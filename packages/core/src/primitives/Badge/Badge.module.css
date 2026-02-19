@@ -1,0 +1,59 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--arcana-spacing-1);
+  padding: 2px var(--arcana-spacing-2);
+  border-radius: var(--arcana-radius-full);
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-xs);
+  font-weight: var(--arcana-typography-font-weight-medium);
+  line-height: var(--arcana-typography-line-height-tight);
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+/* Variants */
+.default {
+  background-color: var(--arcana-surface-tertiary);
+  color: var(--arcana-text-secondary);
+  border-color: var(--arcana-border-default);
+}
+
+.secondary {
+  background-color: var(--arcana-surface-tertiary);
+  color: var(--arcana-text-muted);
+  border-color: var(--arcana-border-default);
+}
+
+.success {
+  background-color: var(--arcana-feedback-success-bg);
+  color: var(--arcana-feedback-success-text);
+  border-color: var(--arcana-feedback-success-border);
+}
+
+.warning {
+  background-color: var(--arcana-feedback-warning-bg);
+  color: var(--arcana-feedback-warning-text);
+  border-color: var(--arcana-feedback-warning-border);
+}
+
+.error {
+  background-color: var(--arcana-feedback-error-bg);
+  color: var(--arcana-feedback-error-text);
+  border-color: var(--arcana-feedback-error-border);
+}
+
+.info {
+  background-color: var(--arcana-feedback-info-bg);
+  color: var(--arcana-feedback-info-text);
+  border-color: var(--arcana-feedback-info-border);
+}
+
+/* Dot indicator */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--arcana-radius-full);
+  flex-shrink: 0;
+  background-color: currentColor;
+}

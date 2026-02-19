@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arcana-spacing-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arcana-spacing-1-5);
+}
+
+.label {
+  display: block;
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-sm);
+  font-weight: var(--arcana-typography-font-weight-medium);
+  color: var(--arcana-text-primary);
+  line-height: var(--arcana-typography-line-height-tight);
+}
+
+.required {
+  color: var(--arcana-feedback-error);
+}
+
+.helperText {
+  margin: 0;
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-xs);
+  color: var(--arcana-text-secondary);
+  line-height: var(--arcana-typography-line-height-normal);
+}
+
+.errorMessage {
+  margin: 0;
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-xs);
+  color: var(--arcana-feedback-error);
+  line-height: var(--arcana-typography-line-height-normal);
+}

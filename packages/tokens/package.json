@@ -1,0 +1,22 @@
+{
+  "name": "@arcana-ui/tokens",
+  "version": "0.1.0",
+  "description": "Design tokens for Arcana UI — JSON to CSS custom properties",
+  "main": "./dist/arcana.css",
+  "exports": {
+    ".": "./dist/arcana.css",
+    "./base": "./dist/arcana.css",
+    "./light": "./dist/themes/light.css",
+    "./dark": "./dist/themes/dark.css"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "npx tsx scripts/build-tokens.ts",
+    "dev": "npx tsx --watch scripts/build-tokens.ts",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

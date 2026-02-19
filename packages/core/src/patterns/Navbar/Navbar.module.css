@@ -1,0 +1,45 @@
+.navbar {
+  width: 100%;
+  background-color: var(--arcana-surface-primary);
+  z-index: var(--arcana-z-index-sticky);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+.border {
+  border-bottom: var(--arcana-component-border-width) solid var(--arcana-border-default);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: var(--arcana-spacing-4);
+  height: 56px;
+  padding: 0 var(--arcana-spacing-6);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: var(--arcana-spacing-4);
+  flex: 1;
+  margin-left: var(--arcana-spacing-4);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--arcana-spacing-2);
+  margin-left: auto;
+}

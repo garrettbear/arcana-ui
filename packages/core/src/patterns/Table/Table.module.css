@@ -1,0 +1,89 @@
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-sm);
+}
+
+.thead {
+  background-color: var(--arcana-surface-secondary);
+}
+
+.tbody {}
+
+.row {}
+
+.rowHoverable:hover {
+  background-color: var(--arcana-surface-secondary);
+  transition: background-color var(--arcana-motion-duration-fast) var(--arcana-motion-easing-default);
+}
+
+.rowStriped:nth-child(even) {
+  background-color: var(--arcana-surface-secondary);
+}
+
+.th {
+  padding: var(--arcana-spacing-3) var(--arcana-spacing-4);
+  text-align: left;
+  font-weight: var(--arcana-typography-font-weight-semibold);
+  color: var(--arcana-text-secondary);
+  border-bottom: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  white-space: nowrap;
+  font-size: var(--arcana-typography-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--arcana-typography-letter-spacing-wide);
+}
+
+.thSortable {
+  padding: 0;
+}
+
+.sortButton {
+  display: flex;
+  align-items: center;
+  gap: var(--arcana-spacing-1);
+  padding: var(--arcana-spacing-3) var(--arcana-spacing-4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  width: 100%;
+  text-align: left;
+}
+
+.sortButton:hover {
+  color: var(--arcana-text-primary);
+}
+
+.sortButton:focus-visible {
+  outline: none;
+  box-shadow: inset var(--arcana-component-focus-ring);
+}
+
+.sortIcon {
+  display: inline-flex;
+  color: var(--arcana-text-muted);
+}
+
+.td {
+  padding: var(--arcana-spacing-3) var(--arcana-spacing-4);
+  color: var(--arcana-text-primary);
+  border-bottom: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  vertical-align: middle;
+}
+
+.tbody .row:last-child .td {
+  border-bottom: none;
+}

@@ -1,0 +1,28 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.hstack {
+  display: flex;
+  flex-direction: row;
+}
+
+.grid {
+  display: grid;
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--arcana-spacing-6);
+  padding-right: var(--arcana-spacing-6);
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: var(--arcana-spacing-4);
+    padding-right: var(--arcana-spacing-4);
+  }
+}

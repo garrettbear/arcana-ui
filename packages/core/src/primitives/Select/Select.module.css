@@ -1,0 +1,104 @@
+/* Select wrapper */
+.wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--arcana-spacing-1);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.fullWidth .selectWrapper {
+  width: 100%;
+}
+
+/* Label */
+.label {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-sm);
+  font-weight: var(--arcana-typography-font-weight-medium);
+  color: var(--arcana-text-primary);
+  line-height: var(--arcana-typography-line-height-tight);
+}
+
+/* Select container */
+.selectWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--arcana-surface-primary);
+  border: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  transition:
+    border-color var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default),
+    box-shadow var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default);
+}
+
+.selectWrapper:focus-within {
+  border-color: var(--arcana-border-focus);
+  box-shadow: var(--arcana-component-focus-ring);
+}
+
+.selectWrapper.hasError {
+  border-color: var(--arcana-border-error);
+}
+
+.selectWrapper.hasError:focus-within {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.selectWrapper.disabled {
+  background-color: var(--arcana-surface-secondary);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Select element */
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--arcana-spacing-8) 0 var(--arcana-spacing-3);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-sm);
+  color: var(--arcana-text-primary);
+  cursor: pointer;
+  line-height: var(--arcana-typography-line-height-normal);
+}
+
+.select:disabled {
+  cursor: not-allowed;
+  color: var(--arcana-text-disabled);
+}
+
+/* Chevron icon */
+.chevron {
+  position: absolute;
+  right: var(--arcana-spacing-3);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--arcana-text-secondary);
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Helper / Error text */
+.helperText {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-xs);
+  color: var(--arcana-text-secondary);
+  line-height: var(--arcana-typography-line-height-normal);
+}
+
+.errorText {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-xs);
+  color: var(--arcana-feedback-error-text);
+  line-height: var(--arcana-typography-line-height-normal);
+}

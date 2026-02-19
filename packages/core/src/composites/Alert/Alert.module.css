@@ -1,0 +1,91 @@
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--arcana-spacing-3);
+  padding: var(--arcana-spacing-4);
+  border-radius: var(--arcana-component-radius);
+  border: var(--arcana-component-border-width) solid;
+}
+
+.icon {
+  display: flex;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-sm);
+  font-weight: var(--arcana-typography-font-weight-semibold);
+  line-height: var(--arcana-typography-line-height-tight);
+}
+
+.body {
+  margin-top: var(--arcana-spacing-1);
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-sm);
+  line-height: var(--arcana-typography-line-height-normal);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--arcana-radius-sm);
+  color: currentColor;
+  opacity: 0.6;
+  transition: opacity var(--arcana-motion-duration-fast) var(--arcana-motion-easing-default);
+}
+
+.closeButton:hover {
+  opacity: 1;
+}
+
+.closeButton:focus-visible {
+  outline: none;
+  box-shadow: var(--arcana-component-focus-ring);
+}
+
+/* Variants */
+.info {
+  background-color: var(--arcana-feedback-info-bg);
+  border-color: var(--arcana-feedback-info-border);
+  color: var(--arcana-feedback-info-text);
+}
+
+.success {
+  background-color: var(--arcana-feedback-success-bg);
+  border-color: var(--arcana-feedback-success-border);
+  color: var(--arcana-feedback-success-text);
+}
+
+.warning {
+  background-color: var(--arcana-feedback-warning-bg);
+  border-color: var(--arcana-feedback-warning-border);
+  color: var(--arcana-feedback-warning-text);
+}
+
+.error {
+  background-color: var(--arcana-feedback-error-bg);
+  border-color: var(--arcana-feedback-error-border);
+  color: var(--arcana-feedback-error-text);
+}

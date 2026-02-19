@@ -1,0 +1,112 @@
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--arcana-radius-full);
+  background-color: var(--arcana-surface-tertiary);
+  border: 2px solid var(--arcana-surface-primary);
+  overflow: hidden;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Sizes */
+.xs {
+  width: 24px;
+  height: 24px;
+}
+
+.sm {
+  width: 32px;
+  height: 32px;
+}
+
+.md {
+  width: 40px;
+  height: 40px;
+}
+
+.lg {
+  width: 48px;
+  height: 48px;
+}
+
+.xl {
+  width: 64px;
+  height: 64px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.initials {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-weight: var(--arcana-typography-font-weight-semibold);
+  color: #ffffff;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.xs .initials {
+  font-size: 9px;
+}
+
+.sm .initials {
+  font-size: 11px;
+}
+
+.md .initials {
+  font-size: 14px;
+}
+
+.lg .initials {
+  font-size: 16px;
+}
+
+.xl .initials {
+  font-size: 22px;
+}
+
+.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--arcana-text-muted);
+  width: 60%;
+  height: 60%;
+}
+
+.fallback svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Overflow indicator */
+.overflow {
+  background-color: var(--arcana-surface-tertiary);
+  color: var(--arcana-text-secondary);
+}
+
+.overflow .initials {
+  color: var(--arcana-text-secondary);
+  font-size: 12px;
+}
+
+/* Group */
+.group {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.groupItem {
+  position: relative;
+  margin-left: -8px;
+}
+
+.groupItem:first-child {
+  margin-left: 0;
+}

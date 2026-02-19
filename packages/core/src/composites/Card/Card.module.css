@@ -1,0 +1,130 @@
+.card {
+  background-color: var(--arcana-surface-primary);
+  border-radius: var(--arcana-component-radius);
+  font-family: var(--arcana-typography-font-family-sans);
+  color: var(--arcana-text-primary);
+  overflow: hidden;
+  transition: box-shadow var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default),
+    transform var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default);
+}
+
+/* Variants */
+.default {
+  border: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  box-shadow: var(--arcana-shadow-sm);
+}
+
+.outlined {
+  border: var(--arcana-component-border-width) solid var(--arcana-border-strong);
+  box-shadow: none;
+}
+
+.elevated {
+  border: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  box-shadow: var(--arcana-shadow-md);
+  background-color: var(--arcana-surface-elevated);
+}
+
+/* Interactive state */
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover {
+  box-shadow: var(--arcana-shadow-lg);
+  transform: translateY(-1px);
+}
+
+.interactive:active {
+  transform: translateY(0);
+  box-shadow: var(--arcana-shadow-sm);
+}
+
+/* Padding variants */
+.padding-none {
+  padding: 0;
+}
+
+.padding-sm .header,
+.padding-sm .body,
+.padding-sm .footer {
+  padding: var(--arcana-spacing-3);
+}
+
+.padding-md .header,
+.padding-md .body,
+.padding-md .footer {
+  padding: var(--arcana-spacing-4) var(--arcana-spacing-5);
+}
+
+.padding-lg .header,
+.padding-lg .body,
+.padding-lg .footer {
+  padding: var(--arcana-spacing-6) var(--arcana-spacing-8);
+}
+
+/* CardHeader */
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--arcana-spacing-4);
+  border-bottom: var(--arcana-component-border-width) solid var(--arcana-border-default);
+}
+
+.header + .body,
+.header + .footer {
+  border-top: none;
+}
+
+.headerContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.headerAction {
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--arcana-typography-font-size-lg);
+  font-weight: var(--arcana-typography-font-weight-semibold);
+  line-height: var(--arcana-typography-line-height-tight);
+  color: var(--arcana-text-primary);
+}
+
+.description {
+  margin: var(--arcana-spacing-1) 0 0;
+  font-size: var(--arcana-typography-font-size-sm);
+  color: var(--arcana-text-secondary);
+  line-height: var(--arcana-typography-line-height-normal);
+}
+
+/* CardBody */
+.body {
+  color: var(--arcana-text-primary);
+}
+
+/* CardFooter */
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--arcana-spacing-3);
+  border-top: var(--arcana-component-border-width) solid var(--arcana-border-default);
+}
+
+.align-left {
+  justify-content: flex-start;
+}
+
+.align-center {
+  justify-content: center;
+}
+
+.align-right {
+  justify-content: flex-end;
+}
+
+.align-space-between {
+  justify-content: space-between;
+}

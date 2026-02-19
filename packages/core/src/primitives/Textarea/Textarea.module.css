@@ -1,0 +1,103 @@
+/* Textarea wrapper */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arcana-spacing-1);
+}
+
+/* Label */
+.label {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-sm);
+  font-weight: var(--arcana-typography-font-weight-medium);
+  color: var(--arcana-text-primary);
+  line-height: var(--arcana-typography-line-height-tight);
+}
+
+/* Textarea element */
+.textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: var(--arcana-spacing-2) var(--arcana-spacing-3);
+  background-color: var(--arcana-surface-primary);
+  border: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-sm);
+  color: var(--arcana-text-primary);
+  line-height: var(--arcana-typography-line-height-normal);
+  resize: vertical;
+  box-sizing: border-box;
+  transition:
+    border-color var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default),
+    box-shadow var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default);
+}
+
+.textarea::placeholder {
+  color: var(--arcana-text-muted);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--arcana-border-focus);
+  box-shadow: var(--arcana-component-focus-ring);
+}
+
+.textarea.hasError {
+  border-color: var(--arcana-border-error);
+}
+
+.textarea.hasError:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.textarea.disabled {
+  background-color: var(--arcana-surface-secondary);
+  color: var(--arcana-text-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+  resize: none;
+}
+
+.textarea.autoResize {
+  resize: none;
+  overflow: hidden;
+}
+
+/* Footer row */
+.footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--arcana-spacing-2);
+  min-height: 1rem;
+}
+
+/* Helper / Error text */
+.helperText {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-xs);
+  color: var(--arcana-text-secondary);
+  line-height: var(--arcana-typography-line-height-normal);
+}
+
+.errorText {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-xs);
+  color: var(--arcana-feedback-error-text);
+  line-height: var(--arcana-typography-line-height-normal);
+}
+
+/* Character count */
+.count {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-xs);
+  color: var(--arcana-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.countAtMax {
+  color: var(--arcana-feedback-error-text);
+}

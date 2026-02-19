@@ -1,0 +1,97 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tab List */
+.tabList {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--arcana-border-default);
+  gap: var(--arcana-spacing-1);
+}
+
+.tabListPills {
+  border-bottom: none;
+  background-color: var(--arcana-surface-secondary);
+  border-radius: var(--arcana-component-radius);
+  padding: var(--arcana-spacing-1);
+  gap: var(--arcana-spacing-1);
+  display: inline-flex;
+}
+
+/* Tab base */
+.tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--arcana-spacing-2) var(--arcana-spacing-3);
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-sm);
+  font-weight: var(--arcana-typography-font-weight-medium);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition:
+    color var(--arcana-motion-duration-fast) var(--arcana-motion-easing-default),
+    background-color var(--arcana-motion-duration-fast) var(--arcana-motion-easing-default);
+  white-space: nowrap;
+}
+
+.tab:focus-visible {
+  outline: none;
+  box-shadow: var(--arcana-component-focus-ring);
+  border-radius: var(--arcana-radius-sm);
+}
+
+/* Line variant */
+.tabLine {
+  color: var(--arcana-text-secondary);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  border-radius: var(--arcana-radius-sm) var(--arcana-radius-sm) 0 0;
+}
+
+.tabLine:hover:not(.tabDisabled) {
+  color: var(--arcana-text-primary);
+}
+
+.tabLineActive {
+  color: var(--arcana-action-primary);
+  border-bottom-color: var(--arcana-action-primary);
+}
+
+/* Pills variant */
+.tabPill {
+  color: var(--arcana-text-secondary);
+  border-radius: var(--arcana-radius-sm);
+}
+
+.tabPill:hover:not(.tabDisabled) {
+  color: var(--arcana-text-primary);
+  background-color: var(--arcana-surface-primary);
+}
+
+.tabPillActive {
+  color: var(--arcana-text-primary);
+  background-color: var(--arcana-surface-primary);
+  box-shadow: var(--arcana-shadow-sm);
+}
+
+/* Disabled */
+.tabDisabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Tab Panels */
+.tabPanels {
+  padding-top: var(--arcana-spacing-4);
+}
+
+.tabPanel {
+  outline: none;
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-base);
+  color: var(--arcana-text-primary);
+}

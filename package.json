@@ -1,0 +1,23 @@
+{
+  "name": "arcana-ui",
+  "private": true,
+  "version": "0.0.0",
+  "description": "AI-first design system with token-driven theming",
+  "scripts": {
+    "build": "pnpm -r build",
+    "build:tokens": "pnpm --filter @arcana-ui/tokens build",
+    "build:core": "pnpm --filter @arcana-ui/core build",
+    "dev": "pnpm --filter playground dev",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "pnpm -r typecheck",
+    "clean": "pnpm -r clean"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  }
+}

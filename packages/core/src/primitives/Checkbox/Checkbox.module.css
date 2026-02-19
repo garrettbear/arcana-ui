@@ -1,0 +1,107 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arcana-spacing-1);
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--arcana-spacing-2-5);
+}
+
+.checkboxWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.input {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--arcana-radius-sm);
+  border: var(--arcana-component-border-width) solid var(--arcana-border-strong);
+  background-color: var(--arcana-surface-primary);
+  cursor: pointer;
+  transition:
+    background-color var(--arcana-motion-duration-fast) var(--arcana-motion-easing-default),
+    border-color var(--arcana-motion-duration-fast) var(--arcana-motion-easing-default);
+}
+
+.input:checked,
+.input:indeterminate {
+  background-color: var(--arcana-action-primary);
+  border-color: var(--arcana-action-primary);
+}
+
+.input:hover:not(:disabled) {
+  border-color: var(--arcana-action-primary);
+}
+
+.input:focus-visible {
+  outline: none;
+  box-shadow: var(--arcana-component-focus-ring);
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input.hasError {
+  border-color: var(--arcana-border-error);
+}
+
+.indicator {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: var(--arcana-text-inverse);
+  opacity: 0;
+  transition: opacity var(--arcana-motion-duration-fast) var(--arcana-motion-easing-default);
+}
+
+.input:checked + .indicator,
+.input:indeterminate + .indicator {
+  opacity: 1;
+}
+
+.indicator svg {
+  width: 10px;
+  height: 10px;
+}
+
+.labelGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-sm);
+  font-weight: var(--arcana-typography-font-weight-medium);
+  color: var(--arcana-text-primary);
+  line-height: var(--arcana-typography-line-height-tight);
+  cursor: pointer;
+}
+
+.description {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-xs);
+  color: var(--arcana-text-secondary);
+  line-height: var(--arcana-typography-line-height-normal);
+}
+
+.errorText {
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: var(--arcana-typography-font-size-xs);
+  color: var(--arcana-feedback-error);
+}
