@@ -1,60 +1,84 @@
-# Arcana UI - Phase 1.5: Playground + Accessibility
+# Arcana UI — Next Task: Testing + Typography System
 
-Read SPEC.md for full context. Phase 1 components are built and working.
+Read SPEC.md and TODO.md for full context. Components are built and deployed.
 
-## Your Task: Make the Playground the "Oh Shit" Moment
+## Task 1: Component Testing
 
-### 1. Token Editor Panel (LEFT SIDEBAR)
-Build a live token editor that updates CSS custom properties in real-time:
+### Setup
+- Add Vitest + @testing-library/react + @testing-library/jest-dom + jsdom to packages/core
+- Add jest-axe for accessibility testing
+- Configure vitest.config.ts in packages/core
+- Add `"test": "vitest run"` script to packages/core/package.json and root
 
-- **Color pickers** for all semantic tokens (surface, action, text, border, feedback colors)
-- **Sliders** for: border-radius scale, spacing scale, shadow intensity, font size scale
-- **Font family selector** (dropdown with web-safe + popular Google fonts)
-- **Preset buttons**: Light, Dark, Terminal (green on black), Retro 98 (Windows 98 look), Glass (Apple-style blur/transparency), Brutalist (harsh, raw)
-- Changing ANY token instantly updates all components on the page (just update CSS custom properties on :root)
-- "Reset to Default" button
-- "Export Theme" button that downloads the current tokens as JSON
+### Tests for Every Component
+Write tests for all 22 components. Each component gets its own .test.tsx file next to it. Each test file should include:
 
-### 2. Accessibility Panel (RIGHT SIDEBAR or BOTTOM PANEL)
-Live accessibility testing that runs on every token change:
+1. **Renders without crashing** — basic smoke test
+2. **Props work** — key props (variant, size, disabled, etc.) render correctly
+3. **Accessibility** — jest-axe `toHaveNoViolations()` check
+4. **Interaction** — click handlers, onChange, keyboard events where applicable
+5. **States** — loading, disabled, error, open/closed
 
-- **Contrast Checker**: For every text/background combination in the current theme, show WCAG AA and AAA pass/fail. Show the actual contrast ratio (e.g., "4.5:1 ✅ AA / ❌ AAA"). Color code: green = pass both, yellow = AA only, red = fail.
-- **Color Blindness Simulator**: CSS filter toggles to preview the entire page through protanopia, deuteranopia, tritanopia, achromatopsia. Dropdown or button group to switch.
-- **Auto-Fix Suggestions**: When a contrast check fails, suggest the nearest passing color with a one-click "Apply Fix" button.
-- **A11y Score Card**: Overall theme grade (AAA / AA / Fail) with breakdown of passing/failing combinations.
-
-### 3. Improve the Kitchen Sink Layout
-The current App.tsx shows all components but make it look like a real dashboard/app:
-- Header with Navbar
-- Sidebar navigation
-- Main content area with sections for each component category
-- Make it look like something someone would actually build — not just a component dump
-- Show realistic data in tables, forms, cards
-
-### 4. Theme Presets
-Create these preset themes as JSON files in packages/tokens/src/presets/:
-- light.json (default - warm stone + indigo)
-- dark.json (dark mode)
-- terminal.json (green phosphor on black, monospace everything, no radius)
-- retro98.json (Windows 98: gray backgrounds, 2px outset borders, system fonts, square corners)
-- glass.json (translucent surfaces, blur backdrops, thin borders, large radius)
-- brutalist.json (black/white, thick borders, no radius, no shadows, bold type)
-
-Each preset is a complete semantic token set that overrides the defaults.
-
-### Technical Notes
-- Token editor should modify CSS custom properties directly on document.documentElement.style
-- Use simple state management (React useState/useReducer) — no external state libs
-- Contrast ratio calculation: use the WCAG relative luminance formula (built-in, no external lib needed)
-- Color blindness filters: use CSS `filter` with SVG color matrices
-- Keep it all in the playground/ package
-- Must build with `pnpm build` when done
+Components to test:
+- Button, Input, Textarea, Select, Checkbox, Radio/RadioGroup, Toggle
+- Badge, Avatar/AvatarGroup
+- Card, Modal, Alert, Toast, Tabs, Accordion
+- Stack, HStack, Grid, Container
+- Navbar, EmptyState, Form, Table
 
 ### Quality Bar
-- The playground should make someone say "oh shit this is cool" when they toggle between Windows 98 and Glass mode
-- Accessibility panel should feel integrated, not bolted on
-- Responsive — works on desktop (mobile is a nice-to-have)
-- Fast — token changes should feel instant
+- All tests must pass
+- Every component must pass axe accessibility checks
+- Aim for meaningful tests, not just coverage padding
+
+## Task 2: Typography System in Playground
+
+### Google Fonts Integration
+- Fetch the Google Fonts catalog (use the CSS API, not the JSON API — just load fonts via <link> tags)
+- Build a searchable font dropdown/picker component
+- Popular fonts at the top: Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Playfair Display, Space Grotesk, DM Sans, Geist
+
+### Multiple Font Slots
+Add to the Token Editor:
+- **Display Font** — for headings (h1-h4) and marketing text
+- **Body Font** — for paragraph text, labels, UI elements  
+- **Mono Font** — for code blocks and technical content
+- Each slot gets its own Google Fonts picker
+- Changing a font updates the corresponding CSS variable immediately
+
+### Local Font Upload
+- Drag & drop zone or file input for .woff2, .woff, .ttf, .otf files
+- When uploaded, register as @font-face and make available in the font pickers
+- Store in memory (no server needed — use URL.createObjectURL)
+
+### Type Scale Editor (inspired by typescale.com)
+- **Base size** slider (14-20px, default 16px)
+- **Scale ratio** selector with presets:
+  - 1.067 Minor Second
+  - 1.125 Major Second  
+  - 1.200 Minor Third
+  - 1.250 Major Third
+  - 1.333 Perfect Fourth
+  - 1.414 Augmented Fourth
+  - 1.500 Perfect Fifth
+  - 1.618 Golden Ratio
+- **Live preview** showing the full scale: h1, h2, h3, h4, h5, h6, body, small, xs
+- Each level shows: font size in px/rem, line height, letter spacing
+- **Line height** control per level (or global multiplier)
+- **Letter spacing** control
+- **Font weight** per level
+- All changes instantly update the CSS custom properties and the kitchen sink components reflect them
+
+### Spacing Scale Editor
+- Visual editor for the spacing scale (--arcana-spacing-*)
+- Base unit slider (default 4px)
+- Scale preview showing all spacing values as visual blocks
+- Components update in real-time
+
+### Integration
+- All new controls go in the existing TokenEditor sidebar
+- Group them in collapsible sections: Colors | Typography | Spacing | Effects
+- Export button should include all typography + spacing tokens in the JSON output
 
 When completely finished, run this command to notify me:
-openclaw system event --text "Done: Arcana playground with token editor, 6 theme presets, and accessibility panel built" --mode now
+openclaw system event --text "Done: Component tests + typography system + spacing editor built for Arcana" --mode now
