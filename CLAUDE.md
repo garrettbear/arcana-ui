@@ -1,80 +1,60 @@
-# Arcana UI - Project Instructions
+# Arcana UI - Phase 1.5: Playground + Accessibility
 
-Read SPEC.md for the full specification.
+Read SPEC.md for full context. Phase 1 components are built and working.
 
-## Your Task: Phase 1 Foundation
+## Your Task: Make the Playground the "Oh Shit" Moment
 
-Build the monorepo with token system and core React components.
+### 1. Token Editor Panel (LEFT SIDEBAR)
+Build a live token editor that updates CSS custom properties in real-time:
 
-### Step 1: Monorepo Setup
-- pnpm workspaces monorepo
-- packages/tokens, packages/core, playground/
-- tsup for building packages
-- Vite for playground
-- Biome for linting
-- Vitest for testing
+- **Color pickers** for all semantic tokens (surface, action, text, border, feedback colors)
+- **Sliders** for: border-radius scale, spacing scale, shadow intensity, font size scale
+- **Font family selector** (dropdown with web-safe + popular Google fonts)
+- **Preset buttons**: Light, Dark, Terminal (green on black), Retro 98 (Windows 98 look), Glass (Apple-style blur/transparency), Brutalist (harsh, raw)
+- Changing ANY token instantly updates all components on the page (just update CSS custom properties on :root)
+- "Reset to Default" button
+- "Export Theme" button that downloads the current tokens as JSON
 
-### Step 2: Token System (@arcana-ui/tokens)
-- JSON token files: base.json (primitives), light.json, dark.json (semantic themes)
-- Build script that generates CSS custom properties from JSON tokens
-- All vars prefixed with --arcana-
-- Theme switching via data-theme attribute on root
-- Output: dist/arcana.css, dist/themes/light.css, dist/themes/dark.css
+### 2. Accessibility Panel (RIGHT SIDEBAR or BOTTOM PANEL)
+Live accessibility testing that runs on every token change:
 
-### Step 3: Core Components (@arcana-ui/core)
-Build these P1 components using CSS custom properties (--arcana-* vars). No Tailwind. Each component:
-- TypeScript + React
-- Uses CSS Modules or vanilla CSS with arcana vars
-- Accessible (proper ARIA, keyboard nav)
-- Forwards refs
-- Has sensible defaults
+- **Contrast Checker**: For every text/background combination in the current theme, show WCAG AA and AAA pass/fail. Show the actual contrast ratio (e.g., "4.5:1 ✅ AA / ❌ AAA"). Color code: green = pass both, yellow = AA only, red = fail.
+- **Color Blindness Simulator**: CSS filter toggles to preview the entire page through protanopia, deuteranopia, tritanopia, achromatopsia. Dropdown or button group to switch.
+- **Auto-Fix Suggestions**: When a contrast check fails, suggest the nearest passing color with a one-click "Apply Fix" button.
+- **A11y Score Card**: Overall theme grade (AAA / AA / Fail) with breakdown of passing/failing combinations.
 
-Components to build:
-1. Button (variants: primary, secondary, ghost, danger, outline; sizes: sm, md, lg; loading + disabled states; icon support)
-2. Input (text, email, password, search; prefix/suffix slots; error state)
-3. Textarea (auto-resize option, character count)
-4. Select (native dropdown with arcana styling)
-5. Checkbox (with indeterminate state)
-6. Radio / RadioGroup
-7. Toggle / Switch
-8. Badge (variants: default, success, warning, error, info)
-9. Avatar + AvatarGroup (image, initials, fallback)
-10. Card (Header, Body, Footer slots)
-11. Modal / Dialog (focus trap, escape to close, overlay)
-12. Toast (stack, auto-dismiss, variants)
-13. Alert / Callout (info, success, warning, error)
-14. Tabs (horizontal, controlled/uncontrolled)
-15. Accordion / Collapsible (single + multi expand)
-16. Stack + HStack (flex layout with gap)
-17. Grid (CSS grid with responsive columns)
-18. Container (max-width centered)
-19. Navbar (responsive, sticky option)
-20. EmptyState (icon + message + action)
-21. Form (field wrapper with label, error, helper text)
-22. Table (sortable headers, striped option)
+### 3. Improve the Kitchen Sink Layout
+The current App.tsx shows all components but make it look like a real dashboard/app:
+- Header with Navbar
+- Sidebar navigation
+- Main content area with sections for each component category
+- Make it look like something someone would actually build — not just a component dump
+- Show realistic data in tables, forms, cards
 
-### Step 4: AI Manifest
-Create manifest.ai.json at the repo root with every component documented (import, description, props, examples, when to use).
+### 4. Theme Presets
+Create these preset themes as JSON files in packages/tokens/src/presets/:
+- light.json (default - warm stone + indigo)
+- dark.json (dark mode)
+- terminal.json (green phosphor on black, monospace everything, no radius)
+- retro98.json (Windows 98: gray backgrounds, 2px outset borders, system fonts, square corners)
+- glass.json (translucent surfaces, blur backdrops, thin borders, large radius)
+- brutalist.json (black/white, thick borders, no radius, no shadows, bold type)
 
-### Step 5: Playground Skeleton
-- Vite + React app in playground/
-- Renders ALL components in a kitchen-sink layout
-- Theme toggle (light/dark) working
-- Uses @arcana-ui/tokens and @arcana-ui/core from the monorepo
+Each preset is a complete semantic token set that overrides the defaults.
 
-### Design Direction
-- Warm stone neutrals, deep indigo primary (#4F46E5), amber accent
-- 8px default radius
-- Inter for body text, JetBrains Mono for code
-- Subtle warm-tinted shadows
-- 150ms transitions
-- Clean, minimal, Anthropic-inspired warmth
+### Technical Notes
+- Token editor should modify CSS custom properties directly on document.documentElement.style
+- Use simple state management (React useState/useReducer) — no external state libs
+- Contrast ratio calculation: use the WCAG relative luminance formula (built-in, no external lib needed)
+- Color blindness filters: use CSS `filter` with SVG color matrices
+- Keep it all in the playground/ package
+- Must build with `pnpm build` when done
 
 ### Quality Bar
-- Every component must work with just CSS vars (no JS theming runtime)
-- Every component must be accessible
-- Code should be clean enough that AI would want to copy-paste it
-- Export everything from packages/core/src/index.ts
+- The playground should make someone say "oh shit this is cool" when they toggle between Windows 98 and Glass mode
+- Accessibility panel should feel integrated, not bolted on
+- Responsive — works on desktop (mobile is a nice-to-have)
+- Fast — token changes should feel instant
 
 When completely finished, run this command to notify me:
-openclaw system event --text "Done: Arcana UI Phase 1 - monorepo, token system, 22 React components, AI manifest, and playground built" --mode now
+openclaw system event --text "Done: Arcana playground with token editor, 6 theme presets, and accessibility panel built" --mode now

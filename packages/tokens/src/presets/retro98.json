@@ -1,0 +1,70 @@
+{
+  "theme": "retro98",
+  "surface": {
+    "primary": "#c0c0c0",
+    "secondary": "#d4d0c8",
+    "tertiary": "#e0ddd8",
+    "elevated": "#ffffff",
+    "overlay": "rgba(0, 0, 0, 0.5)",
+    "inverse": "#000080",
+    "canvas": "#008080"
+  },
+  "action": {
+    "primary": "#000080",
+    "primaryHover": "#0000aa",
+    "primaryActive": "#00007f",
+    "secondary": "#c0c0c0",
+    "secondaryHover": "#d4d0c8",
+    "secondaryActive": "#b0aaa0",
+    "danger": "#800000",
+    "dangerHover": "#990000",
+    "dangerActive": "#660000",
+    "ghost": "transparent",
+    "ghostHover": "rgba(0, 0, 0, 0.05)",
+    "ghostActive": "rgba(0, 0, 0, 0.1)",
+    "outline": "transparent",
+    "outlineHover": "rgba(0, 0, 128, 0.1)"
+  },
+  "text": {
+    "primary": "#000000",
+    "secondary": "#444444",
+    "muted": "#808080",
+    "disabled": "#808080",
+    "inverse": "#ffffff",
+    "link": "#000080",
+    "linkHover": "#0000cc",
+    "onAction": "#ffffff",
+    "onDanger": "#ffffff"
+  },
+  "border": {
+    "default": "#808080",
+    "strong": "#404040",
+    "stronger": "#000000",
+    "focus": "#000080",
+    "error": "#800000",
+    "inverse": "#ffffff"
+  },
+  "feedback": {
+    "success": "#008000",
+    "successBg": "#e0ffe0",
+    "successBorder": "#008000",
+    "successText": "#004000",
+    "warning": "#808000",
+    "warningBg": "#ffffe0",
+    "warningBorder": "#808000",
+    "warningText": "#404000",
+    "error": "#800000",
+    "errorBg": "#ffe0e0",
+    "errorBorder": "#800000",
+    "errorText": "#400000",
+    "info": "#000080",
+    "infoBg": "#e0e0ff",
+    "infoBorder": "#000080",
+    "infoText": "#000040"
+  },
+  "component": {
+    "radius": "0px",
+    "borderWidth": "2px",
+    "focusRing": "0 0 0 1px #000080"
+  }
+}

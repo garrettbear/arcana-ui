@@ -1,0 +1,369 @@
+/* ─── Root layout ─────────────────────────────────────────────────────────── */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--arcana-typography-font-family-sans);
+  color: var(--arcana-text-primary);
+}
+
+/* ─── Top bar ─────────────────────────────────────────────────────────────── */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  height: 52px;
+  flex-shrink: 0;
+  background: var(--arcana-surface-elevated);
+  border-bottom: 1px solid var(--arcana-border-default);
+  z-index: 100;
+  box-shadow: var(--arcana-shadow-sm, 0 1px 3px rgba(0,0,0,.08));
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--arcana-text-primary);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brandLogo {
+  font-size: 20px;
+}
+
+.brandName {
+  letter-spacing: -0.01em;
+}
+
+.brandVersion {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  background: var(--arcana-action-outline-hover);
+  color: var(--arcana-action-primary);
+  border: 1px solid var(--arcana-border-default);
+}
+
+.topbarSpacer {
+  flex: 1;
+}
+
+.topbarControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panelToggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  background: var(--arcana-surface-secondary);
+  color: var(--arcana-text-secondary);
+  cursor: pointer;
+  transition: all 120ms;
+  font-family: var(--arcana-typography-font-family-sans);
+}
+
+.panelToggle:hover {
+  background: var(--arcana-action-secondary-hover);
+  color: var(--arcana-text-primary);
+}
+
+.panelToggleActive {
+  background: var(--arcana-action-primary);
+  color: var(--arcana-text-on-action);
+  border-color: var(--arcana-action-primary);
+}
+
+.panelToggleActive:hover {
+  background: var(--arcana-action-primary-hover) !important;
+  border-color: var(--arcana-action-primary-hover);
+  color: var(--arcana-text-on-action) !important;
+}
+
+.topbarDivider {
+  width: 1px;
+  height: 20px;
+  background: var(--arcana-border-default);
+  flex-shrink: 0;
+}
+
+/* ─── Workspace ───────────────────────────────────────────────────────────── */
+
+.workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ─── Left / Right panels ─────────────────────────────────────────────────── */
+
+.leftPanel {
+  width: 272px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--arcana-border-default);
+  overflow: hidden;
+  transition: width 200ms ease, opacity 200ms ease;
+}
+
+.leftPanel.collapsed {
+  width: 0;
+  opacity: 0;
+  border-right: none;
+}
+
+.rightPanel {
+  width: 296px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--arcana-border-default);
+  overflow: hidden;
+  transition: width 200ms ease, opacity 200ms ease;
+}
+
+.rightPanel.collapsed {
+  width: 0;
+  opacity: 0;
+  border-left: none;
+}
+
+/* ─── Main content ────────────────────────────────────────────────────────── */
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+  background: var(--arcana-surface-primary);
+}
+
+/* ─── Content nav ─────────────────────────────────────────────────────────── */
+
+.contentNav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--arcana-surface-elevated);
+  border-bottom: 1px solid var(--arcana-border-default);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.contentNav::-webkit-scrollbar {
+  display: none;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--arcana-text-secondary);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 120ms;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: var(--arcana-typography-font-family-sans);
+}
+
+.navLink:hover {
+  color: var(--arcana-text-primary);
+}
+
+.navLink.navActive {
+  color: var(--arcana-action-primary);
+  border-bottom-color: var(--arcana-action-primary);
+}
+
+/* ─── Page content ────────────────────────────────────────────────────────── */
+
+.pageContent {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ─── Dashboard section ───────────────────────────────────────────────────── */
+
+.dashSection {
+  margin-bottom: 48px;
+}
+
+.dashSection:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--arcana-text-primary);
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+
+.sectionSubtitle {
+  font-size: 13px;
+  color: var(--arcana-text-muted);
+  margin: 0 0 20px;
+}
+
+/* ─── Stats grid ──────────────────────────────────────────────────────────── */
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1100px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.statCard {
+  padding: 20px;
+  background: var(--arcana-surface-elevated);
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.statLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--arcana-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.statValue {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--arcana-text-primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.statDelta {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.statDeltaPos { color: var(--arcana-feedback-success); }
+.statDeltaNeg { color: var(--arcana-feedback-error); }
+
+/* ─── Activity feed ───────────────────────────────────────────────────────── */
+
+.activityFeed {
+  background: var(--arcana-surface-elevated);
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  overflow: hidden;
+}
+
+.activityHeader {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--arcana-border-default);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--arcana-text-primary);
+}
+
+.activityItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--arcana-border-default);
+}
+
+.activityItem:last-child {
+  border-bottom: none;
+}
+
+.activityDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.activityText {
+  flex: 1;
+  font-size: 13px;
+  color: var(--arcana-text-secondary);
+  line-height: 1.4;
+}
+
+.activityTime {
+  font-size: 11px;
+  color: var(--arcana-text-muted);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ─── Component demo rows ─────────────────────────────────────────────────── */
+
+.demoRow {
+  margin-bottom: 24px;
+}
+
+.demoRowLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--arcana-text-muted);
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.demoFlex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.threeCol {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .threeCol { grid-template-columns: 1fr 1fr; }
+  .twoCol { grid-template-columns: 1fr; }
+}

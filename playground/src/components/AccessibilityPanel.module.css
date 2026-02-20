@@ -1,0 +1,328 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--arcana-surface-secondary);
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: 13px;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--arcana-border-default);
+  background: var(--arcana-surface-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.panelTitle {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--arcana-text-muted);
+}
+
+/* ─── Sections ─── */
+
+.section {
+  border-bottom: 1px solid var(--arcana-border-default);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  transition: background 120ms;
+}
+
+.sectionHeader:hover {
+  background: var(--arcana-action-ghost-hover);
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--arcana-text-muted);
+  margin: 0;
+}
+
+.toggle {
+  font-size: 10px;
+  color: var(--arcana-text-muted);
+  width: 10px;
+  flex-shrink: 0;
+}
+
+/* ─── Score card ─── */
+
+.scoreCard {
+  padding: 8px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.gradeDisplay {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.scoreStats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.scoreStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.scoreNum {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.scoreStatLabel {
+  font-size: 10px;
+  color: var(--arcana-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.scoreDivider {
+  width: 1px;
+  height: 28px;
+  background: var(--arcana-border-default);
+}
+
+.progressBar {
+  width: 100%;
+  height: 4px;
+  background: var(--arcana-border-default);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 300ms ease;
+}
+
+/* ─── Contrast table ─── */
+
+.contrastTable {
+  padding: 2px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contrastRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--arcana-border-default);
+}
+
+.contrastRow:last-child {
+  border-bottom: none;
+}
+
+.contrastSwatches {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.contrastInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.contrastLabel {
+  font-size: 11px;
+  color: var(--arcana-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contrastBadges {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.ratioText {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--arcana-text-muted);
+  margin-right: 2px;
+}
+
+.badge {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.badgePass {
+  background: var(--arcana-feedback-success-bg);
+  color: var(--arcana-feedback-success-text);
+  border: 1px solid var(--arcana-feedback-success-border);
+}
+
+.badgeFail {
+  background: var(--arcana-feedback-error-bg);
+  color: var(--arcana-feedback-error-text);
+  border: 1px solid var(--arcana-feedback-error-border);
+}
+
+/* ─── Color blindness ─── */
+
+.cbGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 4px 16px 12px;
+}
+
+.cbBtn {
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  background: var(--arcana-surface-primary);
+  color: var(--arcana-text-secondary);
+  cursor: pointer;
+  transition: all 120ms;
+  font-family: var(--arcana-typography-font-family-sans);
+  text-align: center;
+}
+
+.cbBtn:hover {
+  border-color: var(--arcana-action-primary);
+  color: var(--arcana-text-primary);
+}
+
+.cbActive {
+  background: var(--arcana-action-primary) !important;
+  color: var(--arcana-text-on-action) !important;
+  border-color: var(--arcana-action-primary) !important;
+}
+
+/* ─── Fix suggestions ─── */
+
+.fixList {
+  padding: 4px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fixItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: var(--arcana-feedback-error-bg);
+  border: 1px solid var(--arcana-feedback-error-border);
+  border-radius: var(--arcana-component-radius);
+}
+
+.fixLabel {
+  font-size: 11px;
+  color: var(--arcana-feedback-error-text);
+  font-weight: 500;
+}
+
+.fixDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fixRatio {
+  font-size: 10px;
+  color: var(--arcana-text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.fixSuggestion {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fixSwatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid var(--arcana-border-default);
+  flex-shrink: 0;
+}
+
+.fixColor {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--arcana-text-secondary);
+  flex: 1;
+}
+
+.fixApplyBtn {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border: 1px solid var(--arcana-action-primary);
+  border-radius: 3px;
+  background: var(--arcana-action-primary);
+  color: var(--arcana-text-on-action);
+  cursor: pointer;
+  transition: all 120ms;
+  font-family: var(--arcana-typography-font-family-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.fixApplyBtn:hover {
+  background: var(--arcana-action-primary-hover);
+  border-color: var(--arcana-action-primary-hover);
+}

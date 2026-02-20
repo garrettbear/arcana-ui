@@ -1,0 +1,262 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--arcana-surface-secondary);
+  font-family: var(--arcana-typography-font-family-sans);
+  font-size: 13px;
+}
+
+.editorHeader {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--arcana-border-default);
+  background: var(--arcana-surface-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.editorTitle {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--arcana-text-muted);
+}
+
+/* ─── Sections ─── */
+
+.section {
+  border-bottom: 1px solid var(--arcana-border-default);
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--arcana-text-muted);
+  margin: 0;
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  transition: background 120ms;
+}
+
+.groupHeader:hover {
+  background: var(--arcana-action-ghost-hover);
+}
+
+.groupToggle {
+  font-size: 10px;
+  color: var(--arcana-text-muted);
+  width: 10px;
+  flex-shrink: 0;
+}
+
+/* ─── Preset grid ─── */
+
+.presetGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+  padding: 4px 16px 12px;
+}
+
+.presetBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 4px;
+  background: var(--arcana-surface-primary);
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  cursor: pointer;
+  transition: all 120ms;
+  color: var(--arcana-text-primary);
+  font-family: var(--arcana-typography-font-family-sans);
+}
+
+.presetBtn:hover {
+  border-color: var(--arcana-action-primary);
+  background: var(--arcana-action-outline-hover);
+}
+
+.presetActive {
+  border-color: var(--arcana-action-primary) !important;
+  background: var(--arcana-action-outline-hover) !important;
+  box-shadow: inset 0 0 0 1px var(--arcana-action-primary);
+}
+
+.presetEmoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.presetLabel {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--arcana-text-secondary);
+  white-space: nowrap;
+}
+
+/* ─── Token list ─── */
+
+.tokenList {
+  padding: 2px 16px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tokenRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tokenLabel {
+  font-size: 12px;
+  color: var(--arcana-text-secondary);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tokenInputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.colorPicker {
+  width: 28px;
+  height: 24px;
+  border: 1px solid var(--arcana-border-default);
+  border-radius: 4px;
+  padding: 1px;
+  cursor: pointer;
+  background: none;
+  flex-shrink: 0;
+}
+
+.colorPicker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.colorPicker::-webkit-color-swatch {
+  border: none;
+  border-radius: 3px;
+}
+
+.colorValue {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  color: var(--arcana-text-muted);
+  width: 58px;
+  flex-shrink: 0;
+}
+
+/* ─── Slider ─── */
+
+.sliderRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sliderControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.slider {
+  flex: 1;
+  height: 4px;
+  cursor: pointer;
+  accent-color: var(--arcana-action-primary);
+}
+
+.sliderValue {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--arcana-text-secondary);
+  width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ─── Font select ─── */
+
+.fontSelect {
+  font-size: 12px;
+  padding: 4px 6px;
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  background: var(--arcana-surface-primary);
+  color: var(--arcana-text-primary);
+  cursor: pointer;
+  max-width: 140px;
+  font-family: var(--arcana-typography-font-family-sans);
+}
+
+/* ─── Actions ─── */
+
+.actions {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  margin-top: auto;
+  border-top: 1px solid var(--arcana-border-default);
+  position: sticky;
+  bottom: 0;
+  background: var(--arcana-surface-secondary);
+}
+
+.actionBtn {
+  flex: 1;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  background: var(--arcana-surface-primary);
+  color: var(--arcana-text-primary);
+  cursor: pointer;
+  transition: all 120ms;
+  font-family: var(--arcana-typography-font-family-sans);
+}
+
+.actionBtn:hover {
+  background: var(--arcana-action-ghost-hover);
+}
+
+.actionBtnPrimary {
+  background: var(--arcana-action-primary);
+  color: var(--arcana-text-on-action);
+  border-color: var(--arcana-action-primary);
+}
+
+.actionBtnPrimary:hover {
+  background: var(--arcana-action-primary-hover) !important;
+  border-color: var(--arcana-action-primary-hover);
+}

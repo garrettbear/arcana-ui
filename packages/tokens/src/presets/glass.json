@@ -1,0 +1,70 @@
+{
+  "theme": "glass",
+  "surface": {
+    "primary": "rgba(255, 255, 255, 0.15)",
+    "secondary": "rgba(255, 255, 255, 0.1)",
+    "tertiary": "rgba(255, 255, 255, 0.05)",
+    "elevated": "rgba(255, 255, 255, 0.25)",
+    "overlay": "rgba(0, 0, 0, 0.3)",
+    "inverse": "rgba(0, 0, 0, 0.8)",
+    "canvas": "#667eea"
+  },
+  "action": {
+    "primary": "rgba(99, 102, 241, 0.9)",
+    "primaryHover": "rgba(79, 70, 229, 0.95)",
+    "primaryActive": "rgba(67, 56, 202, 1)",
+    "secondary": "rgba(255, 255, 255, 0.2)",
+    "secondaryHover": "rgba(255, 255, 255, 0.35)",
+    "secondaryActive": "rgba(255, 255, 255, 0.5)",
+    "danger": "rgba(220, 38, 38, 0.9)",
+    "dangerHover": "rgba(185, 28, 28, 0.95)",
+    "dangerActive": "rgba(153, 27, 27, 1)",
+    "ghost": "transparent",
+    "ghostHover": "rgba(255, 255, 255, 0.15)",
+    "ghostActive": "rgba(255, 255, 255, 0.25)",
+    "outline": "transparent",
+    "outlineHover": "rgba(99, 102, 241, 0.15)"
+  },
+  "text": {
+    "primary": "#ffffff",
+    "secondary": "rgba(255, 255, 255, 0.8)",
+    "muted": "rgba(255, 255, 255, 0.55)",
+    "disabled": "rgba(255, 255, 255, 0.3)",
+    "inverse": "#1e1b4b",
+    "link": "#c7d2fe",
+    "linkHover": "#e0e7ff",
+    "onAction": "#ffffff",
+    "onDanger": "#ffffff"
+  },
+  "border": {
+    "default": "rgba(255, 255, 255, 0.2)",
+    "strong": "rgba(255, 255, 255, 0.35)",
+    "stronger": "rgba(255, 255, 255, 0.55)",
+    "focus": "rgba(165, 180, 252, 0.8)",
+    "error": "rgba(252, 165, 165, 0.8)",
+    "inverse": "rgba(0, 0, 0, 0.3)"
+  },
+  "feedback": {
+    "success": "#4ade80",
+    "successBg": "rgba(74, 222, 128, 0.15)",
+    "successBorder": "rgba(74, 222, 128, 0.3)",
+    "successText": "#86efac",
+    "warning": "#fbbf24",
+    "warningBg": "rgba(251, 191, 36, 0.15)",
+    "warningBorder": "rgba(251, 191, 36, 0.3)",
+    "warningText": "#fde68a",
+    "error": "#f87171",
+    "errorBg": "rgba(248, 113, 113, 0.15)",
+    "errorBorder": "rgba(248, 113, 113, 0.3)",
+    "errorText": "#fca5a5",
+    "info": "#60a5fa",
+    "infoBg": "rgba(96, 165, 250, 0.15)",
+    "infoBorder": "rgba(96, 165, 250, 0.3)",
+    "infoText": "#93c5fd"
+  },
+  "component": {
+    "radius": "16px",
+    "borderWidth": "1px",
+    "focusRing": "0 0 0 3px rgba(165, 180, 252, 0.4)"
+  }
+}

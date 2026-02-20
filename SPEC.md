@@ -451,7 +451,15 @@ Tools exposed to AI agents:
 ### Sections
 
 1. **Kitchen Sink** — Every component rendered in a realistic layout (dashboard mockup)
-2. **Token Editor** — Visual controls for every token category:
+2. **Accessibility Panel** — Live a11y testing built into the editor:
+   - **Contrast checker** — real-time WCAG AA/AAA scoring as you change colors. Red/yellow/green indicators on every text + background combination
+   - **Color blindness simulator** — preview your entire theme through protanopia, deuteranopia, tritanopia filters
+   - **Focus order visualizer** — see tab order and focus ring visibility across components
+   - **Screen reader preview** — shows what ARIA labels and roles each component exposes
+   - **A11y score card** — overall grade (A/AA/AAA) for the current theme with specific failures listed
+   - **Auto-fix suggestions** — "This text fails AA contrast. Darken to #X or lighten background to #Y" with one-click apply
+   - Runs on every token change — you can't accidentally ship an inaccessible theme
+3. **Token Editor** — Visual controls for every token category:
    - Color pickers for all semantic colors
    - Sliders for spacing scale, radius, shadow intensity
    - Typography selectors (font family, scale, weights)

@@ -1,0 +1,70 @@
+{
+  "theme": "brutalist",
+  "surface": {
+    "primary": "#ffffff",
+    "secondary": "#f0f0f0",
+    "tertiary": "#e0e0e0",
+    "elevated": "#ffffff",
+    "overlay": "rgba(0, 0, 0, 0.8)",
+    "inverse": "#000000",
+    "canvas": "#f8f8f8"
+  },
+  "action": {
+    "primary": "#000000",
+    "primaryHover": "#222222",
+    "primaryActive": "#444444",
+    "secondary": "#ffffff",
+    "secondaryHover": "#f0f0f0",
+    "secondaryActive": "#e0e0e0",
+    "danger": "#ff0000",
+    "dangerHover": "#cc0000",
+    "dangerActive": "#990000",
+    "ghost": "transparent",
+    "ghostHover": "rgba(0, 0, 0, 0.05)",
+    "ghostActive": "rgba(0, 0, 0, 0.1)",
+    "outline": "transparent",
+    "outlineHover": "rgba(0, 0, 0, 0.05)"
+  },
+  "text": {
+    "primary": "#000000",
+    "secondary": "#333333",
+    "muted": "#666666",
+    "disabled": "#aaaaaa",
+    "inverse": "#ffffff",
+    "link": "#0000ff",
+    "linkHover": "#0000cc",
+    "onAction": "#ffffff",
+    "onDanger": "#ffffff"
+  },
+  "border": {
+    "default": "#000000",
+    "strong": "#000000",
+    "stronger": "#000000",
+    "focus": "#0000ff",
+    "error": "#ff0000",
+    "inverse": "#ffffff"
+  },
+  "feedback": {
+    "success": "#008000",
+    "successBg": "#f0fff0",
+    "successBorder": "#000000",
+    "successText": "#004400",
+    "warning": "#886600",
+    "warningBg": "#fffff0",
+    "warningBorder": "#000000",
+    "warningText": "#554400",
+    "error": "#ff0000",
+    "errorBg": "#fff0f0",
+    "errorBorder": "#ff0000",
+    "errorText": "#880000",
+    "info": "#0000aa",
+    "infoBg": "#f0f0ff",
+    "infoBorder": "#000000",
+    "infoText": "#000055"
+  },
+  "component": {
+    "radius": "0px",
+    "borderWidth": "3px",
+    "focusRing": "0 0 0 3px rgba(0, 0, 255, 0.3)"
+  }
+}
