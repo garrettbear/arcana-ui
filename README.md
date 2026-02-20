@@ -35,7 +35,7 @@ function App() {
 
 ## Playground
 
-Try the live theme editor: [arcana-ui.vercel.app](https://arcana-ui.vercel.app)
+Try the live theme editor: [arcana-design-system.vercel.app](https://arcana-design-system.vercel.app)
 
 ```bash
 # Run locally
