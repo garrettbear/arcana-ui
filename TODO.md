@@ -2,8 +2,16 @@
 
 ## Priority: Now
 - [x] GitHub repo setup
-- [ ] Vercel deployment (need `npm i -g vercel && vercel` — Bear to run)
+- [x] Vercel deployment — fix absolute path in vite config
 - [ ] Component testing (Vitest + Testing Library)
+
+## Infra: Version Control & Environments
+- [ ] Branch strategy: `main` (production) + `develop` (staging)
+- [ ] Vercel preview deployments on PRs (automatic with Vercel + GitHub)
+- [ ] Production domain: arcana-ui.dev or similar
+- [ ] Staging: auto-deployed from `develop` branch
+- [ ] Semantic versioning (semver) for npm packages
+- [ ] Changesets for managing version bumps + changelogs
 
 ## Priority: Next Build Session
 ### Typography System Upgrade
