@@ -8,6 +8,8 @@
   font-size: 13px;
 }
 
+/* ─── Header ─── */
+
 .editorHeader {
   display: flex;
   align-items: center;
@@ -33,16 +35,7 @@
   border-bottom: 1px solid var(--arcana-border-default);
 }
 
-.sectionLabel {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--arcana-text-muted);
-  margin: 0;
-}
-
-.groupHeader {
+.sectionHeader {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -54,6 +47,64 @@
   text-align: left;
   color: inherit;
   transition: background 120ms;
+  font-family: inherit;
+}
+
+.sectionHeader:hover {
+  background: var(--arcana-action-ghost-hover);
+}
+
+.sectionToggle {
+  font-size: 10px;
+  color: var(--arcana-text-muted);
+  width: 10px;
+  flex-shrink: 0;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--arcana-text-muted);
+}
+
+.sectionBody {
+  padding: 4px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subSections {
+  /* sub-groups inside Colors */
+}
+
+.subSectionLabel {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--arcana-text-muted);
+  margin: 0;
+  padding: 6px 0 2px;
+}
+
+/* ─── Color sub-groups ─── */
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 7px 16px 7px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  transition: background 120ms;
+  font-family: inherit;
 }
 
 .groupHeader:hover {
@@ -65,6 +116,12 @@
   color: var(--arcana-text-muted);
   width: 10px;
   flex-shrink: 0;
+}
+
+.groupLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--arcana-text-secondary);
 }
 
 /* ─── Preset grid ─── */
@@ -117,7 +174,7 @@
 /* ─── Token list ─── */
 
 .tokenList {
-  padding: 2px 16px 10px;
+  padding: 2px 16px 8px 32px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -200,23 +257,328 @@
   font-size: 11px;
   font-family: 'JetBrains Mono', monospace;
   color: var(--arcana-text-secondary);
-  width: 28px;
+  width: 34px;
   text-align: right;
   flex-shrink: 0;
 }
 
-/* ─── Font select ─── */
+/* ─── Font select (ratio dropdown etc.) ─── */
 
 .fontSelect {
-  font-size: 12px;
-  padding: 4px 6px;
+  font-size: 11px;
+  padding: 3px 6px;
   border: 1px solid var(--arcana-border-default);
   border-radius: var(--arcana-component-radius);
   background: var(--arcana-surface-primary);
   color: var(--arcana-text-primary);
   cursor: pointer;
-  max-width: 140px;
+  max-width: 150px;
   font-family: var(--arcana-typography-font-family-sans);
+}
+
+/* ─── Font Picker ─── */
+
+.fontSlots {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fontPicker {
+  position: relative;
+}
+
+.fontPickerTrigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  background: var(--arcana-surface-primary);
+  cursor: pointer;
+  transition: border-color 120ms;
+  user-select: none;
+}
+
+.fontPickerTrigger:hover {
+  border-color: var(--arcana-action-primary);
+}
+
+.fontPickerTriggerLabel {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--arcana-text-muted);
+  width: 42px;
+  flex-shrink: 0;
+}
+
+.fontPickerTriggerValue {
+  flex: 1;
+  font-size: 12px;
+  color: var(--arcana-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.fontPickerChevron {
+  font-size: 9px;
+  color: var(--arcana-text-muted);
+  flex-shrink: 0;
+}
+
+.fontPickerDropdown {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  background: var(--arcana-surface-elevated);
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 200;
+  overflow: hidden;
+}
+
+.fontPickerSearchWrapper {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--arcana-border-default);
+}
+
+.fontPickerSearch {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: 12px;
+  border: 1px solid var(--arcana-border-default);
+  border-radius: 4px;
+  background: var(--arcana-surface-primary);
+  color: var(--arcana-text-primary);
+  font-family: var(--arcana-typography-font-family-sans);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.fontPickerSearch:focus {
+  border-color: var(--arcana-border-focus);
+}
+
+.fontPickerList {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.fontPickerGroupLabel {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--arcana-text-muted);
+  padding: 6px 10px 2px;
+}
+
+.fontPickerOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--arcana-text-primary);
+  text-align: left;
+  transition: background 80ms;
+  font-family: inherit;
+}
+
+.fontPickerOption:hover {
+  background: var(--arcana-action-ghost-hover);
+}
+
+.fontPickerOptionActive {
+  background: var(--arcana-action-outline-hover);
+  color: var(--arcana-action-primary);
+}
+
+.fontPickerOptionBadge {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--arcana-action-primary);
+  background: var(--arcana-action-outline-hover);
+  border-radius: 3px;
+  padding: 1px 4px;
+}
+
+.fontPickerEmpty {
+  padding: 12px 10px;
+  font-size: 12px;
+  color: var(--arcana-text-muted);
+  text-align: center;
+}
+
+/* ─── Type Scale Preview ─── */
+
+.typeScalePreview {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px 0;
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  overflow: hidden;
+}
+
+.typeScaleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 8px;
+  height: 32px;
+  overflow: hidden;
+  transition: background 80ms;
+}
+
+.typeScaleRow:hover {
+  background: var(--arcana-action-ghost-hover);
+}
+
+.typeScaleTag {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--arcana-text-muted);
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.typeScaleSample {
+  flex: 1;
+  line-height: 1;
+  color: var(--arcana-text-primary);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.typeScaleSize {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--arcana-text-muted);
+  width: 38px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ─── Spacing Preview ─── */
+
+.spacingPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.spacingRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 16px;
+}
+
+.spacingLabel {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--arcana-text-muted);
+  width: 22px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.spacingTrack {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.spacingBlock {
+  height: 8px;
+  background: var(--arcana-action-primary);
+  border-radius: 2px;
+  opacity: 0.7;
+  min-width: 2px;
+  transition: width 120ms;
+}
+
+.spacingValue {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--arcana-text-muted);
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ─── Local Font Upload ─── */
+
+.localFontUpload {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.localFontLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border: 1px dashed var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  cursor: pointer;
+  transition: border-color 120ms, background 120ms;
+}
+
+.localFontLabel:hover {
+  border-color: var(--arcana-action-primary);
+  background: var(--arcana-action-outline-hover);
+}
+
+.localFontLabelText {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--arcana-text-secondary);
+}
+
+.localFontHint {
+  font-size: 10px;
+  color: var(--arcana-text-muted);
+}
+
+.localFontInput {
+  display: none;
+}
+
+.localFontList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.localFontChip {
+  font-size: 11px;
+  padding: 2px 7px;
+  background: var(--arcana-action-outline-hover);
+  border: 1px solid var(--arcana-border-default);
+  border-radius: var(--arcana-component-radius);
+  color: var(--arcana-text-secondary);
+  white-space: nowrap;
 }
 
 /* ─── Actions ─── */
