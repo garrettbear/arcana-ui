@@ -1,84 +1,112 @@
-# Arcana UI — Next Task: Testing + Typography System
+# Arcana UI — Current Build Tasks
 
-Read SPEC.md and TODO.md for full context. Components are built and deployed.
+## Context
+- 8 component tests exist (Button, Input, Textarea, Checkbox, Radio, Select, Badge, Toggle)
+- Token editor + accessibility panel exist in playground
+- No typography/spacing editors yet
+- No docs site yet
 
-## Task 1: Component Testing
+## Task 1: Remaining Component Tests
+Write tests for these 14 components (same pattern as existing tests — render, props, axe a11y):
+Avatar, AvatarGroup, Card, Modal, Alert, Toast, Tabs, Accordion, Stack, HStack, Grid, Container, Navbar, EmptyState, Form, Table
 
-### Setup
-- Add Vitest + @testing-library/react + @testing-library/jest-dom + jsdom to packages/core
-- Add jest-axe for accessibility testing
-- Configure vitest.config.ts in packages/core
-- Add `"test": "vitest run"` script to packages/core/package.json and root
-
-### Tests for Every Component
-Write tests for all 22 components. Each component gets its own .test.tsx file next to it. Each test file should include:
-
-1. **Renders without crashing** — basic smoke test
-2. **Props work** — key props (variant, size, disabled, etc.) render correctly
-3. **Accessibility** — jest-axe `toHaveNoViolations()` check
-4. **Interaction** — click handlers, onChange, keyboard events where applicable
-5. **States** — loading, disabled, error, open/closed
-
-Components to test:
-- Button, Input, Textarea, Select, Checkbox, Radio/RadioGroup, Toggle
-- Badge, Avatar/AvatarGroup
-- Card, Modal, Alert, Toast, Tabs, Accordion
-- Stack, HStack, Grid, Container
-- Navbar, EmptyState, Form, Table
-
-### Quality Bar
-- All tests must pass
-- Every component must pass axe accessibility checks
-- Aim for meaningful tests, not just coverage padding
+Each .test.tsx goes next to its component. All must pass `toHaveNoViolations()`.
 
 ## Task 2: Typography System in Playground
 
-### Google Fonts Integration
-- Fetch the Google Fonts catalog (use the CSS API, not the JSON API — just load fonts via <link> tags)
-- Build a searchable font dropdown/picker component
-- Popular fonts at the top: Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Playfair Display, Space Grotesk, DM Sans, Geist
+### Google Fonts Picker
+- Hardcode a curated list of 30+ popular Google Fonts (don't need API — just the font names and load via Google Fonts CSS URL)
+- Searchable dropdown component
+- When selected, inject a <link> tag to load the font, then update the CSS variable
 
-### Multiple Font Slots
-Add to the Token Editor:
-- **Display Font** — for headings (h1-h4) and marketing text
-- **Body Font** — for paragraph text, labels, UI elements  
-- **Mono Font** — for code blocks and technical content
-- Each slot gets its own Google Fonts picker
-- Changing a font updates the corresponding CSS variable immediately
+### Multiple Font Slots in Token Editor
+Add 3 font pickers to the Token Editor sidebar:
+- Display Font (--arcana-font-display) — for headings
+- Body Font (--arcana-font-body) — for UI text
+- Mono Font (--arcana-font-mono) — for code
+
+### Type Scale Editor
+- Base size slider (12-24px, default 16)
+- Scale ratio dropdown: Minor Second 1.067, Major Second 1.125, Minor Third 1.200, Major Third 1.250, Perfect Fourth 1.333, Augmented Fourth 1.414, Perfect Fifth 1.500, Golden Ratio 1.618
+- Live preview showing computed sizes for h1-h6, body, small
+- Updates --arcana-font-size-* CSS variables in real-time
+- Line height slider (1.0-2.0)
+
+### Spacing Scale Editor  
+- Base unit slider (2-8px, default 4)
+- Preview blocks showing all spacing values visually
+- Updates --arcana-spacing-* CSS variables
 
 ### Local Font Upload
-- Drag & drop zone or file input for .woff2, .woff, .ttf, .otf files
-- When uploaded, register as @font-face and make available in the font pickers
-- Store in memory (no server needed — use URL.createObjectURL)
+- File input accepting .woff2, .woff, .ttf, .otf
+- Register uploaded font via @font-face + URL.createObjectURL
+- Make it appear in the font picker dropdowns
 
-### Type Scale Editor (inspired by typescale.com)
-- **Base size** slider (14-20px, default 16px)
-- **Scale ratio** selector with presets:
-  - 1.067 Minor Second
-  - 1.125 Major Second  
-  - 1.200 Minor Third
-  - 1.250 Major Third
-  - 1.333 Perfect Fourth
-  - 1.414 Augmented Fourth
-  - 1.500 Perfect Fifth
-  - 1.618 Golden Ratio
-- **Live preview** showing the full scale: h1, h2, h3, h4, h5, h6, body, small, xs
-- Each level shows: font size in px/rem, line height, letter spacing
-- **Line height** control per level (or global multiplier)
-- **Letter spacing** control
-- **Font weight** per level
-- All changes instantly update the CSS custom properties and the kitchen sink components reflect them
+### Token Editor Organization
+Group the token editor into collapsible sections:
+1. Colors (existing color pickers)
+2. Typography (new — fonts, type scale, line height)
+3. Spacing (new — spacing scale)
+4. Effects (existing — radius, shadows)
+5. Theme Presets (existing — light, dark, terminal, etc.)
 
-### Spacing Scale Editor
-- Visual editor for the spacing scale (--arcana-spacing-*)
-- Base unit slider (default 4px)
-- Scale preview showing all spacing values as visual blocks
-- Components update in real-time
+## Task 3: Docs Site with Fumadocs
 
-### Integration
-- All new controls go in the existing TokenEditor sidebar
-- Group them in collapsible sections: Colors | Typography | Spacing | Effects
-- Export button should include all typography + spacing tokens in the JSON output
+Set up a docs site in /docs using Fumadocs (Next.js):
+
+```bash
+npx create-fumadocs-app docs
+```
+
+### Structure
+docs/
+├── app/
+├── content/docs/
+│   ├── index.mdx              (Getting Started)
+│   ├── installation.mdx       (Install + setup)
+│   ├── theming.mdx            (Token system, theme switching, customization)
+│   ├── accessibility.mdx      (A11y features, WCAG compliance)
+│   ├── ai-integration.mdx     (manifest.ai.json, llms.txt, MCP)
+│   ├── components/
+│   │   ├── button.mdx
+│   │   ├── input.mdx
+│   │   ├── ... (one page per component)
+│   └── playground.mdx         (Link to live playground)
+
+### Design Direction
+- Clean, warm, Anthropic-inspired aesthetic
+- Warm white backgrounds, stone neutrals, indigo accents
+- Use Inter font
+- Subtle, confident, not flashy
+
+### SEO Requirements
+- Proper meta tags on every page (title, description, og:image)
+- Structured data (JSON-LD) for software application
+- Sitemap.xml generation
+- robots.txt
+- OpenGraph images
+- Canonical URLs
+- Fast load times (Fumadocs handles this)
+
+### AI Discoverability
+- Create /llms.txt at root — plain text summary of what Arcana is, components list, install instructions
+- Create /llms-full.txt — detailed version with all component props
+- Ensure manifest.ai.json is served at a public URL
+- Add <meta name="ai-content-description"> tags
+
+### Each Component Doc Page Should Have
+- Description + when to use
+- Import statement
+- Props table
+- Live examples (use code blocks — we'll add live preview later)
+- Accessibility notes
+- Related components
+
+## Quality Bar
+- pnpm build must pass across all packages
+- pnpm test must pass
+- Docs site must build (pnpm --filter docs build)
+- Commit and push when done
 
 When completely finished, run this command to notify me:
-openclaw system event --text "Done: Component tests + typography system + spacing editor built for Arcana" --mode now
+openclaw system event --text "Done: Remaining tests, typography system, spacing editor, and Fumadocs site built for Arcana" --mode now
