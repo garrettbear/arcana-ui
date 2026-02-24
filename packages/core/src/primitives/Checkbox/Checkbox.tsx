@@ -10,7 +10,7 @@ export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputE
 }
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ label, description, indeterminate = false, error, className, id, ...props }, ref) => {
+  ({ label, description, indeterminate = false, error, className, id, onChange, ...props }, ref) => {
     const generatedId = React.useId()
     const inputId = id ?? generatedId
     const descId = `${inputId}-desc`
@@ -23,6 +23,11 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         resolvedRef.current.indeterminate = indeterminate
       }
     }, [indeterminate, resolvedRef])
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (props.disabled) return
+      onChange?.(e)
+    }
 
     const hasError = Boolean(error)
     const errorMessage = typeof error === 'string' ? error : undefined
@@ -41,6 +46,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
                 [description && descId, errorMessage && errorId].filter(Boolean).join(' ') ||
                 undefined
               }
+              onChange={handleChange}
               {...props}
             />
             <span className={styles.indicator} aria-hidden="true">

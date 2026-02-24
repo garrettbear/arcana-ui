@@ -1,0 +1,12 @@
+{
+  "title": "Arcana UI",
+  "pages": [
+    "index",
+    "installation",
+    "theming",
+    "accessibility",
+    "ai-integration",
+    "components",
+    "playground"
+  ]
+}

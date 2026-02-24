@@ -1,0 +1,94 @@
+---
+title: Radio
+description: Single-choice selection using RadioGroup for grouped options or standalone Radio for custom layouts.
+---
+
+## Import
+
+```tsx
+import { Radio, RadioGroup } from '@arcana-ui/core'
+```
+
+## RadioGroup usage
+
+`RadioGroup` is the preferred way to render mutually exclusive options:
+
+```tsx
+<RadioGroup
+  name="plan"
+  label="Billing plan"
+  value={selectedPlan}
+  onChange={setSelectedPlan}
+  options={[
+    { value: 'free', label: 'Free', description: 'Up to 3 projects' },
+    { value: 'pro', label: 'Pro', description: '$9/month — unlimited projects' },
+    { value: 'enterprise', label: 'Enterprise', disabled: true, description: 'Contact sales' },
+  ]}
+/>
+```
+
+## RadioGroup Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `string` | — | Input name for the radio group |
+| `label` | `string` | — | Fieldset legend |
+| `value` | `string` | — | Currently selected value |
+| `onChange` | `(value: string) => void` | — | Called with the new value |
+| `options` | `RadioOption[]` | — | Array of options |
+| `className` | `string` | — | Additional CSS classes |
+
+## RadioOption type
+
+```tsx
+interface RadioOption {
+  value: string
+  label: string
+  description?: string
+  disabled?: boolean
+}
+```
+
+## Standalone Radio usage
+
+For custom layouts where you manage the group yourself:
+
+```tsx
+<fieldset>
+  <legend>Notification preference</legend>
+  <Radio
+    name="notif"
+    value="email"
+    label="Email"
+    checked={pref === 'email'}
+    onChange={() => setPref('email')}
+  />
+  <Radio
+    name="notif"
+    value="sms"
+    label="SMS"
+    checked={pref === 'sms'}
+    onChange={() => setPref('sms')}
+  />
+</fieldset>
+```
+
+## Radio Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Visible label |
+| `description` | `string` | — | Secondary text |
+| `...rest` | `InputHTMLAttributes` | — | All native input attributes (`name`, `value`, `checked`, `disabled`, etc.) |
+
+## Accessibility
+
+- `RadioGroup` renders a `<fieldset>` with `<legend>` — correct semantic structure
+- Arrow keys move between options in the group
+- Disabled options cannot be selected (neither by click nor keyboard)
+- `aria-describedby` links description text
+
+## Related
+
+- [Checkbox](/docs/components/checkbox) — independent boolean toggles
+- [Select](/docs/components/select) — dropdown for larger option sets

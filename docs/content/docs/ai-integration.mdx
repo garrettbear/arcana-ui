@@ -1,0 +1,144 @@
+---
+title: AI Integration
+description: How Arcana UI is designed for AI-first workflows — llms.txt, llms-full.txt, and using Arcana with AI coding assistants.
+---
+
+## AI-first design philosophy
+
+Arcana UI is built with AI coding assistants in mind. The goal: an AI should be able to generate correct, idiomatic Arcana code from a natural language prompt, without accessing the internet.
+
+We achieve this through three mechanisms:
+
+1. **`llms.txt`** — a brief plain-text overview at the repo root
+2. **`llms-full.txt`** — a complete props reference for all 22 components
+3. **`manifest.ai.json`** — machine-readable component registry (coming soon)
+
+## llms.txt
+
+The `llms.txt` file (at the repo root) gives AI assistants a concise overview of Arcana:
+
+- What the library is and how to install it
+- The complete component list
+- Links to full documentation
+
+AI assistants that index your codebase (GitHub Copilot, Cursor, Claude, etc.) will find this file and use it to understand your UI library.
+
+## llms-full.txt
+
+The `llms-full.txt` file contains the complete props documentation for every component. An AI assistant can read this file and know exactly how to use any Arcana component:
+
+```
+Button
+  import: import { Button } from '@arcana-ui/core'
+  props:
+    variant: 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline' — default: 'primary'
+    size: 'sm' | 'md' | 'lg' — default: 'md'
+    loading: boolean — default: false
+    disabled: boolean — default: false
+    fullWidth: boolean — default: false
+    ...
+```
+
+## Using with AI coding assistants
+
+### Claude / Cursor / Copilot
+
+Add `llms-full.txt` to your project context window, then prompt:
+
+```
+Using Arcana UI, create a login form with email input, password input,
+submit button, and error handling.
+```
+
+The AI will generate:
+
+```tsx
+import { Form, Input, Button, Alert } from '@arcana-ui/core'
+
+function LoginForm() {
+  const [error, setError] = useState('')
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Input
+        label="Email"
+        type="email"
+        required
+        placeholder="you@example.com"
+      />
+      <Input
+        label="Password"
+        type="password"
+        required
+      />
+      {error && <Alert variant="error">{error}</Alert>}
+      <Button type="submit" fullWidth>
+        Sign in
+      </Button>
+    </Form>
+  )
+}
+```
+
+### Adding to a Cursor rules file
+
+Create `.cursorrules` in your project root:
+
+```
+This project uses Arcana UI (@arcana-ui/core) for all React components.
+See llms-full.txt for the complete component API reference.
+Always import from '@arcana-ui/core', never use inline styles.
+Import '@arcana-ui/tokens/dist/arcana.css' once at the app root.
+```
+
+### System prompts
+
+For Claude or GPT-based workflows, you can include `llms-full.txt` directly in your system prompt or as a user-provided file.
+
+## Component API patterns for AI
+
+Arcana follows consistent patterns that make it easy for AI to learn:
+
+### All form components share:
+- `label` — visible label text
+- `error` — string error message (auto-adds aria-invalid)
+- `disabled` — disables the control
+- `className` — additional CSS classes
+
+### All components accept:
+- `className` — appended to root element
+- Native HTML attributes via rest props (`...props`)
+
+### Variant naming:
+- `variant`: `'primary' | 'secondary' | 'ghost' | 'danger' | 'outline'`
+- `size`: `'sm' | 'md' | 'lg'`
+
+## TypeScript integration
+
+All component props are fully typed. AI assistants with TypeScript LSP support will get inline completions:
+
+```tsx
+import { Button, type ButtonProps } from '@arcana-ui/core'
+
+// ButtonProps = {
+//   variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline'
+//   size?: 'sm' | 'md' | 'lg'
+//   loading?: boolean
+//   disabled?: boolean
+//   fullWidth?: boolean
+//   children?: React.ReactNode
+//   className?: string
+//   ... and all native button attributes
+// }
+```
+
+## MCP server (coming soon)
+
+A Model Context Protocol (MCP) server for Arcana is planned, which will allow AI assistants with MCP support (Claude Desktop, etc.) to:
+
+- Search component documentation
+- Get props for any component by name
+- Generate usage examples on demand
+- Check accessibility requirements
+
+Watch the GitHub repo for updates.

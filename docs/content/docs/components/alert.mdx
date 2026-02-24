@@ -1,0 +1,81 @@
+---
+title: Alert
+description: Inline status message with icon, title, description, and dismissal.
+---
+
+## Import
+
+```tsx
+import { Alert } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Alert variant="info">Your account is pending verification.</Alert>
+<Alert variant="success">Payment processed successfully.</Alert>
+<Alert variant="warning">Storage is 90% full.</Alert>
+<Alert variant="error">Failed to save changes. Please try again.</Alert>
+
+{/* With title */}
+<Alert variant="warning" title="Storage limit approaching">
+  You've used 90% of your 10GB storage quota. Upgrade to continue uploading files.
+</Alert>
+
+{/* Dismissible */}
+<Alert variant="info" dismissible onDismiss={() => setVisible(false)}>
+  A new version is available. Refresh to update.
+</Alert>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'info' \| 'success' \| 'warning' \| 'error'` | `'info'` | Alert type and colour |
+| `title` | `string` | — | Bold title line |
+| `dismissible` | `boolean` | `false` | Show dismiss button |
+| `onDismiss` | `() => void` | — | Called when dismiss button clicked |
+| `children` | `React.ReactNode` | — | Alert body content |
+| `className` | `string` | — | Additional CSS classes |
+
+## Controlled visibility
+
+```tsx
+const [visible, setVisible] = useState(true)
+
+{visible && (
+  <Alert
+    variant="info"
+    dismissible
+    onDismiss={() => setVisible(false)}
+  >
+    Feature announcement
+  </Alert>
+)}
+```
+
+## With actions
+
+```tsx
+<Alert variant="warning" title="Unsaved changes">
+  You have unsaved changes. Save or discard before leaving.
+  <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+    <Button size="sm">Save</Button>
+    <Button size="sm" variant="ghost">Discard</Button>
+  </div>
+</Alert>
+```
+
+## Accessibility
+
+- Renders with `role="alert"` for live region announcements
+- Icon is `aria-hidden` — variant meaning is conveyed via text
+- Dismiss button has `aria-label="Dismiss"`
+- Screen readers announce the alert content when it appears
+
+## Related
+
+- [Toast](/docs/components/toast) — transient, auto-dismissing notifications
+- [Badge](/docs/components/badge) — compact inline status indicators
+- [Modal](/docs/components/modal) — for confirmations requiring user action

@@ -1,0 +1,97 @@
+---
+title: Toast
+description: Transient notification overlay. Wrap your app with ToastProvider, then use useToast to trigger notifications.
+---
+
+## Import
+
+```tsx
+import { ToastProvider, useToast } from '@arcana-ui/core'
+```
+
+## Setup
+
+Wrap your app (or the relevant subtree) with `ToastProvider`:
+
+```tsx
+// app/layout.tsx or App.tsx
+import { ToastProvider } from '@arcana-ui/core'
+
+export default function App() {
+  return (
+    <ToastProvider>
+      <MyApp />
+    </ToastProvider>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import { useToast } from '@arcana-ui/core'
+
+function SaveButton() {
+  const toast = useToast()
+
+  const handleSave = async () => {
+    try {
+      await saveData()
+      toast.success('Changes saved successfully')
+    } catch {
+      toast.error('Failed to save. Please try again.')
+    }
+  }
+
+  return <Button onClick={handleSave}>Save</Button>
+}
+```
+
+## Toast methods
+
+```tsx
+const toast = useToast()
+
+toast.success('Operation completed')
+toast.error('Something went wrong')
+toast.warning('Action may have side effects')
+toast.info('Update available')
+
+// With title
+toast.success('File uploaded', { title: 'Success' })
+
+// With custom duration (ms)
+toast.info('Saving...', { duration: 10000 })
+
+// Persistent (no auto-dismiss)
+toast.error('Connection lost', { duration: Infinity })
+```
+
+## ToastProvider Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `position` | `'top-right' \| 'top-left' \| 'bottom-right' \| 'bottom-left' \| 'top-center' \| 'bottom-center'` | `'top-right'` | Screen position |
+| `defaultDuration` | `number` | `4000` | Auto-dismiss delay in ms |
+| `maxToasts` | `number` | `5` | Maximum simultaneous toasts |
+
+## useToast options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `title` | `string` | — | Bold title line |
+| `duration` | `number` | `4000` | Auto-dismiss delay (`Infinity` = no dismiss) |
+| `dismissible` | `boolean` | `true` | Show manual dismiss button |
+
+## Accessibility
+
+- Toasts render in an `aria-live="polite"` region by default
+- Error toasts use `aria-live="assertive"` for immediate announcement
+- Each toast has `role="status"` (or `role="alert"` for errors)
+- Auto-dismiss respects `prefers-reduced-motion` (pauses animation)
+- Dismiss button has accessible label
+
+## Related
+
+- [Alert](/docs/components/alert) — persistent inline status messages
+- [Modal](/docs/components/modal) — blocking dialogs requiring user action

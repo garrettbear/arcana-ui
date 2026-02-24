@@ -1,0 +1,97 @@
+---
+title: EmptyState
+description: Placeholder for empty lists, zero-data views, and onboarding prompts.
+---
+
+## Import
+
+```tsx
+import { EmptyState } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+{/* Basic */}
+<EmptyState
+  title="No results found"
+  description="Try adjusting your search or filters."
+/>
+
+{/* With icon */}
+<EmptyState
+  icon={<InboxIcon size={48} />}
+  title="Your inbox is empty"
+  description="When you receive messages, they'll appear here."
+/>
+
+{/* With action */}
+<EmptyState
+  title="No projects yet"
+  description="Create your first project to get started."
+  action={<Button onClick={handleCreate}>Create project</Button>}
+/>
+
+{/* Full example */}
+<EmptyState
+  icon={<FolderOpen size={48} />}
+  title="No files uploaded"
+  description="Drag and drop files here, or click below to browse."
+  action={
+    <>
+      <Button>Upload files</Button>
+      <Button variant="ghost">Learn more</Button>
+    </>
+  }
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `icon` | `React.ReactNode` | — | Illustration or icon above title |
+| `title` | `string` | — | Primary message |
+| `description` | `string` | — | Secondary explanation text |
+| `action` | `React.ReactNode` | — | CTA button(s) |
+| `className` | `string` | — | Additional CSS classes |
+
+## In a table
+
+```tsx
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableHeader>Name</TableHeader>
+      <TableHeader>Status</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    {items.length === 0 ? (
+      <TableRow>
+        <TableCell colSpan={2}>
+          <EmptyState
+            title="No items"
+            description="Add an item to get started."
+            action={<Button size="sm">Add item</Button>}
+          />
+        </TableCell>
+      </TableRow>
+    ) : (
+      items.map((item) => <TableRow key={item.id}>...</TableRow>)
+    )}
+  </TableBody>
+</Table>
+```
+
+## Accessibility
+
+- Renders as a `<div>` with appropriate text hierarchy
+- `title` renders as `<h3>`, `description` as `<p>`
+- Icon is `aria-hidden` — text content carries meaning
+- Action buttons have full keyboard access
+
+## Related
+
+- [Table](/docs/components/table) — tables with empty state integration
+- [Card](/docs/components/card) — content containers

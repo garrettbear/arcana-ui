@@ -1,0 +1,174 @@
+---
+title: Accessibility
+description: WCAG AA compliance, axe-core testing, keyboard navigation, and screen reader support in Arcana UI.
+---
+
+## Our accessibility commitment
+
+Every Arcana component is designed and tested to meet **WCAG 2.1 AA** standards. This means:
+
+- Minimum 4.5:1 contrast ratio for body text (3:1 for large text)
+- Full keyboard operability for all interactive elements
+- Semantic HTML with correct ARIA roles, states, and properties
+- Screen reader announcements for dynamic content
+- Focus management for modals and overlays
+- axe-core automated tests pass on all components (238 tests, all passing)
+
+## Testing with axe
+
+All components are tested with `jest-axe` in the test suite:
+
+```tsx
+import { axe } from 'jest-axe'
+import { render } from '@testing-library/react'
+import { Button } from '@arcana-ui/core'
+
+it('passes axe checks', async () => {
+  const { container } = render(<Button>Submit</Button>)
+  const results = await axe(container)
+  expect(results).toHaveNoViolations()
+})
+```
+
+## Keyboard navigation
+
+| Component | Keys |
+|-----------|------|
+| Button | Enter, Space to activate |
+| Input, Textarea | Standard text editing |
+| Select | Enter/Space to open, Arrow keys to navigate, Enter to select, Escape to close |
+| Checkbox | Space to toggle |
+| Radio | Arrow keys to navigate group, Space to select |
+| Toggle | Space, Enter to toggle |
+| Modal | Escape to close, Tab/Shift+Tab trapped inside |
+| Tabs | Arrow keys to switch tabs, Enter/Space to activate |
+| Accordion | Enter/Space to expand/collapse |
+| Dropdown menus | Arrow keys, Enter, Escape |
+
+## Focus management
+
+### Modal focus trap
+
+The Modal component implements a complete focus trap: when open, Tab and Shift+Tab cycle only through focusable elements inside the dialog. Focus is restored to the triggering element when the modal closes.
+
+```tsx
+<Modal
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="Confirm action"
+>
+  {/* Tab stays within this dialog */}
+  <p>Are you sure?</p>
+  <Button>Cancel</Button>
+  <Button variant="danger">Delete</Button>
+</Modal>
+```
+
+### Skip links
+
+For page-level accessibility, add a skip link before your Navbar:
+
+```tsx
+<a href="#main-content" className="sr-only focus:not-sr-only">
+  Skip to main content
+</a>
+<Navbar />
+<main id="main-content">
+  {/* content */}
+</main>
+```
+
+## ARIA attributes
+
+### Required labels
+
+All form components require accessible names:
+
+```tsx
+{/* Good — label prop */}
+<Input label="Email address" />
+
+{/* Good — aria-label */}
+<Input aria-label="Search" placeholder="Search..." />
+
+{/* Bad — no accessible name */}
+<Input placeholder="Email" />
+```
+
+### Error states
+
+Use the `error` prop on form components to associate error messages:
+
+```tsx
+<Input
+  label="Email"
+  error="Please enter a valid email address"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+/>
+```
+
+This adds `aria-invalid="true"` and `aria-describedby` pointing to the error message.
+
+### Icon-only buttons
+
+Always add `aria-label` to buttons that contain only icons:
+
+```tsx
+<Button aria-label="Close dialog">
+  <XIcon />
+</Button>
+```
+
+## Colour contrast
+
+Arcana's default palette is tested against WCAG AA:
+
+| Token | Foreground | Background | Ratio | Level |
+|-------|-----------|------------|-------|-------|
+| Primary text | `--arcana-text-primary` | `--arcana-surface-default` | 14.3:1 | AAA |
+| Secondary text | `--arcana-text-secondary` | `--arcana-surface-default` | 6.2:1 | AA |
+| Action text on primary | `--arcana-text-on-action` | `--arcana-action-primary` | 5.1:1 | AA |
+| Placeholder | `--arcana-text-placeholder` | `--arcana-surface-default` | 4.6:1 | AA |
+
+When customising colours, use a contrast checker to verify:
+
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+- [Who Can Use](https://www.whocanuse.com/)
+
+## Screen reader testing
+
+Components are tested with:
+
+- **macOS VoiceOver** — Safari and Chrome
+- **NVDA + Firefox** (Windows)
+- **axe DevTools** browser extension
+
+### Live regions
+
+Dynamic content (Toast notifications, form errors) uses appropriate ARIA live regions:
+
+```tsx
+{/* Toast notifications use role="alert" */}
+<Toast message="File saved successfully" variant="success" />
+
+{/* Form errors use role="alert" */}
+<Input label="Email" error="Invalid email" />
+```
+
+## Reduced motion
+
+Arcana respects `prefers-reduced-motion`:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* All animations are disabled automatically */
+  --arcana-motion-duration-fast: 0ms;
+  --arcana-motion-duration-normal: 0ms;
+  --arcana-motion-duration-slow: 0ms;
+}
+```
+
+## Reporting accessibility issues
+
+If you find an accessibility issue with any Arcana component, please [open a GitHub issue](https://github.com/your-org/arcana-ui/issues) with the component name, reproduction steps, and the assistive technology you tested with.

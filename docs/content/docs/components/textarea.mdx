@@ -1,0 +1,83 @@
+---
+title: Textarea
+description: Multiline text input with auto-resize, character count, and full form integration.
+---
+
+## Import
+
+```tsx
+import { Textarea } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Textarea label="Message" placeholder="Type your message..." />
+<Textarea label="Bio" maxLength={160} showCount />
+<Textarea label="Notes" autoResize />
+<Textarea label="Description" rows={6} />
+<Textarea label="Feedback" error="Please describe the issue" />
+<Textarea label="Readonly" readOnly value="Can't edit this" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Visible label |
+| `hint` | `string` | — | Helper text below the textarea |
+| `error` | `string` | — | Error message (sets `aria-invalid`) |
+| `autoResize` | `boolean` | `false` | Grow with content automatically |
+| `showCount` | `boolean` | `false` | Show character count (requires `maxLength`) |
+| `maxLength` | `number` | — | Maximum character limit |
+| `rows` | `number` | `3` | Initial row height |
+| `className` | `string` | — | Additional CSS classes on wrapper |
+| `...rest` | `TextareaHTMLAttributes` | — | All native textarea attributes |
+
+## Auto-resize
+
+```tsx
+<Textarea
+  label="Notes"
+  autoResize
+  placeholder="This textarea grows as you type..."
+/>
+```
+
+## Character count
+
+```tsx
+<Textarea
+  label="Bio"
+  maxLength={160}
+  showCount
+  placeholder="Tell us about yourself"
+/>
+```
+
+Shows a live counter like "0 / 160" that updates as the user types. When over the limit, the counter turns red.
+
+## Controlled
+
+```tsx
+const [text, setText] = useState('')
+
+<Textarea
+  label="Message"
+  value={text}
+  onChange={(e) => setText(e.target.value)}
+  maxLength={500}
+  showCount
+/>
+```
+
+## Accessibility
+
+- Same label/error association as `Input` via `htmlFor` and `aria-describedby`
+- `aria-invalid` set when `error` is provided
+- Character count announces to screen readers via `aria-live`
+
+## Related
+
+- [Input](/docs/components/input) — single-line text
+- [Form](/docs/components/form) — form layout and validation

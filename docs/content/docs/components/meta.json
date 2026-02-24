@@ -1,0 +1,25 @@
+{
+  "title": "Components",
+  "pages": [
+    "button",
+    "input",
+    "textarea",
+    "select",
+    "checkbox",
+    "radio",
+    "toggle",
+    "badge",
+    "avatar",
+    "card",
+    "modal",
+    "alert",
+    "toast",
+    "tabs",
+    "accordion",
+    "table",
+    "form",
+    "navbar",
+    "empty-state",
+    "layout"
+  ]
+}

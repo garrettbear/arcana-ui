@@ -1,112 +1,69 @@
-# Arcana UI — Current Build Tasks
+# Arcana UI — Current Task: Fix Fumadocs Build
 
 ## Context
-- 8 component tests exist (Button, Input, Textarea, Checkbox, Radio, Select, Badge, Toggle)
-- Token editor + accessibility panel exist in playground
-- No typography/spacing editors yet
-- No docs site yet
+- Fumadocs docs site exists in /docs with full content (26 MDX pages, layouts, search API)
+- Dependencies: fumadocs-core@15.8.5, fumadocs-mdx@11.10.1, fumadocs-ui@15.8.5, next@15.5.12
+- The docs site does NOT build due to Fumadocs v15 API breaking changes
 
-## Task 1: Remaining Component Tests
-Write tests for these 14 components (same pattern as existing tests — render, props, axe a11y):
-Avatar, AvatarGroup, Card, Modal, Alert, Toast, Tabs, Accordion, Stack, HStack, Grid, Container, Navbar, EmptyState, Form, Table
+## Build Errors
 
-Each .test.tsx goes next to its component. All must pass `toHaveNoViolations()`.
+### Error 1: Type error in page.tsx
+```
+./app/docs/[[...slug]]/page.tsx:21:25
+Type error: Property 'body' does not exist on type 'PageData & BaseCollectionEntry'.
+```
+The page template accesses `page.data.body`, `page.data.toc`, `page.data.full` — but the TypeScript types from fumadocs-core's `loader()` don't expose these. The data IS there at runtime (from fumadocs-mdx), the types just don't flow through.
 
-## Task 2: Typography System in Playground
+### Error 2: Type error in lib/source.ts
+```
+./lib/source.ts:7:27
+Type error: Argument of type '{ docs: DocOut<...>[]; meta: MetaOut<...>[]; toFumadocsSource: () => Source<...>; }' 
+is not assignable to parameter of type '(PageData & BaseCollectionEntry)[]'.
+```
+The `createMDXSource(docs)` call from fumadocs-mdx no longer works with fumadocs-mdx v11. The `docs` object from `@/.source` now has a `.toFumadocsSource()` method that should be used instead.
 
-### Google Fonts Picker
-- Hardcode a curated list of 30+ popular Google Fonts (don't need API — just the font names and load via Google Fonts CSS URL)
-- Searchable dropdown component
-- When selected, inject a <link> tag to load the font, then update the CSS variable
+### Error 3: Runtime error in search route
+```
+TypeError: a.map is not a function
+[Error: Failed to collect page data for /api/search]
+```
+The search API route `createFromSource(source)` has a runtime error — something about the source data not being iterable.
 
-### Multiple Font Slots in Token Editor
-Add 3 font pickers to the Token Editor sidebar:
-- Display Font (--arcana-font-display) — for headings
-- Body Font (--arcana-font-body) — for UI text
-- Mono Font (--arcana-font-mono) — for code
+## What To Do
 
-### Type Scale Editor
-- Base size slider (12-24px, default 16)
-- Scale ratio dropdown: Minor Second 1.067, Major Second 1.125, Minor Third 1.200, Major Third 1.250, Perfect Fourth 1.333, Augmented Fourth 1.414, Perfect Fifth 1.500, Golden Ratio 1.618
-- Live preview showing computed sizes for h1-h6, body, small
-- Updates --arcana-font-size-* CSS variables in real-time
-- Line height slider (1.0-2.0)
+1. Fix `lib/source.ts` — use `docs.toFumadocsSource()` instead of `createMDXSource(docs)`:
+```ts
+import { docs } from '@/.source'
+import { loader } from 'fumadocs-core/source'
 
-### Spacing Scale Editor  
-- Base unit slider (2-8px, default 4)
-- Preview blocks showing all spacing values visually
-- Updates --arcana-spacing-* CSS variables
-
-### Local Font Upload
-- File input accepting .woff2, .woff, .ttf, .otf
-- Register uploaded font via @font-face + URL.createObjectURL
-- Make it appear in the font picker dropdowns
-
-### Token Editor Organization
-Group the token editor into collapsible sections:
-1. Colors (existing color pickers)
-2. Typography (new — fonts, type scale, line height)
-3. Spacing (new — spacing scale)
-4. Effects (existing — radius, shadows)
-5. Theme Presets (existing — light, dark, terminal, etc.)
-
-## Task 3: Docs Site with Fumadocs
-
-Set up a docs site in /docs using Fumadocs (Next.js):
-
-```bash
-npx create-fumadocs-app docs
+export const source = loader({
+  baseUrl: '/docs',
+  source: docs.toFumadocsSource(),
+})
 ```
 
-### Structure
-docs/
-├── app/
-├── content/docs/
-│   ├── index.mdx              (Getting Started)
-│   ├── installation.mdx       (Install + setup)
-│   ├── theming.mdx            (Token system, theme switching, customization)
-│   ├── accessibility.mdx      (A11y features, WCAG compliance)
-│   ├── ai-integration.mdx     (manifest.ai.json, llms.txt, MCP)
-│   ├── components/
-│   │   ├── button.mdx
-│   │   ├── input.mdx
-│   │   ├── ... (one page per component)
-│   └── playground.mdx         (Link to live playground)
+2. Fix `app/docs/[[...slug]]/page.tsx` — cast `page.data` as `any` for the MDX-specific properties (body, toc, full) since TypeScript can't infer them through the loader:
+```ts
+const data = page.data as any
+const MDX = data.body
+// Use data.toc, data.full, data.title, data.description
+```
 
-### Design Direction
-- Clean, warm, Anthropic-inspired aesthetic
-- Warm white backgrounds, stone neutrals, indigo accents
-- Use Inter font
-- Subtle, confident, not flashy
+3. Fix `app/api/search/route.ts` — check if `createFromSource` API changed in fumadocs-core v15. Look at fumadocs docs at https://fumadocs.dev/docs/headless/search for the current API. May need to use a different search setup.
 
-### SEO Requirements
-- Proper meta tags on every page (title, description, og:image)
-- Structured data (JSON-LD) for software application
-- Sitemap.xml generation
-- robots.txt
-- OpenGraph images
-- Canonical URLs
-- Fast load times (Fumadocs handles this)
+4. Run `pnpm --filter docs build` and fix any remaining errors.
 
-### AI Discoverability
-- Create /llms.txt at root — plain text summary of what Arcana is, components list, install instructions
-- Create /llms-full.txt — detailed version with all component props
-- Ensure manifest.ai.json is served at a public URL
-- Add <meta name="ai-content-description"> tags
+5. If the search route keeps failing, you can temporarily remove it to get the build passing, then fix it properly.
 
-### Each Component Doc Page Should Have
-- Description + when to use
-- Import statement
-- Props table
-- Live examples (use code blocks — we'll add live preview later)
-- Accessibility notes
-- Related components
+## After Build Passes
+
+- Run `pnpm --filter docs dev` to verify pages render
+- Commit all docs changes
+- Push to main
 
 ## Quality Bar
-- pnpm build must pass across all packages
-- pnpm test must pass
-- Docs site must build (pnpm --filter docs build)
+- `pnpm --filter docs build` must pass
 - Commit and push when done
 
-When completely finished, run this command to notify me:
-openclaw system event --text "Done: Remaining tests, typography system, spacing editor, and Fumadocs site built for Arcana" --mode now
+When completely finished, run:
+openclaw system event --text "Done: Fumadocs build fixed and docs site working for Arcana" --mode now

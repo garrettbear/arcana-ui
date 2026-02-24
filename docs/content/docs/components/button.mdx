@@ -1,0 +1,78 @@
+---
+title: Button
+description: Primary action trigger with multiple variants, sizes, and states. Renders a native button element.
+---
+
+## Import
+
+```tsx
+import { Button } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Button>Click me</Button>
+<Button variant="secondary">Cancel</Button>
+<Button variant="ghost">Learn more</Button>
+<Button variant="danger" loading>Deleting...</Button>
+<Button variant="outline" size="sm">Small outline</Button>
+<Button fullWidth>Full width</Button>
+<Button disabled>Can't click</Button>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'primary' \| 'secondary' \| 'ghost' \| 'danger' \| 'outline'` | `'primary'` | Visual style |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button size |
+| `loading` | `boolean` | `false` | Show spinner, disables the button |
+| `disabled` | `boolean` | `false` | Disable interaction |
+| `fullWidth` | `boolean` | `false` | Stretch to container width |
+| `children` | `React.ReactNode` | — | Button content |
+| `className` | `string` | — | Additional CSS classes |
+| `...rest` | `ButtonHTMLAttributes` | — | All native button attributes |
+
+## Variants
+
+| Variant | Use case |
+|---------|----------|
+| `primary` | Main call to action — one per view |
+| `secondary` | Secondary actions |
+| `ghost` | Tertiary/text-like actions |
+| `danger` | Destructive actions (delete, remove) |
+| `outline` | Bordered alternative to ghost |
+
+## Loading state
+
+When `loading` is `true`, the button renders a spinner and sets `aria-busy="true"` and `disabled` to prevent double-submission:
+
+```tsx
+<Button loading onClick={handleSubmit}>
+  Saving...
+</Button>
+```
+
+## Icon buttons
+
+For icon-only buttons, provide an `aria-label`:
+
+```tsx
+<Button aria-label="Close dialog" variant="ghost">
+  <XIcon />
+</Button>
+```
+
+## Accessibility
+
+- Renders as native `<button>` element — keyboard accessible by default
+- Enter and Space activate the button
+- `loading` state announces `aria-busy="true"` to screen readers
+- `disabled` prevents interaction and announces to assistive technology
+- Use `aria-label` for icon-only buttons
+
+## Related
+
+- [Form](/docs/components/form) — wrapping buttons in forms
+- [Modal](/docs/components/modal) — buttons in dialog footers

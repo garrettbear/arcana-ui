@@ -43,7 +43,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         ref={ref}
         className={cn(styles.avatar, styles[size], className)}
         style={showInitials ? { backgroundColor: bgColor } : undefined}
-        aria-label={alt ?? name}
+        aria-label={alt ?? name ?? 'Avatar'}
         role="img"
       >
         {showImage && (

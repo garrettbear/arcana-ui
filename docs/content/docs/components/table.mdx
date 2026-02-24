@@ -1,0 +1,129 @@
+---
+title: Table
+description: Semantic HTML table with sortable columns, striped rows, hover states, and caption support.
+---
+
+## Import
+
+```tsx
+import { Table, TableHead, TableBody, TableRow, TableCell, TableHeader } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Table caption="Team members">
+  <TableHead>
+    <TableRow>
+      <TableHeader>Name</TableHeader>
+      <TableHeader>Role</TableHeader>
+      <TableHeader>Status</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>Alice Johnson</TableCell>
+      <TableCell>Engineer</TableCell>
+      <TableCell><Badge variant="success">Active</Badge></TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Bob Chen</TableCell>
+      <TableCell>Designer</TableCell>
+      <TableCell><Badge variant="warning">Away</Badge></TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+## Sortable columns
+
+```tsx
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableHeader
+        sortable
+        sortDirection={sort.column === 'name' ? sort.direction : undefined}
+        onSort={() => handleSort('name')}
+      >
+        Name
+      </TableHeader>
+      <TableHeader
+        sortable
+        sortDirection={sort.column === 'date' ? sort.direction : undefined}
+        onSort={() => handleSort('date')}
+      >
+        Date
+      </TableHeader>
+    </TableRow>
+  </TableHead>
+  ...
+</Table>
+```
+
+## Table Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `caption` | `string` | — | `<caption>` text for screen readers |
+| `striped` | `boolean` | `false` | Alternating row background colours |
+| `hoverable` | `boolean` | `false` | Highlight row on hover |
+| `stickyHeader` | `boolean` | `false` | Pin header row while scrolling |
+| `className` | `string` | — | Additional CSS classes |
+
+## TableHeader Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `sortable` | `boolean` | `false` | Show sort indicator |
+| `sortDirection` | `'asc' \| 'desc' \| undefined` | — | Current sort direction |
+| `onSort` | `() => void` | — | Called when header is clicked to sort |
+| `align` | `'left' \| 'center' \| 'right'` | `'left'` | Text alignment |
+
+## TableCell Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `'left' \| 'center' \| 'right'` | `'left'` | Text alignment |
+| `colSpan` | `number` | — | Span multiple columns |
+
+## Responsive
+
+Wrap in a scroll container for small screens:
+
+```tsx
+<div style={{ overflowX: 'auto' }}>
+  <Table>...</Table>
+</div>
+```
+
+## Empty state
+
+```tsx
+<Table>
+  <TableHead>...</TableHead>
+  <TableBody>
+    {data.length === 0 ? (
+      <TableRow>
+        <TableCell colSpan={3}>
+          <EmptyState title="No records" description="No data to display." />
+        </TableCell>
+      </TableRow>
+    ) : (
+      data.map((row) => ...)
+    )}
+  </TableBody>
+</Table>
+```
+
+## Accessibility
+
+- Semantic `<table>`, `<thead>`, `<tbody>`, `<th>`, `<td>` elements
+- `caption` renders a `<caption>` for screen reader context
+- Sortable headers have `aria-sort` attribute (`ascending` / `descending`)
+- `scope="col"` on all `<th>` elements
+
+## Related
+
+- [EmptyState](/docs/components/empty-state) — no-data placeholder
+- [Badge](/docs/components/badge) — status indicators in cells

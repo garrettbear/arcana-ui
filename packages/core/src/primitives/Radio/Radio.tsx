@@ -93,7 +93,7 @@ export const RadioGroup = ({ name, label, value, onChange, options, className }:
                     value={opt.value}
                     checked={value === opt.value}
                     disabled={opt.disabled}
-                    onChange={() => onChange?.(opt.value)}
+                    onChange={() => { if (!opt.disabled) onChange?.(opt.value) }}
                     className={styles.input}
                     aria-describedby={opt.description ? descId : undefined}
                   />

@@ -1,0 +1,112 @@
+---
+title: Form
+description: Form layout wrapper with spacing, validation messaging, and submission handling.
+---
+
+## Import
+
+```tsx
+import { Form, FormField, FormLabel, FormError, FormHint } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Form onSubmit={handleSubmit}>
+  <FormField>
+    <FormLabel htmlFor="name">Full name</FormLabel>
+    <Input id="name" name="name" required />
+    <FormHint>As it appears on your ID</FormHint>
+  </FormField>
+
+  <FormField>
+    <FormLabel htmlFor="email">Email</FormLabel>
+    <Input id="email" name="email" type="email" required />
+    {errors.email && <FormError>{errors.email}</FormError>}
+  </FormField>
+
+  <Button type="submit">Submit</Button>
+</Form>
+```
+
+## With all Arcana form components
+
+Most Arcana form components (Input, Textarea, Select, Checkbox) handle their own labels, hints, and errors via props. The `Form` wrapper adds consistent spacing between fields:
+
+```tsx
+<Form onSubmit={handleSubmit}>
+  <Input label="Email" type="email" error={errors.email} />
+  <Input label="Password" type="password" error={errors.password} />
+  <Textarea label="Message" rows={4} />
+  <Checkbox label="I agree to the terms" error={errors.terms} />
+  <Button type="submit" fullWidth loading={isSubmitting}>
+    Create account
+  </Button>
+</Form>
+```
+
+## Form Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `onSubmit` | `(e: FormEvent) => void` | — | Form submit handler |
+| `gap` | `'sm' \| 'md' \| 'lg'` | `'md'` | Space between fields |
+| `className` | `string` | — | Additional CSS classes |
+| `...rest` | `FormHTMLAttributes` | — | All native form attributes |
+
+## FormField Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | — | Label, input, and messages |
+| `className` | `string` | — | Additional CSS classes |
+
+## FormLabel Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `htmlFor` | `string` | — | Associates with input `id` |
+| `required` | `boolean` | `false` | Shows required asterisk |
+| `children` | `React.ReactNode` | — | Label text |
+
+## FormError / FormHint
+
+Both render a `<p>` with appropriate styling. `FormError` adds `role="alert"`.
+
+```tsx
+<FormError>This field is required</FormError>
+<FormHint>Must be at least 8 characters</FormHint>
+```
+
+## Preventing double-submit
+
+```tsx
+const [submitting, setSubmitting] = useState(false)
+
+const handleSubmit = async (e: FormEvent) => {
+  e.preventDefault()
+  setSubmitting(true)
+  try {
+    await submitForm(new FormData(e.currentTarget as HTMLFormElement))
+  } finally {
+    setSubmitting(false)
+  }
+}
+
+<Form onSubmit={handleSubmit}>
+  ...
+  <Button type="submit" loading={submitting}>Submit</Button>
+</Form>
+```
+
+## Accessibility
+
+- `Form` renders a native `<form>` element
+- Associate every input with a label using `htmlFor`/`id` or use Arcana's `label` prop
+- `FormError` uses `role="alert"` for screen reader announcements
+- Required fields should have both visual indicators and `required` attribute
+
+## Related
+
+- [Input](/docs/components/input), [Textarea](/docs/components/textarea), [Select](/docs/components/select) — form inputs
+- [Button](/docs/components/button) — form submission

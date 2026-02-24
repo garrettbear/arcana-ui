@@ -1,0 +1,158 @@
+---
+title: Layout
+description: Layout primitives — Stack, HStack, Grid, and Container — for spacing and structure without writing CSS.
+---
+
+## Import
+
+```tsx
+import { Stack, HStack, Grid, Container } from '@arcana-ui/core'
+```
+
+## Stack
+
+Vertical stack with consistent gap between children:
+
+```tsx
+<Stack gap={4}>
+  <Input label="First name" />
+  <Input label="Last name" />
+  <Button>Submit</Button>
+</Stack>
+```
+
+### Stack Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `gap` | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 8 \| 10 \| 12 \| 16` | `4` | Gap between items (maps to spacing tokens) |
+| `align` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'stretch'` | Cross-axis alignment |
+| `children` | `React.ReactNode` | — | Stack items |
+| `className` | `string` | — | Additional CSS classes |
+| `as` | `React.ElementType` | `'div'` | Root element |
+
+## HStack
+
+Horizontal stack for inline layouts:
+
+```tsx
+<HStack gap={3} align="center">
+  <Avatar name="Alice" size="sm" />
+  <span>Alice Johnson</span>
+  <Badge variant="success">Active</Badge>
+</HStack>
+```
+
+### HStack Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `gap` | number | `4` | Gap between items |
+| `align` | `'start' \| 'center' \| 'end' \| 'baseline'` | `'center'` | Cross-axis alignment |
+| `justify` | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | `'start'` | Main-axis distribution |
+| `wrap` | `boolean` | `false` | Allow wrapping |
+| `className` | `string` | — | Additional CSS classes |
+
+## Grid
+
+Responsive CSS grid layout:
+
+```tsx
+<Grid cols={3} gap={6}>
+  <Card>...</Card>
+  <Card>...</Card>
+  <Card>...</Card>
+</Grid>
+
+{/* Responsive cols */}
+<Grid cols={{ sm: 1, md: 2, lg: 3 }} gap={4}>
+  ...
+</Grid>
+```
+
+### Grid Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `cols` | `number \| { sm?: number; md?: number; lg?: number; xl?: number }` | `1` | Column count |
+| `gap` | number | `4` | Grid gap (same scale as Stack) |
+| `className` | `string` | — | Additional CSS classes |
+
+## Container
+
+Centers content with a maximum width and horizontal padding:
+
+```tsx
+<Container>
+  <h1>Page title</h1>
+  <p>Content is centered and padded.</p>
+</Container>
+
+{/* Custom max width */}
+<Container maxWidth="lg">
+  <Navbar />
+</Container>
+```
+
+### Container Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `maxWidth` | `'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| 'full'` | `'xl'` | Maximum content width |
+| `padding` | `boolean` | `true` | Add horizontal padding |
+| `center` | `boolean` | `true` | Center with `margin: auto` |
+| `className` | `string` | — | Additional CSS classes |
+
+## Composition example
+
+```tsx
+<Container maxWidth="2xl">
+  <Navbar />
+  <Stack gap={8} as="main">
+    <section>
+      <h1>Dashboard</h1>
+      <Grid cols={{ sm: 1, md: 3 }} gap={4}>
+        <Card>...</Card>
+        <Card>...</Card>
+        <Card>...</Card>
+      </Grid>
+    </section>
+    <section>
+      <HStack justify="between" align="center">
+        <h2>Recent activity</h2>
+        <Button variant="ghost" size="sm">View all</Button>
+      </HStack>
+      <Table>...</Table>
+    </section>
+  </Stack>
+</Container>
+```
+
+## Gap scale
+
+Gap values map to the `--arcana-spacing-*` token scale:
+
+| Value | Token | Size |
+|-------|-------|------|
+| 0 | — | 0 |
+| 1 | `--arcana-spacing-1` | 4px |
+| 2 | `--arcana-spacing-2` | 8px |
+| 3 | `--arcana-spacing-3` | 12px |
+| 4 | `--arcana-spacing-4` | 16px |
+| 5 | `--arcana-spacing-5` | 20px |
+| 6 | `--arcana-spacing-6` | 24px |
+| 8 | `--arcana-spacing-8` | 32px |
+| 10 | `--arcana-spacing-10` | 40px |
+| 12 | `--arcana-spacing-12` | 48px |
+| 16 | `--arcana-spacing-16` | 64px |
+
+## Accessibility
+
+All layout components render as semantic HTML. Use the `as` prop to choose the appropriate element:
+
+```tsx
+<Stack as="main" gap={8}>
+  <Stack as="section" gap={4}>...</Stack>
+</Stack>
+<HStack as="nav" gap={2}>...</HStack>
+```

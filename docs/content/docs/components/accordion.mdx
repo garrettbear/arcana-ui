@@ -1,0 +1,93 @@
+---
+title: Accordion
+description: Collapsible sections for FAQs, settings panels, and progressive disclosure patterns.
+---
+
+## Import
+
+```tsx
+import { Accordion, AccordionItem } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Accordion>
+  <AccordionItem title="What is Arcana UI?">
+    <p>Arcana UI is a modern React component library with 22 production-ready components.</p>
+  </AccordionItem>
+  <AccordionItem title="Is it accessible?">
+    <p>Yes — all components pass axe-core accessibility checks and support keyboard navigation.</p>
+  </AccordionItem>
+  <AccordionItem title="Can I customize the theme?">
+    <p>Absolutely. Override any CSS custom property to change colours, spacing, and more.</p>
+  </AccordionItem>
+</Accordion>
+```
+
+## Multiple open
+
+```tsx
+<Accordion type="multiple">
+  <AccordionItem title="Section A">Content A</AccordionItem>
+  <AccordionItem title="Section B">Content B</AccordionItem>
+</Accordion>
+```
+
+## Controlled
+
+```tsx
+const [open, setOpen] = useState<string[]>([])
+
+<Accordion value={open} onValueChange={setOpen} type="multiple">
+  <AccordionItem value="a" title="Section A">Content A</AccordionItem>
+  <AccordionItem value="b" title="Section B">Content B</AccordionItem>
+</Accordion>
+```
+
+## Default open
+
+```tsx
+<Accordion defaultValue="faq-1">
+  <AccordionItem value="faq-1" title="What is...">
+    First item — open by default
+  </AccordionItem>
+  <AccordionItem value="faq-2" title="How do I...">
+    Second item
+  </AccordionItem>
+</Accordion>
+```
+
+## Accordion Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `'single' \| 'multiple'` | `'single'` | Allow one or multiple open items |
+| `defaultValue` | `string` | — | Initially open item (uncontrolled, single) |
+| `value` | `string \| string[]` | — | Open item(s) (controlled) |
+| `onValueChange` | `(v: string \| string[]) => void` | — | Called when open state changes |
+| `collapsible` | `boolean` | `true` | Allow closing by clicking open item |
+| `className` | `string` | — | Additional CSS classes |
+
+## AccordionItem Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string \| React.ReactNode` | — | Trigger label |
+| `value` | `string` | — | Unique identifier |
+| `disabled` | `boolean` | `false` | Disable this item |
+| `children` | `React.ReactNode` | — | Panel content |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Trigger has `role="button"` with `aria-expanded` and `aria-controls`
+- Panel has `role="region"` with `aria-labelledby` pointing to the trigger
+- Enter/Space toggles the panel
+- Disabled items have `aria-disabled="true"`
+- Animated with CSS transitions that respect `prefers-reduced-motion`
+
+## Related
+
+- [Tabs](/docs/components/tabs) — side-by-side tab switching
+- [Card](/docs/components/card) — non-collapsible content container

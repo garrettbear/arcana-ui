@@ -1,0 +1,54 @@
+---
+title: Playground
+description: Interactive component playground for Arcana UI.
+---
+
+## Live Playground
+
+The Arcana UI playground is a live interactive environment where you can explore all 22 components, experiment with props, preview the design token system, and test dark mode.
+
+**[Open the Playground →](http://localhost:5173)**
+
+> The playground runs locally. Start it with:
+>
+> ```bash
+> cd playground
+> pnpm dev
+> ```
+
+## What's in the playground
+
+### Component gallery
+
+Browse all 22 components with live props controls:
+
+- Toggle variants, sizes, and states
+- See accessibility attributes in the DOM inspector
+- Copy example code
+
+### Typography system
+
+Preview the full Arcana type scale — headings, body, captions, monospace — applied to real content blocks.
+
+### Spacing editor
+
+Visual spacing reference with all `--arcana-spacing-*` tokens laid out side by side.
+
+### Token inspector
+
+Browse every CSS custom property in the design system, with live previews of colour swatches, shadows, and radii.
+
+### Dark mode toggle
+
+Switch between light and dark themes to preview every component in both modes simultaneously.
+
+## Building for production
+
+The playground uses Vite and can be built as a static site:
+
+```bash
+cd playground
+pnpm build
+```
+
+Output goes to `playground/dist/`. Deploy to any static host (Vercel, Netlify, GitHub Pages).

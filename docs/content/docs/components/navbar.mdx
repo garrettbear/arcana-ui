@@ -1,0 +1,91 @@
+---
+title: Navbar
+description: Top navigation bar with logo, navigation links, and action slot. Responsive with mobile hamburger menu.
+---
+
+## Import
+
+```tsx
+import { Navbar, NavbarBrand, NavbarNav, NavbarItem, NavbarActions } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Navbar>
+  <NavbarBrand href="/">
+    <img src="/logo.svg" alt="Acme" height={28} />
+  </NavbarBrand>
+  <NavbarNav>
+    <NavbarItem href="/" active>Home</NavbarItem>
+    <NavbarItem href="/pricing">Pricing</NavbarItem>
+    <NavbarItem href="/docs">Docs</NavbarItem>
+    <NavbarItem href="/blog">Blog</NavbarItem>
+  </NavbarNav>
+  <NavbarActions>
+    <Button variant="ghost" size="sm">Sign in</Button>
+    <Button size="sm">Get started</Button>
+  </NavbarActions>
+</Navbar>
+```
+
+## Navbar Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `sticky` | `boolean` | `false` | Position fixed at top of page |
+| `bordered` | `boolean` | `true` | Show bottom border |
+| `children` | `React.ReactNode` | — | NavbarBrand, NavbarNav, NavbarActions |
+| `className` | `string` | — | Additional CSS classes |
+
+## NavbarBrand Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `href` | `string` | `'/'` | Brand link URL |
+| `children` | `React.ReactNode` | — | Logo or brand text |
+
+## NavbarItem Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `href` | `string` | — | Link URL |
+| `active` | `boolean` | `false` | Mark as current page |
+| `disabled` | `boolean` | `false` | Prevent interaction |
+| `children` | `React.ReactNode` | — | Link label |
+
+## Sticky navbar
+
+```tsx
+<Navbar sticky>
+  ...
+</Navbar>
+
+<main style={{ paddingTop: '64px' }}>
+  {/* Account for navbar height */}
+</main>
+```
+
+## With avatar and dropdown
+
+```tsx
+<NavbarActions>
+  <Avatar name="Jane Smith" size="sm" />
+</NavbarActions>
+```
+
+## Mobile behaviour
+
+The Navbar includes a built-in hamburger menu button on small screens. The navigation collapses into a slide-down panel below 768px.
+
+## Accessibility
+
+- `<nav>` element with `aria-label="Main navigation"`
+- Active item has `aria-current="page"`
+- Mobile toggle has `aria-expanded` and `aria-controls`
+- Keyboard navigable with Tab and Enter
+
+## Related
+
+- [Button](/docs/components/button) — action buttons in NavbarActions
+- [Avatar](/docs/components/avatar) — user avatar in nav

@@ -1,0 +1,91 @@
+---
+title: Avatar
+description: User avatar with image, name initials fallback, and AvatarGroup for stacked groups.
+---
+
+## Import
+
+```tsx
+import { Avatar, AvatarGroup } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+{/* Image avatar */}
+<Avatar src="https://example.com/user.jpg" alt="Jane Smith" />
+
+{/* Name initials */}
+<Avatar name="Jane Smith" />
+
+{/* Fallback icon (no src or name) */}
+<Avatar />
+
+{/* Sizes */}
+<Avatar name="Alice" size="xs" />
+<Avatar name="Alice" size="sm" />
+<Avatar name="Alice" size="md" />
+<Avatar name="Alice" size="lg" />
+<Avatar name="Alice" size="xl" />
+```
+
+## Avatar Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | — | Image URL |
+| `alt` | `string` | — | Image alt text / accessible name |
+| `name` | `string` | — | User name (used for initials and as fallback `alt`) |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Avatar size |
+| `className` | `string` | — | Additional CSS classes |
+
+## AvatarGroup
+
+Stack multiple avatars in a compact group:
+
+```tsx
+<AvatarGroup max={3}>
+  <Avatar name="Alice Johnson" />
+  <Avatar name="Bob Chen" />
+  <Avatar name="Carol Williams" />
+  <Avatar name="Dave Smith" />
+  <Avatar name="Eve Brown" />
+</AvatarGroup>
+```
+
+With `max={3}`, this shows the first 3 avatars and a `+2` overflow badge.
+
+## AvatarGroup Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `max` | `number` | — | Maximum visible avatars before `+N` overflow |
+| `children` | `React.ReactNode` | — | Avatar elements |
+| `className` | `string` | — | Additional CSS classes |
+
+## Initials algorithm
+
+- Single name (`"Alice"`) → first two letters: `AL`
+- Two words (`"John Doe"`) → first letters: `JD`
+- Three+ words (`"Mary Jane Watson"`) → first and last: `MW`
+
+## Colour generation
+
+When showing initials, the background colour is deterministically derived from the name string so the same person always gets the same colour.
+
+## Image fallback
+
+If the `src` image fails to load, the component automatically falls back to initials (if `name` is set) or the generic user icon.
+
+## Accessibility
+
+- Wrapper renders with `role="img"` and `aria-label`
+- Image `<img>` has `alt` text
+- Initials span is `aria-hidden` (the container label is used instead)
+- Fallback state has `aria-label="Avatar"` when no name or alt is provided
+- `AvatarGroup` renders with `role="group"`
+
+## Related
+
+- [Badge](/docs/components/badge) — status indicators
+- [Navbar](/docs/components/navbar) — user menu avatar usage

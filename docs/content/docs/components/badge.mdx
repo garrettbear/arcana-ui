@@ -1,0 +1,77 @@
+---
+title: Badge
+description: Small inline label for status, count, category, or priority indicators.
+---
+
+## Import
+
+```tsx
+import { Badge } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Badge>Default</Badge>
+<Badge variant="success">Active</Badge>
+<Badge variant="warning">Pending</Badge>
+<Badge variant="error">Failed</Badge>
+<Badge variant="info">Beta</Badge>
+<Badge variant="primary">New</Badge>
+<Badge size="sm">Small</Badge>
+<Badge size="lg">Large</Badge>
+<Badge dot variant="success">Online</Badge>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'primary' \| 'success' \| 'warning' \| 'error' \| 'info'` | `'default'` | Colour variant |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Badge size |
+| `dot` | `boolean` | `false` | Show a coloured dot before the label |
+| `children` | `React.ReactNode` | — | Badge content |
+| `className` | `string` | — | Additional CSS classes |
+
+## Variants
+
+| Variant | Semantic meaning |
+|---------|-----------------|
+| `default` | Neutral / unclassified |
+| `primary` | Featured / highlighted |
+| `success` | Active, complete, healthy |
+| `warning` | Needs attention, degraded |
+| `error` | Failed, critical, over limit |
+| `info` | Informational, beta, new |
+
+## With dot indicator
+
+```tsx
+<Badge dot variant="success">Live</Badge>
+<Badge dot variant="warning">Degraded</Badge>
+<Badge dot variant="error">Down</Badge>
+```
+
+## Usage in lists
+
+```tsx
+<tr>
+  <td>Payment</td>
+  <td><Badge variant="success">Completed</Badge></td>
+</tr>
+<tr>
+  <td>Shipment</td>
+  <td><Badge variant="warning">Processing</Badge></td>
+</tr>
+```
+
+## Accessibility
+
+- Renders as `<span>` — inline with text flow
+- Colour alone is never the only indicator — always include text
+- For screen readers, the text content is the accessible name
+
+## Related
+
+- [Alert](/docs/components/alert) — full-width status messages
+- [Toast](/docs/components/toast) — transient notifications

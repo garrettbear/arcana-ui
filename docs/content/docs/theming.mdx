@@ -1,0 +1,128 @@
+---
+title: Theming
+description: Customise the Arcana token system, override at any scope, and implement dark mode.
+---
+
+## How theming works
+
+Arcana's visual design is entirely driven by CSS custom properties (variables) defined in `@arcana-ui/tokens/dist/arcana.css`. Components never hardcode a colour or spacing value — they always reference a token.
+
+This means you can change the look of **every component** by overriding a handful of CSS variables, without touching any JSX.
+
+## Token categories
+
+| Category | Example variable | Description |
+|----------|-----------------|-------------|
+| Color — action | `--arcana-action-primary` | Primary button/link backgrounds |
+| Color — text | `--arcana-text-primary` | Main body text |
+| Color — surface | `--arcana-surface-default` | Page backgrounds |
+| Color — border | `--arcana-border-default` | Default border colour |
+| Spacing | `--arcana-spacing-4` | 16px spacing unit |
+| Radius | `--arcana-radius-md` | Medium border radius |
+| Shadow | `--arcana-shadow-md` | Drop shadows |
+| Typography | `--arcana-typography-font-family-sans` | Font stack |
+| Motion | `--arcana-motion-duration-fast` | Transition speed |
+| Z-index | `--arcana-z-index-modal` | Modal z-index |
+
+## Override tokens globally
+
+Add your overrides after importing the Arcana CSS:
+
+```css
+/* your-theme.css */
+:root {
+  /* Change primary colour to emerald */
+  --arcana-action-primary: #10b981;
+  --arcana-action-primary-hover: #059669;
+
+  /* Change border radius to sharp */
+  --arcana-radius-md: 4px;
+  --arcana-radius-lg: 6px;
+}
+```
+
+```tsx
+import '@arcana-ui/tokens/dist/arcana.css'
+import './your-theme.css'
+```
+
+## Override tokens at component scope
+
+Because these are CSS custom properties, you can scope overrides to any container:
+
+```css
+.admin-panel {
+  --arcana-action-primary: #dc2626; /* Red for admin danger zone */
+}
+```
+
+```tsx
+<div className="admin-panel">
+  <Button>Delete account</Button>
+</div>
+```
+
+## Dark mode
+
+The token file ships both light and dark palettes. Dark mode activates automatically when the `[data-theme="dark"]` attribute (or the `dark` class) is present on the `<html>` element.
+
+### Using data-theme attribute
+
+```tsx
+// Toggle dark mode
+document.documentElement.setAttribute('data-theme', 'dark')
+document.documentElement.removeAttribute('data-theme')
+```
+
+### Using class
+
+```tsx
+document.documentElement.classList.add('dark')
+document.documentElement.classList.remove('dark')
+```
+
+### System preference (prefers-color-scheme)
+
+The tokens file automatically responds to `@media (prefers-color-scheme: dark)`. No JavaScript needed if you want automatic dark mode.
+
+### React dark mode hook example
+
+```tsx
+import { useState, useEffect } from 'react'
+
+function useDarkMode() {
+  const [dark, setDark] = useState(
+    () => window.matchMedia('(prefers-color-scheme: dark)').matches
+  )
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.setAttribute('data-theme', dark ? 'dark' : 'light')
+  }, [dark])
+
+  return [dark, setDark] as const
+}
+```
+
+## Creating a custom theme
+
+You can generate your own token file by editing `packages/tokens/src/light.json` and `packages/tokens/src/dark.json` in the Arcana monorepo, then running:
+
+```bash
+pnpm --filter @arcana-ui/tokens build
+```
+
+Or create a new CSS file that overrides the Arcana tokens you want to change — no need to fork the library.
+
+## Component-level CSS custom properties
+
+Some components expose their own local tokens for fine-grained control:
+
+```css
+/* Targeting a single component */
+.my-button {
+  --arcana-component-radius: 9999px; /* Pill shape */
+}
+```
+
+These local tokens cascade from the global design tokens by default.

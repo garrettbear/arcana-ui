@@ -1,0 +1,62 @@
+---
+title: Toggle
+description: Immediate-effect boolean switch. Use instead of Checkbox when the action takes effect immediately without form submission.
+---
+
+## Import
+
+```tsx
+import { Toggle } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Toggle label="Dark mode" />
+<Toggle label="Notifications" checked={enabled} onChange={(e) => setEnabled(e.target.checked)} />
+<Toggle label="Beta features" description="Opt in to experimental features" />
+<Toggle label="Analytics" disabled />
+<Toggle label="Marketing emails" size="sm" />
+<Toggle label="System alerts" size="lg" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Visible label |
+| `description` | `string` | — | Secondary label text |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Toggle size |
+| `className` | `string` | — | Additional CSS classes |
+| `...rest` | `InputHTMLAttributes` | — | All native input attributes |
+
+## When to use Toggle vs Checkbox
+
+| Toggle | Checkbox |
+|--------|----------|
+| Immediate effect (dark mode, notifications) | Form submission required |
+| Single independent setting | Part of a list (select all, multi-select) |
+| Mobile-like on/off switch aesthetic | Traditional form feel |
+
+## Controlled
+
+```tsx
+const [darkMode, setDarkMode] = useState(false)
+
+<Toggle
+  label="Dark mode"
+  checked={darkMode}
+  onChange={(e) => {
+    setDarkMode(e.target.checked)
+    document.documentElement.setAttribute('data-theme', e.target.checked ? 'dark' : 'light')
+  }}
+/>
+```
+
+## Accessibility
+
+- Renders as `<input type="checkbox">` with a custom visual indicator
+- Space toggles the switch
+- `aria-checked` reflects the current state
+- Label associated via `htmlFor`
+- Respects `disabled` attribute

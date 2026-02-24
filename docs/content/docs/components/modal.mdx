@@ -1,0 +1,98 @@
+---
+title: Modal
+description: Accessible dialog overlay with focus trap, keyboard dismissal, and configurable sizes.
+---
+
+## Import
+
+```tsx
+import { Modal } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+const [open, setOpen] = useState(false)
+
+<Button onClick={() => setOpen(true)}>Open modal</Button>
+
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Confirm delete"
+  description="This action cannot be undone."
+  footer={
+    <>
+      <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
+      <Button variant="danger">Delete</Button>
+    </>
+  }
+>
+  <p>Are you sure you want to delete this item?</p>
+</Modal>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Whether the modal is visible |
+| `onClose` | `() => void` | — | Called when user dismisses the modal |
+| `title` | `string` | — | Dialog title (sets `aria-labelledby`) |
+| `description` | `string` | — | Subtitle below title |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'md'` | Dialog width |
+| `closeOnOverlayClick` | `boolean` | `true` | Close when clicking backdrop |
+| `closeOnEsc` | `boolean` | `true` | Close on Escape key |
+| `footer` | `React.ReactNode` | — | Footer content (buttons) |
+| `children` | `React.ReactNode` | — | Dialog body |
+| `className` | `string` | — | Additional CSS classes on dialog |
+
+## Sizes
+
+| Size | Max width |
+|------|-----------|
+| `sm` | 400px |
+| `md` | 560px |
+| `lg` | 720px |
+| `xl` | 960px |
+| `full` | 100% screen |
+
+## No overlay close
+
+```tsx
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  closeOnOverlayClick={false}
+  closeOnEsc={false}
+  title="Required step"
+>
+  <p>You must complete this before continuing.</p>
+</Modal>
+```
+
+## Without title
+
+When no `title` is provided, a close button still appears in the top-right corner. Add `aria-label` to describe the dialog purpose:
+
+```tsx
+<Modal open={open} onClose={() => setOpen(false)}>
+  <img src="/preview.png" alt="Preview" />
+</Modal>
+```
+
+## Accessibility
+
+- `role="dialog"` and `aria-modal="true"` on the dialog element
+- `aria-labelledby` points to the title element when `title` is provided
+- `aria-describedby` points to the description when provided
+- **Focus trap**: Tab/Shift+Tab cycle only through focusable elements inside the dialog
+- Focus returns to the triggering element when modal closes
+- `Escape` closes the modal (configurable)
+- Prevents body scroll when open
+
+## Related
+
+- [Card](/docs/components/card) — non-overlay content containers
+- [Alert](/docs/components/alert) — inline status messages
+- [Toast](/docs/components/toast) — transient notifications

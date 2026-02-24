@@ -1,0 +1,107 @@
+---
+title: Installation
+description: How to install Arcana UI in any React project — Vite, Next.js, Remix, or CRA.
+---
+
+## Requirements
+
+- React 18 or 19
+- A bundler that handles CSS Modules (Vite, webpack, Next.js, Parcel)
+- TypeScript 5+ (optional but recommended)
+
+## Install packages
+
+```bash
+npm install @arcana-ui/core @arcana-ui/tokens
+```
+
+## Import design tokens
+
+Arcana's visual system lives in `@arcana-ui/tokens/dist/arcana.css`. Import it once at the root of your application.
+
+### Vite / React
+
+```tsx
+// src/main.tsx
+import '@arcana-ui/tokens/dist/arcana.css'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />)
+```
+
+### Next.js App Router
+
+```tsx
+// app/layout.tsx
+import '@arcana-ui/tokens/dist/arcana.css'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+### Next.js Pages Router
+
+```tsx
+// pages/_app.tsx
+import '@arcana-ui/tokens/dist/arcana.css'
+import type { AppProps } from 'next/app'
+
+export default function App({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />
+}
+```
+
+## Import components
+
+Every component is individually exported from `@arcana-ui/core`:
+
+```tsx
+import { Button } from '@arcana-ui/core'
+import { Input, Textarea } from '@arcana-ui/core'
+import { Modal, Toast, ToastProvider } from '@arcana-ui/core'
+```
+
+You can import them all at once — the package is tree-shakeable so only the components you use end up in the bundle.
+
+## TypeScript
+
+All components ship with TypeScript declarations. No additional `@types` package needed.
+
+```tsx
+import { Button, type ButtonProps } from '@arcana-ui/core'
+
+const MyButton = (props: ButtonProps) => <Button {...props} />
+```
+
+## CSS Modules bundler config
+
+Arcana components use CSS Modules internally. Your bundler handles this automatically if you're using:
+
+- **Vite** — works out of the box
+- **Next.js** — works out of the box
+- **webpack (CRA, custom)** — CSS Modules are enabled by default in `create-react-app`; for custom webpack configs, ensure `css-loader` is configured with `modules: true` for `*.module.css` files
+
+## Troubleshooting
+
+### Styles not applying
+
+Make sure `@arcana-ui/tokens/dist/arcana.css` is imported **before** any other stylesheets. The token file sets CSS custom properties on `:root` that all components depend on.
+
+### SSR / hydration issues
+
+If you see hydration mismatches with dark mode, ensure your HTML `<html>` element has `suppressHydrationWarning` (Next.js App Router) or that you apply the theme class synchronously before first paint.
+
+### Peer dependency warnings
+
+Arcana requires React 18+. If you see peer dependency warnings about React versions, upgrade:
+
+```bash
+npm install react@^18 react-dom@^18
+```

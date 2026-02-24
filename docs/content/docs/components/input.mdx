@@ -1,0 +1,86 @@
+---
+title: Input
+description: Single-line text input with label, helper text, error states, and leading/trailing slots.
+---
+
+## Import
+
+```tsx
+import { Input } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Input label="Email" placeholder="you@example.com" />
+<Input label="Password" type="password" />
+<Input label="Search" prefix={<SearchIcon />} />
+<Input label="Amount" suffix="USD" />
+<Input label="Username" error="Username already taken" />
+<Input label="Bio" hint="Max 160 characters" />
+<Input label="Read-only" readOnly value="fixed value" />
+<Input label="Disabled" disabled />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Visible label (required for a11y unless `aria-label` is set) |
+| `hint` | `string` | — | Helper text below the input |
+| `error` | `string` | — | Error message (sets `aria-invalid`) |
+| `prefix` | `React.ReactNode` | — | Content rendered before the input (icon or text) |
+| `suffix` | `React.ReactNode` | — | Content rendered after the input (icon or text) |
+| `className` | `string` | — | Additional CSS classes on the wrapper |
+| `...rest` | `InputHTMLAttributes` | — | All native input attributes (`type`, `placeholder`, `value`, etc.) |
+
+## Controlled usage
+
+```tsx
+const [email, setEmail] = useState('')
+
+<Input
+  label="Email"
+  type="email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  error={!email.includes('@') ? 'Invalid email' : ''}
+/>
+```
+
+## With icons
+
+```tsx
+import { SearchIcon, EyeIcon } from 'lucide-react'
+
+<Input label="Search" prefix={<SearchIcon size={16} />} />
+<Input label="Password" type="password" suffix={<EyeIcon size={16} />} />
+```
+
+## Error state
+
+```tsx
+<Input
+  label="Email"
+  error="Please enter a valid email address"
+  value="notanemail"
+/>
+```
+
+When `error` is set:
+- `aria-invalid="true"` is added to the input
+- The error message is associated via `aria-describedby`
+- Visual error styling is applied
+
+## Accessibility
+
+- `label` renders a `<label>` element associated via `htmlFor`/`id`
+- `hint` and `error` are associated via `aria-describedby`
+- `error` adds `aria-invalid="true"`
+- All native input attributes are forwarded
+
+## Related
+
+- [Textarea](/docs/components/textarea) — multiline text input
+- [Select](/docs/components/select) — dropdown selection
+- [Form](/docs/components/form) — form layout and validation

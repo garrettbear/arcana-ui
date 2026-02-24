@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useCallback } from 'react'
-import { createPortal } from 'react-dom'
 import { cn } from '../../utils/cn'
 import styles from './Modal.module.css'
 
@@ -192,6 +191,6 @@ export const Modal = ({
     </div>
   )
 
-  return createPortal(modal, document.body)
+  return modal
 }
 Modal.displayName = 'Modal'

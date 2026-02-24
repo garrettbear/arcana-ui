@@ -1,0 +1,88 @@
+---
+title: Card
+description: Container for grouping related content with optional header, body, and footer sections.
+---
+
+## Import
+
+```tsx
+import { Card, CardHeader, CardBody, CardFooter } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+{/* Simple card */}
+<Card>
+  <CardBody>
+    <p>Card content here.</p>
+  </CardBody>
+</Card>
+
+{/* Full card */}
+<Card>
+  <CardHeader>
+    <h3>Card title</h3>
+    <p>Subtitle or description</p>
+  </CardHeader>
+  <CardBody>
+    <p>Main content area with padding.</p>
+  </CardBody>
+  <CardFooter>
+    <Button variant="secondary">Cancel</Button>
+    <Button>Confirm</Button>
+  </CardFooter>
+</Card>
+
+{/* Clickable card */}
+<Card hoverable onClick={handleClick}>
+  <CardBody>Click me</CardBody>
+</Card>
+
+{/* Flat (no shadow) */}
+<Card variant="flat">
+  <CardBody>Flat card</CardBody>
+</Card>
+```
+
+## Card Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'elevated' \| 'flat' \| 'outlined'` | `'elevated'` | Visual style |
+| `hoverable` | `boolean` | `false` | Add hover lift effect |
+| `padding` | `'none' \| 'sm' \| 'md' \| 'lg'` | — | Override default body padding |
+| `className` | `string` | — | Additional CSS classes |
+| `...rest` | `HTMLAttributes<HTMLDivElement>` | — | All native div attributes |
+
+## CardHeader / CardBody / CardFooter
+
+Each subcomponent accepts `className` and `children`. They handle spacing and borders automatically.
+
+```tsx
+<Card>
+  <CardHeader>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <h3>Project Alpha</h3>
+      <Badge variant="success">Active</Badge>
+    </div>
+  </CardHeader>
+  <CardBody>
+    <p>48 open issues · 12 pull requests</p>
+  </CardBody>
+  <CardFooter>
+    <Button size="sm" variant="ghost">View details</Button>
+  </CardFooter>
+</Card>
+```
+
+## Accessibility
+
+- Renders as a `<div>` — not inherently interactive
+- When `hoverable` and `onClick` are used, add `role="button"` and `tabIndex={0}` for keyboard access, or use an anchor tag
+- Use proper heading hierarchy inside cards
+
+## Related
+
+- [Modal](/docs/components/modal) — for overlay dialogs
+- [Accordion](/docs/components/accordion) — collapsible sections

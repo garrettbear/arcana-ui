@@ -1,0 +1,73 @@
+---
+title: Getting Started
+description: An overview of Arcana UI — why it exists, what it provides, and how to get up and running in minutes.
+---
+
+## What is Arcana UI?
+
+Arcana UI is a modern React component library designed for speed, accessibility, and AI-first workflows. It ships 22 production-ready components built on top of a carefully crafted warm stone/indigo design token system.
+
+Every component is:
+
+- **Accessible by default** — WCAG AA contrast, keyboard navigation, ARIA roles, axe-core tested
+- **Themeable** — all visual properties exposed as CSS custom properties
+- **Zero-dependency runtime** — CSS Modules, no CSS-in-JS, tree-shakeable ESM
+- **AI-readable** — ships with `llms.txt` and `llms-full.txt` so AI assistants can use the API
+
+## Why Arcana UI?
+
+Most component libraries ask you to choose between beauty and accessibility, or between flexibility and consistency. Arcana solves this by:
+
+1. **Starting with tokens** — every colour, spacing value, and radius comes from a semantic token layer that you can override without touching components
+2. **Composing, not wrapping** — components accept `className` and forward all native HTML attributes, so you never fight the library
+3. **Thinking AI-first** — the `llms.txt` manifest means an AI coding assistant can generate correct Arcana code from a prompt alone
+
+## Quick Start
+
+### 1. Install
+
+```bash
+npm install @arcana-ui/core @arcana-ui/tokens
+# or
+pnpm add @arcana-ui/core @arcana-ui/tokens
+```
+
+### 2. Import the design tokens CSS
+
+In your app entry point (e.g. `main.tsx` or `_app.tsx`):
+
+```tsx
+import '@arcana-ui/tokens/dist/arcana.css'
+```
+
+### 3. Use components
+
+```tsx
+import { Button, Input, Modal } from '@arcana-ui/core'
+
+export default function App() {
+  return (
+    <div>
+      <Button variant="primary">Get started</Button>
+      <Input label="Email" placeholder="you@example.com" />
+    </div>
+  )
+}
+```
+
+That's it. No providers required for most components.
+
+## Package structure
+
+| Package | Description |
+|---------|-------------|
+| `@arcana-ui/tokens` | Design token CSS file — import once at the root |
+| `@arcana-ui/core` | All 22 React components with type definitions |
+
+## Next steps
+
+- [Installation guide](/docs/installation) — full setup with TypeScript and frameworks
+- [Theming](/docs/theming) — customise tokens, switch themes, dark mode
+- [Components](/docs/components/button) — browse every component with props tables
+- [Accessibility](/docs/accessibility) — WCAG compliance details and testing tools
+- [AI integration](/docs/ai-integration) — `llms.txt`, MCP server, AI usage patterns

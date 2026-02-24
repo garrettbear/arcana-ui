@@ -1,0 +1,97 @@
+---
+title: Select
+description: Dropdown selection with full keyboard navigation, label, and error state.
+---
+
+## Import
+
+```tsx
+import { Select } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Select
+  label="Country"
+  options={[
+    { value: 'us', label: 'United States' },
+    { value: 'uk', label: 'United Kingdom' },
+    { value: 'ca', label: 'Canada' },
+  ]}
+/>
+
+<Select
+  label="Role"
+  placeholder="Select a role..."
+  options={roles}
+  value={selectedRole}
+  onChange={(e) => setSelectedRole(e.target.value)}
+/>
+
+<Select label="Timezone" options={timezones} error="Please select a timezone" />
+<Select label="Plan" options={plans} disabled />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Visible label |
+| `options` | `SelectOption[]` | — | Array of options |
+| `placeholder` | `string` | — | Placeholder option text |
+| `hint` | `string` | — | Helper text below the select |
+| `error` | `string` | — | Error message |
+| `className` | `string` | — | Additional CSS classes on wrapper |
+| `...rest` | `SelectHTMLAttributes` | — | All native select attributes |
+
+## SelectOption type
+
+```tsx
+interface SelectOption {
+  value: string
+  label: string
+  disabled?: boolean
+}
+```
+
+## Grouped options
+
+For grouped options, use native `optgroup` via the standard HTML select or the `groups` prop:
+
+```tsx
+<Select
+  label="Framework"
+  options={[
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue' },
+    { value: 'svelte', label: 'Svelte' },
+  ]}
+/>
+```
+
+## Disabled options
+
+```tsx
+<Select
+  label="Plan"
+  options={[
+    { value: 'free', label: 'Free' },
+    { value: 'pro', label: 'Pro — $9/mo' },
+    { value: 'enterprise', label: 'Enterprise (contact us)', disabled: true },
+  ]}
+/>
+```
+
+## Accessibility
+
+- Renders as native `<select>` — full browser keyboard support
+- Arrow keys navigate options
+- Enter/Space opens and selects
+- `label` associated via `htmlFor`/`id`
+- `error` associated via `aria-describedby`
+
+## Related
+
+- [Radio](/docs/components/radio) — for small option sets (< 5 items)
+- [Form](/docs/components/form) — form layout

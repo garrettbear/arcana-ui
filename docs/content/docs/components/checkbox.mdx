@@ -1,0 +1,83 @@
+---
+title: Checkbox
+description: Boolean toggle with label, description, indeterminate state, and error messaging.
+---
+
+## Import
+
+```tsx
+import { Checkbox } from '@arcana-ui/core'
+```
+
+## Usage
+
+```tsx
+<Checkbox label="I agree to the terms" />
+<Checkbox label="Subscribe to newsletter" description="Weekly updates, no spam." />
+<Checkbox label="Remember me" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
+<Checkbox label="Select all" indeterminate />
+<Checkbox label="Required" error="You must accept to continue" />
+<Checkbox label="Disabled" disabled />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Visible label text |
+| `description` | `string` | — | Secondary text below label |
+| `indeterminate` | `boolean` | `false` | Partial selection state |
+| `error` | `string \| boolean` | — | Error message or error flag |
+| `className` | `string` | — | Additional CSS classes on wrapper |
+| `...rest` | `InputHTMLAttributes` | — | All native checkbox attributes (`checked`, `onChange`, `disabled`, etc.) |
+
+## Controlled
+
+```tsx
+const [accepted, setAccepted] = useState(false)
+
+<Checkbox
+  label="Accept terms of service"
+  checked={accepted}
+  onChange={(e) => setAccepted(e.target.checked)}
+/>
+```
+
+## Indeterminate state
+
+Used to represent partial selection in a select-all pattern:
+
+```tsx
+const allSelected = items.every((i) => selected.has(i.id))
+const someSelected = items.some((i) => selected.has(i.id))
+
+<Checkbox
+  label="Select all"
+  checked={allSelected}
+  indeterminate={someSelected && !allSelected}
+  onChange={handleSelectAll}
+/>
+```
+
+## With error
+
+```tsx
+<Checkbox
+  label="I accept the privacy policy"
+  error="You must accept the privacy policy to continue"
+/>
+```
+
+## Accessibility
+
+- Renders as native `<input type="checkbox">`
+- `indeterminate` managed via `useEffect` on the DOM node
+- Error message associated via `aria-describedby` and `role="alert"`
+- `aria-invalid="true"` when error is set
+- Disabled state prevents `onChange` from firing
+
+## Related
+
+- [Radio](/docs/components/radio) — mutually exclusive options
+- [Toggle](/docs/components/toggle) — immediate-action boolean switch
+- [Form](/docs/components/form) — form layout
