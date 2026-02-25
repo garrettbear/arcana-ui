@@ -1,0 +1,12 @@
+feat(playground): build typography system + spacing editor
+
+- Google Fonts picker with 31 curated fonts (sans, serif, mono)
+- Three font slots: Display, Body, Mono with searchable dropdown
+- Local font upload via @font-face + createObjectURL
+- Type scale editor: base size slider + 8 ratio presets + live preview
+- Line height slider (1.0-2.0)
+- Spacing scale editor: base unit slider with visual bar preview
+- Token editor reorganized into 5 collapsible sections
+- Export JSON updated to include all new variables
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
