@@ -18,12 +18,13 @@ export default async function Page({
   const page = source.getPage(slug)
   if (!page) notFound()
 
-  const MDX = page.data.body
+  const data = page.data as any
+  const MDX = data.body
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
+    <DocsPage toc={data.toc} full={data.full}>
+      <DocsTitle>{data.title}</DocsTitle>
+      <DocsDescription>{data.description}</DocsDescription>
       <DocsBody>
         <MDX components={{ ...defaultMdxComponents }} />
       </DocsBody>
