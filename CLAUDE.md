@@ -445,23 +445,27 @@ Phase 0 — Foundation Cleanup
 - AI_OPS.md created (prompt library, tracking system, session management)
 - PROGRESS.md created (task tracker)
 - CLAUDE.md rewritten (this file)
+- Task 0.1 — Token audit completed (`docs/audits/token-audit.md`)
 
 ### Currently Working On
-Ready to begin Phase 0, Task 0.1 — Audit & document current token set
+Ready to begin Phase 0, Task 0.2 — Restructure token JSON to three-tier hierarchy
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.1 is next
-2. Read the prompt for Task 0.1 in `AI_OPS.md` Part 2
-3. Execute the audit: scan all CSS files, catalog all tokens, identify all hardcoded values
-4. Produce the gap analysis document at `docs/audits/token-audit-YYYY-MM-DD.md`
-5. Update `PROGRESS.md` to check off 0.1
-6. Move to Task 0.2
+1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.2 is next
+2. Read `docs/audits/token-audit.md` for the complete gap analysis
+3. Read the prompt for Task 0.2 in `AI_OPS.md` Part 2
+4. Restructure token JSON to three-tier hierarchy (primitive → semantic → component)
+5. Create JSON Schema for token validation
+6. Migrate all 6 theme presets to new format
+7. Update build script to resolve references and output all themes
+8. Update `PROGRESS.md` to check off 0.2
 
 ### Session History
 
 | Date | Agent | Tasks Completed | Notes |
 |------|-------|-----------------|-------|
 | 2026-03-01 | Claude (claude.ai) | Project planning | Created ROADMAP.md, AI_OPS.md, PROGRESS.md, CLAUDE.md |
+| 2026-03-02 | Claude (Claude Code) | Task 0.1 — Token audit | Scanned 32 CSS files, cataloged ~176 tokens, found 88 hardcoded violations in components, 4 unbuilt themes. Full report at docs/audits/token-audit.md |

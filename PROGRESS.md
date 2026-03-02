@@ -1,12 +1,12 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-03-01
+> **Last updated:** 2026-03-02
 > **Current phase:** 0 — Foundation Cleanup
-> **Next priority task:** 0.1
+> **Next priority task:** 0.2
 > **Blocking issues:** None
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
-- [ ] 0.1 — Audit & document current token set
+- [x] 0.1 — Audit & document current token set
 - [ ] 0.2 — Restructure token JSON to three-tier hierarchy
 - [ ] 0.3 — Establish code standards (strict TS, naming, exports)
 - [ ] 0.4 — Add build pipeline for tokens (JSON → CSS)
