@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function HomePage() {
   return (
@@ -49,9 +49,8 @@ export default function HomePage() {
               margin: '0 auto 2.5rem',
             }}
           >
-            Arcana UI is a modern React component library with 22 production-ready
-            components, a warm stone/indigo design system, WCAG AA accessibility,
-            and an AI-first API surface.
+            Arcana UI is a modern React component library with 22 production-ready components, a
+            warm stone/indigo design system, WCAG AA accessibility, and an AI-first API surface.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link
@@ -202,8 +201,7 @@ function App() {
               fontSize: '1.1rem',
             }}
           >
-            Primitives, composites, patterns — all with accessible markup and
-            CSS custom properties.
+            Primitives, composites, patterns — all with accessible markup and CSS custom properties.
           </p>
           <div
             style={{
@@ -251,16 +249,13 @@ function App() {
             Documentation
           </Link>{' '}
           ·{' '}
-          <a
-            href="https://github.com/your-org/arcana-ui"
-            style={{ color: '#4f46e5' }}
-          >
+          <a href="https://github.com/your-org/arcana-ui" style={{ color: '#4f46e5' }}>
             GitHub
           </a>
         </p>
       </footer>
     </main>
-  )
+  );
 }
 
 const features = [
@@ -300,7 +295,7 @@ const features = [
     description:
       'Every component accepts className and style overrides. CSS custom properties let you theme at any level without forking.',
   },
-]
+];
 
 const components = [
   { name: 'Button', href: '/docs/components/button' },
@@ -325,4 +320,4 @@ const components = [
   { name: 'Stack / HStack', href: '/docs/components/layout' },
   { name: 'Grid', href: '/docs/components/layout' },
   { name: 'Container', href: '/docs/components/layout' },
-]
+];

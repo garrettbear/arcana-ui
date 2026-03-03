@@ -1,6 +1,6 @@
-import './global.css'
-import { RootProvider } from 'fumadocs-ui/provider'
-import type { ReactNode } from 'react'
+import './global.css';
+import { RootProvider } from 'fumadocs-ui/provider';
+import type { ReactNode } from 'react';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -9,7 +9,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <RootProvider>{children}</RootProvider>
       </body>
     </html>
-  )
+  );
 }
 
 export const metadata = {
@@ -19,4 +19,4 @@ export const metadata = {
   },
   description:
     'A modern React component library with a warm stone/indigo design system, built for accessibility and AI-first workflows.',
-}
+};

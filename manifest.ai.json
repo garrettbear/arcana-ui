@@ -43,11 +43,19 @@
           "default": "md",
           "description": "Button size (32px / 40px / 48px height)"
         },
-        "loading": { "type": "boolean", "default": false, "description": "Shows spinner, disables interaction" },
+        "loading": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shows spinner, disables interaction"
+        },
         "disabled": { "type": "boolean", "default": false },
         "icon": { "type": "ReactNode", "description": "Leading icon element" },
         "iconRight": { "type": "ReactNode", "description": "Trailing icon element" },
-        "fullWidth": { "type": "boolean", "default": false, "description": "Stretches button to fill container" }
+        "fullWidth": {
+          "type": "boolean",
+          "default": false,
+          "description": "Stretches button to fill container"
+        }
       },
       "examples": [
         "<Button>Save changes</Button>",
@@ -66,12 +74,18 @@
       "when": "User needs to enter text: name, email, password, search, etc.",
       "props": {
         "label": { "type": "string", "description": "Label above the input" },
-        "error": { "type": "string | boolean", "description": "Error message or true to show error styling" },
+        "error": {
+          "type": "string | boolean",
+          "description": "Error message or true to show error styling"
+        },
         "helperText": { "type": "string", "description": "Helper text below input" },
         "prefix": { "type": "ReactNode", "description": "Icon or text prepended inside input" },
         "suffix": { "type": "ReactNode", "description": "Icon or text appended inside input" },
         "fullWidth": { "type": "boolean", "default": false },
-        "type": { "type": "string", "description": "HTML input type: text, email, password, search, etc." }
+        "type": {
+          "type": "string",
+          "description": "HTML input type: text, email, password, search, etc."
+        }
       },
       "examples": [
         "<Input label=\"Email\" type=\"email\" placeholder=\"you@example.com\" />",
@@ -90,9 +104,20 @@
         "label": { "type": "string" },
         "error": { "type": "string | boolean" },
         "helperText": { "type": "string" },
-        "autoResize": { "type": "boolean", "default": false, "description": "Grows with content automatically" },
-        "showCount": { "type": "boolean", "default": false, "description": "Shows character count" },
-        "maxLength": { "type": "number", "description": "Max characters. Shows X/max counter when showCount=true" }
+        "autoResize": {
+          "type": "boolean",
+          "default": false,
+          "description": "Grows with content automatically"
+        },
+        "showCount": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shows character count"
+        },
+        "maxLength": {
+          "type": "number",
+          "description": "Max characters. Shows X/max counter when showCount=true"
+        }
       },
       "examples": [
         "<Textarea label=\"Bio\" placeholder=\"Tell us about yourself\" />",
@@ -108,8 +133,14 @@
         "label": { "type": "string" },
         "error": { "type": "string | boolean" },
         "helperText": { "type": "string" },
-        "placeholder": { "type": "string", "description": "Disabled first option shown before selection" },
-        "options": { "type": "SelectOption[]", "description": "Array of {value, label, disabled?} objects" },
+        "placeholder": {
+          "type": "string",
+          "description": "Disabled first option shown before selection"
+        },
+        "options": {
+          "type": "SelectOption[]",
+          "description": "Array of {value, label, disabled?} objects"
+        },
         "fullWidth": { "type": "boolean", "default": false }
       },
       "examples": [
@@ -126,7 +157,11 @@
         "label": { "type": "string" },
         "description": { "type": "string", "description": "Helper text below label" },
         "checked": { "type": "boolean" },
-        "indeterminate": { "type": "boolean", "default": false, "description": "Shows dash (partial selection)" },
+        "indeterminate": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shows dash (partial selection)"
+        },
         "onChange": { "type": "ChangeEventHandler<HTMLInputElement>" },
         "disabled": { "type": "boolean", "default": false }
       },
@@ -141,11 +176,17 @@
       "description": "Single radio or grouped radio buttons with descriptions. RadioGroup is the preferred pattern.",
       "when": "User must choose exactly one option from a small set",
       "props": {
-        "RadioGroup.name": { "type": "string", "description": "HTML name attribute for the radio group" },
+        "RadioGroup.name": {
+          "type": "string",
+          "description": "HTML name attribute for the radio group"
+        },
         "RadioGroup.label": { "type": "string", "description": "Group legend" },
         "RadioGroup.value": { "type": "string", "description": "Currently selected value" },
         "RadioGroup.onChange": { "type": "(value: string) => void" },
-        "RadioGroup.options": { "type": "RadioOption[]", "description": "Array of {value, label, description?, disabled?}" }
+        "RadioGroup.options": {
+          "type": "RadioOption[]",
+          "description": "Array of {value, label, description?, disabled?}"
+        }
       },
       "examples": [
         "<RadioGroup name=\"plan\" label=\"Select plan\" value={plan} onChange={setPlan} options={[{value:'free', label:'Free'}, {value:'pro', label:'Pro', description:'$9/mo'}]} />"
@@ -159,7 +200,10 @@
       "props": {
         "label": { "type": "string" },
         "checked": { "type": "boolean" },
-        "onChange": { "type": "(checked: boolean) => void", "description": "Receives boolean (not event)" },
+        "onChange": {
+          "type": "(checked: boolean) => void",
+          "description": "Receives boolean (not event)"
+        },
         "size": { "type": "enum", "values": ["sm", "md", "lg"], "default": "md" },
         "disabled": { "type": "boolean", "default": false }
       },
@@ -179,7 +223,11 @@
           "values": ["default", "success", "warning", "error", "info", "secondary"],
           "default": "default"
         },
-        "dot": { "type": "boolean", "default": false, "description": "Shows colored dot before text" }
+        "dot": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shows colored dot before text"
+        }
       },
       "examples": [
         "<Badge>Beta</Badge>",
@@ -194,11 +242,24 @@
       "description": "User avatar with image, initials fallback, and group stacking.",
       "when": "Display user identity: profile picture, initials, or group of users",
       "props": {
-        "Avatar.src": { "type": "string", "description": "Image URL. Falls back to initials on error." },
-        "Avatar.name": { "type": "string", "description": "Full name — used for initials and accessible label" },
+        "Avatar.src": {
+          "type": "string",
+          "description": "Image URL. Falls back to initials on error."
+        },
+        "Avatar.name": {
+          "type": "string",
+          "description": "Full name — used for initials and accessible label"
+        },
         "Avatar.alt": { "type": "string" },
-        "Avatar.size": { "type": "enum", "values": ["xs", "sm", "md", "lg", "xl"], "default": "md" },
-        "AvatarGroup.max": { "type": "number", "description": "Max avatars to show before +N overflow indicator" }
+        "Avatar.size": {
+          "type": "enum",
+          "values": ["xs", "sm", "md", "lg", "xl"],
+          "default": "md"
+        },
+        "AvatarGroup.max": {
+          "type": "number",
+          "description": "Max avatars to show before +N overflow indicator"
+        }
       },
       "examples": [
         "<Avatar name=\"Alice Zhao\" size=\"md\" />",
@@ -212,13 +273,25 @@
       "description": "Flexible container for grouping related content. Composed of optional Header, Body, and Footer slots.",
       "when": "Group related content: dashboard widgets, list items, profile sections, forms",
       "props": {
-        "Card.variant": { "type": "enum", "values": ["default", "outlined", "elevated"], "default": "default" },
+        "Card.variant": {
+          "type": "enum",
+          "values": ["default", "outlined", "elevated"],
+          "default": "default"
+        },
         "Card.padding": { "type": "enum", "values": ["none", "sm", "md", "lg"], "default": "md" },
-        "Card.interactive": { "type": "boolean", "default": false, "description": "Adds hover lift effect" },
+        "Card.interactive": {
+          "type": "boolean",
+          "default": false,
+          "description": "Adds hover lift effect"
+        },
         "CardHeader.title": { "type": "string" },
         "CardHeader.description": { "type": "string" },
         "CardHeader.action": { "type": "ReactNode", "description": "Slotted action in top-right" },
-        "CardFooter.align": { "type": "enum", "values": ["left", "center", "right", "space-between"], "default": "right" }
+        "CardFooter.align": {
+          "type": "enum",
+          "values": ["left", "center", "right", "space-between"],
+          "default": "right"
+        }
       },
       "examples": [
         "<Card><CardHeader title=\"Profile\" description=\"Manage your info\" /><CardBody>...</CardBody><CardFooter><Button size=\"sm\">Save</Button></CardFooter></Card>",
@@ -251,7 +324,11 @@
       "description": "Inline status message for info, success, warning, or error states.",
       "when": "Show form validation results, operation outcomes, or important notices inline",
       "props": {
-        "variant": { "type": "enum", "values": ["info", "success", "warning", "error"], "default": "info" },
+        "variant": {
+          "type": "enum",
+          "values": ["info", "success", "warning", "error"],
+          "default": "info"
+        },
         "title": { "type": "string" },
         "onClose": { "type": "() => void", "description": "Shows X button if provided" }
       },
@@ -271,8 +348,15 @@
         "toast.title": { "type": "string" },
         "toast.description": { "type": "string" },
         "toast.variant": { "type": "enum", "values": ["default", "success", "warning", "error"] },
-        "toast.duration": { "type": "number", "default": 5000, "description": "Auto-dismiss in ms" },
-        "toast.action": { "type": "{ label: string, onClick: () => void }", "description": "Inline action button" }
+        "toast.duration": {
+          "type": "number",
+          "default": 5000,
+          "description": "Auto-dismiss in ms"
+        },
+        "toast.action": {
+          "type": "{ label: string, onClick: () => void }",
+          "description": "Inline action button"
+        }
       },
       "examples": [
         "const { toast } = useToast()",
@@ -289,9 +373,15 @@
       "props": {
         "Tabs.value": { "type": "string", "description": "Controlled active tab value" },
         "Tabs.onChange": { "type": "(value: string) => void" },
-        "Tabs.defaultValue": { "type": "string", "description": "Initial active tab (uncontrolled)" },
+        "Tabs.defaultValue": {
+          "type": "string",
+          "description": "Initial active tab (uncontrolled)"
+        },
         "Tabs.variant": { "type": "enum", "values": ["line", "pills"], "default": "line" },
-        "Tab.value": { "type": "string", "description": "Tab identifier, must match TabPanel value" },
+        "Tab.value": {
+          "type": "string",
+          "description": "Tab identifier, must match TabPanel value"
+        },
         "Tab.disabled": { "type": "boolean", "default": false }
       },
       "examples": [
@@ -306,7 +396,10 @@
       "when": "FAQs, settings sections, collapsible content groups",
       "props": {
         "Accordion.type": { "type": "enum", "values": ["single", "multiple"], "default": "single" },
-        "Accordion.defaultValue": { "type": "string | string[]", "description": "Initially open item(s)" },
+        "Accordion.defaultValue": {
+          "type": "string | string[]",
+          "description": "Initially open item(s)"
+        },
         "AccordionItem.value": { "type": "string" },
         "AccordionItem.disabled": { "type": "boolean", "default": false }
       },
@@ -321,7 +414,11 @@
       "description": "Vertical flex container with consistent gap spacing using Arcana spacing scale.",
       "when": "Stack elements vertically with consistent spacing",
       "props": {
-        "gap": { "type": "number", "default": 4, "description": "Spacing token number (1=4px, 2=8px, 4=16px, 6=24px, 8=32px)" },
+        "gap": {
+          "type": "number",
+          "default": 4,
+          "description": "Spacing token number (1=4px, 2=8px, 4=16px, 6=24px, 8=32px)"
+        },
         "align": { "type": "string", "description": "CSS alignItems value" },
         "justify": { "type": "string", "description": "CSS justifyContent value" }
       },
@@ -338,7 +435,10 @@
       "props": {
         "gap": { "type": "number", "default": 4 },
         "align": { "type": "string", "default": "center" },
-        "justify": { "type": "string", "description": "CSS justifyContent. Use 'flex-end' for right-aligned buttons" }
+        "justify": {
+          "type": "string",
+          "description": "CSS justifyContent. Use 'flex-end' for right-aligned buttons"
+        }
       },
       "examples": [
         "<HStack gap={2} justify=\"flex-end\"><Button variant=\"secondary\">Cancel</Button><Button>Save</Button></HStack>",
@@ -351,7 +451,11 @@
       "description": "CSS Grid wrapper with responsive column support.",
       "when": "Multi-column layouts: card grids, form field rows, dashboard widgets",
       "props": {
-        "columns": { "type": "number | string", "default": 2, "description": "Number of equal columns or CSS grid-template-columns string" },
+        "columns": {
+          "type": "number | string",
+          "default": 2,
+          "description": "Number of equal columns or CSS grid-template-columns string"
+        },
         "gap": { "type": "number", "description": "Spacing token for both row and column gap" }
       },
       "examples": [
@@ -365,7 +469,12 @@
       "description": "Centered max-width container with responsive padding.",
       "when": "Constrain page content width and center it",
       "props": {
-        "size": { "type": "enum", "values": ["sm", "md", "lg", "xl", "2xl", "full"], "default": "lg", "description": "Max-width preset: sm=640px, md=768px, lg=1024px, xl=1280px" }
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg", "xl", "2xl", "full"],
+          "default": "lg",
+          "description": "Max-width preset: sm=640px, md=768px, lg=1024px, xl=1280px"
+        }
       },
       "examples": [
         "<Container size=\"xl\"><main>Page content</main></Container>",
@@ -378,8 +487,16 @@
       "description": "Responsive navigation header with brand, nav links, and action slots.",
       "when": "Top-level site navigation",
       "props": {
-        "Navbar.sticky": { "type": "boolean", "default": false, "description": "position: sticky top: 0" },
-        "Navbar.border": { "type": "boolean", "default": false, "description": "Adds bottom border" }
+        "Navbar.sticky": {
+          "type": "boolean",
+          "default": false,
+          "description": "position: sticky top: 0"
+        },
+        "Navbar.border": {
+          "type": "boolean",
+          "default": false,
+          "description": "Adds bottom border"
+        }
       },
       "examples": [
         "<Navbar sticky border><NavbarBrand><Logo /></NavbarBrand><NavbarContent><a href=\"/\">Home</a><a href=\"/docs\">Docs</a></NavbarContent><NavbarActions><Button size=\"sm\">Sign in</Button></NavbarActions></Navbar>"
@@ -408,8 +525,16 @@
       "description": "Form wrapper with field-level validation state management via context.",
       "when": "Building forms with labels, helper text, and validation messages",
       "props": {
-        "FormField.isRequired": { "type": "boolean", "default": false, "description": "Shows asterisk on label" },
-        "FormField.isInvalid": { "type": "boolean", "default": false, "description": "Shows error message, hides helper text" }
+        "FormField.isRequired": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shows asterisk on label"
+        },
+        "FormField.isInvalid": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shows error message, hides helper text"
+        }
       },
       "examples": [
         "<Form onSubmit={handleSubmit}><FormField isRequired><FormLabel>Email</FormLabel><Input type=\"email\" /><FormHelperText>We'll never share your email.</FormHelperText></FormField><FormField isInvalid={!!errors.name}><FormLabel>Name</FormLabel><Input /><FormErrorMessage>{errors.name}</FormErrorMessage></FormField></Form>"
@@ -421,10 +546,22 @@
       "description": "Styled data table with striped rows, hover states, and sortable column headers.",
       "when": "Display tabular data: user lists, transaction history, analytics, settings",
       "props": {
-        "Table.striped": { "type": "boolean", "default": false, "description": "Alternating row background" },
-        "Table.hoverable": { "type": "boolean", "default": false, "description": "Row background on hover" },
+        "Table.striped": {
+          "type": "boolean",
+          "default": false,
+          "description": "Alternating row background"
+        },
+        "Table.hoverable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Row background on hover"
+        },
         "TableHead.sortable": { "type": "boolean", "default": false },
-        "TableHead.sortDirection": { "type": "enum", "values": ["asc", "desc", null], "description": "Current sort direction" },
+        "TableHead.sortDirection": {
+          "type": "enum",
+          "values": ["asc", "desc", null],
+          "description": "Current sort direction"
+        },
         "TableHead.onSort": { "type": "() => void" }
       },
       "examples": [
