@@ -451,20 +451,29 @@ Phase 0 — Foundation Cleanup
   - Migrated all 6 presets to new format (`packages/tokens/src/presets/{light,dark,terminal,retro98,glass,brutalist}.json`)
   - All 6 presets validated against schema
   - Created migration guide (`docs/MIGRATION.md`) with old→new token name mapping
+- Task 0.3 — Code standards established
+  - Root `tsconfig.json` created with strict mode + all sub-options
+  - Package tsconfigs updated: `noImplicitAny`, `strictNullChecks`, `noUnusedLocals`, `noUnusedParameters`
+  - `biome.json` updated: trailing commas (all), semicolons (always), import sorting, line width 100
+  - `.editorconfig` created (2-space indent, UTF-8, LF, trim trailing whitespace)
+  - All lint/format violations fixed (zero `any` types, consistent formatting)
+  - Husky + lint-staged pre-commit hook installed (runs biome on staged files)
+  - 54 a11y warnings documented for future component improvement tasks
 
 ### Currently Working On
-Ready to begin Phase 0, Task 0.3 — Establish code standards (strict TS, naming, exports)
+Ready to begin Phase 0, Task 0.4 — Add build pipeline for tokens (JSON → CSS)
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.3 is next
+1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.4 is next
 2. Read `docs/MIGRATION.md` for token name mapping (old → new)
-3. Read the prompt for Task 0.3 in `AI_OPS.md` Part 2
-4. Establish strict TypeScript config, naming conventions, barrel exports
-5. Note: Task 0.4 (build pipeline) will need to resolve `{primitive.*}` references in the new JSON format
-6. Update `PROGRESS.md` to check off 0.3
+3. Read the prompt for Task 0.4 in `AI_OPS.md` Part 2
+4. Rewrite `packages/tokens/scripts/build-tokens.ts` to read from `src/presets/*.json` (three-tier format)
+5. Resolve `{primitive.*}` references in semantic tokens to actual values
+6. Generate CSS for all 6 presets (not just light/dark)
+7. Update `PROGRESS.md` to check off 0.4
 
 ### Session History
 
@@ -473,3 +482,4 @@ None
 | 2026-03-01 | Claude (claude.ai) | Project planning | Created ROADMAP.md, AI_OPS.md, PROGRESS.md, CLAUDE.md |
 | 2026-03-02 | Claude (Claude Code) | Task 0.1 — Token audit | Scanned 32 CSS files, cataloged ~176 tokens, found 88 hardcoded violations in components, 4 unbuilt themes. Full report at docs/audits/token-audit.md |
 | 2026-03-03 | Claude (Claude Code) | Task 0.2 — Token restructure | Created JSON Schema, migrated 6 presets to three-tier format, validated all against schema, created MIGRATION.md |
+| 2026-03-03 | Claude (Claude Code) | Task 0.3 — Code standards | Strict TS config, biome formatting rules, .editorconfig, husky pre-commit hook, zero `any` types, 238 tests pass |
