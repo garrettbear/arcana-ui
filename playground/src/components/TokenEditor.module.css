@@ -225,7 +225,7 @@
 }
 
 .colorValue {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
   font-size: 10px;
   color: var(--arcana-text-muted);
   width: 58px;
@@ -255,7 +255,7 @@
 
 .sliderValue {
   font-size: 11px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   color: var(--arcana-text-secondary);
   width: 34px;
   text-align: right;
@@ -470,7 +470,7 @@
 
 .typeScaleSize {
   font-size: 9px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   color: var(--arcana-text-muted);
   width: 38px;
   text-align: right;
@@ -495,7 +495,7 @@
 
 .spacingLabel {
   font-size: 9px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   color: var(--arcana-text-muted);
   width: 22px;
   flex-shrink: 0;
@@ -519,7 +519,7 @@
 
 .spacingValue {
   font-size: 9px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   color: var(--arcana-text-muted);
   width: 32px;
   text-align: right;

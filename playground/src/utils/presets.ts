@@ -6,64 +6,66 @@
  * which cascade over the stylesheet-defined defaults.
  */
 
-export type PresetId = 'light' | 'dark' | 'terminal' | 'retro98' | 'glass' | 'brutalist'
+export type PresetId = 'light' | 'dark' | 'terminal' | 'retro98' | 'glass' | 'brutalist';
 
 export interface ThemePreset {
-  id: PresetId
-  label: string
-  emoji: string
-  description: string
+  id: PresetId;
+  label: string;
+  emoji: string;
+  description: string;
   /** Set data-theme attribute. Undefined = remove the attribute. */
-  dataTheme?: 'light' | 'dark'
+  dataTheme?: 'light' | 'dark';
   /** CSS custom property overrides (applied via documentElement.style) */
-  tokens: Record<string, string>
+  tokens: Record<string, string>;
   /** Optional CSS injected into a <style> tag (for body bg, etc.) */
-  globalCSS?: string
+  globalCSS?: string;
 }
 
 // Module-level state for cleanup
-let appliedTokenKeys: string[] = []
-let injectedStyleEl: HTMLStyleElement | null = null
+let appliedTokenKeys: string[] = [];
+let injectedStyleEl: HTMLStyleElement | null = null;
 
 /** Apply a preset — updates CSS vars and optional global styles. */
 export function applyPreset(preset: ThemePreset): void {
-  const root = document.documentElement
+  const root = document.documentElement;
 
   // 1. Clear previously applied inline token overrides
-  appliedTokenKeys.forEach((k) => root.style.removeProperty(k))
-  appliedTokenKeys = []
+  for (const k of appliedTokenKeys) {
+    root.style.removeProperty(k);
+  }
+  appliedTokenKeys = [];
 
   // 2. Remove previously injected global CSS
-  injectedStyleEl?.remove()
-  injectedStyleEl = null
+  injectedStyleEl?.remove();
+  injectedStyleEl = null;
 
   // 3. Set data-theme
   if (preset.dataTheme) {
-    root.setAttribute('data-theme', preset.dataTheme)
+    root.setAttribute('data-theme', preset.dataTheme);
   } else if (preset.id !== 'light' && preset.id !== 'dark') {
     // Custom presets: remove data-theme so the base CSS light values apply
     // then override everything via JS tokens
-    root.removeAttribute('data-theme')
+    root.removeAttribute('data-theme');
   }
 
   // 4. Apply token overrides
   for (const [varName, value] of Object.entries(preset.tokens)) {
-    root.style.setProperty(varName, value)
-    appliedTokenKeys.push(varName)
+    root.style.setProperty(varName, value);
+    appliedTokenKeys.push(varName);
   }
 
   // 5. Inject global CSS if provided
   if (preset.globalCSS) {
-    injectedStyleEl = document.createElement('style')
-    injectedStyleEl.id = 'arcana-preset-override'
-    injectedStyleEl.textContent = preset.globalCSS
-    document.head.appendChild(injectedStyleEl)
+    injectedStyleEl = document.createElement('style');
+    injectedStyleEl.id = 'arcana-preset-override';
+    injectedStyleEl.textContent = preset.globalCSS;
+    document.head.appendChild(injectedStyleEl);
   }
 }
 
 /** Read the current computed value of a CSS custom property */
 export function getCSSVar(varName: string): string {
-  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim()
+  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
 }
 
 const TERMINAL_TOKENS: Record<string, string> = {
@@ -124,7 +126,7 @@ const TERMINAL_TOKENS: Record<string, string> = {
   '--arcana-component-focus-ring': '0 0 0 3px rgba(57, 211, 83, 0.4)',
   '--arcana-typography-font-family-sans':
     "'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Courier New', monospace",
-}
+};
 
 const RETRO98_TOKENS: Record<string, string> = {
   '--arcana-surface-primary': '#c0c0c0',
@@ -184,7 +186,7 @@ const RETRO98_TOKENS: Record<string, string> = {
   '--arcana-component-focus-ring': '0 0 0 1px #000080',
   '--arcana-typography-font-family-sans':
     '"MS Sans Serif", "Tahoma", "Arial", system-ui, sans-serif',
-}
+};
 
 const GLASS_TOKENS: Record<string, string> = {
   '--arcana-surface-primary': 'rgba(255, 255, 255, 0.15)',
@@ -244,7 +246,7 @@ const GLASS_TOKENS: Record<string, string> = {
   '--arcana-component-focus-ring': '0 0 0 3px rgba(165, 180, 252, 0.4)',
   '--arcana-typography-font-family-sans':
     '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
-}
+};
 
 const BRUTALIST_TOKENS: Record<string, string> = {
   '--arcana-surface-primary': '#ffffff',
@@ -302,9 +304,8 @@ const BRUTALIST_TOKENS: Record<string, string> = {
   '--arcana-component-radius': '0px',
   '--arcana-component-border-width': '3px',
   '--arcana-component-focus-ring': '0 0 0 3px rgba(0, 0, 255, 0.3)',
-  '--arcana-typography-font-family-sans':
-    '"Arial Black", "Impact", "Arial", Helvetica, sans-serif',
-}
+  '--arcana-typography-font-family-sans': '"Arial Black", "Impact", "Arial", Helvetica, sans-serif',
+};
 
 export const PRESETS: ThemePreset[] = [
   {
@@ -373,8 +374,8 @@ export const PRESETS: ThemePreset[] = [
       * { box-shadow: none !important; transition: none !important; }
     `,
   },
-]
+];
 
 export function getPresetById(id: PresetId): ThemePreset | undefined {
-  return PRESETS.find((p) => p.id === id)
+  return PRESETS.find((p) => p.id === id);
 }

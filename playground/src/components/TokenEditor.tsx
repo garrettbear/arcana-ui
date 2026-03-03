@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
-import styles from './TokenEditor.module.css'
-import { PRESETS, ThemePreset, PresetId, applyPreset, getCSSVar } from '../utils/presets'
-import { toHex } from '../utils/contrast'
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { toHex } from '../utils/contrast';
+import { PRESETS, type PresetId, type ThemePreset, applyPreset, getCSSVar } from '../utils/presets';
+import styles from './TokenEditor.module.css';
 
 // ─── Google Fonts ─────────────────────────────────────────────────────────────
 
@@ -40,32 +40,34 @@ const GOOGLE_FONTS = [
   { name: 'Roboto Mono', category: 'mono' as const, weights: '400;500' },
   { name: 'Inconsolata', category: 'mono' as const, weights: '400;500' },
   { name: 'Space Mono', category: 'mono' as const, weights: '400;700' },
-]
+];
 
-type GoogleFont = (typeof GOOGLE_FONTS)[number]
+type GoogleFont = (typeof GOOGLE_FONTS)[number];
 
-function fontToStack(font: GoogleFont | { name: string; category: 'sans' | 'serif' | 'mono' }): string {
+function fontToStack(
+  font: GoogleFont | { name: string; category: 'sans' | 'serif' | 'mono' },
+): string {
   const fallback =
-    font.category === 'mono' ? 'monospace' : font.category === 'serif' ? 'serif' : 'sans-serif'
-  return `'${font.name}', ${fallback}`
+    font.category === 'mono' ? 'monospace' : font.category === 'serif' ? 'serif' : 'sans-serif';
+  return `'${font.name}', ${fallback}`;
 }
 
 function loadGoogleFont(font: GoogleFont): void {
-  const id = `gf-${font.name.replace(/\s+/g, '-').toLowerCase()}`
-  if (document.getElementById(id)) return
-  const link = document.createElement('link')
-  link.id = id
-  link.rel = 'stylesheet'
-  const family = font.name.replace(/\s+/g, '+')
-  link.href = `https://fonts.googleapis.com/css2?family=${family}:wght@${font.weights}&display=swap`
-  document.head.appendChild(link)
+  const id = `gf-${font.name.replace(/\s+/g, '-').toLowerCase()}`;
+  if (document.getElementById(id)) return;
+  const link = document.createElement('link');
+  link.id = id;
+  link.rel = 'stylesheet';
+  const family = font.name.replace(/\s+/g, '+');
+  link.href = `https://fonts.googleapis.com/css2?family=${family}:wght@${font.weights}&display=swap`;
+  document.head.appendChild(link);
 }
 
 // ─── Token Groups ─────────────────────────────────────────────────────────────
 
 const TOKEN_GROUPS: Array<{
-  label: string
-  tokens: Array<{ label: string; var: string }>
+  label: string;
+  tokens: Array<{ label: string; var: string }>;
 }> = [
   {
     label: 'Surface',
@@ -108,9 +110,9 @@ const TOKEN_GROUPS: Array<{
       { label: 'Info', var: '--arcana-feedback-info' },
     ],
   },
-]
+];
 
-const ALL_EDITOR_VARS = TOKEN_GROUPS.flatMap((g) => g.tokens.map((t) => t.var))
+const ALL_EDITOR_VARS = TOKEN_GROUPS.flatMap((g) => g.tokens.map((t) => t.var));
 
 // ─── Type Scale ───────────────────────────────────────────────────────────────
 
@@ -124,7 +126,7 @@ const TYPE_SCALE_STEPS = [
   { key: 'base', step: 0, label: 'body', cssVar: '--arcana-typography-font-size-base' },
   { key: 'sm', step: -1, label: 'small', cssVar: '--arcana-typography-font-size-sm' },
   { key: 'xs', step: -2, label: 'xs', cssVar: '--arcana-typography-font-size-xs' },
-]
+];
 
 const TYPE_SCALE_RATIOS = [
   { label: 'Minor Second', value: 1.067 },
@@ -132,13 +134,13 @@ const TYPE_SCALE_RATIOS = [
   { label: 'Minor Third', value: 1.2 },
   { label: 'Major Third', value: 1.25 },
   { label: 'Perfect Fourth', value: 1.333 },
-  { label: 'Augmented Fourth', value: 1.414 },
+  { label: 'Augmented Fourth', value: Math.SQRT2 },
   { label: 'Perfect Fifth', value: 1.5 },
   { label: 'Golden Ratio', value: 1.618 },
-]
+];
 
 function computeFontSize(base: number, ratio: number, step: number): number {
-  return base * Math.pow(ratio, step)
+  return base * ratio ** step;
 }
 
 // ─── Spacing Scale ────────────────────────────────────────────────────────────
@@ -155,7 +157,7 @@ const SPACING_PREVIEW_STEPS = [
   { multiplier: 10, label: '10', cssVar: '--arcana-spacing-10' },
   { multiplier: 12, label: '12', cssVar: '--arcana-spacing-12' },
   { multiplier: 16, label: '16', cssVar: '--arcana-spacing-16' },
-]
+];
 
 const ALL_SPACING_STEPS = [
   { multiplier: 0.5, cssVar: '--arcana-spacing-0-5' },
@@ -177,69 +179,69 @@ const ALL_SPACING_STEPS = [
   { multiplier: 20, cssVar: '--arcana-spacing-20' },
   { multiplier: 24, cssVar: '--arcana-spacing-24' },
   { multiplier: 32, cssVar: '--arcana-spacing-32' },
-]
+];
 
 // ─── FontPicker ───────────────────────────────────────────────────────────────
 
 interface LocalFont {
-  name: string
-  stack: string
+  name: string;
+  stack: string;
 }
 
 interface FontPickerProps {
-  label: string
-  value: string
-  localFonts: LocalFont[]
-  onChange: (stack: string) => void
+  label: string;
+  value: string;
+  localFonts: LocalFont[];
+  onChange: (stack: string) => void;
 }
 
 function getFirstFontName(stack: string): string {
-  return stack.split(',')[0].trim().replace(/['"]/g, '')
+  return stack.split(',')[0].trim().replace(/['"]/g, '');
 }
 
 function FontPicker({ label, value, localFonts, onChange }: FontPickerProps) {
-  const [search, setSearch] = useState('')
-  const [open, setOpen] = useState(false)
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
-  const inputRef = useRef<HTMLInputElement | null>(null)
+  const [search, setSearch] = useState('');
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const filtered = useMemo(() => {
-    const q = search.toLowerCase()
-    const gf = q ? GOOGLE_FONTS.filter((f) => f.name.toLowerCase().includes(q)) : GOOGLE_FONTS
-    const lf = localFonts.filter((f) => !q || f.name.toLowerCase().includes(q))
-    return { googleFonts: gf, localFonts: lf }
-  }, [search, localFonts])
+    const q = search.toLowerCase();
+    const gf = q ? GOOGLE_FONTS.filter((f) => f.name.toLowerCase().includes(q)) : GOOGLE_FONTS;
+    const lf = localFonts.filter((f) => !q || f.name.toLowerCase().includes(q));
+    return { googleFonts: gf, localFonts: lf };
+  }, [search, localFonts]);
 
   const handleSelect = (font: GoogleFont) => {
-    loadGoogleFont(font)
-    onChange(fontToStack(font))
-    setOpen(false)
-    setSearch('')
-  }
+    loadGoogleFont(font);
+    onChange(fontToStack(font));
+    setOpen(false);
+    setSearch('');
+  };
 
   const handleLocalSelect = (font: LocalFont) => {
-    onChange(font.stack)
-    setOpen(false)
-    setSearch('')
-  }
+    onChange(font.stack);
+    setOpen(false);
+    setSearch('');
+  };
 
   useEffect(() => {
-    if (!open) return
+    if (!open) return;
     const handleOutside = (e: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-        setOpen(false)
-        setSearch('')
+        setOpen(false);
+        setSearch('');
       }
-    }
-    document.addEventListener('mousedown', handleOutside)
-    return () => document.removeEventListener('mousedown', handleOutside)
-  }, [open])
+    };
+    document.addEventListener('mousedown', handleOutside);
+    return () => document.removeEventListener('mousedown', handleOutside);
+  }, [open]);
 
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 0)
-  }, [open])
+    if (open) setTimeout(() => inputRef.current?.focus(), 0);
+  }, [open]);
 
-  const currentName = getFirstFontName(value)
+  const currentName = getFirstFontName(value);
 
   return (
     <div ref={wrapperRef} className={styles.fontPicker}>
@@ -287,9 +289,10 @@ function FontPicker({ label, value, localFonts, onChange }: FontPickerProps) {
               </>
             )}
             {(['sans', 'serif', 'mono'] as const).map((cat) => {
-              const catFonts = filtered.googleFonts.filter((f) => f.category === cat)
-              if (!catFonts.length) return null
-              const catLabel = cat === 'sans' ? 'Sans-Serif' : cat === 'serif' ? 'Serif' : 'Monospace'
+              const catFonts = filtered.googleFonts.filter((f) => f.category === cat);
+              if (!catFonts.length) return null;
+              const catLabel =
+                cat === 'sans' ? 'Sans-Serif' : cat === 'serif' ? 'Serif' : 'Monospace';
               return (
                 <React.Fragment key={cat}>
                   <div className={styles.fontPickerGroupLabel}>{catLabel}</div>
@@ -303,7 +306,7 @@ function FontPicker({ label, value, localFonts, onChange }: FontPickerProps) {
                     </button>
                   ))}
                 </React.Fragment>
-              )
+              );
             })}
             {filtered.googleFonts.length === 0 && filtered.localFonts.length === 0 && (
               <div className={styles.fontPickerEmpty}>No fonts match "{search}"</div>
@@ -312,213 +315,208 @@ function FontPicker({ label, value, localFonts, onChange }: FontPickerProps) {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 interface TokenEditorProps {
-  activePresetId: PresetId
-  onPresetChange: (id: PresetId) => void
+  activePresetId: PresetId;
+  onPresetChange: (id: PresetId) => void;
 }
 
 export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps) {
-  const [tokenValues, setTokenValues] = useState<Record<string, string>>({})
-  const [radius, setRadius] = useState(8)
-  const [displayFont, setDisplayFont] = useState("'Playfair Display', serif")
-  const [bodyFont, setBodyFont] = useState('Inter, system-ui, -apple-system, sans-serif')
+  const [tokenValues, setTokenValues] = useState<Record<string, string>>({});
+  const [radius, setRadius] = useState(8);
+  const [displayFont, setDisplayFont] = useState("'Playfair Display', serif");
+  const [bodyFont, setBodyFont] = useState('Inter, system-ui, -apple-system, sans-serif');
   const [monoFont, setMonoFont] = useState(
     "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
-  )
-  const [typeBaseSize, setTypeBaseSize] = useState(16)
-  const [typeRatio, setTypeRatio] = useState(1.25)
-  const [lineHeight, setLineHeight] = useState(1.5)
-  const [spacingBase, setSpacingBase] = useState(4)
-  const [localFonts, setLocalFonts] = useState<LocalFont[]>([])
-  const [openSections, setOpenSections] = useState<Set<string>>(
-    new Set(['presets', 'typography']),
-  )
+  );
+  const [typeBaseSize, setTypeBaseSize] = useState(16);
+  const [typeRatio, setTypeRatio] = useState(1.25);
+  const [lineHeight, setLineHeight] = useState(1.5);
+  const [spacingBase, setSpacingBase] = useState(4);
+  const [localFonts, setLocalFonts] = useState<LocalFont[]>([]);
+  const [openSections, setOpenSections] = useState<Set<string>>(new Set(['presets', 'typography']));
   const [openColorGroups, setOpenColorGroups] = useState<Set<string>>(
     new Set(['Surface', 'Action', 'Text']),
-  )
-  const [copied, setCopied] = useState(false)
+  );
+  const [copied, setCopied] = useState(false);
 
   const refreshValues = useCallback(() => {
-    const values: Record<string, string> = {}
+    const values: Record<string, string> = {};
     for (const varName of ALL_EDITOR_VARS) {
-      values[varName] = getCSSVar(varName)
+      values[varName] = getCSSVar(varName);
     }
-    setTokenValues(values)
+    setTokenValues(values);
 
-    const r = getCSSVar('--arcana-component-radius')
-    setRadius(parseInt(r) || 8)
+    const r = getCSSVar('--arcana-component-radius');
+    setRadius(Number.parseInt(r) || 8);
 
-    const sans = getCSSVar('--arcana-typography-font-family-sans')
-    if (sans) setBodyFont(sans)
+    const sans = getCSSVar('--arcana-typography-font-family-sans');
+    if (sans) setBodyFont(sans);
 
-    const mono = getCSSVar('--arcana-typography-font-family-mono')
-    if (mono) setMonoFont(mono)
-  }, [])
+    const mono = getCSSVar('--arcana-typography-font-family-mono');
+    if (mono) setMonoFont(mono);
+  }, []);
 
   useEffect(() => {
-    const timer = setTimeout(refreshValues, 50)
-    return () => clearTimeout(timer)
-  }, [activePresetId, refreshValues])
+    const timer = setTimeout(refreshValues, 50);
+    return () => clearTimeout(timer);
+  }, [activePresetId, refreshValues]);
 
   const applyTypeScale = useCallback((base: number, ratio: number) => {
     for (const step of TYPE_SCALE_STEPS) {
-      const px = computeFontSize(base, ratio, step.step)
-      document.documentElement.style.setProperty(step.cssVar, `${px.toFixed(3)}px`)
+      const px = computeFontSize(base, ratio, step.step);
+      document.documentElement.style.setProperty(step.cssVar, `${px.toFixed(3)}px`);
     }
-  }, [])
+  }, []);
 
   const applySpacingScale = useCallback((base: number) => {
     for (const step of ALL_SPACING_STEPS) {
-      document.documentElement.style.setProperty(step.cssVar, `${step.multiplier * base}px`)
+      document.documentElement.style.setProperty(step.cssVar, `${step.multiplier * base}px`);
     }
-  }, [])
+  }, []);
 
   const handlePresetSelect = (preset: ThemePreset) => {
-    applyPreset(preset)
-    onPresetChange(preset.id)
-  }
+    applyPreset(preset);
+    onPresetChange(preset.id);
+  };
 
   const handleColorChange = (varName: string, value: string) => {
-    setTokenValues((prev) => ({ ...prev, [varName]: value }))
-    document.documentElement.style.setProperty(varName, value)
-  }
+    setTokenValues((prev) => ({ ...prev, [varName]: value }));
+    document.documentElement.style.setProperty(varName, value);
+  };
 
   const handleRadiusChange = (value: number) => {
-    setRadius(value)
-    document.documentElement.style.setProperty('--arcana-component-radius', `${value}px`)
-  }
+    setRadius(value);
+    document.documentElement.style.setProperty('--arcana-component-radius', `${value}px`);
+  };
 
   const handleDisplayFontChange = (stack: string) => {
-    setDisplayFont(stack)
-    document.documentElement.style.setProperty('--arcana-typography-font-family-display', stack)
-  }
+    setDisplayFont(stack);
+    document.documentElement.style.setProperty('--arcana-typography-font-family-display', stack);
+  };
 
   const handleBodyFontChange = (stack: string) => {
-    setBodyFont(stack)
-    document.documentElement.style.setProperty('--arcana-typography-font-family-sans', stack)
-  }
+    setBodyFont(stack);
+    document.documentElement.style.setProperty('--arcana-typography-font-family-sans', stack);
+  };
 
   const handleMonoFontChange = (stack: string) => {
-    setMonoFont(stack)
-    document.documentElement.style.setProperty('--arcana-typography-font-family-mono', stack)
-  }
+    setMonoFont(stack);
+    document.documentElement.style.setProperty('--arcana-typography-font-family-mono', stack);
+  };
 
   const handleTypeSizeChange = (value: number) => {
-    setTypeBaseSize(value)
-    applyTypeScale(value, typeRatio)
-  }
+    setTypeBaseSize(value);
+    applyTypeScale(value, typeRatio);
+  };
 
   const handleTypeRatioChange = (value: number) => {
-    setTypeRatio(value)
-    applyTypeScale(typeBaseSize, value)
-  }
+    setTypeRatio(value);
+    applyTypeScale(typeBaseSize, value);
+  };
 
   const handleLineHeightChange = (value: number) => {
-    setLineHeight(value)
-    document.documentElement.style.setProperty('--arcana-typography-line-height-normal', String(value))
-  }
+    setLineHeight(value);
+    document.documentElement.style.setProperty(
+      '--arcana-typography-line-height-normal',
+      String(value),
+    );
+  };
 
   const handleSpacingBaseChange = (value: number) => {
-    setSpacingBase(value)
-    applySpacingScale(value)
-  }
+    setSpacingBase(value);
+    applySpacingScale(value);
+  };
 
   const handleLocalFontUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
+    const file = e.target.files?.[0];
+    if (!file) return;
     const fontName = file.name
       .replace(/\.(woff2?|ttf|otf)$/i, '')
       .replace(/[-_]/g, ' ')
-      .replace(/\b\w/g, (l) => l.toUpperCase())
-    const url = URL.createObjectURL(file)
-    const ext = file.name.split('.').pop()?.toLowerCase()
+      .replace(/\b\w/g, (l) => l.toUpperCase());
+    const url = URL.createObjectURL(file);
+    const ext = file.name.split('.').pop()?.toLowerCase();
     const format =
-      ext === 'woff2'
-        ? 'woff2'
-        : ext === 'woff'
-          ? 'woff'
-          : ext === 'ttf'
-            ? 'truetype'
-            : 'opentype'
-    const styleEl = document.createElement('style')
-    styleEl.textContent = `@font-face { font-family: '${fontName}'; src: url('${url}') format('${format}'); font-display: swap; }`
-    document.head.appendChild(styleEl)
-    setLocalFonts((prev) => [...prev, { name: fontName, stack: `'${fontName}', sans-serif` }])
-    e.target.value = ''
-  }
+      ext === 'woff2' ? 'woff2' : ext === 'woff' ? 'woff' : ext === 'ttf' ? 'truetype' : 'opentype';
+    const styleEl = document.createElement('style');
+    styleEl.textContent = `@font-face { font-family: '${fontName}'; src: url('${url}') format('${format}'); font-display: swap; }`;
+    document.head.appendChild(styleEl);
+    setLocalFonts((prev) => [...prev, { name: fontName, stack: `'${fontName}', sans-serif` }]);
+    e.target.value = '';
+  };
 
   const handleReset = () => {
-    const lightPreset = PRESETS.find((p) => p.id === 'light')!
-    applyPreset(lightPreset)
-    onPresetChange('light')
-    setTypeBaseSize(16)
-    setTypeRatio(1.25)
-    setLineHeight(1.5)
-    setSpacingBase(4)
-    setDisplayFont("'Playfair Display', serif")
+    const lightPreset = PRESETS.find((p) => p.id === 'light')!;
+    applyPreset(lightPreset);
+    onPresetChange('light');
+    setTypeBaseSize(16);
+    setTypeRatio(1.25);
+    setLineHeight(1.5);
+    setSpacingBase(4);
+    setDisplayFont("'Playfair Display', serif");
     for (const step of TYPE_SCALE_STEPS) {
-      document.documentElement.style.removeProperty(step.cssVar)
+      document.documentElement.style.removeProperty(step.cssVar);
     }
     for (const step of ALL_SPACING_STEPS) {
-      document.documentElement.style.removeProperty(step.cssVar)
+      document.documentElement.style.removeProperty(step.cssVar);
     }
-    document.documentElement.style.removeProperty('--arcana-typography-line-height-normal')
-    document.documentElement.style.removeProperty('--arcana-typography-font-family-display')
-  }
+    document.documentElement.style.removeProperty('--arcana-typography-line-height-normal');
+    document.documentElement.style.removeProperty('--arcana-typography-font-family-display');
+  };
 
   const handleExport = async () => {
-    const exportObj: Record<string, string> = {}
+    const exportObj: Record<string, string> = {};
     for (const varName of ALL_EDITOR_VARS) {
-      exportObj[varName] = getCSSVar(varName)
+      exportObj[varName] = getCSSVar(varName);
     }
-    exportObj['--arcana-component-radius'] = `${radius}px`
-    exportObj['--arcana-typography-font-family-display'] = displayFont
-    exportObj['--arcana-typography-font-family-sans'] = bodyFont
-    exportObj['--arcana-typography-font-family-mono'] = monoFont
-    exportObj['--arcana-typography-line-height-normal'] = String(lineHeight)
+    exportObj['--arcana-component-radius'] = `${radius}px`;
+    exportObj['--arcana-typography-font-family-display'] = displayFont;
+    exportObj['--arcana-typography-font-family-sans'] = bodyFont;
+    exportObj['--arcana-typography-font-family-mono'] = monoFont;
+    exportObj['--arcana-typography-line-height-normal'] = String(lineHeight);
     for (const step of TYPE_SCALE_STEPS) {
-      exportObj[step.cssVar] = getCSSVar(step.cssVar)
+      exportObj[step.cssVar] = getCSSVar(step.cssVar);
     }
     for (const step of ALL_SPACING_STEPS) {
-      exportObj[step.cssVar] = getCSSVar(step.cssVar)
+      exportObj[step.cssVar] = getCSSVar(step.cssVar);
     }
 
-    const json = JSON.stringify(exportObj, null, 2)
+    const json = JSON.stringify(exportObj, null, 2);
     try {
-      await navigator.clipboard.writeText(json)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      await navigator.clipboard.writeText(json);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
-      const blob = new Blob([json], { type: 'application/json' })
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `arcana-theme-${activePresetId}.json`
-      a.click()
-      URL.revokeObjectURL(url)
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `arcana-theme-${activePresetId}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
     }
-  }
+  };
 
   const toggleSection = (name: string) => {
     setOpenSections((prev) => {
-      const next = new Set(prev)
-      next.has(name) ? next.delete(name) : next.add(name)
-      return next
-    })
-  }
+      const next = new Set(prev);
+      next.has(name) ? next.delete(name) : next.add(name);
+      return next;
+    });
+  };
 
   const toggleColorGroup = (label: string) => {
     setOpenColorGroups((prev) => {
-      const next = new Set(prev)
-      next.has(label) ? next.delete(label) : next.add(label)
-      return next
-    })
-  }
+      const next = new Set(prev);
+      next.has(label) ? next.delete(label) : next.add(label);
+      return next;
+    });
+  };
 
   return (
     <div className={styles.editor}>
@@ -572,8 +570,8 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                 {openColorGroups.has(group.label) && (
                   <div className={styles.tokenList}>
                     {group.tokens.map((token) => {
-                      const currentVal = tokenValues[token.var] ?? '#000000'
-                      const hexVal = toHex(currentVal)
+                      const currentVal = tokenValues[token.var] ?? '#000000';
+                      const hexVal = toHex(currentVal);
                       return (
                         <div key={token.var} className={styles.tokenRow}>
                           <label className={styles.tokenLabel}>{token.label}</label>
@@ -587,7 +585,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                             <span className={styles.colorValue}>{hexVal.toUpperCase()}</span>
                           </div>
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 )}
@@ -600,9 +598,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
       {/* ── 3. Typography ── */}
       <div className={styles.section}>
         <button className={styles.sectionHeader} onClick={() => toggleSection('typography')}>
-          <span className={styles.sectionToggle}>
-            {openSections.has('typography') ? '▾' : '▸'}
-          </span>
+          <span className={styles.sectionToggle}>{openSections.has('typography') ? '▾' : '▸'}</span>
           <span className={styles.sectionLabel}>Typography</span>
         </button>
         {openSections.has('typography') && (
@@ -642,7 +638,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                   max={24}
                   step={0.5}
                   value={typeBaseSize}
-                  onChange={(e) => handleTypeSizeChange(parseFloat(e.target.value))}
+                  onChange={(e) => handleTypeSizeChange(Number.parseFloat(e.target.value))}
                 />
                 <span className={styles.sliderValue}>{typeBaseSize}px</span>
               </div>
@@ -652,7 +648,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
               <select
                 className={styles.fontSelect}
                 value={typeRatio}
-                onChange={(e) => handleTypeRatioChange(parseFloat(e.target.value))}
+                onChange={(e) => handleTypeRatioChange(Number.parseFloat(e.target.value))}
               >
                 {TYPE_SCALE_RATIOS.map((r) => (
                   <option key={r.value} value={r.value}>
@@ -664,8 +660,8 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
             {/* Scale preview */}
             <div className={styles.typeScalePreview}>
               {TYPE_SCALE_STEPS.map((step) => {
-                const px = computeFontSize(typeBaseSize, typeRatio, step.step)
-                const clampedPx = Math.min(px, 36)
+                const px = computeFontSize(typeBaseSize, typeRatio, step.step);
+                const clampedPx = Math.min(px, 36);
                 return (
                   <div key={step.key} className={styles.typeScaleRow}>
                     <span className={styles.typeScaleTag}>{step.label}</span>
@@ -677,7 +673,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                     </span>
                     <span className={styles.typeScaleSize}>{px.toFixed(1)}px</span>
                   </div>
-                )
+                );
               })}
             </div>
 
@@ -692,7 +688,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                   max={2.0}
                   step={0.05}
                   value={lineHeight}
-                  onChange={(e) => handleLineHeightChange(parseFloat(e.target.value))}
+                  onChange={(e) => handleLineHeightChange(Number.parseFloat(e.target.value))}
                 />
                 <span className={styles.sliderValue}>{lineHeight.toFixed(2)}</span>
               </div>
@@ -746,16 +742,16 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                   max={8}
                   step={0.5}
                   value={spacingBase}
-                  onChange={(e) => handleSpacingBaseChange(parseFloat(e.target.value))}
+                  onChange={(e) => handleSpacingBaseChange(Number.parseFloat(e.target.value))}
                 />
                 <span className={styles.sliderValue}>{spacingBase}px</span>
               </div>
             </div>
             <div className={styles.spacingPreview}>
               {SPACING_PREVIEW_STEPS.map((step) => {
-                const px = step.multiplier * spacingBase
-                const maxBar = 96
-                const barWidth = Math.min(px, maxBar)
+                const px = step.multiplier * spacingBase;
+                const maxBar = 96;
+                const barWidth = Math.min(px, maxBar);
                 return (
                   <div key={step.label} className={styles.spacingRow}>
                     <span className={styles.spacingLabel}>{step.label}</span>
@@ -764,7 +760,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                     </div>
                     <span className={styles.spacingValue}>{px}px</span>
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -789,7 +785,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                   max={24}
                   step={1}
                   value={radius}
-                  onChange={(e) => handleRadiusChange(parseInt(e.target.value))}
+                  onChange={(e) => handleRadiusChange(Number.parseInt(e.target.value))}
                 />
                 <span className={styles.sliderValue}>{radius}px</span>
               </div>
@@ -803,13 +799,10 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
         <button className={styles.actionBtn} onClick={handleReset}>
           Reset
         </button>
-        <button
-          className={`${styles.actionBtn} ${styles.actionBtnPrimary}`}
-          onClick={handleExport}
-        >
+        <button className={`${styles.actionBtn} ${styles.actionBtnPrimary}`} onClick={handleExport}>
           {copied ? '✓ Copied!' : 'Export JSON'}
         </button>
       </div>
     </div>
-  )
+  );
 }

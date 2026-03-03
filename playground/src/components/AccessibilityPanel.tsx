@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import styles from './AccessibilityPanel.module.css'
-import { contrastRatio, wcagLevel, suggestFix } from '../utils/contrast'
+import React, { useState, useEffect, useCallback } from 'react';
+import { contrastRatio, suggestFix, wcagLevel } from '../utils/contrast';
+import styles from './AccessibilityPanel.module.css';
 
 function getCSSVar(varName: string): string {
-  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim()
+  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
 }
 
 // ─── Contrast pairs to evaluate ──────────────────────────────────────────────
 
 interface ContrastPair {
-  label: string
-  fgVar: string
-  bgVar: string
+  label: string;
+  fgVar: string;
+  bgVar: string;
 }
 
 const CONTRAST_PAIRS: ContrastPair[] = [
@@ -75,104 +75,99 @@ const CONTRAST_PAIRS: ContrastPair[] = [
     fgVar: '--arcana-border-default',
     bgVar: '--arcana-surface-primary',
   },
-]
+];
 
 // ─── Color blindness filters ──────────────────────────────────────────────────
 
-type CBFilter = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia' | 'achromatopsia'
+type CBFilter = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia' | 'achromatopsia';
 
 const CB_FILTERS: Array<{ id: CBFilter; label: string; matrix: string }> = [
   { id: 'none', label: 'Normal', matrix: '' },
   {
     id: 'protanopia',
     label: 'Protanopia',
-    matrix:
-      '0.567,0.433,0,0,0 0.558,0.442,0,0,0 0,0.242,0.758,0,0 0,0,0,1,0',
+    matrix: '0.567,0.433,0,0,0 0.558,0.442,0,0,0 0,0.242,0.758,0,0 0,0,0,1,0',
   },
   {
     id: 'deuteranopia',
     label: 'Deuteranopia',
-    matrix:
-      '0.625,0.375,0,0,0 0.7,0.3,0,0,0 0,0.3,0.7,0,0 0,0,0,1,0',
+    matrix: '0.625,0.375,0,0,0 0.7,0.3,0,0,0 0,0.3,0.7,0,0 0,0,0,1,0',
   },
   {
     id: 'tritanopia',
     label: 'Tritanopia',
-    matrix:
-      '0.95,0.05,0,0,0 0,0.433,0.567,0,0 0,0.475,0.525,0,0 0,0,0,1,0',
+    matrix: '0.95,0.05,0,0,0 0,0.433,0.567,0,0 0,0.475,0.525,0,0 0,0,0,1,0',
   },
   {
     id: 'achromatopsia',
     label: 'Achromat.',
-    matrix:
-      '0.299,0.587,0.114,0,0 0.299,0.587,0.114,0,0 0.299,0.587,0.114,0,0 0,0,0,1,0',
+    matrix: '0.299,0.587,0.114,0,0 0.299,0.587,0.114,0,0 0.299,0.587,0.114,0,0 0,0,0,1,0',
   },
-]
+];
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 interface CheckResult {
-  label: string
-  fgColor: string
-  bgColor: string
-  ratio: number | null
-  level: 'AAA' | 'AA' | 'Fail' | 'N/A'
-  fixSuggestion: string | null
+  label: string;
+  fgColor: string;
+  bgColor: string;
+  ratio: number | null;
+  level: 'AAA' | 'AA' | 'Fail' | 'N/A';
+  fixSuggestion: string | null;
 }
 
 // ─── SVG filter injection ─────────────────────────────────────────────────────
 
 function injectCBFilters() {
-  if (document.getElementById('arcana-cb-svg-filters')) return
+  if (document.getElementById('arcana-cb-svg-filters')) return;
 
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-  svg.setAttribute('id', 'arcana-cb-svg-filters')
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('id', 'arcana-cb-svg-filters');
   svg.setAttribute(
     'style',
-    'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none'
-  )
-  svg.setAttribute('aria-hidden', 'true')
+    'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none',
+  );
+  svg.setAttribute('aria-hidden', 'true');
 
   svg.innerHTML = `<defs>
     ${CB_FILTERS.filter((f) => f.id !== 'none')
       .map(
         (f) => `<filter id="cb-${f.id}">
       <feColorMatrix type="matrix" values="${f.matrix}"/>
-    </filter>`
+    </filter>`,
       )
       .join('\n')}
-  </defs>`
+  </defs>`;
 
-  document.body.appendChild(svg)
+  document.body.appendChild(svg);
 }
 
 function applyCBFilter(filterId: CBFilter) {
-  const preview = document.getElementById('preview-area')
-  if (!preview) return
+  const preview = document.getElementById('preview-area');
+  if (!preview) return;
   if (filterId === 'none') {
-    preview.style.filter = ''
+    preview.style.filter = '';
   } else {
-    preview.style.filter = `url(#cb-${filterId})`
+    preview.style.filter = `url(#cb-${filterId})`;
   }
 }
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export function AccessibilityPanel() {
-  const [results, setResults] = useState<CheckResult[]>([])
-  const [activeFilter, setActiveFilter] = useState<CBFilter>('none')
+  const [results, setResults] = useState<CheckResult[]>([]);
+  const [activeFilter, setActiveFilter] = useState<CBFilter>('none');
   const [openSections, setOpenSections] = useState<Set<string>>(
-    new Set(['score', 'contrast', 'colorblind'])
-  )
+    new Set(['score', 'contrast', 'colorblind']),
+  );
 
   const computeContrasts = useCallback(() => {
     const checks: CheckResult[] = CONTRAST_PAIRS.map((pair) => {
-      const fg = getCSSVar(pair.fgVar)
-      const bg = getCSSVar(pair.bgVar)
-      const ratio = contrastRatio(fg, bg)
-      const level = ratio !== null ? wcagLevel(ratio) : 'N/A'
-      const fixSuggestion =
-        ratio !== null && ratio < 4.5 ? suggestFix(fg, bg) : null
+      const fg = getCSSVar(pair.fgVar);
+      const bg = getCSSVar(pair.bgVar);
+      const ratio = contrastRatio(fg, bg);
+      const level = ratio !== null ? wcagLevel(ratio) : 'N/A';
+      const fixSuggestion = ratio !== null && ratio < 4.5 ? suggestFix(fg, bg) : null;
 
       return {
         label: pair.label,
@@ -181,77 +176,77 @@ export function AccessibilityPanel() {
         ratio,
         level,
         fixSuggestion,
-      }
-    })
-    setResults(checks)
-  }, [])
+      };
+    });
+    setResults(checks);
+  }, []);
 
   // Inject SVG filters once
   useEffect(() => {
-    injectCBFilters()
+    injectCBFilters();
     return () => {
       // Clean up filter when panel unmounts
-      applyCBFilter('none')
-    }
-  }, [])
+      applyCBFilter('none');
+    };
+  }, []);
 
   // Watch for CSS var changes via MutationObserver
   useEffect(() => {
-    computeContrasts()
+    computeContrasts();
 
     const observer = new MutationObserver(() => {
-      computeContrasts()
-    })
+      computeContrasts();
+    });
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['style', 'data-theme'],
-    })
+    });
 
-    return () => observer.disconnect()
-  }, [computeContrasts])
+    return () => observer.disconnect();
+  }, [computeContrasts]);
 
   const handleFilterChange = (filterId: CBFilter) => {
-    setActiveFilter(filterId)
-    applyCBFilter(filterId)
-  }
+    setActiveFilter(filterId);
+    applyCBFilter(filterId);
+  };
 
   const handleApplyFix = (varName: string, color: string) => {
-    document.documentElement.style.setProperty(varName, color)
-    computeContrasts()
-  }
+    document.documentElement.style.setProperty(varName, color);
+    computeContrasts();
+  };
 
   const toggleSection = (key: string) => {
     setOpenSections((prev) => {
-      const next = new Set(prev)
-      if (next.has(key)) next.delete(key)
-      else next.add(key)
-      return next
-    })
-  }
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
 
   // Compute score
-  const checkable = results.filter((r) => r.level !== 'N/A')
-  const passing = checkable.filter((r) => r.level !== 'Fail')
-  const aaaPassing = checkable.filter((r) => r.level === 'AAA')
-  const failing = checkable.filter((r) => r.level === 'Fail')
+  const checkable = results.filter((r) => r.level !== 'N/A');
+  const passing = checkable.filter((r) => r.level !== 'Fail');
+  const aaaPassing = checkable.filter((r) => r.level === 'AAA');
+  const failing = checkable.filter((r) => r.level === 'Fail');
 
   const overallGrade =
     checkable.length === 0
       ? 'N/A'
       : aaaPassing.length === checkable.length
-      ? 'AAA'
-      : passing.length === checkable.length
-      ? 'AA'
-      : failing.length === checkable.length
-      ? 'Fail'
-      : 'AA*'
+        ? 'AAA'
+        : passing.length === checkable.length
+          ? 'AA'
+          : failing.length === checkable.length
+            ? 'Fail'
+            : 'AA*';
 
   const gradeColor =
     overallGrade === 'AAA'
       ? 'var(--arcana-feedback-success)'
       : overallGrade === 'AA' || overallGrade === 'AA*'
-      ? 'var(--arcana-feedback-warning)'
-      : 'var(--arcana-feedback-error)'
+        ? 'var(--arcana-feedback-warning)'
+        : 'var(--arcana-feedback-error)';
 
   return (
     <div className={styles.panel}>
@@ -273,7 +268,10 @@ export function AccessibilityPanel() {
             </div>
             <div className={styles.scoreStats}>
               <div className={styles.scoreStat}>
-                <span className={styles.scoreNum} style={{ color: 'var(--arcana-feedback-success)' }}>
+                <span
+                  className={styles.scoreNum}
+                  style={{ color: 'var(--arcana-feedback-success)' }}
+                >
                   {passing.length}
                 </span>
                 <span className={styles.scoreStatLabel}>Passing</span>
@@ -322,12 +320,18 @@ export function AccessibilityPanel() {
                 <div className={styles.contrastSwatches}>
                   <div
                     className={styles.swatch}
-                    style={{ background: result.bgColor, border: '1px solid var(--arcana-border-default)' }}
+                    style={{
+                      background: result.bgColor,
+                      border: '1px solid var(--arcana-border-default)',
+                    }}
                     title={result.bgColor}
                   />
                   <div
                     className={styles.swatch}
-                    style={{ background: result.fgColor, border: '1px solid var(--arcana-border-default)' }}
+                    style={{
+                      background: result.fgColor,
+                      border: '1px solid var(--arcana-border-default)',
+                    }}
                     title={result.fgColor}
                   />
                 </div>
@@ -399,7 +403,7 @@ export function AccessibilityPanel() {
                 .filter((r) => r.level === 'Fail' && r.fixSuggestion)
                 .map((result) => {
                   // Find the fg var name
-                  const pair = CONTRAST_PAIRS.find((p) => p.label === result.label)
+                  const pair = CONTRAST_PAIRS.find((p) => p.label === result.label);
                   return (
                     <div key={result.label} className={styles.fixItem}>
                       <div className={styles.fixLabel}>{result.label}</div>
@@ -417,9 +421,7 @@ export function AccessibilityPanel() {
                             {pair && (
                               <button
                                 className={styles.fixApplyBtn}
-                                onClick={() =>
-                                  handleApplyFix(pair.fgVar, result.fixSuggestion!)
-                                }
+                                onClick={() => handleApplyFix(pair.fgVar, result.fixSuggestion!)}
                               >
                                 Apply
                               </button>
@@ -428,12 +430,12 @@ export function AccessibilityPanel() {
                         )}
                       </div>
                     </div>
-                  )
+                  );
                 })}
             </div>
           )}
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -189,7 +189,7 @@
 
 .ratioText {
   font-size: 11px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   color: var(--arcana-text-muted);
   margin-right: 2px;
 }
@@ -283,7 +283,7 @@
 .fixRatio {
   font-size: 10px;
   color: var(--arcana-text-muted);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .fixSuggestion {
@@ -302,7 +302,7 @@
 
 .fixColor {
   font-size: 11px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   color: var(--arcana-text-secondary);
   flex: 1;
 }

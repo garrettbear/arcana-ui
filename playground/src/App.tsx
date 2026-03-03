@@ -1,54 +1,54 @@
-import React, { useState } from 'react'
 import {
-  Button,
-  Input,
-  Textarea,
-  Select,
-  Checkbox,
-  Radio,
-  RadioGroup,
-  Toggle,
-  Badge,
-  Avatar,
-  AvatarGroup,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Modal,
-  Alert,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
-  ToastProvider,
-  useToast,
-  Stack,
-  HStack,
-  Grid,
+  Alert,
+  Avatar,
+  AvatarGroup,
+  Badge,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Checkbox,
   Container,
   EmptyState,
   Form,
-  FormField,
-  FormLabel,
-  FormHelperText,
   FormErrorMessage,
+  FormField,
+  FormHelperText,
+  FormLabel,
+  Grid,
+  HStack,
+  Input,
+  Modal,
+  Radio,
+  RadioGroup,
+  Select,
+  Stack,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
   Table,
-  TableHeader,
   TableBody,
-  TableRow,
-  TableHead,
   TableCell,
-} from '@arcana-ui/core'
-import { TokenEditor } from './components/TokenEditor'
-import { AccessibilityPanel } from './components/AccessibilityPanel'
-import { PRESETS, PresetId, applyPreset } from './utils/presets'
-import styles from './App.module.css'
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tabs,
+  Textarea,
+  ToastProvider,
+  Toggle,
+  useToast,
+} from '@arcana-ui/core';
+import React, { useState } from 'react';
+import styles from './App.module.css';
+import { AccessibilityPanel } from './components/AccessibilityPanel';
+import { TokenEditor } from './components/TokenEditor';
+import { PRESETS, type PresetId, applyPreset } from './utils/presets';
 
 // ─── Stat Card ────────────────────────────────────────────────────────────────
 
@@ -58,37 +58,44 @@ function StatCard({
   delta,
   positive = true,
 }: {
-  label: string
-  value: string
-  delta?: string
-  positive?: boolean
+  label: string;
+  value: string;
+  delta?: string;
+  positive?: boolean;
 }) {
   return (
     <div className={styles.statCard}>
       <span className={styles.statLabel}>{label}</span>
       <span className={styles.statValue}>{value}</span>
       {delta && (
-        <span className={`${styles.statDelta} ${positive ? styles.statDeltaPos : styles.statDeltaNeg}`}>
+        <span
+          className={`${styles.statDelta} ${positive ? styles.statDeltaPos : styles.statDeltaNeg}`}
+        >
           {positive ? '↑' : '↓'} {delta}
         </span>
       )}
     </div>
-  )
+  );
 }
 
 // ─── Toast Demo ───────────────────────────────────────────────────────────────
 
 function ToastDemo() {
-  const { toast } = useToast()
+  const { toast } = useToast();
   return (
     <div className={styles.demoFlex}>
-      <Button size="sm" onClick={() => toast({ title: 'Changes saved', description: 'Your profile was updated.' })}>
+      <Button
+        size="sm"
+        onClick={() => toast({ title: 'Changes saved', description: 'Your profile was updated.' })}
+      >
         Default
       </Button>
       <Button
         size="sm"
         variant="secondary"
-        onClick={() => toast({ title: 'Deployed!', description: 'v2.4.1 is now live.', variant: 'success' })}
+        onClick={() =>
+          toast({ title: 'Deployed!', description: 'v2.4.1 is now live.', variant: 'success' })
+        }
       >
         Success
       </Button>
@@ -96,7 +103,11 @@ function ToastDemo() {
         size="sm"
         variant="secondary"
         onClick={() =>
-          toast({ title: 'Usage limit approaching', description: '80% of your monthly quota used.', variant: 'warning' })
+          toast({
+            title: 'Usage limit approaching',
+            description: '80% of your monthly quota used.',
+            variant: 'warning',
+          })
         }
       >
         Warning
@@ -105,7 +116,11 @@ function ToastDemo() {
         size="sm"
         variant="danger"
         onClick={() =>
-          toast({ title: 'Build failed', description: 'Check the logs for details.', variant: 'error' })
+          toast({
+            title: 'Build failed',
+            description: 'Check the logs for details.',
+            variant: 'error',
+          })
         }
       >
         Error
@@ -124,19 +139,39 @@ function ToastDemo() {
         With action
       </Button>
     </div>
-  )
+  );
 }
 
 // ─── Overview Dashboard ───────────────────────────────────────────────────────
 
 function OverviewSection() {
   const activityItems = [
-    { text: 'Alice Zhao deployed v2.4.1 to production', time: '2m ago', color: 'var(--arcana-feedback-success)' },
-    { text: 'Bob Smith opened PR #142 — "Refactor auth flow"', time: '18m ago', color: 'var(--arcana-action-primary)' },
-    { text: 'CI pipeline failed on branch feature/dark-mode', time: '41m ago', color: 'var(--arcana-feedback-error)' },
-    { text: 'Carlos Rivera commented on issue #89', time: '1h ago', color: 'var(--arcana-feedback-info)' },
-    { text: 'Diana Prince created milestone "Q2 Release"', time: '2h ago', color: 'var(--arcana-feedback-warning)' },
-  ]
+    {
+      text: 'Alice Zhao deployed v2.4.1 to production',
+      time: '2m ago',
+      color: 'var(--arcana-feedback-success)',
+    },
+    {
+      text: 'Bob Smith opened PR #142 — "Refactor auth flow"',
+      time: '18m ago',
+      color: 'var(--arcana-action-primary)',
+    },
+    {
+      text: 'CI pipeline failed on branch feature/dark-mode',
+      time: '41m ago',
+      color: 'var(--arcana-feedback-error)',
+    },
+    {
+      text: 'Carlos Rivera commented on issue #89',
+      time: '1h ago',
+      color: 'var(--arcana-feedback-info)',
+    },
+    {
+      text: 'Diana Prince created milestone "Q2 Release"',
+      time: '2h ago',
+      color: 'var(--arcana-feedback-warning)',
+    },
+  ];
 
   return (
     <div>
@@ -160,17 +195,17 @@ function OverviewSection() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 // ─── Components Section ───────────────────────────────────────────────────────
 
 function ComponentsSection() {
-  const [checkboxChecked, setCheckboxChecked] = useState(false)
-  const [radioValue, setRadioValue] = useState('react')
-  const [toggleOn, setToggleOn] = useState(true)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [tabValue, setTabValue] = useState('overview')
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
+  const [radioValue, setRadioValue] = useState('react');
+  const [toggleOn, setToggleOn] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [tabValue, setTabValue] = useState('overview');
 
   return (
     <div>
@@ -196,8 +231,12 @@ function ComponentsSection() {
             <Button size="sm">Small</Button>
             <Button size="md">Medium</Button>
             <Button size="lg">Large</Button>
-            <Button loading size="md">Loading</Button>
-            <Button disabled size="md">Disabled</Button>
+            <Button loading size="md">
+              Loading
+            </Button>
+            <Button disabled size="md">
+              Disabled
+            </Button>
           </div>
         </div>
       </div>
@@ -215,9 +254,15 @@ function ComponentsSection() {
             <Badge variant="info">Info</Badge>
           </div>
           <div className={styles.demoFlex}>
-            <Badge dot variant="success">Online</Badge>
-            <Badge dot variant="warning">Away</Badge>
-            <Badge dot variant="error">Offline</Badge>
+            <Badge dot variant="success">
+              Online
+            </Badge>
+            <Badge dot variant="warning">
+              Away
+            </Badge>
+            <Badge dot variant="error">
+              Offline
+            </Badge>
             <Badge dot>Unknown</Badge>
           </div>
         </div>
@@ -275,15 +320,34 @@ function ComponentsSection() {
           description="This will permanently delete Project Alpha and all associated data."
           footer={
             <HStack gap={2} justify="flex-end">
-              <Button variant="secondary" onClick={() => setModalOpen(false)}>Cancel</Button>
-              <Button variant="danger" onClick={() => setModalOpen(false)}>Delete</Button>
+              <Button variant="secondary" onClick={() => setModalOpen(false)}>
+                Cancel
+              </Button>
+              <Button variant="danger" onClick={() => setModalOpen(false)}>
+                Delete
+              </Button>
             </HStack>
           }
         >
-          <p style={{ margin: 0, color: 'var(--arcana-text-secondary)', fontSize: '14px', lineHeight: 1.6 }}>
+          <p
+            style={{
+              margin: 0,
+              color: 'var(--arcana-text-secondary)',
+              fontSize: '14px',
+              lineHeight: 1.6,
+            }}
+          >
             Deleting <strong>Project Alpha</strong> will remove:
           </p>
-          <ul style={{ margin: '8px 0 0', paddingLeft: '20px', color: 'var(--arcana-text-secondary)', fontSize: '14px', lineHeight: 1.8 }}>
+          <ul
+            style={{
+              margin: '8px 0 0',
+              paddingLeft: '20px',
+              color: 'var(--arcana-text-secondary)',
+              fontSize: '14px',
+              lineHeight: 1.8,
+            }}
+          >
             <li>12 open issues</li>
             <li>3 active branches</li>
             <li>47 commits</li>
@@ -308,21 +372,41 @@ function ComponentsSection() {
               <Tab value="overview">Overview</Tab>
               <Tab value="analytics">Analytics</Tab>
               <Tab value="settings">Settings</Tab>
-              <Tab value="billing" disabled>Billing</Tab>
+              <Tab value="billing" disabled>
+                Billing
+              </Tab>
             </TabList>
             <TabPanels>
               <TabPanel value="overview">
-                <div style={{ padding: '16px 0', color: 'var(--arcana-text-secondary)', fontSize: '14px' }}>
+                <div
+                  style={{
+                    padding: '16px 0',
+                    color: 'var(--arcana-text-secondary)',
+                    fontSize: '14px',
+                  }}
+                >
                   Overview: showing project health, recent commits, and team activity.
                 </div>
               </TabPanel>
               <TabPanel value="analytics">
-                <div style={{ padding: '16px 0', color: 'var(--arcana-text-secondary)', fontSize: '14px' }}>
+                <div
+                  style={{
+                    padding: '16px 0',
+                    color: 'var(--arcana-text-secondary)',
+                    fontSize: '14px',
+                  }}
+                >
                   Analytics: page views, conversion funnel, error rates by endpoint.
                 </div>
               </TabPanel>
               <TabPanel value="settings">
-                <div style={{ padding: '16px 0', color: 'var(--arcana-text-secondary)', fontSize: '14px' }}>
+                <div
+                  style={{
+                    padding: '16px 0',
+                    color: 'var(--arcana-text-secondary)',
+                    fontSize: '14px',
+                  }}
+                >
                   Settings: environment variables, deploy hooks, collaborator access.
                 </div>
               </TabPanel>
@@ -345,7 +429,11 @@ function ComponentsSection() {
         <p className={styles.sectionSubtitle}>Checkboxes, radios, and toggles</p>
         <div className={styles.threeCol}>
           <Stack gap={3}>
-            <Checkbox label="Enable dark mode" checked={checkboxChecked} onChange={(e) => setCheckboxChecked(e.target.checked)} />
+            <Checkbox
+              label="Enable dark mode"
+              checked={checkboxChecked}
+              onChange={(e) => setCheckboxChecked(e.target.checked)}
+            />
             <Checkbox label="Email notifications" checked={true} onChange={() => {}} />
             <Checkbox label="Weekly digest" checked={false} onChange={() => {}} />
             <Checkbox label="Disabled option" disabled checked={false} onChange={() => {}} />
@@ -386,21 +474,45 @@ function ComponentsSection() {
             <AccordionItem value="q1">
               <AccordionTrigger>What is Arcana UI?</AccordionTrigger>
               <AccordionContent>
-                An AI-first design system with a token-driven architecture. Built for machines to read and humans to love.
+                An AI-first design system with a token-driven architecture. Built for machines to
+                read and humans to love.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="q2">
               <AccordionTrigger>How does theme switching work?</AccordionTrigger>
               <AccordionContent>
-                Set <code style={{ fontFamily: 'monospace', fontSize: '12px', background: 'var(--arcana-surface-secondary)', padding: '1px 4px', borderRadius: '3px' }}>data-theme</code> on{' '}
-                <code style={{ fontFamily: 'monospace', fontSize: '12px', background: 'var(--arcana-surface-secondary)', padding: '1px 4px', borderRadius: '3px' }}>document.documentElement</code>,
-                or override CSS custom properties via JS for custom themes.
+                Set{' '}
+                <code
+                  style={{
+                    fontFamily: 'monospace',
+                    fontSize: '12px',
+                    background: 'var(--arcana-surface-secondary)',
+                    padding: '1px 4px',
+                    borderRadius: '3px',
+                  }}
+                >
+                  data-theme
+                </code>{' '}
+                on{' '}
+                <code
+                  style={{
+                    fontFamily: 'monospace',
+                    fontSize: '12px',
+                    background: 'var(--arcana-surface-secondary)',
+                    padding: '1px 4px',
+                    borderRadius: '3px',
+                  }}
+                >
+                  document.documentElement
+                </code>
+                , or override CSS custom properties via JS for custom themes.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="q3">
               <AccordionTrigger>Is it accessible?</AccordionTrigger>
               <AccordionContent>
-                Yes. WAI-ARIA patterns, keyboard navigation, and focus management built-in. Check the A11y panel on the right for live analysis.
+                Yes. WAI-ARIA patterns, keyboard navigation, and focus management built-in. Check
+                the A11y panel on the right for live analysis.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -408,7 +520,8 @@ function ComponentsSection() {
             <AccordionItem value="f1">
               <AccordionTrigger>Can I export my theme?</AccordionTrigger>
               <AccordionContent>
-                Yes — use the "Export JSON" button in the Token Editor to copy the current theme as a flat CSS variable map.
+                Yes — use the "Export JSON" button in the Token Editor to copy the current theme as
+                a flat CSS variable map.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="f2">
@@ -425,16 +538,16 @@ function ComponentsSection() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 // ─── Forms Section ────────────────────────────────────────────────────────────
 
 function FormsSection() {
-  const [inputValue, setInputValue] = useState('')
-  const [textareaValue, setTextareaValue] = useState('')
-  const [selectValue, setSelectValue] = useState('')
-  const [agreed, setAgreed] = useState(false)
+  const [inputValue, setInputValue] = useState('');
+  const [textareaValue, setTextareaValue] = useState('');
+  const [selectValue, setSelectValue] = useState('');
+  const [agreed, setAgreed] = useState(false);
 
   return (
     <div>
@@ -447,7 +560,11 @@ function FormsSection() {
               <Stack gap={4}>
                 <FormField isRequired>
                   <FormLabel>Full name</FormLabel>
-                  <Input placeholder="Jane Smith" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+                  <Input
+                    placeholder="Jane Smith"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
                   <FormHelperText>Used on your public profile.</FormHelperText>
                 </FormField>
                 <FormField isRequired isInvalid>
@@ -488,8 +605,12 @@ function FormsSection() {
                   />
                 </FormField>
                 <HStack gap={2} justify="flex-end">
-                  <Button type="button" variant="secondary">Cancel</Button>
-                  <Button type="submit" disabled={!agreed}>Create Account</Button>
+                  <Button type="button" variant="secondary">
+                    Cancel
+                  </Button>
+                  <Button type="submit" disabled={!agreed}>
+                    Create Account
+                  </Button>
                 </HStack>
               </Stack>
             </Form>
@@ -513,7 +634,12 @@ function FormsSection() {
                     </svg>
                   }
                 />
-                <Input label="With error" placeholder="you@email.com" type="email" error="Invalid email format." />
+                <Input
+                  label="With error"
+                  placeholder="you@email.com"
+                  type="email"
+                  error="Invalid email format."
+                />
                 <Input label="Disabled" value="Read-only value" disabled />
               </Stack>
             </CardBody>
@@ -525,17 +651,29 @@ function FormsSection() {
               <div className={styles.threeCol} style={{ gridTemplateColumns: '1fr 1fr 1fr' }}>
                 <Card>
                   <CardBody>
-                    <p style={{ margin: 0, fontSize: '13px', color: 'var(--arcana-text-secondary)' }}>Default</p>
+                    <p
+                      style={{ margin: 0, fontSize: '13px', color: 'var(--arcana-text-secondary)' }}
+                    >
+                      Default
+                    </p>
                   </CardBody>
                 </Card>
                 <Card variant="outlined">
                   <CardBody>
-                    <p style={{ margin: 0, fontSize: '13px', color: 'var(--arcana-text-secondary)' }}>Outlined</p>
+                    <p
+                      style={{ margin: 0, fontSize: '13px', color: 'var(--arcana-text-secondary)' }}
+                    >
+                      Outlined
+                    </p>
                   </CardBody>
                 </Card>
                 <Card variant="elevated" interactive>
                   <CardBody>
-                    <p style={{ margin: 0, fontSize: '13px', color: 'var(--arcana-text-secondary)' }}>Elevated</p>
+                    <p
+                      style={{ margin: 0, fontSize: '13px', color: 'var(--arcana-text-secondary)' }}
+                    >
+                      Elevated
+                    </p>
                   </CardBody>
                 </Card>
               </div>
@@ -544,36 +682,81 @@ function FormsSection() {
         </Stack>
       </div>
     </div>
-  )
+  );
 }
 
 // ─── Data Section ─────────────────────────────────────────────────────────────
 
 const TEAM_DATA = [
-  { name: 'Alice Zhao', role: 'Senior Engineer', status: 'Active', projects: 4, joined: 'Jan 2024', avatar: 'Alice Zhao' },
-  { name: 'Bob Smith', role: 'Product Designer', status: 'Active', projects: 7, joined: 'Mar 2024', avatar: 'Bob Smith' },
-  { name: 'Carlos Rivera', role: 'Engineering Manager', status: 'Away', projects: 12, joined: 'Feb 2024', avatar: 'Carlos Rivera' },
-  { name: 'Diana Prince', role: 'Frontend Engineer', status: 'Inactive', projects: 2, joined: 'Dec 2023', avatar: 'Diana Prince' },
-  { name: 'Evan Walsh', role: 'DevOps Engineer', status: 'Active', projects: 6, joined: 'Apr 2024', avatar: 'Evan Walsh' },
-  { name: 'Fiona Xu', role: 'QA Engineer', status: 'Active', projects: 3, joined: 'May 2024', avatar: 'Fiona Xu' },
-]
+  {
+    name: 'Alice Zhao',
+    role: 'Senior Engineer',
+    status: 'Active',
+    projects: 4,
+    joined: 'Jan 2024',
+    avatar: 'Alice Zhao',
+  },
+  {
+    name: 'Bob Smith',
+    role: 'Product Designer',
+    status: 'Active',
+    projects: 7,
+    joined: 'Mar 2024',
+    avatar: 'Bob Smith',
+  },
+  {
+    name: 'Carlos Rivera',
+    role: 'Engineering Manager',
+    status: 'Away',
+    projects: 12,
+    joined: 'Feb 2024',
+    avatar: 'Carlos Rivera',
+  },
+  {
+    name: 'Diana Prince',
+    role: 'Frontend Engineer',
+    status: 'Inactive',
+    projects: 2,
+    joined: 'Dec 2023',
+    avatar: 'Diana Prince',
+  },
+  {
+    name: 'Evan Walsh',
+    role: 'DevOps Engineer',
+    status: 'Active',
+    projects: 6,
+    joined: 'Apr 2024',
+    avatar: 'Evan Walsh',
+  },
+  {
+    name: 'Fiona Xu',
+    role: 'QA Engineer',
+    status: 'Active',
+    projects: 3,
+    joined: 'May 2024',
+    avatar: 'Fiona Xu',
+  },
+];
 
 function DataSection() {
-  const [sortKey, setSortKey] = useState<string | null>('name')
-  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
+  const [sortKey, setSortKey] = useState<string | null>('name');
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
 
   const handleSort = (key: string) => {
-    if (sortKey === key) setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))
-    else { setSortKey(key); setSortDir('asc') }
-  }
+    if (sortKey === key) setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+    else {
+      setSortKey(key);
+      setSortDir('asc');
+    }
+  };
 
   const sorted = [...TEAM_DATA].sort((a, b) => {
-    if (!sortKey) return 0
-    const av = a[sortKey as keyof typeof a]
-    const bv = b[sortKey as keyof typeof b]
-    const cmp = String(av).localeCompare(String(bv))
-    return sortDir === 'asc' ? cmp : -cmp
-  })
+    if (!sortKey) return 0;
+    const av = a[sortKey as keyof typeof a];
+    const bv = b[sortKey as keyof typeof b];
+    const cmp = String(av).localeCompare(String(bv));
+    return sortDir === 'asc' ? cmp : -cmp;
+  });
 
   return (
     <div>
@@ -583,14 +766,26 @@ function DataSection() {
         <Table striped hoverable>
           <TableHeader>
             <TableRow>
-              <TableHead sortable sortDirection={sortKey === 'name' ? sortDir : undefined} onSort={() => handleSort('name')}>
+              <TableHead
+                sortable
+                sortDirection={sortKey === 'name' ? sortDir : undefined}
+                onSort={() => handleSort('name')}
+              >
                 Member
               </TableHead>
-              <TableHead sortable sortDirection={sortKey === 'role' ? sortDir : undefined} onSort={() => handleSort('role')}>
+              <TableHead
+                sortable
+                sortDirection={sortKey === 'role' ? sortDir : undefined}
+                onSort={() => handleSort('role')}
+              >
                 Role
               </TableHead>
               <TableHead>Status</TableHead>
-              <TableHead sortable sortDirection={sortKey === 'projects' ? sortDir : undefined} onSort={() => handleSort('projects')}>
+              <TableHead
+                sortable
+                sortDirection={sortKey === 'projects' ? sortDir : undefined}
+                onSort={() => handleSort('projects')}
+              >
                 Projects
               </TableHead>
               <TableHead>Joined</TableHead>
@@ -606,12 +801,18 @@ function DataSection() {
                     <span style={{ fontWeight: 500 }}>{member.name}</span>
                   </HStack>
                 </TableCell>
-                <TableCell style={{ color: 'var(--arcana-text-secondary)' }}>{member.role}</TableCell>
+                <TableCell style={{ color: 'var(--arcana-text-secondary)' }}>
+                  {member.role}
+                </TableCell>
                 <TableCell>
                   <Badge
                     dot
                     variant={
-                      member.status === 'Active' ? 'success' : member.status === 'Away' ? 'warning' : 'secondary'
+                      member.status === 'Active'
+                        ? 'success'
+                        : member.status === 'Away'
+                          ? 'warning'
+                          : 'secondary'
                     }
                   >
                     {member.status}
@@ -623,7 +824,9 @@ function DataSection() {
                 <TableCell style={{ color: 'var(--arcana-text-muted)' }}>{member.joined}</TableCell>
                 <TableCell>
                   <HStack gap={1}>
-                    <Button size="sm" variant="ghost">Edit</Button>
+                    <Button size="sm" variant="ghost">
+                      Edit
+                    </Button>
                     <Button size="sm" variant="ghost">
                       <span style={{ color: 'var(--arcana-feedback-error)' }}>Remove</span>
                     </Button>
@@ -645,15 +848,37 @@ function DataSection() {
               <EmptyState
                 icon={
                   <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <rect x="6" y="10" width="28" height="22" rx="3" stroke="var(--arcana-text-muted)" strokeWidth="2" />
-                    <path d="M13 18h14M13 24h8" stroke="var(--arcana-text-muted)" strokeWidth="2" strokeLinecap="round" />
+                    <rect
+                      x="6"
+                      y="10"
+                      width="28"
+                      height="22"
+                      rx="3"
+                      stroke="var(--arcana-text-muted)"
+                      strokeWidth="2"
+                    />
+                    <path
+                      d="M13 18h14M13 24h8"
+                      stroke="var(--arcana-text-muted)"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
                     <circle cx="29" cy="11" r="5" fill="var(--arcana-feedback-error)" />
-                    <path d="M29 8.5v3M29 13v.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                    <path
+                      d="M29 8.5v3M29 13v.5"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
                   </svg>
                 }
                 title="No issues found"
                 description="Your project is issue-free. Keep up the good work!"
-                action={<Button variant="secondary" size="sm">Create an issue</Button>}
+                action={
+                  <Button variant="secondary" size="sm">
+                    Create an issue
+                  </Button>
+                }
               />
             </CardBody>
           </Card>
@@ -669,7 +894,7 @@ function DataSection() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 // ─── Layout Section ───────────────────────────────────────────────────────────
@@ -679,7 +904,9 @@ function LayoutSection() {
     <div>
       <div className={styles.dashSection}>
         <h3 className={styles.sectionTitle}>Layout Primitives</h3>
-        <p className={styles.sectionSubtitle}>Stack, HStack, Grid — composable layout building blocks</p>
+        <p className={styles.sectionSubtitle}>
+          Stack, HStack, Grid — composable layout building blocks
+        </p>
 
         <div className={styles.twoCol} style={{ marginBottom: 24 }}>
           <div>
@@ -744,12 +971,12 @@ function LayoutSection() {
         </Grid>
       </div>
     </div>
-  )
+  );
 }
 
 // ─── Main Kitchen Sink ────────────────────────────────────────────────────────
 
-type SectionId = 'overview' | 'components' | 'forms' | 'data' | 'layout'
+type SectionId = 'overview' | 'components' | 'forms' | 'data' | 'layout';
 
 const SECTIONS: Array<{ id: SectionId; label: string }> = [
   { id: 'overview', label: 'Overview' },
@@ -757,10 +984,10 @@ const SECTIONS: Array<{ id: SectionId; label: string }> = [
   { id: 'forms', label: 'Forms & Inputs' },
   { id: 'data', label: 'Data & Tables' },
   { id: 'layout', label: 'Layout' },
-]
+];
 
 function KitchenSink() {
-  const [activeSection, setActiveSection] = useState<SectionId>('overview')
+  const [activeSection, setActiveSection] = useState<SectionId>('overview');
 
   return (
     <div>
@@ -786,19 +1013,19 @@ function KitchenSink() {
         {activeSection === 'layout' && <LayoutSection />}
       </div>
     </div>
-  )
+  );
 }
 
 // ─── Root App ─────────────────────────────────────────────────────────────────
 
 export default function App() {
-  const [leftOpen, setLeftOpen] = useState(true)
-  const [rightOpen, setRightOpen] = useState(false)
-  const [activePresetId, setActivePresetId] = useState<PresetId>('light')
+  const [leftOpen, setLeftOpen] = useState(true);
+  const [rightOpen, setRightOpen] = useState(false);
+  const [activePresetId, setActivePresetId] = useState<PresetId>('light');
 
   const handlePresetChange = (id: PresetId) => {
-    setActivePresetId(id)
-  }
+    setActivePresetId(id);
+  };
 
   return (
     <ToastProvider>
@@ -842,10 +1069,7 @@ export default function App() {
         <div className={styles.workspace}>
           {/* Left: Token Editor */}
           <aside className={`${styles.leftPanel} ${!leftOpen ? styles.collapsed : ''}`}>
-            <TokenEditor
-              activePresetId={activePresetId}
-              onPresetChange={handlePresetChange}
-            />
+            <TokenEditor activePresetId={activePresetId} onPresetChange={handlePresetChange} />
           </aside>
 
           {/* Center: Kitchen Sink */}
@@ -860,5 +1084,5 @@ export default function App() {
         </div>
       </div>
     </ToastProvider>
-  )
+  );
 }
