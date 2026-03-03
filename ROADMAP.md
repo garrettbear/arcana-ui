@@ -1365,6 +1365,71 @@ These are the design systems Arcana should study, learn from, and differentiate 
 
 ---
 
+## Appendix D: Future Ideas & Backlog
+
+These are ideas we want to pursue but haven't scheduled into a phase yet. They live here so they don't get lost and so contributors can see where the project is heading long-term. When an idea matures enough to have a clear scope and dependencies, promote it into a phase.
+
+### Figma Integration
+
+| Idea | Description | Complexity | Dependencies |
+|---|---|---|---|
+| **Tokens Studio export** | Add a build step that converts each preset JSON into Tokens Studio format (`*.tokens.json`). Designers import the file via the Tokens Studio Figma plugin and instantly get all variables populated. This is the lowest-friction path to Figma interop — no API keys, no plugin development. | Medium | Token build pipeline (0.4) |
+| **Figma Variables API push** | CLI command (`arcana export-figma --preset corporate --file-key abc123`) that pushes semantic tokens directly into a Figma file as native Variables with modes (light/dark, density). Requires Figma API token. More powerful than Tokens Studio because it uses Figma's own variable system. | Large | Tokens Studio export, stable token names |
+| **Figma plugin ("Arcana Theme Importer")** | A Figma community plugin that lets designers paste a preset JSON (or fetch from URL) and auto-creates all local variables, text/color/effect styles, and optionally a starter component library. Best end-user experience but requires maintaining a separate Figma plugin codebase. | XL | Stable v1.0 release, Figma Variables API experience |
+| **Figma → Arcana reverse sync** | Pull token updates from Figma back into the JSON presets via Tokens Studio's GitHub sync or the Variables API. Enables designers to tweak tokens in Figma and have changes flow back to code automatically. | Large | Bidirectional Tokens Studio setup |
+
+### React Native Support
+
+| Idea | Description | Complexity | Dependencies |
+|---|---|---|---|
+| **`@arcana-ui/native` package** | A React Native component library that consumes the same token JSON presets but outputs `StyleSheet` objects instead of CSS custom properties. Same component APIs, same prop names, same theming model — different rendering target. | XL | Stable component APIs (post-Phase 3), settled token schema |
+| **Token → StyleSheet build step** | Extend the token build pipeline to output a `tokens.native.ts` file alongside CSS, exporting all token values as a typed JavaScript object that React Native `StyleSheet.create()` can consume. | Medium | Token build pipeline (0.4) |
+| **Shared token schema, divergent components** | Architecture where `@arcana-ui/tokens` remains the single source of truth and both `@arcana-ui/core` (web) and `@arcana-ui/native` (RN) read from it. Components are separate packages but share prop interfaces via a shared `@arcana-ui/types` package. | Large | Stable token schema, stable prop interfaces |
+| **Expo + React Native Web bridge** | Support React Native Web so Arcana components can run in both native and web contexts from a single codebase. Would let teams use Arcana for universal apps. | XL | @arcana-ui/native package |
+
+### Platform & Framework Expansion
+
+| Idea | Description | Complexity | Dependencies |
+|---|---|---|---|
+| **Vue component library** | `@arcana-ui/vue` — same token system, Vue 3 components with Composition API. | XL | Stable token schema, stable component patterns |
+| **Svelte component library** | `@arcana-ui/svelte` — Svelte 5 components consuming the same tokens. | XL | Same as Vue |
+| **Web Components** | Framework-agnostic custom elements that work everywhere (vanilla JS, Angular, etc.). Built on the same token CSS. | XL | Stable CSS token output |
+| **Astro integration** | First-class Astro support with an `@arcana-ui/astro` package for server-rendered components. | Medium | Stable core package |
+
+### Developer Experience
+
+| Idea | Description | Complexity | Dependencies |
+|---|---|---|---|
+| **Theme playground CLI** | `npx arcana-ui create-theme` — interactive CLI that walks through color selection, typography, density, and generates a complete preset JSON. | Medium | Stable token schema |
+| **VS Code extension** | Token autocomplete, color preview swatches in the editor, theme preview panel. | Large | Stable token names |
+| **Storybook integration** | Official Storybook addon for theme switching and token visualization. | Medium | Stable components |
+| **AI theme generation** | "Describe your brand in 2 sentences" → AI generates a complete preset JSON. Could be a CLI tool or a web feature in the playground. | Medium | Stable token schema, LLM API integration |
+
+### Advanced Token Features
+
+| Idea | Description | Complexity | Dependencies |
+|---|---|---|---|
+| **W3C Design Tokens spec export** | Output tokens in the official W3C Design Tokens Format (2025.10) for interop with any spec-compliant tool. | Medium | Token build pipeline |
+| **Multi-brand token sets** | Support multiple brands within a single Arcana installation — e.g., a company with 3 sub-brands sharing components but with different color/type tokens. | Large | Stable token architecture |
+| **Animation token presets** | Pre-built motion personality packs (snappy, smooth, playful, dramatic) that override the motion tokens as a group. | Small | Motion tokens (Phase 1) |
+| **Dark mode auto-generation** | Given a light theme preset, automatically generate a perceptually balanced dark variant using OKLCH color space manipulation. | Medium | Full color system (Phase 1) |
+| **Token diff tool** | CLI command that compares two presets and outputs the differences — useful for reviewing theme changes in PRs. | Small | Token build pipeline |
+
+### Community & Ecosystem
+
+| Idea | Description | Complexity | Dependencies |
+|---|---|---|---|
+| **Theme marketplace** | Community-contributed presets hosted on the Arcana docs site. Browse, preview, and install with one command. | Large | Docs site (Phase 5), stable preset format |
+| **Component recipe library** | Curated compositions — e.g., "SaaS pricing page" = Hero + PricingCard × 3 + FAQ + CTA. Copy-paste ready, like shadcn/ui blocks. | Medium | Expanded component library (Phase 3) |
+| **Accessibility audit CI action** | GitHub Action that runs axe-core + contrast checks on every PR and posts results as a comment. Publishable for other projects to use. | Medium | Testing infrastructure (Phase 0) |
+| **Arcana + AI starter kits** | Pre-built project templates optimized for AI-assisted development: "Build a SaaS dashboard" prompt + Arcana + Next.js + sample data. | Medium | Community templates (Phase 5) |
+
+---
+
+*To propose a new idea, add it to the appropriate table above with a description, complexity estimate, and dependencies. When an idea is ready to be scheduled, move it into the relevant phase and add it to PROGRESS.md.*
+
+---
+
 *This roadmap is a living document. Update it as tasks are completed. Mark items with ✅ when done.*
 
 *Arcana: Where intention meets interface.* 🔮
