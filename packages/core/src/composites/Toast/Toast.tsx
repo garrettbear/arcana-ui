@@ -9,12 +9,19 @@ import styles from './Toast.module.css';
 export type ToastVariant = 'default' | 'success' | 'warning' | 'error';
 
 export interface ToastOptions {
+  /** Toast heading text */
   title: string;
+  /** Optional description text below the title */
   description?: string;
+  /** Visual style variant */
   variant?: ToastVariant;
+  /** Auto-dismiss duration in milliseconds */
   duration?: number;
+  /** Optional action button */
   action?: {
+    /** Action button label */
     label: string;
+    /** Callback fired when the action button is clicked */
     onClick: () => void;
   };
 }
@@ -175,6 +182,7 @@ function ToastPortal({ toasts, onDismiss }: ToastPortalProps) {
 // ─── ToastProvider ────────────────────────────────────────────────────────────
 
 export interface ToastProviderProps {
+  /** Application content to wrap with toast context */
   children: React.ReactNode;
 }
 

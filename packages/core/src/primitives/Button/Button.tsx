@@ -3,11 +3,17 @@ import { cn } from '../../utils/cn';
 import styles from './Button.module.css';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline';
+  /** Visual style variant */
+  variant?: 'primary' | 'secondary' | 'ghost' | 'destructive' | 'outline';
+  /** Size of the button */
   size?: 'sm' | 'md' | 'lg';
+  /** Whether the button is in a loading state */
   loading?: boolean;
+  /** Icon element displayed before the label */
   icon?: React.ReactNode;
+  /** Icon element displayed after the label */
   iconRight?: React.ReactNode;
+  /** Whether the button stretches to fill its container */
   fullWidth?: boolean;
 }
 

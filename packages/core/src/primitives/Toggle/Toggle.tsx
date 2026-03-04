@@ -3,12 +3,19 @@ import { cn } from '../../utils/cn';
 import styles from './Toggle.module.css';
 
 export interface ToggleProps {
+  /** Label text displayed next to the toggle */
   label?: string;
+  /** Whether the toggle is in the on state */
   checked: boolean;
+  /** Callback fired when the toggle state changes */
   onChange: (checked: boolean) => void;
+  /** Whether the toggle is disabled */
   disabled?: boolean;
+  /** Size of the toggle */
   size?: 'sm' | 'md' | 'lg';
+  /** HTML id attribute */
   id?: string;
+  /** Additional CSS class name */
   className?: string;
 }
 

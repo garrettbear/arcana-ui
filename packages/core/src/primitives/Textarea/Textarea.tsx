@@ -3,11 +3,17 @@ import { cn } from '../../utils/cn';
 import styles from './Textarea.module.css';
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  /** Label text displayed above the textarea */
   label?: string;
+  /** Error message string or boolean error state */
   error?: string | boolean;
+  /** Helper text displayed below the textarea */
   helperText?: string;
+  /** Whether the textarea automatically grows to fit content */
   autoResize?: boolean;
+  /** Whether to display a character count */
   showCount?: boolean;
+  /** Maximum number of characters allowed */
   maxLength?: number;
 }
 

@@ -5,10 +5,15 @@ import styles from './Avatar.module.css';
 // ─── Avatar ───────────────────────────────────────────────────────────────────
 
 export interface AvatarProps {
+  /** Image source URL */
   src?: string;
+  /** Alt text for the avatar image */
   alt?: string;
+  /** User name for generating initials and background color */
   name?: string;
+  /** Size of the avatar */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  /** Additional CSS class name */
   className?: string;
 }
 
@@ -42,7 +47,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
 
     const showImage = src && !imgError;
     const showInitials = !showImage && name;
-    const bgColor = name ? getColorFromName(name) : 'var(--arcana-surface-tertiary)';
+    const bgColor = name ? getColorFromName(name) : 'var(--color-bg-subtle)';
 
     return (
       <div
@@ -81,29 +86,34 @@ Avatar.displayName = 'Avatar';
 // ─── AvatarGroup ──────────────────────────────────────────────────────────────
 
 export interface AvatarGroupProps {
+  /** Maximum number of avatars to display before truncating */
   max?: number;
+  /** Avatar elements to render */
   children: React.ReactNode;
+  /** Additional CSS class name */
   className?: string;
 }
 
-export const AvatarGroup = ({ max, children, className }: AvatarGroupProps) => {
-  const childArray = React.Children.toArray(children);
-  const visible = max ? childArray.slice(0, max) : childArray;
-  const overflow = max ? childArray.length - max : 0;
+export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
+  ({ max, children, className }, ref) => {
+    const childArray = React.Children.toArray(children);
+    const visible = max ? childArray.slice(0, max) : childArray;
+    const overflow = max ? childArray.length - max : 0;
 
-  return (
-    <div className={cn(styles.group, className)} role="group">
-      {visible.map((child, i) => (
-        <div key={i} className={styles.groupItem} style={{ zIndex: visible.length - i }}>
-          {child}
-        </div>
-      ))}
-      {overflow > 0 && (
-        <div className={cn(styles.avatar, styles.md, styles.overflow)} style={{ zIndex: 0 }}>
-          <span className={styles.initials}>+{overflow}</span>
-        </div>
-      )}
-    </div>
-  );
-};
+    return (
+      <div ref={ref} className={cn(styles.group, className)} role="group">
+        {visible.map((child, i) => (
+          <div key={i} className={styles.groupItem} style={{ zIndex: visible.length - i }}>
+            {child}
+          </div>
+        ))}
+        {overflow > 0 && (
+          <div className={cn(styles.avatar, styles.md, styles.overflow)} style={{ zIndex: 0 }}>
+            <span className={styles.initials}>+{overflow}</span>
+          </div>
+        )}
+      </div>
+    );
+  },
+);
 AvatarGroup.displayName = 'AvatarGroup';

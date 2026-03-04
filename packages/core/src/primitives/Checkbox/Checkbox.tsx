@@ -3,9 +3,13 @@ import { cn } from '../../utils/cn';
 import styles from './Checkbox.module.css';
 
 export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  /** Label text displayed next to the checkbox */
   label?: string;
+  /** Description text displayed below the label */
   description?: string;
+  /** Whether the checkbox is in an indeterminate state */
   indeterminate?: boolean;
+  /** Error message string or boolean error state */
   error?: string | boolean;
 }
 

@@ -10,7 +10,7 @@ describe('Button', () => {
   });
 
   it('renders all variants without crashing', () => {
-    const variants = ['primary', 'secondary', 'ghost', 'danger', 'outline'] as const;
+    const variants = ['primary', 'secondary', 'ghost', 'destructive', 'outline'] as const;
     for (const variant of variants) {
       const { unmount } = render(<Button variant={variant}>{variant}</Button>);
       expect(screen.getByRole('button', { name: variant })).toBeInTheDocument();

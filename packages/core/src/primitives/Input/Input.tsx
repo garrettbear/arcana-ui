@@ -4,11 +4,17 @@ import styles from './Input.module.css';
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'suffix'> {
+  /** Label text displayed above the input */
   label?: string;
+  /** Error message string or boolean error state */
   error?: string | boolean;
+  /** Helper text displayed below the input */
   helperText?: string;
+  /** Element rendered before the input field */
   prefix?: React.ReactNode;
+  /** Element rendered after the input field */
   suffix?: React.ReactNode;
+  /** Whether the input stretches to fill its container */
   fullWidth?: boolean;
 }
 

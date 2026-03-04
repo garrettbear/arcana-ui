@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 import { cn } from '../../utils/cn';
 import styles from './Alert.module.css';
 
@@ -62,45 +62,52 @@ const icons = {
 };
 
 export interface AlertProps {
+  /** Visual style variant indicating the alert type */
   variant?: 'info' | 'success' | 'warning' | 'error';
+  /** Alert title text */
   title?: string;
+  /** Callback fired when the dismiss button is clicked */
   onClose?: () => void;
+  /** Alert body content */
   children?: React.ReactNode;
+  /** Additional CSS class name */
   className?: string;
 }
 
-export const Alert = ({ variant = 'info', title, onClose, children, className }: AlertProps) => {
-  return (
-    <div role="alert" className={cn(styles.alert, styles[variant], className)}>
-      <span className={styles.icon}>{icons[variant]}</span>
-      <div className={styles.content}>
-        {title && <p className={styles.title}>{title}</p>}
-        {children && <div className={styles.body}>{children}</div>}
-      </div>
-      {onClose && (
-        <button
-          type="button"
-          className={styles.closeButton}
-          onClick={onClose}
-          aria-label="Dismiss alert"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
+export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+  ({ variant = 'info', title, onClose, children, className }, ref) => {
+    return (
+      <div ref={ref} role="alert" className={cn(styles.alert, styles[variant], className)}>
+        <span className={styles.icon}>{icons[variant]}</span>
+        <div className={styles.content}>
+          {title && <p className={styles.title}>{title}</p>}
+          {children && <div className={styles.body}>{children}</div>}
+        </div>
+        {onClose && (
+          <button
+            type="button"
+            className={styles.closeButton}
+            onClick={onClose}
+            aria-label="Dismiss alert"
           >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-      )}
-    </div>
-  );
-};
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        )}
+      </div>
+    );
+  },
+);
 Alert.displayName = 'Alert';

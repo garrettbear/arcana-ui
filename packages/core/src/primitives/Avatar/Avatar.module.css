@@ -3,9 +3,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--arcana-radius-full);
-  background-color: var(--arcana-surface-tertiary);
-  border: 2px solid var(--arcana-surface-primary);
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-subtle);
+  border: 2px solid var(--color-bg-page);
   overflow: hidden;
   flex-shrink: 0;
   user-select: none;
@@ -44,8 +44,8 @@
 }
 
 .initials {
-  font-family: var(--arcana-typography-font-family-sans);
-  font-weight: var(--arcana-typography-font-weight-semibold);
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-semibold);
   color: #ffffff;
   line-height: 1;
   pointer-events: none;
@@ -75,7 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--arcana-text-muted);
+  color: var(--color-fg-muted);
   width: 60%;
   height: 60%;
 }
@@ -87,12 +87,12 @@
 
 /* Overflow indicator */
 .overflow {
-  background-color: var(--arcana-surface-tertiary);
-  color: var(--arcana-text-secondary);
+  background-color: var(--color-bg-subtle);
+  color: var(--color-fg-secondary);
 }
 
 .overflow .initials {
-  color: var(--arcana-text-secondary);
+  color: var(--color-fg-secondary);
   font-size: 12px;
 }
 

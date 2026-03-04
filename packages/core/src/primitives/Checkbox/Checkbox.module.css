@@ -1,13 +1,13 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--arcana-spacing-1);
+  gap: var(--spacing-1);
 }
 
 .row {
   display: flex;
   align-items: flex-start;
-  gap: var(--arcana-spacing-2-5);
+  gap: var(--spacing-2-5);
 }
 
 .checkboxWrapper {
@@ -23,28 +23,27 @@
   appearance: none;
   width: 18px;
   height: 18px;
-  border-radius: var(--arcana-radius-sm);
-  border: var(--arcana-component-border-width) solid var(--arcana-border-strong);
-  background-color: var(--arcana-surface-primary);
+  border-radius: var(--radius-sm);
+  border: var(--border-width-default) solid var(--color-border-strong);
+  background-color: var(--color-bg-page);
   cursor: pointer;
-  transition: background-color var(--arcana-motion-duration-fast)
-    var(--arcana-motion-easing-default), border-color var(--arcana-motion-duration-fast)
-    var(--arcana-motion-easing-default);
+  transition: background-color var(--duration-fast) var(--ease-default), border-color
+    var(--duration-fast) var(--ease-default);
 }
 
 .input:checked,
 .input:indeterminate {
-  background-color: var(--arcana-action-primary);
-  border-color: var(--arcana-action-primary);
+  background-color: var(--color-action-primary);
+  border-color: var(--color-action-primary);
 }
 
 .input:hover:not(:disabled) {
-  border-color: var(--arcana-action-primary);
+  border-color: var(--color-action-primary);
 }
 
 .input:focus-visible {
   outline: none;
-  box-shadow: var(--arcana-component-focus-ring);
+  box-shadow: var(--focus-ring);
 }
 
 .input:disabled {
@@ -53,7 +52,7 @@
 }
 
 .input.hasError {
-  border-color: var(--arcana-border-error);
+  border-color: var(--color-border-error);
 }
 
 .indicator {
@@ -63,9 +62,9 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  color: var(--arcana-text-inverse);
+  color: var(--color-fg-inverse);
   opacity: 0;
-  transition: opacity var(--arcana-motion-duration-fast) var(--arcana-motion-easing-default);
+  transition: opacity var(--duration-fast) var(--ease-default);
 }
 
 .input:checked + .indicator,
@@ -85,23 +84,23 @@
 }
 
 .label {
-  font-family: var(--arcana-typography-font-family-sans);
-  font-size: var(--arcana-typography-font-size-sm);
-  font-weight: var(--arcana-typography-font-weight-medium);
-  color: var(--arcana-text-primary);
-  line-height: var(--arcana-typography-line-height-tight);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-fg-primary);
+  line-height: var(--line-height-tight);
   cursor: pointer;
 }
 
 .description {
-  font-family: var(--arcana-typography-font-family-sans);
-  font-size: var(--arcana-typography-font-size-xs);
-  color: var(--arcana-text-secondary);
-  line-height: var(--arcana-typography-line-height-normal);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-secondary);
+  line-height: var(--line-height-normal);
 }
 
 .errorText {
-  font-family: var(--arcana-typography-font-family-sans);
-  font-size: var(--arcana-typography-font-size-xs);
-  color: var(--arcana-feedback-error);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-status-error);
 }
