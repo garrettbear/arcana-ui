@@ -114,7 +114,7 @@ function ToastDemo() {
       </Button>
       <Button
         size="sm"
-        variant="danger"
+        variant="destructive"
         onClick={() =>
           toast({
             title: 'Build failed',
@@ -149,27 +149,27 @@ function OverviewSection() {
     {
       text: 'Alice Zhao deployed v2.4.1 to production',
       time: '2m ago',
-      color: 'var(--arcana-feedback-success)',
+      color: 'var(--color-status-success)',
     },
     {
       text: 'Bob Smith opened PR #142 — "Refactor auth flow"',
       time: '18m ago',
-      color: 'var(--arcana-action-primary)',
+      color: 'var(--color-action-primary)',
     },
     {
       text: 'CI pipeline failed on branch feature/dark-mode',
       time: '41m ago',
-      color: 'var(--arcana-feedback-error)',
+      color: 'var(--color-status-error)',
     },
     {
       text: 'Carlos Rivera commented on issue #89',
       time: '1h ago',
-      color: 'var(--arcana-feedback-info)',
+      color: 'var(--color-status-info)',
     },
     {
       text: 'Diana Prince created milestone "Q2 Release"',
       time: '2h ago',
-      color: 'var(--arcana-feedback-warning)',
+      color: 'var(--color-status-warning)',
     },
   ];
 
@@ -221,7 +221,7 @@ function ComponentsSection() {
             <Button variant="secondary">Secondary</Button>
             <Button variant="ghost">Ghost</Button>
             <Button variant="outline">Outline</Button>
-            <Button variant="danger">Danger</Button>
+            <Button variant="destructive">Danger</Button>
           </div>
         </div>
 
@@ -323,7 +323,7 @@ function ComponentsSection() {
               <Button variant="secondary" onClick={() => setModalOpen(false)}>
                 Cancel
               </Button>
-              <Button variant="danger" onClick={() => setModalOpen(false)}>
+              <Button variant="destructive" onClick={() => setModalOpen(false)}>
                 Delete
               </Button>
             </HStack>
@@ -332,7 +332,7 @@ function ComponentsSection() {
           <p
             style={{
               margin: 0,
-              color: 'var(--arcana-text-secondary)',
+              color: 'var(--color-fg-secondary)',
               fontSize: '14px',
               lineHeight: 1.6,
             }}
@@ -343,7 +343,7 @@ function ComponentsSection() {
             style={{
               margin: '8px 0 0',
               paddingLeft: '20px',
-              color: 'var(--arcana-text-secondary)',
+              color: 'var(--color-fg-secondary)',
               fontSize: '14px',
               lineHeight: 1.8,
             }}
@@ -381,7 +381,7 @@ function ComponentsSection() {
                 <div
                   style={{
                     padding: '16px 0',
-                    color: 'var(--arcana-text-secondary)',
+                    color: 'var(--color-fg-secondary)',
                     fontSize: '14px',
                   }}
                 >
@@ -392,7 +392,7 @@ function ComponentsSection() {
                 <div
                   style={{
                     padding: '16px 0',
-                    color: 'var(--arcana-text-secondary)',
+                    color: 'var(--color-fg-secondary)',
                     fontSize: '14px',
                   }}
                 >
@@ -403,7 +403,7 @@ function ComponentsSection() {
                 <div
                   style={{
                     padding: '16px 0',
-                    color: 'var(--arcana-text-secondary)',
+                    color: 'var(--color-fg-secondary)',
                     fontSize: '14px',
                   }}
                 >
@@ -486,7 +486,7 @@ function ComponentsSection() {
                   style={{
                     fontFamily: 'monospace',
                     fontSize: '12px',
-                    background: 'var(--arcana-surface-secondary)',
+                    background: 'var(--color-bg-surface)',
                     padding: '1px 4px',
                     borderRadius: '3px',
                   }}
@@ -498,7 +498,7 @@ function ComponentsSection() {
                   style={{
                     fontFamily: 'monospace',
                     fontSize: '12px',
-                    background: 'var(--arcana-surface-secondary)',
+                    background: 'var(--color-bg-surface)',
                     padding: '1px 4px',
                     borderRadius: '3px',
                   }}
@@ -629,7 +629,7 @@ function FormsSection() {
                   placeholder="Search projects..."
                   type="search"
                   prefix={
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="var(--arcana-text-muted)">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="var(--color-fg-muted)">
                       <path d="M6.5 1a5.5 5.5 0 104.223 9.02l3.129 3.128a.75.75 0 001.06-1.06l-3.129-3.13A5.5 5.5 0 006.5 1zM2.5 6.5a4 4 0 118 0 4 4 0 01-8 0z" />
                     </svg>
                   }
@@ -651,27 +651,21 @@ function FormsSection() {
               <div className={styles.threeCol} style={{ gridTemplateColumns: '1fr 1fr 1fr' }}>
                 <Card>
                   <CardBody>
-                    <p
-                      style={{ margin: 0, fontSize: '13px', color: 'var(--arcana-text-secondary)' }}
-                    >
+                    <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-fg-secondary)' }}>
                       Default
                     </p>
                   </CardBody>
                 </Card>
                 <Card variant="outlined">
                   <CardBody>
-                    <p
-                      style={{ margin: 0, fontSize: '13px', color: 'var(--arcana-text-secondary)' }}
-                    >
+                    <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-fg-secondary)' }}>
                       Outlined
                     </p>
                   </CardBody>
                 </Card>
                 <Card variant="elevated" interactive>
                   <CardBody>
-                    <p
-                      style={{ margin: 0, fontSize: '13px', color: 'var(--arcana-text-secondary)' }}
-                    >
+                    <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-fg-secondary)' }}>
                       Elevated
                     </p>
                   </CardBody>
@@ -801,9 +795,7 @@ function DataSection() {
                     <span style={{ fontWeight: 500 }}>{member.name}</span>
                   </HStack>
                 </TableCell>
-                <TableCell style={{ color: 'var(--arcana-text-secondary)' }}>
-                  {member.role}
-                </TableCell>
+                <TableCell style={{ color: 'var(--color-fg-secondary)' }}>{member.role}</TableCell>
                 <TableCell>
                   <Badge
                     dot
@@ -818,17 +810,17 @@ function DataSection() {
                     {member.status}
                   </Badge>
                 </TableCell>
-                <TableCell style={{ color: 'var(--arcana-text-secondary)', textAlign: 'center' }}>
+                <TableCell style={{ color: 'var(--color-fg-secondary)', textAlign: 'center' }}>
                   {member.projects}
                 </TableCell>
-                <TableCell style={{ color: 'var(--arcana-text-muted)' }}>{member.joined}</TableCell>
+                <TableCell style={{ color: 'var(--color-fg-muted)' }}>{member.joined}</TableCell>
                 <TableCell>
                   <HStack gap={1}>
                     <Button size="sm" variant="ghost">
                       Edit
                     </Button>
                     <Button size="sm" variant="ghost">
-                      <span style={{ color: 'var(--arcana-feedback-error)' }}>Remove</span>
+                      <span style={{ color: 'var(--color-status-error)' }}>Remove</span>
                     </Button>
                   </HStack>
                 </TableCell>
@@ -854,16 +846,16 @@ function DataSection() {
                       width="28"
                       height="22"
                       rx="3"
-                      stroke="var(--arcana-text-muted)"
+                      stroke="var(--color-fg-muted)"
                       strokeWidth="2"
                     />
                     <path
                       d="M13 18h14M13 24h8"
-                      stroke="var(--arcana-text-muted)"
+                      stroke="var(--color-fg-muted)"
                       strokeWidth="2"
                       strokeLinecap="round"
                     />
-                    <circle cx="29" cy="11" r="5" fill="var(--arcana-feedback-error)" />
+                    <circle cx="29" cy="11" r="5" fill="var(--color-status-error)" />
                     <path
                       d="M29 8.5v3M29 13v.5"
                       stroke="white"
@@ -917,11 +909,11 @@ function LayoutSection() {
                   key={item}
                   style={{
                     padding: '8px 12px',
-                    background: 'var(--arcana-surface-elevated)',
-                    border: '1px solid var(--arcana-border-default)',
-                    borderRadius: 'var(--arcana-component-radius)',
+                    background: 'var(--color-bg-elevated)',
+                    border: '1px solid var(--color-border-default)',
+                    borderRadius: 'var(--radius-md)',
                     fontSize: '13px',
-                    color: 'var(--arcana-text-secondary)',
+                    color: 'var(--color-fg-secondary)',
                   }}
                 >
                   {item}
@@ -937,9 +929,9 @@ function LayoutSection() {
                   key={item}
                   style={{
                     padding: '8px 16px',
-                    background: 'var(--arcana-action-primary)',
-                    color: 'var(--arcana-text-on-action)',
-                    borderRadius: 'var(--arcana-component-radius)',
+                    background: 'var(--color-action-primary)',
+                    color: 'var(--color-fg-on-primary)',
+                    borderRadius: 'var(--radius-md)',
                     fontSize: '13px',
                   }}
                 >
@@ -957,12 +949,12 @@ function LayoutSection() {
               key={i}
               style={{
                 padding: '16px',
-                background: 'var(--arcana-surface-elevated)',
-                border: '1px solid var(--arcana-border-default)',
-                borderRadius: 'var(--arcana-component-radius)',
+                background: 'var(--color-bg-elevated)',
+                border: '1px solid var(--color-border-default)',
+                borderRadius: 'var(--radius-md)',
                 textAlign: 'center',
                 fontSize: '13px',
-                color: 'var(--arcana-text-secondary)',
+                color: 'var(--color-fg-secondary)',
               }}
             >
               Cell {i + 1}

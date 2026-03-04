@@ -17,63 +17,63 @@ interface ContrastPair {
 const CONTRAST_PAIRS: ContrastPair[] = [
   {
     label: 'Body text / Background',
-    fgVar: '--arcana-text-primary',
-    bgVar: '--arcana-surface-primary',
+    fgVar: '--color-fg-primary',
+    bgVar: '--color-bg-page',
   },
   {
     label: 'Secondary text / Background',
-    fgVar: '--arcana-text-secondary',
-    bgVar: '--arcana-surface-primary',
+    fgVar: '--color-fg-secondary',
+    bgVar: '--color-bg-page',
   },
   {
     label: 'Muted text / Background',
-    fgVar: '--arcana-text-muted',
-    bgVar: '--arcana-surface-primary',
+    fgVar: '--color-fg-muted',
+    bgVar: '--color-bg-page',
   },
   {
     label: 'Body text / Secondary surface',
-    fgVar: '--arcana-text-primary',
-    bgVar: '--arcana-surface-secondary',
+    fgVar: '--color-fg-primary',
+    bgVar: '--color-bg-surface',
   },
   {
     label: 'Body text / Card surface',
-    fgVar: '--arcana-text-primary',
-    bgVar: '--arcana-surface-elevated',
+    fgVar: '--color-fg-primary',
+    bgVar: '--color-bg-elevated',
   },
   {
     label: 'Button label / Primary',
-    fgVar: '--arcana-text-on-action',
-    bgVar: '--arcana-action-primary',
+    fgVar: '--color-fg-on-primary',
+    bgVar: '--color-action-primary',
   },
   {
     label: 'Button label / Danger',
-    fgVar: '--arcana-text-on-danger',
-    bgVar: '--arcana-action-danger',
+    fgVar: '--color-fg-on-destructive',
+    bgVar: '--color-action-destructive',
   },
   {
     label: 'Success text / Success bg',
-    fgVar: '--arcana-feedback-success-text',
-    bgVar: '--arcana-feedback-success-bg',
+    fgVar: '--color-status-success-fg',
+    bgVar: '--color-status-success-bg',
   },
   {
     label: 'Warning text / Warning bg',
-    fgVar: '--arcana-feedback-warning-text',
-    bgVar: '--arcana-feedback-warning-bg',
+    fgVar: '--color-status-warning-fg',
+    bgVar: '--color-status-warning-bg',
   },
   {
     label: 'Error text / Error bg',
-    fgVar: '--arcana-feedback-error-text',
-    bgVar: '--arcana-feedback-error-bg',
+    fgVar: '--color-status-error-fg',
+    bgVar: '--color-status-error-bg',
   },
   {
     label: 'Info text / Info bg',
-    fgVar: '--arcana-feedback-info-text',
-    bgVar: '--arcana-feedback-info-bg',
+    fgVar: '--color-status-info-fg',
+    bgVar: '--color-status-info-bg',
   },
   {
     label: 'Border / Background',
-    fgVar: '--arcana-border-default',
-    bgVar: '--arcana-surface-primary',
+    fgVar: '--color-border-default',
+    bgVar: '--color-bg-page',
   },
 ];
 
@@ -243,10 +243,10 @@ export function AccessibilityPanel() {
 
   const gradeColor =
     overallGrade === 'AAA'
-      ? 'var(--arcana-feedback-success)'
+      ? 'var(--color-status-success)'
       : overallGrade === 'AA' || overallGrade === 'AA*'
-        ? 'var(--arcana-feedback-warning)'
-        : 'var(--arcana-feedback-error)';
+        ? 'var(--color-status-warning)'
+        : 'var(--color-status-error)';
 
   return (
     <div className={styles.panel}>
@@ -268,17 +268,14 @@ export function AccessibilityPanel() {
             </div>
             <div className={styles.scoreStats}>
               <div className={styles.scoreStat}>
-                <span
-                  className={styles.scoreNum}
-                  style={{ color: 'var(--arcana-feedback-success)' }}
-                >
+                <span className={styles.scoreNum} style={{ color: 'var(--color-status-success)' }}>
                   {passing.length}
                 </span>
                 <span className={styles.scoreStatLabel}>Passing</span>
               </div>
               <div className={styles.scoreDivider} />
               <div className={styles.scoreStat}>
-                <span className={styles.scoreNum} style={{ color: 'var(--arcana-feedback-error)' }}>
+                <span className={styles.scoreNum} style={{ color: 'var(--color-status-error)' }}>
                   {failing.length}
                 </span>
                 <span className={styles.scoreStatLabel}>Failing</span>
@@ -297,8 +294,8 @@ export function AccessibilityPanel() {
                     width: `${(passing.length / checkable.length) * 100}%`,
                     background:
                       passing.length === checkable.length
-                        ? 'var(--arcana-feedback-success)'
-                        : 'var(--arcana-feedback-warning)',
+                        ? 'var(--color-status-success)'
+                        : 'var(--color-status-warning)',
                   }}
                 />
               </div>
@@ -322,7 +319,7 @@ export function AccessibilityPanel() {
                     className={styles.swatch}
                     style={{
                       background: result.bgColor,
-                      border: '1px solid var(--arcana-border-default)',
+                      border: '1px solid var(--color-border-default)',
                     }}
                     title={result.bgColor}
                   />
@@ -330,7 +327,7 @@ export function AccessibilityPanel() {
                     className={styles.swatch}
                     style={{
                       background: result.fgColor,
-                      border: '1px solid var(--arcana-border-default)',
+                      border: '1px solid var(--color-border-default)',
                     }}
                     title={result.fgColor}
                   />

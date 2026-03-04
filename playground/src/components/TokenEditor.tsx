@@ -72,42 +72,42 @@ const TOKEN_GROUPS: Array<{
   {
     label: 'Surface',
     tokens: [
-      { label: 'Background', var: '--arcana-surface-primary' },
-      { label: 'Secondary', var: '--arcana-surface-secondary' },
-      { label: 'Card / Elevated', var: '--arcana-surface-elevated' },
+      { label: 'Background', var: '--color-bg-page' },
+      { label: 'Secondary', var: '--color-bg-surface' },
+      { label: 'Card / Elevated', var: '--color-bg-elevated' },
     ],
   },
   {
     label: 'Action',
     tokens: [
-      { label: 'Primary', var: '--arcana-action-primary' },
-      { label: 'Primary Hover', var: '--arcana-action-primary-hover' },
-      { label: 'Danger', var: '--arcana-action-danger' },
+      { label: 'Primary', var: '--color-action-primary' },
+      { label: 'Primary Hover', var: '--color-action-primary-hover' },
+      { label: 'Danger', var: '--color-action-destructive' },
     ],
   },
   {
     label: 'Text',
     tokens: [
-      { label: 'Primary', var: '--arcana-text-primary' },
-      { label: 'Secondary', var: '--arcana-text-secondary' },
-      { label: 'Muted', var: '--arcana-text-muted' },
-      { label: 'On Action', var: '--arcana-text-on-action' },
+      { label: 'Primary', var: '--color-fg-primary' },
+      { label: 'Secondary', var: '--color-fg-secondary' },
+      { label: 'Muted', var: '--color-fg-muted' },
+      { label: 'On Action', var: '--color-fg-on-primary' },
     ],
   },
   {
     label: 'Border',
     tokens: [
-      { label: 'Default', var: '--arcana-border-default' },
-      { label: 'Focus Ring', var: '--arcana-border-focus' },
+      { label: 'Default', var: '--color-border-default' },
+      { label: 'Focus Ring', var: '--color-border-focus' },
     ],
   },
   {
     label: 'Feedback',
     tokens: [
-      { label: 'Success', var: '--arcana-feedback-success' },
-      { label: 'Warning', var: '--arcana-feedback-warning' },
-      { label: 'Error', var: '--arcana-feedback-error' },
-      { label: 'Info', var: '--arcana-feedback-info' },
+      { label: 'Success', var: '--color-status-success' },
+      { label: 'Warning', var: '--color-status-warning' },
+      { label: 'Error', var: '--color-status-error' },
+      { label: 'Info', var: '--color-status-info' },
     ],
   },
 ];
@@ -117,15 +117,15 @@ const ALL_EDITOR_VARS = TOKEN_GROUPS.flatMap((g) => g.tokens.map((t) => t.var));
 // ─── Type Scale ───────────────────────────────────────────────────────────────
 
 const TYPE_SCALE_STEPS = [
-  { key: '5xl', step: 6, label: 'h1', cssVar: '--arcana-typography-font-size-5xl' },
-  { key: '4xl', step: 4, label: 'h2', cssVar: '--arcana-typography-font-size-4xl' },
-  { key: '3xl', step: 3, label: 'h3', cssVar: '--arcana-typography-font-size-3xl' },
-  { key: '2xl', step: 2, label: 'h4', cssVar: '--arcana-typography-font-size-2xl' },
-  { key: 'xl', step: 1, label: 'h5', cssVar: '--arcana-typography-font-size-xl' },
-  { key: 'lg', step: 0.5, label: 'h6', cssVar: '--arcana-typography-font-size-lg' },
-  { key: 'base', step: 0, label: 'body', cssVar: '--arcana-typography-font-size-base' },
-  { key: 'sm', step: -1, label: 'small', cssVar: '--arcana-typography-font-size-sm' },
-  { key: 'xs', step: -2, label: 'xs', cssVar: '--arcana-typography-font-size-xs' },
+  { key: '5xl', step: 6, label: 'h1', cssVar: '--font-size-5xl' },
+  { key: '4xl', step: 4, label: 'h2', cssVar: '--font-size-4xl' },
+  { key: '3xl', step: 3, label: 'h3', cssVar: '--font-size-3xl' },
+  { key: '2xl', step: 2, label: 'h4', cssVar: '--font-size-2xl' },
+  { key: 'xl', step: 1, label: 'h5', cssVar: '--font-size-xl' },
+  { key: 'lg', step: 0.5, label: 'h6', cssVar: '--font-size-lg' },
+  { key: 'base', step: 0, label: 'body', cssVar: '--font-size-base' },
+  { key: 'sm', step: -1, label: 'small', cssVar: '--font-size-sm' },
+  { key: 'xs', step: -2, label: 'xs', cssVar: '--font-size-xs' },
 ];
 
 const TYPE_SCALE_RATIOS = [
@@ -146,39 +146,39 @@ function computeFontSize(base: number, ratio: number, step: number): number {
 // ─── Spacing Scale ────────────────────────────────────────────────────────────
 
 const SPACING_PREVIEW_STEPS = [
-  { multiplier: 0.5, label: '0.5', cssVar: '--arcana-spacing-0-5' },
-  { multiplier: 1, label: '1', cssVar: '--arcana-spacing-1' },
-  { multiplier: 2, label: '2', cssVar: '--arcana-spacing-2' },
-  { multiplier: 3, label: '3', cssVar: '--arcana-spacing-3' },
-  { multiplier: 4, label: '4', cssVar: '--arcana-spacing-4' },
-  { multiplier: 5, label: '5', cssVar: '--arcana-spacing-5' },
-  { multiplier: 6, label: '6', cssVar: '--arcana-spacing-6' },
-  { multiplier: 8, label: '8', cssVar: '--arcana-spacing-8' },
-  { multiplier: 10, label: '10', cssVar: '--arcana-spacing-10' },
-  { multiplier: 12, label: '12', cssVar: '--arcana-spacing-12' },
-  { multiplier: 16, label: '16', cssVar: '--arcana-spacing-16' },
+  { multiplier: 0.5, label: '0.5', cssVar: '--spacing-0-5' },
+  { multiplier: 1, label: '1', cssVar: '--spacing-1' },
+  { multiplier: 2, label: '2', cssVar: '--spacing-2' },
+  { multiplier: 3, label: '3', cssVar: '--spacing-3' },
+  { multiplier: 4, label: '4', cssVar: '--spacing-4' },
+  { multiplier: 5, label: '5', cssVar: '--spacing-5' },
+  { multiplier: 6, label: '6', cssVar: '--spacing-6' },
+  { multiplier: 8, label: '8', cssVar: '--spacing-8' },
+  { multiplier: 10, label: '10', cssVar: '--spacing-10' },
+  { multiplier: 12, label: '12', cssVar: '--spacing-12' },
+  { multiplier: 16, label: '16', cssVar: '--spacing-16' },
 ];
 
 const ALL_SPACING_STEPS = [
-  { multiplier: 0.5, cssVar: '--arcana-spacing-0-5' },
-  { multiplier: 1, cssVar: '--arcana-spacing-1' },
-  { multiplier: 1.5, cssVar: '--arcana-spacing-1-5' },
-  { multiplier: 2, cssVar: '--arcana-spacing-2' },
-  { multiplier: 2.5, cssVar: '--arcana-spacing-2-5' },
-  { multiplier: 3, cssVar: '--arcana-spacing-3' },
-  { multiplier: 3.5, cssVar: '--arcana-spacing-3-5' },
-  { multiplier: 4, cssVar: '--arcana-spacing-4' },
-  { multiplier: 5, cssVar: '--arcana-spacing-5' },
-  { multiplier: 6, cssVar: '--arcana-spacing-6' },
-  { multiplier: 7, cssVar: '--arcana-spacing-7' },
-  { multiplier: 8, cssVar: '--arcana-spacing-8' },
-  { multiplier: 10, cssVar: '--arcana-spacing-10' },
-  { multiplier: 12, cssVar: '--arcana-spacing-12' },
-  { multiplier: 14, cssVar: '--arcana-spacing-14' },
-  { multiplier: 16, cssVar: '--arcana-spacing-16' },
-  { multiplier: 20, cssVar: '--arcana-spacing-20' },
-  { multiplier: 24, cssVar: '--arcana-spacing-24' },
-  { multiplier: 32, cssVar: '--arcana-spacing-32' },
+  { multiplier: 0.5, cssVar: '--spacing-0-5' },
+  { multiplier: 1, cssVar: '--spacing-1' },
+  { multiplier: 1.5, cssVar: '--spacing-1-5' },
+  { multiplier: 2, cssVar: '--spacing-2' },
+  { multiplier: 2.5, cssVar: '--spacing-2-5' },
+  { multiplier: 3, cssVar: '--spacing-3' },
+  { multiplier: 3.5, cssVar: '--spacing-3-5' },
+  { multiplier: 4, cssVar: '--spacing-4' },
+  { multiplier: 5, cssVar: '--spacing-5' },
+  { multiplier: 6, cssVar: '--spacing-6' },
+  { multiplier: 7, cssVar: '--spacing-7' },
+  { multiplier: 8, cssVar: '--spacing-8' },
+  { multiplier: 10, cssVar: '--spacing-10' },
+  { multiplier: 12, cssVar: '--spacing-12' },
+  { multiplier: 14, cssVar: '--spacing-14' },
+  { multiplier: 16, cssVar: '--spacing-16' },
+  { multiplier: 20, cssVar: '--spacing-20' },
+  { multiplier: 24, cssVar: '--spacing-24' },
+  { multiplier: 32, cssVar: '--spacing-32' },
 ];
 
 // ─── FontPicker ───────────────────────────────────────────────────────────────
@@ -351,13 +351,13 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     }
     setTokenValues(values);
 
-    const r = getCSSVar('--arcana-component-radius');
+    const r = getCSSVar('--radius-md');
     setRadius(Number.parseInt(r) || 8);
 
-    const sans = getCSSVar('--arcana-typography-font-family-sans');
+    const sans = getCSSVar('--font-family-body');
     if (sans) setBodyFont(sans);
 
-    const mono = getCSSVar('--arcana-typography-font-family-mono');
+    const mono = getCSSVar('--font-family-mono');
     if (mono) setMonoFont(mono);
   }, []);
 
@@ -391,22 +391,22 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
 
   const handleRadiusChange = (value: number) => {
     setRadius(value);
-    document.documentElement.style.setProperty('--arcana-component-radius', `${value}px`);
+    document.documentElement.style.setProperty('--radius-md', `${value}px`);
   };
 
   const handleDisplayFontChange = (stack: string) => {
     setDisplayFont(stack);
-    document.documentElement.style.setProperty('--arcana-typography-font-family-display', stack);
+    document.documentElement.style.setProperty('--font-family-display', stack);
   };
 
   const handleBodyFontChange = (stack: string) => {
     setBodyFont(stack);
-    document.documentElement.style.setProperty('--arcana-typography-font-family-sans', stack);
+    document.documentElement.style.setProperty('--font-family-body', stack);
   };
 
   const handleMonoFontChange = (stack: string) => {
     setMonoFont(stack);
-    document.documentElement.style.setProperty('--arcana-typography-font-family-mono', stack);
+    document.documentElement.style.setProperty('--font-family-mono', stack);
   };
 
   const handleTypeSizeChange = (value: number) => {
@@ -421,10 +421,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
 
   const handleLineHeightChange = (value: number) => {
     setLineHeight(value);
-    document.documentElement.style.setProperty(
-      '--arcana-typography-line-height-normal',
-      String(value),
-    );
+    document.documentElement.style.setProperty('--line-height-normal', String(value));
   };
 
   const handleSpacingBaseChange = (value: number) => {
@@ -465,8 +462,8 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     for (const step of ALL_SPACING_STEPS) {
       document.documentElement.style.removeProperty(step.cssVar);
     }
-    document.documentElement.style.removeProperty('--arcana-typography-line-height-normal');
-    document.documentElement.style.removeProperty('--arcana-typography-font-family-display');
+    document.documentElement.style.removeProperty('--line-height-normal');
+    document.documentElement.style.removeProperty('--font-family-display');
   };
 
   const handleExport = async () => {
@@ -474,11 +471,11 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     for (const varName of ALL_EDITOR_VARS) {
       exportObj[varName] = getCSSVar(varName);
     }
-    exportObj['--arcana-component-radius'] = `${radius}px`;
-    exportObj['--arcana-typography-font-family-display'] = displayFont;
-    exportObj['--arcana-typography-font-family-sans'] = bodyFont;
-    exportObj['--arcana-typography-font-family-mono'] = monoFont;
-    exportObj['--arcana-typography-line-height-normal'] = String(lineHeight);
+    exportObj['--radius-md'] = `${radius}px`;
+    exportObj['--font-family-display'] = displayFont;
+    exportObj['--font-family-body'] = bodyFont;
+    exportObj['--font-family-mono'] = monoFont;
+    exportObj['--line-height-normal'] = String(lineHeight);
     for (const step of TYPE_SCALE_STEPS) {
       exportObj[step.cssVar] = getCSSVar(step.cssVar);
     }
