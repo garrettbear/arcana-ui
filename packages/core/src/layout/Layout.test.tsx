@@ -22,7 +22,7 @@ describe('Stack', () => {
       </Stack>,
     );
     const el = container.firstChild as HTMLElement;
-    expect(el.style.gap).toBe('var(--arcana-spacing-4)');
+    expect(el.style.gap).toBe('var(--spacing-4)');
   });
 
   it('accepts string gap', () => {
@@ -105,7 +105,7 @@ describe('HStack', () => {
       </HStack>,
     );
     const el = container.firstChild as HTMLElement;
-    expect(el.style.gap).toBe('var(--arcana-spacing-2)');
+    expect(el.style.gap).toBe('var(--spacing-2)');
   });
 
   it('passes axe accessibility checks', async () => {
@@ -159,7 +159,7 @@ describe('Grid', () => {
       </Grid>,
     );
     const el = container.firstChild as HTMLElement;
-    expect(el.style.gap).toBe('var(--arcana-spacing-4)');
+    expect(el.style.gap).toBe('var(--spacing-4)');
   });
 
   it('passes axe accessibility checks', async () => {

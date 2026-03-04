@@ -14,8 +14,11 @@ const TableContext = React.createContext<TableContextValue>({ striped: false, ho
 // ─── Table ────────────────────────────────────────────────────────────────────
 
 export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {
+  /** Whether to alternate row background colors */
   striped?: boolean;
+  /** Whether rows highlight on hover */
   hoverable?: boolean;
+  /** Table content (TableHeader, TableBody) */
   children?: React.ReactNode;
 }
 
@@ -37,6 +40,7 @@ Table.displayName = 'Table';
 // ─── TableHeader ──────────────────────────────────────────────────────────────
 
 export interface TableHeaderProps extends React.HTMLAttributes<HTMLTableSectionElement> {
+  /** Table header rows (TableRow with TableHead cells) */
   children?: React.ReactNode;
 }
 
@@ -54,6 +58,7 @@ TableHeader.displayName = 'TableHeader';
 // ─── TableBody ────────────────────────────────────────────────────────────────
 
 export interface TableBodyProps extends React.HTMLAttributes<HTMLTableSectionElement> {
+  /** Table body rows (TableRow with TableCell elements) */
   children?: React.ReactNode;
 }
 
@@ -71,6 +76,7 @@ TableBody.displayName = 'TableBody';
 // ─── TableRow ─────────────────────────────────────────────────────────────────
 
 export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
+  /** Row cells (TableHead or TableCell elements) */
   children?: React.ReactNode;
 }
 
@@ -98,9 +104,13 @@ TableRow.displayName = 'TableRow';
 // ─── TableHead ────────────────────────────────────────────────────────────────
 
 export interface TableHeadProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
+  /** Whether the column is sortable */
   sortable?: boolean;
+  /** Current sort direction — null means unsorted */
   sortDirection?: 'asc' | 'desc' | null;
+  /** Callback fired when the sort button is clicked */
   onSort?: () => void;
+  /** Column header content */
   children?: React.ReactNode;
 }
 
@@ -184,6 +194,7 @@ TableHead.displayName = 'TableHead';
 // ─── TableCell ────────────────────────────────────────────────────────────────
 
 export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+  /** Cell content */
   children?: React.ReactNode;
 }
 

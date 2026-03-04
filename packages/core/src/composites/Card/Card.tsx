@@ -5,8 +5,11 @@ import styles from './Card.module.css';
 // Card
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Visual style variant */
   variant?: 'default' | 'outlined' | 'elevated';
+  /** Padding size applied to the card */
   padding?: 'none' | 'sm' | 'md' | 'lg';
+  /** Whether the card has hover and focus interactions */
   interactive?: boolean;
 }
 
@@ -35,8 +38,11 @@ Card.displayName = 'Card';
 // CardHeader
 
 export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Header title text */
   title?: string;
+  /** Description text below the title */
   description?: string;
+  /** Action element rendered on the right side */
   action?: React.ReactNode;
 }
 
@@ -70,6 +76,7 @@ CardBody.displayName = 'CardBody';
 // CardFooter
 
 export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Horizontal alignment of footer content */
   align?: 'left' | 'center' | 'right' | 'space-between';
 }
 

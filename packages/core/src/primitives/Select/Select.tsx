@@ -3,17 +3,26 @@ import { cn } from '../../utils/cn';
 import styles from './Select.module.css';
 
 export interface SelectOption {
+  /** Option value submitted with the form */
   value: string;
+  /** Display text for the option */
   label: string;
+  /** Whether this option is disabled */
   disabled?: boolean;
 }
 
 export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  /** Label text displayed above the select */
   label?: string;
+  /** Error message string or boolean error state */
   error?: string | boolean;
+  /** Helper text displayed below the select */
   helperText?: string;
+  /** Placeholder text for the default option */
   placeholder?: string;
+  /** Array of options to render */
   options?: SelectOption[];
+  /** Whether the select stretches to fill its container */
   fullWidth?: boolean;
 }
 

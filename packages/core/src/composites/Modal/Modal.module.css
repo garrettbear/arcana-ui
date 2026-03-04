@@ -1,13 +1,13 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: var(--arcana-z-index-overlay);
+  z-index: var(--z-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--arcana-surface-overlay);
-  padding: var(--arcana-spacing-4);
-  animation: overlayFadeIn var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default);
+  background-color: var(--color-bg-overlay);
+  padding: var(--spacing-4);
+  animation: overlayFadeIn var(--duration-normal) var(--ease-default);
 }
 
 @keyframes overlayFadeIn {
@@ -21,17 +21,17 @@
 
 .dialog {
   position: relative;
-  z-index: var(--arcana-z-index-modal);
-  background-color: var(--arcana-surface-elevated);
-  border-radius: var(--arcana-radius-lg);
-  box-shadow: var(--arcana-shadow-xl);
-  border: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  z-index: var(--z-modal);
+  background-color: var(--color-bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: var(--border-width-default) solid var(--color-border-default);
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - var(--arcana-spacing-8));
+  max-height: calc(100vh - var(--spacing-8));
   width: 100%;
-  animation: dialogIn var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default);
-  font-family: var(--arcana-typography-font-family-sans);
+  animation: dialogIn var(--duration-normal) var(--ease-default);
+  font-family: var(--font-family-body);
 }
 
 @keyframes dialogIn {
@@ -73,9 +73,9 @@
 .dialogHeader {
   display: flex;
   align-items: flex-start;
-  gap: var(--arcana-spacing-4);
-  padding: var(--arcana-spacing-5) var(--arcana-spacing-5) var(--arcana-spacing-4);
-  border-bottom: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  gap: var(--spacing-4);
+  padding: var(--spacing-5) var(--spacing-5) var(--spacing-4);
+  border-bottom: var(--border-width-default) solid var(--color-border-default);
   flex-shrink: 0;
 }
 
@@ -86,24 +86,24 @@
 
 .dialogTitle {
   margin: 0;
-  font-size: var(--arcana-typography-font-size-xl);
-  font-weight: var(--arcana-typography-font-weight-semibold);
-  line-height: var(--arcana-typography-line-height-tight);
-  color: var(--arcana-text-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-fg-primary);
 }
 
 .dialogDescription {
-  margin: var(--arcana-spacing-1) 0 0;
-  font-size: var(--arcana-typography-font-size-sm);
-  color: var(--arcana-text-secondary);
-  line-height: var(--arcana-typography-line-height-normal);
+  margin: var(--spacing-1) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+  line-height: var(--line-height-normal);
 }
 
 /* Close only (no title/desc) */
 .closeOnly {
   display: flex;
   justify-content: flex-end;
-  padding: var(--arcana-spacing-3) var(--arcana-spacing-3) 0;
+  padding: var(--spacing-3) var(--spacing-3) 0;
   flex-shrink: 0;
 }
 
@@ -111,10 +111,10 @@
 .dialogBody {
   flex: 1;
   overflow-y: auto;
-  padding: var(--arcana-spacing-5);
-  color: var(--arcana-text-primary);
-  font-size: var(--arcana-typography-font-size-base);
-  line-height: var(--arcana-typography-line-height-normal);
+  padding: var(--spacing-5);
+  color: var(--color-fg-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
 }
 
 /* Footer */
@@ -122,9 +122,9 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--arcana-spacing-3);
-  padding: var(--arcana-spacing-4) var(--arcana-spacing-5);
-  border-top: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) var(--spacing-5);
+  border-top: var(--border-width-default) solid var(--color-border-default);
   flex-shrink: 0;
 }
 
@@ -135,24 +135,23 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: var(--arcana-radius-sm);
+  border-radius: var(--radius-sm);
   border: none;
   background: transparent;
-  color: var(--arcana-text-muted);
+  color: var(--color-fg-muted);
   cursor: pointer;
-  transition: background-color var(--arcana-motion-duration-fast)
-    var(--arcana-motion-easing-default), color var(--arcana-motion-duration-fast)
-    var(--arcana-motion-easing-default);
+  transition: background-color var(--duration-fast) var(--ease-default), color var(--duration-fast)
+    var(--ease-default);
   flex-shrink: 0;
   padding: 0;
 }
 
 .closeButton:hover {
-  background-color: var(--arcana-action-ghost-hover);
-  color: var(--arcana-text-primary);
+  background-color: var(--color-action-ghost-hover);
+  color: var(--color-fg-primary);
 }
 
 .closeButton:focus-visible {
-  outline: var(--arcana-component-focus-ring);
+  outline: var(--focus-ring);
   outline-offset: 2px;
 }

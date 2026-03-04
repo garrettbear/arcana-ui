@@ -471,19 +471,26 @@ Phase 0 — Foundation Cleanup
   - Updated `packages/tokens/package.json`: build script → `src/build.ts`, exports for all 6 themes + compat
   - Reports: 195 variables per theme, 1170 total, unreferenced primitive warnings
   - All builds pass (tokens + core + docs + playground), 238 tests pass, 0 lint errors
+- Task 0.5 — Component API surfaces cleaned up
+  - Migrated all 20 `.module.css` files from old `--arcana-*` token names to new semantic names (511 replacements, 0 old tokens remaining)
+  - Added JSDoc comments to every prop in all 48 components across 4 categories (primitives, composites, layout, patterns)
+  - Added `forwardRef` + `displayName` to 23 components that were missing it (RadioGroup, AvatarGroup, Modal, ModalClose, Alert, Tabs, TabList, Tab, TabPanels, TabPanel, Accordion, AccordionItem, AccordionTrigger, AccordionContent, Navbar, NavbarBrand, NavbarContent, NavbarActions, EmptyState, FormField, FormLabel, FormHelperText, FormErrorMessage)
+  - Renamed Button variant `danger` → `destructive` to match token naming
+  - Fixed inline token references in Layout.tsx and Avatar.tsx
+  - Created `docs/COMPONENT-INVENTORY.md` — full component registry with props, forwardRef status, migration status
+  - All 238 tests pass, 0 lint errors, build succeeds
 
 ### Currently Working On
-Ready to begin Phase 0, Task 0.5 — Clean up component API surfaces
+Ready to begin Phase 0, Task 0.6 — Set up testing infrastructure
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.5 is next
-2. Read `AI_OPS.md` for the Task 0.5 prompt
-3. Update component CSS to use new token names (replace `--arcana-*` with new names per `docs/MIGRATION.md`)
-4. Include `dist/compat.css` during migration to prevent breaking changes
-5. Update `PROGRESS.md` to check off 0.5
+1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.6 is next
+2. Read `AI_OPS.md` for the Task 0.6 prompt
+3. Set up testing infrastructure (Vitest + Playwright)
+4. Update `PROGRESS.md` to check off 0.6
 
 ### Session History
 
@@ -494,3 +501,4 @@ None
 | 2026-03-03 | Claude (Claude Code) | Task 0.2 — Token restructure | Created JSON Schema, migrated 6 presets to three-tier format, validated all against schema, created MIGRATION.md |
 | 2026-03-03 | Claude (Claude Code) | Task 0.3 — Code standards | Strict TS config, biome formatting rules, .editorconfig, husky pre-commit hook, zero `any` types, 238 tests pass |
 | 2026-03-04 | Claude (Claude Code) | Task 0.4 — Build pipeline | New build.ts: reads 6 presets, resolves refs, generates CSS with new naming. 195 vars/theme, compat.css with 177 aliases. All builds + tests pass. |
+| 2026-03-04 | Claude (Claude Code) | Task 0.5 — Component API cleanup | Migrated all 20 CSS files from old `--arcana-*` to new token names (511 replacements). Added JSDoc to all props across 48 components. Added forwardRef to 23 components. Renamed Button `danger` → `destructive`. Created docs/COMPONENT-INVENTORY.md. 238 tests pass, 0 lint errors. |

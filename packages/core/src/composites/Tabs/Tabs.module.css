@@ -7,16 +7,16 @@
 .tabList {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--arcana-border-default);
-  gap: var(--arcana-spacing-1);
+  border-bottom: 1px solid var(--color-border-default);
+  gap: var(--spacing-1);
 }
 
 .tabListPills {
   border-bottom: none;
-  background-color: var(--arcana-surface-secondary);
-  border-radius: var(--arcana-component-radius);
-  padding: var(--arcana-spacing-1);
-  gap: var(--arcana-spacing-1);
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-1);
+  gap: var(--spacing-1);
   display: inline-flex;
 }
 
@@ -25,56 +25,56 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--arcana-spacing-2) var(--arcana-spacing-3);
-  font-family: var(--arcana-typography-font-family-sans);
-  font-size: var(--arcana-typography-font-size-sm);
-  font-weight: var(--arcana-typography-font-weight-medium);
+  padding: var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
   border: none;
   background: transparent;
-  transition: color var(--arcana-motion-duration-fast) var(--arcana-motion-easing-default),
-    background-color var(--arcana-motion-duration-fast) var(--arcana-motion-easing-default);
+  transition: color var(--duration-fast) var(--ease-default), background-color var(--duration-fast)
+    var(--ease-default);
   white-space: nowrap;
 }
 
 .tab:focus-visible {
   outline: none;
-  box-shadow: var(--arcana-component-focus-ring);
-  border-radius: var(--arcana-radius-sm);
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
 }
 
 /* Line variant */
 .tabLine {
-  color: var(--arcana-text-secondary);
+  color: var(--color-fg-secondary);
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
-  border-radius: var(--arcana-radius-sm) var(--arcana-radius-sm) 0 0;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
 }
 
 .tabLine:hover:not(.tabDisabled) {
-  color: var(--arcana-text-primary);
+  color: var(--color-fg-primary);
 }
 
 .tabLineActive {
-  color: var(--arcana-action-primary);
-  border-bottom-color: var(--arcana-action-primary);
+  color: var(--color-action-primary);
+  border-bottom-color: var(--color-action-primary);
 }
 
 /* Pills variant */
 .tabPill {
-  color: var(--arcana-text-secondary);
-  border-radius: var(--arcana-radius-sm);
+  color: var(--color-fg-secondary);
+  border-radius: var(--radius-sm);
 }
 
 .tabPill:hover:not(.tabDisabled) {
-  color: var(--arcana-text-primary);
-  background-color: var(--arcana-surface-primary);
+  color: var(--color-fg-primary);
+  background-color: var(--color-bg-page);
 }
 
 .tabPillActive {
-  color: var(--arcana-text-primary);
-  background-color: var(--arcana-surface-primary);
-  box-shadow: var(--arcana-shadow-sm);
+  color: var(--color-fg-primary);
+  background-color: var(--color-bg-page);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Disabled */
@@ -85,12 +85,12 @@
 
 /* Tab Panels */
 .tabPanels {
-  padding-top: var(--arcana-spacing-4);
+  padding-top: var(--spacing-4);
 }
 
 .tabPanel {
   outline: none;
-  font-family: var(--arcana-typography-font-family-sans);
-  font-size: var(--arcana-typography-font-size-base);
-  color: var(--arcana-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  color: var(--color-fg-primary);
 }

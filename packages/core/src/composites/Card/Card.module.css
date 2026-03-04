@@ -1,28 +1,28 @@
 .card {
-  background-color: var(--arcana-surface-primary);
-  border-radius: var(--arcana-component-radius);
-  font-family: var(--arcana-typography-font-family-sans);
-  color: var(--arcana-text-primary);
+  background-color: var(--color-bg-page);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-body);
+  color: var(--color-fg-primary);
   overflow: hidden;
-  transition: box-shadow var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default),
-    transform var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default);
+  transition: box-shadow var(--duration-normal) var(--ease-default), transform
+    var(--duration-normal) var(--ease-default);
 }
 
 /* Variants */
 .default {
-  border: var(--arcana-component-border-width) solid var(--arcana-border-default);
-  box-shadow: var(--arcana-shadow-sm);
+  border: var(--border-width-default) solid var(--color-border-default);
+  box-shadow: var(--shadow-sm);
 }
 
 .outlined {
-  border: var(--arcana-component-border-width) solid var(--arcana-border-strong);
+  border: var(--border-width-default) solid var(--color-border-strong);
   box-shadow: none;
 }
 
 .elevated {
-  border: var(--arcana-component-border-width) solid var(--arcana-border-default);
-  box-shadow: var(--arcana-shadow-md);
-  background-color: var(--arcana-surface-elevated);
+  border: var(--border-width-default) solid var(--color-border-default);
+  box-shadow: var(--shadow-md);
+  background-color: var(--color-bg-elevated);
 }
 
 /* Interactive state */
@@ -31,13 +31,13 @@
 }
 
 .interactive:hover {
-  box-shadow: var(--arcana-shadow-lg);
+  box-shadow: var(--shadow-lg);
   transform: translateY(-1px);
 }
 
 .interactive:active {
   transform: translateY(0);
-  box-shadow: var(--arcana-shadow-sm);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Padding variants */
@@ -48,27 +48,27 @@
 .padding-sm .header,
 .padding-sm .body,
 .padding-sm .footer {
-  padding: var(--arcana-spacing-3);
+  padding: var(--spacing-3);
 }
 
 .padding-md .header,
 .padding-md .body,
 .padding-md .footer {
-  padding: var(--arcana-spacing-4) var(--arcana-spacing-5);
+  padding: var(--spacing-4) var(--spacing-5);
 }
 
 .padding-lg .header,
 .padding-lg .body,
 .padding-lg .footer {
-  padding: var(--arcana-spacing-6) var(--arcana-spacing-8);
+  padding: var(--spacing-6) var(--spacing-8);
 }
 
 /* CardHeader */
 .header {
   display: flex;
   align-items: flex-start;
-  gap: var(--arcana-spacing-4);
-  border-bottom: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  gap: var(--spacing-4);
+  border-bottom: var(--border-width-default) solid var(--color-border-default);
 }
 
 .header + .body,
@@ -87,30 +87,30 @@
 
 .title {
   margin: 0;
-  font-size: var(--arcana-typography-font-size-lg);
-  font-weight: var(--arcana-typography-font-weight-semibold);
-  line-height: var(--arcana-typography-line-height-tight);
-  color: var(--arcana-text-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-fg-primary);
 }
 
 .description {
-  margin: var(--arcana-spacing-1) 0 0;
-  font-size: var(--arcana-typography-font-size-sm);
-  color: var(--arcana-text-secondary);
-  line-height: var(--arcana-typography-line-height-normal);
+  margin: var(--spacing-1) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+  line-height: var(--line-height-normal);
 }
 
 /* CardBody */
 .body {
-  color: var(--arcana-text-primary);
+  color: var(--color-fg-primary);
 }
 
 /* CardFooter */
 .footer {
   display: flex;
   align-items: center;
-  gap: var(--arcana-spacing-3);
-  border-top: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  gap: var(--spacing-3);
+  border-top: var(--border-width-default) solid var(--color-border-default);
 }
 
 .align-left {

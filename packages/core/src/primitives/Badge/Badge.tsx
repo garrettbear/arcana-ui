@@ -3,8 +3,11 @@ import { cn } from '../../utils/cn';
 import styles from './Badge.module.css';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Visual style variant */
   variant?: 'default' | 'success' | 'warning' | 'error' | 'info' | 'secondary';
+  /** Whether to display a status dot indicator */
   dot?: boolean;
+  /** Badge content */
   children?: React.ReactNode;
 }
 

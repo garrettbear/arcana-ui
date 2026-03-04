@@ -1,19 +1,19 @@
 .tableWrapper {
   width: 100%;
   overflow-x: auto;
-  border: var(--arcana-component-border-width) solid var(--arcana-border-default);
-  border-radius: var(--arcana-component-radius);
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-md);
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-family: var(--arcana-typography-font-family-sans);
-  font-size: var(--arcana-typography-font-size-sm);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
 }
 
 .thead {
-  background-color: var(--arcana-surface-secondary);
+  background-color: var(--color-bg-surface);
 }
 
 .tbody {
@@ -23,25 +23,24 @@
 }
 
 .rowHoverable:hover {
-  background-color: var(--arcana-surface-secondary);
-  transition: background-color var(--arcana-motion-duration-fast)
-    var(--arcana-motion-easing-default);
+  background-color: var(--color-bg-surface);
+  transition: background-color var(--duration-fast) var(--ease-default);
 }
 
 .rowStriped:nth-child(even) {
-  background-color: var(--arcana-surface-secondary);
+  background-color: var(--color-bg-surface);
 }
 
 .th {
-  padding: var(--arcana-spacing-3) var(--arcana-spacing-4);
+  padding: var(--spacing-3) var(--spacing-4);
   text-align: left;
-  font-weight: var(--arcana-typography-font-weight-semibold);
-  color: var(--arcana-text-secondary);
-  border-bottom: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-secondary);
+  border-bottom: var(--border-width-default) solid var(--color-border-default);
   white-space: nowrap;
-  font-size: var(--arcana-typography-font-size-xs);
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
-  letter-spacing: var(--arcana-typography-letter-spacing-wide);
+  letter-spacing: var(--letter-spacing-wide);
 }
 
 .thSortable {
@@ -51,8 +50,8 @@
 .sortButton {
   display: flex;
   align-items: center;
-  gap: var(--arcana-spacing-1);
-  padding: var(--arcana-spacing-3) var(--arcana-spacing-4);
+  gap: var(--spacing-1);
+  padding: var(--spacing-3) var(--spacing-4);
   background: none;
   border: none;
   cursor: pointer;
@@ -67,23 +66,23 @@
 }
 
 .sortButton:hover {
-  color: var(--arcana-text-primary);
+  color: var(--color-fg-primary);
 }
 
 .sortButton:focus-visible {
   outline: none;
-  box-shadow: inset var(--arcana-component-focus-ring);
+  box-shadow: inset var(--focus-ring);
 }
 
 .sortIcon {
   display: inline-flex;
-  color: var(--arcana-text-muted);
+  color: var(--color-fg-muted);
 }
 
 .td {
-  padding: var(--arcana-spacing-3) var(--arcana-spacing-4);
-  color: var(--arcana-text-primary);
-  border-bottom: var(--arcana-component-border-width) solid var(--arcana-border-default);
+  padding: var(--spacing-3) var(--spacing-4);
+  color: var(--color-fg-primary);
+  border-bottom: var(--border-width-default) solid var(--color-border-default);
   vertical-align: middle;
 }
 

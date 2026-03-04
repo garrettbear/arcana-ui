@@ -2,7 +2,7 @@
 .wrapper {
   display: inline-flex;
   flex-direction: column;
-  gap: var(--arcana-spacing-1);
+  gap: var(--spacing-1);
 }
 
 .fullWidth {
@@ -11,11 +11,11 @@
 
 /* Label */
 .label {
-  font-family: var(--arcana-typography-font-family-sans);
-  font-size: var(--arcana-typography-font-size-sm);
-  font-weight: var(--arcana-typography-font-weight-medium);
-  color: var(--arcana-text-primary);
-  line-height: var(--arcana-typography-line-height-tight);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-fg-primary);
+  line-height: var(--line-height-tight);
 }
 
 /* Input container */
@@ -23,21 +23,21 @@
   display: flex;
   align-items: center;
   position: relative;
-  background-color: var(--arcana-surface-primary);
-  border: var(--arcana-component-border-width) solid var(--arcana-border-default);
-  border-radius: var(--arcana-component-radius);
-  transition: border-color var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default),
-    box-shadow var(--arcana-motion-duration-normal) var(--arcana-motion-easing-default);
+  background-color: var(--color-bg-page);
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-normal) var(--ease-default), box-shadow
+    var(--duration-normal) var(--ease-default);
 }
 
 .inputWrapper:focus-within {
-  border-color: var(--arcana-border-focus);
-  box-shadow: var(--arcana-component-focus-ring);
+  border-color: var(--color-border-focus);
+  box-shadow: var(--focus-ring);
   outline: none;
 }
 
 .inputWrapper.hasError {
-  border-color: var(--arcana-border-error);
+  border-color: var(--color-border-error);
 }
 
 .inputWrapper.hasError:focus-within {
@@ -45,7 +45,7 @@
 }
 
 .inputWrapper.disabled {
-  background-color: var(--arcana-surface-secondary);
+  background-color: var(--color-bg-surface);
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -55,31 +55,31 @@
   flex: 1;
   min-width: 0;
   height: 40px;
-  padding: 0 var(--arcana-spacing-3);
+  padding: 0 var(--spacing-3);
   background: transparent;
   border: none;
   outline: none;
-  font-family: var(--arcana-typography-font-family-sans);
-  font-size: var(--arcana-typography-font-size-sm);
-  color: var(--arcana-text-primary);
-  line-height: var(--arcana-typography-line-height-normal);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-primary);
+  line-height: var(--line-height-normal);
 }
 
 .input::placeholder {
-  color: var(--arcana-text-muted);
+  color: var(--color-fg-muted);
 }
 
 .input:disabled {
   cursor: not-allowed;
-  color: var(--arcana-text-disabled);
+  color: var(--color-fg-disabled);
 }
 
 .input.hasPrefix {
-  padding-left: var(--arcana-spacing-2);
+  padding-left: var(--spacing-2);
 }
 
 .input.hasSuffix {
-  padding-right: var(--arcana-spacing-2);
+  padding-right: var(--spacing-2);
 }
 
 /* Prefix / Suffix */
@@ -88,29 +88,29 @@
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  color: var(--arcana-text-secondary);
-  font-size: var(--arcana-typography-font-size-sm);
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-sm);
 }
 
 .prefix {
-  padding-left: var(--arcana-spacing-3);
+  padding-left: var(--spacing-3);
 }
 
 .suffix {
-  padding-right: var(--arcana-spacing-3);
+  padding-right: var(--spacing-3);
 }
 
 /* Helper / Error text */
 .helperText {
-  font-family: var(--arcana-typography-font-family-sans);
-  font-size: var(--arcana-typography-font-size-xs);
-  color: var(--arcana-text-secondary);
-  line-height: var(--arcana-typography-line-height-normal);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-secondary);
+  line-height: var(--line-height-normal);
 }
 
 .errorText {
-  font-family: var(--arcana-typography-font-family-sans);
-  font-size: var(--arcana-typography-font-size-xs);
-  color: var(--arcana-feedback-error-text);
-  line-height: var(--arcana-typography-line-height-normal);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-status-error-fg);
+  line-height: var(--line-height-normal);
 }
