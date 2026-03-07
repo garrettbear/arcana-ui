@@ -349,9 +349,153 @@ Every theme preset is a single JSON file conforming to this schema. The build sy
       "hover": "0.8",
       "overlay": "0.5"
     }
+  },
+
+  "component": {
+    "button": {
+      "bg": "{semantic.color.action.primary.default}",
+      "bg-hover": "{semantic.color.action.primary.hover}",
+      "bg-active": "{semantic.color.action.primary.active}",
+      "bg-disabled": "{semantic.color.action.primary.disabled}",
+      "fg": "{semantic.color.foreground.on-primary}",
+      "border": "transparent",
+      "radius": "{semantic.radius.md}",
+      "shadow": "none",
+      "padding-x": "{semantic.spacing.md}",
+      "padding-y": "{semantic.spacing.sm}",
+      "font-size": "{semantic.typography.size.sm}",
+      "font-weight": "{semantic.typography.weight.semibold}",
+      "height": {
+        "compact": "2rem",
+        "default": "2.5rem",
+        "comfortable": "3rem"
+      }
+    },
+    "card": {
+      "bg": "{semantic.color.background.surface}",
+      "border": "{semantic.color.border.default}",
+      "border-width": "{semantic.border.width.thin}",
+      "radius": "{semantic.radius.lg}",
+      "shadow": "{semantic.elevation.md}",
+      "padding": {
+        "compact": "{semantic.spacing.md}",
+        "default": "{semantic.spacing.lg}",
+        "comfortable": "{semantic.spacing.xl}"
+      }
+    },
+    "input": {
+      "bg": "{semantic.color.background.surface}",
+      "border": "{semantic.color.border.default}",
+      "border-focus": "{semantic.color.border.focus}",
+      "border-error": "{semantic.color.border.error}",
+      "radius": "{semantic.radius.md}",
+      "shadow": "none",
+      "padding-x": "{semantic.spacing.sm}",
+      "font-size": "{semantic.typography.size.base}",
+      "placeholder-color": "{semantic.color.foreground.muted}",
+      "height": {
+        "compact": "2rem",
+        "default": "2.5rem",
+        "comfortable": "3rem"
+      }
+    },
+    "hero": {
+      "padding-y": "{semantic.spacing.section}",
+      "headline-size": "{semantic.typography.size.5xl}",
+      "headline-weight": "{semantic.typography.weight.black}",
+      "headline-line-height": "{semantic.typography.lineHeight.tight}",
+      "subheadline-size": "{semantic.typography.size.xl}",
+      "subheadline-color": "{semantic.color.foreground.secondary}",
+      "max-width": "{semantic.layout.content.wide}"
+    },
+    "navbar": {
+      "height": "4rem",
+      "bg": "{semantic.color.background.surface}",
+      "border-bottom": "{semantic.color.border.muted}",
+      "shadow": "{semantic.elevation.sm}",
+      "backdrop-blur": "12px"
+    },
+    "sidebar": {
+      "width": "16rem",
+      "width-collapsed": "4rem",
+      "bg": "{semantic.color.background.surface}",
+      "border-right": "{semantic.color.border.muted}",
+      "item-padding-x": "{semantic.spacing.md}",
+      "item-padding-y": "{semantic.spacing.sm}",
+      "item-radius": "{semantic.radius.md}",
+      "item-hover-bg": "{semantic.color.background.subtle}"
+    },
+    "modal": {
+      "bg": "{semantic.color.background.surface}",
+      "radius": "{semantic.radius.xl}",
+      "shadow": "{semantic.elevation.xl}",
+      "padding": "{semantic.spacing.xl}",
+      "overlay-bg": "{semantic.color.background.overlay}",
+      "max-width": "32rem"
+    },
+    "table": {
+      "header-bg": "{semantic.color.background.subtle}",
+      "header-font-weight": "{semantic.typography.weight.semibold}",
+      "row-border": "{semantic.color.border.muted}",
+      "row-hover-bg": "{semantic.color.background.subtle}",
+      "cell-padding-x": "{semantic.spacing.md}",
+      "cell-padding-y": "{semantic.spacing.sm}"
+    },
+    "toast": {
+      "bg": "{semantic.color.background.elevated}",
+      "radius": "{semantic.radius.lg}",
+      "shadow": "{semantic.elevation.lg}",
+      "padding": "{semantic.spacing.md}"
+    },
+    "pricingCard": {
+      "bg": "{semantic.color.background.surface}",
+      "border": "{semantic.color.border.default}",
+      "radius": "{semantic.radius.xl}",
+      "shadow": "{semantic.elevation.sm}",
+      "popular-border": "{semantic.color.action.primary.default}",
+      "popular-shadow": "{semantic.elevation.lg}",
+      "padding": "{semantic.spacing.xl}"
+    }
   }
 }
 ```
+
+#### Component Token Design Principles
+
+The component tier is what makes Arcana genuinely adaptable across app-style dashboards, marketing websites, and hybrid layouts. Here's how it works:
+
+**Every component exposes a full token surface.** Each component defines every visual property it uses as an overridable token — background, border, radius, shadow, padding, font-size, height, etc. The component's CSS references these component tokens, which default to semantic tokens, which resolve to primitives.
+
+**Presets tune components for their use case.** A dashboard-focused preset like "Midnight" might set `card.shadow` to `none` and `card.border-width` to `thin` (borders, not shadows, define depth). A marketing preset like "Startup" might set `card.shadow` to `lg` and `card.radius` to `xl` (dramatic elevation, friendly shape). Same component, wildly different feel, zero code changes.
+
+**Density modes work per-component.** Properties that should scale with density (heights, paddings) can specify values for `compact`, `default`, and `comfortable`. The active density is set via `data-density` on the root element. This lets a single preset support both a dense data table and a spacious hero section.
+
+**The cascade:** Component tokens are optional overrides. If a preset doesn't specify `button.radius`, the component falls back to its default (which references a semantic token). This means a minimal preset only needs primitives and semantics — component tokens are for fine-tuning.
+
+```
+User sets data-theme="startup" data-density="comfortable"
+                    ↓
+Component CSS:      var(--button-height)
+                    ↓
+Resolves to:        component.button.height.comfortable → "3rem"
+                    ↓
+If not defined:     falls back to semantic → var(--spacing-xl)
+                    ↓
+If not defined:     falls back to primitive → "2rem"
+```
+
+**App vs. Marketing vs. Hybrid tuning examples:**
+
+| Property | Dashboard Preset | Marketing Preset | Hybrid Preset |
+|---|---|---|---|
+| `card.shadow` | `none` or `xs` | `md` or `lg` | `sm` (balanced) |
+| `card.radius` | `md` (4-6px) | `xl` (12-16px) | `lg` (8px) |
+| `card.padding` | compact: `md` | comfortable: `xl` | default: `lg` |
+| `input.height` | compact: `2rem` | comfortable: `3rem` | default: `2.5rem` |
+| `hero.headline-size` | `3xl` (smaller) | `5xl` (dramatic) | `4xl` (balanced) |
+| `hero.padding-y` | `xl` (compact) | `section` (96px) | `2xl` (48px) |
+| `navbar.shadow` | `xs` (subtle) | `sm` (present) | `sm` |
+| `navbar.backdrop-blur` | `0` (solid) | `12px` (frosted) | `8px` |
 
 ### 2.4 CSS Custom Property Output
 
@@ -444,6 +588,7 @@ The build step converts the JSON to CSS like:
 | 1.9 | **Build token validation** — CI check that ensures no hardcoded values in component CSS | P0 | M |
 | 1.10 | **Build theme switching** — `data-theme` attribute, system preference detection, transition support | P0 | M |
 | 1.11 | **WCAG contrast validation** — automated checking that every fg/bg token pair meets AA or AAA | P0 | M |
+| 1.12 | **Implement component token layer** — every component exposes a full set of overridable tokens (bg, border, radius, shadow, padding, font-size, etc.) controlled from the preset JSON. Support density modes (compact/default/comfortable) per component. This is the mechanism that lets presets tune individual components for app-style vs. marketing-style vs. hybrid use cases. | P0 | L |
 
 ### Phase 2: Responsive & Mobile (Weeks 5–7)
 > **Goal:** Every component works beautifully from 320px to 2560px.
