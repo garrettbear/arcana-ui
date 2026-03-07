@@ -520,17 +520,26 @@ Phase 0 — Foundation Cleanup
   - Suppressed false-positive biome a11y error on TabPanel tabIndex (WAI-ARIA compliant)
   - All 274 tests pass, 0 lint errors (53 pre-existing warnings), build succeeds
 
+- Task 0.8 — Documentation update and AI integration
+  - Updated `manifest.ai.json`: new token naming (three-tier architecture), updated key token examples with new names (--color-*, --spacing-*, --radius-*, --shadow-*, --font-size-*, --duration-*), changed Button variant "danger" → "destructive"
+  - Updated CLAUDE.md "Current State" section to mark tasks 0.1-0.8 complete
+  - Updated PROGRESS.md: checked off tasks 0.1-0.8, set next task to 0.9
+  - Created `docs/ARCHITECTURE.md` — quick reference guide (system overview, monorepo structure, token pipeline, component architecture, testing strategy, theme switching)
+  - Verified README.md: accurate component count (23 main components), correct theme presets (6 current + 8 planned), working quick start, "For AI Agents" section
+  - Verified all supporting docs: ROADMAP.md, AI_OPS.md, docs/COMPONENT-INVENTORY.md, docs/MIGRATION.md all present and accurate
+  - All 274 tests pass, 0 lint errors, build succeeds
+
 ### Currently Working On
-Ready to begin Phase 0, Task 0.8 — Update README, CLAUDE.md, SPEC.md
+Phase 0 — Foundation Cleanup (nearly complete). Ready to move to Phase 0, Task 0.9 — Set up CI/CD
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.8 is next
-2. Read `AI_OPS.md` for the Task 0.8 prompt
-3. Update README, CLAUDE.md, SPEC.md
-4. Update `PROGRESS.md` to check off 0.8
+1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.9 is next (CI/CD setup)
+2. Read `AI_OPS.md` for the Task 0.9 prompt
+3. Set up GitHub Actions workflows for testing, linting, and building
+4. Update `PROGRESS.md` to check off 0.9
 
 ### Session History
 
@@ -545,3 +554,4 @@ None
 | 2026-03-04 | Claude (Claude Code) | Playground bugfix | Fixed theme switching and interactive controls. Root cause: playground files referenced old `--arcana-*` token names after Task 0.5 migration. Fix: rewrote presets.ts to use `data-theme` attribute for all 6 themes (removed ~240 lines of inline token overrides), migrated 322 old token references across 6 playground files, fixed 3 `variant="danger"` → `variant="destructive"`. 238 tests pass, 0 lint errors. |
 | 2026-03-04 | Claude (Claude Code) | Task 0.6 — Testing infrastructure | Enhanced Vitest with coverage (70% thresholds). Rewrote Button (19), Input (23), Modal (28) test suites with ref/className/keyboard/a11y coverage. Set up Playwright 1.56 with 3 viewports, 12 baseline screenshots. Added axe-core a11y Playwright test (0 critical violations). Created test template. 274 unit tests + 13 visual tests pass. |
 | 2026-03-07 | Claude (Claude Code) | Task 0.7 — CSS token linter | Created lint-tokens.ts + config. Fixed 93 hardcoded violations across 16 CSS files using component CSS custom properties. Added --focus-ring-error token to all 6 presets. Integrated into pnpm lint. 274 tests pass, 0 lint errors. |
+| 2026-03-07 | Claude (Claude Code) | Task 0.8 — Documentation update | Updated manifest.ai.json with new token names and destructive variant. Updated CLAUDE.md and PROGRESS.md to mark tasks 0.1-0.8 complete. Created docs/ARCHITECTURE.md. Verified all docs accuracy. |

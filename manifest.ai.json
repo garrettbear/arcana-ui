@@ -12,16 +12,19 @@
   ],
   "themeSetup": "Set data-theme='light' or data-theme='dark' on <html> element",
   "tokens": {
-    "prefix": "--arcana-",
-    "documentation": "All tokens are CSS custom properties prefixed with --arcana-",
-    "themeSwitch": "Set data-theme attribute on root element: 'light' | 'dark'",
-    "customization": "Override any --arcana-* property in your CSS to customize",
+    "categories": ["primitive", "semantic", "component"],
+    "naming": "Three-tier architecture: primitives (raw values) → semantic (contextual) → component (scoped)",
+    "themeSwitch": "Set data-theme attribute on root element: 'light' | 'dark' | 'terminal' | 'retro98' | 'glass' | 'brutalist'",
+    "customization": "Override any CSS custom property in your CSS to customize. All tokens are prefixed with -- (e.g., --color-action-primary)",
     "keyTokens": {
-      "--arcana-action-primary": "Primary brand color (#4f46e5 indigo)",
-      "--arcana-surface-primary": "Main background surface",
-      "--arcana-text-primary": "Primary text color",
-      "--arcana-component-radius": "Default border radius (8px)",
-      "--arcana-component-focus-ring": "Focus ring box-shadow value"
+      "--color-action-primary": "Primary brand color for actions (button, link, highlight)",
+      "--color-bg-page": "Main background surface for page content",
+      "--color-fg-primary": "Primary text color (body text, labels)",
+      "--radius-md": "Medium border radius (commonly used in components)",
+      "--shadow-md": "Medium drop shadow for elevation",
+      "--spacing-md": "Medium spacing unit (used for padding, margin, gaps)",
+      "--font-size-base": "Base text size for body copy",
+      "--duration-normal": "Default animation duration for transitions"
     }
   },
   "components": [
@@ -33,7 +36,7 @@
       "props": {
         "variant": {
           "type": "enum",
-          "values": ["primary", "secondary", "ghost", "danger", "outline"],
+          "values": ["primary", "secondary", "ghost", "destructive", "outline"],
           "default": "primary",
           "description": "Visual style of the button"
         },
@@ -60,7 +63,7 @@
       "examples": [
         "<Button>Save changes</Button>",
         "<Button variant=\"secondary\" size=\"sm\">Cancel</Button>",
-        "<Button variant=\"danger\" loading>Deleting...</Button>",
+        "<Button variant=\"destructive\" loading>Deleting...</Button>",
         "<Button variant=\"ghost\" icon={<PlusIcon />}>Add item</Button>",
         "<Button variant=\"outline\">Learn more</Button>",
         "<Button fullWidth>Sign in</Button>"
