@@ -275,6 +275,12 @@ function generateSemanticVars(
 
   // Border focus
   vars.push({ name: '--focus-ring', value: resolveValue(preset, semantic.border.focus.ring) });
+  if (semantic.border.focus.ringError) {
+    vars.push({
+      name: '--focus-ring-error',
+      value: resolveValue(preset, semantic.border.focus.ringError),
+    });
+  }
   vars.push({ name: '--focus-offset', value: resolveValue(preset, semantic.border.focus.offset) });
 
   // Motion duration

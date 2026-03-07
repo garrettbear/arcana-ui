@@ -41,7 +41,7 @@
 }
 
 .inputWrapper.hasError:focus-within {
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  box-shadow: var(--focus-ring-error);
 }
 
 .inputWrapper.disabled {
@@ -54,7 +54,8 @@
 .input {
   flex: 1;
   min-width: 0;
-  height: 40px;
+  --input-height: var(--spacing-10);
+  height: var(--input-height);
   padding: 0 var(--spacing-3);
   background: transparent;
   border: none;

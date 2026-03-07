@@ -92,19 +92,25 @@
 
 /* Sizes */
 .sm {
-  height: 32px;
+  --button-height: var(--spacing-8);
+  --button-icon-size: var(--spacing-3-5);
+  height: var(--button-height);
   padding: 0 var(--spacing-3);
   font-size: var(--font-size-xs);
 }
 
 .md {
-  height: 40px;
+  --button-height: var(--spacing-10);
+  --button-icon-size: var(--spacing-4);
+  height: var(--button-height);
   padding: 0 var(--spacing-4);
   font-size: var(--font-size-sm);
 }
 
 .lg {
-  height: 48px;
+  --button-height: var(--spacing-12);
+  --button-icon-size: var(--spacing-5);
+  height: var(--button-height);
   padding: 0 var(--spacing-6);
   font-size: var(--font-size-base);
 }
@@ -127,22 +133,10 @@
   flex-shrink: 0;
 }
 
-.sm .iconLeading svg,
-.sm .iconTrailing svg {
-  width: 14px;
-  height: 14px;
-}
-
-.md .iconLeading svg,
-.md .iconTrailing svg {
-  width: 16px;
-  height: 16px;
-}
-
-.lg .iconLeading svg,
-.lg .iconTrailing svg {
-  width: 18px;
-  height: 18px;
+.iconLeading svg,
+.iconTrailing svg {
+  width: var(--button-icon-size, var(--spacing-4));
+  height: var(--button-icon-size, var(--spacing-4));
 }
 
 /* Label */
@@ -153,25 +147,10 @@
 
 /* Spinner */
 .spinner {
-  animation: spin 0.75s linear infinite;
-  width: 1em;
-  height: 1em;
+  animation: spin var(--duration-slow) linear infinite;
+  width: var(--button-icon-size, var(--spacing-4));
+  height: var(--button-icon-size, var(--spacing-4));
   flex-shrink: 0;
-}
-
-.sm .spinner {
-  width: 14px;
-  height: 14px;
-}
-
-.md .spinner {
-  width: 16px;
-  height: 16px;
-}
-
-.lg .spinner {
-  width: 18px;
-  height: 18px;
 }
 
 .spinnerTrack {

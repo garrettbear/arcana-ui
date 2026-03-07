@@ -16,13 +16,13 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: var(--spacing-px);
 }
 
 .input {
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: var(--spacing-4);
+  height: var(--spacing-4);
   border-radius: var(--radius-sm);
   border: var(--border-width-default) solid var(--color-border-strong);
   background-color: var(--color-bg-page);
@@ -73,14 +73,14 @@
 }
 
 .indicator svg {
-  width: 10px;
-  height: 10px;
+  width: var(--spacing-2-5);
+  height: var(--spacing-2-5);
 }
 
 .labelGroup {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--spacing-0-5);
 }
 
 .label {

@@ -47,7 +47,7 @@
 .tabLine {
   color: var(--color-fg-secondary);
   border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
+  margin-bottom: calc(-1 * var(--spacing-px));
   border-radius: var(--radius-sm) var(--radius-sm) 0 0;
 }
 

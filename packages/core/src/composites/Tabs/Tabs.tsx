@@ -184,6 +184,7 @@ export const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
         id={panelId}
         role="tabpanel"
         aria-labelledby={tabId}
+        // biome-ignore lint/a11y/noNoninteractiveTabindex: tabpanels should be focusable per WAI-ARIA
         tabIndex={0}
         className={cn(styles.tabPanel, className)}
       >

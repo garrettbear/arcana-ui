@@ -47,19 +47,23 @@
 
 /* Size variants */
 .sm {
-  max-width: 400px;
+  --modal-max-width: 25rem;
+  max-width: var(--modal-max-width);
 }
 
 .md {
-  max-width: 560px;
+  --modal-max-width: 35rem;
+  max-width: var(--modal-max-width);
 }
 
 .lg {
-  max-width: 720px;
+  --modal-max-width: 45rem;
+  max-width: var(--modal-max-width);
 }
 
 .xl {
-  max-width: 960px;
+  --modal-max-width: 60rem;
+  max-width: var(--modal-max-width);
 }
 
 .full {
@@ -133,8 +137,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: var(--spacing-8);
+  height: var(--spacing-8);
   border-radius: var(--radius-sm);
   border: none;
   background: transparent;

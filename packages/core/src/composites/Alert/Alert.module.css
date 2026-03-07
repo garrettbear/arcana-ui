@@ -10,9 +10,9 @@
 .icon {
   display: flex;
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  margin-top: 1px;
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+  margin-top: var(--spacing-px);
 }
 
 .icon svg {
@@ -45,8 +45,8 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  width: var(--spacing-6);
+  height: var(--spacing-6);
   border: none;
   background: transparent;
   cursor: pointer;

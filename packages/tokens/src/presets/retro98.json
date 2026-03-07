@@ -298,6 +298,7 @@
       },
       "focus": {
         "ring": "0 0 0 1px #000080",
+        "ringError": "0 0 0 1px #ff0000",
         "offset": "2px"
       }
     },

@@ -25,13 +25,13 @@
 }
 
 .md .icon {
-  width: 48px;
-  height: 48px;
+  width: var(--spacing-12);
+  height: var(--spacing-12);
 }
 
 .sm .icon {
-  width: 32px;
-  height: 32px;
+  width: var(--spacing-8);
+  height: var(--spacing-8);
 }
 
 .text {

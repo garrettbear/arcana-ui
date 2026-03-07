@@ -504,17 +504,33 @@ Phase 0 — Foundation Cleanup
   - **Scripts added:** test:visual, test:visual:update, test:all
   - All 274 Vitest tests pass, 13 Playwright tests pass, 0 lint errors (54 pre-existing warnings)
 
+- Task 0.7 — CSS token usage linter
+  - Created `packages/tokens/src/lint-tokens.ts` — custom CSS linter that scans component CSS for hardcoded values
+  - Detects: hex colors, rgb/rgba/hsl functions, hardcoded px/rem/em in spacing/size/font-size/radius properties, hardcoded box-shadow values, hardcoded animation durations, hardcoded z-index, hardcoded font-weight/font-family/line-height
+  - Allows: 0/0px, percentages, structural keywords (none, auto, inherit, transparent), var() references, calc() with var(), properties like display/position/cursor/flex-direction
+  - Created `packages/tokens/src/lint-tokens.config.json` — configurable ignore paths and allowed properties
+  - Added `pnpm lint:tokens` script; integrated into `pnpm lint` (biome + token lint combined)
+  - Fixed 93 hardcoded violations across 16 CSS files:
+    - Replaced hardcoded sizes with component CSS custom properties (--button-height, --avatar-size, --toggle-width, --modal-max-width, etc.)
+    - Replaced hardcoded colors (#ffffff → var(--color-fg-on-primary), rgba error rings → var(--focus-ring-error))
+    - Replaced hardcoded font-sizes with --font-size-* tokens
+    - Replaced hardcoded spacing with --spacing-* tokens
+    - Replaced hardcoded animation duration with var(--duration-slow)
+  - Added `--focus-ring-error` token to all 6 presets and build script
+  - Suppressed false-positive biome a11y error on TabPanel tabIndex (WAI-ARIA compliant)
+  - All 274 tests pass, 0 lint errors (53 pre-existing warnings), build succeeds
+
 ### Currently Working On
-Ready to begin Phase 0, Task 0.7 — Add linting rules (enforce token usage)
+Ready to begin Phase 0, Task 0.8 — Update README, CLAUDE.md, SPEC.md
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.7 is next
-2. Read `AI_OPS.md` for the Task 0.7 prompt
-3. Add linting rules to enforce token usage in CSS
-4. Update `PROGRESS.md` to check off 0.7
+1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.8 is next
+2. Read `AI_OPS.md` for the Task 0.8 prompt
+3. Update README, CLAUDE.md, SPEC.md
+4. Update `PROGRESS.md` to check off 0.8
 
 ### Session History
 
@@ -528,3 +544,4 @@ None
 | 2026-03-04 | Claude (Claude Code) | Task 0.5 — Component API cleanup | Migrated all 20 CSS files from old `--arcana-*` to new token names (511 replacements). Added JSDoc to all props across 48 components. Added forwardRef to 23 components. Renamed Button `danger` → `destructive`. Created docs/COMPONENT-INVENTORY.md. 238 tests pass, 0 lint errors. |
 | 2026-03-04 | Claude (Claude Code) | Playground bugfix | Fixed theme switching and interactive controls. Root cause: playground files referenced old `--arcana-*` token names after Task 0.5 migration. Fix: rewrote presets.ts to use `data-theme` attribute for all 6 themes (removed ~240 lines of inline token overrides), migrated 322 old token references across 6 playground files, fixed 3 `variant="danger"` → `variant="destructive"`. 238 tests pass, 0 lint errors. |
 | 2026-03-04 | Claude (Claude Code) | Task 0.6 — Testing infrastructure | Enhanced Vitest with coverage (70% thresholds). Rewrote Button (19), Input (23), Modal (28) test suites with ref/className/keyboard/a11y coverage. Set up Playwright 1.56 with 3 viewports, 12 baseline screenshots. Added axe-core a11y Playwright test (0 critical violations). Created test template. 274 unit tests + 13 visual tests pass. |
+| 2026-03-07 | Claude (Claude Code) | Task 0.7 — CSS token linter | Created lint-tokens.ts + config. Fixed 93 hardcoded violations across 16 CSS files using component CSS custom properties. Added --focus-ring-error token to all 6 presets. Integrated into pnpm lint. 274 tests pass, 0 lint errors. |

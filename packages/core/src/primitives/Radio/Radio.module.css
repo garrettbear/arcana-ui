@@ -36,20 +36,21 @@
 }
 
 .inputWrapper {
+  --radio-size: var(--spacing-4);
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: 1px;
-  width: 18px;
-  height: 18px;
+  margin-top: var(--spacing-px);
+  width: var(--radio-size);
+  height: var(--radio-size);
 }
 
 .input {
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: var(--radio-size);
+  height: var(--radio-size);
   border-radius: var(--radius-full);
   border: var(--border-width-default) solid var(--color-border-strong);
   background-color: var(--color-bg-page);
@@ -85,7 +86,7 @@
 .labelGroup {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--spacing-0-5);
 }
 
 .label {

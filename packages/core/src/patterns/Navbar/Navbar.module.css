@@ -17,9 +17,11 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-4);
-  height: 56px;
+  --navbar-height: var(--spacing-14);
+  --navbar-max-width: 80rem;
+  height: var(--navbar-height);
   padding: 0 var(--spacing-6);
-  max-width: 1280px;
+  max-width: var(--navbar-max-width);
   margin: 0 auto;
 }
 

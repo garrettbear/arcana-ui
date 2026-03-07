@@ -17,7 +17,8 @@
 /* Textarea element */
 .textarea {
   width: 100%;
-  min-height: 80px;
+  --textarea-min-height: var(--spacing-20);
+  min-height: var(--textarea-min-height);
   padding: var(--spacing-2) var(--spacing-3);
   background-color: var(--color-bg-page);
   border: var(--border-width-default) solid var(--color-border-default);
@@ -47,7 +48,7 @@
 }
 
 .textarea.hasError:focus {
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  box-shadow: var(--focus-ring-error);
 }
 
 .textarea.disabled {
@@ -69,7 +70,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--spacing-2);
-  min-height: 1rem;
+  min-height: var(--spacing-4);
 }
 
 /* Helper / Error text */

@@ -13,28 +13,33 @@
 
 /* Sizes */
 .xs {
-  width: 24px;
-  height: 24px;
+  --avatar-size: var(--spacing-6);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
 }
 
 .sm {
-  width: 32px;
-  height: 32px;
+  --avatar-size: var(--spacing-8);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
 }
 
 .md {
-  width: 40px;
-  height: 40px;
+  --avatar-size: var(--spacing-10);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
 }
 
 .lg {
-  width: 48px;
-  height: 48px;
+  --avatar-size: var(--spacing-12);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
 }
 
 .xl {
-  width: 64px;
-  height: 64px;
+  --avatar-size: var(--spacing-16);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
 }
 
 .image {
@@ -46,29 +51,29 @@
 .initials {
   font-family: var(--font-family-body);
   font-weight: var(--font-weight-semibold);
-  color: #ffffff;
+  color: var(--color-fg-on-primary);
   line-height: 1;
   pointer-events: none;
 }
 
 .xs .initials {
-  font-size: 9px;
+  font-size: var(--font-size-xs);
 }
 
 .sm .initials {
-  font-size: 11px;
+  font-size: var(--font-size-xs);
 }
 
 .md .initials {
-  font-size: 14px;
+  font-size: var(--font-size-sm);
 }
 
 .lg .initials {
-  font-size: 16px;
+  font-size: var(--font-size-base);
 }
 
 .xl .initials {
-  font-size: 22px;
+  font-size: var(--font-size-xl);
 }
 
 .fallback {
@@ -93,7 +98,7 @@
 
 .overflow .initials {
   color: var(--color-fg-secondary);
-  font-size: 12px;
+  font-size: var(--font-size-xs);
 }
 
 /* Group */
@@ -104,7 +109,7 @@
 
 .groupItem {
   position: relative;
-  margin-left: -8px;
+  margin-left: calc(-1 * var(--spacing-2));
 }
 
 .groupItem:first-child {

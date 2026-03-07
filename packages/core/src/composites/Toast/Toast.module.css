@@ -7,7 +7,8 @@
   flex-direction: column;
   gap: var(--spacing-2);
   pointer-events: none;
-  max-width: 380px;
+  --toast-max-width: 23.75rem;
+  max-width: var(--toast-max-width);
   width: calc(100vw - var(--spacing-12));
 }
 
@@ -38,9 +39,9 @@
 .icon {
   display: flex;
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  margin-top: 2px;
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  margin-top: var(--spacing-0-5);
 }
 
 .icon svg {
@@ -94,8 +95,8 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: var(--spacing-5);
+  height: var(--spacing-5);
   border: none;
   background: transparent;
   cursor: pointer;

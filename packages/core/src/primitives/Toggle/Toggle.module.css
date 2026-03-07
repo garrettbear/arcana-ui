@@ -24,18 +24,27 @@
 
 /* Sizes */
 .sm {
-  width: 32px;
-  height: 18px;
+  --toggle-width: var(--spacing-8);
+  --toggle-height: var(--spacing-4);
+  --toggle-thumb-size: var(--spacing-3);
+  width: var(--toggle-width);
+  height: var(--toggle-height);
 }
 
 .md {
-  width: 44px;
-  height: 24px;
+  --toggle-width: var(--spacing-10);
+  --toggle-height: var(--spacing-6);
+  --toggle-thumb-size: var(--spacing-4);
+  width: var(--toggle-width);
+  height: var(--toggle-height);
 }
 
 .lg {
-  width: 56px;
-  height: 30px;
+  --toggle-width: var(--spacing-14);
+  --toggle-height: var(--spacing-7);
+  --toggle-thumb-size: var(--spacing-5);
+  width: var(--toggle-width);
+  height: var(--toggle-height);
 }
 
 .checked {
@@ -53,36 +62,21 @@
   background-color: var(--primitive-white);
   box-shadow: var(--shadow-sm);
   transition: transform var(--duration-normal) var(--ease-default);
-}
-
-.sm .thumb {
-  width: 12px;
-  height: 12px;
-  left: 3px;
-}
-
-.md .thumb {
-  width: 18px;
-  height: 18px;
-  left: 3px;
-}
-
-.lg .thumb {
-  width: 22px;
-  height: 22px;
-  left: 4px;
+  width: var(--toggle-thumb-size);
+  height: var(--toggle-thumb-size);
+  left: var(--spacing-0-5);
 }
 
 .sm.checked .thumb {
-  transform: translateX(14px);
+  transform: translateX(var(--spacing-3-5));
 }
 
 .md.checked .thumb {
-  transform: translateX(20px);
+  transform: translateX(var(--spacing-5));
 }
 
 .lg.checked .thumb {
-  transform: translateX(26px);
+  transform: translateX(var(--spacing-7));
 }
 
 .label {

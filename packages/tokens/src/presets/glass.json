@@ -298,6 +298,7 @@
       },
       "focus": {
         "ring": "0 0 0 3px rgba(165, 180, 252, 0.4)",
+        "ringError": "0 0 0 3px rgba(248, 113, 113, 0.3)",
         "offset": "2px"
       }
     },
