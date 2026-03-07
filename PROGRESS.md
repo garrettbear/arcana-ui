@@ -1,8 +1,8 @@
 # Arcana UI — Progress Tracker
 
 > **Last updated:** 2026-03-07
-> **Current phase:** 0 — Foundation Cleanup
-> **Next priority task:** 0.10
+> **Current phase:** Phase 0 COMPLETE — ready for Phase 1
+> **Next priority task:** 1.1
 > **Blocking issues:** None
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
@@ -15,7 +15,7 @@
 - [x] 0.7 — Add linting rules (enforce token usage)
 - [x] 0.8 — Update README, CLAUDE.md, SPEC.md
 - [x] 0.9 — Set up CI/CD
-- [ ] 0.10 — Establish CONTRIBUTING.md
+- [x] 0.10 — Establish CONTRIBUTING.md
 
 ## Phase 1: Token System Maturity (Weeks 3–5)
 - [ ] 1.1 — Full color system
