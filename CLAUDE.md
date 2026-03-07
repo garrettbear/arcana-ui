@@ -445,7 +445,7 @@ Decisions made during development that should not be revisited without discussio
 *This section is updated at the end of every AI agent session.*
 
 ### Active Phase
-Phase 0 — Foundation Cleanup
+Phase 0 COMPLETE — ready for Phase 1
 
 ### Completed
 - Comprehensive ROADMAP.md created (token architecture, phased plan, component library, preset matrix)
@@ -548,17 +548,25 @@ Phase 0 — Foundation Cleanup
   - Verified Vercel deployment: `vercel.json` configured with `buildCommand: "pnpm build"`, `outputDirectory: "playground/dist"` — Vercel GitHub integration handles deployment automatically
   - All 274 tests pass, 0 lint errors, build succeeds
 
-### Currently Working On
-Phase 0 — Foundation Cleanup (nearly complete). Ready to move to Phase 0, Task 0.10 — Establish CONTRIBUTING.md
+- Task 0.10 — CONTRIBUTING.md
+  - Created `CONTRIBUTING.md` at project root with 11 sections: Welcome, Getting Started, Project Orientation, How to Contribute, Code Standards, Adding a Component, Adding a Theme, For AI Agents, Commit Convention, Code of Conduct, Getting Help
+  - Serves both human contributors and AI code agents in one document
+  - All internal links verified to resolve to real files in the repo
+  - Updated README.md to link to CONTRIBUTING.md and mark Phase 0 as complete
+  - Under 300 lines, dense and scannable
+  - All 274 tests pass, 0 lint errors, build succeeds
+
+### Active Phase
+Phase 0 COMPLETE. Ready for Phase 1 — Token System Maturity.
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 0 / Task 0.10 is next (CONTRIBUTING.md)
-2. Read `AI_OPS.md` for the Task 0.10 prompt
-3. Create CONTRIBUTING.md with contribution guidelines
-4. Update `PROGRESS.md` to check off 0.10 and mark Phase 0 complete
+1. Read `PROGRESS.md` to confirm Phase 1 / Task 1.1 is next (Full color system)
+2. Read `ROADMAP.md` Section 2 for token architecture details
+3. Read `AI_OPS.md` for the Task 1.1 prompt
+4. Implement the full color token system
 
 ### Session History
 
@@ -575,3 +583,4 @@ None
 | 2026-03-07 | Claude (Claude Code) | Task 0.7 — CSS token linter | Created lint-tokens.ts + config. Fixed 93 hardcoded violations across 16 CSS files using component CSS custom properties. Added --focus-ring-error token to all 6 presets. Integrated into pnpm lint. 274 tests pass, 0 lint errors. |
 | 2026-03-07 | Claude (Claude Code) | Task 0.8 — Documentation update | Updated manifest.ai.json with new token names and destructive variant. Updated CLAUDE.md and PROGRESS.md to mark tasks 0.1-0.8 complete. Created docs/ARCHITECTURE.md. Verified all docs accuracy. |
 | 2026-03-07 | Claude (Claude Code) | Task 0.9 — CI/CD setup | Created ci.yml (5 jobs: lint, typecheck, test, build, visual-test), pr-title.yml (conventional commit validation). Added CI badge to README. Verified Vercel deployment. 274 tests pass, 0 lint errors. |
+| 2026-03-07 | Claude (Claude Code) | Task 0.10 — CONTRIBUTING.md | Created CONTRIBUTING.md (11 sections, under 300 lines). Updated README.md with link. Phase 0 complete. 274 tests pass, 0 lint errors. |

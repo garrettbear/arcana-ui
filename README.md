@@ -226,7 +226,7 @@ pnpm lint
 
 ## Contributing
 
-We welcome contributions from humans and AI agents alike. Read these files to get oriented:
+We welcome contributions from humans and AI agents alike. See **[CONTRIBUTING.md](./CONTRIBUTING.md)** for the full guide. Here's the quick orientation:
 
 1. **[CLAUDE.md](./CLAUDE.md)** — Project standards, conventions, and current state
 2. **[ROADMAP.md](./ROADMAP.md)** — Full architecture and phased plan
@@ -249,7 +249,7 @@ Arcana is in active development across five phases:
 
 | Phase | Focus | Status |
 |-------|-------|--------|
-| **0** | Foundation cleanup — code standards, token restructure, CI/CD | 🟨 Nearly complete (0.1-0.8/0.10 done) |
+| **0** | Foundation cleanup — code standards, token restructure, CI/CD | ✅ Complete |
 | **1** | Token system maturity — full color, typography, elevation, motion | ⬜ Planned |
 | **2** | Responsive & mobile — mobile-first CSS, touch targets, breakpoints | ⬜ Planned |
 | **3** | Expanded components — 22 → 60+ across all categories | ⬜ Planned |
