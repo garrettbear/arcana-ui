@@ -11,6 +11,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/garrettbear/arcana-ui/actions/workflows/ci.yml"><img src="https://github.com/garrettbear/arcana-ui/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="https://github.com/garrettbear/arcana-ui/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License" /></a>
   <a href="https://github.com/garrettbear/arcana-ui"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
   <a href="https://github.com/garrettbear/arcana-ui"><img src="https://img.shields.io/badge/AI-optimized-blueviolet.svg" alt="AI Optimized" /></a>
