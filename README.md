@@ -248,7 +248,7 @@ Arcana is in active development across five phases:
 
 | Phase | Focus | Status |
 |-------|-------|--------|
-| **0** | Foundation cleanup — code standards, token restructure, CI/CD | 🔄 In Progress |
+| **0** | Foundation cleanup — code standards, token restructure, CI/CD | 🟨 Nearly complete (0.1-0.8/0.10 done) |
 | **1** | Token system maturity — full color, typography, elevation, motion | ⬜ Planned |
 | **2** | Responsive & mobile — mobile-first CSS, touch targets, breakpoints | ⬜ Planned |
 | **3** | Expanded components — 22 → 60+ across all categories | ⬜ Planned |
