@@ -88,17 +88,32 @@ interface CSSVariable {
 
 const REFERENCE_RE = /^\{(.+)\}$/;
 
-/** Resolve a dotted path against a nested object */
+/** Resolve a dotted path against a nested object.
+ *  Handles keys that contain dots (e.g., "0.5" in spacing) by trying
+ *  greedy matching: at each level, try the longest possible key first. */
 function resolvePath(obj: Record<string, unknown>, path: string): string | undefined {
   const parts = path.split('.');
-  let current: unknown = obj;
-  for (const part of parts) {
+
+  function resolve(current: unknown, index: number): string | undefined {
+    if (index >= parts.length) {
+      return typeof current === 'string' ? current : undefined;
+    }
     if (current === null || current === undefined || typeof current !== 'object') {
       return undefined;
     }
-    current = (current as Record<string, unknown>)[part];
+    const record = current as Record<string, unknown>;
+    // Try progressively longer keys to handle dots in key names (e.g., "0.5")
+    for (let end = parts.length; end > index; end--) {
+      const key = parts.slice(index, end).join('.');
+      if (key in record) {
+        const result = resolve(record[key], end);
+        if (result !== undefined) return result;
+      }
+    }
+    return undefined;
   }
-  return typeof current === 'string' ? current : undefined;
+
+  return resolve(obj, 0);
 }
 
 /** Resolve all {references} in a token value, with circular reference detection */
@@ -460,6 +475,36 @@ function generateCombinedCSS(presets: TokenPreset[]): string {
     sections.push('');
   }
 
+  // Density modes (theme-independent)
+  sections.push(
+    '/* ─── Density: Compact ─── */',
+    '[data-density="compact"] {',
+    '  --spacing-xs: var(--spacing-0-5);',
+    '  --spacing-sm: var(--spacing-1);',
+    '  --spacing-md: var(--spacing-2);',
+    '  --spacing-lg: var(--spacing-3);',
+    '  --spacing-xl: var(--spacing-5);',
+    '  --spacing-2xl: var(--spacing-8);',
+    '  --spacing-3xl: var(--spacing-12);',
+    '  --spacing-section: var(--spacing-16);',
+    '  --spacing-section-lg: var(--spacing-24);',
+    '}',
+    '',
+    '/* ─── Density: Comfortable ─── */',
+    '[data-density="comfortable"] {',
+    '  --spacing-xs: var(--spacing-2);',
+    '  --spacing-sm: var(--spacing-3);',
+    '  --spacing-md: var(--spacing-6);',
+    '  --spacing-lg: var(--spacing-8);',
+    '  --spacing-xl: var(--spacing-12);',
+    '  --spacing-2xl: var(--spacing-16);',
+    '  --spacing-3xl: var(--spacing-24);',
+    '  --spacing-section: var(--spacing-32);',
+    '  --spacing-section-lg: var(--spacing-40);',
+    '}',
+    '',
+  );
+
   // Global reset + base styles (use new token names)
   sections.push(
     '/* ─── Global Reset + Base Styles ─── */',
@@ -536,13 +581,20 @@ function generateCompatCSS(): string {
     ['--arcana-spacing-6', 'var(--spacing-6)'],
     ['--arcana-spacing-7', 'var(--spacing-7)'],
     ['--arcana-spacing-8', 'var(--spacing-8)'],
+    ['--arcana-spacing-9', 'var(--spacing-9)'],
     ['--arcana-spacing-10', 'var(--spacing-10)'],
+    ['--arcana-spacing-11', 'var(--spacing-11)'],
     ['--arcana-spacing-12', 'var(--spacing-12)'],
     ['--arcana-spacing-14', 'var(--spacing-14)'],
     ['--arcana-spacing-16', 'var(--spacing-16)'],
     ['--arcana-spacing-20', 'var(--spacing-20)'],
     ['--arcana-spacing-24', 'var(--spacing-24)'],
+    ['--arcana-spacing-28', 'var(--spacing-28)'],
     ['--arcana-spacing-32', 'var(--spacing-32)'],
+    ['--arcana-spacing-36', 'var(--spacing-36)'],
+    ['--arcana-spacing-40', 'var(--spacing-40)'],
+    ['--arcana-spacing-44', 'var(--spacing-44)'],
+    ['--arcana-spacing-48', 'var(--spacing-48)'],
     // Radius
     ['--arcana-radius-none', 'var(--radius-none)'],
     ['--arcana-radius-xs', 'var(--radius-xs)'],

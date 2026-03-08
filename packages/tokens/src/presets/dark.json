@@ -233,13 +233,20 @@
       "6": "1.5rem",
       "7": "1.75rem",
       "8": "2rem",
+      "9": "2.25rem",
       "10": "2.5rem",
+      "11": "2.75rem",
       "12": "3rem",
       "14": "3.5rem",
       "16": "4rem",
       "20": "5rem",
       "24": "6rem",
-      "32": "8rem"
+      "28": "7rem",
+      "32": "8rem",
+      "36": "9rem",
+      "40": "10rem",
+      "44": "11rem",
+      "48": "12rem"
     },
     "radius": {
       "none": "0",
@@ -467,7 +474,8 @@
       "xl": "{primitive.spacing.8}",
       "2xl": "{primitive.spacing.12}",
       "3xl": "{primitive.spacing.16}",
-      "section": "{primitive.spacing.24}"
+      "section": "{primitive.spacing.24}",
+      "section-lg": "{primitive.spacing.32}"
     },
     "elevation": {
       "none": "{primitive.shadow.none}",
@@ -527,7 +535,9 @@
       "border-color": "{semantic.color.border.default}",
       "font-size": "{primitive.typography.fontSize.sm}",
       "font-weight": "{primitive.typography.fontWeight.medium}",
-      "letter-spacing": "{primitive.typography.letterSpacing.normal}"
+      "letter-spacing": "{primitive.typography.letterSpacing.normal}",
+      "padding-x": "var(--spacing-md)",
+      "padding-y": "var(--spacing-sm)"
     },
     "input": {
       "radius": "{semantic.radius.md}",
@@ -537,13 +547,15 @@
       "border-color": "{semantic.color.border.default}",
       "border-focus": "{semantic.color.border.focus}",
       "border-error": "{semantic.color.border.error}",
-      "font-size": "{primitive.typography.fontSize.sm}"
+      "font-size": "{primitive.typography.fontSize.sm}",
+      "padding-x": "var(--spacing-sm)"
     },
     "card": {
       "radius": "{semantic.radius.md}",
       "border-width": "{semantic.border.width.default}",
       "bg": "{semantic.color.background.surface}",
-      "border-color": "{semantic.color.border.default}"
+      "border-color": "{semantic.color.border.default}",
+      "padding": "var(--spacing-lg)"
     }
   }
 }

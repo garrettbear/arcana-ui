@@ -573,17 +573,29 @@ Phase 0 COMPLETE — ready for Phase 1
   - Build output: 1703 total variables across 6 themes (up from ~1170)
   - All 274 tests pass, 0 lint errors, build succeeds
 
+- Task 1.3 — Spacing system
+  - Expanded primitive spacing scale to 29 values (spacing-0 through spacing-48) across all 6 presets
+  - Semantic spacing aliases: xs, sm, md, lg, xl, 2xl, 3xl, section, section-lg
+  - Terminal and retro98 presets use compact-equivalent default spacing (xs=2px, sm=4px, md=8px, lg=12px)
+  - Three density modes via `data-density` attribute: compact, default, comfortable
+  - Density CSS generated theme-independently in arcana.css (composes with any `data-theme`)
+  - Component spacing tokens (button padding-x/y, input padding-x, card padding) use `var(--spacing-*)` for automatic density adaptation
+  - Fixed `resolvePath` in build.ts to handle dotted keys (e.g., "0.5" in spacing)
+  - Updated compat aliases for new spacing values (9, 11, 28, 36, 40, 44, 48)
+  - Build output: 1955 total variables across 6 themes, 188 compat aliases
+  - All 274 tests pass, 0 lint errors (53 pre-existing warnings), build succeeds
+
 ### Active Phase
-Phase 1 — Token System Maturity. Tasks 1.1–1.2 complete, next is Task 1.3 (Spacing system).
+Phase 1 — Token System Maturity. Tasks 1.1–1.3 complete, next is Task 1.4 (Elevation system).
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 1 / Task 1.3 is next (Spacing system)
-2. Read `ROADMAP.md` for spacing token inventory
-3. Read `AI_OPS.md` for the Task 1.3 prompt
-4. Implement the spacing token system
+1. Read `PROGRESS.md` to confirm Phase 1 / Task 1.4 is next (Elevation system — shadows + z-index)
+2. Read `ROADMAP.md` for elevation token inventory
+3. Read `AI_OPS.md` for the Task 1.4 prompt
+4. Implement the elevation token system
 
 ### Session History
 
@@ -603,3 +615,4 @@ None
 | 2026-03-07 | Claude (Claude Code) | Task 0.10 — CONTRIBUTING.md | Created CONTRIBUTING.md (11 sections, under 300 lines). Updated README.md with link. Phase 0 complete. 274 tests pass, 0 lint errors. |
 | 2026-03-08 | Claude (Claude Code) | Task 1.1 — Full color system | Expanded primitive palettes: light/dark/glass get full 16-hue Tailwind palette (179 primitives), terminal green+gray only, retro98 Win98-authentic, brutalist minimal. Added accent, border-muted, border-success, action-disabled semantic tokens. Added component color tokens. 1703 total vars. 274 tests pass, 0 lint errors. |
 | 2026-03-08 | Claude (Claude Code) | Task 1.2 — Typography system | Added display font family, 6xl/7xl sizes, light/black weights to all 6 presets. Changed loose line height from 2 to 1.75. Added semantic typography: fluid clamp() sizes (lg–7xl) for 5 presets, fixed sizes for retro98. Added semantic weight/lineHeight/letterSpacing aliases (heading, body, strong, ui, caps). Added paragraphSpacing token. Added component typography tokens (button font-size/weight/letter-spacing, input font-size). Preset personalities: glass=lighter weights, brutalist=heavy black headings, terminal=monospace everywhere. Removed Google Fonts import from build.ts. Updated build.ts SemanticTokens type. 1883 total vars. 274 tests pass, 0 lint errors. |
+| 2026-03-08 | Claude (Claude Code) | Task 1.3 — Spacing system | Expanded primitive scale to 29 values (0–48). Added semantic aliases (xs–section-lg). Terminal/retro98 use compact defaults. Three density modes (compact/default/comfortable) via data-density attribute. Component spacing tokens use var() for density adaptation. Fixed resolvePath for dotted keys. 1955 total vars. 274 tests pass, 0 lint errors. |
