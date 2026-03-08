@@ -574,16 +574,16 @@ Phase 0 COMPLETE — ready for Phase 1
   - All 274 tests pass, 0 lint errors, build succeeds
 
 ### Active Phase
-Phase 1 — Token System Maturity. Task 1.1 complete, next is Task 1.2 (Typography system).
+Phase 1 — Token System Maturity. Tasks 1.1–1.2 complete, next is Task 1.3 (Spacing system).
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 1 / Task 1.2 is next (Typography system)
-2. Read `ROADMAP.md` Section 2.2 for typography token inventory
-3. Read `AI_OPS.md` for the Task 1.2 prompt
-4. Implement the full typography token system
+1. Read `PROGRESS.md` to confirm Phase 1 / Task 1.3 is next (Spacing system)
+2. Read `ROADMAP.md` for spacing token inventory
+3. Read `AI_OPS.md` for the Task 1.3 prompt
+4. Implement the spacing token system
 
 ### Session History
 
@@ -602,3 +602,4 @@ None
 | 2026-03-07 | Claude (Claude Code) | Task 0.9 — CI/CD setup | Created ci.yml (5 jobs: lint, typecheck, test, build, visual-test), pr-title.yml (conventional commit validation). Added CI badge to README. Verified Vercel deployment. 274 tests pass, 0 lint errors. |
 | 2026-03-07 | Claude (Claude Code) | Task 0.10 — CONTRIBUTING.md | Created CONTRIBUTING.md (11 sections, under 300 lines). Updated README.md with link. Phase 0 complete. 274 tests pass, 0 lint errors. |
 | 2026-03-08 | Claude (Claude Code) | Task 1.1 — Full color system | Expanded primitive palettes: light/dark/glass get full 16-hue Tailwind palette (179 primitives), terminal green+gray only, retro98 Win98-authentic, brutalist minimal. Added accent, border-muted, border-success, action-disabled semantic tokens. Added component color tokens. 1703 total vars. 274 tests pass, 0 lint errors. |
+| 2026-03-08 | Claude (Claude Code) | Task 1.2 — Typography system | Added display font family, 6xl/7xl sizes, light/black weights to all 6 presets. Changed loose line height from 2 to 1.75. Added semantic typography: fluid clamp() sizes (lg–7xl) for 5 presets, fixed sizes for retro98. Added semantic weight/lineHeight/letterSpacing aliases (heading, body, strong, ui, caps). Added paragraphSpacing token. Added component typography tokens (button font-size/weight/letter-spacing, input font-size). Preset personalities: glass=lighter weights, brutalist=heavy black headings, terminal=monospace everywhere. Removed Google Fonts import from build.ts. Updated build.ts SemanticTokens type. 1883 total vars. 274 tests pass, 0 lint errors. |

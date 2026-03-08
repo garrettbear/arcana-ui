@@ -2,7 +2,7 @@
 
 > **Last updated:** 2026-03-08
 > **Current phase:** 1 — Token System Maturity
-> **Next priority task:** 1.2
+> **Next priority task:** 1.3
 > **Blocking issues:** None
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
@@ -19,7 +19,7 @@
 
 ## Phase 1: Token System Maturity (Weeks 3–5)
 - [x] 1.1 — Full color system
-- [ ] 1.2 — Typography system
+- [x] 1.2 — Typography system
 - [ ] 1.3 — Spacing system
 - [ ] 1.4 — Elevation system (shadows + z-index)
 - [ ] 1.5 — Layout tokens (breakpoints, containers, grid)
