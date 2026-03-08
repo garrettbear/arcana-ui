@@ -1,8 +1,8 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-03-07
-> **Current phase:** Phase 0 COMPLETE — ready for Phase 1
-> **Next priority task:** 1.1
+> **Last updated:** 2026-03-08
+> **Current phase:** 1 — Token System Maturity
+> **Next priority task:** 1.2
 > **Blocking issues:** None
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
@@ -18,7 +18,7 @@
 - [x] 0.10 — Establish CONTRIBUTING.md
 
 ## Phase 1: Token System Maturity (Weeks 3–5)
-- [ ] 1.1 — Full color system
+- [x] 1.1 — Full color system
 - [ ] 1.2 — Typography system
 - [ ] 1.3 — Spacing system
 - [ ] 1.4 — Elevation system (shadows + z-index)

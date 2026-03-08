@@ -556,17 +556,34 @@ Phase 0 COMPLETE — ready for Phase 1
   - Under 300 lines, dense and scannable
   - All 274 tests pass, 0 lint errors, build succeeds
 
+- Task 1.1 — Full color system
+  - Expanded primitive color palettes across all 6 presets:
+    - light/dark/glass: Full 16-hue Tailwind palette (slate, gray, zinc, stone, red, orange, amber, yellow, green, emerald, teal, blue, indigo, violet, purple, pink) × 11 steps + white/black/transparent = 179 primitives each
+    - terminal: Reduced to green + gray only (25 primitives) — no other hues
+    - retro98: Custom Win98-authentic colors (gray, blue, teal, red, green, yellow) with saturated 11-step scales
+    - brutalist: Minimal palette (gray, red, blue, green, amber) — restrained by design
+  - Added missing semantic color tokens to all 6 presets:
+    - `color-accent-primary` and `color-accent-secondary` (new category)
+    - `color-border-muted` and `color-border-success` (new border tokens)
+    - `color-action-primary-disabled` (new state)
+  - Fixed raw hex values in semantic tier → primitive references (light: status.fg/border now use {primitive.color.*})
+  - Dark theme: elevated surfaces are LIGHTER than base (950 → 900 → 800 hierarchy)
+  - Added component color tokens (bg, fg, border-color) to button, input, card in all presets
+  - Updated `build.ts`: added accent token support to SemanticTokens type and CSS generation
+  - Build output: 1703 total variables across 6 themes (up from ~1170)
+  - All 274 tests pass, 0 lint errors, build succeeds
+
 ### Active Phase
-Phase 0 COMPLETE. Ready for Phase 1 — Token System Maturity.
+Phase 1 — Token System Maturity. Task 1.1 complete, next is Task 1.2 (Typography system).
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 1 / Task 1.1 is next (Full color system)
-2. Read `ROADMAP.md` Section 2 for token architecture details
-3. Read `AI_OPS.md` for the Task 1.1 prompt
-4. Implement the full color token system
+1. Read `PROGRESS.md` to confirm Phase 1 / Task 1.2 is next (Typography system)
+2. Read `ROADMAP.md` Section 2.2 for typography token inventory
+3. Read `AI_OPS.md` for the Task 1.2 prompt
+4. Implement the full typography token system
 
 ### Session History
 
@@ -584,3 +601,4 @@ None
 | 2026-03-07 | Claude (Claude Code) | Task 0.8 — Documentation update | Updated manifest.ai.json with new token names and destructive variant. Updated CLAUDE.md and PROGRESS.md to mark tasks 0.1-0.8 complete. Created docs/ARCHITECTURE.md. Verified all docs accuracy. |
 | 2026-03-07 | Claude (Claude Code) | Task 0.9 — CI/CD setup | Created ci.yml (5 jobs: lint, typecheck, test, build, visual-test), pr-title.yml (conventional commit validation). Added CI badge to README. Verified Vercel deployment. 274 tests pass, 0 lint errors. |
 | 2026-03-07 | Claude (Claude Code) | Task 0.10 — CONTRIBUTING.md | Created CONTRIBUTING.md (11 sections, under 300 lines). Updated README.md with link. Phase 0 complete. 274 tests pass, 0 lint errors. |
+| 2026-03-08 | Claude (Claude Code) | Task 1.1 — Full color system | Expanded primitive palettes: light/dark/glass get full 16-hue Tailwind palette (179 primitives), terminal green+gray only, retro98 Win98-authentic, brutalist minimal. Added accent, border-muted, border-success, action-disabled semantic tokens. Added component color tokens. 1703 total vars. 274 tests pass, 0 lint errors. |
