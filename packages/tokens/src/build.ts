@@ -46,6 +46,7 @@ interface SemanticTokens {
     action: Record<string, Record<string, string>>;
     border: Record<string, string>;
     status: Record<string, Record<string, string>>;
+    accent?: Record<string, string>;
   };
   typography: {
     family: Record<string, string>;
@@ -245,6 +246,13 @@ function generateSemanticVars(
         name: `--color-status-${type}${suffix}`,
         value: resolveValue(preset, value),
       });
+    }
+  }
+
+  // Accent
+  if (semantic.color.accent) {
+    for (const [key, value] of Object.entries(semantic.color.accent)) {
+      vars.push({ name: `--color-accent-${key}`, value: resolveValue(preset, value) });
     }
   }
 
