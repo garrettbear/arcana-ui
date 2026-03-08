@@ -50,6 +50,11 @@ interface SemanticTokens {
   };
   typography: {
     family: Record<string, string>;
+    size?: Record<string, string>;
+    weight?: Record<string, string>;
+    lineHeight?: Record<string, string>;
+    letterSpacing?: Record<string, string>;
+    paragraphSpacing?: string;
   };
   spacing: Record<string, string>;
   elevation: Record<string, string>;
@@ -261,6 +266,42 @@ function generateSemanticVars(
     vars.push({ name: `--font-family-${key}`, value: resolveValue(preset, value) });
   }
 
+  // Typography size (overrides primitive --font-size-* with fluid values)
+  if (semantic.typography.size) {
+    for (const [key, value] of Object.entries(semantic.typography.size)) {
+      vars.push({ name: `--font-size-${key}`, value: resolveValue(preset, value) });
+    }
+  }
+
+  // Typography weight (semantic aliases like heading, body, strong, ui)
+  if (semantic.typography.weight) {
+    for (const [key, value] of Object.entries(semantic.typography.weight)) {
+      vars.push({ name: `--font-weight-${key}`, value: resolveValue(preset, value) });
+    }
+  }
+
+  // Typography line height (semantic aliases)
+  if (semantic.typography.lineHeight) {
+    for (const [key, value] of Object.entries(semantic.typography.lineHeight)) {
+      vars.push({ name: `--line-height-${key}`, value: resolveValue(preset, value) });
+    }
+  }
+
+  // Typography letter spacing (semantic aliases)
+  if (semantic.typography.letterSpacing) {
+    for (const [key, value] of Object.entries(semantic.typography.letterSpacing)) {
+      vars.push({ name: `--letter-spacing-${key}`, value: resolveValue(preset, value) });
+    }
+  }
+
+  // Paragraph spacing
+  if (semantic.typography.paragraphSpacing) {
+    vars.push({
+      name: '--paragraph-spacing',
+      value: resolveValue(preset, semantic.typography.paragraphSpacing),
+    });
+  }
+
   // Spacing
   for (const [key, value] of Object.entries(semantic.spacing)) {
     vars.push({ name: `--spacing-${key}`, value: resolveValue(preset, value) });
@@ -408,9 +449,6 @@ function generateCombinedCSS(presets: TokenPreset[]): string {
     ' * Version: 0.1.0',
     ' */',
     '',
-    '/* ─── Font Imports ─── */',
-    "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');",
-    '',
   ];
 
   for (const preset of sorted) {
@@ -526,10 +564,14 @@ function generateCompatCSS(): string {
     ['--arcana-typography-font-size-3xl', 'var(--font-size-3xl)'],
     ['--arcana-typography-font-size-4xl', 'var(--font-size-4xl)'],
     ['--arcana-typography-font-size-5xl', 'var(--font-size-5xl)'],
+    ['--arcana-typography-font-size-6xl', 'var(--font-size-6xl)'],
+    ['--arcana-typography-font-size-7xl', 'var(--font-size-7xl)'],
+    ['--arcana-typography-font-weight-light', 'var(--font-weight-light)'],
     ['--arcana-typography-font-weight-normal', 'var(--font-weight-normal)'],
     ['--arcana-typography-font-weight-medium', 'var(--font-weight-medium)'],
     ['--arcana-typography-font-weight-semibold', 'var(--font-weight-semibold)'],
     ['--arcana-typography-font-weight-bold', 'var(--font-weight-bold)'],
+    ['--arcana-typography-font-weight-black', 'var(--font-weight-black)'],
     ['--arcana-typography-line-height-none', 'var(--line-height-none)'],
     ['--arcana-typography-line-height-tight', 'var(--line-height-tight)'],
     ['--arcana-typography-line-height-snug', 'var(--line-height-snug)'],
