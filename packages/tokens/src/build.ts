@@ -38,6 +38,7 @@ interface PrimitiveTokens {
     easing: Record<string, string>;
   };
   zIndex: Record<string, string>;
+  layout: Record<string, string>;
 }
 
 interface SemanticTokens {
@@ -59,6 +60,7 @@ interface SemanticTokens {
   };
   spacing: Record<string, string>;
   elevation: Record<string, string>;
+  layout?: Record<string, string>;
   radius: Record<string, string>;
   border: {
     width: Record<string, string>;
@@ -209,6 +211,11 @@ function generatePrimitiveVars(
     vars.push({ name: `--z-${key}`, value: resolveValue(preset, value) });
   }
 
+  // Layout
+  for (const [key, value] of Object.entries(primitive.layout)) {
+    vars.push({ name: `--${key}`, value: resolveValue(preset, value) });
+  }
+
   return vars;
 }
 
@@ -333,6 +340,13 @@ function generateSemanticVars(
   for (const [key, value] of Object.entries(semantic.elevation)) {
     const prefix = SHADOW_SIZE_KEYS.has(key) ? '--shadow' : '--elevation';
     vars.push({ name: `${prefix}-${key}`, value: resolveValue(preset, value) });
+  }
+
+  // Layout
+  if (semantic.layout) {
+    for (const [key, value] of Object.entries(semantic.layout)) {
+      vars.push({ name: `--${key}`, value: resolveValue(preset, value) });
+    }
   }
 
   // Radius
@@ -792,6 +806,7 @@ function validatePreset(data: unknown, filename: string): TokenPreset {
     'blur',
     'motion',
     'zIndex',
+    'layout',
   ];
   for (const field of primRequired) {
     if (!(field in primitive)) {

@@ -217,6 +217,24 @@
       "popover": "600",
       "toast": "700",
       "tooltip": "800"
+    },
+    "layout": {
+      "breakpoint-sm": "640px",
+      "breakpoint-md": "768px",
+      "breakpoint-lg": "1024px",
+      "breakpoint-xl": "1280px",
+      "breakpoint-2xl": "1536px",
+      "container-sm": "640px",
+      "container-md": "768px",
+      "container-lg": "1024px",
+      "container-xl": "1280px",
+      "container-2xl": "1536px",
+      "content-prose": "65ch",
+      "content-narrow": "42rem",
+      "content-default": "64rem",
+      "content-wide": "80rem",
+      "content-full": "100%",
+      "grid-columns": "12"
     }
   },
 
@@ -375,6 +393,29 @@
       "toast": "{primitive.shadow.md}",
       "navbar": "{primitive.shadow.xs}",
       "sidebar": "{primitive.shadow.none}"
+    },
+    "layout": {
+      "breakpoint-sm": "{primitive.layout.breakpoint-sm}",
+      "breakpoint-md": "{primitive.layout.breakpoint-md}",
+      "breakpoint-lg": "{primitive.layout.breakpoint-lg}",
+      "breakpoint-xl": "{primitive.layout.breakpoint-xl}",
+      "breakpoint-2xl": "{primitive.layout.breakpoint-2xl}",
+      "container-sm": "{primitive.layout.container-sm}",
+      "container-md": "{primitive.layout.container-md}",
+      "container-lg": "{primitive.layout.container-lg}",
+      "container-xl": "{primitive.layout.container-xl}",
+      "container-2xl": "{primitive.layout.container-2xl}",
+      "content-prose": "{primitive.layout.content-prose}",
+      "content-narrow": "{primitive.layout.content-narrow}",
+      "content-default": "{primitive.layout.content-default}",
+      "content-wide": "{primitive.layout.content-wide}",
+      "content-full": "{primitive.layout.content-full}",
+      "grid-columns": "{primitive.layout.grid-columns}",
+      "grid-gutter": "var(--spacing-md)",
+      "grid-gutter-sm": "var(--spacing-sm)",
+      "grid-gutter-lg": "var(--spacing-lg)",
+      "grid-margin": "var(--spacing-md)",
+      "grid-margin-lg": "var(--spacing-xl)"
     },
     "radius": {
       "none": "{primitive.radius.none}",
