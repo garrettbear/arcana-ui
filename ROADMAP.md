@@ -1550,6 +1550,23 @@ These are ideas we want to pursue but haven't scheduled into a phase yet. They l
 | **Storybook integration** | Official Storybook addon for theme switching and token visualization. | Medium | Stable components |
 | **AI theme generation** | "Describe your brand in 2 sentences" → AI generates a complete preset JSON. Could be a CLI tool or a web feature in the playground. | Medium | Stable token schema, LLM API integration |
 
+### Theme Studio (Multi-Brand Workspace)
+
+The vision: a web-based theme editor where a brand can create, name, and manage multiple themes — then switch between them in real-time to compare. Think "Figma for design tokens." This is a significant product surface that evolves in stages:
+
+| Idea | Description | Complexity | Dependencies |
+|---|---|---|---|
+| **Named theme workspaces** | Upgrade the playground from a single-theme editor to a multi-theme workspace. Users can create new themes, name them (e.g., "Ritz-Carlton", "W Hotels", "Courtyard"), and switch between them instantly. Each theme is a complete preset JSON stored in the browser. Export any theme as a JSON file. | Large | Stable token schema, full component library |
+| **Side-by-side theme comparison** | Split-screen or overlay mode that renders the same component/page in two themes simultaneously. Essential for brands managing light + dark + high-contrast, or parent brand + sub-brands. | Medium | Named theme workspaces |
+| **Live component preview** | As you edit token values, every component updates in real-time. Organized by component category so you can see how your changes affect buttons, cards, forms, and marketing sections all at once. | Medium | Named theme workspaces, full component library |
+| **Component-level token editor** | Expose the Tier 3 (component token) surface in the UI. A user can click on a Card component and directly adjust its shadow, radius, padding, and border — overriding the semantic defaults for that specific component within this theme. | Large | Component token layer (1.12), named theme workspaces |
+| **Density mode preview** | Toggle between compact/default/comfortable in the theme editor and see all components adapt in real-time. Critical for brands that need both dashboard and marketing aesthetics. | Medium | Density modes (1.3), named theme workspaces |
+| **Persistent storage (local)** | Themes persist in the browser via IndexedDB or localStorage so users don't lose work between sessions. Import/export as JSON for backup and sharing. | Medium | Named theme workspaces |
+| **Cloud storage with accounts** | User accounts (OAuth — GitHub, Google) with cloud-saved theme workspaces. Share themes via URL. Collaborate on theme development. This is where Arcana becomes a product, not just a library. | XL | Persistent local storage, auth infrastructure, backend/database |
+| **Theme version history** | Track changes to a theme over time. Diff between versions. Restore previous states. Works locally first (undo stack), then with cloud storage (full version history). | Large | Cloud storage with accounts |
+| **Team collaboration** | Multiple team members can edit the same theme workspace. Real-time sync (like Figma). Role-based access: editor, viewer, admin. | XL | Cloud storage with accounts, real-time sync infrastructure |
+| **Brand guidelines export** | Generate a comprehensive brand guidelines document (PDF or web page) from a theme — showing color palette, typography scale, spacing system, component examples, and usage rules. Essentially auto-generates a design system documentation site from a single JSON file. | Large | Named theme workspaces, full component library, docs infrastructure |
+
 ### Advanced Token Features
 
 | Idea | Description | Complexity | Dependencies |
