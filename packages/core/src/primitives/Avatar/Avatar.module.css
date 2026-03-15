@@ -5,7 +5,7 @@
   justify-content: center;
   border-radius: var(--radius-full);
   background-color: var(--color-bg-subtle);
-  border: 2px solid var(--color-bg-page);
+  border: var(--border-width-thick) solid var(--color-bg-page);
   overflow: hidden;
   flex-shrink: 0;
   user-select: none;
