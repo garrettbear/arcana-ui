@@ -26,7 +26,7 @@
 }
 
 .disabledWrapper {
-  opacity: 0.5;
+  opacity: var(--opacity-disabled);
 }
 
 .row {
@@ -61,7 +61,7 @@
 
 .input:checked {
   border-color: var(--color-action-primary);
-  border-width: 5px;
+  border-width: var(--border-width-heavy);
   background-color: var(--color-bg-page);
 }
 

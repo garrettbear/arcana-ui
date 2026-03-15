@@ -611,6 +611,29 @@ Phase 0 COMPLETE — ready for Phase 1
   - All 274 tests pass, 0 lint errors, build succeeds
 
 - Task 1.6 — Motion tokens (durations, easing, transitions, reduced-motion)
+
+- Tasks 1.7 + 1.8 — Border/shape + opacity tokens (combined)
+  - Added primitive border widths (border-0 through border-8: 0px, 1px, 1.5px, 2px, 4px) and divider (weight, style) to all 6 presets
+  - Added 16 primitive opacity values (0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 95, 100) to all 6 presets
+  - Updated primitive radius scale: added 3xl (1.5rem/24px), adjusted sizes for finer granularity (md=0.375rem, lg=0.5rem, xl=0.75rem, 2xl=1rem)
+  - Added semantic border widths: thin (1px), default (1.5px), thick (2px), heavy (4px) — all referencing primitive border widths
+  - Added composable focus ring tokens: --focus-ring-width, --focus-ring-color, --focus-ring (using var() references)
+  - Added semantic divider-color token referencing color-border-muted
+  - Added 5 semantic opacity tokens: disabled (0.4), placeholder (0.5), hover-overlay (0.08), overlay, overlay-heavy
+  - Per-preset border/radius strategies:
+    - light/dark: standard radius scale, 1.5px default borders, indigo focus rings at 30%
+    - terminal: radius-none everywhere, 1px thin borders, green focus ring at 40%
+    - retro98: radius-none everywhere, chunky 2px default borders, solid 1px black focus ring
+    - glass: generous radius (0.25–3rem), subtle focus ring at 25% opacity
+    - brutalist: radius-none everywhere, thick 3px default borders, bold 3px solid black focus ring
+  - Per-preset opacity: dark=heavier overlays (0.65), terminal=imposing (0.8), retro98=solid (1.0), glass=light (0.3), brutalist=nearly solid (0.95)
+  - Added component tokens: modal.radius, toast.radius, badge.radius, alert.radius to all 6 presets
+  - Fixed hardcoded border values: Avatar 2px→var(--border-width-thick), Toast 3px→var(--border-width-thick), Tabs 1px/2px→border-width tokens, Radio 5px→var(--border-width-heavy)
+  - Replaced hardcoded disabled opacity (0.4–0.6) with var(--opacity-disabled) in 10 components (Button, Input, Checkbox, Radio, Toggle, Select, Textarea, Accordion, Tabs)
+  - Updated build.ts: primitive border/opacity generation, semantic opacity/divider/focus-ring-width/focus-ring-color generation, validation requires border+opacity
+  - Added 197 compat aliases (up from 190) with new border/radius entries
+  - Build output: 2681 total variables across 6 themes (up from 2459)
+  - All 274 tests pass, 0 lint errors (53 pre-existing warnings), 0 token lint violations, build succeeds
   - Expanded primitive motion to 9 duration values (0–1000ms) and 7 easing curves (linear, default, in, out, in-out, spring, bounce) across all 6 presets
   - Added semantic duration aliases (instant, fast, normal, slow, slower) with per-preset personalities
   - Added 5 transition shorthand tokens (transition-colors, transition-shadow, transition-transform, transition-opacity, transition-all)
@@ -625,16 +648,16 @@ Phase 0 COMPLETE — ready for Phase 1
   - All 274 tests pass, 0 lint errors, 0 token lint violations, build succeeds
 
 ### Active Phase
-Phase 1 — Token System Maturity. Tasks 1.1–1.6 complete, next is Task 1.7 (Border & shape tokens).
+Phase 1 — Token System Maturity. Tasks 1.1–1.8 complete, next is Task 1.9 (Token validation CI check).
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 1 / Task 1.7 is next (Border & shape tokens)
-2. Read `ROADMAP.md` for border & shape token inventory
-3. Read `AI_OPS.md` for the Task 1.7 prompt
-4. Implement the border & shape token system
+1. Read `PROGRESS.md` to confirm Phase 1 / Task 1.9 is next (Token validation CI check)
+2. Read `ROADMAP.md` for token validation requirements
+3. Read `AI_OPS.md` for the Task 1.9 prompt
+4. Implement token validation CI check
 
 ### Session History
 
@@ -658,3 +681,4 @@ None
 | 2026-03-09 | Claude (Claude Code) | Task 1.4 — Elevation system | Added primitive shadows (xs–2xl, inner, none), backdrop blur (none–3xl), updated z-index scale (added fixed/popover, reordered 0–800). Added 8 semantic elevation tokens (card, card-hover, dropdown, modal, popover, toast, navbar, sidebar). Per-preset strategies: light=standard shadows, dark=higher opacity shadows, terminal=zero shadows, retro98=hard pixel shadows, glass=subtle shadows + backdrop-blur, brutalist=exaggerated hard shadows. Added component elevation tokens (card shadow/shadow-hover, modal shadow/overlay-bg, toast shadow, navbar shadow/backdrop-blur). Updated Card/Modal/Toast/Navbar CSS to use elevation tokens. Updated build.ts: blur primitive generation, contextual --elevation-* naming. 2099 total vars. 274 tests pass, 0 lint errors. |
 | 2026-03-09 | Claude (Claude Code) | Task 1.5 — Layout tokens | Added primitive layout tokens (5 breakpoints, 5 container sizes, 5 content widths, grid-columns) and semantic layout tokens (grid-gutter variants, grid-margin variants) to all 6 presets. Per-preset variations: terminal=narrower content (56rem/72rem) + tighter gutters, brutalist=wider gutters. Updated build.ts with layout generation + validation. Created layout.css utility classes (container, content width, 12-column grid, responsive columns, stack). Created useMediaQuery and useBreakpoint hooks (SSR-safe). Exported hooks from index.ts. 2321 total vars. 274 tests pass, 0 lint errors. |
 | 2026-03-10 | Claude (Claude Code) | Task 1.6 — Motion tokens | Expanded primitive motion to 9 durations × 7 easings. Added semantic aliases + 5 transition shorthands. Per-preset personalities: light/dark=standard, terminal/brutalist=instant, retro98=minimal, glass=smooth/elegant. Added reduced-motion media query zeroing all durations. Updated 14 component CSS files to use shorthand tokens. Created usePrefersReducedMotion hook. Enhanced token linter for hardcoded easing. 2459 total vars. 274 tests pass, 0 lint errors. |
+| 2026-03-15 | Claude (Claude Code) | Tasks 1.7+1.8 — Border/shape + opacity | Added primitive border widths (0/1/2/4/8), divider (weight/style), 16 opacity values (0–100). Updated primitive radius scale (added 3xl, adjusted sizes for finer granularity). Added semantic border (thin/default/thick/heavy referencing primitives), focus ring (composable ringWidth + ringColor + ring shorthand), divider color, 5 semantic opacity tokens (disabled/placeholder/hover-overlay/overlay/overlay-heavy). Per-preset: terminal/retro98/brutalist=radius-none everywhere; glass=generous radius (0.25–3rem); retro98=chunky 2px borders + solid 1px focus ring; brutalist=3px default borders + 3px solid black focus ring; glass=subtle 25% opacity focus ring. Added component tokens (modal/toast/badge/alert radius). Fixed hardcoded values: Avatar 2px→border-width-thick, Toast 3px→border-width-thick, Tabs 1px/2px→border-width-thin/thick, Radio 5px→border-width-heavy. Replaced hardcoded disabled opacity (0.4–0.6) with var(--opacity-disabled) in 10 components. Updated build.ts: primitive border/opacity generation, semantic opacity/divider/focus-ring-width/focus-ring-color generation, validation. 2681 total vars. 274 tests pass, 0 lint/token-lint errors. |

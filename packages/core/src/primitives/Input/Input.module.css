@@ -46,7 +46,7 @@
 .inputWrapper.disabled {
   background-color: var(--color-bg-surface);
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: var(--opacity-disabled);
 }
 
 /* Input element */

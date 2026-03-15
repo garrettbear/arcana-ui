@@ -1,8 +1,8 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-03-09
+> **Last updated:** 2026-03-15
 > **Current phase:** 1 — Token System Maturity
-> **Next priority task:** 1.7
+> **Next priority task:** 1.9
 > **Blocking issues:** None
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
@@ -24,8 +24,8 @@
 - [x] 1.4 — Elevation system (shadows + z-index + backdrop blur)
 - [x] 1.5 — Layout tokens (breakpoints, containers, grid)
 - [x] 1.6 — Motion tokens
-- [ ] 1.7 — Border & shape tokens
-- [ ] 1.8 — Opacity tokens
+- [x] 1.7 — Border & shape tokens
+- [x] 1.8 — Opacity tokens
 - [ ] 1.9 — Token validation CI check
 - [ ] 1.10 — Theme switching (data-theme + system pref)
 - [ ] 1.11 — WCAG contrast validation

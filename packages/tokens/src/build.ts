@@ -24,6 +24,11 @@ interface PrimitiveTokens {
   color: Record<string, string | Record<string, string>>;
   spacing: Record<string, string>;
   radius: Record<string, string>;
+  border: {
+    width: Record<string, string>;
+    divider: Record<string, string>;
+  };
+  opacity: Record<string, string>;
   typography: {
     fontFamily: Record<string, string>;
     fontSize: Record<string, string>;
@@ -65,7 +70,9 @@ interface SemanticTokens {
   border: {
     width: Record<string, string>;
     focus: Record<string, string>;
+    divider?: Record<string, string>;
   };
+  opacity?: Record<string, string>;
   motion: {
     duration: Record<string, string>;
     easing: Record<string, string>;
@@ -227,6 +234,21 @@ function generatePrimitiveVars(
     vars.push({ name: `--${key}`, value: resolveValue(preset, value) });
   }
 
+  // Border widths
+  for (const [key, value] of Object.entries(primitive.border.width)) {
+    vars.push({ name: `--border-${key}`, value: resolveValue(preset, value) });
+  }
+
+  // Divider primitives
+  for (const [key, value] of Object.entries(primitive.border.divider)) {
+    vars.push({ name: `--divider-${key}`, value: resolveValue(preset, value) });
+  }
+
+  // Opacity
+  for (const [key, value] of Object.entries(primitive.opacity)) {
+    vars.push({ name: `--opacity-${key}`, value: resolveValue(preset, value) });
+  }
+
   return vars;
 }
 
@@ -371,6 +393,18 @@ function generateSemanticVars(
   }
 
   // Border focus
+  if (semantic.border.focus.ringWidth) {
+    vars.push({
+      name: '--focus-ring-width',
+      value: resolveValue(preset, semantic.border.focus.ringWidth),
+    });
+  }
+  if (semantic.border.focus.ringColor) {
+    vars.push({
+      name: '--focus-ring-color',
+      value: resolveValue(preset, semantic.border.focus.ringColor),
+    });
+  }
   vars.push({ name: '--focus-ring', value: resolveValue(preset, semantic.border.focus.ring) });
   if (semantic.border.focus.ringError) {
     vars.push({
@@ -379,6 +413,20 @@ function generateSemanticVars(
     });
   }
   vars.push({ name: '--focus-offset', value: resolveValue(preset, semantic.border.focus.offset) });
+
+  // Border divider
+  if (semantic.border.divider) {
+    for (const [key, value] of Object.entries(semantic.border.divider)) {
+      vars.push({ name: `--divider-${key}`, value: resolveValue(preset, value) });
+    }
+  }
+
+  // Opacity
+  if (semantic.opacity) {
+    for (const [key, value] of Object.entries(semantic.opacity)) {
+      vars.push({ name: `--opacity-${key}`, value: resolveValue(preset, value) });
+    }
+  }
 
   // Motion duration
   for (const [key, value] of Object.entries(semantic.motion.duration)) {
@@ -667,7 +715,16 @@ function generateCompatCSS(): string {
     ['--arcana-radius-lg', 'var(--radius-lg)'],
     ['--arcana-radius-xl', 'var(--radius-xl)'],
     ['--arcana-radius-2xl', 'var(--radius-2xl)'],
+    ['--arcana-radius-3xl', 'var(--radius-3xl)'],
     ['--arcana-radius-full', 'var(--radius-full)'],
+    // Border width
+    ['--arcana-border-width-thin', 'var(--border-width-thin)'],
+    ['--arcana-border-width-default', 'var(--border-width-default)'],
+    ['--arcana-border-width-thick', 'var(--border-width-thick)'],
+    ['--arcana-border-width-heavy', 'var(--border-width-heavy)'],
+    // Opacity
+    ['--arcana-opacity-disabled', 'var(--opacity-disabled)'],
+    ['--arcana-opacity-overlay', 'var(--opacity-overlay)'],
     // Typography
     ['--arcana-typography-font-family-sans', 'var(--font-family-body)'],
     ['--arcana-typography-font-family-mono', 'var(--font-family-mono)'],
@@ -843,6 +900,8 @@ function validatePreset(data: unknown, filename: string): TokenPreset {
     'color',
     'spacing',
     'radius',
+    'border',
+    'opacity',
     'typography',
     'shadow',
     'blur',
