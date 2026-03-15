@@ -3,7 +3,6 @@
   "name": "arcana-light",
   "version": "0.1.0",
   "description": "Warm stone + indigo — the Arcana default",
-
   "primitive": {
     "color": {
       "white": "#ffffff",
@@ -250,12 +249,13 @@
     },
     "radius": {
       "none": "0",
-      "xs": "2px",
-      "sm": "4px",
-      "md": "8px",
-      "lg": "12px",
-      "xl": "16px",
-      "2xl": "24px",
+      "xs": "0.125rem",
+      "sm": "0.25rem",
+      "md": "0.375rem",
+      "lg": "0.5rem",
+      "xl": "0.75rem",
+      "2xl": "1rem",
+      "3xl": "1.5rem",
       "full": "9999px"
     },
     "typography": {
@@ -372,9 +372,39 @@
       "content-wide": "80rem",
       "content-full": "100%",
       "grid-columns": "12"
+    },
+    "border": {
+      "width": {
+        "0": "0px",
+        "1": "1px",
+        "2": "1.5px",
+        "4": "2px",
+        "8": "4px"
+      },
+      "divider": {
+        "weight": "1px",
+        "style": "solid"
+      }
+    },
+    "opacity": {
+      "0": "0",
+      "5": "0.05",
+      "10": "0.1",
+      "15": "0.15",
+      "20": "0.2",
+      "25": "0.25",
+      "30": "0.3",
+      "40": "0.4",
+      "50": "0.5",
+      "60": "0.6",
+      "70": "0.7",
+      "75": "0.75",
+      "80": "0.8",
+      "90": "0.9",
+      "95": "0.95",
+      "100": "1"
     }
   },
-
   "semantic": {
     "color": {
       "background": {
@@ -562,18 +592,25 @@
       "lg": "{primitive.radius.lg}",
       "xl": "{primitive.radius.xl}",
       "2xl": "{primitive.radius.2xl}",
-      "full": "{primitive.radius.full}"
+      "full": "{primitive.radius.full}",
+      "3xl": "{primitive.radius.3xl}"
     },
     "border": {
       "width": {
-        "thin": "1px",
-        "default": "1px",
-        "thick": "2px"
+        "thin": "{primitive.border.width.1}",
+        "default": "{primitive.border.width.2}",
+        "thick": "{primitive.border.width.4}",
+        "heavy": "{primitive.border.width.8}"
       },
       "focus": {
-        "ring": "0 0 0 3px rgba(99, 102, 241, 0.25)",
-        "ringError": "0 0 0 3px rgba(239, 68, 68, 0.2)",
+        "ringWidth": "3px",
+        "ringColor": "rgba(99, 102, 241, 0.3)",
+        "ring": "0 0 0 var(--focus-ring-width) var(--focus-ring-color)",
+        "ringError": "0 0 0 var(--focus-ring-width) rgba(239, 68, 68, 0.25)",
         "offset": "2px"
+      },
+      "divider": {
+        "color": "{semantic.color.border.muted}"
       }
     },
     "motion": {
@@ -599,9 +636,15 @@
         "opacity": "opacity var(--duration-normal) var(--ease-default)",
         "all": "all var(--duration-normal) var(--ease-default)"
       }
+    },
+    "opacity": {
+      "disabled": "{primitive.opacity.40}",
+      "placeholder": "{primitive.opacity.50}",
+      "hover-overlay": "0.08",
+      "overlay": "{primitive.opacity.50}",
+      "overlay-heavy": "{primitive.opacity.75}"
     }
   },
-
   "component": {
     "button": {
       "radius": "{semantic.radius.md}",
@@ -637,14 +680,22 @@
     },
     "modal": {
       "shadow": "{semantic.elevation.modal}",
-      "overlay-bg": "{semantic.color.background.overlay}"
+      "overlay-bg": "{semantic.color.background.overlay}",
+      "radius": "{semantic.radius.xl}"
     },
     "toast": {
-      "shadow": "{semantic.elevation.toast}"
+      "shadow": "{semantic.elevation.toast}",
+      "radius": "{semantic.radius.md}"
     },
     "navbar": {
       "shadow": "{semantic.elevation.navbar}",
       "backdrop-blur": "{primitive.blur.none}"
+    },
+    "badge": {
+      "radius": "{semantic.radius.full}"
+    },
+    "alert": {
+      "radius": "{semantic.radius.md}"
     }
   }
 }

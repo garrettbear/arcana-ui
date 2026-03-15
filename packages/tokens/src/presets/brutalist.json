@@ -3,7 +3,6 @@
   "name": "arcana-brutalist",
   "version": "0.1.0",
   "description": "Raw brutalism — black and white, heavy borders, no curves",
-
   "primitive": {
     "color": {
       "white": "#ffffff",
@@ -113,6 +112,7 @@
       "lg": "0",
       "xl": "0",
       "2xl": "0",
+      "3xl": "0",
       "full": "9999px"
     },
     "typography": {
@@ -229,9 +229,39 @@
       "content-wide": "80rem",
       "content-full": "100%",
       "grid-columns": "12"
+    },
+    "border": {
+      "width": {
+        "0": "0px",
+        "1": "1px",
+        "2": "1.5px",
+        "4": "2px",
+        "8": "4px"
+      },
+      "divider": {
+        "weight": "1px",
+        "style": "solid"
+      }
+    },
+    "opacity": {
+      "0": "0",
+      "5": "0.05",
+      "10": "0.1",
+      "15": "0.15",
+      "20": "0.2",
+      "25": "0.25",
+      "30": "0.3",
+      "40": "0.4",
+      "50": "0.5",
+      "60": "0.6",
+      "70": "0.7",
+      "75": "0.75",
+      "80": "0.8",
+      "90": "0.9",
+      "95": "0.95",
+      "100": "1"
     }
   },
-
   "semantic": {
     "color": {
       "background": {
@@ -419,18 +449,25 @@
       "lg": "{primitive.radius.lg}",
       "xl": "{primitive.radius.xl}",
       "2xl": "{primitive.radius.2xl}",
-      "full": "{primitive.radius.full}"
+      "full": "{primitive.radius.full}",
+      "3xl": "{primitive.radius.3xl}"
     },
     "border": {
       "width": {
-        "thin": "2px",
+        "thin": "{primitive.border.width.4}",
         "default": "3px",
-        "thick": "4px"
+        "thick": "{primitive.border.width.8}",
+        "heavy": "{primitive.border.width.8}"
       },
       "focus": {
-        "ring": "0 0 0 3px rgba(0, 0, 255, 0.3)",
-        "ringError": "0 0 0 3px rgba(255, 0, 0, 0.3)",
+        "ringWidth": "3px",
+        "ringColor": "{primitive.color.black}",
+        "ring": "0 0 0 3px #000000",
+        "ringError": "0 0 0 3px #ff0000",
         "offset": "2px"
+      },
+      "divider": {
+        "color": "{primitive.color.black}"
       }
     },
     "motion": {
@@ -456,9 +493,15 @@
         "opacity": "opacity var(--duration-normal) var(--ease-default)",
         "all": "all var(--duration-normal) var(--ease-default)"
       }
+    },
+    "opacity": {
+      "disabled": "{primitive.opacity.40}",
+      "placeholder": "{primitive.opacity.50}",
+      "hover-overlay": "0",
+      "overlay": "{primitive.opacity.95}",
+      "overlay-heavy": "{primitive.opacity.100}"
     }
   },
-
   "component": {
     "button": {
       "radius": "{semantic.radius.none}",
@@ -494,14 +537,22 @@
     },
     "modal": {
       "shadow": "{semantic.elevation.modal}",
-      "overlay-bg": "{semantic.color.background.overlay}"
+      "overlay-bg": "{semantic.color.background.overlay}",
+      "radius": "{semantic.radius.none}"
     },
     "toast": {
-      "shadow": "{semantic.elevation.toast}"
+      "shadow": "{semantic.elevation.toast}",
+      "radius": "{semantic.radius.none}"
     },
     "navbar": {
       "shadow": "{semantic.elevation.navbar}",
       "backdrop-blur": "{primitive.blur.none}"
+    },
+    "badge": {
+      "radius": "{semantic.radius.full}"
+    },
+    "alert": {
+      "radius": "{semantic.radius.none}"
     }
   }
 }
