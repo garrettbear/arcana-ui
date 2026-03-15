@@ -1,3 +1,15 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --modal-bg             Background color (fallback: --color-bg-elevated)
+ *   --modal-border-color   Border color (fallback: --color-border-default)
+ *   --modal-border-width   Border width (fallback: --border-width-default)
+ *   --modal-radius         Border radius (fallback: --radius-xl)
+ *   --modal-shadow         Box shadow (fallback: --elevation-modal)
+ *   --modal-padding        Content padding (fallback: --spacing-xl)
+ *   --modal-overlay-bg     Overlay background (fallback: --color-bg-overlay)
+ *   --modal-max-width      Maximum width (fallback: 35rem)
+ */
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -5,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-bg-overlay);
+  background-color: var(--modal-overlay-bg, var(--color-bg-overlay));
   padding: var(--spacing-4);
   animation: overlayFadeIn var(--duration-normal) var(--ease-default);
 }
@@ -22,10 +34,11 @@
 .dialog {
   position: relative;
   z-index: var(--z-modal);
-  background-color: var(--color-bg-elevated);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--elevation-modal);
-  border: var(--border-width-default) solid var(--color-border-default);
+  background-color: var(--modal-bg, var(--color-bg-elevated));
+  border-radius: var(--modal-radius, var(--radius-xl));
+  box-shadow: var(--modal-shadow, var(--elevation-modal));
+  border: var(--modal-border-width, var(--border-width-default)) solid
+    var(--modal-border-color, var(--color-border-default));
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - var(--spacing-8));
@@ -47,23 +60,19 @@
 
 /* Size variants */
 .sm {
-  --modal-max-width: 25rem;
-  max-width: var(--modal-max-width);
+  max-width: var(--modal-max-width-sm, 25rem);
 }
 
 .md {
-  --modal-max-width: 35rem;
-  max-width: var(--modal-max-width);
+  max-width: var(--modal-max-width, 35rem);
 }
 
 .lg {
-  --modal-max-width: 45rem;
-  max-width: var(--modal-max-width);
+  max-width: var(--modal-max-width-lg, 45rem);
 }
 
 .xl {
-  --modal-max-width: 60rem;
-  max-width: var(--modal-max-width);
+  max-width: var(--modal-max-width-xl, 60rem);
 }
 
 .full {
@@ -78,8 +87,10 @@
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-4);
-  padding: var(--spacing-5) var(--spacing-5) var(--spacing-4);
-  border-bottom: var(--border-width-default) solid var(--color-border-default);
+  padding: var(--modal-padding, var(--spacing-xl)) var(--modal-padding, var(--spacing-xl))
+    var(--spacing-4);
+  border-bottom: var(--modal-border-width, var(--border-width-default)) solid
+    var(--modal-border-color, var(--color-border-default));
   flex-shrink: 0;
 }
 
@@ -115,7 +126,7 @@
 .dialogBody {
   flex: 1;
   overflow-y: auto;
-  padding: var(--spacing-5);
+  padding: var(--modal-padding, var(--spacing-xl));
   color: var(--color-fg-primary);
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
@@ -127,8 +138,9 @@
   align-items: center;
   justify-content: flex-end;
   gap: var(--spacing-3);
-  padding: var(--spacing-4) var(--spacing-5);
-  border-top: var(--border-width-default) solid var(--color-border-default);
+  padding: var(--spacing-4) var(--modal-padding, var(--spacing-xl));
+  border-top: var(--modal-border-width, var(--border-width-default)) solid
+    var(--modal-border-color, var(--color-border-default));
   flex-shrink: 0;
 }
 

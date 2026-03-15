@@ -1,12 +1,21 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --badge-radius         Border radius (fallback: --radius-full)
+ *   --badge-padding-x      Horizontal padding (fallback: --spacing-2)
+ *   --badge-padding-y      Vertical padding (fallback: --spacing-0-5)
+ *   --badge-font-size      Font size (fallback: --font-size-xs)
+ *   --badge-font-weight    Font weight (fallback: --font-weight-medium)
+ */
+
 .badge {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-1);
-  padding: var(--spacing-0-5) var(--spacing-2);
-  border-radius: var(--radius-full);
+  padding: var(--badge-padding-y, var(--spacing-0-5)) var(--badge-padding-x, var(--spacing-2));
+  border-radius: var(--badge-radius, var(--radius-full));
   font-family: var(--font-family-body);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--badge-font-size, var(--font-size-xs));
+  font-weight: var(--badge-font-weight, var(--font-weight-medium));
   line-height: var(--line-height-tight);
   white-space: nowrap;
   border: var(--border-width-default) solid transparent;

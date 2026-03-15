@@ -1,19 +1,31 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --table-radius          Border radius (fallback: --radius-md)
+ *   --table-border-color    Border color (fallback: --color-border-default)
+ *   --table-border-width    Border width (fallback: --border-width-default)
+ *   --table-header-bg       Header background (fallback: --color-bg-surface)
+ *   --table-font-size       Font size (fallback: --font-size-sm)
+ *   --table-cell-padding-x  Cell horizontal padding (fallback: --spacing-4)
+ *   --table-cell-padding-y  Cell vertical padding (fallback: --spacing-3)
+ */
+
 .tableWrapper {
   width: 100%;
   overflow-x: auto;
-  border: var(--border-width-default) solid var(--color-border-default);
-  border-radius: var(--radius-md);
+  border: var(--table-border-width, var(--border-width-default)) solid
+    var(--table-border-color, var(--color-border-default));
+  border-radius: var(--table-radius, var(--radius-md));
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
+  font-size: var(--table-font-size, var(--font-size-sm));
 }
 
 .thead {
-  background-color: var(--color-bg-surface);
+  background-color: var(--table-header-bg, var(--color-bg-surface));
 }
 
 .tbody {
@@ -32,11 +44,13 @@
 }
 
 .th {
-  padding: var(--spacing-3) var(--spacing-4);
+  padding: var(--table-cell-padding-y, var(--spacing-3))
+    var(--table-cell-padding-x, var(--spacing-4));
   text-align: left;
   font-weight: var(--font-weight-semibold);
   color: var(--color-fg-secondary);
-  border-bottom: var(--border-width-default) solid var(--color-border-default);
+  border-bottom: var(--table-border-width, var(--border-width-default)) solid
+    var(--table-border-color, var(--color-border-default));
   white-space: nowrap;
   font-size: var(--font-size-xs);
   text-transform: uppercase;
@@ -51,7 +65,8 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-1);
-  padding: var(--spacing-3) var(--spacing-4);
+  padding: var(--table-cell-padding-y, var(--spacing-3))
+    var(--table-cell-padding-x, var(--spacing-4));
   background: none;
   border: none;
   cursor: pointer;
@@ -80,9 +95,11 @@
 }
 
 .td {
-  padding: var(--spacing-3) var(--spacing-4);
+  padding: var(--table-cell-padding-y, var(--spacing-3))
+    var(--table-cell-padding-x, var(--spacing-4));
   color: var(--color-fg-primary);
-  border-bottom: var(--border-width-default) solid var(--color-border-default);
+  border-bottom: var(--table-border-width, var(--border-width-default)) solid
+    var(--table-border-color, var(--color-border-default));
   vertical-align: middle;
 }
 

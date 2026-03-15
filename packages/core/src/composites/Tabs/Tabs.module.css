@@ -1,3 +1,13 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --tabs-border-color    Border color (fallback: --color-border-default)
+ *   --tabs-font-size       Tab font size (fallback: --font-size-sm)
+ *   --tabs-font-weight     Tab font weight (fallback: --font-weight-medium)
+ *   --tabs-padding-x       Tab horizontal padding (fallback: --spacing-3)
+ *   --tabs-padding-y       Tab vertical padding (fallback: --spacing-2)
+ *   --tabs-active-color    Active tab color (fallback: --color-action-primary)
+ */
+
 .tabs {
   display: flex;
   flex-direction: column;
@@ -7,7 +17,8 @@
 .tabList {
   display: flex;
   align-items: center;
-  border-bottom: var(--border-width-thin) solid var(--color-border-default);
+  border-bottom: var(--border-width-thin) solid
+    var(--tabs-border-color, var(--color-border-default));
   gap: var(--spacing-1);
 }
 
@@ -25,10 +36,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-2) var(--spacing-3);
+  padding: var(--tabs-padding-y, var(--spacing-2)) var(--tabs-padding-x, var(--spacing-3));
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--tabs-font-size, var(--font-size-sm));
+  font-weight: var(--tabs-font-weight, var(--font-weight-medium));
   cursor: pointer;
   border: none;
   background: transparent;
@@ -55,8 +66,8 @@
 }
 
 .tabLineActive {
-  color: var(--color-action-primary);
-  border-bottom-color: var(--color-action-primary);
+  color: var(--tabs-active-color, var(--color-action-primary));
+  border-bottom-color: var(--tabs-active-color, var(--color-action-primary));
 }
 
 /* Pills variant */

@@ -1,3 +1,18 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --input-bg               Background color (fallback: --color-bg-page)
+ *   --input-fg               Text color (fallback: --color-fg-primary)
+ *   --input-border-color     Border color (fallback: --color-border-default)
+ *   --input-border-focus     Focus border color (fallback: --color-border-focus)
+ *   --input-border-error     Error border color (fallback: --color-border-error)
+ *   --input-border-width     Border width (fallback: --border-width-default)
+ *   --input-radius           Border radius (fallback: --radius-md)
+ *   --input-padding-x        Horizontal padding (fallback: --spacing-sm)
+ *   --input-font-size        Font size (fallback: --font-size-sm)
+ *   --input-placeholder-color Placeholder color (fallback: --color-fg-muted)
+ *   --input-height           Element height (density-aware, fallback: 2.5rem)
+ */
+
 /* Input wrapper */
 .wrapper {
   display: inline-flex;
@@ -12,7 +27,7 @@
 /* Label */
 .label {
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
+  font-size: var(--input-font-size, var(--font-size-sm));
   font-weight: var(--font-weight-medium);
   color: var(--color-fg-primary);
   line-height: var(--line-height-tight);
@@ -23,20 +38,21 @@
   display: flex;
   align-items: center;
   position: relative;
-  background-color: var(--color-bg-page);
-  border: var(--border-width-default) solid var(--color-border-default);
-  border-radius: var(--radius-md);
+  background-color: var(--input-bg, var(--color-bg-page));
+  border: var(--input-border-width, var(--border-width-default)) solid
+    var(--input-border-color, var(--color-border-default));
+  border-radius: var(--input-radius, var(--radius-md));
   transition: var(--transition-colors), var(--transition-shadow);
 }
 
 .inputWrapper:focus-within {
-  border-color: var(--color-border-focus);
+  border-color: var(--input-border-focus, var(--color-border-focus));
   box-shadow: var(--focus-ring);
   outline: none;
 }
 
 .inputWrapper.hasError {
-  border-color: var(--color-border-error);
+  border-color: var(--input-border-error, var(--color-border-error));
 }
 
 .inputWrapper.hasError:focus-within {
@@ -53,20 +69,19 @@
 .input {
   flex: 1;
   min-width: 0;
-  --input-height: var(--spacing-10);
-  height: var(--input-height);
-  padding: 0 var(--spacing-3);
+  height: var(--input-height, 2.5rem);
+  padding: 0 var(--input-padding-x, var(--spacing-sm));
   background: transparent;
   border: none;
   outline: none;
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
-  color: var(--color-fg-primary);
+  font-size: var(--input-font-size, var(--font-size-sm));
+  color: var(--input-fg, var(--color-fg-primary));
   line-height: var(--line-height-normal);
 }
 
 .input::placeholder {
-  color: var(--color-fg-muted);
+  color: var(--input-placeholder-color, var(--color-fg-muted));
 }
 
 .input:disabled {
@@ -89,15 +104,15 @@
   align-items: center;
   flex-shrink: 0;
   color: var(--color-fg-secondary);
-  font-size: var(--font-size-sm);
+  font-size: var(--input-font-size, var(--font-size-sm));
 }
 
 .prefix {
-  padding-left: var(--spacing-3);
+  padding-left: var(--input-padding-x, var(--spacing-sm));
 }
 
 .suffix {
-  padding-right: var(--spacing-3);
+  padding-right: var(--input-padding-x, var(--spacing-sm));
 }
 
 /* Helper / Error text */

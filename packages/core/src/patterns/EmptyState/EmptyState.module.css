@@ -1,3 +1,9 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --emptystate-padding    Padding (fallback: --spacing-8)
+ *   --emptystate-icon-color Icon color (fallback: --color-fg-muted)
+ */
+
 .emptyState {
   display: flex;
   flex-direction: column;
@@ -7,7 +13,7 @@
 }
 
 .md {
-  padding: var(--spacing-8) var(--spacing-4);
+  padding: var(--emptystate-padding, var(--spacing-8)) var(--spacing-4);
   gap: var(--spacing-4);
 }
 
@@ -20,7 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-fg-muted);
+  color: var(--emptystate-icon-color, var(--color-fg-muted));
   flex-shrink: 0;
 }
 

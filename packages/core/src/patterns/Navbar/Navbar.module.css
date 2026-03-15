@@ -1,10 +1,20 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --navbar-bg             Background color (fallback: --color-bg-page)
+ *   --navbar-border-color   Border color (fallback: --color-border-default)
+ *   --navbar-shadow         Box shadow (fallback: --elevation-navbar)
+ *   --navbar-backdrop-blur  Backdrop blur (fallback: 0)
+ *   --navbar-height         Height (fallback: --spacing-14)
+ *   --navbar-max-width      Max width (fallback: 80rem)
+ */
+
 .navbar {
   width: 100%;
-  background-color: var(--color-bg-page);
+  background-color: var(--navbar-bg, var(--color-bg-page));
   z-index: var(--z-sticky);
-  box-shadow: var(--elevation-navbar);
-  -webkit-backdrop-filter: blur(var(--navbar-backdrop-blur));
-  backdrop-filter: blur(var(--navbar-backdrop-blur));
+  box-shadow: var(--navbar-shadow, var(--elevation-navbar));
+  -webkit-backdrop-filter: blur(var(--navbar-backdrop-blur, 0));
+  backdrop-filter: blur(var(--navbar-backdrop-blur, 0));
 }
 
 .sticky {
@@ -13,18 +23,17 @@
 }
 
 .border {
-  border-bottom: var(--border-width-default) solid var(--color-border-default);
+  border-bottom: var(--border-width-default) solid
+    var(--navbar-border-color, var(--color-border-default));
 }
 
 .inner {
   display: flex;
   align-items: center;
   gap: var(--spacing-4);
-  --navbar-height: var(--spacing-14);
-  --navbar-max-width: 80rem;
-  height: var(--navbar-height);
+  height: var(--navbar-height, var(--spacing-14));
   padding: 0 var(--spacing-6);
-  max-width: var(--navbar-max-width);
+  max-width: var(--navbar-max-width, 80rem);
   margin: 0 auto;
 }
 

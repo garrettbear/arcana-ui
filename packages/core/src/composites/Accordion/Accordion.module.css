@@ -1,13 +1,24 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --accordion-radius        Border radius (fallback: --radius-md)
+ *   --accordion-border-color  Border color (fallback: --color-border-default)
+ *   --accordion-border-width  Border width (fallback: --border-width-default)
+ *   --accordion-padding       Trigger/content padding (fallback: --spacing-4)
+ *   --accordion-font-size     Font size (fallback: --font-size-sm)
+ */
+
 .accordion {
   display: flex;
   flex-direction: column;
-  border: var(--border-width-default) solid var(--color-border-default);
-  border-radius: var(--radius-md);
+  border: var(--accordion-border-width, var(--border-width-default)) solid
+    var(--accordion-border-color, var(--color-border-default));
+  border-radius: var(--accordion-radius, var(--radius-md));
   overflow: hidden;
 }
 
 .item {
-  border-bottom: var(--border-width-default) solid var(--color-border-default);
+  border-bottom: var(--accordion-border-width, var(--border-width-default)) solid
+    var(--accordion-border-color, var(--color-border-default));
 }
 
 .item:last-child {
@@ -27,14 +38,14 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: var(--spacing-4);
+  padding: var(--accordion-padding, var(--spacing-4));
   background: transparent;
   border: none;
   cursor: pointer;
   text-align: left;
   color: var(--color-fg-primary);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
+  font-size: var(--accordion-font-size, var(--font-size-sm));
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-normal);
   transition: var(--transition-colors);
@@ -77,9 +88,9 @@
 }
 
 .contentInner {
-  padding: 0 var(--spacing-4) var(--spacing-4);
+  padding: 0 var(--accordion-padding, var(--spacing-4)) var(--accordion-padding, var(--spacing-4));
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
+  font-size: var(--accordion-font-size, var(--font-size-sm));
   color: var(--color-fg-secondary);
   line-height: var(--line-height-relaxed);
 }

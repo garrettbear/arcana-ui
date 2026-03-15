@@ -1,3 +1,15 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --select-bg             Background color (fallback: --color-bg-page)
+ *   --select-border-color   Border color (fallback: --color-border-default)
+ *   --select-border-focus   Focus border (fallback: --color-border-focus)
+ *   --select-border-width   Border width (fallback: --border-width-default)
+ *   --select-radius         Border radius (fallback: --radius-md)
+ *   --select-font-size      Font size (fallback: --font-size-sm)
+ *   --select-padding-x      Horizontal padding (fallback: --spacing-sm)
+ *   --select-height         Element height (density-aware, fallback: 2.5rem)
+ */
+
 /* Select wrapper */
 .wrapper {
   display: inline-flex;
@@ -16,7 +28,7 @@
 /* Label */
 .label {
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
+  font-size: var(--select-font-size, var(--font-size-sm));
   font-weight: var(--font-weight-medium);
   color: var(--color-fg-primary);
   line-height: var(--line-height-tight);
@@ -27,14 +39,15 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  background-color: var(--color-bg-page);
-  border: var(--border-width-default) solid var(--color-border-default);
-  border-radius: var(--radius-md);
+  background-color: var(--select-bg, var(--color-bg-page));
+  border: var(--select-border-width, var(--border-width-default)) solid
+    var(--select-border-color, var(--color-border-default));
+  border-radius: var(--select-radius, var(--radius-md));
   transition: var(--transition-colors), var(--transition-shadow);
 }
 
 .selectWrapper:focus-within {
-  border-color: var(--color-border-focus);
+  border-color: var(--select-border-focus, var(--color-border-focus));
   box-shadow: var(--focus-ring);
 }
 
@@ -57,14 +70,13 @@
   appearance: none;
   -webkit-appearance: none;
   width: 100%;
-  --select-height: var(--spacing-10);
-  height: var(--select-height);
-  padding: 0 var(--spacing-8) 0 var(--spacing-3);
+  height: var(--select-height, 2.5rem);
+  padding: 0 var(--spacing-8) 0 var(--select-padding-x, var(--spacing-sm));
   background: transparent;
   border: none;
   outline: none;
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
+  font-size: var(--select-font-size, var(--font-size-sm));
   color: var(--color-fg-primary);
   cursor: pointer;
   line-height: var(--line-height-normal);

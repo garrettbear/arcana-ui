@@ -1,3 +1,13 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --checkbox-size           Element size (fallback: --spacing-4)
+ *   --checkbox-radius         Border radius (fallback: --radius-sm)
+ *   --checkbox-border-color   Border color (fallback: --color-border-strong)
+ *   --checkbox-bg             Background color (fallback: --color-bg-page)
+ *   --checkbox-checked-bg     Checked background (fallback: --color-action-primary)
+ *   --checkbox-checked-border Checked border (fallback: --color-action-primary)
+ */
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -21,19 +31,19 @@
 
 .input {
   appearance: none;
-  width: var(--spacing-4);
-  height: var(--spacing-4);
-  border-radius: var(--radius-sm);
-  border: var(--border-width-default) solid var(--color-border-strong);
-  background-color: var(--color-bg-page);
+  width: var(--checkbox-size, var(--spacing-4));
+  height: var(--checkbox-size, var(--spacing-4));
+  border-radius: var(--checkbox-radius, var(--radius-sm));
+  border: var(--border-width-default) solid var(--checkbox-border-color, var(--color-border-strong));
+  background-color: var(--checkbox-bg, var(--color-bg-page));
   cursor: pointer;
   transition: var(--transition-colors);
 }
 
 .input:checked,
 .input:indeterminate {
-  background-color: var(--color-action-primary);
-  border-color: var(--color-action-primary);
+  background-color: var(--checkbox-checked-bg, var(--color-action-primary));
+  border-color: var(--checkbox-checked-border, var(--color-action-primary));
 }
 
 .input:hover:not(:disabled) {

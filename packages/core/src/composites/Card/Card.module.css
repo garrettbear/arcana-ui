@@ -1,6 +1,17 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --card-bg             Background color (fallback: --color-bg-page)
+ *   --card-border-color   Border color (fallback: --color-border-default)
+ *   --card-border-width   Border width (fallback: --border-width-default)
+ *   --card-radius         Border radius (fallback: --radius-md)
+ *   --card-shadow         Box shadow (fallback: --elevation-card)
+ *   --card-shadow-hover   Hover box shadow (fallback: --elevation-card-hover)
+ *   --card-padding        Content padding (density-aware, fallback: --spacing-lg)
+ */
+
 .card {
-  background-color: var(--color-bg-page);
-  border-radius: var(--radius-md);
+  background-color: var(--card-bg, var(--color-bg-page));
+  border-radius: var(--card-radius, var(--radius-md));
   font-family: var(--font-family-body);
   color: var(--color-fg-primary);
   overflow: hidden;
@@ -9,17 +20,19 @@
 
 /* Variants */
 .default {
-  border: var(--border-width-default) solid var(--color-border-default);
-  box-shadow: var(--elevation-card);
+  border: var(--card-border-width, var(--border-width-default)) solid
+    var(--card-border-color, var(--color-border-default));
+  box-shadow: var(--card-shadow, var(--elevation-card));
 }
 
 .outlined {
-  border: var(--border-width-default) solid var(--color-border-strong);
+  border: var(--card-border-width, var(--border-width-default)) solid var(--color-border-strong);
   box-shadow: none;
 }
 
 .elevated {
-  border: var(--border-width-default) solid var(--color-border-default);
+  border: var(--card-border-width, var(--border-width-default)) solid
+    var(--card-border-color, var(--color-border-default));
   box-shadow: var(--shadow-md);
   background-color: var(--color-bg-elevated);
 }
@@ -30,13 +43,13 @@
 }
 
 .interactive:hover {
-  box-shadow: var(--elevation-card-hover);
+  box-shadow: var(--card-shadow-hover, var(--elevation-card-hover));
   transform: translateY(-1px);
 }
 
 .interactive:active {
   transform: translateY(0);
-  box-shadow: var(--elevation-card);
+  box-shadow: var(--card-shadow, var(--elevation-card));
 }
 
 /* Padding variants */
@@ -53,7 +66,7 @@
 .padding-md .header,
 .padding-md .body,
 .padding-md .footer {
-  padding: var(--spacing-4) var(--spacing-5);
+  padding: var(--card-padding, var(--spacing-lg));
 }
 
 .padding-lg .header,
@@ -67,7 +80,8 @@
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-4);
-  border-bottom: var(--border-width-default) solid var(--color-border-default);
+  border-bottom: var(--card-border-width, var(--border-width-default)) solid
+    var(--card-border-color, var(--color-border-default));
 }
 
 .header + .body,
@@ -109,7 +123,8 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-3);
-  border-top: var(--border-width-default) solid var(--color-border-default);
+  border-top: var(--card-border-width, var(--border-width-default)) solid
+    var(--card-border-color, var(--color-border-default));
 }
 
 .align-left {

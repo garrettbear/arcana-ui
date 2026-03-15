@@ -1,3 +1,16 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --textarea-bg             Background color (fallback: --color-bg-page)
+ *   --textarea-border-color   Border color (fallback: --color-border-default)
+ *   --textarea-border-focus   Focus border (fallback: --color-border-focus)
+ *   --textarea-border-width   Border width (fallback: --border-width-default)
+ *   --textarea-radius         Border radius (fallback: --radius-md)
+ *   --textarea-font-size      Font size (fallback: --font-size-sm)
+ *   --textarea-padding-x      Horizontal padding (fallback: --spacing-sm)
+ *   --textarea-padding-y      Vertical padding (fallback: --spacing-2)
+ *   --textarea-min-height     Minimum height (fallback: --spacing-20)
+ */
+
 /* Textarea wrapper */
 .wrapper {
   display: flex;
@@ -8,7 +21,7 @@
 /* Label */
 .label {
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
+  font-size: var(--textarea-font-size, var(--font-size-sm));
   font-weight: var(--font-weight-medium);
   color: var(--color-fg-primary);
   line-height: var(--line-height-tight);
@@ -17,14 +30,14 @@
 /* Textarea element */
 .textarea {
   width: 100%;
-  --textarea-min-height: var(--spacing-20);
-  min-height: var(--textarea-min-height);
-  padding: var(--spacing-2) var(--spacing-3);
-  background-color: var(--color-bg-page);
-  border: var(--border-width-default) solid var(--color-border-default);
-  border-radius: var(--radius-md);
+  min-height: var(--textarea-min-height, var(--spacing-20));
+  padding: var(--textarea-padding-y, var(--spacing-2)) var(--textarea-padding-x, var(--spacing-sm));
+  background-color: var(--textarea-bg, var(--color-bg-page));
+  border: var(--textarea-border-width, var(--border-width-default)) solid
+    var(--textarea-border-color, var(--color-border-default));
+  border-radius: var(--textarea-radius, var(--radius-md));
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
+  font-size: var(--textarea-font-size, var(--font-size-sm));
   color: var(--color-fg-primary);
   line-height: var(--line-height-normal);
   resize: vertical;
@@ -38,7 +51,7 @@
 
 .textarea:focus {
   outline: none;
-  border-color: var(--color-border-focus);
+  border-color: var(--textarea-border-focus, var(--color-border-focus));
   box-shadow: var(--focus-ring);
 }
 

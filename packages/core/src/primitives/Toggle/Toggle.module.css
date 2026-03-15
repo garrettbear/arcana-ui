@@ -1,3 +1,11 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --toggle-radius        Track border radius (fallback: --radius-full)
+ *   --toggle-bg            Track background (fallback: --color-border-strong)
+ *   --toggle-checked-bg    Checked background (fallback: --color-action-primary)
+ *   --toggle-thumb-bg      Thumb color (fallback: --primitive-white)
+ */
+
 .wrapper {
   display: inline-flex;
   align-items: center;
@@ -9,8 +17,8 @@
   display: inline-flex;
   align-items: center;
   border: none;
-  border-radius: var(--radius-full);
-  background-color: var(--color-border-strong);
+  border-radius: var(--toggle-radius, var(--radius-full));
+  background-color: var(--toggle-bg, var(--color-border-strong));
   cursor: pointer;
   transition: var(--transition-colors);
   padding: 0;
@@ -48,7 +56,7 @@
 }
 
 .checked {
-  background-color: var(--color-action-primary);
+  background-color: var(--toggle-checked-bg, var(--color-action-primary));
 }
 
 .disabled {
@@ -58,8 +66,8 @@
 
 .thumb {
   position: absolute;
-  border-radius: var(--radius-full);
-  background-color: var(--primitive-white);
+  border-radius: var(--toggle-radius, var(--radius-full));
+  background-color: var(--toggle-thumb-bg, var(--primitive-white));
   box-shadow: var(--shadow-sm);
   transition: var(--transition-transform);
   width: var(--toggle-thumb-size);

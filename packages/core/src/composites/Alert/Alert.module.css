@@ -1,10 +1,17 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --alert-radius         Border radius (fallback: --radius-md)
+ *   --alert-padding        Content padding (fallback: --spacing-md)
+ *   --alert-border-width   Border width (fallback: --border-width-default)
+ */
+
 .alert {
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-3);
-  padding: var(--spacing-4);
-  border-radius: var(--radius-md);
-  border: var(--border-width-default) solid;
+  padding: var(--alert-padding, var(--spacing-md));
+  border-radius: var(--alert-radius, var(--radius-md));
+  border: var(--alert-border-width, var(--border-width-default)) solid;
 }
 
 .icon {

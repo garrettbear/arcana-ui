@@ -1,3 +1,14 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --toast-bg             Background color (fallback: --color-bg-elevated)
+ *   --toast-border-color   Border color (fallback: --color-border-default)
+ *   --toast-border-width   Border width (fallback: --border-width-default)
+ *   --toast-radius         Border radius (fallback: --radius-md)
+ *   --toast-shadow         Box shadow (fallback: --elevation-toast)
+ *   --toast-padding        Content padding (fallback: --spacing-md)
+ *   --toast-max-width      Maximum width (fallback: 23.75rem)
+ */
+
 .portal {
   position: fixed;
   bottom: var(--spacing-6);
@@ -7,8 +18,7 @@
   flex-direction: column;
   gap: var(--spacing-2);
   pointer-events: none;
-  --toast-max-width: 23.75rem;
-  max-width: var(--toast-max-width);
+  max-width: var(--toast-max-width, 23.75rem);
   width: calc(100vw - var(--spacing-12));
 }
 
@@ -16,11 +26,12 @@
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-3);
-  padding: var(--spacing-4);
-  background-color: var(--color-bg-elevated);
-  border: var(--border-width-default) solid var(--color-border-default);
-  border-radius: var(--radius-md);
-  box-shadow: var(--elevation-toast);
+  padding: var(--toast-padding, var(--spacing-md));
+  background-color: var(--toast-bg, var(--color-bg-elevated));
+  border: var(--toast-border-width, var(--border-width-default)) solid
+    var(--toast-border-color, var(--color-border-default));
+  border-radius: var(--toast-radius, var(--radius-md));
+  box-shadow: var(--toast-shadow, var(--elevation-toast));
   pointer-events: auto;
   transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow)
     var(--ease-out);

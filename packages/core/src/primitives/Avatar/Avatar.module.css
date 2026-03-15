@@ -1,11 +1,20 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --avatar-radius        Border radius (fallback: --radius-full)
+ *   --avatar-bg             Background color (fallback: --color-bg-subtle)
+ *   --avatar-border-color   Border color (fallback: --color-bg-page)
+ *   --avatar-border-width   Border width (fallback: --border-width-thick)
+ */
+
 .avatar {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-full);
-  background-color: var(--color-bg-subtle);
-  border: var(--border-width-thick) solid var(--color-bg-page);
+  border-radius: var(--avatar-radius, var(--radius-full));
+  background-color: var(--avatar-bg, var(--color-bg-subtle));
+  border: var(--avatar-border-width, var(--border-width-thick)) solid
+    var(--avatar-border-color, var(--color-bg-page));
   overflow: hidden;
   flex-shrink: 0;
   user-select: none;

@@ -1,3 +1,11 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --radio-size             Element size (fallback: --spacing-4)
+ *   --radio-border-color     Border color (fallback: --color-border-strong)
+ *   --radio-bg               Background color (fallback: --color-bg-page)
+ *   --radio-checked-border   Checked border color (fallback: --color-action-primary)
+ */
+
 .group {
   border: none;
   padding: 0;
@@ -36,33 +44,32 @@
 }
 
 .inputWrapper {
-  --radio-size: var(--spacing-4);
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   margin-top: var(--spacing-px);
-  width: var(--radio-size);
-  height: var(--radio-size);
+  width: var(--radio-size, var(--spacing-4));
+  height: var(--radio-size, var(--spacing-4));
 }
 
 .input {
   appearance: none;
-  width: var(--radio-size);
-  height: var(--radio-size);
+  width: var(--radio-size, var(--spacing-4));
+  height: var(--radio-size, var(--spacing-4));
   border-radius: var(--radius-full);
-  border: var(--border-width-default) solid var(--color-border-strong);
-  background-color: var(--color-bg-page);
+  border: var(--border-width-default) solid var(--radio-border-color, var(--color-border-strong));
+  background-color: var(--radio-bg, var(--color-bg-page));
   cursor: pointer;
   transition: var(--transition-colors);
   margin: 0;
 }
 
 .input:checked {
-  border-color: var(--color-action-primary);
+  border-color: var(--radio-checked-border, var(--color-action-primary));
   border-width: var(--border-width-heavy);
-  background-color: var(--color-bg-page);
+  background-color: var(--radio-bg, var(--color-bg-page));
 }
 
 .input:hover:not(:disabled) {

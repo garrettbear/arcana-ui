@@ -1,7 +1,14 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --form-gap              Form field gap (fallback: --spacing-4)
+ *   --form-label-font-size  Label font size (fallback: --font-size-sm)
+ *   --form-label-font-weight Label font weight (fallback: --font-weight-medium)
+ */
+
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-4);
+  gap: var(--form-gap, var(--spacing-4));
 }
 
 .field {
@@ -13,8 +20,8 @@
 .label {
   display: block;
   font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--form-label-font-size, var(--font-size-sm));
+  font-weight: var(--form-label-font-weight, var(--font-weight-medium));
   color: var(--color-fg-primary);
   line-height: var(--line-height-tight);
 }
