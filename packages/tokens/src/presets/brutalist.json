@@ -296,9 +296,9 @@
           "active": "{primitive.color.gray.200}"
         },
         "destructive": {
-          "default": "{primitive.color.red.500}",
-          "hover": "{primitive.color.red.600}",
-          "active": "{primitive.color.red.700}"
+          "default": "{primitive.color.red.600}",
+          "hover": "{primitive.color.red.700}",
+          "active": "{primitive.color.red.800}"
         },
         "ghost": {
           "default": "{primitive.color.transparent}",

@@ -75,6 +75,24 @@ jobs:
           path: packages/core/coverage/
           retention-days: 7
 
+  validate-tokens:
+    name: Validate Tokens
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm validate:tokens
+
   build:
     name: Build
     runs-on: ubuntu-latest

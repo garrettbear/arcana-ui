@@ -16,6 +16,7 @@
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots",
     "test:all": "vitest run && playwright test",
+    "validate:tokens": "pnpm --filter @arcana-ui/tokens validate",
     "typecheck": "pnpm -r typecheck",
     "clean": "pnpm -r clean",
     "prepare": "husky"

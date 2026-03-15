@@ -18,7 +18,8 @@
   "scripts": {
     "build": "npx tsx src/build.ts",
     "dev": "npx tsx --watch src/build.ts",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "validate": "npx tsx src/validate.ts"
   },
   "devDependencies": {
     "tsx": "^4.19.2",

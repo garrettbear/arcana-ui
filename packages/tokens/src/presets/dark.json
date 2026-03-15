@@ -428,9 +428,9 @@
       },
       "action": {
         "primary": {
-          "default": "{primitive.color.indigo.500}",
-          "hover": "{primitive.color.indigo.400}",
-          "active": "{primitive.color.indigo.600}",
+          "default": "{primitive.color.indigo.600}",
+          "hover": "{primitive.color.indigo.500}",
+          "active": "{primitive.color.indigo.700}",
           "disabled": "{primitive.color.indigo.800}"
         },
         "secondary": {
@@ -439,9 +439,9 @@
           "active": "{primitive.color.stone.600}"
         },
         "destructive": {
-          "default": "{primitive.color.red.500}",
-          "hover": "{primitive.color.red.400}",
-          "active": "{primitive.color.red.600}"
+          "default": "{primitive.color.red.700}",
+          "hover": "{primitive.color.red.600}",
+          "active": "{primitive.color.red.800}"
         },
         "ghost": {
           "default": "{primitive.color.transparent}",
