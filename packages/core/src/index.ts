@@ -66,8 +66,16 @@ export type {
 } from './composites/Accordion';
 
 // ─── Layout ───────────────────────────────────────────────────────────────────
-export { Stack, HStack, Grid, Container } from './layout';
-export type { StackProps, HStackProps, GridProps, ContainerProps } from './layout';
+export { Stack, HStack, Grid, GridColumn, Container } from './layout';
+export type {
+  StackProps,
+  HStackProps,
+  GridProps,
+  GridColumnProps,
+  ContainerProps,
+  ContainerSize,
+  ContainerPadding,
+} from './layout';
 
 // ─── Patterns ─────────────────────────────────────────────────────────────────
 export { Navbar, NavbarBrand, NavbarContent, NavbarActions } from './patterns/Navbar';

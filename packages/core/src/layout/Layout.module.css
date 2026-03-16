@@ -1,28 +1,198 @@
+/**
+ * Layout Components — Container, Grid, GridColumn, Stack, HStack
+ *
+ * These are structural layout primitives. They control spacing and arrangement
+ * only — no backgrounds, borders, or shadows.
+ *
+ * Container tokens:
+ *   --container-padding-x   Horizontal padding (fallback: --spacing-md)
+ *
+ * Grid tokens:
+ *   --grid-gap               Grid gap (fallback: --grid-gutter)
+ */
+
+/* ─── Stack ─────────────────────────────────────────────────────────────────── */
+
 .stack {
   display: flex;
   flex-direction: column;
 }
+
+.stackRow {
+  flex-direction: row;
+}
+
+/* ─── HStack ────────────────────────────────────────────────────────────────── */
 
 .hstack {
   display: flex;
   flex-direction: row;
 }
 
-.grid {
-  display: grid;
-}
+/* ─── Container ─────────────────────────────────────────────────────────────── */
 
 .container {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--spacing-6);
-  padding-right: var(--spacing-6);
 }
 
-@media (max-width: 640px) {
-  .container {
-    padding-left: var(--spacing-4);
-    padding-right: var(--spacing-4);
+/* Container sizes */
+.containerSm {
+  max-width: var(--container-sm);
+}
+.containerMd {
+  max-width: var(--container-md);
+}
+.containerLg {
+  max-width: var(--container-lg);
+}
+.containerXl {
+  max-width: var(--container-xl);
+}
+.container2xl {
+  max-width: var(--container-2xl);
+}
+.containerFull {
+  max-width: 100%;
+}
+.containerProse {
+  max-width: var(--content-prose);
+}
+
+/* Container padding */
+.paddingNone {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.paddingSm {
+  padding-left: var(--spacing-sm);
+  padding-right: var(--spacing-sm);
+}
+
+.paddingMd {
+  padding-left: var(--container-padding-x, var(--spacing-md));
+  padding-right: var(--container-padding-x, var(--spacing-md));
+}
+
+@media (min-width: 640px) {
+  .paddingMd {
+    padding-left: var(--container-padding-x, var(--spacing-lg));
+    padding-right: var(--container-padding-x, var(--spacing-lg));
+  }
+}
+
+@media (min-width: 1024px) {
+  .paddingMd {
+    padding-left: var(--container-padding-x, var(--spacing-xl));
+    padding-right: var(--container-padding-x, var(--spacing-xl));
+  }
+}
+
+.paddingLg {
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .paddingLg {
+    padding-left: var(--spacing-xl);
+    padding-right: var(--spacing-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .paddingLg {
+    padding-left: var(--spacing-2xl);
+    padding-right: var(--spacing-2xl);
+  }
+}
+
+/* No center */
+.noCenter {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* ─── Grid ──────────────────────────────────────────────────────────────────── */
+
+.grid {
+  display: grid;
+  gap: var(--grid-gap, var(--grid-gutter));
+}
+
+/*
+ * Auto-collapse: fixed column grids collapse to 1 column on mobile,
+ * then restore to the specified count at tablet (640px).
+ */
+.gridAutoCollapse {
+  --grid-cols: 1;
+}
+
+@media (min-width: 640px) {
+  .gridAutoCollapse {
+    --grid-cols: initial;
+  }
+}
+
+/*
+ * Responsive columns: the component sets --grid-cols-sm/md/lg/xl via
+ * inline styles. These media queries pick up the right value.
+ */
+.gridResponsive {
+  --grid-cols: 1;
+}
+
+@media (min-width: 640px) {
+  .gridResponsive {
+    --grid-cols: var(--grid-cols-sm, 1);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gridResponsive {
+    --grid-cols: var(--grid-cols-lg, var(--grid-cols-md, var(--grid-cols-sm, 1)));
+  }
+}
+
+@media (min-width: 1280px) {
+  .gridResponsive {
+    --grid-cols: var(
+      --grid-cols-xl,
+      var(--grid-cols-lg, var(--grid-cols-md, var(--grid-cols-sm, 1)))
+    );
+  }
+}
+
+/* ─── GridColumn ────────────────────────────────────────────────────────────── */
+
+.column {
+  min-width: 0;
+}
+
+/*
+ * Responsive spans: the component sets --col-span-sm/lg/xl via inline styles.
+ * Mobile default uses the inline --col-span fallback directly.
+ */
+.columnResponsive {
+  /* Mobile: use default span from inline style */
+}
+
+@media (min-width: 640px) {
+  .columnResponsive {
+    --col-span: var(--col-span-sm);
+  }
+}
+
+@media (min-width: 1024px) {
+  .columnResponsive {
+    --col-span: var(--col-span-lg, var(--col-span-sm));
+  }
+}
+
+@media (min-width: 1280px) {
+  .columnResponsive {
+    --col-span: var(--col-span-xl, var(--col-span-lg, var(--col-span-sm)));
   }
 }
