@@ -5,10 +5,18 @@
  *   --form-label-font-weight Label font weight (fallback: --font-weight-medium)
  */
 
+/* Form — mobile-first: larger gap for touch targets */
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--form-gap, var(--spacing-4));
+  gap: var(--spacing-5);
+}
+
+/* @breakpoint-sm (640px) — restore standard gap */
+@media (min-width: 640px) {
+  .form {
+    gap: var(--form-gap, var(--spacing-4));
+  }
 }
 
 .field {

@@ -6,10 +6,19 @@
  *   --toggle-thumb-bg      Thumb color (fallback: --primitive-white)
  */
 
+/* Wrapper — mobile-first: 44px min-height touch target */
 .wrapper {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-2-5);
+  min-height: 2.75rem;
+}
+
+/* @breakpoint-sm (640px) — relax touch target */
+@media (min-width: 640px) {
+  .wrapper {
+    min-height: auto;
+  }
 }
 
 .toggle {

@@ -2,6 +2,7 @@
   "scanPaths": ["packages/core/src"],
   "filePattern": "*.module.css",
   "ignorePaths": [],
+  "allowedHardcodedValues": ["2.75rem", "1rem"],
   "allowedHardcodedProperties": [
     "content",
     "cursor",

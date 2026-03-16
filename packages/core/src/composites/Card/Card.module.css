@@ -63,16 +63,32 @@
   padding: var(--spacing-3);
 }
 
+/* Mobile-first: tighter padding, expand at 640px+ */
 .padding-md .header,
 .padding-md .body,
 .padding-md .footer {
-  padding: var(--card-padding, var(--spacing-lg));
+  padding: var(--spacing-md);
 }
 
 .padding-lg .header,
 .padding-lg .body,
 .padding-lg .footer {
-  padding: var(--spacing-6) var(--spacing-8);
+  padding: var(--spacing-4) var(--spacing-5);
+}
+
+/* @breakpoint-sm (640px) — restore standard padding */
+@media (min-width: 640px) {
+  .padding-md .header,
+  .padding-md .body,
+  .padding-md .footer {
+    padding: var(--card-padding, var(--spacing-lg));
+  }
+
+  .padding-lg .header,
+  .padding-lg .body,
+  .padding-lg .footer {
+    padding: var(--spacing-6) var(--spacing-8);
+  }
 }
 
 /* CardHeader */

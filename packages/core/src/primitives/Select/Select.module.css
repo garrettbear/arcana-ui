@@ -65,21 +65,30 @@
   cursor: not-allowed;
 }
 
-/* Select element */
+/* Select element — mobile-first: 44px min-height, 16px font for iOS */
 .select {
   appearance: none;
   -webkit-appearance: none;
   width: 100%;
-  height: var(--select-height, 2.5rem);
+  min-height: 2.75rem;
   padding: 0 var(--spacing-8) 0 var(--select-padding-x, var(--spacing-sm));
   background: transparent;
   border: none;
   outline: none;
   font-family: var(--font-family-body);
-  font-size: var(--select-font-size, var(--font-size-sm));
+  font-size: 1rem;
   color: var(--color-fg-primary);
   cursor: pointer;
   line-height: var(--line-height-normal);
+}
+
+/* @breakpoint-sm (640px) — restore density-aware height and smaller font */
+@media (min-width: 640px) {
+  .select {
+    min-height: auto;
+    height: var(--select-height, 2.5rem);
+    font-size: var(--select-font-size, var(--font-size-sm));
+  }
 }
 
 .select:disabled {

@@ -19,6 +19,7 @@ interface LintConfig {
   scanPaths: string[];
   filePattern: string;
   ignorePaths: string[];
+  allowedHardcodedValues: string[];
   allowedHardcodedProperties: string[];
 }
 
@@ -38,6 +39,7 @@ const config: LintConfig = JSON.parse(
 );
 
 const allowedProps = new Set(config.allowedHardcodedProperties);
+const allowedValues = new Set(config.allowedHardcodedValues ?? []);
 
 // ─── File Discovery ─────────────────────────────────────────────────────────
 
@@ -228,6 +230,9 @@ function checkDeclaration(
 
   // Skip properties that are allowed to have hardcoded values
   if (allowedProps.has(prop)) return null;
+
+  // Skip globally allowed hardcoded values (e.g., WCAG touch targets, iOS zoom prevention)
+  if (allowedValues.has(val)) return null;
 
   // If it already uses var(), it's fine
   if (isAcceptableExpression(val)) return null;

@@ -37,10 +37,21 @@
   opacity: var(--opacity-disabled);
 }
 
+/* Row — mobile-first: 44px min-height touch target */
 .row {
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-2-5);
+  min-height: 2.75rem;
+  padding: var(--spacing-1-5) 0;
+}
+
+/* @breakpoint-sm (640px) — relax touch target padding */
+@media (min-width: 640px) {
+  .row {
+    min-height: auto;
+    padding: 0;
+  }
 }
 
 .inputWrapper {

@@ -13,7 +13,7 @@
  *   --input-height           Element height (density-aware, fallback: 2.5rem)
  */
 
-/* Input wrapper */
+/* Input wrapper — mobile-first */
 .wrapper {
   display: inline-flex;
   flex-direction: column;
@@ -65,19 +65,28 @@
   opacity: var(--opacity-disabled);
 }
 
-/* Input element */
+/* Input element — mobile-first: 44px min-height, 16px font to prevent iOS zoom */
 .input {
   flex: 1;
   min-width: 0;
-  height: var(--input-height, 2.5rem);
+  min-height: 2.75rem;
   padding: 0 var(--input-padding-x, var(--spacing-sm));
   background: transparent;
   border: none;
   outline: none;
   font-family: var(--font-family-body);
-  font-size: var(--input-font-size, var(--font-size-sm));
+  font-size: 1rem;
   color: var(--input-fg, var(--color-fg-primary));
   line-height: var(--line-height-normal);
+}
+
+/* @breakpoint-sm (640px) — restore density-aware height and smaller font */
+@media (min-width: 640px) {
+  .input {
+    min-height: auto;
+    height: var(--input-height, 2.5rem);
+    font-size: var(--input-font-size, var(--font-size-sm));
+  }
 }
 
 .input::placeholder {

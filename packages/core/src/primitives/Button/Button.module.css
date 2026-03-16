@@ -15,12 +15,13 @@
  *   --button-height         Element height (density-aware, fallback: 2.5rem)
  */
 
-/* Button base */
+/* Button base — mobile-first */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-2);
+  min-height: 2.75rem;
   border: var(--button-border-width, var(--border-width-default)) solid
     var(--button-border-color, transparent);
   border-radius: var(--button-radius, var(--radius-md));
@@ -37,6 +38,13 @@
   user-select: none;
   position: relative;
   overflow: hidden;
+}
+
+/* @breakpoint-sm (640px) — relax min-height for desktop */
+@media (min-width: 640px) {
+  .button {
+    min-height: auto;
+  }
 }
 
 .button:focus-visible {
@@ -105,17 +113,17 @@
   color: var(--color-action-primary-hover);
 }
 
-/* Sizes */
+/* Sizes — mobile-first: all sizes get 44px minimum touch target */
 .sm {
   --button-icon-size: var(--spacing-3-5);
-  height: var(--button-height, 2rem);
+  height: 2.75rem;
   padding: 0 var(--spacing-3);
   font-size: var(--font-size-xs);
 }
 
 .md {
   --button-icon-size: var(--spacing-4);
-  height: var(--button-height, 2.5rem);
+  height: 2.75rem;
   padding: 0 var(--button-padding-x, var(--spacing-md));
   font-size: var(--button-font-size, var(--font-size-sm));
 }
@@ -125,6 +133,17 @@
   height: var(--button-height, 3rem);
   padding: 0 var(--spacing-6);
   font-size: var(--font-size-base);
+}
+
+/* @breakpoint-sm (640px) — restore intended sizes */
+@media (min-width: 640px) {
+  .sm {
+    height: var(--button-height, 2rem);
+  }
+
+  .md {
+    height: var(--button-height, 2.5rem);
+  }
 }
 
 /* Full width */

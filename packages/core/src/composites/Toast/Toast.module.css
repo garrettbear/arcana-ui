@@ -9,17 +9,29 @@
  *   --toast-max-width      Maximum width (fallback: 23.75rem)
  */
 
+/* Portal — mobile-first: centered at bottom */
 .portal {
   position: fixed;
-  bottom: var(--spacing-6);
-  right: var(--spacing-6);
+  bottom: var(--spacing-4);
+  left: var(--spacing-4);
+  right: var(--spacing-4);
   z-index: var(--z-toast);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);
   pointer-events: none;
-  max-width: var(--toast-max-width, 23.75rem);
-  width: calc(100vw - var(--spacing-12));
+  width: auto;
+}
+
+/* @breakpoint-sm (640px) — right-aligned */
+@media (min-width: 640px) {
+  .portal {
+    left: auto;
+    bottom: var(--spacing-6);
+    right: var(--spacing-6);
+    max-width: var(--toast-max-width, 23.75rem);
+    width: calc(100vw - var(--spacing-12));
+  }
 }
 
 .toast {
@@ -37,14 +49,26 @@
     var(--ease-out);
 }
 
+/* Mobile-first: slide up instead of slide right */
 .hidden {
   opacity: 0;
-  transform: translateX(calc(100% + var(--spacing-6)));
+  transform: translateY(calc(100% + var(--spacing-4)));
 }
 
 .visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
+}
+
+/* @breakpoint-sm (640px) — slide from right */
+@media (min-width: 640px) {
+  .hidden {
+    transform: translateX(calc(100% + var(--spacing-6)));
+  }
+
+  .visible {
+    transform: translateX(0);
+  }
 }
 
 .icon {
@@ -82,9 +106,12 @@
   line-height: var(--line-height-normal);
 }
 
+/* Action button — mobile-first: 44px touch target */
 .actionButton {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-top: var(--spacing-2);
+  min-height: 2.75rem;
   padding: 0;
   border: none;
   background: none;
@@ -97,23 +124,41 @@
   text-underline-offset: 2px;
 }
 
+/* @breakpoint-sm (640px) — relax touch target */
+@media (min-width: 640px) {
+  .actionButton {
+    min-height: auto;
+  }
+}
+
 .actionButton:hover {
   color: var(--color-action-primary-hover);
 }
 
+/* Dismiss button — mobile-first: 44px touch target */
 .dismissButton {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: var(--spacing-5);
-  height: var(--spacing-5);
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: calc(-1 * var(--spacing-1-5));
   border: none;
   background: transparent;
   cursor: pointer;
   color: var(--color-fg-muted);
   border-radius: var(--radius-sm);
   transition: var(--transition-colors);
+}
+
+/* @breakpoint-sm (640px) — restore compact dismiss button */
+@media (min-width: 640px) {
+  .dismissButton {
+    width: var(--spacing-5);
+    height: var(--spacing-5);
+    margin: 0;
+  }
 }
 
 .dismissButton:hover {

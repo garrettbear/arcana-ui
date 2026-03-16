@@ -7,6 +7,7 @@
  *   --badge-font-weight    Font weight (fallback: --font-weight-medium)
  */
 
+/* Badge — mobile-first: max-width with ellipsis */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -19,6 +20,9 @@
   line-height: var(--line-height-tight);
   white-space: nowrap;
   border: var(--border-width-default) solid transparent;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Variants */

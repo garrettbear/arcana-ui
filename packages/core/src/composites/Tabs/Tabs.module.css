@@ -13,13 +13,20 @@
   flex-direction: column;
 }
 
-/* Tab List */
+/* Tab List — mobile-first: horizontal scroll */
 .tabList {
   display: flex;
   align-items: center;
   border-bottom: var(--border-width-thin) solid
     var(--tabs-border-color, var(--color-border-default));
   gap: var(--spacing-1);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabList::-webkit-scrollbar {
+  display: none;
 }
 
 .tabListPills {
@@ -31,11 +38,12 @@
   display: inline-flex;
 }
 
-/* Tab base */
+/* Tab base — mobile-first: 44px min-height touch target */
 .tab {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 2.75rem;
   padding: var(--tabs-padding-y, var(--spacing-2)) var(--tabs-padding-x, var(--spacing-3));
   font-family: var(--font-family-body);
   font-size: var(--tabs-font-size, var(--font-size-sm));
@@ -45,6 +53,15 @@
   background: transparent;
   transition: var(--transition-colors);
   white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* @breakpoint-sm (640px) — relax touch target */
+@media (min-width: 640px) {
+  .tab {
+    min-height: auto;
+    flex-shrink: initial;
+  }
 }
 
 .tab:focus-visible {

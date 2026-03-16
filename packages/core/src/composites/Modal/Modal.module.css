@@ -10,16 +10,25 @@
  *   --modal-max-width      Maximum width (fallback: 35rem)
  */
 
+/* Overlay — mobile-first: bottom-sheet alignment */
 .overlay {
   position: fixed;
   inset: 0;
   z-index: var(--z-overlay);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   background-color: var(--modal-overlay-bg, var(--color-bg-overlay));
-  padding: var(--spacing-4);
+  padding: 0;
   animation: overlayFadeIn var(--duration-normal) var(--ease-default);
+}
+
+/* @breakpoint-sm (640px) — centered dialog */
+@media (min-width: 640px) {
+  .overlay {
+    align-items: center;
+    padding: var(--spacing-4);
+  }
 }
 
 @keyframes overlayFadeIn {
@@ -31,20 +40,41 @@
   }
 }
 
+/* Dialog — mobile-first: bottom sheet (full-width, rounded top corners) */
 .dialog {
   position: relative;
   z-index: var(--z-modal);
   background-color: var(--modal-bg, var(--color-bg-elevated));
-  border-radius: var(--modal-radius, var(--radius-xl));
+  border-radius: var(--modal-radius, var(--radius-xl)) var(--modal-radius, var(--radius-xl)) 0 0;
   box-shadow: var(--modal-shadow, var(--elevation-modal));
   border: var(--modal-border-width, var(--border-width-default)) solid
     var(--modal-border-color, var(--color-border-default));
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - var(--spacing-8));
+  max-height: 85vh;
   width: 100%;
-  animation: dialogIn var(--duration-normal) var(--ease-default);
+  animation: dialogSlideUp var(--duration-normal) var(--ease-default);
   font-family: var(--font-family-body);
+}
+
+@keyframes dialogSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* @breakpoint-sm (640px) — centered dialog with full border-radius */
+@media (min-width: 640px) {
+  .dialog {
+    border-radius: var(--modal-radius, var(--radius-xl));
+    max-height: calc(100vh - var(--spacing-8));
+    animation: dialogIn var(--duration-normal) var(--ease-default);
+  }
 }
 
 @keyframes dialogIn {
@@ -144,13 +174,13 @@
   flex-shrink: 0;
 }
 
-/* Close button */
+/* Close button — mobile-first: 44px touch target */
 .closeButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-8);
-  height: var(--spacing-8);
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: var(--radius-sm);
   border: none;
   background: transparent;
@@ -159,6 +189,14 @@
   transition: var(--transition-colors);
   flex-shrink: 0;
   padding: 0;
+}
+
+/* @breakpoint-sm (640px) — restore compact close button */
+@media (min-width: 640px) {
+  .closeButton {
+    width: var(--spacing-8);
+    height: var(--spacing-8);
+  }
 }
 
 .closeButton:hover {

@@ -47,13 +47,15 @@
   line-height: var(--line-height-normal);
 }
 
+/* Close button — mobile-first: 44px touch target */
 .closeButton {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: var(--spacing-6);
-  height: var(--spacing-6);
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: calc(-1 * var(--spacing-1-5));
   border: none;
   background: transparent;
   cursor: pointer;
@@ -61,6 +63,15 @@
   color: currentColor;
   opacity: 0.6;
   transition: var(--transition-opacity);
+}
+
+/* @breakpoint-sm (640px) — restore compact close button */
+@media (min-width: 640px) {
+  .closeButton {
+    width: var(--spacing-6);
+    height: var(--spacing-6);
+    margin: 0;
+  }
 }
 
 .closeButton:hover {
