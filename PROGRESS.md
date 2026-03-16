@@ -1,8 +1,8 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-03-15
-> **Current phase:** 1 — Token System Maturity
-> **Next priority task:** 1.11
+> **Last updated:** 2026-03-16
+> **Current phase:** 2 — Responsive & Mobile
+> **Next priority task:** 2.2
 > **Blocking issues:** None
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
@@ -32,7 +32,7 @@
 - [x] 1.12 — Component token layer (Tier 3) with density support
 
 ## Phase 2: Responsive & Mobile (Weeks 5–7)
-- [ ] 2.1 — Responsive behavior matrix (docs)
+- [x] 2.1 — Responsive behavior matrix (docs)
 - [ ] 2.2 — Responsive container component
 - [ ] 2.3 — Responsive grid system
 - [ ] 2.4 — Audit & fix all 22 existing components for mobile
