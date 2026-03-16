@@ -1022,6 +1022,15 @@ export default function App() {
   return (
     <ToastProvider>
       <div className={styles.app}>
+        {/* Dev banner */}
+        <div className={styles.devBanner}>
+          <span className={styles.devBannerIcon}>🚧</span>
+          <span>
+            Arcana UI is actively under development — expect broken features.{' '}
+            <strong>Official launch coming soon.</strong>
+          </span>
+        </div>
+
         {/* Top bar */}
         <header className={styles.topbar}>
           <div className={styles.brand}>
