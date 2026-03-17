@@ -1,0 +1,92 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --mobilenav-bg           Background color (fallback: --color-bg-surface)
+ *   --mobilenav-border       Top border color (fallback: --color-border-default)
+ *   --mobilenav-height       Bar height (fallback: --spacing-16)
+ *   --mobilenav-active-color Active item color (fallback: --color-action-primary)
+ */
+
+.mobileNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixed);
+  background-color: var(--mobilenav-bg, var(--color-bg-surface));
+  border-top: var(--border-width-default) solid var(--mobilenav-border, var(--color-border-default));
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* Hidden above 768px */
+@media (min-width: 768px) {
+  .mobileNav {
+    display: none;
+  }
+}
+
+.items {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  height: var(--mobilenav-height, var(--spacing-16));
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+.itemButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-0-5);
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--spacing-1) var(--spacing-1);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-fg-muted);
+  transition: var(--transition-colors);
+  text-decoration: none;
+  font-family: var(--font-family-body);
+}
+
+.itemButton:focus-visible {
+  outline: none;
+  box-shadow: inset var(--focus-ring);
+}
+
+.itemActive {
+  color: var(--mobilenav-active-color, var(--color-action-primary));
+}
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+  flex-shrink: 0;
+}
+
+.itemIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.itemLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}

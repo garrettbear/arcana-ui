@@ -98,36 +98,3 @@
     display: none;
   }
 }
-
-/* Mobile panel — slides down below navbar */
-.mobilePanel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4) var(--spacing-6);
-  border-top: var(--border-width-default) solid
-    var(--navbar-border-color, var(--color-border-default));
-  background-color: var(--navbar-bg, var(--color-bg-page));
-}
-
-/* @breakpoint-sm (640px) — hide mobile panel */
-@media (min-width: 640px) {
-  .mobilePanel {
-    display: none;
-  }
-}
-
-.mobilePanelContent {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-.mobilePanelActions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-  padding-top: var(--spacing-2);
-  border-top: var(--border-width-default) solid
-    var(--navbar-border-color, var(--color-border-default));
-}

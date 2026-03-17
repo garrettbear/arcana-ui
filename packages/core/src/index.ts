@@ -98,6 +98,15 @@ export type {
   FormErrorMessageProps,
 } from './patterns/Form';
 
+export { BottomSheet } from './patterns/BottomSheet';
+export type { BottomSheetProps } from './patterns/BottomSheet';
+
+export { MobileNav } from './patterns/MobileNav';
+export type { MobileNavProps, MobileNavItem } from './patterns/MobileNav';
+
+export { DrawerNav } from './patterns/DrawerNav';
+export type { DrawerNavProps } from './patterns/DrawerNav';
+
 export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from './patterns/Table';
 export type {
   TableProps,

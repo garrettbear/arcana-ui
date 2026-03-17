@@ -2,7 +2,7 @@
 
 > **Last updated:** 2026-03-16
 > **Current phase:** 2 — Responsive & Mobile
-> **Next priority task:** 2.5
+> **Next priority task:** 2.6
 > **Blocking issues:** None
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
@@ -36,7 +36,7 @@
 - [x] 2.2 — Responsive container component
 - [x] 2.3 — Responsive grid system
 - [x] 2.4 — Audit & fix all 22 existing components for mobile
-- [ ] 2.5 — Mobile-specific patterns (bottom sheet, drawer nav)
+- [x] 2.5 — Mobile-specific patterns (bottom sheet, drawer nav)
 - [ ] 2.6 — Responsive typography (fluid clamp)
 - [ ] 2.7 — Viewport-aware spacing
 - [ ] 2.8 — Mobile-first CSS refactor
