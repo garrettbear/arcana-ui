@@ -121,7 +121,6 @@ export const PRESETS: ThemePreset[] = [
     tokens: {},
     globalCSS: `
       body { background: #f8f8f8 !important; }
-      * { box-shadow: none !important; transition: none !important; }
     `,
   },
 ];
