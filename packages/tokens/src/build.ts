@@ -173,6 +173,85 @@ function sanitizeKey(key: string): string {
   return key.replace(/\./g, '-');
 }
 
+/** Size-based shadow keys (vs contextual elevation keys) */
+const SHADOW_SIZE_KEYS_SET = new Set(['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', 'inner']);
+
+/**
+ * Convert a token reference path (e.g., "semantic.radius.md") to its CSS variable
+ * form (e.g., "var(--radius-md)"). Returns null if the mapping is unknown,
+ * in which case the caller should fall back to resolveValue().
+ *
+ * This enables component tokens to reference semantic/primitive CSS vars at runtime,
+ * so that changing a semantic token (e.g., via the playground slider) cascades to
+ * all component tokens that depend on it.
+ */
+function referenceToVar(ref: string): string | null {
+  const parts = ref.split('.');
+
+  if (parts[0] === 'semantic') {
+    if (parts[1] === 'radius' && parts[2]) return `var(--radius-${parts[2]})`;
+    if (parts[1] === 'spacing' && parts[2]) return `var(--spacing-${sanitizeKey(parts[2])})`;
+    if (parts[1] === 'opacity' && parts[2]) return `var(--opacity-${parts[2]})`;
+
+    // Border
+    if (parts[1] === 'border' && parts[2] === 'width' && parts[3]) {
+      return `var(--border-width-${parts[3]})`;
+    }
+
+    // Elevation: size-based → --shadow-*, contextual → --elevation-*
+    if (parts[1] === 'elevation' && parts[2]) {
+      const prefix = SHADOW_SIZE_KEYS_SET.has(parts[2]) ? '--shadow' : '--elevation';
+      return `var(${prefix}-${parts[2]})`;
+    }
+
+    // Color
+    if (parts[1] === 'color' && parts[2]) {
+      if (parts[2] === 'background' && parts[3])
+        return `var(--color-bg-${parts.slice(3).join('-')})`;
+      if (parts[2] === 'foreground' && parts[3])
+        return `var(--color-fg-${parts.slice(3).join('-')})`;
+      if (parts[2] === 'border' && parts[3])
+        return `var(--color-border-${parts.slice(3).join('-')})`;
+      if (parts[2] === 'action' && parts[3]) {
+        const rest = parts.slice(3);
+        // action.primary.default → --color-action-primary (no suffix for default)
+        if (rest.length >= 2 && rest[rest.length - 1] === 'default') {
+          return `var(--color-action-${rest.slice(0, -1).join('-')})`;
+        }
+        return `var(--color-action-${rest.join('-')})`;
+      }
+      if (parts[2] === 'status' && parts[3]) {
+        const rest = parts.slice(3);
+        if (rest.length >= 2 && rest[rest.length - 1] === 'default') {
+          return `var(--color-status-${rest.slice(0, -1).join('-')})`;
+        }
+        return `var(--color-status-${rest.join('-')})`;
+      }
+      if (parts[2] === 'accent' && parts[3])
+        return `var(--color-accent-${parts.slice(3).join('-')})`;
+    }
+
+    return null;
+  }
+
+  if (parts[0] === 'primitive') {
+    if (parts[1] === 'shadow' && parts[2]) return `var(--shadow-${parts[2]})`;
+    if (parts[1] === 'blur' && parts[2]) return `var(--blur-${parts[2]})`;
+    if (parts[1] === 'color' && parts.length >= 3) {
+      return `var(--primitive-${parts.slice(2).join('-')})`;
+    }
+    if (parts[1] === 'typography') {
+      if (parts[2] === 'fontSize' && parts[3]) return `var(--font-size-${parts[3]})`;
+      if (parts[2] === 'fontWeight' && parts[3]) return `var(--font-weight-${parts[3]})`;
+      if (parts[2] === 'letterSpacing' && parts[3]) return `var(--letter-spacing-${parts[3]})`;
+      if (parts[2] === 'lineHeight' && parts[3]) return `var(--line-height-${parts[3]})`;
+    }
+    return null;
+  }
+
+  return null;
+}
+
 // ─── CSS Variable Generation ───────────────────────────────────────────────
 
 /**
@@ -386,9 +465,8 @@ function generateSemanticVars(
   }
 
   // Elevation → --shadow-* (size-based) + --elevation-* (contextual)
-  const SHADOW_SIZE_KEYS = new Set(['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', 'inner']);
   for (const [key, value] of Object.entries(semantic.elevation)) {
-    const prefix = SHADOW_SIZE_KEYS.has(key) ? '--shadow' : '--elevation';
+    const prefix = SHADOW_SIZE_KEYS_SET.has(key) ? '--shadow' : '--elevation';
     vars.push({ name: `${prefix}-${key}`, value: resolveValue(preset, value) });
   }
 
@@ -478,6 +556,22 @@ function isDensityValue(value: unknown): value is DensityValue {
 }
 
 /**
+ * Resolve a component token value. If the value is a {reference} to a semantic
+ * or primitive token, emit a var() reference to the corresponding CSS variable
+ * so that runtime changes cascade. Falls back to resolveValue() for unknown refs
+ * or raw values.
+ */
+function resolveComponentValue(preset: Record<string, unknown>, value: string): string {
+  const match = REFERENCE_RE.exec(value);
+  if (match) {
+    const varRef = referenceToVar(match[1]);
+    if (varRef) return varRef;
+  }
+  // Already a var() reference or raw value — use as-is or resolve
+  return resolveValue(preset, value);
+}
+
+/**
  * Generate CSS variables for the component tier.
  * component.{name}.{prop} → --{name}-{prop}
  *
@@ -499,15 +593,18 @@ function generateComponentVars(
       const varName = `--${name}-${prop}`;
 
       if (isDensityValue(value)) {
-        defaultVars.push({ name: varName, value: resolveValue(preset, value.default) });
+        defaultVars.push({ name: varName, value: resolveComponentValue(preset, value.default) });
         if (value.compact) {
-          compactVars.push({ name: varName, value: resolveValue(preset, value.compact) });
+          compactVars.push({ name: varName, value: resolveComponentValue(preset, value.compact) });
         }
         if (value.comfortable) {
-          comfortableVars.push({ name: varName, value: resolveValue(preset, value.comfortable) });
+          comfortableVars.push({
+            name: varName,
+            value: resolveComponentValue(preset, value.comfortable),
+          });
         }
       } else {
-        defaultVars.push({ name: varName, value: resolveValue(preset, value) });
+        defaultVars.push({ name: varName, value: resolveComponentValue(preset, value) });
       }
     }
   }

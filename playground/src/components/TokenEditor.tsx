@@ -181,6 +181,19 @@ const ALL_SPACING_STEPS = [
   { multiplier: 32, cssVar: '--spacing-32' },
 ];
 
+// ─── Radius Scale ────────────────────────────────────────────────────────────
+
+const RADIUS_SCALE = [
+  { var: '--radius-none', ratio: 0 },
+  { var: '--radius-xs', ratio: 0.33 },
+  { var: '--radius-sm', ratio: 0.67 },
+  { var: '--radius-md', ratio: 1 },
+  { var: '--radius-lg', ratio: 1.33 },
+  { var: '--radius-xl', ratio: 2 },
+  { var: '--radius-2xl', ratio: 2.67 },
+  { var: '--radius-3xl', ratio: 4 },
+];
+
 // ─── FontPicker ───────────────────────────────────────────────────────────────
 
 interface LocalFont {
@@ -340,6 +353,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
   const [lineHeight, setLineHeight] = useState(1.5);
   const [spacingBase, setSpacingBase] = useState(4);
   const [density, setDensity] = useState<DensityMode>('default');
+  const [scale, setScale] = useState(1);
   const [localFonts, setLocalFonts] = useState<LocalFont[]>([]);
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['presets', 'typography']));
   const [openColorGroups, setOpenColorGroups] = useState<Set<string>>(
@@ -394,7 +408,12 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
 
   const handleRadiusChange = (value: number) => {
     setRadius(value);
-    document.documentElement.style.setProperty('--radius-md', `${value}px`);
+    for (const step of RADIUS_SCALE) {
+      const px = Math.round(value * step.ratio);
+      document.documentElement.style.setProperty(step.var, `${px}px`);
+    }
+    // --radius-full always stays 9999px
+    document.documentElement.style.setProperty('--radius-full', '9999px');
   };
 
   const handleDisplayFontChange = (stack: string) => {
@@ -441,6 +460,17 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     }
   };
 
+  const handleScaleChange = (value: number) => {
+    setScale(value);
+    // Apply CSS zoom to the preview area so all components scale proportionally
+    // without affecting the sidebar or accessibility panel
+    const preview = document.getElementById('preview-area');
+    if (preview) {
+      preview.style.zoom = String(value);
+    }
+    document.documentElement.style.setProperty('--arcana-scale', String(value));
+  };
+
   const handleLocalFontUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -468,6 +498,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     setLineHeight(1.5);
     setSpacingBase(4);
     setDensity('default');
+    setScale(1);
     document.documentElement.removeAttribute('data-density');
     setDisplayFont("'Playfair Display', serif");
     for (const step of TYPE_SCALE_STEPS) {
@@ -476,8 +507,17 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     for (const step of ALL_SPACING_STEPS) {
       document.documentElement.style.removeProperty(step.cssVar);
     }
+    for (const v of RADIUS_SCALE) {
+      document.documentElement.style.removeProperty(v.var);
+    }
+    document.documentElement.style.removeProperty('--radius-full');
     document.documentElement.style.removeProperty('--line-height-normal');
     document.documentElement.style.removeProperty('--font-family-display');
+    document.documentElement.style.removeProperty('--arcana-scale');
+    const preview = document.getElementById('preview-area');
+    if (preview) {
+      preview.style.zoom = '';
+    }
   };
 
   const handleExport = async () => {
@@ -485,7 +525,11 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     for (const varName of ALL_EDITOR_VARS) {
       exportObj[varName] = getCSSVar(varName);
     }
-    exportObj['--radius-md'] = `${radius}px`;
+    for (const step of RADIUS_SCALE) {
+      exportObj[step.var] = `${Math.round(radius * step.ratio)}px`;
+    }
+    exportObj['--radius-full'] = '9999px';
+    exportObj['--arcana-scale'] = String(scale);
     exportObj['--font-family-display'] = displayFont;
     exportObj['--font-family-body'] = bodyFont;
     exportObj['--font-family-mono'] = monoFont;
@@ -814,6 +858,22 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                   onChange={(e) => handleRadiusChange(Number.parseInt(e.target.value))}
                 />
                 <span className={styles.sliderValue}>{radius}px</span>
+              </div>
+            </div>
+
+            <div className={styles.sliderRow}>
+              <label className={styles.tokenLabel}>Scale</label>
+              <div className={styles.sliderControl}>
+                <input
+                  type="range"
+                  className={styles.slider}
+                  min={0.5}
+                  max={2}
+                  step={0.05}
+                  value={scale}
+                  onChange={(e) => handleScaleChange(Number.parseFloat(e.target.value))}
+                />
+                <span className={styles.sliderValue}>{Math.round(scale * 100)}%</span>
               </div>
             </div>
           </div>
