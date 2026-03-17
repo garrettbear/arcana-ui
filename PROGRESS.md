@@ -1,8 +1,8 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-03-16
-> **Current phase:** 2 — Responsive & Mobile
-> **Next priority task:** 2.6
+> **Last updated:** 2026-03-17
+> **Current phase:** 3 — Expanded Component Library
+> **Next priority task:** 3.1
 > **Blocking issues:** None
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
@@ -37,11 +37,11 @@
 - [x] 2.3 — Responsive grid system
 - [x] 2.4 — Audit & fix all 22 existing components for mobile
 - [x] 2.5 — Mobile-specific patterns (bottom sheet, drawer nav)
-- [ ] 2.6 — Responsive typography (fluid clamp)
-- [ ] 2.7 — Viewport-aware spacing
-- [ ] 2.8 — Mobile-first CSS refactor
-- [ ] 2.9 — Touch & interaction (44px targets, no hover-only)
-- [ ] 2.10 — Visual regression test matrix (5 breakpoints)
+- [x] 2.6 — Responsive typography (fluid clamp)
+- [x] 2.7 — Viewport-aware spacing
+- [x] 2.8 — Mobile-first CSS refactor
+- [x] 2.9 — Touch & interaction (44px targets, no hover-only)
+- [x] 2.10 — Visual regression test matrix (5 breakpoints)
 
 ## Phase 3: Expanded Component Library (Weeks 7–12)
 - [ ] 3.1 — Refine existing 22 components

@@ -648,15 +648,15 @@ Phase 0 COMPLETE — ready for Phase 1
   - All 274 tests pass, 0 lint errors, 0 token lint violations, build succeeds
 
 ### Active Phase
-Phase 1 COMPLETE — all tasks 1.1–1.12 done. Ready for Phase 2.
+Phase 2 COMPLETE — all tasks 2.1–2.10 done. Ready for Phase 3.
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 2 / Task 2.1 is next
-2. Read `ROADMAP.md` for Phase 2 (Responsive & Mobile) requirements
-3. Begin Task 2.1 — Responsive behavior matrix
+1. Read `PROGRESS.md` to confirm Phase 3 / Task 3.1 is next
+2. Read `ROADMAP.md` for Phase 3 (Expanded Component Library) requirements
+3. Begin Task 3.1 — Refine existing 22 components
 
 ### Session History
 
@@ -684,3 +684,4 @@ None
 | 2026-03-15 | Claude (Claude Code) | Task 1.9 — Token validation CI check | Created validate.ts with 5 checks: structural validation (required fields + naming patterns), reference integrity (broken/circular refs), completeness (all presets match light structure), WCAG AA contrast (11 fg/bg pairs per preset with alpha compositing for rgba backgrounds), value format validation (colors, spacing, durations, opacity, z-index). Created utils/contrast.ts (WCAG 2.1 relative luminance + contrast ratio calculator). Fixed 4 WCAG contrast failures: dark action-primary (indigo-500→600), dark action-destructive (red-500→700), brutalist destructive (red-500→600), terminal destructive (#f85149→#cc0000). Added Validate Tokens CI job. Generated docs/audits/token-validation-report.md. All 6 presets pass, 0 errors. 274 tests pass, 0 lint errors. |
 | 2026-03-15 | Claude (Claude Code) | Task 1.10 — Theme switching | Implemented useTheme hook (useSyncExternalStore, localStorage, system preference detection), ThemeProvider context, theme-transition.css. 16 new tests (290 total). |
 | 2026-03-15 | Claude (Claude Code) | Task 1.12 — Component token layer | Implemented Tier 3 component tokens with density support. Updated build.ts for density-aware DensityValue objects. Expanded component sections in all 6 preset JSONs (19 components × ~5-12 tokens each). Wired all 19 component CSS files to use var(--{component}-{prop}, var(--semantic-fallback)) pattern. Density modes: compact/default/comfortable for button/input/select height, card padding, table cell-padding-y. Created docs/COMPONENT-TOKENS.md reference. 3239+ total vars. 290 tests pass, 0 token lint violations. Phase 1 COMPLETE. |
+| 2026-03-17 | Claude (Claude Code) | Tasks 2.5–2.10 — Mobile patterns + responsive completion | Built BottomSheet, MobileNav, DrawerNav components. Integrated DrawerNav into Navbar (replaced inline mobile panel). Verified tasks 2.6–2.8 already complete (fluid clamp typography from 1.2, density spacing from 1.3, zero max-width queries). Fixed 5 hover-only violations (Card, Table, Tabs, Toast) by adding focus-visible equivalents. Expanded Playwright from 3→5 viewports (320, 375, 768, 1280, 1536). Visual regression tests: 57 baseline screenshots across 5 breakpoints × 2 themes + 2 density modes. Phase 2 COMPLETE. |

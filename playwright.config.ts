@@ -28,6 +28,12 @@ export default defineConfig({
       },
     },
     {
+      name: 'mobile-lg',
+      use: {
+        viewport: { width: 375, height: 812 },
+      },
+    },
+    {
       name: 'tablet',
       use: {
         viewport: { width: 768, height: 1024 },
@@ -37,6 +43,12 @@ export default defineConfig({
       name: 'desktop',
       use: {
         viewport: { width: 1280, height: 800 },
+      },
+    },
+    {
+      name: 'wide',
+      use: {
+        viewport: { width: 1536, height: 864 },
       },
     },
   ],

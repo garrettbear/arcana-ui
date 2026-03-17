@@ -12,6 +12,27 @@ export async function switchTheme(page: Page, theme: string): Promise<void> {
 }
 
 /**
+ * Set the density mode by setting the data-density attribute.
+ */
+export async function setDensity(page: Page, density: string): Promise<void> {
+  await page.evaluate((d) => {
+    document.documentElement.setAttribute('data-density', d);
+  }, density);
+  await page.waitForTimeout(200);
+}
+
+/**
+ * Navigate to a specific playground section by clicking the nav link.
+ */
+export async function navigateToSection(page: Page, sectionId: string): Promise<void> {
+  const navButton = page.locator(`button[class*="navLink"]`, { hasText: sectionId });
+  if (await navButton.isVisible()) {
+    await navButton.click();
+    await page.waitForTimeout(200);
+  }
+}
+
+/**
  * Wait for the playground to fully load (fonts, images, etc.)
  */
 export async function waitForPlaygroundReady(page: Page): Promise<void> {
