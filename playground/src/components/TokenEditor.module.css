@@ -526,6 +526,50 @@
   flex-shrink: 0;
 }
 
+/* ─── Density Toggle ─── */
+
+.densityToggle {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.densityBtn {
+  flex: 1;
+  padding: 5px 6px;
+  font-size: 11px;
+  font-weight: 500;
+  border: none;
+  border-right: 1px solid var(--color-border-default);
+  background: var(--color-bg-page);
+  color: var(--color-fg-secondary);
+  cursor: pointer;
+  transition: background 120ms, color 120ms;
+  font-family: var(--font-family-body);
+  text-align: center;
+}
+
+.densityBtn:last-child {
+  border-right: none;
+}
+
+.densityBtn:hover {
+  background: var(--color-action-ghost-hover);
+  color: var(--color-fg-primary);
+}
+
+.densityActive {
+  background: var(--color-action-primary);
+  color: var(--color-fg-on-primary);
+}
+
+.densityActive:hover {
+  background: var(--color-action-primary-hover);
+  color: var(--color-fg-on-primary);
+}
+
 /* ─── Local Font Upload ─── */
 
 .localFontUpload {

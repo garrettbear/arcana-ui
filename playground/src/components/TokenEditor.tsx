@@ -325,6 +325,8 @@ interface TokenEditorProps {
   onPresetChange: (id: PresetId) => void;
 }
 
+type DensityMode = 'compact' | 'default' | 'comfortable';
+
 export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps) {
   const [tokenValues, setTokenValues] = useState<Record<string, string>>({});
   const [radius, setRadius] = useState(8);
@@ -337,6 +339,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
   const [typeRatio, setTypeRatio] = useState(1.25);
   const [lineHeight, setLineHeight] = useState(1.5);
   const [spacingBase, setSpacingBase] = useState(4);
+  const [density, setDensity] = useState<DensityMode>('default');
   const [localFonts, setLocalFonts] = useState<LocalFont[]>([]);
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['presets', 'typography']));
   const [openColorGroups, setOpenColorGroups] = useState<Set<string>>(
@@ -429,6 +432,15 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     applySpacingScale(value);
   };
 
+  const handleDensityChange = (mode: DensityMode) => {
+    setDensity(mode);
+    if (mode === 'default') {
+      document.documentElement.removeAttribute('data-density');
+    } else {
+      document.documentElement.setAttribute('data-density', mode);
+    }
+  };
+
   const handleLocalFontUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -455,6 +467,8 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     setTypeRatio(1.25);
     setLineHeight(1.5);
     setSpacingBase(4);
+    setDensity('default');
+    document.documentElement.removeAttribute('data-density');
     setDisplayFont("'Playfair Display', serif");
     for (const step of TYPE_SCALE_STEPS) {
       document.documentElement.style.removeProperty(step.cssVar);
@@ -729,6 +743,21 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
         </button>
         {openSections.has('spacing') && (
           <div className={styles.sectionBody}>
+            {/* Density */}
+            <p className={styles.subSectionLabel}>Density</p>
+            <div className={styles.densityToggle}>
+              {(['compact', 'default', 'comfortable'] as const).map((mode) => (
+                <button
+                  key={mode}
+                  className={`${styles.densityBtn} ${density === mode ? styles.densityActive : ''}`}
+                  onClick={() => handleDensityChange(mode)}
+                >
+                  {mode.charAt(0).toUpperCase() + mode.slice(1)}
+                </button>
+              ))}
+            </div>
+
+            <p className={styles.subSectionLabel}>Scale</p>
             <div className={styles.sliderRow}>
               <label className={styles.tokenLabel}>Base Unit</label>
               <div className={styles.sliderControl}>
