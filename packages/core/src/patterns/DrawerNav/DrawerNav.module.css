@@ -1,0 +1,130 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --drawernav-bg       Background color (fallback: --color-bg-elevated)
+ *   --drawernav-shadow   Box shadow (fallback: --elevation-modal)
+ *   --drawernav-width    Drawer width (fallback: 80vw, max 320px)
+ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background-color: var(--color-bg-overlay);
+  animation: overlayFadeIn var(--duration-normal) var(--ease-default);
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  flex-direction: column;
+  width: var(--drawernav-width, 80vw);
+  max-width: var(--drawernav-width, 20rem);
+  background-color: var(--drawernav-bg, var(--color-bg-elevated));
+  box-shadow: var(--drawernav-shadow, var(--elevation-modal));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.left {
+  left: 0;
+  animation: slideInLeft var(--duration-slow) var(--ease-out);
+}
+
+.right {
+  right: 0;
+  animation: slideInRight var(--duration-slow) var(--ease-out);
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) var(--spacing-5);
+  border-bottom: var(--border-width-default) solid var(--color-border-default);
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+  line-height: var(--line-height-tight);
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--color-fg-muted);
+  cursor: pointer;
+  transition: var(--transition-colors);
+  flex-shrink: 0;
+  padding: 0;
+  margin: calc(-1 * var(--spacing-1));
+}
+
+.closeButton:hover {
+  background-color: var(--color-action-ghost-hover);
+  color: var(--color-fg-primary);
+}
+
+.closeButton:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.body {
+  flex: 1;
+  padding: var(--spacing-4) var(--spacing-5);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    animation: none;
+  }
+
+  .left,
+  .right {
+    animation: none;
+  }
+}
