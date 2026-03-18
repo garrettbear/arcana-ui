@@ -7,6 +7,7 @@ import {
   Avatar,
   AvatarGroup,
   Badge,
+  BottomSheet,
   Button,
   Card,
   CardBody,
@@ -14,6 +15,7 @@ import {
   CardHeader,
   Checkbox,
   Container,
+  DrawerNav,
   EmptyState,
   Form,
   FormErrorMessage,
@@ -23,6 +25,7 @@ import {
   Grid,
   HStack,
   Input,
+  MobileNav,
   Modal,
   Radio,
   RadioGroup,
@@ -966,9 +969,138 @@ function LayoutSection() {
   );
 }
 
+// ─── Mobile Patterns Section ─────────────────────────────────────────────────
+
+function MobilePatternsSection() {
+  const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [activeNavKey, setActiveNavKey] = useState('home');
+
+  return (
+    <div>
+      <div className={styles.dashSection}>
+        <h3 className={styles.sectionTitle}>Bottom Sheet</h3>
+        <p className={styles.sectionSubtitle}>
+          Mobile-friendly overlay that slides up from the bottom
+        </p>
+
+        <Button onClick={() => setBottomSheetOpen(true)}>Open Bottom Sheet</Button>
+
+        <BottomSheet
+          open={bottomSheetOpen}
+          onClose={() => setBottomSheetOpen(false)}
+          title="Select an option"
+          description="Choose one of the following actions"
+        >
+          <Stack gap={2}>
+            {['View details', 'Edit item', 'Share', 'Duplicate', 'Archive', 'Delete'].map(
+              (action) => (
+                <Button
+                  key={action}
+                  variant={action === 'Delete' ? 'destructive' : 'ghost'}
+                  style={{ width: '100%', justifyContent: 'flex-start' }}
+                  onClick={() => setBottomSheetOpen(false)}
+                >
+                  {action}
+                </Button>
+              ),
+            )}
+          </Stack>
+        </BottomSheet>
+      </div>
+
+      <div className={styles.dashSection}>
+        <h3 className={styles.sectionTitle}>Drawer Navigation</h3>
+        <p className={styles.sectionSubtitle}>Slide-out navigation panel for mobile menus</p>
+
+        <HStack gap={2}>
+          <Button onClick={() => setDrawerOpen(true)}>Open Drawer (Left)</Button>
+        </HStack>
+
+        <DrawerNav
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          side="left"
+          title="Navigation"
+        >
+          <Stack gap={1}>
+            {['Dashboard', 'Projects', 'Team', 'Settings', 'Help & Support'].map((item) => (
+              <Button
+                key={item}
+                variant="ghost"
+                style={{ width: '100%', justifyContent: 'flex-start' }}
+                onClick={() => setDrawerOpen(false)}
+              >
+                {item}
+              </Button>
+            ))}
+          </Stack>
+        </DrawerNav>
+      </div>
+
+      <div className={styles.dashSection}>
+        <h3 className={styles.sectionTitle}>Mobile Navigation Bar</h3>
+        <p className={styles.sectionSubtitle}>
+          Fixed bottom navigation for mobile apps (resize to mobile to see it in context)
+        </p>
+
+        <div
+          style={{
+            position: 'relative',
+            border: '1px solid var(--color-border-default)',
+            borderRadius: 'var(--radius-lg)',
+            overflow: 'hidden',
+            maxWidth: '375px',
+          }}
+        >
+          <MobileNav
+            items={[
+              { key: 'home', label: 'Home', icon: <span>&#8962;</span> },
+              { key: 'search', label: 'Search', icon: <span>&#128269;</span> },
+              { key: 'add', label: 'Create', icon: <span>&#43;</span> },
+              { key: 'notifications', label: 'Alerts', icon: <span>&#128276;</span> },
+              { key: 'profile', label: 'Profile', icon: <span>&#9786;</span> },
+            ]}
+            activeKey={activeNavKey}
+            onChange={setActiveNavKey}
+            style={{ position: 'relative' }}
+          />
+        </div>
+      </div>
+
+      <div className={styles.dashSection}>
+        <h3 className={styles.sectionTitle}>Container</h3>
+        <p className={styles.sectionSubtitle}>
+          Responsive content wrapper with max-width constraints
+        </p>
+
+        <Stack gap={3}>
+          {(['sm', 'md', 'lg'] as const).map((size) => (
+            <Container key={size} size={size}>
+              <div
+                style={{
+                  padding: 'var(--spacing-md)',
+                  background: 'var(--color-bg-elevated)',
+                  border: '1px solid var(--color-border-default)',
+                  borderRadius: 'var(--radius-md)',
+                  textAlign: 'center',
+                  fontSize: '13px',
+                  color: 'var(--color-fg-secondary)',
+                }}
+              >
+                Container size=&quot;{size}&quot;
+              </div>
+            </Container>
+          ))}
+        </Stack>
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Kitchen Sink ────────────────────────────────────────────────────────
 
-type SectionId = 'overview' | 'components' | 'forms' | 'data' | 'layout';
+type SectionId = 'overview' | 'components' | 'forms' | 'data' | 'layout' | 'mobile';
 
 const SECTIONS: Array<{ id: SectionId; label: string }> = [
   { id: 'overview', label: 'Overview' },
@@ -976,6 +1108,7 @@ const SECTIONS: Array<{ id: SectionId; label: string }> = [
   { id: 'forms', label: 'Forms & Inputs' },
   { id: 'data', label: 'Data & Tables' },
   { id: 'layout', label: 'Layout' },
+  { id: 'mobile', label: 'Mobile Patterns' },
 ];
 
 function KitchenSink() {
@@ -1003,6 +1136,7 @@ function KitchenSink() {
         {activeSection === 'forms' && <FormsSection />}
         {activeSection === 'data' && <DataSection />}
         {activeSection === 'layout' && <LayoutSection />}
+        {activeSection === 'mobile' && <MobilePatternsSection />}
       </div>
     </div>
   );
