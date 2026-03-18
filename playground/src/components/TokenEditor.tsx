@@ -368,14 +368,53 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     }
     setTokenValues(values);
 
+    // Radius
     const r = getCSSVar('--radius-md');
     setRadius(Number.parseInt(r) || 8);
+
+    // Fonts
+    const display = getCSSVar('--font-family-display');
+    if (display) setDisplayFont(display);
 
     const sans = getCSSVar('--font-family-body');
     if (sans) setBodyFont(sans);
 
     const mono = getCSSVar('--font-family-mono');
     if (mono) setMonoFont(mono);
+
+    // Line height
+    const lh = getCSSVar('--line-height-normal');
+    if (lh) setLineHeight(Number.parseFloat(lh) || 1.5);
+
+    // Font size base → derive base size (parse rem/px)
+    const baseFontSize = getCSSVar('--font-size-base');
+    if (baseFontSize) {
+      const px = Number.parseFloat(baseFontSize);
+      if (px > 0) setTypeBaseSize(Math.round(px));
+    }
+
+    // Spacing base → derive from --spacing-1 (= 1x base unit)
+    const sp1 = getCSSVar('--spacing-1');
+    if (sp1) {
+      const px = Number.parseFloat(sp1);
+      if (px > 0) setSpacingBase(Math.round(px));
+    }
+
+    // Scale
+    const preview = document.getElementById('preview-area');
+    if (preview?.style.zoom) {
+      setScale(Number.parseFloat(preview.style.zoom) || 1);
+    } else {
+      setScale(1);
+    }
+
+    // Density
+    const densityAttr = document.documentElement.getAttribute('data-density');
+    if (densityAttr === 'compact' || densityAttr === 'comfortable') {
+      setDensity(densityAttr);
+    } else {
+      setDensity('default');
+    }
   }, []);
 
   useEffect(() => {
@@ -501,6 +540,8 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     setScale(1);
     document.documentElement.removeAttribute('data-density');
     setDisplayFont("'Playfair Display', serif");
+    setBodyFont('Inter, system-ui, -apple-system, sans-serif');
+    setMonoFont("'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace");
     for (const step of TYPE_SCALE_STEPS) {
       document.documentElement.style.removeProperty(step.cssVar);
     }
@@ -513,6 +554,8 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     document.documentElement.style.removeProperty('--radius-full');
     document.documentElement.style.removeProperty('--line-height-normal');
     document.documentElement.style.removeProperty('--font-family-display');
+    document.documentElement.style.removeProperty('--font-family-body');
+    document.documentElement.style.removeProperty('--font-family-mono');
     document.documentElement.style.removeProperty('--arcana-scale');
     const preview = document.getElementById('preview-area');
     if (preview) {

@@ -80,9 +80,6 @@ export const PRESETS: ThemePreset[] = [
     emoji: '💻',
     description: 'Green phosphor on black, mono everything',
     tokens: {},
-    globalCSS: `
-      body { background: #010409 !important; }
-    `,
   },
   {
     id: 'retro98',
@@ -90,9 +87,6 @@ export const PRESETS: ThemePreset[] = [
     emoji: '🖥️',
     description: 'Windows 98 vibes, gray skies, 2px borders',
     tokens: {},
-    globalCSS: `
-      body { background: #008080 !important; }
-    `,
   },
   {
     id: 'glass',
@@ -102,9 +96,9 @@ export const PRESETS: ThemePreset[] = [
     tokens: {},
     globalCSS: `
       body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%) !important;
-        background-size: 400% 400% !important;
-        animation: gradientShift 8s ease infinite !important;
+        background: linear-gradient(135deg, var(--primitive-indigo-400) 0%, var(--primitive-violet-600) 50%, var(--primitive-indigo-400) 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
       }
       @keyframes gradientShift {
         0% { background-position: 0% 50%; }
@@ -119,9 +113,6 @@ export const PRESETS: ThemePreset[] = [
     emoji: '🔲',
     description: 'No mercy, no radius, no shadows',
     tokens: {},
-    globalCSS: `
-      body { background: #f8f8f8 !important; }
-    `,
   },
 ];
 
