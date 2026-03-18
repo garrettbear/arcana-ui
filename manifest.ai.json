@@ -822,6 +822,160 @@
       "examples": [
         "<LogoCloud title=\"Trusted by\" logos={[{ src: '/logos/acme.svg', alt: 'Acme' }]} />"
       ]
+    },
+    {
+      "name": "DataTable",
+      "import": "import { DataTable } from '@arcana-ui/core'",
+      "description": "Full-featured data table with sorting, filtering, row selection, pagination, sticky header, and loading states. Generic — works with any data shape.",
+      "whenToUse": "Dashboards, admin panels, data-heavy views, user management tables",
+      "props": {
+        "data": { "type": "T[]", "required": true, "description": "Array of data objects" },
+        "columns": {
+          "type": "ColumnDef<T>[]",
+          "required": true,
+          "description": "Column definitions with key, header, render, align, width, sticky"
+        },
+        "sortable": {
+          "type": "boolean",
+          "default": "false",
+          "description": "Enable column header click to sort"
+        },
+        "filterable": {
+          "type": "boolean",
+          "default": "false",
+          "description": "Show filter search input"
+        },
+        "selectable": {
+          "type": "boolean",
+          "default": "false",
+          "description": "Show row checkboxes"
+        },
+        "pagination": {
+          "type": "boolean | { pageSize, pageSizeOptions }",
+          "default": "false",
+          "description": "Enable pagination"
+        },
+        "striped": {
+          "type": "boolean",
+          "default": "false",
+          "description": "Alternating row colors"
+        },
+        "hoverable": { "type": "boolean", "default": "true", "description": "Row hover highlight" },
+        "stickyHeader": {
+          "type": "boolean",
+          "default": "false",
+          "description": "Sticky header on scroll"
+        },
+        "loading": { "type": "boolean", "default": "false", "description": "Show skeleton rows" },
+        "emptyState": { "type": "ReactNode", "description": "Content when data is empty" }
+      },
+      "examples": [
+        "<DataTable data={users} columns={[{ key: 'name', header: 'Name' }, { key: 'email', header: 'Email' }]} sortable filterable pagination={{ pageSize: 10 }} />"
+      ],
+      "accessibility": "ARIA sort attributes on sortable headers. Checkbox labels for row selection. Filter input has aria-label."
+    },
+    {
+      "name": "StatCard",
+      "import": "import { StatCard } from '@arcana-ui/core'",
+      "description": "Compact card displaying a single key metric with optional trend indicator, icon, and comparison text. Uses dl/dt/dd semantics.",
+      "whenToUse": "Dashboard KPI grids, metric summaries, analytics overviews",
+      "props": {
+        "value": {
+          "type": "string | number",
+          "required": true,
+          "description": "Main metric value"
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "What the metric represents"
+        },
+        "prefix": { "type": "string", "description": "Prefix before value (e.g., '$')" },
+        "suffix": { "type": "string", "description": "Suffix after value (e.g., '%')" },
+        "trend": {
+          "type": "{ value: number, direction: 'up' | 'down' | 'neutral' }",
+          "description": "Trend indicator"
+        },
+        "comparison": {
+          "type": "string",
+          "description": "Comparison text (e.g., 'vs last month')"
+        },
+        "icon": { "type": "ReactNode", "description": "Metric icon" },
+        "variant": { "type": "'default' | 'compact'", "default": "default" },
+        "loading": { "type": "boolean", "default": "false" }
+      },
+      "examples": [
+        "<StatCard value=\"$142,580\" label=\"Revenue\" trend={{ value: 12.3, direction: 'up' }} comparison=\"vs last month\" />"
+      ],
+      "accessibility": "Uses dl/dt/dd for label/value semantics. Trend has aria-label."
+    },
+    {
+      "name": "ProgressBar",
+      "import": "import { ProgressBar } from '@arcana-ui/core'",
+      "description": "Horizontal bar showing completion or progress with multiple visual variants and color options.",
+      "whenToUse": "File uploads, task completion, loading progress, quota usage",
+      "props": {
+        "value": { "type": "number", "required": true, "description": "Current progress (0-100)" },
+        "max": { "type": "number", "default": "100" },
+        "variant": { "type": "'default' | 'striped' | 'animated'", "default": "default" },
+        "size": { "type": "'sm' | 'md' | 'lg'", "default": "md" },
+        "color": {
+          "type": "'primary' | 'success' | 'warning' | 'error' | 'info'",
+          "default": "primary"
+        },
+        "label": { "type": "string", "description": "Accessible label" },
+        "showValue": {
+          "type": "boolean",
+          "default": "false",
+          "description": "Show percentage text"
+        },
+        "indeterminate": {
+          "type": "boolean",
+          "default": "false",
+          "description": "Unknown progress animation"
+        }
+      },
+      "examples": [
+        "<ProgressBar value={67} label=\"Upload progress\" showValue />",
+        "<ProgressBar value={0} indeterminate label=\"Loading...\" />"
+      ],
+      "accessibility": "role=progressbar with aria-valuenow, aria-valuemin, aria-valuemax, aria-label. Respects prefers-reduced-motion."
+    },
+    {
+      "name": "KPICard",
+      "import": "import { KPICard } from '@arcana-ui/core'",
+      "description": "Enhanced stat card with inline SVG sparkline trend visualization. Premium data display component for dashboards.",
+      "whenToUse": "Dashboard analytics, KPI tracking, executive summaries with trend data",
+      "props": {
+        "value": {
+          "type": "string | number",
+          "required": true,
+          "description": "Main metric value"
+        },
+        "label": { "type": "string", "required": true, "description": "Metric label" },
+        "prefix": { "type": "string", "description": "Value prefix" },
+        "suffix": { "type": "string", "description": "Value suffix" },
+        "trend": {
+          "type": "{ value: number, direction: 'up' | 'down' | 'neutral' }",
+          "description": "Trend indicator"
+        },
+        "data": {
+          "type": "number[]",
+          "description": "Array of values for sparkline (min 2 points)"
+        },
+        "sparklineColor": { "type": "string", "description": "Custom sparkline color" },
+        "target": {
+          "type": "{ value: number, label: string }",
+          "description": "Target line on sparkline"
+        },
+        "period": { "type": "string", "description": "Time range label (e.g., 'Last 7 days')" },
+        "variant": { "type": "'default' | 'compact'", "default": "default" },
+        "loading": { "type": "boolean", "default": "false" }
+      },
+      "examples": [
+        "<KPICard value=\"$142,580\" label=\"Revenue\" trend={{ value: 12.3, direction: 'up' }} data={[95, 102, 98, 115, 120, 130, 142]} period=\"Last 30 days\" />"
+      ],
+      "accessibility": "dl/dt/dd semantics. Sparkline is aria-hidden (decorative). Trend conveyed via text."
     }
   ],
   "design": {

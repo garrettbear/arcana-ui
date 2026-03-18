@@ -765,6 +765,64 @@
       "gap": "var(--spacing-xl)",
       "opacity": "0.8",
       "hover-opacity": "1"
+    },
+    "datatable": {
+      "header-bg": "{primitive.color.gray.300}",
+      "header-font-weight": "{primitive.typography.fontWeight.semibold}",
+      "header-font-size": "{primitive.typography.fontSize.sm}",
+      "row-border": "{semantic.color.border.default}",
+      "row-hover-bg": "{semantic.color.background.surface}",
+      "row-stripe-bg": "{semantic.color.background.surface}",
+      "row-selected-bg": "{semantic.color.action.primary}",
+      "cell-padding-x": "var(--spacing-md)",
+      "cell-padding-y": {
+        "compact": "var(--spacing-2)",
+        "default": "var(--spacing-3)",
+        "comfortable": "var(--spacing-4)"
+      },
+      "sort-indicator-color": "{semantic.color.foreground.muted}",
+      "sticky-shadow": "{semantic.elevation.card}",
+      "radius": "{semantic.radius.none}",
+      "border-color": "{semantic.color.border.default}"
+    },
+    "statcard": {
+      "bg": "{semantic.color.background.surface}",
+      "radius": "{semantic.radius.none}",
+      "shadow": "{semantic.elevation.card}",
+      "padding": {
+        "compact": "var(--spacing-md)",
+        "default": "var(--spacing-lg)",
+        "comfortable": "var(--spacing-xl)"
+      },
+      "value-size": "var(--font-size-fluid-3xl)",
+      "value-weight": "{primitive.typography.fontWeight.bold}",
+      "label-size": "{primitive.typography.fontSize.sm}",
+      "label-color": "{semantic.color.foreground.secondary}",
+      "trend-up": "{semantic.color.status.success.fg}",
+      "trend-down": "{semantic.color.status.error.fg}",
+      "icon-color": "{semantic.color.foreground.muted}",
+      "icon-size": "2.5rem"
+    },
+    "progress": {
+      "bg": "{semantic.color.background.surface}",
+      "fill-color": "{semantic.color.action.primary}",
+      "radius": "{semantic.radius.none}",
+      "height-sm": "0.5rem",
+      "height-md": "0.75rem",
+      "height-lg": "1rem"
+    },
+    "kpicard": {
+      "bg": "{semantic.color.background.surface}",
+      "radius": "{semantic.radius.none}",
+      "shadow": "{semantic.elevation.card}",
+      "padding": {
+        "compact": "var(--spacing-md)",
+        "default": "var(--spacing-lg)",
+        "comfortable": "var(--spacing-xl)"
+      },
+      "sparkline-height": "3rem",
+      "sparkline-stroke-width": "2",
+      "target-line-color": "{semantic.color.foreground.muted}"
     }
   }
 }

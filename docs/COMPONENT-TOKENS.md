@@ -282,6 +282,64 @@ Some tokens support density modes (`compact`, `default`, `comfortable`) via the 
 | text-color | `--footer-text-color` | `--color-fg-muted` | |
 | link-color | `--footer-link-color` | `--color-fg-secondary` | |
 
+### DataTable
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| header-bg | `--datatable-header-bg` | `--color-bg-surface` | |
+| header-font-weight | `--datatable-header-font-weight` | `--font-weight-semibold` | |
+| header-font-size | `--datatable-header-font-size` | `--font-size-xs` | |
+| row-border | `--datatable-row-border` | `--color-border-default` | |
+| row-hover-bg | `--datatable-row-hover-bg` | `--color-bg-surface` | |
+| row-stripe-bg | `--datatable-row-stripe-bg` | `--color-bg-surface` | |
+| row-selected-bg | `--datatable-row-selected-bg` | `--color-action-primary` | |
+| cell-padding-x | `--datatable-cell-padding-x` | `--spacing-md` | |
+| cell-padding-y | `--datatable-cell-padding-y` | `--spacing-3` | **D** |
+| sort-indicator-color | `--datatable-sort-indicator-color` | `--color-fg-muted` | |
+| sticky-shadow | `--datatable-sticky-shadow` | `--elevation-card` | |
+| radius | `--datatable-radius` | `--radius-md` | |
+| border-color | `--datatable-border-color` | `--color-border-default` | |
+
+### StatCard
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| bg | `--statcard-bg` | `--color-bg-surface` | |
+| radius | `--statcard-radius` | `--radius-lg` | |
+| shadow | `--statcard-shadow` | `--elevation-card` | |
+| padding | `--statcard-padding` | `--spacing-lg` | **D** |
+| value-size | `--statcard-value-size` | `--font-size-fluid-3xl` | |
+| value-weight | `--statcard-value-weight` | `--font-weight-bold` | |
+| label-size | `--statcard-label-size` | `--font-size-sm` | |
+| label-color | `--statcard-label-color` | `--color-fg-secondary` | |
+| trend-up | `--statcard-trend-up` | `--color-status-success-fg` | |
+| trend-down | `--statcard-trend-down` | `--color-status-error-fg` | |
+| icon-color | `--statcard-icon-color` | `--color-fg-muted` | |
+| icon-size | `--statcard-icon-size` | `2.5rem` | |
+
+### ProgressBar
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| bg | `--progress-bg` | `--color-bg-surface` | |
+| fill-color | `--progress-fill-color` | `--color-action-primary` | |
+| radius | `--progress-radius` | `--radius-full` | |
+| height-sm | `--progress-height-sm` | `0.25rem` | |
+| height-md | `--progress-height-md` | `0.5rem` | |
+| height-lg | `--progress-height-lg` | `0.75rem` | |
+
+### KPICard
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| bg | `--kpicard-bg` | `--color-bg-surface` | |
+| radius | `--kpicard-radius` | `--radius-lg` | |
+| shadow | `--kpicard-shadow` | `--elevation-card` | |
+| padding | `--kpicard-padding` | `--spacing-lg` | **D** |
+| sparkline-height | `--kpicard-sparkline-height` | `3rem` | |
+| sparkline-stroke-width | `--kpicard-sparkline-stroke-width` | `2` | |
+| target-line-color | `--kpicard-target-line-color` | `--color-fg-muted` | |
+
 ---
 
 ## Per-Preset Overrides

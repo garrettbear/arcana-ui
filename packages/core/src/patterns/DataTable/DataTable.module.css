@@ -1,0 +1,387 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --datatable-header-bg          Header background (fallback: --color-bg-surface)
+ *   --datatable-header-font-weight Header font weight (fallback: --font-weight-semibold)
+ *   --datatable-header-font-size   Header font size (fallback: --font-size-xs)
+ *   --datatable-row-border         Row border color (fallback: --color-border-default)
+ *   --datatable-row-hover-bg       Row hover background (fallback: --color-bg-surface)
+ *   --datatable-row-stripe-bg      Striped row background (fallback: --color-bg-surface)
+ *   --datatable-row-selected-bg    Selected row background (fallback: --color-action-primary)
+ *   --datatable-cell-padding-x     Cell horizontal padding (fallback: --spacing-md)
+ *   --datatable-cell-padding-y     Cell vertical padding (fallback: --spacing-3)
+ *   --datatable-sort-indicator-color  Sort icon color (fallback: --color-fg-muted)
+ *   --datatable-sticky-shadow      Shadow for sticky columns (fallback: --shadow-sm)
+ *   --datatable-radius             Border radius (fallback: --radius-md)
+ *   --datatable-border-color       Border color (fallback: --color-border-default)
+ *   --datatable-filter-max-width   Filter input max width
+ *   --datatable-sticky-max-height  Sticky header wrapper max height
+ *   --datatable-checkbox-width     Checkbox column width
+ *   --datatable-page-button-size   Pagination button size
+ */
+
+.dataTable {
+  --datatable-filter-max-width: var(--content-narrow, 20rem);
+  --datatable-sticky-max-height: var(--content-default, 32rem);
+  --datatable-checkbox-width: var(--spacing-10);
+  --datatable-page-button-size: var(--spacing-8);
+  --datatable-sticky-edge-width: var(--spacing-1);
+
+  width: 100%;
+  font-family: var(--font-family-body);
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) 0;
+  flex-wrap: wrap;
+}
+
+.filterInput {
+  flex: 1;
+  min-width: 0;
+  max-width: var(--datatable-filter-max-width);
+  padding: var(--spacing-2) var(--spacing-3);
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-page);
+  color: var(--color-fg-primary);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  transition: var(--transition-colors);
+}
+
+.filterInput:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-color: var(--color-border-focus);
+}
+
+.filterInput::placeholder {
+  color: var(--color-fg-muted);
+}
+
+.selectionCount {
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+  white-space: nowrap;
+}
+
+/* Table wrapper */
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: var(--border-width-default) solid
+    var(--datatable-border-color, var(--color-border-default));
+  border-radius: var(--datatable-radius, var(--radius-md));
+}
+
+.stickyHeaderWrapper {
+  max-height: var(--datatable-sticky-max-height);
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+/* Header */
+.thead {
+  background-color: var(--datatable-header-bg, var(--color-bg-surface));
+}
+
+.stickyThead {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+
+.th {
+  padding: var(--datatable-cell-padding-y, var(--spacing-3))
+    var(--datatable-cell-padding-x, var(--spacing-md));
+  text-align: left;
+  font-weight: var(--datatable-header-font-weight, var(--font-weight-semibold));
+  color: var(--color-fg-secondary);
+  border-bottom: var(--border-width-default) solid
+    var(--datatable-row-border, var(--color-border-default));
+  white-space: nowrap;
+  font-size: var(--datatable-header-font-size, var(--font-size-xs));
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.thSortable {
+  padding: 0;
+}
+
+/* Sort button */
+.sortButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  min-height: 2.75rem;
+  padding: var(--datatable-cell-padding-y, var(--spacing-3))
+    var(--datatable-cell-padding-x, var(--spacing-md));
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  width: 100%;
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .sortButton {
+    min-height: auto;
+  }
+}
+
+.sortButton:hover {
+  color: var(--color-fg-primary);
+}
+
+.sortButton:focus-visible {
+  outline: none;
+  box-shadow: inset var(--focus-ring);
+}
+
+.sortIcon {
+  display: inline-flex;
+  color: var(--datatable-sort-indicator-color, var(--color-fg-muted));
+}
+
+.rowHoverable:hover,
+.rowHoverable:focus-within {
+  background-color: var(--datatable-row-hover-bg, var(--color-bg-surface));
+  transition: var(--transition-colors);
+}
+
+.rowStriped:nth-child(even) {
+  background-color: var(--datatable-row-stripe-bg, var(--color-bg-surface));
+}
+
+.rowSelected {
+  background-color: color-mix(
+    in srgb,
+    var(--datatable-row-selected-bg, var(--color-action-primary)) 8%,
+    transparent
+  );
+}
+
+.rowClickable {
+  cursor: pointer;
+}
+
+.td {
+  padding: var(--datatable-cell-padding-y, var(--spacing-3))
+    var(--datatable-cell-padding-x, var(--spacing-md));
+  color: var(--color-fg-primary);
+  border-bottom: var(--border-width-default) solid
+    var(--datatable-row-border, var(--color-border-default));
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+}
+
+.tbody .row:last-child .td {
+  border-bottom: none;
+}
+
+/* Checkbox cell */
+.checkboxCell {
+  width: var(--datatable-checkbox-width);
+  text-align: center;
+  padding-left: var(--spacing-sm);
+  padding-right: var(--spacing-sm);
+}
+
+.checkboxCell input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  accent-color: var(--color-action-primary);
+}
+
+/* Sticky columns */
+.stickyLeft {
+  position: sticky;
+  left: 0;
+  z-index: var(--z-raised);
+  background: inherit;
+}
+
+.stickyLeft::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: calc(-1 * var(--datatable-sticky-edge-width));
+  bottom: 0;
+  width: var(--datatable-sticky-edge-width);
+  background: linear-gradient(to right, var(--color-border-muted), transparent);
+  pointer-events: none;
+}
+
+.stickyRight {
+  position: sticky;
+  right: 0;
+  z-index: var(--z-raised);
+  background: inherit;
+}
+
+.stickyRight::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--datatable-sticky-edge-width));
+  bottom: 0;
+  width: var(--datatable-sticky-edge-width);
+  background: linear-gradient(to left, var(--color-border-muted), transparent);
+  pointer-events: none;
+}
+
+/* Empty state */
+.emptyCell {
+  padding: var(--spacing-xl);
+  text-align: center;
+}
+
+.emptyDefault {
+  color: var(--color-fg-muted);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xl) 0;
+}
+
+/* Skeleton loading */
+.skeleton {
+  display: block;
+  height: var(--font-size-sm);
+  width: 80%;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface);
+  animation: skeleton-pulse var(--duration-slow) ease-in-out infinite alternate;
+}
+
+@keyframes skeleton-pulse {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) 0;
+  flex-wrap: wrap;
+}
+
+.paginationInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+}
+
+.pageSizeLabel {
+  white-space: nowrap;
+}
+
+.pageSizeSelect {
+  padding: var(--spacing-1) var(--spacing-2);
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-page);
+  color: var(--color-fg-primary);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+}
+
+.pageSizeSelect:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.paginationRange {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.paginationButtons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.pageButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--datatable-page-button-size);
+  height: var(--datatable-page-button-size);
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-page);
+  color: var(--color-fg-primary);
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.pageButton:hover:not(:disabled) {
+  background: var(--color-bg-surface);
+}
+
+.pageButton:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.pageButton:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.pageIndicator {
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+  padding: 0 var(--spacing-2);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mobile: full-width pagination */
+@media (max-width: 639px) {
+  .pagination {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .paginationInfo {
+    justify-content: center;
+  }
+
+  .paginationButtons {
+    justify-content: center;
+  }
+}

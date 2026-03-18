@@ -16,6 +16,7 @@ import {
   CardHeader,
   Checkbox,
   Container,
+  DataTable,
   DrawerNav,
   EmptyState,
   FeatureSection,
@@ -28,14 +29,17 @@ import {
   HStack,
   Hero,
   Input,
+  KPICard,
   LogoCloud,
   MobileNav,
   Modal,
   PricingCard,
+  ProgressBar,
   Radio,
   RadioGroup,
   Select,
   Stack,
+  StatCard,
   StatsBar,
   Tab,
   TabList,
@@ -55,15 +59,16 @@ import {
   Toggle,
   useToast,
 } from '@arcana-ui/core';
+import type { ColumnDef } from '@arcana-ui/core';
 import React, { useState } from 'react';
 import styles from './App.module.css';
 import { AccessibilityPanel } from './components/AccessibilityPanel';
 import { TokenEditor } from './components/TokenEditor';
 import { PRESETS, type PresetId, applyPreset } from './utils/presets';
 
-// ─── Stat Card ────────────────────────────────────────────────────────────────
+// ─── Overview Stat Card (legacy playground card) ──────────────────────────────
 
-function StatCard({
+function OverviewStatCard({
   label,
   value,
   delta,
@@ -188,10 +193,10 @@ function OverviewSection() {
     <div>
       {/* Stats */}
       <div className={styles.statsGrid}>
-        <StatCard label="Total Projects" value="24" delta="3 this month" positive />
-        <StatCard label="Active Users" value="1,284" delta="12% vs last week" positive />
-        <StatCard label="Open Issues" value="47" delta="8 new today" positive={false} />
-        <StatCard label="Deployments" value="312" delta="28 this week" positive />
+        <OverviewStatCard label="Total Projects" value="24" delta="3 this month" positive />
+        <OverviewStatCard label="Active Users" value="1,284" delta="12% vs last week" positive />
+        <OverviewStatCard label="Open Issues" value="47" delta="8 new today" positive={false} />
+        <OverviewStatCard label="Deployments" value="312" delta="28 this week" positive />
       </div>
 
       {/* Activity Feed */}
@@ -896,6 +901,327 @@ function DataSection() {
           </Card>
         </div>
       </div>
+
+      {/* DataTable Demo */}
+      <DataTableDemo />
+
+      {/* StatCard Demo */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.sectionTitle}>Stat Cards</h3>
+        <p className={styles.sectionSubtitle}>Key metrics at a glance with trend indicators</p>
+        <div className={styles.statsGrid}>
+          <StatCard
+            value="142,580"
+            label="Revenue"
+            prefix="$"
+            trend={{ value: 12.3, direction: 'up' }}
+            comparison="vs last month"
+            icon={
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+              </svg>
+            }
+          />
+          <StatCard
+            value="8,492"
+            label="Active Users"
+            trend={{ value: 5.7, direction: 'up' }}
+            comparison="vs last month"
+            icon={
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+              </svg>
+            }
+          />
+          <StatCard
+            value="3.2"
+            label="Conversion Rate"
+            suffix="%"
+            trend={{ value: 0.4, direction: 'down' }}
+            comparison="vs last month"
+            icon={
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            }
+          />
+          <StatCard
+            value="1.2"
+            label="Page Load"
+            suffix="s"
+            trend={{ value: 15.8, direction: 'down' }}
+            comparison="faster than last week"
+            variant="compact"
+          />
+        </div>
+      </div>
+
+      {/* ProgressBar Demo */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.sectionTitle}>Progress Bars</h3>
+        <p className={styles.sectionSubtitle}>
+          Completion and loading indicators in multiple styles
+        </p>
+        <Stack gap={4}>
+          <div>
+            <p
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--color-fg-secondary)',
+                marginBottom: 'var(--spacing-2)',
+              }}
+            >
+              Default sizes
+            </p>
+            <Stack gap={2}>
+              <ProgressBar value={75} size="sm" label="Small" />
+              <ProgressBar value={60} size="md" label="Medium" showValue />
+              <ProgressBar value={45} size="lg" label="Large" showValue />
+            </Stack>
+          </div>
+          <div>
+            <p
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--color-fg-secondary)',
+                marginBottom: 'var(--spacing-2)',
+              }}
+            >
+              Colors
+            </p>
+            <Stack gap={2}>
+              <ProgressBar value={80} color="primary" label="Primary" showValue />
+              <ProgressBar value={65} color="success" label="Success" showValue />
+              <ProgressBar value={45} color="warning" label="Warning" showValue />
+              <ProgressBar value={25} color="error" label="Error" showValue />
+            </Stack>
+          </div>
+          <div>
+            <p
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--color-fg-secondary)',
+                marginBottom: 'var(--spacing-2)',
+              }}
+            >
+              Variants
+            </p>
+            <Stack gap={2}>
+              <ProgressBar value={70} variant="striped" label="Striped" showValue />
+              <ProgressBar value={55} variant="animated" label="Animated" showValue />
+              <ProgressBar value={0} indeterminate label="Loading data..." />
+            </Stack>
+          </div>
+        </Stack>
+      </div>
+
+      {/* KPICard Demo */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.sectionTitle}>KPI Cards</h3>
+        <p className={styles.sectionSubtitle}>Metrics with sparkline trend visualizations</p>
+        <div className={styles.statsGrid}>
+          <KPICard
+            value="142,580"
+            label="Revenue"
+            prefix="$"
+            trend={{ value: 12.3, direction: 'up' }}
+            data={[95, 102, 98, 115, 120, 118, 130, 125, 135, 142]}
+            period="Last 30 days"
+            target={{ value: 130, label: '$130K' }}
+          />
+          <KPICard
+            value="8,492"
+            label="Active Users"
+            trend={{ value: 5.7, direction: 'up' }}
+            data={[7200, 7400, 7100, 7800, 8000, 7900, 8100, 8300, 8200, 8492]}
+            period="Last 30 days"
+          />
+          <KPICard
+            value="3.2"
+            label="Conversion Rate"
+            suffix="%"
+            trend={{ value: 0.4, direction: 'down' }}
+            data={[3.8, 3.6, 3.5, 3.4, 3.3, 3.4, 3.2, 3.3, 3.1, 3.2]}
+            period="Last 7 days"
+          />
+          <KPICard
+            value="1.2"
+            label="Page Load"
+            suffix="s"
+            trend={{ value: 15.8, direction: 'down' }}
+            data={[1.8, 1.7, 1.5, 1.4, 1.3, 1.4, 1.3, 1.2, 1.3, 1.2]}
+            period="Last 7 days"
+            variant="compact"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── DataTable Demo ──────────────────────────────────────────────────────────
+
+interface LuminaUser {
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  lastActive: string;
+}
+
+const LUMINA_USERS: LuminaUser[] = [
+  {
+    name: 'Sarah Chen',
+    email: 'sarah@lumina.io',
+    role: 'Admin',
+    status: 'Active',
+    lastActive: '2 min ago',
+  },
+  {
+    name: 'James Wilson',
+    email: 'james@lumina.io',
+    role: 'Editor',
+    status: 'Active',
+    lastActive: '15 min ago',
+  },
+  {
+    name: 'Maya Patel',
+    email: 'maya@lumina.io',
+    role: 'Viewer',
+    status: 'Inactive',
+    lastActive: '3 days ago',
+  },
+  {
+    name: 'Alex Kim',
+    email: 'alex@lumina.io',
+    role: 'Editor',
+    status: 'Active',
+    lastActive: '1 hr ago',
+  },
+  {
+    name: "Liam O'Brien",
+    email: 'liam@lumina.io',
+    role: 'Admin',
+    status: 'Active',
+    lastActive: '5 min ago',
+  },
+  {
+    name: 'Zoe Nakamura',
+    email: 'zoe@lumina.io',
+    role: 'Viewer',
+    status: 'On Leave',
+    lastActive: '1 week ago',
+  },
+  {
+    name: 'Carlos Rivera',
+    email: 'carlos@lumina.io',
+    role: 'Editor',
+    status: 'Active',
+    lastActive: '30 min ago',
+  },
+  {
+    name: 'Ava Thompson',
+    email: 'ava@lumina.io',
+    role: 'Viewer',
+    status: 'Active',
+    lastActive: '2 hr ago',
+  },
+  {
+    name: 'Noah Fischer',
+    email: 'noah@lumina.io',
+    role: 'Admin',
+    status: 'Active',
+    lastActive: '10 min ago',
+  },
+  {
+    name: 'Emma Davis',
+    email: 'emma@lumina.io',
+    role: 'Editor',
+    status: 'Inactive',
+    lastActive: '5 days ago',
+  },
+  {
+    name: 'Oscar Martinez',
+    email: 'oscar@lumina.io',
+    role: 'Viewer',
+    status: 'Active',
+    lastActive: '45 min ago',
+  },
+  {
+    name: 'Isla Murray',
+    email: 'isla@lumina.io',
+    role: 'Editor',
+    status: 'Active',
+    lastActive: '20 min ago',
+  },
+];
+
+const LUMINA_COLUMNS: ColumnDef<LuminaUser>[] = [
+  { key: 'name', header: 'Name', sticky: 'left' },
+  { key: 'email', header: 'Email' },
+  { key: 'role', header: 'Role' },
+  {
+    key: 'status',
+    header: 'Status',
+    render: (value) => (
+      <Badge
+        dot
+        variant={value === 'Active' ? 'success' : value === 'Inactive' ? 'secondary' : 'warning'}
+      >
+        {String(value)}
+      </Badge>
+    ),
+  },
+  { key: 'lastActive', header: 'Last Active', align: 'right' },
+];
+
+function DataTableDemo() {
+  return (
+    <div className={styles.dashSection}>
+      <h3 className={styles.sectionTitle}>DataTable</h3>
+      <p className={styles.sectionSubtitle}>
+        Full-featured data table with sorting, filtering, selection, and pagination
+      </p>
+      <DataTable
+        data={LUMINA_USERS}
+        columns={LUMINA_COLUMNS}
+        sortable
+        filterable
+        selectable
+        pagination={{ pageSize: 5 }}
+        striped
+        hoverable
+        emptyState={
+          <EmptyState
+            size="sm"
+            title="No users found"
+            description="Try adjusting your search or filters."
+          />
+        }
+      />
     </div>
   );
 }

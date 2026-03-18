@@ -1,0 +1,157 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --kpicard-bg                Card background (fallback: --color-bg-surface)
+ *   --kpicard-radius            Border radius (fallback: --radius-lg)
+ *   --kpicard-shadow            Box shadow (fallback: --elevation-card)
+ *   --kpicard-padding           Card padding (fallback: --spacing-lg)
+ *   --kpicard-sparkline-height  Sparkline SVG height (fallback: 3rem)
+ *   --kpicard-sparkline-stroke  Sparkline stroke width (fallback: 2)
+ *   --kpicard-target-line-color Target line color (fallback: --color-fg-muted)
+ */
+
+.kpiCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--kpicard-padding, var(--spacing-lg));
+  background: var(--kpicard-bg, var(--color-bg-surface));
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--kpicard-radius, var(--radius-lg));
+  box-shadow: var(--kpicard-shadow, var(--elevation-card));
+  margin: 0;
+}
+
+/* Compact variant */
+.variant-compact {
+  gap: var(--spacing-1);
+  padding: var(--spacing-md);
+}
+
+.variant-compact .value {
+  font-size: var(--font-size-xl);
+}
+
+.variant-compact .sparklineWrapper {
+  height: var(--spacing-8);
+}
+
+/* Label */
+.label {
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+}
+
+/* Value */
+.valueWrapper {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  margin: 0;
+}
+
+.value {
+  font-size: var(--font-size-fluid-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-fg-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--line-height-tight);
+}
+
+.affix {
+  font-weight: var(--font-weight-normal);
+  opacity: 0.7;
+}
+
+/* Trend */
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-0-5);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.trend-up {
+  color: var(--statcard-trend-up, var(--color-status-success-fg));
+}
+
+.trend-down {
+  color: var(--statcard-trend-down, var(--color-status-error-fg));
+}
+
+.trend-neutral {
+  color: var(--color-fg-muted);
+}
+
+/* Sparkline */
+.sparklineWrapper {
+  height: var(--kpicard-sparkline-height, 3rem);
+  margin: 0;
+}
+
+.sparkline {
+  width: 100%;
+  height: 100%;
+}
+
+/* Meta (period + target) */
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  margin: 0;
+}
+
+.period {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+}
+
+.targetLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+}
+
+/* Loading skeleton */
+.loading {
+  pointer-events: none;
+}
+
+.skeleton {
+  display: block;
+  height: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-page);
+  animation: kpi-skeleton-pulse var(--duration-slow) ease-in-out infinite alternate;
+}
+
+.skeletonValue {
+  width: 40%;
+  height: var(--font-size-fluid-3xl);
+}
+
+.skeletonSparkline {
+  width: 100%;
+  height: var(--kpicard-sparkline-height, var(--spacing-12));
+}
+
+@keyframes kpi-skeleton-pulse {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    opacity: 0.6;
+  }
+}

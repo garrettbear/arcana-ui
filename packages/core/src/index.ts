@@ -172,6 +172,18 @@ export type { TimelineProps, TimelineItemData } from './patterns/Timeline';
 export { LogoCloud } from './patterns/LogoCloud';
 export type { LogoCloudProps, LogoItem } from './patterns/LogoCloud';
 
+export { DataTable } from './patterns/DataTable';
+export type { DataTableProps, ColumnDef, SortState, PaginationConfig } from './patterns/DataTable';
+
+export { StatCard } from './patterns/StatCard';
+export type { StatCardProps, StatTrend } from './patterns/StatCard';
+
+export { ProgressBar } from './patterns/ProgressBar';
+export type { ProgressBarProps } from './patterns/ProgressBar';
+
+export { KPICard } from './patterns/KPICard';
+export type { KPICardProps, KPITrend, KPITarget } from './patterns/KPICard';
+
 // ─── Hooks ────────────────────────────────────────────────────────────────────
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useBreakpoint } from './hooks/useBreakpoint';

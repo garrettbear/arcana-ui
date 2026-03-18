@@ -1,0 +1,154 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --progress-bg          Track background (fallback: --color-bg-surface)
+ *   --progress-fill-color  Fill color (fallback: --color-action-primary)
+ *   --progress-radius      Border radius (fallback: --radius-full)
+ *   --progress-height-sm   Small bar height (fallback: 0.25rem)
+ *   --progress-height-md   Medium bar height (fallback: 0.5rem)
+ *   --progress-height-lg   Large bar height (fallback: 0.75rem)
+ */
+
+.progressBar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+.withValue {
+  gap: var(--spacing-3);
+}
+
+/* Track */
+.track {
+  flex: 1;
+  min-width: 0;
+  background: var(--progress-bg, var(--color-bg-surface));
+  border-radius: var(--progress-radius, var(--radius-full));
+  overflow: hidden;
+}
+
+.size-sm .track {
+  height: var(--progress-height-sm, 0.25rem);
+}
+
+.size-md .track {
+  height: var(--progress-height-md, 0.5rem);
+}
+
+.size-lg .track {
+  height: var(--progress-height-lg, 0.75rem);
+}
+
+/* Fill */
+.fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width var(--duration-normal) var(--ease-default);
+}
+
+/* Color variants */
+.color-primary {
+  background-color: var(--progress-fill-color, var(--color-action-primary));
+}
+
+.color-success {
+  background-color: var(--color-status-success-fg);
+}
+
+.color-warning {
+  background-color: var(--color-status-warning-fg);
+}
+
+.color-error {
+  background-color: var(--color-status-error-fg);
+}
+
+.color-info {
+  background-color: var(--color-status-info-fg);
+}
+
+/* Striped variant */
+.striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+}
+
+/* Animated variant — stripes move */
+.animated {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+  animation: progress-stripe-move var(--duration-slow) linear infinite;
+}
+
+@keyframes progress-stripe-move {
+  from {
+    background-position: 1rem 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* Indeterminate */
+.indeterminate {
+  width: 40% !important;
+  animation: progress-indeterminate var(--duration-slow) ease-in-out infinite alternate;
+}
+
+@keyframes progress-indeterminate {
+  from {
+    margin-left: 0;
+    width: 30%;
+  }
+  to {
+    margin-left: 70%;
+    width: 30%;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animated,
+  .indeterminate {
+    animation: none;
+  }
+
+  .indeterminate {
+    width: 100% !important;
+    opacity: 0.6;
+  }
+
+  .fill {
+    transition: none;
+  }
+}
+
+/* Value text */
+.valueText {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-fg-secondary);
+  font-variant-numeric: tabular-nums;
+  min-width: var(--spacing-10);
+  text-align: right;
+}
