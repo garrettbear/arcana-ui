@@ -1,0 +1,89 @@
+/**
+ * FeatureSection — Grid of feature highlights
+ *
+ * Component tokens:
+ *   --feature-padding     Section padding (fallback: --spacing-section)
+ *   --feature-gap         Gap between items (fallback: --spacing-lg)
+ *   --feature-icon-size   Icon container size (fallback: --spacing-12)
+ *   --feature-icon-color  Icon color (fallback: --color-action-primary)
+ */
+
+.section {
+  padding: var(--feature-padding, var(--spacing-section)) var(--spacing-lg);
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  gap: var(--feature-gap, var(--spacing-lg));
+  max-width: var(--content-width-wide);
+  margin: 0 auto;
+}
+
+/* Default: 1 column on mobile */
+.grid {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .cols2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cols3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cols4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cols3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cols4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Feature item */
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--feature-icon-size, var(--spacing-12));
+  height: var(--feature-icon-size, var(--spacing-12));
+  color: var(--feature-icon-color, var(--color-action-primary));
+  flex-shrink: 0;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  color: var(--color-fg-primary);
+  margin: 0;
+}
+
+.description {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-fg-secondary);
+  margin: 0;
+}

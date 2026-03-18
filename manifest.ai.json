@@ -570,6 +570,103 @@
       "examples": [
         "<Table striped hoverable><TableHeader><TableRow><TableHead sortable sortDirection=\"asc\" onSort={sortByName}>Name</TableHead><TableHead>Role</TableHead></TableRow></TableHeader><TableBody>{users.map(u => <TableRow key={u.id}><TableCell>{u.name}</TableCell><TableCell>{u.role}</TableCell></TableRow>)}</TableBody></Table>"
       ]
+    },
+    {
+      "name": "Sidebar",
+      "import": "import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarSection, SidebarItem } from '@arcana-ui/core'",
+      "description": "Collapsible navigation sidebar with icon-only mode, sections, and badge counts.",
+      "when": "Build dashboard or admin layouts with persistent navigation",
+      "props": {
+        "collapsed": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether sidebar is in icon-only mode"
+        },
+        "position": { "type": "enum", "values": ["left", "right"], "default": "left" },
+        "SidebarItem.icon": { "type": "ReactNode", "description": "Icon element" },
+        "SidebarItem.active": { "type": "boolean", "default": false },
+        "SidebarItem.badge": {
+          "type": "string | number",
+          "description": "Badge count on the right"
+        },
+        "SidebarItem.href": {
+          "type": "string",
+          "description": "Renders as anchor instead of button"
+        }
+      },
+      "examples": [
+        "<Sidebar><SidebarSection label=\"Main\"><SidebarItem icon={<HomeIcon />} active>Dashboard</SidebarItem><SidebarItem icon={<InboxIcon />} badge={5}>Inbox</SidebarItem></SidebarSection></Sidebar>"
+      ]
+    },
+    {
+      "name": "Breadcrumb",
+      "import": "import { Breadcrumb, BreadcrumbItem } from '@arcana-ui/core'",
+      "description": "Hierarchical navigation breadcrumb with truncation support.",
+      "when": "Show page location within a site hierarchy",
+      "props": {
+        "separator": {
+          "type": "ReactNode",
+          "default": "chevron icon",
+          "description": "Custom separator"
+        },
+        "maxItems": { "type": "number", "description": "Truncate middle items with ellipsis" },
+        "BreadcrumbItem.href": { "type": "string", "description": "Link URL" },
+        "BreadcrumbItem.current": {
+          "type": "boolean",
+          "default": false,
+          "description": "Current page (no link)"
+        }
+      },
+      "examples": [
+        "<Breadcrumb><BreadcrumbItem href=\"/\">Home</BreadcrumbItem><BreadcrumbItem href=\"/products\">Products</BreadcrumbItem><BreadcrumbItem current>Widget</BreadcrumbItem></Breadcrumb>"
+      ]
+    },
+    {
+      "name": "Pagination",
+      "import": "import { Pagination } from '@arcana-ui/core'",
+      "description": "Page navigation with prev/next, page numbers, ellipsis, and compact variant.",
+      "when": "Navigate through paginated data or content",
+      "props": {
+        "page": { "type": "number", "description": "Current page (1-indexed)" },
+        "totalPages": { "type": "number", "description": "Total number of pages" },
+        "onPageChange": { "type": "(page: number) => void" },
+        "siblingCount": { "type": "number", "default": 1 },
+        "showEdges": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show first/last page buttons"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "compact"],
+          "default": "default",
+          "description": "Compact shows 'Page X of Y'"
+        }
+      },
+      "examples": [
+        "<Pagination page={currentPage} totalPages={20} onPageChange={setPage} />",
+        "<Pagination page={page} totalPages={total} onPageChange={setPage} variant=\"compact\" />"
+      ]
+    },
+    {
+      "name": "Footer",
+      "import": "import { Footer, FooterSection, FooterLink, FooterBottom } from '@arcana-ui/core'",
+      "description": "Site footer with link sections, bottom bar, and external link handling.",
+      "when": "Add site-wide footer with navigation links and copyright",
+      "props": {
+        "border": { "type": "boolean", "default": true },
+        "variant": { "type": "enum", "values": ["standard", "minimal"], "default": "standard" },
+        "FooterSection.title": { "type": "string", "description": "Section heading" },
+        "FooterLink.href": { "type": "string" },
+        "FooterLink.external": {
+          "type": "boolean",
+          "default": false,
+          "description": "Opens in new tab with rel=noopener"
+        }
+      },
+      "examples": [
+        "<Footer><FooterSection title=\"Product\"><FooterLink href=\"/features\">Features</FooterLink></FooterSection><FooterBottom>© 2026 Company</FooterBottom></Footer>"
+      ]
     }
   ],
   "design": {

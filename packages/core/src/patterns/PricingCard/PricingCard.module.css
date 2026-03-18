@@ -1,0 +1,108 @@
+/**
+ * PricingCard — Pricing tier card with plan, price, features, and CTA
+ *
+ * Component tokens:
+ *   --pricing-bg             Background (fallback: --color-bg-surface)
+ *   --pricing-border-color   Border color (fallback: --color-border-default)
+ *   --pricing-radius         Border radius (fallback: --radius-xl)
+ *   --pricing-padding        Padding (fallback: --spacing-xl)
+ *   --pricing-featured-border  Featured border color (fallback: --color-action-primary)
+ */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding: var(--pricing-padding, var(--spacing-xl));
+  background-color: var(--pricing-bg, var(--color-bg-surface));
+  border: var(--border-width-default) solid var(--pricing-border-color, var(--color-border-default));
+  border-radius: var(--pricing-radius, var(--radius-xl));
+}
+
+.featured {
+  border-color: var(--pricing-featured-border, var(--color-action-primary));
+  border-width: var(--border-width-thick);
+  position: relative;
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.plan {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+  margin: 0;
+}
+
+.planDescription {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+  margin: 0;
+}
+
+/* Price */
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-xs);
+}
+
+.amount {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-fluid-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-none);
+  color: var(--color-fg-primary);
+}
+
+.period {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-muted);
+}
+
+/* Features list */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+}
+
+.featureExcluded {
+  color: var(--color-fg-muted);
+  text-decoration: line-through;
+}
+
+.featureCheck {
+  flex-shrink: 0;
+  color: var(--color-status-success-fg);
+}
+
+.featureExcluded .featureCheck {
+  color: var(--color-fg-muted);
+}
+
+/* Action */
+.action {
+  margin-top: auto;
+}

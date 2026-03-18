@@ -117,6 +117,90 @@ export type {
   TableCellProps,
 } from './patterns/Table';
 
+export {
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+  SidebarItem,
+  SidebarSection,
+} from './patterns/Sidebar';
+export type {
+  SidebarProps,
+  SidebarHeaderProps,
+  SidebarContentProps,
+  SidebarFooterProps,
+  SidebarItemProps,
+  SidebarSectionProps,
+} from './patterns/Sidebar';
+
+export { Breadcrumb, BreadcrumbItem } from './patterns/Breadcrumb';
+export type { BreadcrumbProps, BreadcrumbItemProps } from './patterns/Breadcrumb';
+
+export { Pagination } from './patterns/Pagination';
+export type { PaginationProps } from './patterns/Pagination';
+
+export { Footer, FooterSection, FooterLink, FooterBottom } from './patterns/Footer';
+export type {
+  FooterProps,
+  FooterSectionProps,
+  FooterLinkProps,
+  FooterBottomProps,
+} from './patterns/Footer';
+
+export {
+  Hero,
+  HeroContent,
+  HeroTitle,
+  HeroDescription,
+  HeroActions,
+  HeroMedia,
+} from './patterns/Hero';
+export type {
+  HeroProps,
+  HeroContentProps,
+  HeroTitleProps,
+  HeroDescriptionProps,
+  HeroActionsProps,
+  HeroMediaProps,
+} from './patterns/Hero';
+
+export { FeatureSection, FeatureItem } from './patterns/FeatureSection';
+export type { FeatureSectionProps, FeatureItemProps } from './patterns/FeatureSection';
+
+export { Testimonial, TestimonialQuote, TestimonialAuthor } from './patterns/Testimonial';
+export type {
+  TestimonialProps,
+  TestimonialQuoteProps,
+  TestimonialAuthorProps,
+} from './patterns/Testimonial';
+
+export {
+  PricingCard,
+  PricingCardHeader,
+  PricingCardPrice,
+  PricingCardFeatures,
+  PricingCardFeature,
+  PricingCardAction,
+} from './patterns/PricingCard';
+export type {
+  PricingCardProps,
+  PricingCardHeaderProps,
+  PricingCardPriceProps,
+  PricingCardFeaturesProps,
+  PricingCardFeatureProps,
+  PricingCardActionProps,
+} from './patterns/PricingCard';
+
+export { CTA, CTATitle, CTADescription, CTAActions } from './patterns/CTA';
+export type { CTAProps, CTATitleProps, CTADescriptionProps, CTAActionsProps } from './patterns/CTA';
+
+export { StatsBar, StatItem } from './patterns/StatsBar';
+export type { StatsBarProps, StatItemProps } from './patterns/StatsBar';
+
+export { Timeline, TimelineItem } from './patterns/Timeline';
+export type { TimelineProps, TimelineItemProps } from './patterns/Timeline';
+
 // ─── Hooks ────────────────────────────────────────────────────────────────────
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useBreakpoint } from './hooks/useBreakpoint';

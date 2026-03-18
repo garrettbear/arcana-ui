@@ -1,0 +1,70 @@
+/**
+ * CTA — Call-to-action section
+ *
+ * Component tokens:
+ *   --cta-bg            Background (fallback: transparent)
+ *   --cta-padding       Padding (fallback: --spacing-section)
+ *   --cta-radius        Border radius (fallback: --radius-xl)
+ *   --cta-max-width     Max content width (fallback: --content-width-default)
+ */
+
+.cta {
+  display: flex;
+  justify-content: center;
+  padding: var(--cta-padding, var(--spacing-section)) var(--spacing-lg);
+  text-align: center;
+  width: 100%;
+}
+
+.alignLeft {
+  text-align: left;
+}
+
+.filled {
+  background-color: var(--cta-bg, var(--color-bg-subtle));
+  border-radius: var(--cta-radius, var(--radius-xl));
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  max-width: var(--cta-max-width, var(--content-width-default));
+  width: 100%;
+}
+
+.alignLeft .inner {
+  align-items: flex-start;
+}
+
+.cta:not(.alignLeft) .inner {
+  align-items: center;
+}
+
+/* Title */
+.title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-fluid-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-fg-primary);
+  margin: 0;
+}
+
+/* Description */
+.description {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-fg-secondary);
+  margin: 0;
+  max-width: var(--content-width-prose);
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+}

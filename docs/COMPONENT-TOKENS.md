@@ -248,6 +248,42 @@ Some tokens support density modes (`compact`, `default`, `comfortable`) via the 
 
 ---
 
+### Sidebar
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| width | `--sidebar-width` | `16rem` | |
+| collapsed-width | `--sidebar-collapsed-width` | `4rem` | |
+| bg | `--sidebar-bg` | `--color-bg-surface` | |
+| border-color | `--sidebar-border-color` | `--color-border-default` | |
+
+### Breadcrumb
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| separator-color | `--breadcrumb-separator-color` | `--color-fg-muted` | |
+| item-color | `--breadcrumb-item-color` | `--color-fg-secondary` | |
+| active-color | `--breadcrumb-active-color` | `--color-fg-primary` | |
+
+### Pagination
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| item-radius | `--pagination-item-radius` | `--radius-md` | |
+| active-bg | `--pagination-active-bg` | `--color-action-primary` | |
+| active-color | `--pagination-active-color` | `--color-fg-on-primary` | |
+
+### Footer
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| bg | `--footer-bg` | `--color-bg-surface` | |
+| border-color | `--footer-border-color` | `--color-border-default` | |
+| text-color | `--footer-text-color` | `--color-fg-muted` | |
+| link-color | `--footer-link-color` | `--color-fg-secondary` | |
+
+---
+
 ## Per-Preset Overrides
 
 Each theme preset can override any component token. Here are the key differences from the `light` baseline:

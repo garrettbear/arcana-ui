@@ -1,0 +1,81 @@
+/**
+ * Testimonial — Customer testimonial / quote card
+ *
+ * Component tokens:
+ *   --testimonial-bg           Background (fallback: --color-bg-surface)
+ *   --testimonial-border-color Border color (fallback: --color-border-default)
+ *   --testimonial-radius       Border radius (fallback: --radius-lg)
+ *   --testimonial-padding      Padding (fallback: --spacing-lg)
+ *   --testimonial-avatar-size  Avatar size (fallback: --spacing-12)
+ */
+
+.testimonial {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--testimonial-padding, var(--spacing-lg));
+  background-color: var(--testimonial-bg, var(--color-bg-surface));
+  border: var(--border-width-default) solid
+    var(--testimonial-border-color, var(--color-border-default));
+  border-radius: var(--testimonial-radius, var(--radius-lg));
+  margin: 0;
+}
+
+.inline {
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: center;
+  align-items: center;
+}
+
+/* Quote */
+.quote {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+  color: var(--color-fg-primary);
+  margin: 0;
+}
+
+.inline .quote {
+  font-size: var(--font-size-fluid-xl);
+}
+
+/* Author */
+.author {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.inline .author {
+  justify-content: center;
+}
+
+.avatar {
+  width: var(--testimonial-avatar-size, var(--spacing-12));
+  height: var(--testimonial-avatar-size, var(--spacing-12));
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorName {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+}
+
+.authorTitle {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+}

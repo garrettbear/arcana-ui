@@ -1,0 +1,116 @@
+/**
+ * Timeline — Vertical timeline with dots and connecting lines
+ *
+ * Component tokens:
+ *   --timeline-line-color   Line color (fallback: --color-border-default)
+ *   --timeline-line-width   Line width (fallback: --border-width-default)
+ *   --timeline-dot-size     Dot size (fallback: --spacing-3)
+ *   --timeline-dot-color    Dot background (fallback: --color-action-primary)
+ *   --timeline-gap          Gap between items (fallback: --spacing-lg)
+ */
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+/* Timeline item */
+.item {
+  display: flex;
+  gap: var(--spacing-md);
+  padding-bottom: var(--timeline-gap, var(--spacing-lg));
+  position: relative;
+}
+
+.item:last-child {
+  padding-bottom: 0;
+}
+
+.item:last-child .line {
+  display: none;
+}
+
+/* Indicator column */
+.indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Dot */
+.dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--timeline-dot-size, var(--spacing-3));
+  height: var(--timeline-dot-size, var(--spacing-3));
+  border-radius: var(--radius-full);
+  background-color: var(--timeline-dot-color, var(--color-action-primary));
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.dot:empty {
+  min-width: var(--timeline-dot-size, var(--spacing-3));
+}
+
+.dot svg {
+  width: var(--spacing-3);
+  height: var(--spacing-3);
+  color: var(--color-fg-on-primary);
+}
+
+/* Connecting line */
+.line {
+  width: var(--timeline-line-width, var(--border-width-default));
+  flex: 1;
+  background-color: var(--timeline-line-color, var(--color-border-default));
+  margin-top: var(--spacing-1);
+}
+
+/* Content */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding-bottom: var(--spacing-xs);
+  min-width: 0;
+  flex: 1;
+}
+
+.date {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-fg-muted);
+}
+
+.body {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-fg-primary);
+}
+
+/* Alternate layout — desktop only */
+@media (min-width: 1024px) {
+  .alternate .item {
+    width: 50%;
+    margin-left: 50%;
+  }
+
+  .alternate .item:nth-child(even) {
+    flex-direction: row-reverse;
+    margin-left: 0;
+    margin-right: 50%;
+    text-align: right;
+  }
+
+  .alternate .item:nth-child(even) .content {
+    align-items: flex-end;
+  }
+}
