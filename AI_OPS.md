@@ -134,14 +134,119 @@ Add this instruction to `CLAUDE.md`:
 
 Every session, follow this exact sequence:
 
+### Start of Session
 1. **Read PROGRESS.md** — know what's done and what's next
 2. **Read ROADMAP.md** — understand the full context of the current task
 3. **Confirm the task** — tell the user what you're about to work on
-4. **Do the work** — follow the standards in ROADMAP.md Section 8
-5. **Run checks** — `pnpm lint && pnpm test && pnpm build`
-6. **Update PROGRESS.md** — check off completed items, update "Last updated", "Next priority task"
-7. **Commit PROGRESS.md** with the work — `chore: update progress tracker`
-8. **Summarize** — tell the user what was done, what's next, and any blockers
+4. **Do NOT start coding until the user confirms the plan**
+
+### Branch Setup
+5. **Create a branch from main** before writing any code:
+   ```
+   git checkout main && git pull
+   git checkout -b {type}/{task-number}-{short-description}
+   ```
+   Branch naming examples:
+   - `feat/3.4-data-display-components`
+   - `fix/playground-theme-switching`
+   - `refactor/1.12-component-token-layer`
+   - `docs/0.8-update-documentation`
+   - `test/2.10-visual-regression-matrix`
+   
+   Types: feat, fix, refactor, test, docs, chore
+
+### During Work
+6. **Do the work** — follow the standards in ROADMAP.md Section 8
+7. **Commit frequently** using conventional commits:
+   ```
+   feat(core): add DataTable component
+   feat(core): add StatCard component
+   test(core): add DataTable tests
+   docs: update manifest.ai.json with data display components
+   ```
+8. **Run checks** after each component or logical unit:
+   ```
+   pnpm lint && pnpm test && pnpm build
+   ```
+
+### End of Session
+9. **Update PROGRESS.md** — check off completed items, update "Last updated", "Next priority task"
+10. **Update CLAUDE.md** — update "Current State" section with what was done, what's next
+11. **Commit the doc updates**:
+    ```
+    chore: update progress tracker and session state
+    ```
+12. **Push the branch and create a PR**:
+    ```
+    git push -u origin {branch-name}
+    ```
+    
+    Create the PR with a properly formatted title and description:
+    
+    **PR Title format:** `{type}({scope}): {description} [{task-number}]`
+    Examples:
+    - `feat(core): add data display components [3.4]`
+    - `fix(playground): restore theme switching and interactive controls`
+    - `feat(tokens): implement elevation system with per-preset depth strategies [1.4]`
+    
+    **PR Description template:**
+    ```
+    ## Task
+    Task {X.Y} from ROADMAP.md — {task description}
+    
+    ## Changes
+    - {List every component added or modified}
+    - {List every file created}
+    - {List any config changes}
+    
+    ## Testing
+    - [ ] pnpm lint passes
+    - [ ] pnpm test passes
+    - [ ] pnpm build passes
+    - [ ] Playground verified at 320px, 768px, 1280px
+    - [ ] All 6 theme presets verified
+    - [ ] Density modes verified (if applicable)
+    
+    ## Documentation
+    - [ ] Components exported from index.ts
+    - [ ] Component tokens documented in COMPONENT-TOKENS.md
+    - [ ] manifest.ai.json updated
+    - [ ] Playground demos added
+    - [ ] PROGRESS.md updated
+    
+    ## References
+    - ROADMAP.md Section {N}
+    - Closes #{issue-number} (if GitHub issue exists)
+    ```
+    
+    Use the GitHub CLI if available:
+    ```
+    gh pr create \
+      --title "feat(core): add data display components [3.4]" \
+      --body "$(cat <<'EOF'
+    ## Task
+    Task 3.4 from ROADMAP.md — Build data display components
+    
+    ## Changes
+    - Added DataTable with sorting, filtering, pagination
+    - Added StatCard with trend indicators
+    - Added ProgressBar with determinate/indeterminate modes
+    - Added KPICard with sparkline
+    
+    ## Testing
+    - [x] pnpm lint passes
+    - [x] pnpm test passes
+    - [x] pnpm build passes
+    
+    ## References
+    - ROADMAP.md Section 4.2
+    EOF
+    )"
+    ```
+    
+    If gh CLI is not available, push the branch and provide the PR title and body text for the user to create manually.
+
+13. **Summarize** — tell the user what was done, what's next, and any blockers
 ```
 
 ---
@@ -924,8 +1029,10 @@ Then tell me:
 - What task is next
 - Any blockers or dependencies
 - Your plan for this session
+- The branch name you will create (e.g., feat/3.4-data-display-components)
 
 Do NOT start coding until I confirm the plan.
+After I confirm, create the branch from main before writing any code.
 ```
 
 ### End-of-Session Prompt
@@ -946,7 +1053,11 @@ Before we wrap up:
    - Any decisions made
    - What the next agent should do
 4. Commit all changes with appropriate conventional commit messages
-5. Give me a summary: what we did, what's next, estimated sessions remaining
+5. Push the branch and create a PR:
+   - PR title: "{type}({scope}): {description} [{task-number}]"
+   - PR description: use the template from the Session Protocol in this file
+   - Use `gh pr create` if available, otherwise provide the title and body for manual creation
+6. Give me a summary: what we did, what's next, estimated sessions remaining
 ```
 
 ### Unstick Prompt
