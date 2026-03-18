@@ -16,9 +16,11 @@ import {
   CardHeader,
   Checkbox,
   CheckboxGroup,
+  CommandPalette,
   Container,
   DataTable,
   DatePicker,
+  Drawer,
   DrawerNav,
   EmptyState,
   FeatureSection,
@@ -36,6 +38,7 @@ import {
   LogoCloud,
   MobileNav,
   Modal,
+  Popover,
   PricingCard,
   ProgressBar,
   Radio,
@@ -60,9 +63,10 @@ import {
   Timeline,
   ToastProvider,
   Toggle,
+  useHotkey,
   useToast,
 } from '@arcana-ui/core';
-import type { ColumnDef } from '@arcana-ui/core';
+import type { ColumnDef, CommandItem } from '@arcana-ui/core';
 import React, { useState } from 'react';
 import styles from './App.module.css';
 import { AccessibilityPanel } from './components/AccessibilityPanel';
@@ -1851,13 +1855,169 @@ function MarketingSection() {
 
 // ─── Main Kitchen Sink ────────────────────────────────────────────────────────
 
-type SectionId = 'overview' | 'components' | 'forms' | 'data' | 'layout' | 'mobile' | 'marketing';
+// ─── Overlays Section ────────────────────────────────────────────────────────
+
+const COMMAND_ITEMS: CommandItem[] = [
+  { id: 'dash', label: 'Go to Dashboard', group: 'Navigation', shortcut: '⌘D' },
+  { id: 'settings', label: 'Go to Settings', group: 'Navigation', shortcut: '⌘,' },
+  { id: 'profile', label: 'View Profile', group: 'Navigation' },
+  { id: 'new-project', label: 'Create Project', group: 'Actions', shortcut: '⌘N' },
+  { id: 'invite', label: 'Invite Team Member', group: 'Actions' },
+  { id: 'export', label: 'Export Data', group: 'Actions', shortcut: '⌘E' },
+  { id: 'theme', label: 'Toggle Dark Mode', group: 'Preferences' },
+  { id: 'help', label: 'Help & Documentation', group: 'Preferences', shortcut: '⌘?' },
+];
+
+function OverlaysSection() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerSide, setDrawerSide] = useState<'left' | 'right' | 'bottom'>('right');
+  const [cmdOpen, setCmdOpen] = useState(false);
+
+  useHotkey('k', () => setCmdOpen(true), { modifier: 'meta' });
+
+  return (
+    <div>
+      <div className={styles.dashSection}>
+        <h3 className={styles.sectionTitle}>Drawer</h3>
+        <p className={styles.sectionSubtitle}>Slide-out panels for detail views and forms</p>
+        <HStack gap={2}>
+          <Button
+            size="sm"
+            onClick={() => {
+              setDrawerSide('right');
+              setDrawerOpen(true);
+            }}
+          >
+            Right Drawer
+          </Button>
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() => {
+              setDrawerSide('left');
+              setDrawerOpen(true);
+            }}
+          >
+            Left Drawer
+          </Button>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => {
+              setDrawerSide('bottom');
+              setDrawerOpen(true);
+            }}
+          >
+            Bottom Drawer
+          </Button>
+        </HStack>
+        <Drawer
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          side={drawerSide}
+          title="Edit Settings"
+          description="Configure your workspace preferences"
+          footer={
+            <HStack gap={2} justify="flex-end">
+              <Button variant="secondary" size="sm" onClick={() => setDrawerOpen(false)}>
+                Cancel
+              </Button>
+              <Button size="sm" onClick={() => setDrawerOpen(false)}>
+                Save Changes
+              </Button>
+            </HStack>
+          }
+        >
+          <Stack gap={4}>
+            <Input label="Workspace Name" placeholder="My Workspace" />
+            <Textarea label="Description" placeholder="Describe your workspace..." rows={3} />
+            <Toggle label="Public workspace" checked={false} onChange={() => {}} />
+          </Stack>
+        </Drawer>
+      </div>
+
+      <div className={styles.dashSection}>
+        <h3 className={styles.sectionTitle}>Popover</h3>
+        <p className={styles.sectionSubtitle}>Floating content panels with auto-positioning</p>
+        <HStack gap={4}>
+          <Popover
+            trigger={<Button size="sm">Click Popover</Button>}
+            content={
+              <div>
+                <p style={{ margin: 0, fontWeight: 'var(--font-weight-semibold)' }}>Sarah Chen</p>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: 'var(--font-size-xs)',
+                    color: 'var(--color-fg-secondary)',
+                  }}
+                >
+                  sarah@lumina.io · Admin
+                </p>
+              </div>
+            }
+          />
+          <Popover
+            trigger={
+              <Button size="sm" variant="secondary">
+                With Arrow
+              </Button>
+            }
+            content={<p style={{ margin: 0 }}>This popover has an arrow indicator.</p>}
+            showArrow
+            side="top"
+          />
+        </HStack>
+      </div>
+
+      <div className={styles.dashSection}>
+        <h3 className={styles.sectionTitle}>Command Palette</h3>
+        <p className={styles.sectionSubtitle}>
+          Press{' '}
+          <kbd
+            style={{
+              padding: '2px 6px',
+              background: 'var(--color-bg-surface)',
+              borderRadius: 'var(--radius-sm)',
+              border: '1px solid var(--color-border-default)',
+              fontFamily: 'var(--font-family-mono)',
+              fontSize: 'var(--font-size-xs)',
+            }}
+          >
+            ⌘K
+          </kbd>{' '}
+          or click the button below
+        </p>
+        <Button size="sm" onClick={() => setCmdOpen(true)}>
+          Open Command Palette
+        </Button>
+        <CommandPalette
+          open={cmdOpen}
+          onClose={() => setCmdOpen(false)}
+          items={COMMAND_ITEMS}
+          onSelect={(item) => setCmdOpen(false)}
+        />
+      </div>
+    </div>
+  );
+}
+
+type SectionId =
+  | 'overview'
+  | 'components'
+  | 'forms'
+  | 'data'
+  | 'layout'
+  | 'overlays'
+  | 'mobile'
+  | 'marketing';
 
 const SECTIONS: Array<{ id: SectionId; label: string }> = [
   { id: 'overview', label: 'Overview' },
   { id: 'components', label: 'Components' },
   { id: 'forms', label: 'Forms & Inputs' },
   { id: 'data', label: 'Data & Tables' },
+  { id: 'overlays', label: 'Overlays' },
   { id: 'layout', label: 'Layout' },
   { id: 'mobile', label: 'Mobile Patterns' },
   { id: 'marketing', label: 'Marketing' },
@@ -1887,6 +2047,7 @@ function KitchenSink() {
         {activeSection === 'components' && <ComponentsSection />}
         {activeSection === 'forms' && <FormsSection />}
         {activeSection === 'data' && <DataSection />}
+        {activeSection === 'overlays' && <OverlaysSection />}
         {activeSection === 'layout' && <LayoutSection />}
         {activeSection === 'mobile' && <MobilePatternsSection />}
         {activeSection === 'marketing' && <MarketingSection />}

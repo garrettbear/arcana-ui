@@ -977,6 +977,39 @@
       "padding": "var(--spacing-xl)",
       "icon-color": "{semantic.color.foreground.muted}",
       "text-color": "{semantic.color.foreground.secondary}"
+    },
+    "drawer": {
+      "bg": "{semantic.color.background.page}",
+      "shadow": "{primitive.shadow.2xl}",
+      "overlay-bg": "{semantic.color.background.overlay}",
+      "header-padding": "var(--spacing-lg)",
+      "body-padding": "var(--spacing-lg)",
+      "footer-padding": "var(--spacing-lg)",
+      "width-sm": "20rem",
+      "width-md": "26.25rem",
+      "width-lg": "40rem"
+    },
+    "popover": {
+      "bg": "{semantic.color.background.page}",
+      "radius": "{semantic.radius.lg}",
+      "shadow": "{primitive.shadow.lg}",
+      "padding": "var(--spacing-md)",
+      "border": "{semantic.color.border.default}",
+      "max-width": "20rem",
+      "arrow-size": "var(--spacing-2)"
+    },
+    "command": {
+      "bg": "{semantic.color.background.page}",
+      "radius": "{semantic.radius.xl}",
+      "shadow": "{primitive.shadow.2xl}",
+      "input-height": "3.5rem",
+      "input-font-size": "{primitive.typography.fontSize.lg}",
+      "item-padding": "var(--spacing-3) var(--spacing-md)",
+      "item-hover-bg": "{semantic.color.background.surface}",
+      "group-label-color": "{semantic.color.foreground.muted}",
+      "shortcut-color": "{semantic.color.foreground.muted}",
+      "max-width": "40rem",
+      "max-height": "60vh"
     }
   }
 }

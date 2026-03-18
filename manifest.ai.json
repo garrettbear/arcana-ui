@@ -1052,6 +1052,79 @@
         "<CheckboxGroup label=\"Notifications\" options={[{ value: 'email', label: 'Email' }, { value: 'sms', label: 'SMS' }]} value={selected} onChange={setSelected} />"
       ],
       "accessibility": "fieldset/legend semantics, aria-labelledby on group, individual checkboxes with labels"
+    },
+    {
+      "name": "Drawer",
+      "import": "import { Drawer } from '@arcana-ui/core'",
+      "description": "General-purpose slide-out overlay panel from any edge. For detail views, forms, filters, settings.",
+      "whenToUse": "Settings panels, detail views, filter panels, edit forms, mobile navigation",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "required": true,
+          "description": "Whether the drawer is visible"
+        },
+        "onClose": { "type": "() => void", "required": true, "description": "Close callback" },
+        "side": { "type": "'left' | 'right' | 'top' | 'bottom'", "default": "right" },
+        "size": { "type": "'sm' | 'md' | 'lg' | 'full'", "default": "md" },
+        "title": { "type": "string", "description": "Header title" },
+        "description": { "type": "string", "description": "Header description" },
+        "footer": { "type": "ReactNode", "description": "Sticky footer content" },
+        "closeOnEsc": { "type": "boolean", "default": "true" },
+        "closeOnOverlayClick": { "type": "boolean", "default": "true" }
+      },
+      "examples": [
+        "<Drawer open={open} onClose={() => setOpen(false)} title=\"Settings\" side=\"right\">{children}</Drawer>"
+      ],
+      "accessibility": "role=dialog, aria-modal, focus trap, scroll lock, Escape to close"
+    },
+    {
+      "name": "Popover",
+      "import": "import { Popover } from '@arcana-ui/core'",
+      "description": "Positioned floating content panel with auto-flip. Supports click and hover triggers.",
+      "whenToUse": "Rich tooltips, user profile cards, dropdown menus, confirmation prompts",
+      "props": {
+        "trigger": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Element that opens the popover"
+        },
+        "content": { "type": "ReactNode", "required": true, "description": "Popover content" },
+        "side": { "type": "'top' | 'right' | 'bottom' | 'left'", "default": "bottom" },
+        "align": { "type": "'start' | 'center' | 'end'", "default": "center" },
+        "triggerOn": { "type": "'click' | 'hover'", "default": "click" },
+        "showArrow": { "type": "boolean", "default": "false" },
+        "closeOnEsc": { "type": "boolean", "default": "true" }
+      },
+      "examples": ["<Popover trigger={<Button>Open</Button>} content={<p>Content</p>} />"],
+      "accessibility": "aria-expanded on trigger, Escape to close, auto-flip viewport detection"
+    },
+    {
+      "name": "CommandPalette",
+      "import": "import { CommandPalette, useHotkey } from '@arcana-ui/core'",
+      "description": "⌘K-style search and command interface with keyboard navigation, grouped items, and shortcuts display.",
+      "whenToUse": "App-wide search, quick actions, navigation shortcuts, power user tools",
+      "props": {
+        "open": { "type": "boolean", "required": true },
+        "onClose": { "type": "() => void", "required": true },
+        "items": {
+          "type": "CommandItem[]",
+          "description": "Array of { id, label, description?, icon?, shortcut?, group?, disabled? }"
+        },
+        "onSelect": {
+          "type": "(item: CommandItem) => void",
+          "description": "Called when item is selected"
+        },
+        "onSearch": {
+          "type": "(query: string) => CommandItem[] | Promise<CommandItem[]>",
+          "description": "Async search function"
+        },
+        "placeholder": { "type": "string", "default": "Type a command or search..." }
+      },
+      "examples": [
+        "useHotkey('k', () => setOpen(true), { modifier: 'meta' });\n<CommandPalette open={open} onClose={() => setOpen(false)} items={items} onSelect={handleSelect} />"
+      ],
+      "accessibility": "role=dialog, combobox input, listbox results, aria-activedescendant, focus trap, keyboard navigation"
     }
   ],
   "design": {

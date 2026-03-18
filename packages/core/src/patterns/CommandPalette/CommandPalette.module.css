@@ -1,0 +1,211 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --command-bg            Background (fallback: --color-bg-page)
+ *   --command-radius        Border radius (fallback: --radius-xl)
+ *   --command-shadow        Box shadow (fallback: --shadow-2xl)
+ *   --command-input-height  Search input height (fallback: 3.5rem)
+ *   --command-input-font-size  Input font size (fallback: --font-size-lg)
+ *   --command-item-padding  Item padding (fallback: --spacing-3 --spacing-md)
+ *   --command-item-hover-bg Item hover bg (fallback: --color-bg-surface)
+ *   --command-group-label-color  Group label color (fallback: --color-fg-muted)
+ *   --command-shortcut-color  Shortcut text color (fallback: --color-fg-muted)
+ *   --command-max-width     Max width (fallback: 40rem)
+ *   --command-max-height    Max height (fallback: 60vh)
+ */
+
+.wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+}
+
+@media (max-width: 639px) {
+  .wrapper {
+    padding-top: var(--spacing-md);
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg-overlay);
+  animation: cmdOverlayFade var(--duration-fast) var(--ease-default);
+}
+
+@keyframes cmdOverlayFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.palette {
+  position: relative;
+  width: 100%;
+  max-width: var(--command-max-width, 40rem);
+  background: var(--command-bg, var(--color-bg-page));
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--command-radius, var(--radius-xl));
+  box-shadow: var(--command-shadow, var(--shadow-2xl));
+  overflow: hidden;
+  animation: cmdPaletteIn var(--duration-fast) var(--ease-out);
+}
+
+@keyframes cmdPaletteIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .palette {
+    animation: none;
+  }
+}
+
+/* Search input */
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: 0 var(--spacing-md);
+  border-bottom: var(--border-width-default) solid var(--color-border-default);
+  height: var(--command-input-height, 3.5rem);
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: var(--color-fg-muted);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-fg-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--command-input-font-size, var(--font-size-lg));
+  outline: none;
+  height: 100%;
+}
+
+.input::placeholder {
+  color: var(--color-fg-muted);
+}
+
+.spinner {
+  display: inline-block;
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  border: var(--border-width-thick) solid var(--color-border-default);
+  border-top-color: var(--color-action-primary);
+  border-radius: var(--radius-full);
+  animation: cmdSpin var(--duration-slow) linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes cmdSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Results list */
+.results {
+  max-height: var(--command-max-height, 60vh);
+  overflow-y: auto;
+  padding: var(--spacing-2) 0;
+}
+
+/* Group */
+.group {
+  /* no special styling needed, just a wrapper */
+}
+
+.groupLabel {
+  padding: var(--spacing-2) var(--spacing-md) var(--spacing-1);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--command-group-label-color, var(--color-fg-muted));
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* Item */
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--command-item-padding, var(--spacing-3) var(--spacing-md));
+  cursor: pointer;
+  transition: var(--transition-colors);
+  color: var(--color-fg-primary);
+}
+
+.item:hover,
+.itemActive {
+  background: var(--command-item-hover-bg, var(--color-bg-surface));
+}
+
+.itemDisabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.itemIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-fg-muted);
+}
+
+.itemContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+}
+
+.itemLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.itemDescription {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-secondary);
+}
+
+.itemShortcut {
+  flex-shrink: 0;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+  color: var(--command-shortcut-color, var(--color-fg-muted));
+  background: var(--color-bg-surface);
+  padding: var(--spacing-0-5) var(--spacing-1-5);
+  border-radius: var(--radius-sm);
+  border: var(--border-width-default) solid var(--color-border-default);
+}
+
+/* Empty state */
+.empty {
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+  color: var(--color-fg-muted);
+  font-size: var(--font-size-sm);
+}

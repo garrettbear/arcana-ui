@@ -190,11 +190,21 @@ export type { DatePickerProps } from './patterns/DatePicker';
 export { FileUpload } from './patterns/FileUpload';
 export type { FileUploadProps } from './patterns/FileUpload';
 
+export { Drawer } from './patterns/Drawer';
+export type { DrawerProps } from './patterns/Drawer';
+
+export { Popover } from './patterns/Popover';
+export type { PopoverProps } from './patterns/Popover';
+
+export { CommandPalette } from './patterns/CommandPalette';
+export type { CommandPaletteProps, CommandItem } from './patterns/CommandPalette';
+
 // ─── Hooks ────────────────────────────────────────────────────────────────────
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useBreakpoint } from './hooks/useBreakpoint';
 export type { Breakpoint, UseBreakpointReturn } from './hooks/useBreakpoint';
 export { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion';
+export { useHotkey } from './hooks/useHotkey';
 export { useTheme } from './hooks/useTheme';
 export type { ThemeId, ThemeSource, UseThemeReturn } from './hooks/useTheme';
 
