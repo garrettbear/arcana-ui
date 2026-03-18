@@ -1,0 +1,137 @@
+/**
+ * LogoCloud — Grid or scrolling marquee of partner/client logos
+ *
+ * Component tokens:
+ *   --logocloud-item-height    Logo height (fallback: --spacing-8)
+ *   --logocloud-gap            Gap between logos (fallback: --spacing-xl)
+ *   --logocloud-opacity        Default opacity (fallback: 0.6)
+ *   --logocloud-hover-opacity  Hover opacity (fallback: 1)
+ */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  width: 100%;
+}
+
+.title {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin: 0;
+}
+
+/* ── Grid variant ─────────────────────────────────────────────────────────── */
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--logocloud-gap, var(--spacing-xl));
+  max-width: var(--content-width-wide);
+  width: 100%;
+}
+
+/* ── Logo item ────────────────────────────────────────────────────────────── */
+
+.logo {
+  height: var(--logocloud-item-height, var(--spacing-8));
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: var(--logocloud-opacity, 0.6);
+  transition: var(--transition-opacity);
+}
+
+.logoWrap,
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logoLink {
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+
+.logoLink:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.logoWrap:hover .logo,
+.logoLink:hover .logo {
+  filter: grayscale(0);
+  opacity: var(--logocloud-hover-opacity, 1);
+}
+
+.logoWrap:focus-visible .logo,
+.logoLink:focus-visible .logo {
+  filter: grayscale(0);
+  opacity: var(--logocloud-hover-opacity, 1);
+}
+
+/* ── Marquee variant ──────────────────────────────────────────────────────── */
+
+.marqueeWrapper {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: var(--logocloud-gap, var(--spacing-xl));
+  width: max-content;
+  animation: marquee var(--duration-slower, 30s) linear infinite;
+}
+
+.marqueeWrapper:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Respect reduced motion: stop animation, show static grid */
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+  }
+
+  .marqueeWrapper {
+    mask-image: none;
+  }
+}
+
+/* ── Screen-reader only list ──────────────────────────────────────────────── */
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

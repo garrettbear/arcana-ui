@@ -215,6 +215,9 @@ export type { StatsBarProps, StatItemProps } from './patterns/StatsBar';
 export { Timeline, TimelineItem } from './patterns/Timeline';
 export type { TimelineProps, TimelineItemProps } from './patterns/Timeline';
 
+export { LogoCloud } from './patterns/LogoCloud';
+export type { LogoCloudProps, LogoItem } from './patterns/LogoCloud';
+
 // ─── Hooks ────────────────────────────────────────────────────────────────────
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useBreakpoint } from './hooks/useBreakpoint';
