@@ -118,3 +118,38 @@
 .tbody .row:last-child .td {
   border-bottom: none;
 }
+
+/* Size variants */
+.size-sm .th,
+.size-sm .td {
+  padding: var(--spacing-1-5) var(--spacing-3);
+  font-size: var(--font-size-xs);
+}
+
+.size-sm .sortButton {
+  padding: var(--spacing-1-5) var(--spacing-3);
+}
+
+.size-lg .th,
+.size-lg .td {
+  padding: var(--spacing-4) var(--spacing-5);
+}
+
+.size-lg .sortButton {
+  padding: var(--spacing-4) var(--spacing-5);
+}
+
+/* Bordered variant */
+.bordered {
+  border: var(--table-border-width, var(--border-width-default)) solid
+    var(--table-border-color, var(--color-border-default));
+}
+
+.tdBordered {
+  border-right: var(--table-border-width, var(--border-width-default)) solid
+    var(--table-border-color, var(--color-border-default));
+}
+
+.tdBordered:last-child {
+  border-right: none;
+}

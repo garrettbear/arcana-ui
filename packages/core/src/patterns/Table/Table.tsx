@@ -7,9 +7,16 @@ import styles from './Table.module.css';
 interface TableContextValue {
   striped: boolean;
   hoverable: boolean;
+  size: 'sm' | 'md' | 'lg';
+  bordered: boolean;
 }
 
-const TableContext = React.createContext<TableContextValue>({ striped: false, hoverable: false });
+const TableContext = React.createContext<TableContextValue>({
+  striped: false,
+  hoverable: false,
+  size: 'md',
+  bordered: false,
+});
 
 // ─── Table ────────────────────────────────────────────────────────────────────
 
@@ -18,16 +25,35 @@ export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> 
   striped?: boolean;
   /** Whether rows highlight on hover */
   hoverable?: boolean;
+  /** Size variant affecting cell padding density */
+  size?: 'sm' | 'md' | 'lg';
+  /** Whether to show borders between all cells */
+  bordered?: boolean;
   /** Table content (TableHeader, TableBody) */
   children?: React.ReactNode;
 }
 
 export const Table = React.forwardRef<HTMLTableElement, TableProps>(
-  ({ striped = false, hoverable = false, children, className, ...props }, ref) => {
+  (
+    {
+      striped = false,
+      hoverable = false,
+      size = 'md',
+      bordered = false,
+      children,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
     return (
-      <TableContext.Provider value={{ striped, hoverable }}>
-        <div className={styles.tableWrapper}>
-          <table ref={ref} className={cn(styles.table, className)} {...props}>
+      <TableContext.Provider value={{ striped, hoverable, size, bordered }}>
+        <div className={cn(styles.tableWrapper, bordered && styles.bordered)}>
+          <table
+            ref={ref}
+            className={cn(styles.table, styles[`size-${size}`], className)}
+            {...props}
+          >
             {children}
           </table>
         </div>
@@ -200,8 +226,9 @@ export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElem
 
 export const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
   ({ children, className, ...props }, ref) => {
+    const { bordered } = React.useContext(TableContext);
     return (
-      <td ref={ref} className={cn(styles.td, className)} {...props}>
+      <td ref={ref} className={cn(styles.td, bordered && styles.tdBordered, className)} {...props}>
         {children}
       </td>
     );

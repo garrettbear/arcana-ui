@@ -23,22 +23,23 @@ function getInitials(name: string): string {
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
-function getColorFromName(name: string): string {
-  const colors = [
-    '#4f46e5',
-    '#7c3aed',
-    '#db2777',
-    '#dc2626',
-    '#d97706',
-    '#16a34a',
-    '#0284c7',
-    '#0891b2',
-  ];
+const AVATAR_COLOR_CLASSES = [
+  'color0',
+  'color1',
+  'color2',
+  'color3',
+  'color4',
+  'color5',
+  'color6',
+  'color7',
+] as const;
+
+function getColorClass(name: string): string {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
   }
-  return colors[Math.abs(hash) % colors.length];
+  return AVATAR_COLOR_CLASSES[Math.abs(hash) % AVATAR_COLOR_CLASSES.length];
 }
 
 export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
@@ -47,13 +48,12 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
 
     const showImage = src && !imgError;
     const showInitials = !showImage && name;
-    const bgColor = name ? getColorFromName(name) : 'var(--color-bg-subtle)';
+    const colorClass = name ? getColorClass(name) : undefined;
 
     return (
       <div
         ref={ref}
-        className={cn(styles.avatar, styles[size], className)}
-        style={showInitials ? { backgroundColor: bgColor } : undefined}
+        className={cn(styles.avatar, styles[size], colorClass && styles[colorClass], className)}
         aria-label={alt ?? name ?? 'Avatar'}
         role="img"
       >

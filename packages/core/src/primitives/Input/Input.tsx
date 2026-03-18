@@ -3,9 +3,11 @@ import { cn } from '../../utils/cn';
 import styles from './Input.module.css';
 
 export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'suffix'> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'suffix' | 'size'> {
   /** Label text displayed above the input */
   label?: string;
+  /** Size of the input */
+  size?: 'sm' | 'md' | 'lg';
   /** Error message string or boolean error state */
   error?: string | boolean;
   /** Helper text displayed below the input */
@@ -16,17 +18,21 @@ export interface InputProps
   suffix?: React.ReactNode;
   /** Whether the input stretches to fill its container */
   fullWidth?: boolean;
+  /** Whether the input is required (shows indicator on label) */
+  required?: boolean;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       label,
+      size = 'md',
       error,
       helperText,
       prefix,
       suffix,
       fullWidth = false,
+      required,
       id,
       className,
       disabled,
@@ -47,12 +53,18 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label htmlFor={inputId} className={styles.label}>
             {label}
+            {required && (
+              <span className={styles.required} aria-hidden="true">
+                *
+              </span>
+            )}
           </label>
         )}
 
         <div
           className={cn(
             styles.inputWrapper,
+            styles[`size-${size}`],
             hasError && styles.hasError,
             disabled && styles.disabled,
           )}
@@ -66,6 +78,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={inputId}
             disabled={disabled}
+            required={required}
             aria-invalid={hasError || undefined}
             aria-describedby={
               [errorMessage && errorId, helperText && helperId].filter(Boolean).join(' ') ||

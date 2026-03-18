@@ -85,6 +85,39 @@
   font-size: var(--font-size-xl);
 }
 
+/* Avatar color variants for initials — use semantic colors from tokens */
+.color0 {
+  background-color: var(--color-action-primary);
+}
+
+.color1 {
+  background-color: var(--color-status-success-fg);
+}
+
+.color2 {
+  background-color: var(--color-status-warning-fg);
+}
+
+.color3 {
+  background-color: var(--color-status-error-fg);
+}
+
+.color4 {
+  background-color: var(--color-status-info-fg);
+}
+
+.color5 {
+  background-color: var(--color-accent-primary, var(--color-action-primary));
+}
+
+.color6 {
+  background-color: var(--color-accent-secondary, var(--color-action-destructive));
+}
+
+.color7 {
+  background-color: var(--color-action-primary-hover);
+}
+
 .fallback {
   display: flex;
   align-items: center;

@@ -96,6 +96,12 @@
   transform: translateX(var(--spacing-7));
 }
 
+.labelGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+}
+
 .label {
   font-family: var(--font-family-body);
   font-size: var(--font-size-sm);
@@ -103,6 +109,13 @@
   color: var(--color-fg-primary);
   cursor: pointer;
   user-select: none;
+}
+
+.description {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-secondary);
+  line-height: var(--line-height-normal);
 }
 
 .labelDisabled {

@@ -17,21 +17,34 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   (
     { variant = 'default', padding = 'md', interactive = false, className, children, ...props },
     ref,
-  ) => (
-    <div
-      ref={ref}
-      className={cn(
-        styles.card,
-        styles[variant],
-        styles[`padding-${padding}`],
-        interactive && styles.interactive,
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  ),
+  ) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (interactive && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        e.currentTarget.click();
+      }
+      props.onKeyDown?.(e);
+    };
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          styles.card,
+          styles[variant],
+          styles[`padding-${padding}`],
+          interactive && styles.interactive,
+          className,
+        )}
+        tabIndex={interactive ? 0 : undefined}
+        role={interactive ? 'button' : undefined}
+        onKeyDown={interactive ? handleKeyDown : props.onKeyDown}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
 );
 Card.displayName = 'Card';
 

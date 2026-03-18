@@ -70,10 +70,47 @@ export interface TabListProps {
 export const TabList = React.forwardRef<HTMLDivElement, TabListProps>(
   ({ children, className }, ref) => {
     const { variant } = useTabsContext();
+    const listRef = React.useRef<HTMLDivElement>(null);
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      const list = listRef.current;
+      if (!list) return;
+
+      const tabs = Array.from(
+        list.querySelectorAll<HTMLButtonElement>('[role="tab"]:not([disabled])'),
+      );
+      const currentIndex = tabs.findIndex((tab) => tab === document.activeElement);
+      if (currentIndex === -1) return;
+
+      let nextIndex: number | undefined;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        nextIndex = (currentIndex + 1) % tabs.length;
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        nextIndex = 0;
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        nextIndex = tabs.length - 1;
+      }
+
+      if (nextIndex !== undefined) {
+        tabs[nextIndex].focus();
+      }
+    };
+
     return (
       <div
-        ref={ref}
+        ref={(node) => {
+          (listRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+          if (typeof ref === 'function') ref(node);
+          else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        }}
         role="tablist"
+        onKeyDown={handleKeyDown}
         className={cn(styles.tabList, variant === 'pills' && styles.tabListPills, className)}
       >
         {children}

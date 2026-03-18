@@ -5,6 +5,8 @@ import styles from './Toggle.module.css';
 export interface ToggleProps {
   /** Label text displayed next to the toggle */
   label?: string;
+  /** Description text displayed below the label */
+  description?: string;
   /** Whether the toggle is in the on state */
   checked: boolean;
   /** Callback fired when the toggle state changes */
@@ -20,10 +22,14 @@ export interface ToggleProps {
 }
 
 export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
-  ({ label, checked, onChange, disabled = false, size = 'md', id, className }, ref) => {
+  (
+    { label, description, checked, onChange, disabled = false, size = 'md', id, className },
+    ref,
+  ) => {
     const generatedId = React.useId();
     const buttonId = id ?? generatedId;
     const labelId = `${buttonId}-label`;
+    const descId = `${buttonId}-desc`;
 
     return (
       <div className={cn(styles.wrapper, className)}>
@@ -34,6 +40,7 @@ export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
           role="switch"
           aria-checked={checked}
           aria-labelledby={label ? labelId : undefined}
+          aria-describedby={description ? descId : undefined}
           aria-label={label ? undefined : 'Toggle'}
           disabled={disabled}
           onClick={() => onChange(!checked)}
@@ -46,10 +53,22 @@ export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
         >
           <span className={styles.thumb} />
         </button>
-        {label && (
-          <label id={labelId} className={cn(styles.label, disabled && styles.labelDisabled)}>
-            {label}
-          </label>
+        {(label || description) && (
+          <div className={styles.labelGroup}>
+            {label && (
+              <label id={labelId} className={cn(styles.label, disabled && styles.labelDisabled)}>
+                {label}
+              </label>
+            )}
+            {description && (
+              <span
+                id={descId}
+                className={cn(styles.description, disabled && styles.labelDisabled)}
+              >
+                {description}
+              </span>
+            )}
+          </div>
         )}
       </div>
     );

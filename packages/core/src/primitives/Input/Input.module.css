@@ -65,6 +65,33 @@
   opacity: var(--opacity-disabled);
 }
 
+/* Required indicator */
+.required {
+  color: var(--color-status-error-fg);
+  margin-left: var(--spacing-1);
+}
+
+/* Size variants */
+.size-sm .input {
+  font-size: var(--font-size-xs);
+}
+
+.size-lg .input {
+  font-size: var(--font-size-base);
+}
+
+@media (min-width: 640px) {
+  .size-sm .input {
+    height: var(--spacing-8);
+    min-height: auto;
+  }
+
+  .size-lg .input {
+    height: var(--spacing-12);
+    min-height: auto;
+  }
+}
+
 /* Input element — mobile-first: 44px min-height, 16px font to prevent iOS zoom */
 .input {
   flex: 1;
