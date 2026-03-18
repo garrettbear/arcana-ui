@@ -282,6 +282,104 @@ Some tokens support density modes (`compact`, `default`, `comfortable`) via the 
 | text-color | `--footer-text-color` | `--color-fg-muted` | |
 | link-color | `--footer-link-color` | `--color-fg-secondary` | |
 
+### Hero
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| padding-y | `--hero-padding-y` | `--spacing-section` | |
+| headline-size | `--hero-headline-size` | `--font-size-fluid-5xl` | |
+| headline-weight | `--hero-headline-weight` | `--font-weight-bold` | |
+| headline-line-height | `--hero-headline-line-height` | `--line-height-tight` | |
+| subheadline-size | `--hero-subheadline-size` | `--font-size-fluid-lg` | |
+| subheadline-color | `--hero-subheadline-color` | `--color-fg-secondary` | |
+| max-width | `--hero-max-width` | `--content-width-wide` | |
+| badge-bg | `--hero-badge-bg` | `--color-bg-subtle` | |
+| badge-color | `--hero-badge-color` | `--color-action-primary` | |
+| badge-radius | `--hero-badge-radius` | `--radius-full` | |
+
+### FeatureSection
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| card-padding | `--feature-card-padding` | `--spacing-lg` | |
+| card-radius | `--feature-card-radius` | `--radius-lg` | |
+| card-bg | `--feature-card-bg` | `transparent` | |
+| icon-size | `--feature-icon-size` | `--spacing-12` | |
+| icon-color | `--feature-icon-color` | `--color-action-primary` | |
+| title-size | `--feature-title-size` | `--font-size-lg` | |
+| title-weight | `--feature-title-weight` | `--font-weight-semibold` | |
+
+### Testimonial
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| bg | `--testimonial-bg` | `--color-bg-surface` | |
+| radius | `--testimonial-radius` | `--radius-lg` | |
+| padding | `--testimonial-padding` | `--spacing-lg` | |
+| quote-size | `--testimonial-quote-size` | `--font-size-md` | |
+| quote-color | `--testimonial-quote-color` | `--color-fg-primary` | |
+| author-size | `--testimonial-author-size` | `--font-size-sm` | |
+| star-color | `--testimonial-star-color` | `--color-status-warning-fg` | |
+
+### PricingCard
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| bg | `--pricing-bg` | `--color-bg-surface` | |
+| radius | `--pricing-radius` | `--radius-xl` | |
+| shadow | `--pricing-shadow` | `--shadow-sm` | |
+| padding | `--pricing-padding` | `--spacing-xl` | |
+| popular-border | `--pricing-popular-border` | `--color-action-primary` | |
+| popular-shadow | `--pricing-popular-shadow` | `--shadow-lg` | |
+| popular-bg | `--pricing-popular-bg` | `--color-bg-surface` | |
+| price-size | `--pricing-price-size` | `--font-size-fluid-4xl` | |
+| price-weight | `--pricing-price-weight` | `--font-weight-bold` | |
+| feature-included-color | `--pricing-feature-included-color` | `--color-status-success-fg` | |
+| feature-excluded-color | `--pricing-feature-excluded-color` | `--color-fg-muted` | |
+
+### CTASection
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| bg | `--cta-bg` | `--color-action-primary` (banner) | |
+| fg | `--cta-fg` | `--color-fg-on-primary` (banner) | |
+| padding-y | `--cta-padding-y` | `--spacing-section` | |
+| radius | `--cta-radius` | `--radius-xl` | |
+| headline-size | `--cta-headline-size` | `--font-size-fluid-3xl` | |
+
+### StatsBar
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| value-size | `--stats-value-size` | `--font-size-fluid-3xl` | |
+| value-weight | `--stats-value-weight` | `--font-weight-bold` | |
+| label-size | `--stats-label-size` | `--font-size-sm` | |
+| label-color | `--stats-label-color` | `--color-fg-secondary` | |
+| trend-up-color | `--stats-trend-up-color` | `--color-status-success-fg` | |
+| trend-down-color | `--stats-trend-down-color` | `--color-status-error-fg` | |
+| divider-color | `--stats-divider-color` | `--color-border-default` | |
+
+### Timeline
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| line-color | `--timeline-line-color` | `--color-border-default` | |
+| line-width | `--timeline-line-width` | `--border-width-default` | |
+| dot-size | `--timeline-dot-size` | `--spacing-3` | |
+| dot-complete-color | `--timeline-dot-complete-color` | `--color-action-primary` | |
+| dot-active-color | `--timeline-dot-active-color` | `--color-action-primary` | |
+| dot-pending-color | `--timeline-dot-pending-color` | `--color-fg-muted` | |
+| content-padding | `--timeline-content-padding` | `--spacing-md` | |
+
+### LogoCloud
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| item-height | `--logocloud-item-height` | `--spacing-8` | |
+| gap | `--logocloud-gap` | `--spacing-xl` | |
+| opacity | `--logocloud-opacity` | `0.6` | |
+| hover-opacity | `--logocloud-hover-opacity` | `1` | |
+
 ---
 
 ## Per-Preset Overrides

@@ -667,6 +667,163 @@
       "examples": [
         "<Footer><FooterSection title=\"Product\"><FooterLink href=\"/features\">Features</FooterLink></FooterSection><FooterBottom>© 2026 Company</FooterBottom></Footer>"
       ]
+    },
+    {
+      "name": "Hero",
+      "import": "import { Hero, HeroBadge, HeroContent, HeroTitle, HeroDescription, HeroActions, HeroMedia } from '@arcana-ui/core'",
+      "description": "Full-width hero section for landing pages. Supports centered, split, and fullscreen layouts with optional overlay and badge.",
+      "when": "Landing page hero section with headline, subheadline, and CTAs",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["centered", "split", "fullscreen"],
+          "default": "centered"
+        },
+        "align": { "type": "enum", "values": ["left", "center"], "default": "center" },
+        "height": { "type": "enum", "values": ["viewport", "large", "auto"], "default": "auto" },
+        "overlay": {
+          "type": "boolean",
+          "default": false,
+          "description": "Dark overlay for text readability over background media"
+        }
+      },
+      "examples": [
+        "<Hero variant=\"centered\"><HeroContent><HeroBadge>Now in beta</HeroBadge><HeroTitle>Build faster with Nimbus</HeroTitle><HeroDescription>Ship production-ready UIs in minutes</HeroDescription><HeroActions><Button>Get Started</Button><Button variant=\"outline\">Learn More</Button></HeroActions></HeroContent></Hero>"
+      ]
+    },
+    {
+      "name": "FeatureSection",
+      "import": "import { FeatureSection, FeatureItem } from '@arcana-ui/core'",
+      "description": "Grid, list, or alternating layout of feature highlights with icons, titles, and descriptions.",
+      "when": "Showcase product features in a grid or list",
+      "props": {
+        "title": { "type": "string", "description": "Section heading above features" },
+        "subtitle": { "type": "string", "description": "Section description" },
+        "columns": { "type": "enum", "values": [2, 3, 4], "default": 3 },
+        "variant": { "type": "enum", "values": ["grid", "list", "alternating"], "default": "grid" },
+        "FeatureItem.icon": { "type": "ReactNode" },
+        "FeatureItem.title": { "type": "string", "required": true },
+        "FeatureItem.description": { "type": "string" },
+        "FeatureItem.link": { "type": "{ label: string, href: string }" }
+      },
+      "examples": [
+        "<FeatureSection title=\"Why Nimbus?\" columns={3}><FeatureItem title=\"Lightning Fast\" description=\"Sub-second response times\" /><FeatureItem title=\"Secure\" description=\"Enterprise-grade security\" /><FeatureItem title=\"Simple\" description=\"Get started in minutes\" /></FeatureSection>"
+      ]
+    },
+    {
+      "name": "Testimonial",
+      "import": "import { Testimonial, TestimonialQuote, TestimonialRating, TestimonialAuthor } from '@arcana-ui/core'",
+      "description": "Customer testimonial with quote, author, and optional star rating. Card, inline, or featured layouts.",
+      "when": "Display customer quotes and social proof",
+      "props": {
+        "variant": { "type": "enum", "values": ["card", "inline", "featured"], "default": "card" },
+        "TestimonialRating.value": { "type": "number", "description": "1-5 star rating" },
+        "TestimonialAuthor.name": { "type": "string", "required": true },
+        "TestimonialAuthor.title": { "type": "string", "description": "Job title" },
+        "TestimonialAuthor.company": { "type": "string" },
+        "TestimonialAuthor.avatar": { "type": "string", "description": "Avatar image URL" }
+      },
+      "examples": [
+        "<Testimonial variant=\"card\"><TestimonialRating value={5} /><TestimonialQuote>Nimbus transformed our workflow</TestimonialQuote><TestimonialAuthor name=\"Jane Doe\" title=\"CTO\" company=\"Acme Inc\" avatar=\"/avatar.jpg\" /></Testimonial>"
+      ]
+    },
+    {
+      "name": "PricingCard",
+      "import": "import { PricingCard, PricingCardHeader, PricingCardPrice, PricingCardFeatures, PricingCardFeature, PricingCardAction } from '@arcana-ui/core'",
+      "description": "Pricing tier card with plan name, price, feature list, and CTA. Supports popular highlight and compact layout.",
+      "when": "Display pricing tiers on a pricing page",
+      "props": {
+        "popular": {
+          "type": "boolean",
+          "default": false,
+          "description": "Highlights as recommended tier with badge"
+        },
+        "variant": { "type": "enum", "values": ["default", "compact"], "default": "default" },
+        "PricingCardHeader.plan": { "type": "string", "required": true },
+        "PricingCardPrice.amount": { "type": "string", "required": true },
+        "PricingCardPrice.period": { "type": "string" },
+        "PricingCardFeature.included": { "type": "boolean", "default": true }
+      },
+      "examples": [
+        "<PricingCard popular><PricingCardHeader plan=\"Pro\" description=\"For growing teams\" /><PricingCardPrice amount=\"$49\" period=\"/month\" /><PricingCardFeatures><PricingCardFeature>Unlimited users</PricingCardFeature><PricingCardFeature included={false}>White label</PricingCardFeature></PricingCardFeatures><PricingCardAction><Button>Get Started</Button></PricingCardAction></PricingCard>"
+      ]
+    },
+    {
+      "name": "CTASection",
+      "import": "import { CTASection, CTATitle, CTADescription, CTAActions } from '@arcana-ui/core'",
+      "description": "Call-to-action section with banner (contrasting bg), card (contained), or minimal variants.",
+      "when": "Add a call-to-action block to drive conversions",
+      "props": {
+        "variant": { "type": "enum", "values": ["banner", "card", "minimal"], "default": "banner" }
+      },
+      "examples": [
+        "<CTASection variant=\"banner\"><CTATitle>Ready to get started?</CTATitle><CTADescription>Join thousands of teams using Nimbus</CTADescription><CTAActions><Button>Start Free Trial</Button></CTAActions></CTASection>"
+      ]
+    },
+    {
+      "name": "StatsBar",
+      "import": "import { StatsBar, StatItem } from '@arcana-ui/core'",
+      "description": "Row of key metrics with values, labels, trends. Uses dl/dt/dd semantics. Inline or card variants.",
+      "when": "Display key metrics or KPIs",
+      "props": {
+        "variant": { "type": "enum", "values": ["inline", "card"], "default": "inline" },
+        "columns": { "type": "enum", "values": [2, 3, 4], "default": 4 },
+        "animated": {
+          "type": "boolean",
+          "default": false,
+          "description": "Animate counting on scroll"
+        },
+        "StatItem.value": { "type": "string", "required": true },
+        "StatItem.label": { "type": "string", "required": true },
+        "StatItem.prefix": { "type": "string" },
+        "StatItem.suffix": { "type": "string" },
+        "StatItem.trend": { "type": "enum", "values": ["up", "down", "neutral"] }
+      },
+      "examples": [
+        "<StatsBar columns={4}><StatItem value=\"10K\" label=\"Active Users\" suffix=\"+\" trend=\"up\" /><StatItem value=\"99.9\" label=\"Uptime\" suffix=\"%\" /><StatItem value=\"150\" label=\"Countries\" suffix=\"+\" /><StatItem value=\"4.9\" label=\"Rating\" prefix=\"★\" /></StatsBar>"
+      ]
+    },
+    {
+      "name": "Timeline",
+      "import": "import { Timeline, TimelineItem } from '@arcana-ui/core'",
+      "description": "Vertical timeline with dots, connecting lines, and status indicators. Standard, compact, or alternating layouts.",
+      "when": "Show chronological events, changelogs, or project milestones",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["standard", "compact", "alternating"],
+          "default": "standard"
+        },
+        "TimelineItem.title": { "type": "string" },
+        "TimelineItem.date": { "type": "string" },
+        "TimelineItem.icon": { "type": "ReactNode" },
+        "TimelineItem.status": {
+          "type": "enum",
+          "values": ["complete", "active", "pending"],
+          "default": "complete"
+        }
+      },
+      "examples": [
+        "<Timeline><TimelineItem status=\"complete\" title=\"Founded\" date=\"2024\">Started the journey</TimelineItem><TimelineItem status=\"active\" title=\"Growing\" date=\"2025\">Expanding the team</TimelineItem><TimelineItem status=\"pending\" title=\"IPO\" date=\"2026\">Going public</TimelineItem></Timeline>"
+      ]
+    },
+    {
+      "name": "LogoCloud",
+      "import": "import { LogoCloud } from '@arcana-ui/core'",
+      "description": "Grid or scrolling marquee of partner/client logos with grayscale-to-color hover effect.",
+      "when": "Display trusted-by logos or partner branding",
+      "props": {
+        "logos": {
+          "type": "LogoItem[]",
+          "required": true,
+          "description": "Array of { src, alt, href? }"
+        },
+        "title": { "type": "string", "description": "Section title like 'Trusted by'" },
+        "variant": { "type": "enum", "values": ["grid", "marquee"], "default": "grid" }
+      },
+      "examples": [
+        "<LogoCloud title=\"Trusted by\" logos={[{ src: '/logo1.svg', alt: 'Company A' }, { src: '/logo2.svg', alt: 'Company B' }]} />"
+      ]
     }
   ],
   "design": {

@@ -648,15 +648,15 @@ Phase 2 COMPLETE — ready for Phase 3
   - All 274 tests pass, 0 lint errors, 0 token lint violations, build succeeds
 
 ### Active Phase
-Phase 3 IN PROGRESS — Task 3.1 complete
+Phase 3 IN PROGRESS — Tasks 3.1, 3.2, 3.3 complete
 
 ### Blockers
 None
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase 3 / Task 3.2 is next
+1. Read `PROGRESS.md` to confirm Phase 3 / Task 3.4 is next
 2. Read `ROADMAP.md` for Phase 3 (Expanded Component Library) requirements
-3. Begin Task 3.2 — Build navigation components (Sidebar, Breadcrumb, Pagination, Footer)
+3. Begin Task 3.4 — Data display components (DataTable, StatCard, ProgressBar, KPICard)
 
 ### Session History
 
@@ -688,3 +688,4 @@ None
 | 2026-03-17 | Claude (Claude Code) | Playground bugfix + restoration | Audited playground for broken features. Found: no density switching, brutalist wildcard !important breaking all transitions/shadows, 8 !important declarations, hardcoded box-shadow. Fixes: (1) Added density toggle (compact/default/comfortable) to Token Editor spacing section, (2) Removed brutalist `* { box-shadow: none !important; transition: none !important; }` — theme tokens already handle this, (3) Replaced all !important with proper specificity via double class selectors, (4) Replaced hardcoded font picker dropdown shadow with var(--shadow-lg). All 359 tests pass, 58 Playwright visual tests pass, 0 lint errors. |
 | 2026-03-18 | Claude (Claude Code) | Playground bugfix + Phase 2 demos | Fixed border radius not cascading to components (build.ts now outputs var() references for component tokens instead of static values). Added referenceToVar() mapper for semantic/primitive→CSS var names. Added Scale slider (50-200%) via CSS zoom on preview area. Fixed refreshValues to sync all editor state (display font, line-height, base size, spacing, scale, density) on preset switch. Fixed handleReset to clear body/mono fonts. Removed !important from preset globalCSS. Added Mobile Patterns section with BottomSheet, DrawerNav, MobileNav, and Container demos. Updated 57 visual regression baselines. 359 tests pass, 58 Playwright visual tests pass, 0 lint errors. |
 | 2026-03-18 | Claude (Claude Code) | Task 3.1 — Refine existing components | Button: added iconOnly prop (square icon buttons). Card: added keyboard handling (Enter/Space) and tabIndex/role for interactive cards. Input: added size prop (sm/md/lg), required indicator with asterisk. Modal: replaced Math.random() IDs with useId() for stable/SSR-safe IDs. Table: added size prop (sm/md/lg) and bordered prop with cell borders. Badge: added size prop (sm/md/lg). Alert: extended HTMLAttributes for full prop spreading. Avatar: replaced hardcoded hex colors with token-based CSS classes (8 color variants using semantic tokens). Toggle: added description prop with aria-describedby. Tabs: added arrow key navigation (Left/Right/Up/Down/Home/End) in TabList per WAI-ARIA. Accordion: wired up controlled value/onChange props. 359 tests pass, 0 token lint violations, build succeeds. |
+| 2026-03-18 | Claude (Claude Code) | Tasks 3.2+3.3 — Navigation + Content components | **Navigation (3.2):** Sidebar (compound, collapsed mode), Breadcrumb (maxItems truncation), Pagination (ellipsis algorithm, compact), Footer (sections, external links). **Content (3.3):** Hero (centered/split/fullscreen, overlay, badge, height), FeatureSection (grid/list/alternating, section title, links), Testimonial (card/inline/featured, rating stars, cite), PricingCard (popular badge, compact variant), CTASection (banner/card/minimal), StatsBar (dl/dt/dd semantics, card variant, trend indicators, IntersectionObserver animation), Timeline (standard/compact/alternating, status: complete/active/pending, pulse animation), LogoCloud (grid/marquee, grayscale hover, reduced-motion respect). Updated manifest.ai.json, COMPONENT-TOKENS.md. 523 tests pass across 36 test files, 0 token lint violations, build succeeds. |
