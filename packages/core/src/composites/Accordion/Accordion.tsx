@@ -52,19 +52,35 @@ export interface AccordionProps {
 }
 
 export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
-  ({ type = 'single', defaultValue, children, className }, ref) => {
-    const [openValues, setOpenValues] = useState<string[]>(() => {
+  ({ type = 'single', defaultValue, value, onChange, children, className }, ref) => {
+    const [internalValues, setInternalValues] = useState<string[]>(() => {
       if (!defaultValue) return [];
       return Array.isArray(defaultValue) ? defaultValue : [defaultValue];
     });
 
-    const toggle = (value: string) => {
-      setOpenValues((prev) => {
-        if (type === 'single') {
-          return prev.includes(value) ? [] : [value];
-        }
-        return prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value];
-      });
+    const isControlled = value !== undefined;
+    const openValues = isControlled
+      ? Array.isArray(value)
+        ? value
+        : value
+          ? [value]
+          : []
+      : internalValues;
+
+    const toggle = (itemValue: string) => {
+      const next =
+        type === 'single'
+          ? openValues.includes(itemValue)
+            ? []
+            : [itemValue]
+          : openValues.includes(itemValue)
+            ? openValues.filter((v) => v !== itemValue)
+            : [...openValues, itemValue];
+
+      if (!isControlled) {
+        setInternalValues(next);
+      }
+      onChange?.(type === 'single' ? (next[0] ?? '') : next);
     };
 
     return (

@@ -2,7 +2,7 @@
 
 > **Last updated:** 2026-03-17
 > **Current phase:** 3 — Expanded Component Library
-> **Next priority task:** 3.1
+> **Next priority task:** 3.2
 > **Blocking issues:** None
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
@@ -44,7 +44,7 @@
 - [x] 2.10 — Visual regression test matrix (5 breakpoints)
 
 ## Phase 3: Expanded Component Library (Weeks 7–12)
-- [ ] 3.1 — Refine existing 22 components
+- [x] 3.1 — Refine existing 22 components
 - [ ] 3.2 — Navigation: Navbar, Sidebar, Breadcrumb, Pagination, Tabs, MobileNav, Footer
 - [ ] 3.3 — Content: Hero, FeatureSection, Testimonial, PricingCard, CTA, StatsBar, Timeline
 - [ ] 3.4 — Data display: DataTable, StatCard, ProgressBar, KPICard

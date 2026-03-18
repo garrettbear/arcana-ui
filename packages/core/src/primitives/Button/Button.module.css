@@ -151,6 +151,17 @@
   width: 100%;
 }
 
+/* Icon-only: square button with equal padding */
+.iconOnly {
+  padding: 0;
+  aspect-ratio: 1;
+  gap: 0;
+}
+
+.iconOnly .label {
+  display: none;
+}
+
 /* Loading state */
 .loading {
   pointer-events: none;

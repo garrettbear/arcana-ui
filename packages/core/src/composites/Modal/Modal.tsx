@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useId, useRef } from 'react';
 import { cn } from '../../utils/cn';
 import styles from './Modal.module.css';
 
@@ -94,8 +94,9 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
   ) => {
     const dialogRef = useRef<HTMLDivElement>(null);
     const previousFocusRef = useRef<HTMLElement | null>(null);
-    const titleId = useRef(`modal-title-${Math.random().toString(36).slice(2)}`);
-    const descId = useRef(`modal-desc-${Math.random().toString(36).slice(2)}`);
+    const baseId = useId();
+    const titleId = `${baseId}-title`;
+    const descId = `${baseId}-desc`;
 
     // Focus trap
     const trapFocus = useCallback((e: KeyboardEvent) => {
@@ -171,8 +172,8 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           ref={dialogRef}
           role="dialog"
           aria-modal="true"
-          aria-labelledby={title ? titleId.current : undefined}
-          aria-describedby={description ? descId.current : undefined}
+          aria-labelledby={title ? titleId : undefined}
+          aria-describedby={description ? descId : undefined}
           className={cn(styles.dialog, styles[size], className)}
         >
           {/* Header */}
@@ -180,12 +181,12 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
             <div className={styles.dialogHeader}>
               <div className={styles.dialogHeaderContent}>
                 {title && (
-                  <h2 id={titleId.current} className={styles.dialogTitle}>
+                  <h2 id={titleId} className={styles.dialogTitle}>
                     {title}
                   </h2>
                 )}
                 {description && (
-                  <p id={descId.current} className={styles.dialogDescription}>
+                  <p id={descId} className={styles.dialogDescription}>
                     {description}
                   </p>
                 )}

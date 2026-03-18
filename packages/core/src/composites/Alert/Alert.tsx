@@ -61,23 +61,24 @@ const icons = {
   ),
 };
 
-export interface AlertProps {
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Visual style variant indicating the alert type */
   variant?: 'info' | 'success' | 'warning' | 'error';
   /** Alert title text */
   title?: string;
   /** Callback fired when the dismiss button is clicked */
   onClose?: () => void;
-  /** Alert body content */
-  children?: React.ReactNode;
-  /** Additional CSS class name */
-  className?: string;
 }
 
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ variant = 'info', title, onClose, children, className }, ref) => {
+  ({ variant = 'info', title, onClose, children, className, ...props }, ref) => {
     return (
-      <div ref={ref} role="alert" className={cn(styles.alert, styles[variant], className)}>
+      <div
+        ref={ref}
+        role="alert"
+        className={cn(styles.alert, styles[variant], className)}
+        {...props}
+      >
         <span className={styles.icon}>{icons[variant]}</span>
         <div className={styles.content}>
           {title && <p className={styles.title}>{title}</p>}

@@ -15,6 +15,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   iconRight?: React.ReactNode;
   /** Whether the button stretches to fill its container */
   fullWidth?: boolean;
+  /** Render as an icon-only button (square shape, requires aria-label) */
+  iconOnly?: boolean;
 }
 
 const Spinner = () => (
@@ -50,6 +52,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       icon,
       iconRight,
       fullWidth = false,
+      iconOnly = false,
       disabled,
       className,
       children,
@@ -69,6 +72,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           styles[variant],
           styles[size],
           fullWidth && styles.fullWidth,
+          iconOnly && styles.iconOnly,
           loading && styles.loading,
           className,
         )}
