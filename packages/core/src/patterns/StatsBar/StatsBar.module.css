@@ -2,19 +2,25 @@
  * StatsBar — Row of key metrics / statistics
  *
  * Component tokens:
- *   --stats-padding     Section padding (fallback: --spacing-xl)
- *   --stats-gap         Gap between items (fallback: --spacing-lg)
- *   --stats-value-size  Value font size (fallback: --font-size-fluid-3xl)
+ *   --stats-value-size       Value font size (fallback: --font-size-fluid-3xl)
+ *   --stats-value-weight     Value font weight (fallback: --font-weight-bold)
+ *   --stats-label-size       Label font size (fallback: --font-size-sm)
+ *   --stats-label-color      Label color (fallback: --color-fg-secondary)
+ *   --stats-trend-up-color   Trend up color (fallback: --color-status-success-fg)
+ *   --stats-trend-down-color Trend down color (fallback: --color-status-error-fg)
+ *   --stats-divider-color    Divider color for inline variant (fallback: --color-border-default)
  */
 
+/* Base grid */
 .bar {
   display: grid;
-  gap: var(--stats-gap, var(--spacing-lg));
-  padding: var(--stats-padding, var(--spacing-xl)) 0;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl) 0;
   width: 100%;
+  margin: 0;
 }
 
-/* Default: 2 columns on mobile, expand at breakpoints */
+/* Default: 2 columns on mobile */
 .bar {
   grid-template-columns: repeat(2, 1fr);
 }
@@ -23,7 +29,6 @@
   .cols3 {
     grid-template-columns: repeat(3, 1fr);
   }
-
   .cols4 {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -35,7 +40,36 @@
   }
 }
 
-/* Stat item */
+/* ── Inline variant ───────────────────────────────────────────────────────── */
+
+.inline .item {
+  position: relative;
+}
+
+/* Dividers between items (desktop only) */
+@media (min-width: 640px) {
+  .inline .item:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--spacing-lg) * -0.5);
+    top: 0;
+    bottom: 0;
+    width: var(--border-width-default);
+    background-color: var(--stats-divider-color, var(--color-border-default));
+  }
+}
+
+/* ── Card variant ─────────────────────────────────────────────────────────── */
+
+.card .item {
+  background-color: var(--color-bg-surface);
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+}
+
+/* ── Stat item ────────────────────────────────────────────────────────────── */
+
 .item {
   display: flex;
   flex-direction: column;
@@ -45,15 +79,41 @@
 }
 
 .value {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-1);
   font-family: var(--font-family-display);
   font-size: var(--stats-value-size, var(--font-size-fluid-3xl));
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--stats-value-weight, var(--font-weight-bold));
   line-height: var(--line-height-none);
   color: var(--color-fg-primary);
+  margin: 0;
+}
+
+.prefix,
+.suffix {
+  font-size: var(--font-size-lg);
+  color: var(--color-fg-secondary);
 }
 
 .label {
   font-family: var(--font-family-body);
+  font-size: var(--stats-label-size, var(--font-size-sm));
+  color: var(--stats-label-color, var(--color-fg-secondary));
+}
+
+/* ── Trend indicator ──────────────────────────────────────────────────────── */
+
+.trend {
   font-size: var(--font-size-sm);
-  color: var(--color-fg-secondary);
+  font-weight: var(--font-weight-semibold);
+  margin-left: var(--spacing-1);
+}
+
+.trendUp {
+  color: var(--stats-trend-up-color, var(--color-status-success-fg));
+}
+
+.trendDown {
+  color: var(--stats-trend-down-color, var(--color-status-error-fg));
 }
