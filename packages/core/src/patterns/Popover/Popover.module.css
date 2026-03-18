@@ -1,0 +1,133 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --popover-bg          Background (fallback: --color-bg-page)
+ *   --popover-radius      Border radius (fallback: --radius-lg)
+ *   --popover-shadow      Shadow (fallback: --shadow-lg)
+ *   --popover-padding     Padding (fallback: --spacing-md)
+ *   --popover-border      Border color (fallback: --color-border-default)
+ *   --popover-max-width   Max width (fallback: 20rem)
+ *   --popover-arrow-size  Arrow size (fallback: --spacing-2)
+ */
+
+.popoverWrapper {
+  position: relative;
+}
+
+.triggerWrapper {
+  display: inline-flex;
+}
+
+.popover {
+  z-index: var(--z-popover);
+  background: var(--popover-bg, var(--color-bg-page));
+  border: var(--border-width-default) solid var(--popover-border, var(--color-border-default));
+  border-radius: var(--popover-radius, var(--radius-lg));
+  box-shadow: var(--popover-shadow, var(--shadow-lg));
+  padding: var(--popover-padding, var(--spacing-md));
+  max-width: var(--popover-max-width, 20rem);
+  animation: popoverFadeIn var(--duration-fast) var(--ease-out);
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.side-top {
+  animation-name: popoverFadeInUp;
+}
+
+@keyframes popoverFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.side-left {
+  animation-name: popoverFadeInLeft;
+}
+
+@keyframes popoverFadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.side-right {
+  animation-name: popoverFadeInRight;
+}
+
+@keyframes popoverFadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popover {
+    animation: none;
+  }
+}
+
+/* Arrow */
+.arrow {
+  position: absolute;
+  width: var(--popover-arrow-size, var(--spacing-2));
+  height: var(--popover-arrow-size, var(--spacing-2));
+  background: var(--popover-bg, var(--color-bg-page));
+  border: var(--border-width-default) solid var(--popover-border, var(--color-border-default));
+  transform: rotate(45deg);
+}
+
+.arrow-bottom {
+  top: calc(-1 * var(--popover-arrow-size, var(--spacing-2)) / 2);
+  left: 50%;
+  margin-left: calc(-1 * var(--popover-arrow-size, var(--spacing-2)) / 2);
+  border-bottom: none;
+  border-right: none;
+}
+
+.arrow-top {
+  bottom: calc(-1 * var(--popover-arrow-size, var(--spacing-2)) / 2);
+  left: 50%;
+  margin-left: calc(-1 * var(--popover-arrow-size, var(--spacing-2)) / 2);
+  border-top: none;
+  border-left: none;
+}
+
+.arrow-left {
+  right: calc(-1 * var(--popover-arrow-size, var(--spacing-2)) / 2);
+  top: 50%;
+  margin-top: calc(-1 * var(--popover-arrow-size, var(--spacing-2)) / 2);
+  border-left: none;
+  border-bottom: none;
+}
+
+.arrow-right {
+  left: calc(-1 * var(--popover-arrow-size, var(--spacing-2)) / 2);
+  top: 50%;
+  margin-top: calc(-1 * var(--popover-arrow-size, var(--spacing-2)) / 2);
+  border-right: none;
+  border-top: none;
+}

@@ -376,6 +376,52 @@ Some tokens support density modes (`compact`, `default`, `comfortable`) via the 
 
 Each theme preset can override any component token. Here are the key differences from the `light` baseline:
 
+### Drawer
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| bg | `--drawer-bg` | `--color-bg-page` | |
+| shadow | `--drawer-shadow` | `--shadow-2xl` | |
+| overlay-bg | `--drawer-overlay-bg` | `--color-bg-overlay` | |
+| header-padding | `--drawer-header-padding` | `--spacing-lg` | |
+| body-padding | `--drawer-body-padding` | `--spacing-lg` | |
+| footer-padding | `--drawer-footer-padding` | `--spacing-lg` | |
+| width-sm | `--drawer-width-sm` | `20rem` | |
+| width-md | `--drawer-width-md` | `26.25rem` | |
+| width-lg | `--drawer-width-lg` | `40rem` | |
+
+### Popover
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| bg | `--popover-bg` | `--color-bg-page` | |
+| radius | `--popover-radius` | `--radius-lg` | |
+| shadow | `--popover-shadow` | `--shadow-lg` | |
+| padding | `--popover-padding` | `--spacing-md` | |
+| border | `--popover-border` | `--color-border-default` | |
+| max-width | `--popover-max-width` | `20rem` | |
+| arrow-size | `--popover-arrow-size` | `--spacing-2` | |
+
+### CommandPalette
+
+| Token | CSS Custom Property | Fallback | D |
+|-------|-------------------|----------|---|
+| bg | `--command-bg` | `--color-bg-page` | |
+| radius | `--command-radius` | `--radius-xl` | |
+| shadow | `--command-shadow` | `--shadow-2xl` | |
+| input-height | `--command-input-height` | `3.5rem` | |
+| input-font-size | `--command-input-font-size` | `--font-size-lg` | |
+| item-padding | `--command-item-padding` | `--spacing-3 --spacing-md` | |
+| item-hover-bg | `--command-item-hover-bg` | `--color-bg-surface` | |
+| group-label-color | `--command-group-label-color` | `--color-fg-muted` | |
+| shortcut-color | `--command-shortcut-color` | `--color-fg-muted` | |
+| max-width | `--command-max-width` | `40rem` | |
+| max-height | `--command-max-height` | `60vh` | |
+
+---
+
+## Per-Preset Overrides
+
 | Preset | Key Overrides |
 |--------|--------------|
 | **light** | Baseline — all defaults |
