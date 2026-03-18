@@ -117,6 +117,37 @@ export type {
   TableCellProps,
 } from './patterns/Table';
 
+export {
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+  SidebarItem,
+  SidebarSection,
+} from './patterns/Sidebar';
+export type {
+  SidebarProps,
+  SidebarHeaderProps,
+  SidebarContentProps,
+  SidebarFooterProps,
+  SidebarItemProps,
+  SidebarSectionProps,
+} from './patterns/Sidebar';
+
+export { Breadcrumb, BreadcrumbItem } from './patterns/Breadcrumb';
+export type { BreadcrumbProps, BreadcrumbItemProps } from './patterns/Breadcrumb';
+
+export { Pagination } from './patterns/Pagination';
+export type { PaginationProps } from './patterns/Pagination';
+
+export { Footer, FooterSection, FooterLink, FooterBottom } from './patterns/Footer';
+export type {
+  FooterProps,
+  FooterSectionProps,
+  FooterLinkProps,
+  FooterBottomProps,
+} from './patterns/Footer';
+
 // ─── Hooks ────────────────────────────────────────────────────────────────────
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useBreakpoint } from './hooks/useBreakpoint';
