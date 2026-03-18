@@ -1,81 +1,96 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { CTA, CTAActions, CTADescription, CTATitle } from './CTA';
+import { CTA, CTAActions, CTADescription, CTASection, CTATitle } from './CTA';
 
-describe('CTA', () => {
+describe('CTASection', () => {
   it('renders as section element', () => {
-    const { container } = render(<CTA>Content</CTA>);
+    const { container } = render(<CTASection>Content</CTASection>);
     expect(container.querySelector('section')).toBeTruthy();
   });
 
   it('forwards ref', () => {
     const ref = vi.fn();
-    render(<CTA ref={ref}>Content</CTA>);
+    render(<CTASection ref={ref}>Content</CTASection>);
     expect(ref).toHaveBeenCalled();
   });
 
   it('accepts className', () => {
-    const { container } = render(<CTA className="custom">Content</CTA>);
+    const { container } = render(<CTASection className="custom">Content</CTASection>);
     expect(container.querySelector('section')?.classList.contains('custom')).toBe(true);
   });
 
-  it('renders filled variant', () => {
-    const { container } = render(<CTA variant="filled">Content</CTA>);
-    const section = container.querySelector('section');
-    expect(section?.className).toContain('filled');
+  it('has aria-label', () => {
+    const { container } = render(<CTASection>Content</CTASection>);
+    expect(container.querySelector('section')?.getAttribute('aria-label')).toBe('Call to action');
   });
 
-  it('renders left-aligned', () => {
-    const { container } = render(<CTA align="left">Content</CTA>);
-    const section = container.querySelector('section');
-    expect(section?.className).toContain('alignLeft');
+  it('renders banner variant by default', () => {
+    const { container } = render(<CTASection>Content</CTASection>);
+    expect(container.querySelector('section')?.className).toContain('banner');
+  });
+
+  it('renders card variant', () => {
+    const { container } = render(<CTASection variant="card">Content</CTASection>);
+    expect(container.querySelector('section')?.className).toContain('card');
+  });
+
+  it('renders minimal variant', () => {
+    const { container } = render(<CTASection variant="minimal">Content</CTASection>);
+    expect(container.querySelector('section')?.className).toContain('minimal');
   });
 
   it('renders CTATitle as h2 by default', () => {
     render(
-      <CTA>
+      <CTASection>
         <CTATitle>Get Started Today</CTATitle>
-      </CTA>,
+      </CTASection>,
     );
     expect(screen.getByRole('heading', { level: 2, name: 'Get Started Today' })).toBeTruthy();
   });
 
   it('renders CTATitle as custom heading', () => {
     render(
-      <CTA>
+      <CTASection>
         <CTATitle as="h3">Ready?</CTATitle>
-      </CTA>,
+      </CTASection>,
     );
     expect(screen.getByRole('heading', { level: 3, name: 'Ready?' })).toBeTruthy();
   });
 
   it('renders CTADescription', () => {
     render(
-      <CTA>
-        <CTADescription>Join thousands of users</CTADescription>
-      </CTA>,
+      <CTASection>
+        <CTADescription>Join thousands</CTADescription>
+      </CTASection>,
     );
-    expect(screen.getByText('Join thousands of users')).toBeTruthy();
+    expect(screen.getByText('Join thousands')).toBeTruthy();
   });
 
-  it('renders CTAActions', () => {
+  it('renders CTAActions with buttons', () => {
     render(
-      <CTA>
+      <CTASection>
         <CTAActions>
           <button type="button">Sign Up</button>
+          <button type="button">Learn More</button>
         </CTAActions>
-      </CTA>,
+      </CTASection>,
     );
     expect(screen.getByRole('button', { name: 'Sign Up' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Learn More' })).toBeTruthy();
   });
 
   it('CTATitle forwards ref', () => {
     const ref = vi.fn();
     render(
-      <CTA>
+      <CTASection>
         <CTATitle ref={ref}>Title</CTATitle>
-      </CTA>,
+      </CTASection>,
     );
     expect(ref).toHaveBeenCalled();
+  });
+
+  it('CTA alias works as CTASection', () => {
+    const { container } = render(<CTA>Content</CTA>);
+    expect(container.querySelector('section')).toBeTruthy();
   });
 });

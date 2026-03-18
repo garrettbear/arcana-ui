@@ -2,26 +2,23 @@ import React from 'react';
 import { cn } from '../../utils/cn';
 import styles from './CTA.module.css';
 
-// ─── CTA ─────────────────────────────────────────────────────────────────────
+// ─── CTASection ──────────────────────────────────────────────────────────────
 
-export interface CTAProps extends React.HTMLAttributes<HTMLElement> {
+export interface CTASectionProps extends React.HTMLAttributes<HTMLElement> {
   /** Visual variant */
-  variant?: 'default' | 'filled';
-  /** Text alignment */
-  align?: 'left' | 'center';
+  variant?: 'banner' | 'card' | 'minimal';
 }
 
-export const CTA = React.forwardRef<HTMLElement, CTAProps>(
-  ({ variant = 'default', align = 'center', children, className, ...props }, ref) => {
+/** @deprecated Use CTASection instead */
+export type CTAProps = CTASectionProps;
+
+export const CTASection = React.forwardRef<HTMLElement, CTASectionProps>(
+  ({ variant = 'banner', children, className, ...props }, ref) => {
     return (
       <section
         ref={ref}
-        className={cn(
-          styles.cta,
-          variant === 'filled' && styles.filled,
-          align === 'left' && styles.alignLeft,
-          className,
-        )}
+        className={cn(styles.cta, styles[variant], className)}
+        aria-label="Call to action"
         {...props}
       >
         <div className={styles.inner}>{children}</div>
@@ -29,7 +26,10 @@ export const CTA = React.forwardRef<HTMLElement, CTAProps>(
     );
   },
 );
-CTA.displayName = 'CTA';
+CTASection.displayName = 'CTASection';
+
+/** @deprecated Use CTASection instead */
+export const CTA = CTASection;
 
 // ─── CTATitle ────────────────────────────────────────────────────────────────
 

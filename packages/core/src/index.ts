@@ -200,8 +200,14 @@ export type {
   PricingCardActionProps,
 } from './patterns/PricingCard';
 
-export { CTA, CTATitle, CTADescription, CTAActions } from './patterns/CTA';
-export type { CTAProps, CTATitleProps, CTADescriptionProps, CTAActionsProps } from './patterns/CTA';
+export { CTASection, CTA, CTATitle, CTADescription, CTAActions } from './patterns/CTA';
+export type {
+  CTASectionProps,
+  CTAProps,
+  CTATitleProps,
+  CTADescriptionProps,
+  CTAActionsProps,
+} from './patterns/CTA';
 
 export { StatsBar, StatItem } from './patterns/StatsBar';
 export type { StatsBarProps, StatItemProps } from './patterns/StatsBar';

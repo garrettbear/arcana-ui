@@ -1,57 +1,82 @@
 /**
- * CTA — Call-to-action section
+ * CTASection — Call-to-action section
  *
  * Component tokens:
- *   --cta-bg            Background (fallback: transparent)
- *   --cta-padding       Padding (fallback: --spacing-section)
- *   --cta-radius        Border radius (fallback: --radius-xl)
- *   --cta-max-width     Max content width (fallback: --content-width-default)
+ *   --cta-bg              Background color (fallback: --color-action-primary for banner)
+ *   --cta-fg              Foreground color (fallback: --color-fg-on-primary for banner)
+ *   --cta-padding-y       Vertical padding (fallback: --spacing-section)
+ *   --cta-radius          Border radius (fallback: --radius-xl)
+ *   --cta-headline-size   Headline font size (fallback: --font-size-fluid-3xl)
  */
 
+/* Base */
 .cta {
   display: flex;
   justify-content: center;
-  padding: var(--cta-padding, var(--spacing-section)) var(--spacing-lg);
-  text-align: center;
   width: 100%;
-}
-
-.alignLeft {
-  text-align: left;
-}
-
-.filled {
-  background-color: var(--cta-bg, var(--color-bg-subtle));
-  border-radius: var(--cta-radius, var(--radius-xl));
 }
 
 .inner {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: var(--spacing-md);
-  max-width: var(--cta-max-width, var(--content-width-default));
   width: 100%;
 }
 
-.alignLeft .inner {
-  align-items: flex-start;
+/* ── Banner variant ───────────────────────────────────────────────────────── */
+
+.banner {
+  background-color: var(--cta-bg, var(--color-action-primary));
+  padding: var(--cta-padding-y, var(--spacing-section)) var(--spacing-lg);
 }
 
-.cta:not(.alignLeft) .inner {
-  align-items: center;
+.banner .title {
+  color: var(--cta-fg, var(--color-fg-on-primary));
 }
 
-/* Title */
+.banner .description {
+  color: var(--cta-fg, var(--color-fg-on-primary));
+  opacity: 0.85;
+}
+
+/* ── Card variant ─────────────────────────────────────────────────────────── */
+
+.card {
+  padding: var(--spacing-lg);
+}
+
+.card .inner {
+  background-color: var(--cta-bg, var(--color-bg-subtle));
+  border-radius: var(--cta-radius, var(--radius-xl));
+  padding: var(--cta-padding-y, var(--spacing-section)) var(--spacing-xl);
+  max-width: var(--content-width-wide);
+}
+
+/* ── Minimal variant ──────────────────────────────────────────────────────── */
+
+.minimal {
+  padding: var(--cta-padding-y, var(--spacing-xl)) var(--spacing-lg);
+}
+
+.minimal .inner {
+  max-width: var(--content-width-default);
+}
+
+/* ── Title ────────────────────────────────────────────────────────────────── */
+
 .title {
   font-family: var(--font-family-display);
-  font-size: var(--font-size-fluid-3xl);
+  font-size: var(--cta-headline-size, var(--font-size-fluid-3xl));
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   color: var(--color-fg-primary);
   margin: 0;
 }
 
-/* Description */
+/* ── Description ──────────────────────────────────────────────────────────── */
+
 .description {
   font-family: var(--font-family-body);
   font-size: var(--font-size-md);
@@ -61,10 +86,19 @@
   max-width: var(--content-width-prose);
 }
 
-/* Actions */
+/* ── Actions ──────────────────────────────────────────────────────────────── */
+
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
   margin-top: var(--spacing-xs);
+}
+
+/* Stack CTAs on mobile */
+@media (max-width: 479px) {
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
 }
