@@ -2,7 +2,7 @@
   "$schema": "../schema/tokens.schema.json",
   "name": "arcana-terminal",
   "version": "0.1.0",
-  "description": "Hacker terminal \u2014 green phosphor on deep dark",
+  "description": "Premium terminal emulator \u2014 green phosphor on black, monospace everything, Warp/Hyper-inspired",
   "primitive": {
     "color": {
       "white": "#ffffff",
@@ -22,17 +22,17 @@
         "950": "#030712"
       },
       "green": {
-        "50": "#f0fdf4",
-        "100": "#dcfce7",
-        "200": "#bbf7d0",
-        "300": "#86efac",
-        "400": "#4ade80",
-        "500": "#22c55e",
-        "600": "#16a34a",
-        "700": "#15803d",
-        "800": "#166534",
-        "900": "#14532d",
-        "950": "#052e16"
+        "50": "#e6ffe6",
+        "100": "#b3ffb3",
+        "200": "#80ff80",
+        "300": "#4dff4d",
+        "400": "#33d17a",
+        "500": "#00d26a",
+        "600": "#00b359",
+        "700": "#009648",
+        "800": "#007a3a",
+        "900": "#005c2c",
+        "950": "#003d1d"
       }
     },
     "spacing": {
@@ -226,30 +226,30 @@
   "semantic": {
     "color": {
       "background": {
-        "page": "{primitive.color.black}",
-        "surface": "{primitive.color.gray.950}",
-        "elevated": "{primitive.color.gray.900}",
+        "page": "#0a0a0a",
+        "surface": "#111111",
+        "elevated": "#1a1a1a",
         "overlay": "rgba(0, 0, 0, 0.85)",
-        "sunken": "{primitive.color.black}",
-        "subtle": "{primitive.color.gray.900}"
+        "sunken": "#050505",
+        "subtle": "#141414"
       },
       "foreground": {
-        "primary": "{primitive.color.green.400}",
-        "secondary": "{primitive.color.green.500}",
-        "muted": "{primitive.color.green.700}",
+        "primary": "#00ff41",
+        "secondary": "#00cc33",
+        "muted": "#008f11",
         "disabled": "{primitive.color.green.900}",
         "inverse": "{primitive.color.black}",
         "on-primary": "{primitive.color.black}",
         "on-destructive": "{primitive.color.white}",
-        "link": "{primitive.color.green.300}",
-        "link-hover": "{primitive.color.green.200}"
+        "link": "#00ff41",
+        "link-hover": "#33ff66"
       },
       "action": {
         "primary": {
-          "default": "{primitive.color.green.500}",
-          "hover": "{primitive.color.green.400}",
-          "active": "{primitive.color.green.600}",
-          "disabled": "{primitive.color.green.800}"
+          "default": "#00d26a",
+          "hover": "#00ff41",
+          "active": "#009648",
+          "disabled": "#004d26"
         },
         "secondary": {
           "default": "{primitive.color.gray.800}",
@@ -273,11 +273,11 @@
         }
       },
       "border": {
-        "default": "{primitive.color.gray.800}",
+        "default": "#1a3a1a",
         "muted": "{primitive.color.gray.900}",
         "strong": "{primitive.color.gray.700}",
         "stronger": "{primitive.color.gray.600}",
-        "focus": "{primitive.color.green.400}",
+        "focus": "#00ff41",
         "error": "#f85149",
         "success": "{primitive.color.green.400}",
         "inverse": "{primitive.color.green.400}"
@@ -309,8 +309,8 @@
         }
       },
       "accent": {
-        "primary": "{primitive.color.green.400}",
-        "secondary": "{primitive.color.green.300}"
+        "primary": "#00ff41",
+        "secondary": "#00d26a"
       }
     },
     "typography": {
