@@ -189,7 +189,7 @@
 
 /* Spinner */
 .spinner {
-  animation: spin var(--duration-slow) var(--ease-linear) infinite;
+  animation: spin var(--spinner-speed, 1000ms) var(--ease-linear) infinite;
   width: var(--button-icon-size, var(--spacing-4));
   height: var(--button-icon-size, var(--spacing-4));
   flex-shrink: 0;

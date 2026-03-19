@@ -217,14 +217,14 @@
 .imageSkeleton {
   aspect-ratio: 1;
   background: var(--color-bg-page);
-  animation: product-pulse var(--duration-slow) ease-in-out infinite alternate;
+  animation: product-pulse 1.5s ease-in-out infinite alternate;
 }
 
 .skeletonLine {
   height: var(--font-size-sm);
   border-radius: var(--radius-sm);
   background: var(--color-bg-page);
-  animation: product-pulse var(--duration-slow) ease-in-out infinite alternate;
+  animation: product-pulse 1.5s ease-in-out infinite alternate;
 }
 
 @keyframes product-pulse {

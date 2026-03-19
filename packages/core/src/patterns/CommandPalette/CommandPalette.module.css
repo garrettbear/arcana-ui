@@ -115,7 +115,7 @@
   border: var(--border-width-thick) solid var(--color-border-default);
   border-top-color: var(--color-action-primary);
   border-radius: var(--radius-full);
-  animation: cmdSpin var(--duration-slow) linear infinite;
+  animation: cmdSpin var(--spinner-speed, 1000ms) linear infinite;
   flex-shrink: 0;
 }
 

@@ -72,7 +72,7 @@
   background-color: var(--timeline-dot-active-color, var(--color-action-primary));
   box-shadow: 0 0 0 var(--spacing-1) var(--color-bg-page), 0 0 0 var(--spacing-1-5)
     var(--timeline-dot-active-color, var(--color-action-primary));
-  animation: pulse var(--duration-slow, 500ms) var(--ease-in-out) infinite alternate;
+  animation: pulse 2s var(--ease-in-out) infinite alternate;
 }
 
 .dotPending {
