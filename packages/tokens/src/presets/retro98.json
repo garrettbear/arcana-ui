@@ -2,7 +2,7 @@
   "$schema": "../schema/tokens.schema.json",
   "name": "arcana-retro98",
   "version": "0.1.0",
-  "description": "Windows 98 nostalgia \u2014 silver chrome, navy blue, hard edges",
+  "description": "Authentic Windows 98 recreation \u2014 pixel-perfect bevels, navy blue title bars, silver surfaces",
   "primitive": {
     "color": {
       "white": "#ffffff",
@@ -170,17 +170,22 @@
         "wide": "0.025em",
         "wider": "0.05em",
         "widest": "0.1em"
+      },
+      "family": {
+        "display": "'Segoe UI', Tahoma, 'MS Sans Serif', sans-serif",
+        "sans": "'Segoe UI', Tahoma, 'MS Sans Serif', sans-serif",
+        "mono": "'Courier New', Courier, monospace"
       }
     },
     "shadow": {
       "none": "none",
-      "xs": "1px 1px 0 rgba(0, 0, 0, 0.5)",
-      "sm": "2px 2px 0 rgba(0, 0, 0, 0.5)",
-      "md": "2px 2px 0 rgba(0, 0, 0, 0.7)",
-      "lg": "3px 3px 0 rgba(0, 0, 0, 0.7)",
-      "xl": "4px 4px 0 #000000",
-      "2xl": "6px 6px 0 #000000",
-      "inner": "inset 1px 1px 0 #808080, inset -1px -1px 0 #ffffff"
+      "xs": "inset -1px -1px 0 0 #808080, inset 1px 1px 0 0 #ffffff",
+      "sm": "inset -1px -1px 0 0 #404040, inset 1px 1px 0 0 #ffffff, inset -2px -2px 0 0 #808080, inset 2px 2px 0 0 #dfdfdf",
+      "md": "inset -1px -1px 0 0 #404040, inset 1px 1px 0 0 #ffffff, inset -2px -2px 0 0 #808080, inset 2px 2px 0 0 #dfdfdf",
+      "lg": "inset -1px -1px 0 0 #404040, inset 1px 1px 0 0 #ffffff, inset -2px -2px 0 0 #808080, inset 2px 2px 0 0 #dfdfdf",
+      "xl": "inset -1px -1px 0 0 #404040, inset 1px 1px 0 0 #ffffff, inset -2px -2px 0 0 #808080, inset 2px 2px 0 0 #dfdfdf",
+      "2xl": "inset -1px -1px 0 0 #404040, inset 1px 1px 0 0 #ffffff, inset -2px -2px 0 0 #808080, inset 2px 2px 0 0 #dfdfdf",
+      "inner": "inset 1px 1px 0 0 #808080, inset -1px -1px 0 0 #ffffff"
     },
     "blur": {
       "none": "0",
@@ -278,18 +283,18 @@
   "semantic": {
     "color": {
       "background": {
-        "page": "{primitive.color.gray.300}",
-        "surface": "{primitive.color.gray.200}",
-        "elevated": "{primitive.color.white}",
+        "page": "#c0c0c0",
+        "surface": "#ffffff",
+        "elevated": "#ffffff",
         "overlay": "rgba(0, 0, 0, 0.5)",
-        "sunken": "{primitive.color.teal.500}",
-        "subtle": "{primitive.color.gray.100}"
+        "sunken": "#808080",
+        "subtle": "#d4d0c8"
       },
       "foreground": {
-        "primary": "{primitive.color.black}",
-        "secondary": "{primitive.color.gray.800}",
-        "muted": "{primitive.color.gray.500}",
-        "disabled": "{primitive.color.gray.500}",
+        "primary": "#000000",
+        "secondary": "#404040",
+        "muted": "#808080",
+        "disabled": "#808080",
         "inverse": "{primitive.color.white}",
         "on-primary": "{primitive.color.white}",
         "on-destructive": "{primitive.color.white}",
@@ -298,15 +303,15 @@
       },
       "action": {
         "primary": {
-          "default": "{primitive.color.blue.600}",
-          "hover": "{primitive.color.blue.500}",
-          "active": "{primitive.color.blue.700}",
-          "disabled": "{primitive.color.gray.400}"
+          "default": "#000080",
+          "hover": "#0000a0",
+          "active": "#000060",
+          "disabled": "#808080"
         },
         "secondary": {
-          "default": "{primitive.color.gray.300}",
-          "hover": "{primitive.color.gray.200}",
-          "active": "{primitive.color.gray.400}"
+          "default": "#c0c0c0",
+          "hover": "#d0d0d0",
+          "active": "#a0a0a0"
         },
         "destructive": {
           "default": "{primitive.color.red.600}",
@@ -325,14 +330,14 @@
         }
       },
       "border": {
-        "default": "{primitive.color.gray.500}",
-        "muted": "{primitive.color.gray.400}",
-        "strong": "{primitive.color.gray.700}",
-        "stronger": "{primitive.color.black}",
-        "focus": "{primitive.color.blue.600}",
-        "error": "{primitive.color.red.600}",
-        "success": "{primitive.color.green.500}",
-        "inverse": "{primitive.color.white}"
+        "default": "#808080",
+        "muted": "#a0a0a0",
+        "strong": "#404040",
+        "stronger": "#000000",
+        "focus": "#000000",
+        "error": "#ff0000",
+        "success": "#008000",
+        "inverse": "#ffffff"
       },
       "status": {
         "success": {
@@ -361,8 +366,8 @@
         }
       },
       "accent": {
-        "primary": "{primitive.color.blue.600}",
-        "secondary": "{primitive.color.teal.500}"
+        "primary": "#000080",
+        "secondary": "#008080"
       }
     },
     "typography": {
@@ -424,11 +429,11 @@
       "inner": "{primitive.shadow.inner}",
       "card": "{primitive.shadow.sm}",
       "card-hover": "{primitive.shadow.md}",
-      "dropdown": "{primitive.shadow.lg}",
-      "modal": "{primitive.shadow.xl}",
+      "dropdown": "{primitive.shadow.md}",
+      "modal": "{primitive.shadow.lg}",
       "popover": "{primitive.shadow.md}",
       "toast": "{primitive.shadow.md}",
-      "navbar": "{primitive.shadow.xs}",
+      "navbar": "{primitive.shadow.sm}",
       "sidebar": "{primitive.shadow.none}"
     },
     "layout": {
