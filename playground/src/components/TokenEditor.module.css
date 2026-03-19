@@ -669,6 +669,80 @@
 
 /* ─── Motion Preview ─── */
 
+/* ─── Font Target Selector ─── */
+
+.fontTargetSelector {
+  margin-top: 8px;
+  padding: 10px;
+  border: 1px solid var(--color-action-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+}
+
+.fontTargetHeader {
+  font-size: 12px;
+  color: var(--color-fg-secondary);
+  margin-bottom: 8px;
+}
+
+.fontTargetPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fontTargetBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface);
+  cursor: pointer;
+  transition: all 120ms;
+  text-align: left;
+}
+
+.fontTargetBtn:hover {
+  border-color: var(--color-action-primary);
+  background: var(--color-bg-subtle);
+}
+
+.fontTargetLabel {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-fg-muted);
+  min-width: 48px;
+}
+
+.fontTargetSample {
+  color: var(--color-fg-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fontTargetDismiss {
+  margin-top: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  border: none;
+  background: none;
+  color: var(--color-fg-muted);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.fontTargetDismiss:hover {
+  color: var(--color-fg-primary);
+}
+
+/* ─── Motion Preview ─── */
+
 .motionPreview {
   display: flex;
   flex-direction: column;

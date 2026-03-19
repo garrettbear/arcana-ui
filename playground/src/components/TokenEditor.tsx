@@ -363,6 +363,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
   const [motionDuration, setMotionDuration] = useState(200);
   const [motionEasing, setMotionEasing] = useState('ease');
   const [motionPreviewActive, setMotionPreviewActive] = useState(false);
+  const [pendingFont, setPendingFont] = useState<LocalFont | null>(null);
 
   const refreshValues = useCallback(() => {
     const values: Record<string, string> = {};
@@ -595,8 +596,18 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     const styleEl = document.createElement('style');
     styleEl.textContent = `@font-face { font-family: '${fontName}'; src: url('${url}') format('${format}'); font-display: swap; }`;
     document.head.appendChild(styleEl);
-    setLocalFonts((prev) => [...prev, { name: fontName, stack: `'${fontName}', sans-serif` }]);
+    const newFont: LocalFont = { name: fontName, stack: `'${fontName}', sans-serif` };
+    setLocalFonts((prev) => [...prev, newFont]);
+    setPendingFont(newFont);
     e.target.value = '';
+  };
+
+  const applyFontToTarget = (target: 'display' | 'body' | 'mono') => {
+    if (!pendingFont) return;
+    if (target === 'display') handleDisplayFontChange(pendingFont.stack);
+    else if (target === 'body') handleBodyFontChange(pendingFont.stack);
+    else handleMonoFontChange(pendingFont.stack);
+    setPendingFont(null);
   };
 
   const handleReset = () => {
@@ -896,6 +907,57 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                   onChange={handleLocalFontUpload}
                 />
               </label>
+              {/* Target selector after upload */}
+              {pendingFont && (
+                <div className={styles.fontTargetSelector}>
+                  <div className={styles.fontTargetHeader}>
+                    Apply{' '}
+                    <strong style={{ fontFamily: pendingFont.stack }}>{pendingFont.name}</strong>{' '}
+                    to:
+                  </div>
+                  <div className={styles.fontTargetPreview}>
+                    <button
+                      className={styles.fontTargetBtn}
+                      onClick={() => applyFontToTarget('display')}
+                    >
+                      <span className={styles.fontTargetLabel}>Display</span>
+                      <span
+                        className={styles.fontTargetSample}
+                        style={{ fontFamily: pendingFont.stack, fontSize: '18px', fontWeight: 600 }}
+                      >
+                        Headlines
+                      </span>
+                    </button>
+                    <button
+                      className={styles.fontTargetBtn}
+                      onClick={() => applyFontToTarget('body')}
+                    >
+                      <span className={styles.fontTargetLabel}>Body</span>
+                      <span
+                        className={styles.fontTargetSample}
+                        style={{ fontFamily: pendingFont.stack, fontSize: '13px' }}
+                      >
+                        Body text and paragraphs
+                      </span>
+                    </button>
+                    <button
+                      className={styles.fontTargetBtn}
+                      onClick={() => applyFontToTarget('mono')}
+                    >
+                      <span className={styles.fontTargetLabel}>Mono</span>
+                      <span
+                        className={styles.fontTargetSample}
+                        style={{ fontFamily: pendingFont.stack, fontSize: '12px' }}
+                      >
+                        {'const code = true;'}
+                      </span>
+                    </button>
+                  </div>
+                  <button className={styles.fontTargetDismiss} onClick={() => setPendingFont(null)}>
+                    Dismiss
+                  </button>
+                </div>
+              )}
               {localFonts.length > 0 && (
                 <div className={styles.localFontList}>
                   {localFonts.map((f) => (
