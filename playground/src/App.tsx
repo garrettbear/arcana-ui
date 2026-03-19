@@ -4,12 +4,16 @@ import {
   AccordionItem,
   AccordionTrigger,
   Alert,
+  ArticleLayout,
   AspectRatio,
+  AuthorCard,
   Avatar,
   AvatarGroup,
   Badge,
   Banner,
   BottomSheet,
+  Breadcrumb,
+  BreadcrumbItem,
   Button,
   CTA,
   Card,
@@ -17,10 +21,13 @@ import {
   CardFooter,
   CardHeader,
   Carousel,
+  CartItem,
   Checkbox,
   CheckboxGroup,
+  Collapsible,
   CommandPalette,
   Container,
+  CopyButton,
   DataTable,
   DatePicker,
   Divider,
@@ -30,6 +37,10 @@ import {
   ErrorBoundary,
   FeatureSection,
   FileUpload,
+  Footer,
+  FooterBottom,
+  FooterLink,
+  FooterSection,
   Form,
   FormErrorMessage,
   FormField,
@@ -41,15 +52,35 @@ import {
   Image,
   Input,
   KPICard,
+  KeyboardShortcut,
   LogoCloud,
   MobileNav,
   Modal,
+  Navbar,
+  NavbarActions,
+  NavbarBrand,
+  NavbarContent,
+  NewsletterSignup,
+  Pagination,
   Popover,
+  PriceDisplay,
   PricingCard,
+  ProductCard,
   ProgressBar,
+  PullQuote,
+  QuantitySelector,
   Radio,
   RadioGroup,
+  RatingStars,
+  RelatedPosts,
+  ScrollArea,
   Select,
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarItem,
+  SidebarSection,
   Skeleton,
   Spacer,
   Spinner,
@@ -208,6 +239,11 @@ function OverviewSection() {
 
   return (
     <div>
+      <h2 className={styles.sectionTitle}>Overview</h2>
+      <p className={styles.sectionDesc}>
+        A dashboard snapshot showing Arcana UI components in context — stats, activity feeds, and
+        key metrics.
+      </p>
       {/* Stats */}
       <div className={styles.statsGrid}>
         <OverviewStatCard label="Total Projects" value="24" delta="3 this month" positive />
@@ -242,9 +278,13 @@ function ComponentsSection() {
 
   return (
     <div>
+      <h2 className={styles.sectionTitle}>Core Components</h2>
+      <p className={styles.sectionDesc}>
+        Buttons, badges, avatars, alerts, modals, tabs, form controls, and accordions.
+      </p>
       {/* Buttons */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Buttons</h3>
+        <h3 className={styles.groupTitle}>Buttons</h3>
         <p className={styles.sectionSubtitle}>Variants, sizes, and states</p>
 
         <div className={styles.demoRow}>
@@ -277,7 +317,7 @@ function ComponentsSection() {
       {/* Badges & Avatars */}
       <div className={styles.twoCol}>
         <div className={styles.dashSection}>
-          <h3 className={styles.sectionTitle}>Badges</h3>
+          <h3 className={styles.groupTitle}>Badges</h3>
           <p className={styles.sectionSubtitle}>Status indicators</p>
           <div className={styles.demoFlex} style={{ marginBottom: 12 }}>
             <Badge>Default</Badge>
@@ -301,7 +341,7 @@ function ComponentsSection() {
         </div>
 
         <div className={styles.dashSection}>
-          <h3 className={styles.sectionTitle}>Avatars</h3>
+          <h3 className={styles.groupTitle}>Avatars</h3>
           <p className={styles.sectionSubtitle}>User representations</p>
           <div className={styles.demoFlex} style={{ marginBottom: 12 }}>
             <Avatar size="xs" name="A" />
@@ -323,7 +363,7 @@ function ComponentsSection() {
 
       {/* Alerts */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Alerts</h3>
+        <h3 className={styles.groupTitle}>Alerts</h3>
         <p className={styles.sectionSubtitle}>Feedback for actions and system states</p>
         <Stack gap={3}>
           <Alert variant="info" title="New release available">
@@ -343,7 +383,7 @@ function ComponentsSection() {
 
       {/* Modal */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Modal</h3>
+        <h3 className={styles.groupTitle}>Modal</h3>
         <p className={styles.sectionSubtitle}>Dialogs for confirmations and forms</p>
         <Button onClick={() => setModalOpen(true)}>Open Delete Dialog</Button>
         <Modal
@@ -390,14 +430,14 @@ function ComponentsSection() {
 
       {/* Toasts */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Toast Notifications</h3>
+        <h3 className={styles.groupTitle}>Toast Notifications</h3>
         <p className={styles.sectionSubtitle}>Ephemeral messages for feedback</p>
         <ToastDemo />
       </div>
 
       {/* Tabs */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Tabs</h3>
+        <h3 className={styles.groupTitle}>Tabs</h3>
         <p className={styles.sectionSubtitle}>Content organization and navigation</p>
         <Stack gap={6}>
           <Tabs value={tabValue} onChange={setTabValue}>
@@ -458,7 +498,7 @@ function ComponentsSection() {
 
       {/* Controls */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Form Controls</h3>
+        <h3 className={styles.groupTitle}>Form Controls</h3>
         <p className={styles.sectionSubtitle}>Checkboxes, radios, and toggles</p>
         <div className={styles.threeCol}>
           <Stack gap={3}>
@@ -500,7 +540,7 @@ function ComponentsSection() {
 
       {/* Accordion */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Accordion</h3>
+        <h3 className={styles.groupTitle}>Accordion</h3>
         <p className={styles.sectionSubtitle}>Collapsible content sections</p>
         <div className={styles.twoCol}>
           <Accordion type="single" defaultValue="q1">
@@ -592,6 +632,10 @@ function FormsSection() {
 
   return (
     <div>
+      <h2 className={styles.sectionTitle}>Form Components</h2>
+      <p className={styles.sectionDesc}>
+        Inputs, selects, checkboxes, radios, toggles, date pickers, and file uploads.
+      </p>
       <div className={styles.twoCol}>
         {/* Create Account Form */}
         <Card>
@@ -872,8 +916,12 @@ function DataSection() {
 
   return (
     <div>
+      <h2 className={styles.sectionTitle}>Data Display</h2>
+      <p className={styles.sectionDesc}>
+        Tables, data grids, stat cards, progress indicators, and KPI visualizations.
+      </p>
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Team Members</h3>
+        <h3 className={styles.groupTitle}>Team Members</h3>
         <p className={styles.sectionSubtitle}>Manage access and roles across your organization</p>
         <Table striped hoverable>
           <TableHeader>
@@ -950,7 +998,7 @@ function DataSection() {
 
       {/* Empty states */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Empty States</h3>
+        <h3 className={styles.groupTitle}>Empty States</h3>
         <p className={styles.sectionSubtitle}>Graceful handling of no-content scenarios</p>
         <div className={styles.twoCol}>
           <Card>
@@ -1009,7 +1057,7 @@ function DataSection() {
 
       {/* StatCard Demo */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Stat Cards</h3>
+        <h3 className={styles.groupTitle}>Stat Cards</h3>
         <p className={styles.sectionSubtitle}>Key metrics at a glance with trend indicators</p>
         <div className={styles.statsGrid}>
           <StatCard
@@ -1083,7 +1131,7 @@ function DataSection() {
 
       {/* ProgressBar Demo */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Progress Bars</h3>
+        <h3 className={styles.groupTitle}>Progress Bars</h3>
         <p className={styles.sectionSubtitle}>
           Completion and loading indicators in multiple styles
         </p>
@@ -1142,7 +1190,7 @@ function DataSection() {
 
       {/* KPICard Demo */}
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>KPI Cards</h3>
+        <h3 className={styles.groupTitle}>KPI Cards</h3>
         <p className={styles.sectionSubtitle}>Metrics with sparkline trend visualizations</p>
         <div className={styles.statsGrid}>
           <KPICard
@@ -1303,7 +1351,7 @@ const LUMINA_COLUMNS: ColumnDef<LuminaUser>[] = [
 function DataTableDemo() {
   return (
     <div className={styles.dashSection}>
-      <h3 className={styles.sectionTitle}>DataTable</h3>
+      <h3 className={styles.groupTitle}>DataTable</h3>
       <p className={styles.sectionSubtitle}>
         Full-featured data table with sorting, filtering, selection, and pagination
       </p>
@@ -1333,11 +1381,13 @@ function DataTableDemo() {
 function LayoutSection() {
   return (
     <div>
+      <h2 className={styles.sectionTitle}>Layout Utilities</h2>
+      <p className={styles.sectionDesc}>
+        Stack, grid, container, divider, spacer, and aspect ratio — composable layout building
+        blocks.
+      </p>
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Layout Primitives</h3>
-        <p className={styles.sectionSubtitle}>
-          Stack, HStack, Grid — composable layout building blocks
-        </p>
+        <h3 className={styles.groupTitle}>Stack, HStack & Grid</h3>
 
         <div className={styles.twoCol} style={{ marginBottom: 24 }}>
           <div>
@@ -1416,8 +1466,12 @@ function FeedbackSection() {
 
   return (
     <div>
+      <h2 className={styles.sectionTitle}>Feedback Components</h2>
+      <p className={styles.sectionDesc}>
+        Banners, skeletons, spinners, empty states, and error boundaries for loading and error UX.
+      </p>
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Banners</h3>
+        <h3 className={styles.groupTitle}>Banners</h3>
         <p className={styles.sectionSubtitle}>Full-width notification bars</p>
         <Stack gap={2}>
           <Banner variant="info" title="Update available">
@@ -1442,7 +1496,7 @@ function FeedbackSection() {
       </div>
 
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Skeleton</h3>
+        <h3 className={styles.groupTitle}>Skeleton</h3>
         <p className={styles.sectionSubtitle}>Loading placeholders</p>
         <div className={styles.twoCol}>
           <Card>
@@ -1523,7 +1577,7 @@ function FeedbackSection() {
       </div>
 
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Error Boundary</h3>
+        <h3 className={styles.groupTitle}>Error Boundary</h3>
         <p className={styles.sectionSubtitle}>Graceful error handling with recovery</p>
         <Card>
           <CardBody>
@@ -1579,8 +1633,12 @@ function MobilePatternsSection() {
 
   return (
     <div>
+      <h2 className={styles.sectionTitle}>Mobile Patterns</h2>
+      <p className={styles.sectionDesc}>
+        Touch-optimized components: bottom sheets, drawer navigation, and mobile nav bars.
+      </p>
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Bottom Sheet</h3>
+        <h3 className={styles.groupTitle}>Bottom Sheet</h3>
         <p className={styles.sectionSubtitle}>
           Mobile-friendly overlay that slides up from the bottom
         </p>
@@ -1611,7 +1669,7 @@ function MobilePatternsSection() {
       </div>
 
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Drawer Navigation</h3>
+        <h3 className={styles.groupTitle}>Drawer Navigation</h3>
         <p className={styles.sectionSubtitle}>Slide-out navigation panel for mobile menus</p>
 
         <HStack gap={2}>
@@ -1640,7 +1698,7 @@ function MobilePatternsSection() {
       </div>
 
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Mobile Navigation Bar</h3>
+        <h3 className={styles.groupTitle}>Mobile Navigation Bar</h3>
         <p className={styles.sectionSubtitle}>
           Fixed bottom navigation for mobile apps (resize to mobile to see it in context)
         </p>
@@ -1670,7 +1728,7 @@ function MobilePatternsSection() {
       </div>
 
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Container</h3>
+        <h3 className={styles.groupTitle}>Container</h3>
         <p className={styles.sectionSubtitle}>
           Responsive content wrapper with max-width constraints
         </p>
@@ -2028,6 +2086,703 @@ function MarketingSection() {
   );
 }
 
+// ─── Navigation Section ───────────────────────────────────────────────────────
+
+function NavigationSection() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  return (
+    <div>
+      <h2 className={styles.sectionTitle}>Navigation Components</h2>
+      <p className={styles.sectionDesc}>
+        Wayfinding elements for apps and websites — navbars, sidebars, breadcrumbs, pagination, and
+        footers.
+      </p>
+
+      {/* Navbar */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Navbar</h3>
+        <div
+          style={{
+            border: '1px solid var(--color-border-default)',
+            borderRadius: 'var(--radius-lg)',
+            overflow: 'hidden',
+          }}
+        >
+          <Navbar brand={<NavbarBrand>Nimbus</NavbarBrand>}>
+            <NavbarContent>
+              <span
+                role="link"
+                tabIndex={0}
+                style={{
+                  color: 'var(--color-fg-primary)',
+                  fontSize: 'var(--font-size-sm)',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                }}
+              >
+                Product
+              </span>
+              <span
+                role="link"
+                tabIndex={0}
+                style={{
+                  color: 'var(--color-fg-secondary)',
+                  fontSize: 'var(--font-size-sm)',
+                  cursor: 'pointer',
+                }}
+              >
+                Pricing
+              </span>
+              <span
+                role="link"
+                tabIndex={0}
+                style={{
+                  color: 'var(--color-fg-secondary)',
+                  fontSize: 'var(--font-size-sm)',
+                  cursor: 'pointer',
+                }}
+              >
+                Docs
+              </span>
+            </NavbarContent>
+            <NavbarActions>
+              <Button size="sm" variant="ghost">
+                Sign in
+              </Button>
+              <Button size="sm">Get Started</Button>
+            </NavbarActions>
+          </Navbar>
+        </div>
+      </div>
+
+      {/* Sidebar */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Sidebar</h3>
+        <div
+          style={{
+            border: '1px solid var(--color-border-default)',
+            borderRadius: 'var(--radius-lg)',
+            overflow: 'hidden',
+            height: '380px',
+            display: 'flex',
+          }}
+        >
+          <Sidebar collapsed={sidebarCollapsed}>
+            <SidebarHeader>
+              <HStack gap={2}>
+                <span style={{ fontSize: '18px' }}>🔮</span>
+                {!sidebarCollapsed && (
+                  <span style={{ fontWeight: 600, fontSize: 'var(--font-size-sm)' }}>Arcana</span>
+                )}
+              </HStack>
+            </SidebarHeader>
+            <SidebarContent>
+              <SidebarSection label="Main">
+                <SidebarItem active icon={<span>📊</span>}>
+                  Dashboard
+                </SidebarItem>
+                <SidebarItem icon={<span>📁</span>}>Projects</SidebarItem>
+                <SidebarItem icon={<span>👥</span>}>Team</SidebarItem>
+                <SidebarItem icon={<span>📈</span>}>Analytics</SidebarItem>
+              </SidebarSection>
+              <SidebarSection label="Settings">
+                <SidebarItem icon={<span>⚙️</span>}>General</SidebarItem>
+                <SidebarItem icon={<span>🔒</span>}>Security</SidebarItem>
+              </SidebarSection>
+            </SidebarContent>
+            <SidebarFooter>
+              <Button
+                size="sm"
+                variant="ghost"
+                style={{ width: '100%' }}
+                onClick={() => setSidebarCollapsed((v) => !v)}
+              >
+                {sidebarCollapsed ? '→' : '← Collapse'}
+              </Button>
+            </SidebarFooter>
+          </Sidebar>
+          <div
+            style={{
+              flex: 1,
+              padding: 'var(--spacing-lg)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--color-fg-muted)',
+              fontSize: 'var(--font-size-sm)',
+            }}
+          >
+            Main content area
+          </div>
+        </div>
+      </div>
+
+      {/* Breadcrumb */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Breadcrumb</h3>
+        <Stack gap={4}>
+          <Breadcrumb>
+            <BreadcrumbItem href="#">Home</BreadcrumbItem>
+            <BreadcrumbItem href="#">Projects</BreadcrumbItem>
+            <BreadcrumbItem href="#">Nimbus Dashboard</BreadcrumbItem>
+            <BreadcrumbItem current>Settings</BreadcrumbItem>
+          </Breadcrumb>
+          <Breadcrumb separator="→">
+            <BreadcrumbItem href="#">Store</BreadcrumbItem>
+            <BreadcrumbItem href="#">Electronics</BreadcrumbItem>
+            <BreadcrumbItem current>Headphones</BreadcrumbItem>
+          </Breadcrumb>
+        </Stack>
+      </div>
+
+      {/* Pagination */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Pagination</h3>
+        <Stack gap={4}>
+          <Pagination page={currentPage} totalPages={12} onPageChange={setCurrentPage} />
+          <p style={{ margin: 0, fontSize: 'var(--font-size-xs)', color: 'var(--color-fg-muted)' }}>
+            Page {currentPage} of 12
+          </p>
+        </Stack>
+      </div>
+
+      {/* Footer */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Footer</h3>
+        <div
+          style={{
+            border: '1px solid var(--color-border-default)',
+            borderRadius: 'var(--radius-lg)',
+            overflow: 'hidden',
+          }}
+        >
+          <Footer>
+            <FooterSection title="Product">
+              <FooterLink href="#">Features</FooterLink>
+              <FooterLink href="#">Pricing</FooterLink>
+              <FooterLink href="#">Changelog</FooterLink>
+              <FooterLink href="#">Roadmap</FooterLink>
+            </FooterSection>
+            <FooterSection title="Company">
+              <FooterLink href="#">About</FooterLink>
+              <FooterLink href="#">Blog</FooterLink>
+              <FooterLink href="#">Careers</FooterLink>
+            </FooterSection>
+            <FooterSection title="Resources">
+              <FooterLink href="#">Documentation</FooterLink>
+              <FooterLink href="#">API Reference</FooterLink>
+              <FooterLink href="#">Community</FooterLink>
+            </FooterSection>
+            <FooterSection title="Legal">
+              <FooterLink href="#">Privacy</FooterLink>
+              <FooterLink href="#">Terms</FooterLink>
+            </FooterSection>
+            <FooterBottom>© 2026 Nimbus Inc. All rights reserved.</FooterBottom>
+          </Footer>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── E-commerce Section ──────────────────────────────────────────────────────
+
+function EcommerceSection() {
+  const [cartQty, setCartQty] = useState(2);
+  const [rating, setRating] = useState(0);
+
+  return (
+    <div>
+      <h2 className={styles.sectionTitle}>E-commerce Components</h2>
+      <p className={styles.sectionDesc}>
+        Product displays, shopping carts, pricing, and ratings for online stores.
+      </p>
+
+      {/* ProductCard */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Product Cards</h3>
+        <div className={styles.productGrid}>
+          <ProductCard
+            title="Wireless Headphones"
+            image="https://placehold.co/400x400/e2e8f0/64748b?text=Headphones"
+            price={{ current: 149.99, currency: 'USD' }}
+            rating={{ value: 4.5, count: 128 }}
+            badge="New"
+            onAddToCart={() => {}}
+          />
+          <ProductCard
+            title="Mechanical Keyboard"
+            image="https://placehold.co/400x400/e2e8f0/64748b?text=Keyboard"
+            price={{ current: 89.99, currency: 'USD', original: 129.99 }}
+            rating={{ value: 4.8, count: 256 }}
+            badge="Sale"
+            onAddToCart={() => {}}
+          />
+          <ProductCard
+            title="USB-C Hub"
+            image="https://placehold.co/400x400/e2e8f0/64748b?text=USB-C+Hub"
+            price={{ current: 49.99, currency: 'USD' }}
+            rating={{ value: 4.2, count: 64 }}
+            onAddToCart={() => {}}
+          />
+        </div>
+      </div>
+
+      {/* CartItem */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Cart Items</h3>
+        <Card>
+          <CardBody>
+            <Stack gap={0}>
+              <CartItem
+                title="Wireless Headphones"
+                price={149.99}
+                quantity={cartQty}
+                onQuantityChange={setCartQty}
+                onRemove={() => {}}
+                image="https://placehold.co/80x80/e2e8f0/64748b?text=HP"
+                variant="Black"
+                currency="USD"
+              />
+              <CartItem
+                title="USB-C Hub"
+                price={49.99}
+                quantity={1}
+                onQuantityChange={() => {}}
+                onRemove={() => {}}
+                image="https://placehold.co/80x80/e2e8f0/64748b?text=USB"
+                currency="USD"
+              />
+            </Stack>
+          </CardBody>
+        </Card>
+      </div>
+
+      {/* QuantitySelector + PriceDisplay + RatingStars */}
+      <div className={styles.twoCol}>
+        <div className={styles.dashSection}>
+          <h3 className={styles.groupTitle}>Quantity Selector</h3>
+          <Stack gap={4}>
+            <QuantitySelector value={cartQty} onChange={setCartQty} min={1} max={10} />
+            <QuantitySelector value={1} onChange={() => {}} min={1} max={99} disabled />
+          </Stack>
+        </div>
+
+        <div className={styles.dashSection}>
+          <h3 className={styles.groupTitle}>Price Display</h3>
+          <Stack gap={3}>
+            <PriceDisplay value={149.99} currency="USD" />
+            <PriceDisplay value={89.99} currency="USD" originalValue={129.99} />
+            <PriceDisplay value={0} currency="USD" />
+          </Stack>
+        </div>
+      </div>
+
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Rating Stars</h3>
+        <Stack gap={4}>
+          <div>
+            <p
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--color-fg-secondary)',
+                marginBottom: 'var(--spacing-2)',
+              }}
+            >
+              Read-only
+            </p>
+            <HStack gap={4}>
+              <RatingStars value={4.5} count={128} />
+              <RatingStars value={3} count={42} />
+              <RatingStars value={5} count={1024} />
+            </HStack>
+          </div>
+          <div>
+            <p
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--color-fg-secondary)',
+                marginBottom: 'var(--spacing-2)',
+              }}
+            >
+              Interactive — click to rate
+            </p>
+            <RatingStars value={rating} onChange={setRating} interactive />
+          </div>
+        </Stack>
+      </div>
+    </div>
+  );
+}
+
+// ─── Editorial Section ───────────────────────────────────────────────────────
+
+function EditorialSection() {
+  return (
+    <div>
+      <h2 className={styles.sectionTitle}>Editorial Components</h2>
+      <p className={styles.sectionDesc}>
+        Content-focused components for blogs, articles, and publishing platforms.
+      </p>
+
+      {/* PullQuote */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Pull Quote</h3>
+        <div className={styles.twoCol}>
+          <PullQuote
+            quote="Design is not just what it looks like and feels like. Design is how it works."
+            attribution="Steve Jobs"
+          />
+          <PullQuote
+            quote="The best way to predict the future is to invent it."
+            attribution="Alan Kay"
+            variant="accent"
+          />
+        </div>
+      </div>
+
+      {/* AuthorCard */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Author Card</h3>
+        <div className={styles.twoCol}>
+          <AuthorCard
+            name="Sarah Chen"
+            bio="Staff engineer at Nimbus. Writing about design systems, accessibility, and the intersection of AI and design."
+            avatar="https://placehold.co/80x80/e2e8f0/64748b?text=SC"
+            social={[
+              { platform: 'twitter', url: '#' },
+              { platform: 'github', url: '#' },
+            ]}
+          />
+          <AuthorCard
+            name="Marcus Johnson"
+            bio="Product designer exploring the boundaries of generative UI."
+            avatar="https://placehold.co/80x80/e2e8f0/64748b?text=MJ"
+            variant="inline"
+          />
+        </div>
+      </div>
+
+      {/* NewsletterSignup */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Newsletter Signup</h3>
+        <Stack gap={4}>
+          <NewsletterSignup
+            title="Stay in the loop"
+            description="Get weekly updates on design systems, component architecture, and AI tooling."
+            variant="card"
+          />
+          <NewsletterSignup title="Subscribe to our newsletter" variant="inline" />
+        </Stack>
+      </div>
+
+      {/* RelatedPosts */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Related Posts</h3>
+        <RelatedPosts
+          posts={[
+            {
+              title: 'Building a Token-Driven Design System',
+              excerpt:
+                'How we structured our three-tier token architecture for maximum flexibility.',
+              href: '#',
+              image: 'https://placehold.co/400x200/e2e8f0/64748b?text=Tokens',
+              date: 'Mar 12, 2026',
+            },
+            {
+              title: 'Responsive Design in 2026',
+              excerpt: 'Mobile-first is table stakes. Here is what comes next.',
+              href: '#',
+              image: 'https://placehold.co/400x200/e2e8f0/64748b?text=Responsive',
+              date: 'Mar 8, 2026',
+            },
+            {
+              title: 'AI-First Component APIs',
+              excerpt: 'Designing component interfaces that machines can reason about effectively.',
+              href: '#',
+              image: 'https://placehold.co/400x200/e2e8f0/64748b?text=AI+APIs',
+              date: 'Mar 1, 2026',
+            },
+          ]}
+        />
+      </div>
+
+      {/* ArticleLayout */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Article Layout</h3>
+        <div
+          style={{
+            border: '1px solid var(--color-border-default)',
+            borderRadius: 'var(--radius-lg)',
+            overflow: 'hidden',
+            maxHeight: '400px',
+            overflowY: 'auto',
+          }}
+        >
+          <ArticleLayout
+            sidebar={
+              <Stack gap={4}>
+                <AuthorCard
+                  name="Sarah Chen"
+                  bio="Staff engineer at Nimbus"
+                  avatar="https://placehold.co/40x40/e2e8f0/64748b?text=SC"
+                  variant="inline"
+                />
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: 'var(--font-size-xs)',
+                    color: 'var(--color-fg-muted)',
+                  }}
+                >
+                  March 15, 2026 · 8 min read
+                </p>
+              </Stack>
+            }
+          >
+            <h1
+              style={{
+                fontSize: 'var(--font-size-3xl)',
+                fontWeight: 'var(--font-weight-bold)',
+                margin: '0 0 var(--spacing-sm)',
+              }}
+            >
+              The Future of Design Systems
+            </h1>
+            <p
+              style={{
+                color: 'var(--color-fg-secondary)',
+                fontSize: 'var(--font-size-lg)',
+                margin: '0 0 var(--spacing-lg)',
+              }}
+            >
+              Why token-driven architecture will replace utility-class frameworks
+            </p>
+            <p>
+              The evolution of design systems has been remarkable. From hand-coded CSS to utility
+              frameworks to token-driven architectures, each generation has brought us closer to the
+              ideal: beautiful interfaces that are predictable, maintainable, and scalable.
+            </p>
+            <p>
+              Token-driven systems represent a fundamental shift. Instead of prescribing how
+              components look, they describe the design decisions that determine appearance. A
+              single JSON file controls typography, color, spacing, elevation, and motion — enabling
+              themes that feel cohesive without constraining creativity.
+            </p>
+          </ArticleLayout>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Utilities & Media Section ──────────────────────────────────────────────
+
+function UtilitiesSection() {
+  const [collapsibleOpen, setCollapsibleOpen] = useState(false);
+
+  return (
+    <div>
+      <h2 className={styles.sectionTitle}>Utility & Media Components</h2>
+      <p className={styles.sectionDesc}>
+        Interactive utilities, clipboard tools, keyboard shortcuts, scroll areas, and media display.
+      </p>
+
+      {/* ScrollArea */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Scroll Area</h3>
+        <div className={styles.twoCol}>
+          <ScrollArea style={{ height: '200px' }}>
+            <Stack gap={2} style={{ padding: 'var(--spacing-sm)' }}>
+              {Array.from({ length: 20 }, (_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: 'var(--spacing-sm) var(--spacing-md)',
+                    background: 'var(--color-bg-elevated)',
+                    border: '1px solid var(--color-border-default)',
+                    borderRadius: 'var(--radius-md)',
+                    fontSize: 'var(--font-size-sm)',
+                    color: 'var(--color-fg-secondary)',
+                  }}
+                >
+                  Item {i + 1} — Scrollable list content
+                </div>
+              ))}
+            </Stack>
+          </ScrollArea>
+          <div>
+            <p
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--color-fg-secondary)',
+                margin: '0 0 var(--spacing-sm)',
+              }}
+            >
+              Themed scrollbar with auto-hide. Scroll the list to see it in action.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Collapsible */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Collapsible</h3>
+        <Card>
+          <CardBody>
+            <Collapsible
+              open={collapsibleOpen}
+              onOpenChange={setCollapsibleOpen}
+              trigger={
+                <Button variant="ghost" size="sm">
+                  {collapsibleOpen ? 'Hide' : 'Show'} Advanced Settings
+                </Button>
+              }
+            >
+              <Stack gap={3} style={{ paddingTop: 'var(--spacing-md)' }}>
+                <Input label="API Key" placeholder="sk-..." />
+                <Input label="Webhook URL" placeholder="https://..." />
+                <Toggle label="Enable debug mode" checked={false} onChange={() => {}} />
+              </Stack>
+            </Collapsible>
+          </CardBody>
+        </Card>
+      </div>
+
+      {/* CopyButton + KeyboardShortcut */}
+      <div className={styles.twoCol}>
+        <div className={styles.dashSection}>
+          <h3 className={styles.groupTitle}>Copy Button</h3>
+          <Stack gap={3}>
+            <HStack gap={2}>
+              <code
+                style={{
+                  padding: 'var(--spacing-xs) var(--spacing-sm)',
+                  background: 'var(--color-bg-surface)',
+                  borderRadius: 'var(--radius-sm)',
+                  fontSize: 'var(--font-size-sm)',
+                  fontFamily: 'var(--font-family-mono)',
+                  border: '1px solid var(--color-border-default)',
+                }}
+              >
+                npm install @arcana-ui/core
+              </code>
+              <CopyButton value="npm install @arcana-ui/core" />
+            </HStack>
+            <HStack gap={2}>
+              <code
+                style={{
+                  padding: 'var(--spacing-xs) var(--spacing-sm)',
+                  background: 'var(--color-bg-surface)',
+                  borderRadius: 'var(--radius-sm)',
+                  fontSize: 'var(--font-size-sm)',
+                  fontFamily: 'var(--font-family-mono)',
+                  border: '1px solid var(--color-border-default)',
+                }}
+              >
+                pnpm add @arcana-ui/tokens
+              </code>
+              <CopyButton value="pnpm add @arcana-ui/tokens" variant="ghost" />
+            </HStack>
+          </Stack>
+        </div>
+
+        <div className={styles.dashSection}>
+          <h3 className={styles.groupTitle}>Keyboard Shortcuts</h3>
+          <Stack gap={3}>
+            <HStack gap={3}>
+              <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-fg-secondary)' }}>
+                Save
+              </span>
+              <KeyboardShortcut keys={['mod', 'S']} />
+            </HStack>
+            <HStack gap={3}>
+              <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-fg-secondary)' }}>
+                Command Palette
+              </span>
+              <KeyboardShortcut keys={['mod', 'K']} />
+            </HStack>
+            <HStack gap={3}>
+              <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-fg-secondary)' }}>
+                Search
+              </span>
+              <KeyboardShortcut keys={['mod', 'shift', 'F']} />
+            </HStack>
+            <HStack gap={3}>
+              <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-fg-secondary)' }}>
+                Delete
+              </span>
+              <KeyboardShortcut keys={['Backspace']} />
+            </HStack>
+          </Stack>
+        </div>
+      </div>
+
+      {/* Image */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Image</h3>
+        <div className={styles.twoCol}>
+          <Image
+            src="https://placehold.co/600x400/e2e8f0/64748b?text=Lazy+Loaded"
+            alt="Example of lazy-loaded image with skeleton fallback"
+            radius="lg"
+          />
+          <Image
+            src="https://placehold.co/invalid-url"
+            alt="Broken image showing error fallback"
+            radius="lg"
+            fallback={
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: '200px',
+                  background: 'var(--color-bg-surface)',
+                  borderRadius: 'var(--radius-lg)',
+                  color: 'var(--color-fg-muted)',
+                  fontSize: 'var(--font-size-sm)',
+                }}
+              >
+                Image failed to load — fallback displayed
+              </div>
+            }
+          />
+        </div>
+      </div>
+
+      {/* Carousel */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Carousel</h3>
+        <Carousel>
+          {['Product Tour', 'Feature Highlight', 'Customer Story', 'Team Update'].map((label) => (
+            <div
+              key={label}
+              style={{
+                minWidth: '280px',
+                height: '180px',
+                background: 'var(--color-bg-elevated)',
+                border: '1px solid var(--color-border-default)',
+                borderRadius: 'var(--radius-lg)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--color-fg-secondary)',
+                flexShrink: 0,
+              }}
+            >
+              {label}
+            </div>
+          ))}
+        </Carousel>
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Kitchen Sink ────────────────────────────────────────────────────────
 
 // ─── Overlays Section ────────────────────────────────────────────────────────
@@ -2052,8 +2807,12 @@ function OverlaysSection() {
 
   return (
     <div>
+      <h2 className={styles.sectionTitle}>Overlay Components</h2>
+      <p className={styles.sectionDesc}>
+        Drawers, popovers, and command palettes — floating UI that appears on top of content.
+      </p>
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Drawer</h3>
+        <h3 className={styles.groupTitle}>Drawer</h3>
         <p className={styles.sectionSubtitle}>Slide-out panels for detail views and forms</p>
         <HStack gap={2}>
           <Button
@@ -2112,7 +2871,7 @@ function OverlaysSection() {
       </div>
 
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Popover</h3>
+        <h3 className={styles.groupTitle}>Popover</h3>
         <p className={styles.sectionSubtitle}>Floating content panels with auto-positioning</p>
         <HStack gap={4}>
           <Popover
@@ -2146,7 +2905,7 @@ function OverlaysSection() {
       </div>
 
       <div className={styles.dashSection}>
-        <h3 className={styles.sectionTitle}>Command Palette</h3>
+        <h3 className={styles.groupTitle}>Command Palette</h3>
         <p className={styles.sectionSubtitle}>
           Press{' '}
           <kbd
@@ -2179,6 +2938,7 @@ function OverlaysSection() {
 
 type SectionId =
   | 'overview'
+  | 'navigation'
   | 'components'
   | 'forms'
   | 'data'
@@ -2186,18 +2946,25 @@ type SectionId =
   | 'overlays'
   | 'feedback'
   | 'mobile'
-  | 'marketing';
+  | 'marketing'
+  | 'ecommerce'
+  | 'editorial'
+  | 'utilities';
 
 const SECTIONS: Array<{ id: SectionId; label: string }> = [
   { id: 'overview', label: 'Overview' },
+  { id: 'navigation', label: 'Navigation' },
   { id: 'components', label: 'Components' },
-  { id: 'forms', label: 'Forms & Inputs' },
-  { id: 'data', label: 'Data & Tables' },
+  { id: 'forms', label: 'Forms' },
+  { id: 'data', label: 'Data' },
   { id: 'overlays', label: 'Overlays' },
   { id: 'feedback', label: 'Feedback' },
   { id: 'layout', label: 'Layout' },
-  { id: 'mobile', label: 'Mobile Patterns' },
+  { id: 'mobile', label: 'Mobile' },
   { id: 'marketing', label: 'Marketing' },
+  { id: 'ecommerce', label: 'E-commerce' },
+  { id: 'editorial', label: 'Editorial' },
+  { id: 'utilities', label: 'Utilities' },
 ];
 
 function KitchenSink() {
@@ -2221,6 +2988,7 @@ function KitchenSink() {
       {/* Page content */}
       <div className={styles.pageContent}>
         {activeSection === 'overview' && <OverviewSection />}
+        {activeSection === 'navigation' && <NavigationSection />}
         {activeSection === 'components' && <ComponentsSection />}
         {activeSection === 'forms' && <FormsSection />}
         {activeSection === 'data' && <DataSection />}
@@ -2229,6 +2997,9 @@ function KitchenSink() {
         {activeSection === 'layout' && <LayoutSection />}
         {activeSection === 'mobile' && <MobilePatternsSection />}
         {activeSection === 'marketing' && <MarketingSection />}
+        {activeSection === 'ecommerce' && <EcommerceSection />}
+        {activeSection === 'editorial' && <EditorialSection />}
+        {activeSection === 'utilities' && <UtilitiesSection />}
       </div>
     </div>
   );
@@ -2252,8 +3023,8 @@ export default function App() {
         <div className={styles.devBanner}>
           <span className={styles.devBannerIcon}>🚧</span>
           <span>
-            Arcana UI is actively under development — expect broken features.{' '}
-            <strong>Official launch coming soon.</strong>
+            Arcana UI Playground — token-driven design system with <strong>60+ components</strong>{' '}
+            across 6 themes.
           </span>
         </div>
 
@@ -2263,6 +3034,7 @@ export default function App() {
             <span className={styles.brandLogo}>🔮</span>
             <span className={styles.brandName}>Arcana UI</span>
             <span className={styles.brandVersion}>v0.1.0</span>
+            <span className={styles.componentCount}>60+ components</span>
           </div>
 
           <div className={styles.topbarSpacer} />

@@ -86,6 +86,23 @@ export type {
   NavbarActionsProps,
 } from './patterns/Navbar';
 
+export {
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+  SidebarItem,
+  SidebarSection,
+} from './patterns/Sidebar';
+export type {
+  SidebarProps,
+  SidebarHeaderProps,
+  SidebarContentProps,
+  SidebarFooterProps,
+  SidebarItemProps,
+  SidebarSectionProps,
+} from './patterns/Sidebar';
+
 export { EmptyState } from './patterns/EmptyState';
 export type { EmptyStateProps } from './patterns/EmptyState';
 
@@ -116,23 +133,6 @@ export type {
   TableHeadProps,
   TableCellProps,
 } from './patterns/Table';
-
-export {
-  Sidebar,
-  SidebarHeader,
-  SidebarContent,
-  SidebarFooter,
-  SidebarItem,
-  SidebarSection,
-} from './patterns/Sidebar';
-export type {
-  SidebarProps,
-  SidebarHeaderProps,
-  SidebarContentProps,
-  SidebarFooterProps,
-  SidebarItemProps,
-  SidebarSectionProps,
-} from './patterns/Sidebar';
 
 export { Breadcrumb, BreadcrumbItem } from './patterns/Breadcrumb';
 export type { BreadcrumbProps, BreadcrumbItemProps } from './patterns/Breadcrumb';
