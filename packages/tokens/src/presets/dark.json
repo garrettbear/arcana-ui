@@ -2,7 +2,7 @@
   "$schema": "../schema/tokens.schema.json",
   "name": "arcana-dark",
   "version": "0.1.0",
-  "description": "Dark mode \u2014 warm stone + indigo on deep backgrounds",
+  "description": "Deep slate dark with vibrant indigo accent \u2014 focused, rich, Linear-inspired",
   "primitive": {
     "color": {
       "white": "#ffffff",
@@ -304,13 +304,13 @@
     },
     "shadow": {
       "none": "none",
-      "xs": "0 1px 2px 0 rgba(0, 0, 0, 0.2)",
-      "sm": "0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.25)",
-      "md": "0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.25)",
-      "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.35), 0 4px 6px -4px rgba(0, 0, 0, 0.3)",
-      "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3)",
-      "2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-      "inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.25)"
+      "xs": "0 1px 2px 0 rgba(0, 0, 0, 0.3)",
+      "sm": "0 1px 3px 0 rgba(0, 0, 0, 0.35), 0 1px 2px -1px rgba(0, 0, 0, 0.3)",
+      "md": "0 4px 6px -1px rgba(0, 0, 0, 0.35), 0 2px 4px -2px rgba(0, 0, 0, 0.3)",
+      "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.35)",
+      "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.45), 0 8px 10px -6px rgba(0, 0, 0, 0.35)",
+      "2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.6)",
+      "inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.3)"
     },
     "blur": {
       "none": "0",
@@ -408,19 +408,19 @@
   "semantic": {
     "color": {
       "background": {
-        "page": "{primitive.color.stone.950}",
-        "surface": "{primitive.color.stone.900}",
-        "elevated": "{primitive.color.stone.800}",
-        "overlay": "rgba(0, 0, 0, 0.7)",
+        "page": "{primitive.color.slate.950}",
+        "surface": "{primitive.color.slate.900}",
+        "elevated": "{primitive.color.slate.800}",
+        "overlay": "rgba(0, 0, 0, 0.75)",
         "sunken": "{primitive.color.black}",
-        "subtle": "{primitive.color.stone.800}"
+        "subtle": "{primitive.color.slate.800}"
       },
       "foreground": {
-        "primary": "{primitive.color.stone.50}",
-        "secondary": "{primitive.color.stone.400}",
-        "muted": "{primitive.color.stone.500}",
-        "disabled": "{primitive.color.stone.600}",
-        "inverse": "{primitive.color.stone.900}",
+        "primary": "{primitive.color.slate.50}",
+        "secondary": "{primitive.color.slate.400}",
+        "muted": "{primitive.color.slate.500}",
+        "disabled": "{primitive.color.slate.600}",
+        "inverse": "{primitive.color.slate.900}",
         "on-primary": "{primitive.color.white}",
         "on-destructive": "{primitive.color.white}",
         "link": "{primitive.color.indigo.400}",
@@ -428,9 +428,9 @@
       },
       "action": {
         "primary": {
-          "default": "{primitive.color.indigo.600}",
-          "hover": "{primitive.color.indigo.500}",
-          "active": "{primitive.color.indigo.700}",
+          "default": "{primitive.color.indigo.500}",
+          "hover": "{primitive.color.indigo.400}",
+          "active": "{primitive.color.indigo.600}",
           "disabled": "{primitive.color.indigo.800}"
         },
         "secondary": {
@@ -455,14 +455,14 @@
         }
       },
       "border": {
-        "default": "{primitive.color.stone.700}",
-        "muted": "{primitive.color.stone.800}",
-        "strong": "{primitive.color.stone.600}",
-        "stronger": "{primitive.color.stone.500}",
-        "focus": "{primitive.color.indigo.400}",
-        "error": "{primitive.color.red.400}",
-        "success": "{primitive.color.green.400}",
-        "inverse": "{primitive.color.stone.300}"
+        "default": "{primitive.color.slate.700}",
+        "muted": "{primitive.color.slate.800}",
+        "strong": "{primitive.color.slate.600}",
+        "stronger": "{primitive.color.slate.500}",
+        "focus": "{primitive.color.indigo.500}",
+        "error": "{primitive.color.red.500}",
+        "success": "{primitive.color.green.500}",
+        "inverse": "{primitive.color.slate.200}"
       },
       "status": {
         "success": {
