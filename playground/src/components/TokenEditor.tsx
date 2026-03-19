@@ -360,6 +360,9 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     new Set(['Surface', 'Action', 'Text']),
   );
   const [copied, setCopied] = useState(false);
+  const [motionDuration, setMotionDuration] = useState(200);
+  const [motionEasing, setMotionEasing] = useState('ease');
+  const [motionPreviewActive, setMotionPreviewActive] = useState(false);
 
   const refreshValues = useCallback(() => {
     const values: Record<string, string> = {};
@@ -414,6 +417,13 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
       setDensity(densityAttr);
     } else {
       setDensity('default');
+    }
+
+    // Motion
+    const durNormal = getCSSVar('--duration-normal');
+    if (durNormal) {
+      const ms = Number.parseInt(durNormal);
+      if (!Number.isNaN(ms)) setMotionDuration(ms);
     }
   }, []);
 
@@ -510,6 +520,67 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     document.documentElement.style.setProperty('--arcana-scale', String(value));
   };
 
+  const applyMotionDuration = useCallback((ms: number) => {
+    const root = document.documentElement;
+    root.style.setProperty('--duration-instant', '0ms');
+    root.style.setProperty('--duration-fast', `${Math.round(ms * 0.5)}ms`);
+    root.style.setProperty('--duration-normal', `${ms}ms`);
+    root.style.setProperty('--duration-slow', `${Math.round(ms * 1.5)}ms`);
+    root.style.setProperty('--duration-slower', `${Math.round(ms * 2.5)}ms`);
+    // Update transition shorthands
+    const easingVal = getCSSVar('--ease-default') || 'ease';
+    root.style.setProperty(
+      '--transition-colors',
+      `color ${ms}ms ${easingVal}, background-color ${ms}ms ${easingVal}, border-color ${ms}ms ${easingVal}`,
+    );
+    root.style.setProperty('--transition-shadow', `box-shadow ${ms}ms ${easingVal}`);
+    root.style.setProperty('--transition-transform', `transform ${ms}ms ${easingVal}`);
+    root.style.setProperty('--transition-opacity', `opacity ${ms}ms ${easingVal}`);
+    root.style.setProperty('--transition-all', `all ${ms}ms ${easingVal}`);
+  }, []);
+
+  const applyMotionEasing = useCallback((easing: string) => {
+    const root = document.documentElement;
+    const easingMap: Record<string, string> = {
+      linear: 'linear',
+      ease: 'ease',
+      'ease-in-out': 'ease-in-out',
+      spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+      bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+    };
+    const cssEasing = easingMap[easing] || easing;
+    root.style.setProperty('--ease-default', cssEasing);
+    root.style.setProperty('--ease-in', easing === 'linear' ? 'linear' : 'ease-in');
+    root.style.setProperty('--ease-out', easing === 'linear' ? 'linear' : 'ease-out');
+    root.style.setProperty('--ease-in-out', easing === 'linear' ? 'linear' : 'ease-in-out');
+    // Re-apply transitions with new easing
+    const dur = getCSSVar('--duration-normal') || '200ms';
+    root.style.setProperty(
+      '--transition-colors',
+      `color ${dur} ${cssEasing}, background-color ${dur} ${cssEasing}, border-color ${dur} ${cssEasing}`,
+    );
+    root.style.setProperty('--transition-shadow', `box-shadow ${dur} ${cssEasing}`);
+    root.style.setProperty('--transition-transform', `transform ${dur} ${cssEasing}`);
+    root.style.setProperty('--transition-opacity', `opacity ${dur} ${cssEasing}`);
+    root.style.setProperty('--transition-all', `all ${dur} ${cssEasing}`);
+  }, []);
+
+  const handleMotionDurationChange = (ms: number) => {
+    setMotionDuration(ms);
+    applyMotionDuration(ms);
+  };
+
+  const handleMotionEasingChange = (easing: string) => {
+    setMotionEasing(easing);
+    applyMotionEasing(easing);
+  };
+
+  const triggerMotionPreview = () => {
+    setMotionPreviewActive(false);
+    requestAnimationFrame(() => setMotionPreviewActive(true));
+    setTimeout(() => setMotionPreviewActive(false), motionDuration + 500);
+  };
+
   const handleLocalFontUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -538,7 +609,28 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     setSpacingBase(4);
     setDensity('default');
     setScale(1);
+    setMotionDuration(200);
+    setMotionEasing('ease');
     document.documentElement.removeAttribute('data-density');
+    // Reset motion tokens
+    for (const v of [
+      '--duration-instant',
+      '--duration-fast',
+      '--duration-normal',
+      '--duration-slow',
+      '--duration-slower',
+      '--ease-default',
+      '--ease-in',
+      '--ease-out',
+      '--ease-in-out',
+      '--transition-colors',
+      '--transition-shadow',
+      '--transition-transform',
+      '--transition-opacity',
+      '--transition-all',
+    ]) {
+      document.documentElement.style.removeProperty(v);
+    }
     setDisplayFont("'Playfair Display', serif");
     setBodyFont('Inter, system-ui, -apple-system, sans-serif');
     setMonoFont("'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace");
@@ -918,6 +1010,96 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
                 />
                 <span className={styles.sliderValue}>{Math.round(scale * 100)}%</span>
               </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* ── 6. Motion ── */}
+      <div className={styles.section}>
+        <button className={styles.sectionHeader} onClick={() => toggleSection('motion')}>
+          <span className={styles.sectionToggle}>{openSections.has('motion') ? '▾' : '▸'}</span>
+          <span className={styles.sectionLabel}>Motion</span>
+        </button>
+        {openSections.has('motion') && (
+          <div className={styles.sectionBody}>
+            {/* Duration presets */}
+            <p className={styles.subSectionLabel}>Duration</p>
+            <div className={styles.densityToggle}>
+              {[
+                { label: 'Instant', value: 0 },
+                { label: 'Snappy', value: 100 },
+                { label: 'Default', value: 200 },
+                { label: 'Smooth', value: 300 },
+                { label: 'Dramatic', value: 500 },
+              ].map((preset) => (
+                <button
+                  key={preset.label}
+                  className={`${styles.densityBtn} ${motionDuration === preset.value ? styles.densityActive : ''}`}
+                  onClick={() => handleMotionDurationChange(preset.value)}
+                >
+                  {preset.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Custom duration slider */}
+            <div className={styles.sliderRow}>
+              <label className={styles.tokenLabel}>Custom</label>
+              <div className={styles.sliderControl}>
+                <input
+                  type="range"
+                  className={styles.slider}
+                  min={0}
+                  max={1000}
+                  step={10}
+                  value={motionDuration}
+                  onChange={(e) => handleMotionDurationChange(Number.parseInt(e.target.value))}
+                />
+                <span className={styles.sliderValue}>{motionDuration}ms</span>
+              </div>
+            </div>
+
+            {/* Easing presets */}
+            <p className={styles.subSectionLabel}>Easing</p>
+            <div className={styles.densityToggle}>
+              {[
+                { label: 'Linear', value: 'linear' },
+                { label: 'Ease', value: 'ease' },
+                { label: 'In-Out', value: 'ease-in-out' },
+                { label: 'Spring', value: 'spring' },
+                { label: 'Bounce', value: 'bounce' },
+              ].map((preset) => (
+                <button
+                  key={preset.label}
+                  className={`${styles.densityBtn} ${motionEasing === preset.value ? styles.densityActive : ''}`}
+                  onClick={() => handleMotionEasingChange(preset.value)}
+                >
+                  {preset.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Animation preview */}
+            <p className={styles.subSectionLabel}>Preview</p>
+            <div className={styles.motionPreview}>
+              <div className={styles.motionTrack}>
+                <div
+                  className={`${styles.motionDot} ${motionPreviewActive ? styles.motionDotActive : ''}`}
+                  style={{
+                    transitionDuration: `${motionDuration}ms`,
+                    transitionTimingFunction:
+                      motionEasing === 'spring'
+                        ? 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+                        : motionEasing === 'bounce'
+                          ? 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+                          : motionEasing,
+                  }}
+                />
+              </div>
+              <button className={styles.motionPlayBtn} onClick={triggerMotionPreview}>
+                ▶ Play
+              </button>
             </div>
           </div>
         )}

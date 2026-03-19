@@ -666,3 +666,54 @@
   background: var(--color-action-primary-hover);
   border-color: var(--color-action-primary-hover);
 }
+
+/* ─── Motion Preview ─── */
+
+.motionPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.motionTrack {
+  position: relative;
+  height: 24px;
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-default);
+  overflow: hidden;
+}
+
+.motionDot {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background: var(--color-action-primary);
+  transition-property: transform;
+}
+
+.motionDotActive {
+  transform: translateX(calc(100% + 155px));
+}
+
+.motionPlayBtn {
+  align-self: flex-end;
+  padding: 2px 10px;
+  font-size: 11px;
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+  color: var(--color-fg-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 120ms;
+  font-family: var(--font-family-body);
+}
+
+.motionPlayBtn:hover {
+  background: var(--color-action-ghost-hover);
+  color: var(--color-fg-primary);
+}
