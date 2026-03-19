@@ -271,8 +271,14 @@ function OverviewSection() {
 
 function ComponentsSection() {
   const [checkboxChecked, setCheckboxChecked] = useState(false);
+  const [emailNotifications, setEmailNotifications] = useState(true);
+  const [weeklyDigest, setWeeklyDigest] = useState(false);
+  const [twoFactorAuth, setTwoFactorAuth] = useState(true);
   const [radioValue, setRadioValue] = useState('react');
   const [toggleOn, setToggleOn] = useState(true);
+  const [emailAlerts, setEmailAlerts] = useState(true);
+  const [betaFeatures, setBetaFeatures] = useState(false);
+  const [previewMode, setPreviewMode] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [tabValue, setTabValue] = useState('overview');
 
@@ -507,14 +513,22 @@ function ComponentsSection() {
               checked={checkboxChecked}
               onChange={(e) => setCheckboxChecked(e.target.checked)}
             />
-            <Checkbox label="Email notifications" checked={true} onChange={() => {}} />
-            <Checkbox label="Weekly digest" checked={false} onChange={() => {}} />
+            <Checkbox
+              label="Email notifications"
+              checked={emailNotifications}
+              onChange={(e) => setEmailNotifications(e.target.checked)}
+            />
+            <Checkbox
+              label="Weekly digest"
+              checked={weeklyDigest}
+              onChange={(e) => setWeeklyDigest(e.target.checked)}
+            />
             <Checkbox label="Disabled option" disabled checked={false} onChange={() => {}} />
             <Checkbox
               label="Two-factor auth"
               description="Add extra security to your account."
-              checked={true}
-              onChange={() => {}}
+              checked={twoFactorAuth}
+              onChange={(e) => setTwoFactorAuth(e.target.checked)}
             />
           </Stack>
           <RadioGroup
@@ -531,9 +545,14 @@ function ComponentsSection() {
           />
           <Stack gap={4}>
             <Toggle label="Auto-deploy" checked={toggleOn} onChange={setToggleOn} />
-            <Toggle label="Email alerts" checked={true} onChange={() => {}} />
-            <Toggle label="Beta features" checked={false} onChange={() => {}} />
-            <Toggle size="sm" label="Preview mode" checked={false} onChange={() => {}} />
+            <Toggle label="Email alerts" checked={emailAlerts} onChange={setEmailAlerts} />
+            <Toggle label="Beta features" checked={betaFeatures} onChange={setBetaFeatures} />
+            <Toggle
+              size="sm"
+              label="Preview mode"
+              checked={previewMode}
+              onChange={setPreviewMode}
+            />
           </Stack>
         </div>
       </div>
@@ -2582,6 +2601,7 @@ function EditorialSection() {
 
 function UtilitiesSection() {
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
+  const [debugMode, setDebugMode] = useState(false);
 
   return (
     <div>
@@ -2644,7 +2664,7 @@ function UtilitiesSection() {
               <Stack gap={3} style={{ paddingTop: 'var(--spacing-md)' }}>
                 <Input label="API Key" placeholder="sk-..." />
                 <Input label="Webhook URL" placeholder="https://..." />
-                <Toggle label="Enable debug mode" checked={false} onChange={() => {}} />
+                <Toggle label="Enable debug mode" checked={debugMode} onChange={setDebugMode} />
               </Stack>
             </Collapsible>
           </CardBody>
@@ -2802,6 +2822,7 @@ function OverlaysSection() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerSide, setDrawerSide] = useState<'left' | 'right' | 'bottom'>('right');
   const [cmdOpen, setCmdOpen] = useState(false);
+  const [publicWorkspace, setPublicWorkspace] = useState(false);
 
   useHotkey('k', () => setCmdOpen(true), { modifier: 'meta' });
 
@@ -2865,7 +2886,11 @@ function OverlaysSection() {
           <Stack gap={4}>
             <Input label="Workspace Name" placeholder="My Workspace" />
             <Textarea label="Description" placeholder="Describe your workspace..." rows={3} />
-            <Toggle label="Public workspace" checked={false} onChange={() => {}} />
+            <Toggle
+              label="Public workspace"
+              checked={publicWorkspace}
+              onChange={setPublicWorkspace}
+            />
           </Stack>
         </Drawer>
       </div>
