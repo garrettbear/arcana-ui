@@ -1,0 +1,86 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --price-sale-color        Sale price color (fallback: --color-status-error-fg)
+ *   --price-original-color    Original price color (fallback: --color-fg-muted)
+ *   --price-current-color     Current price color (fallback: --color-fg-primary)
+ */
+
+.price {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--line-height-tight);
+}
+
+/* ─── Current price ─────────────────────────────────────────────────── */
+
+.current {
+  color: var(--price-current-color, var(--color-fg-primary));
+  font-weight: var(--font-weight-bold);
+}
+
+.sale {
+  color: var(--price-sale-color, var(--color-status-error-fg));
+}
+
+/* ─── Original (struck-through) ─────────────────────────────────────── */
+
+.original {
+  color: var(--price-original-color, var(--color-fg-muted));
+  font-weight: var(--font-weight-normal);
+}
+
+.original s {
+  text-decoration: line-through;
+}
+
+/* ─── Sizes ─────────────────────────────────────────────────────────── */
+
+.size-sm {
+  font-size: var(--font-size-sm);
+}
+
+.size-sm .current {
+  font-size: var(--font-size-sm);
+}
+
+.size-sm .original {
+  font-size: var(--font-size-xs);
+}
+
+.size-md {
+  font-size: var(--font-size-base);
+}
+
+.size-md .current {
+  font-size: var(--font-size-base);
+}
+
+.size-md .original {
+  font-size: var(--font-size-sm);
+}
+
+.size-lg {
+  font-size: var(--font-size-xl);
+}
+
+.size-lg .current {
+  font-size: var(--font-size-xl);
+}
+
+.size-lg .original {
+  font-size: var(--font-size-base);
+}
+
+.size-xl {
+  font-size: var(--font-size-3xl);
+}
+
+.size-xl .current {
+  font-size: var(--font-size-3xl);
+}
+
+.size-xl .original {
+  font-size: var(--font-size-lg);
+}

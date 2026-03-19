@@ -226,6 +226,51 @@ export type { SpinnerProps } from './composites/Spinner';
 export { ErrorBoundary } from './composites/ErrorBoundary';
 export type { ErrorBoundaryProps } from './composites/ErrorBoundary';
 
+// ─── E-commerce ──────────────────────────────────────────────────────────────
+export { ProductCard } from './patterns/ProductCard';
+export type { ProductCardProps, ProductPrice, ProductRating } from './patterns/ProductCard';
+
+export { CartItem } from './patterns/CartItem';
+export type { CartItemProps } from './patterns/CartItem';
+
+export { QuantitySelector } from './patterns/QuantitySelector';
+export type { QuantitySelectorProps } from './patterns/QuantitySelector';
+
+export { PriceDisplay } from './patterns/PriceDisplay';
+export type { PriceDisplayProps } from './patterns/PriceDisplay';
+
+export { RatingStars } from './patterns/RatingStars';
+export type { RatingStarsProps } from './patterns/RatingStars';
+
+// ─── Editorial ───────────────────────────────────────────────────────────────
+export { ArticleLayout } from './patterns/ArticleLayout';
+export type { ArticleLayoutProps } from './patterns/ArticleLayout';
+
+export { PullQuote } from './patterns/PullQuote';
+export type { PullQuoteProps } from './patterns/PullQuote';
+
+export { AuthorCard } from './patterns/AuthorCard';
+export type { AuthorCardProps, AuthorSocial } from './patterns/AuthorCard';
+
+export { RelatedPosts } from './patterns/RelatedPosts';
+export type { RelatedPostsProps, RelatedPost } from './patterns/RelatedPosts';
+
+export { NewsletterSignup } from './patterns/NewsletterSignup';
+export type { NewsletterSignupProps } from './patterns/NewsletterSignup';
+
+// ─── Utilities ───────────────────────────────────────────────────────────────
+export { ScrollArea } from './patterns/ScrollArea';
+export type { ScrollAreaProps } from './patterns/ScrollArea';
+
+export { Collapsible } from './patterns/Collapsible';
+export type { CollapsibleProps } from './patterns/Collapsible';
+
+export { CopyButton } from './patterns/CopyButton';
+export type { CopyButtonProps } from './patterns/CopyButton';
+
+export { KeyboardShortcut } from './patterns/KeyboardShortcut';
+export type { KeyboardShortcutProps } from './patterns/KeyboardShortcut';
+
 // ─── Hooks ────────────────────────────────────────────────────────────────────
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useBreakpoint } from './hooks/useBreakpoint';

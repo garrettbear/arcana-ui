@@ -1,0 +1,36 @@
+.shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-0-5);
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--spacing-6);
+  padding: var(--kbd-padding, var(--spacing-0-5) var(--spacing-1-5));
+  background: var(--kbd-bg, var(--color-bg-surface));
+  border: var(--border-width-default) solid var(--kbd-border, var(--color-border-default));
+  border-radius: var(--kbd-radius, var(--radius-sm));
+  box-shadow: var(--kbd-shadow, 0 1px 0 var(--color-border-default));
+  font-family: var(--kbd-font-family, var(--font-family-mono));
+  font-size: var(--kbd-font-size, var(--font-size-xs));
+  color: var(--color-fg-primary);
+  line-height: 1;
+}
+
+.variant-inline .key {
+  min-width: auto;
+  padding: var(--spacing-0-5) var(--spacing-1);
+  font-size: var(--font-size-xs);
+}
+
+.separator {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+}
+
+.variant-inline .separator {
+  display: none;
+}

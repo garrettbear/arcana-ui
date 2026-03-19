@@ -1,0 +1,56 @@
+.pullquote {
+  margin: var(--spacing-lg) 0;
+  padding: 0;
+}
+
+.variant-default {
+  border-left: var(--pullquote-border-width, var(--border-width-heavy)) solid
+    var(--pullquote-border-color, var(--color-action-primary));
+  padding-left: var(--spacing-lg);
+}
+
+.variant-accent {
+  background: var(
+    --pullquote-accent-bg,
+    color-mix(in srgb, var(--color-action-primary) 8%, transparent)
+  );
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+}
+
+.variant-large {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  position: relative;
+}
+
+.variant-large::before {
+  content: "\201C";
+  display: block;
+  font-size: var(--font-size-fluid-5xl);
+  line-height: 1;
+  color: var(--pullquote-quote-mark-color, var(--color-action-primary));
+  opacity: 0.3;
+}
+
+.quote {
+  font-size: var(--pullquote-font-size, var(--font-size-lg));
+  font-style: var(--pullquote-font-style, italic);
+  color: var(--color-fg-primary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.variant-large .quote {
+  font-size: var(--font-size-fluid-xl);
+}
+
+.footer {
+  margin-top: var(--spacing-3);
+}
+
+.attribution {
+  font-size: var(--font-size-sm);
+  color: var(--pullquote-attribution-color, var(--color-fg-secondary));
+  font-style: normal;
+}

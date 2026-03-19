@@ -1,0 +1,60 @@
+.copyButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  font-family: var(--font-family-body);
+  cursor: pointer;
+  transition: var(--transition-colors);
+  border-radius: var(--radius-md);
+}
+
+.variant-default {
+  padding: var(--spacing-1-5) var(--spacing-3);
+  background: var(--color-bg-surface);
+  border: var(--border-width-default) solid var(--color-border-default);
+  color: var(--color-fg-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.variant-ghost {
+  padding: var(--spacing-1-5) var(--spacing-2);
+  background: transparent;
+  border: none;
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.variant-icon {
+  padding: var(--spacing-1-5);
+  background: transparent;
+  border: none;
+  color: var(--color-fg-muted);
+}
+
+.copyButton:hover {
+  background: var(--color-bg-surface);
+  color: var(--color-fg-primary);
+}
+
+.copyButton:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.size-sm {
+  font-size: var(--font-size-xs);
+}
+.size-md {
+  font-size: var(--font-size-sm);
+}
+
+.srOnly {
+  position: absolute;
+  width: var(--spacing-px);
+  height: var(--spacing-px);
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

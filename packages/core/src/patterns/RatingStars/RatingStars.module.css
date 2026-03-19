@@ -1,0 +1,98 @@
+/**
+ * Component tokens (overridable via preset JSON):
+ *   --rating-filled-color    Filled star color (fallback: --color-status-warning-fg)
+ *   --rating-empty-color     Empty star color (fallback: --color-border-default)
+ *   --rating-gap             Gap between stars (fallback: --spacing-0-5)
+ *   --rating-count-color     Count text color (fallback: --color-fg-secondary)
+ */
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rating-gap, var(--spacing-0-5));
+}
+
+.star {
+  flex-shrink: 0;
+}
+
+.starFilled {
+  color: var(--rating-filled-color, var(--color-status-warning-fg));
+}
+
+.starEmpty {
+  color: var(--rating-empty-color, var(--color-border-default));
+}
+
+/* ─── Sizes ─────────────────────────────────────────────────────────── */
+
+.size-sm .star {
+  width: var(--spacing-3-5);
+  height: var(--spacing-3-5);
+}
+
+.size-md .star {
+  width: var(--spacing-4-5);
+  height: var(--spacing-4-5);
+}
+
+.size-lg .star {
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+}
+
+/* ─── Count ─────────────────────────────────────────────────────────── */
+
+.count {
+  color: var(--rating-count-color, var(--color-fg-secondary));
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.size-sm .count {
+  font-size: var(--font-size-xs);
+}
+
+.size-lg .count {
+  font-size: var(--font-size-base);
+}
+
+/* ─── Interactive ───────────────────────────────────────────────────── */
+
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--spacing-0-5);
+  border-radius: var(--radius-sm);
+}
+
+.starButton {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  min-width: var(--spacing-11);
+  min-height: var(--spacing-11);
+  border-radius: var(--radius-sm);
+}
+
+.starButton:focus-visible {
+  outline: var(--focus-ring);
+}
+
+@media (hover: hover) {
+  .starButton:hover .starFilled,
+  .starButton:hover .starEmpty {
+    opacity: var(--opacity-70, 0.7);
+  }
+}

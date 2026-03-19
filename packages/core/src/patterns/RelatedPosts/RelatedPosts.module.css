@@ -1,0 +1,120 @@
+.related {
+  margin-top: var(--spacing-xl);
+}
+
+.heading {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-lg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(var(--related-cols, 3), 1fr);
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--related-card-radius, var(--radius-lg));
+  overflow: hidden;
+  border: var(--border-width-default) solid var(--color-border-default);
+  transition: var(--transition-shadow);
+}
+
+.post:hover {
+  box-shadow: var(--related-card-shadow, var(--shadow-md));
+}
+
+.post:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.postList {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-2);
+  border: none;
+  padding: var(--spacing-2) 0;
+  border-bottom: var(--border-width-default) solid var(--color-border-default);
+  border-radius: 0;
+}
+
+.imageWrapper {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--color-bg-surface);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.postBody {
+  padding: var(--related-card-padding, var(--spacing-md));
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.postList .postBody {
+  padding: 0;
+}
+
+.category {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-action-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.postTitle {
+  font-size: var(--related-title-size, var(--font-size-md));
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+  line-height: var(--line-height-tight);
+  margin: 0;
+}
+
+.excerpt {
+  font-size: var(--font-size-sm);
+  color: var(--related-excerpt-color, var(--color-fg-secondary));
+  line-height: var(--line-height-normal);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.meta {
+  font-size: var(--font-size-xs);
+  color: var(--related-date-color, var(--color-fg-muted));
+}

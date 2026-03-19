@@ -1,0 +1,57 @@
+.scrollArea {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.orientation-vertical {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.orientation-horizontal {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.orientation-both {
+  overflow: auto;
+}
+
+/* Themed scrollbar */
+.scrollArea::-webkit-scrollbar {
+  width: var(--scroll-thumb-width, var(--spacing-1-5));
+  height: var(--scroll-thumb-width, var(--spacing-1-5));
+}
+
+.scrollArea::-webkit-scrollbar-track {
+  background: var(--scroll-track-color, transparent);
+}
+
+.scrollArea::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb-color, var(--color-border-default));
+  border-radius: var(--scroll-thumb-radius, var(--radius-full));
+}
+
+.scrollArea::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-thumb-hover-color, var(--color-fg-muted));
+}
+
+/* Firefox */
+.scrollArea {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb-color, var(--color-border-default))
+    var(--scroll-track-color, transparent);
+}
+
+/* Hover-only scrollbar */
+.scrollbar-hover::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.scrollbar-hover:hover::-webkit-scrollbar-thumb,
+.scrollbar-hover:focus-within::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb-color, var(--color-border-default));
+}
+
+/* Always visible */
+.scrollbar-always::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb-color, var(--color-border-default));
+}
