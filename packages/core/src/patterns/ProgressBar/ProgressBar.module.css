@@ -96,7 +96,7 @@
     transparent
   );
   background-size: 1rem 1rem;
-  animation: progress-stripe-move var(--duration-slow) linear infinite;
+  animation: progress-stripe-move 1s linear infinite;
 }
 
 @keyframes progress-stripe-move {
@@ -111,7 +111,7 @@
 /* Indeterminate */
 .indeterminate {
   width: 40% !important;
-  animation: progress-indeterminate var(--duration-slow) ease-in-out infinite alternate;
+  animation: progress-indeterminate 1.5s ease-in-out infinite alternate;
 }
 
 @keyframes progress-indeterminate {

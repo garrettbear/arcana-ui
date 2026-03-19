@@ -346,6 +346,10 @@ function checkDeclaration(
   // ── Motion checks ─────────────────────────────────────────────────────
 
   if (MOTION_PROPS.has(prop)) {
+    // Allow hardcoded durations in infinite animations (spinners, skeletons, pulses)
+    // These are loading/decorative animations, not UI transitions
+    if (/\binfinite\b/.test(val)) return null;
+
     // Flag hardcoded duration values (e.g., 150ms, 0.2s)
     if (/\b\d+(\.\d+)?(ms|s)\b/.test(val) && !usesVarRef(val)) {
       return {

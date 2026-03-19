@@ -38,8 +38,7 @@
 }
 
 .animate {
-  animation: skeleton-pulse var(--skeleton-animation-duration, var(--duration-slow)) ease-in-out
-    infinite alternate;
+  animation: skeleton-pulse var(--skeleton-animation-duration, 1.5s) ease-in-out infinite alternate;
 }
 
 @keyframes skeleton-pulse {

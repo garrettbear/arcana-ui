@@ -5,7 +5,7 @@
 }
 
 .svg {
-  animation: spinner-rotate var(--spinner-speed, var(--duration-slow)) linear infinite;
+  animation: spinner-rotate var(--spinner-speed, 1000ms) linear infinite;
 }
 
 @keyframes spinner-rotate {

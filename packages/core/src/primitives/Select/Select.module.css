@@ -163,7 +163,7 @@
   border: var(--border-width-thick) solid var(--color-border-default);
   border-top-color: var(--color-action-primary);
   border-radius: var(--radius-full);
-  animation: select-spin var(--duration-slow) linear infinite;
+  animation: select-spin var(--spinner-speed, 1000ms) linear infinite;
 }
 
 @keyframes select-spin {

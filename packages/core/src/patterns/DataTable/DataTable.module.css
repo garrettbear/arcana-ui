@@ -267,7 +267,7 @@
   width: 80%;
   border-radius: var(--radius-sm);
   background: var(--color-bg-surface);
-  animation: skeleton-pulse var(--duration-slow) ease-in-out infinite alternate;
+  animation: skeleton-pulse 1.5s ease-in-out infinite alternate;
 }
 
 @keyframes skeleton-pulse {
