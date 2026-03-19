@@ -78,15 +78,31 @@ export const PRESETS: ThemePreset[] = [
     id: 'terminal',
     label: 'Terminal',
     emoji: '💻',
-    description: 'Green phosphor on black, mono everything',
+    description: 'Premium terminal — green phosphor on black, Warp-inspired',
     tokens: {},
+    globalCSS: `
+      [data-theme="terminal"] * {
+        text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+      }
+      [data-theme="terminal"] .arcana-button--primary {
+        text-shadow: 0 0 12px rgba(0, 255, 65, 0.5);
+      }
+    `,
   },
   {
     id: 'retro98',
     label: 'Retro 98',
     emoji: '🖥️',
-    description: 'Windows 98 vibes, gray skies, 2px borders',
+    description: 'Authentic Windows 98 — pixel-perfect bevels, navy blue',
     tokens: {},
+    globalCSS: `
+      [data-theme="retro98"] body {
+        background: #008080;
+      }
+      [data-theme="retro98"] .arcana-button--primary {
+        box-shadow: inset -1px -1px 0 0 #000080, inset 1px 1px 0 0 #0000ff;
+      }
+    `,
   },
   {
     id: 'glass',
@@ -96,14 +112,31 @@ export const PRESETS: ThemePreset[] = [
     tokens: {},
     globalCSS: `
       body {
-        background: linear-gradient(135deg, var(--primitive-indigo-400) 0%, var(--primitive-violet-600) 50%, var(--primitive-indigo-400) 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #667eea 100%);
         background-size: 400% 400%;
-        animation: gradientShift 8s ease infinite;
+        animation: gradientShift 12s ease infinite;
       }
       @keyframes gradientShift {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
+      }
+      [data-theme="glass"] .arcana-card,
+      [data-theme="glass"] .arcana-navbar,
+      [data-theme="glass"] .arcana-modal__content,
+      [data-theme="glass"] .arcana-alert,
+      [data-theme="glass"] .arcana-input,
+      [data-theme="glass"] .arcana-select__trigger,
+      [data-theme="glass"] .arcana-badge,
+      [data-theme="glass"] .arcana-pricing-card {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      }
+      [data-theme="glass"] .arcana-button--primary {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
       }
     `,
   },
