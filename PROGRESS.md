@@ -1,8 +1,8 @@
 # Arcana UI — Progress Tracker
 
 > **Last updated:** 2026-03-19
-> **Current phase:** 3 COMPLETE — Playground audit & polish done
-> **Next priority task:** 4.1
+> **Current phase:** 4 — Theme Presets & Demo Sites (4.1 in progress)
+> **Next priority task:** 4.2
 > **Blocking issues:** None
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
@@ -58,7 +58,7 @@
 - [x] 3.12 — Utility: ScrollArea, Collapsible, Accordion, CopyButton, KeyboardShortcut
 
 ## Phase 4: Theme Presets & Demo Sites (Weeks 10–14)
-- [ ] 4.1 — Redesign existing 6 presets for full token architecture
+- [x] 4.1 — Redesign existing 6 presets for full token architecture
 - [ ] 4.2 — Build new presets: Corporate, Startup, Editorial, Commerce, Midnight, Nature, Neon, Mono
 - [ ] 4.3 — Demo: SaaS Dashboard
 - [ ] 4.4 — Demo: Marketing Landing Page
