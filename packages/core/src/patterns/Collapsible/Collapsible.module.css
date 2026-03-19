@@ -1,0 +1,33 @@
+.collapsible {
+  width: 100%;
+}
+
+.trigger {
+  cursor: pointer;
+  user-select: none;
+}
+
+.trigger:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+.content {
+  overflow: hidden;
+  height: 0;
+}
+
+.open {
+  height: auto;
+}
+
+.animated {
+  transition: height var(--collapsible-duration, var(--duration-normal)) var(--ease-default);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated {
+    transition: none;
+  }
+}

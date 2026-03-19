@@ -1053,6 +1053,68 @@
       "dot-color": "{semantic.color.border.default}",
       "dot-active-color": "{semantic.color.action.primary}",
       "gap": "var(--spacing-md)"
+    },
+    "productcard": {
+      "bg": "{semantic.color.background.surface}",
+      "radius": "{semantic.radius.lg}",
+      "shadow": "{semantic.elevation.card}",
+      "hover-shadow": "{primitive.shadow.md}",
+      "padding": "var(--spacing-md)",
+      "badge-bg": "{semantic.color.action.primary}",
+      "badge-color": "{semantic.color.foreground.onPrimary}",
+      "sale-color": "{semantic.color.status.error.fg}",
+      "original-price-color": "{semantic.color.foreground.muted}"
+    },
+    "cartitem": {
+      "padding": "var(--spacing-md)",
+      "border": "{semantic.color.border.default}",
+      "image-size": "var(--spacing-20)",
+      "image-radius": "{semantic.radius.md}",
+      "remove-color": "{semantic.color.foreground.muted}"
+    },
+    "quantity": {
+      "bg": "{semantic.color.background.page}",
+      "border": "{semantic.color.border.default}",
+      "radius": "{semantic.radius.md}",
+      "button-size": "var(--spacing-9)"
+    },
+    "rating": {
+      "filled-color": "{semantic.color.status.warning.fg}",
+      "empty-color": "{semantic.color.border.default}",
+      "count-color": "{semantic.color.foreground.muted}"
+    },
+    "price": {
+      "color": "{semantic.color.foreground.primary}",
+      "sale-color": "{semantic.color.status.error.fg}",
+      "original-color": "{semantic.color.foreground.muted}",
+      "font-weight": "{primitive.typography.fontWeight.semibold}"
+    },
+    "article": {
+      "font-size": "{primitive.typography.fontSize.md}",
+      "line-height": "{primitive.typography.lineHeight.relaxed}",
+      "paragraph-spacing": "var(--spacing-6)",
+      "heading-spacing": "var(--spacing-10)",
+      "sidebar-width": "17.5rem",
+      "sidebar-gap": "var(--spacing-xl)"
+    },
+    "pullquote": {
+      "border-color": "{semantic.color.action.primary}",
+      "border-width": "{semantic.border.width.heavy}",
+      "font-size": "{primitive.typography.fontSize.lg}",
+      "attribution-color": "{semantic.color.foreground.secondary}"
+    },
+    "newsletter": {
+      "bg": "{semantic.color.background.surface}",
+      "radius": "{semantic.radius.xl}",
+      "padding": "var(--spacing-xl)",
+      "title-size": "{primitive.typography.fontSize.lg}"
+    },
+    "kbd": {
+      "bg": "{semantic.color.background.surface}",
+      "border": "{semantic.color.border.default}",
+      "radius": "{semantic.radius.sm}",
+      "font-size": "{primitive.typography.fontSize.xs}",
+      "font-family": "{primitive.typography.fontFamily.mono}"
     }
   }
 }

@@ -1,0 +1,121 @@
+/**
+ * QuantitySelector tokens:
+ *   Uses semantic tokens for all visual properties.
+ *   Mobile-first: 44px touch targets on mobile, auto on desktop.
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  border: var(--border-width-default) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+  overflow: hidden;
+}
+
+/* ─── Size variants ───────────────────────────────────────────────────────── */
+
+.size-md .button {
+  min-width: var(--spacing-10);
+  min-height: 2.75rem;
+  padding: var(--spacing-2);
+}
+
+.size-md .input {
+  width: var(--spacing-12);
+  min-height: 2.75rem;
+  font-size: var(--font-size-md);
+}
+
+.size-sm .button {
+  min-width: var(--spacing-8);
+  min-height: 2.75rem;
+  padding: var(--spacing-1);
+}
+
+.size-sm .input {
+  width: var(--spacing-10);
+  min-height: 2.75rem;
+  font-size: var(--font-size-sm);
+}
+
+@media (min-width: 640px) {
+  .size-md .button {
+    min-height: auto;
+  }
+
+  .size-md .input {
+    min-height: auto;
+  }
+
+  .size-sm .button {
+    min-height: auto;
+  }
+
+  .size-sm .input {
+    min-height: auto;
+  }
+}
+
+/* ─── Button ──────────────────────────────────────────────────────────────── */
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--color-fg-primary);
+  cursor: pointer;
+  transition: var(--transition-colors);
+  flex-shrink: 0;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--color-bg-hover);
+}
+
+.button:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: -2px;
+  background: var(--color-bg-hover);
+}
+
+.button:disabled {
+  color: var(--color-fg-muted);
+  cursor: not-allowed;
+  opacity: var(--opacity-disabled);
+}
+
+/* ─── Input ───────────────────────────────────────────────────────────────── */
+
+.input {
+  border: none;
+  border-left: var(--border-width-thin) solid var(--color-border-default);
+  border-right: var(--border-width-thin) solid var(--color-border-default);
+  background: transparent;
+  color: var(--color-fg-primary);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-family: inherit;
+  padding: var(--spacing-1) var(--spacing-1);
+  outline: none;
+}
+
+.input:focus {
+  background: var(--color-bg-hover);
+}
+
+/* Remove number input spinners */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+/* ─── Disabled state ──────────────────────────────────────────────────────── */
+
+.disabled {
+  opacity: var(--opacity-disabled);
+  pointer-events: none;
+}
