@@ -114,34 +114,6 @@ import { AccessibilityPanel } from './components/AccessibilityPanel';
 import { TokenEditor } from './components/TokenEditor';
 import { PRESETS, type PresetId, applyPreset } from './utils/presets';
 
-// ─── Overview Stat Card (legacy playground card) ──────────────────────────────
-
-function OverviewStatCard({
-  label,
-  value,
-  delta,
-  positive = true,
-}: {
-  label: string;
-  value: string;
-  delta?: string;
-  positive?: boolean;
-}) {
-  return (
-    <div className={styles.statCard}>
-      <span className={styles.statLabel}>{label}</span>
-      <span className={styles.statValue}>{value}</span>
-      {delta && (
-        <span
-          className={`${styles.statDelta} ${positive ? styles.statDeltaPos : styles.statDeltaNeg}`}
-        >
-          {positive ? '↑' : '↓'} {delta}
-        </span>
-      )}
-    </div>
-  );
-}
-
 // ─── Toast Demo ───────────────────────────────────────────────────────────────
 
 function ToastDemo() {
@@ -209,59 +181,301 @@ function ToastDemo() {
 // ─── Overview Dashboard ───────────────────────────────────────────────────────
 
 function OverviewSection() {
-  const activityItems = [
-    {
-      text: 'Alice Zhao deployed v2.4.1 to production',
-      time: '2m ago',
-      color: 'var(--color-status-success)',
-    },
-    {
-      text: 'Bob Smith opened PR #142 — "Refactor auth flow"',
-      time: '18m ago',
-      color: 'var(--color-action-primary)',
-    },
-    {
-      text: 'CI pipeline failed on branch feature/dark-mode',
-      time: '41m ago',
-      color: 'var(--color-status-error)',
-    },
-    {
-      text: 'Carlos Rivera commented on issue #89',
-      time: '1h ago',
-      color: 'var(--color-status-info)',
-    },
-    {
-      text: 'Diana Prince created milestone "Q2 Release"',
-      time: '2h ago',
-      color: 'var(--color-status-warning)',
-    },
-  ];
+  const [overviewTab, setOverviewTab] = useState('overview');
+  const [overviewToggle, setOverviewToggle] = useState(true);
 
   return (
     <div>
-      <h2 className={styles.sectionTitle}>Overview</h2>
+      <h2 className={styles.sectionTitle}>Theme Showcase</h2>
       <p className={styles.sectionDesc}>
-        A dashboard snapshot showing Arcana UI components in context — stats, activity feeds, and
-        key metrics.
+        A curated gallery of Arcana UI's best components rendered with the current theme. Adjust
+        tokens in the editor to see everything update in real-time.
       </p>
-      {/* Stats */}
-      <div className={styles.statsGrid}>
-        <OverviewStatCard label="Total Projects" value="24" delta="3 this month" positive />
-        <OverviewStatCard label="Active Users" value="1,284" delta="12% vs last week" positive />
-        <OverviewStatCard label="Open Issues" value="47" delta="8 new today" positive={false} />
-        <OverviewStatCard label="Deployments" value="312" delta="28 this week" positive />
+
+      {/* Hero */}
+      <div className={styles.dashSection}>
+        <Hero
+          variant="centered"
+          headline="Ship beautiful interfaces at the speed of thought"
+          subheadline="Arcana UI is a token-driven design system built for AI agents. One JSON config controls your entire design — colors, typography, spacing, motion. 60+ production-grade components."
+          primaryCTA={{ label: 'Get Started', onClick: () => {} }}
+          secondaryCTA={{ label: 'View on GitHub', onClick: () => {} }}
+        />
       </div>
 
-      {/* Activity Feed */}
-      <div className={styles.activityFeed}>
-        <div className={styles.activityHeader}>Recent Activity</div>
-        {activityItems.map((item, i) => (
-          <div key={i} className={styles.activityItem}>
-            <div className={styles.activityDot} style={{ background: item.color }} />
-            <span className={styles.activityText}>{item.text}</span>
-            <span className={styles.activityTime}>{item.time}</span>
-          </div>
-        ))}
+      {/* Stats */}
+      <div className={styles.statsGrid}>
+        <StatCard label="Components" value="60+" trend={{ value: 12, direction: 'up' }} />
+        <StatCard label="Theme Presets" value="6" trend={{ value: 8, direction: 'up' }} prefix="" />
+        <StatCard label="Design Tokens" value="2,681" trend={{ value: 24, direction: 'up' }} />
+        <StatCard label="WCAG Score" value="AA" />
+      </div>
+
+      {/* Navbar sample */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Navigation</h3>
+        <Navbar>
+          <NavbarBrand>
+            <span
+              style={{ fontWeight: 'var(--font-weight-bold)', fontSize: 'var(--font-size-lg)' }}
+            >
+              Lumina
+            </span>
+          </NavbarBrand>
+          <NavbarContent>
+            {[
+              { label: 'Dashboard', href: '#' },
+              { label: 'Analytics', href: '#' },
+              { label: 'Users', href: '#' },
+              { label: 'Settings', href: '#' },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                style={{
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  fontSize: 'var(--font-size-sm)',
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </NavbarContent>
+          <NavbarActions>
+            <Button size="sm">New Project</Button>
+          </NavbarActions>
+        </Navbar>
+      </div>
+
+      {/* Cards + Form side by side */}
+      <div className={styles.twoCol}>
+        <div className={styles.dashSection}>
+          <h3 className={styles.groupTitle}>Cards</h3>
+          <Stack gap={4}>
+            <Card>
+              <CardHeader title="Project Status" subtitle="Last 30 days" />
+              <CardBody>
+                <ProgressBar value={72} color="primary" showValue />
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    marginTop: 'var(--spacing-sm)',
+                    fontSize: 'var(--font-size-sm)',
+                    color: 'var(--color-fg-secondary)',
+                  }}
+                >
+                  <span>72% complete</span>
+                  <span>28 days remaining</span>
+                </div>
+              </CardBody>
+            </Card>
+            <Card>
+              <CardBody>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-md)' }}>
+                  <Avatar name="Sarah Chen" size="lg" />
+                  <div>
+                    <div style={{ fontWeight: 'var(--font-weight-semibold)' }}>Sarah Chen</div>
+                    <div
+                      style={{
+                        fontSize: 'var(--font-size-sm)',
+                        color: 'var(--color-fg-secondary)',
+                      }}
+                    >
+                      Engineering Lead · Joined 2024
+                    </div>
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          </Stack>
+        </div>
+
+        <div className={styles.dashSection}>
+          <h3 className={styles.groupTitle}>Form Controls</h3>
+          <Stack gap={3}>
+            <Input label="Email" placeholder="you@company.com" />
+            <Input label="Project Name" placeholder="My new project" />
+            <Select
+              label="Role"
+              options={[
+                { value: 'admin', label: 'Admin' },
+                { value: 'editor', label: 'Editor' },
+                { value: 'viewer', label: 'Viewer' },
+              ]}
+            />
+            <Toggle
+              label="Send notifications"
+              checked={overviewToggle}
+              onChange={setOverviewToggle}
+            />
+            <Button>Create Project</Button>
+          </Stack>
+        </div>
+      </div>
+
+      {/* Buttons showcase */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Buttons & Badges</h3>
+        <div className={styles.demoFlex} style={{ flexWrap: 'wrap' }}>
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="destructive">Destructive</Button>
+          <Button loading>Loading</Button>
+        </div>
+        <div
+          className={styles.demoFlex}
+          style={{ flexWrap: 'wrap', marginTop: 'var(--spacing-sm)' }}
+        >
+          <Badge>Default</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="error">Error</Badge>
+          <Badge variant="info">Info</Badge>
+        </div>
+      </div>
+
+      {/* Tabs + Accordion */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Tabs & Accordion</h3>
+        <div className={styles.twoCol}>
+          <Tabs value={overviewTab} onChange={setOverviewTab}>
+            <TabList>
+              <Tab value="overview">Overview</Tab>
+              <Tab value="analytics">Analytics</Tab>
+              <Tab value="settings">Settings</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel value="overview">
+                <p
+                  style={{
+                    fontSize: 'var(--font-size-sm)',
+                    color: 'var(--color-fg-secondary)',
+                    lineHeight: 'var(--line-height-relaxed)',
+                  }}
+                >
+                  A comprehensive view of your project metrics, team activity, and deployment
+                  status. Monitor key performance indicators in real-time.
+                </p>
+              </TabPanel>
+              <TabPanel value="analytics">
+                <p
+                  style={{
+                    fontSize: 'var(--font-size-sm)',
+                    color: 'var(--color-fg-secondary)',
+                    lineHeight: 'var(--line-height-relaxed)',
+                  }}
+                >
+                  Deep analytics for user engagement, conversion funnels, and retention metrics
+                  across all your projects.
+                </p>
+              </TabPanel>
+              <TabPanel value="settings">
+                <p
+                  style={{
+                    fontSize: 'var(--font-size-sm)',
+                    color: 'var(--color-fg-secondary)',
+                    lineHeight: 'var(--line-height-relaxed)',
+                  }}
+                >
+                  Configure notifications, integrations, API keys, and team permissions from one
+                  central location.
+                </p>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+          <Accordion type="single" defaultValue="a1">
+            <AccordionItem value="a1">
+              <AccordionTrigger>What is Arcana UI?</AccordionTrigger>
+              <AccordionContent>
+                A token-driven design system that lets AI agents build production-grade interfaces.
+                One JSON file controls your entire visual identity.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="a2">
+              <AccordionTrigger>How many components?</AccordionTrigger>
+              <AccordionContent>
+                60+ components across navigation, forms, data display, overlays, feedback,
+                marketing, e-commerce, and editorial categories.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="a3">
+              <AccordionTrigger>How does theming work?</AccordionTrigger>
+              <AccordionContent>
+                Each theme is a single JSON file defining a three-tier token hierarchy: primitive
+                values, semantic mappings, and component overrides. Switch themes by changing one
+                attribute.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </div>
+
+      {/* Pricing preview */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Pricing</h3>
+        <div className={styles.threeCol}>
+          <PricingCard
+            name="Starter"
+            price={0}
+            period="month"
+            description="For side projects"
+            features={['5 projects', '1 team member', 'Basic analytics', 'Community support']}
+            cta={{ label: 'Get Started', onClick: () => {} }}
+          />
+          <PricingCard
+            name="Pro"
+            price={29}
+            period="month"
+            description="For growing teams"
+            features={[
+              'Unlimited projects',
+              '10 team members',
+              'Advanced analytics',
+              'Priority support',
+              'Custom domains',
+            ]}
+            cta={{ label: 'Start Free Trial', onClick: () => {} }}
+            popular
+          />
+          <PricingCard
+            name="Enterprise"
+            price={99}
+            period="month"
+            description="For organizations"
+            features={[
+              'Everything in Pro',
+              'Unlimited members',
+              'SSO & SAML',
+              'Dedicated support',
+              'SLA guarantee',
+              'Custom integrations',
+            ]}
+            cta={{ label: 'Contact Sales', onClick: () => {} }}
+          />
+        </div>
+      </div>
+
+      {/* Alerts */}
+      <div className={styles.dashSection}>
+        <h3 className={styles.groupTitle}>Feedback</h3>
+        <Stack gap={3}>
+          <Alert variant="success" title="Deployment successful">
+            Version 2.4.1 is now live in production.
+          </Alert>
+          <Alert variant="warning" title="Usage limit approaching">
+            You have used 80% of your monthly API quota.
+          </Alert>
+          <Alert variant="error" title="Build failed">
+            TypeScript compilation error in src/auth.ts — check the logs.
+          </Alert>
+          <Alert variant="info" title="Scheduled maintenance">
+            A brief maintenance window is planned for Saturday 2am–4am UTC.
+          </Alert>
+        </Stack>
       </div>
     </div>
   );
