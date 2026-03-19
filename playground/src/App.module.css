@@ -59,11 +59,33 @@
 }
 
 .brandLogo {
-  font-size: 20px;
+  display: inline-block;
+  height: 20px;
+  width: 96px;
+  background: var(--color-fg-primary);
+  mask-image: url("/logo.svg");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-image: url("/logo.svg");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
 }
 
-.brandName {
-  letter-spacing: -0.01em;
+.sidebarLogo {
+  display: inline-block;
+  height: 16px;
+  width: 76px;
+  background: var(--color-fg-primary);
+  mask-image: url("/logo.svg");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-image: url("/logo.svg");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
 }
 
 .brandVersion {
