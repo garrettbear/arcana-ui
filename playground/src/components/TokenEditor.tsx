@@ -359,7 +359,6 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
   const [openColorGroups, setOpenColorGroups] = useState<Set<string>>(
     new Set(['Surface', 'Action', 'Text']),
   );
-  const [copied, setCopied] = useState(false);
   const [motionDuration, setMotionDuration] = useState(200);
   const [motionEasing, setMotionEasing] = useState('ease');
   const [motionPreviewActive, setMotionPreviewActive] = useState(false);
@@ -666,7 +665,7 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     }
   };
 
-  const handleExport = async () => {
+  const collectTokenSnapshot = useCallback((): Record<string, string> => {
     const exportObj: Record<string, string> = {};
     for (const varName of ALL_EDITOR_VARS) {
       exportObj[varName] = getCSSVar(varName);
@@ -686,22 +685,88 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     for (const step of ALL_SPACING_STEPS) {
       exportObj[step.cssVar] = getCSSVar(step.cssVar);
     }
+    // Motion
+    exportObj['--duration-normal'] = `${motionDuration}ms`;
+    exportObj['--ease-default'] = getCSSVar('--ease-default') || 'ease';
+    // Density
+    exportObj['--data-density'] = density;
+    return exportObj;
+  }, [radius, scale, displayFont, bodyFont, monoFont, lineHeight, motionDuration, density]);
 
+  const handleExport = () => {
+    const exportObj = collectTokenSnapshot();
     const json = JSON.stringify(exportObj, null, 2);
-    try {
-      await navigator.clipboard.writeText(json);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      const blob = new Blob([json], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `arcana-theme-${activePresetId}.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `arcana-theme-${activePresetId}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
+
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result as string) as Record<string, string>;
+        const root = document.documentElement;
+        for (const [varName, value] of Object.entries(data)) {
+          if (varName === '--data-density') {
+            if (value === 'compact' || value === 'comfortable') {
+              root.setAttribute('data-density', value);
+              setDensity(value);
+            } else {
+              root.removeAttribute('data-density');
+              setDensity('default');
+            }
+            continue;
+          }
+          if (varName.startsWith('--')) {
+            root.style.setProperty(varName, value);
+          }
+        }
+        // Sync editor state from imported values
+        if (data['--font-family-display']) setDisplayFont(data['--font-family-display']);
+        if (data['--font-family-body']) setBodyFont(data['--font-family-body']);
+        if (data['--font-family-mono']) setMonoFont(data['--font-family-mono']);
+        if (data['--line-height-normal']) {
+          setLineHeight(Number.parseFloat(data['--line-height-normal']) || 1.5);
+        }
+        if (data['--font-size-base']) {
+          setTypeBaseSize(Math.round(Number.parseFloat(data['--font-size-base'])) || 16);
+        }
+        if (data['--spacing-1']) {
+          setSpacingBase(Math.round(Number.parseFloat(data['--spacing-1'])) || 4);
+        }
+        if (data['--radius-md']) {
+          setRadius(Number.parseInt(data['--radius-md']) || 8);
+        }
+        if (data['--arcana-scale']) {
+          const s = Number.parseFloat(data['--arcana-scale']);
+          if (s > 0) {
+            setScale(s);
+            const preview = document.getElementById('preview-area');
+            if (preview) preview.style.zoom = String(s);
+          }
+        }
+        if (data['--duration-normal']) {
+          const ms = Number.parseInt(data['--duration-normal']);
+          if (!Number.isNaN(ms)) setMotionDuration(ms);
+        }
+        // Refresh color swatches
+        refreshValues();
+      } catch {
+        // Invalid JSON — ignore silently
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
+
+  const importInputRef = useRef<HTMLInputElement | null>(null);
 
   const toggleSection = (name: string) => {
     setOpenSections((prev) => {
@@ -1172,8 +1237,18 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
         <button className={styles.actionBtn} onClick={handleReset}>
           Reset
         </button>
+        <button className={styles.actionBtn} onClick={() => importInputRef.current?.click()}>
+          Upload JSON
+        </button>
+        <input
+          ref={importInputRef}
+          type="file"
+          accept=".json"
+          style={{ display: 'none' }}
+          onChange={handleImport}
+        />
         <button className={`${styles.actionBtn} ${styles.actionBtnPrimary}`} onClick={handleExport}>
-          {copied ? '✓ Copied!' : 'Export JSON'}
+          Export JSON
         </button>
       </div>
     </div>
