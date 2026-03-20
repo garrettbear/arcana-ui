@@ -345,7 +345,6 @@ export default function Landing() {
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <Link to="/" className={styles.navLogo} aria-label="Arcana UI home">
-            <img src="/favicon.svg" alt="" className={styles.navLogoMark} />
             <img src="/logo-white.svg" alt="Arcana" className={styles.navLogoWordmark} />
           </Link>
 
@@ -372,14 +371,7 @@ export default function Landing() {
             </li>
           </ul>
 
-          <div className={styles.navActions}>
-            <Link to="/playground" className={styles.navBtnGhost}>
-              Log In
-            </Link>
-            <Link to="/playground" className={styles.navBtnPrimary}>
-              Sign Up
-            </Link>
-          </div>
+          <div className={styles.navActions} />
 
           <button
             type="button"
@@ -439,31 +431,6 @@ export default function Landing() {
                 GitHub
               </a>
             </li>
-            <li>
-              <Link
-                to="/playground"
-                className={styles.mobileMenuLink}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Log In
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/playground"
-                className={styles.navBtnPrimary}
-                onClick={() => setMobileMenuOpen(false)}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  marginTop: '8px',
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                }}
-              >
-                Sign Up
-              </Link>
-            </li>
           </ul>
         </div>
       </div>
@@ -473,7 +440,7 @@ export default function Landing() {
         <section className={styles.hero}>
           <div className={styles.heroBadge}>
             <span className={styles.heroBadgeDot} />
-            Open Source
+            Coming Soon
           </div>
 
           <h1 className={styles.heroHeadline}>
@@ -502,6 +469,7 @@ export default function Landing() {
             >
               <ArrowIcon />
             </button>
+            <span className={styles.promptComingSoon}>AI generation coming soon</span>
           </form>
 
           <div className={styles.promptLinks}>
@@ -800,7 +768,7 @@ export default function Landing() {
       <footer className={styles.footer}>
         <div className={styles.footerGrid}>
           <div className={styles.footerBrand}>
-            <span className={styles.footerBrandName}>Arcana UI</span>
+            <img src="/logo-white.svg" alt="Arcana" className={styles.footerLogo} />
             <p className={styles.footerBrandDesc}>
               The design system built for AI. Token-driven theming, production components, infinite
               possibilities.

@@ -391,6 +391,15 @@
   color: var(--landing-fg-muted);
 }
 
+.promptComingSoon {
+  position: absolute;
+  bottom: -24px;
+  right: 12px;
+  font-size: 11px;
+  color: var(--landing-fg-muted);
+  letter-spacing: 0.02em;
+}
+
 .promptTextLink {
   color: var(--landing-fg-secondary);
   text-decoration: none;
@@ -1071,12 +1080,9 @@
   gap: 12px;
 }
 
-.footerBrandName {
-  font-family: var(--font-family-display, Inter, sans-serif);
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--landing-fg);
-  letter-spacing: -0.02em;
+.footerLogo {
+  height: 24px;
+  width: auto;
 }
 
 .footerBrandDesc {
