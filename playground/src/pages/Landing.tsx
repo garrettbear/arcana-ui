@@ -159,6 +159,7 @@ const THEME_PREVIEWS = [
     accentFg: '#ffffff',
     border: '#e7e5e4',
     inputBg: '#ffffff',
+    noRadius: false,
   },
   {
     id: 'dark',
@@ -172,6 +173,7 @@ const THEME_PREVIEWS = [
     accentFg: '#0f172a',
     border: 'rgba(148,163,184,0.15)',
     inputBg: '#1e293b',
+    noRadius: false,
   },
   {
     id: 'terminal',
@@ -185,32 +187,35 @@ const THEME_PREVIEWS = [
     accentFg: '#0a0a0a',
     border: 'rgba(0,255,65,0.15)',
     inputBg: '#111111',
+    noRadius: true,
   },
   {
-    id: 'editorial',
-    name: 'Editorial',
-    desc: 'Elegant serif typography',
-    bg: '#faf8f5',
-    surface: '#fafaf9',
-    fg: '#1c1917',
-    fgSecondary: '#57534e',
-    accent: '#1c1917',
+    id: 'retro98',
+    name: 'Retro 98',
+    desc: 'Pixel-perfect Windows 98',
+    bg: '#c0c0c0',
+    surface: '#ffffff',
+    fg: '#000000',
+    fgSecondary: '#404040',
+    accent: '#000080',
     accentFg: '#ffffff',
-    border: '#d6d3d1',
+    border: '#808080',
     inputBg: '#ffffff',
+    noRadius: true,
   },
   {
-    id: 'neon',
-    name: 'Neon',
-    desc: 'Cyan + pink cyberpunk',
-    bg: '#08080c',
-    surface: '#111118',
-    fg: '#f0f0f8',
-    fgSecondary: '#a0a0b8',
-    accent: '#22d3ee',
-    accentFg: '#08080c',
-    border: 'rgba(160,160,184,0.15)',
-    inputBg: '#111118',
+    id: 'glass',
+    name: 'Glass',
+    desc: 'Frosted translucent surfaces',
+    bg: '#1a1a2e',
+    surface: 'rgba(255,255,255,0.12)',
+    fg: '#ffffff',
+    fgSecondary: 'rgba(255,255,255,0.7)',
+    accent: '#818cf8',
+    accentFg: '#ffffff',
+    border: 'rgba(255,255,255,0.2)',
+    inputBg: 'rgba(255,255,255,0.1)',
+    noRadius: false,
   },
   {
     id: 'brutalist',
@@ -224,6 +229,119 @@ const THEME_PREVIEWS = [
     accentFg: '#ffffff',
     border: '#000000',
     inputBg: '#ffffff',
+    noRadius: true,
+  },
+  {
+    id: 'corporate',
+    name: 'Corporate',
+    desc: 'Enterprise navy + slate',
+    bg: '#ffffff',
+    surface: '#f8fafc',
+    fg: '#0f172a',
+    fgSecondary: '#475569',
+    accent: '#1d4ed8',
+    accentFg: '#ffffff',
+    border: '#e2e8f0',
+    inputBg: '#ffffff',
+    noRadius: false,
+  },
+  {
+    id: 'startup',
+    name: 'Startup',
+    desc: 'Vibrant violet energy',
+    bg: '#ffffff',
+    surface: '#f5f3ff',
+    fg: '#18181b',
+    fgSecondary: '#52525b',
+    accent: '#7c3aed',
+    accentFg: '#ffffff',
+    border: '#ddd6fe',
+    inputBg: '#ffffff',
+    noRadius: false,
+  },
+  {
+    id: 'editorial',
+    name: 'Editorial',
+    desc: 'Elegant serif typography',
+    bg: '#faf8f5',
+    surface: '#fafaf9',
+    fg: '#1c1917',
+    fgSecondary: '#57534e',
+    accent: '#1c1917',
+    accentFg: '#ffffff',
+    border: '#d6d3d1',
+    inputBg: '#ffffff',
+    noRadius: false,
+  },
+  {
+    id: 'commerce',
+    name: 'Commerce',
+    desc: 'Clean product-focused green',
+    bg: '#ffffff',
+    surface: '#f3f4f6',
+    fg: '#111827',
+    fgSecondary: '#4b5563',
+    accent: '#047857',
+    accentFg: '#ffffff',
+    border: '#e5e7eb',
+    inputBg: '#ffffff',
+    noRadius: false,
+  },
+  {
+    id: 'midnight',
+    name: 'Midnight',
+    desc: 'Deep navy + gold accents',
+    bg: '#0a0e1a',
+    surface: '#101829',
+    fg: '#f1f5f9',
+    fgSecondary: '#94a3b8',
+    accent: '#fbbf24',
+    accentFg: '#0a0e1a',
+    border: 'rgba(148,163,184,0.15)',
+    inputBg: '#101829',
+    noRadius: false,
+  },
+  {
+    id: 'nature',
+    name: 'Nature',
+    desc: 'Earth tones + warm greens',
+    bg: '#f9faf6',
+    surface: '#fafaf9',
+    fg: '#292524',
+    fgSecondary: '#57534e',
+    accent: '#15803d',
+    accentFg: '#ffffff',
+    border: '#d6d3d1',
+    inputBg: '#f9faf6',
+    noRadius: false,
+  },
+  {
+    id: 'neon',
+    name: 'Neon',
+    desc: 'Cyan + pink cyberpunk',
+    bg: '#08080c',
+    surface: '#111118',
+    fg: '#f0f0f8',
+    fgSecondary: '#a0a0b8',
+    accent: '#22d3ee',
+    accentFg: '#08080c',
+    border: 'rgba(160,160,184,0.15)',
+    inputBg: '#111118',
+    noRadius: false,
+  },
+  {
+    id: 'mono',
+    name: 'Mono',
+    desc: 'Pure black + white minimal',
+    bg: '#ffffff',
+    surface: '#f9fafb',
+    fg: '#000000',
+    fgSecondary: '#4b5563',
+    accent: '#000000',
+    accentFg: '#ffffff',
+    border: '#d1d5db',
+    inputBg: '#ffffff',
+    noRadius: false,
   },
 ];
 
@@ -275,12 +393,12 @@ export default function Landing() {
           </ul>
 
           <div className={styles.navActions}>
-            <button type="button" className={styles.navBtnGhost}>
+            <Link to="/playground" className={styles.navBtnGhost}>
               Log In
-            </button>
-            <button type="button" className={styles.navBtnPrimary}>
+            </Link>
+            <Link to="/playground" className={styles.navBtnPrimary}>
               Sign Up
-            </button>
+            </Link>
           </div>
 
           <button
@@ -342,22 +460,29 @@ export default function Landing() {
               </a>
             </li>
             <li>
-              <button
-                type="button"
-                className={styles.navBtnGhost}
-                style={{ width: '100%', textAlign: 'left', padding: '12px 0' }}
+              <Link
+                to="/playground"
+                className={styles.mobileMenuLink}
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Log In
-              </button>
+              </Link>
             </li>
             <li>
-              <button
-                type="button"
+              <Link
+                to="/playground"
                 className={styles.navBtnPrimary}
-                style={{ width: '100%', marginTop: '8px' }}
+                onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  marginTop: '8px',
+                  textAlign: 'center',
+                  textDecoration: 'none',
+                }}
               >
                 Sign Up
-              </button>
+              </Link>
             </li>
           </ul>
         </div>
@@ -528,7 +653,7 @@ export default function Landing() {
                     style={{
                       background: theme.accent,
                       color: theme.accentFg,
-                      borderRadius: theme.id === 'brutalist' ? '0' : undefined,
+                      borderRadius: theme.noRadius ? '0' : undefined,
                     }}
                   >
                     Get Started
@@ -539,7 +664,7 @@ export default function Landing() {
                       background: theme.inputBg,
                       color: theme.fg,
                       border: `1px solid ${theme.border}`,
-                      borderRadius: theme.id === 'brutalist' ? '0' : undefined,
+                      borderRadius: theme.noRadius ? '0' : undefined,
                     }}
                     value="jane@example.com"
                     readOnly
@@ -551,7 +676,7 @@ export default function Landing() {
                       background: theme.surface,
                       border: `1px solid ${theme.border}`,
                       color: theme.fgSecondary,
-                      borderRadius: theme.id === 'brutalist' ? '0' : undefined,
+                      borderRadius: theme.noRadius ? '0' : undefined,
                     }}
                   >
                     <span
@@ -592,154 +717,53 @@ export default function Landing() {
               <span className={styles.browserUrl}>your-app.com</span>
             </div>
             <div className={styles.browserContent}>
-              {/* Light-themed inner showcase */}
               <div className={styles.showcaseInner} data-theme="light">
-                <div
-                  style={{
-                    padding: '24px 32px',
-                    borderBottom: '1px solid #e7e5e4',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontWeight: 600,
-                      color: '#1c1917',
-                      fontSize: '16px',
-                      fontFamily: 'var(--font-family-display, Inter, sans-serif)',
-                    }}
-                  >
-                    Acme Inc
-                  </span>
-                  <div style={{ display: 'flex', gap: '24px', fontSize: '14px', color: '#78716c' }}>
+                <div className={styles.showcaseNav}>
+                  <span className={styles.showcaseNavBrand}>Acme Inc</span>
+                  <div className={styles.showcaseNavLinks}>
                     <span>Dashboard</span>
                     <span>Products</span>
                     <span>Analytics</span>
-                    <span>Settings</span>
                   </div>
-                  <div style={{ display: 'flex', gap: '8px' }}>
-                    <span
-                      style={{
-                        padding: '6px 14px',
-                        background: '#4f46e5',
-                        color: 'white',
-                        borderRadius: '6px',
-                        fontSize: '13px',
-                        fontWeight: 600,
-                      }}
-                    >
-                      New Project
-                    </span>
-                  </div>
+                  <span className={styles.showcaseNavCta}>New Project</span>
                 </div>
-                <div
-                  style={{
-                    padding: '32px',
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '16px',
-                  }}
-                >
+                <div className={styles.showcaseStats}>
                   {[
-                    { label: 'Revenue', value: '$48,293', trend: '+12.5%', color: '#16a34a' },
-                    { label: 'Users', value: '2,847', trend: '+8.2%', color: '#16a34a' },
-                    { label: 'Conversion', value: '3.24%', trend: '-0.4%', color: '#dc2626' },
+                    { label: 'Revenue', value: '$48,293', trend: '+12.5%', up: true },
+                    { label: 'Users', value: '2,847', trend: '+8.2%', up: true },
+                    { label: 'Conversion', value: '3.24%', trend: '-0.4%', up: false },
                   ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      style={{
-                        padding: '20px',
-                        border: '1px solid #e7e5e4',
-                        borderRadius: '12px',
-                        background: '#ffffff',
-                      }}
-                    >
-                      <div style={{ fontSize: '13px', color: '#78716c', marginBottom: '8px' }}>
-                        {stat.label}
-                      </div>
+                    <div key={stat.label} className={styles.showcaseStatCard}>
+                      <div className={styles.showcaseStatLabel}>{stat.label}</div>
+                      <div className={styles.showcaseStatValue}>{stat.value}</div>
                       <div
-                        style={{
-                          fontSize: '24px',
-                          fontWeight: 700,
-                          color: '#1c1917',
-                          letterSpacing: '-0.02em',
-                          fontVariantNumeric: 'tabular-nums',
-                        }}
-                      >
-                        {stat.value}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: '13px',
-                          color: stat.color,
-                          fontWeight: 500,
-                          marginTop: '4px',
-                        }}
+                        className={styles.showcaseStatTrend}
+                        style={{ color: stat.up ? '#16a34a' : '#dc2626' }}
                       >
                         {stat.trend} from last month
                       </div>
                     </div>
                   ))}
                 </div>
-                <div style={{ padding: '0 32px 32px' }}>
-                  <div
-                    style={{
-                      border: '1px solid #e7e5e4',
-                      borderRadius: '12px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: 'grid',
-                        gridTemplateColumns: '2fr 1fr 1fr 1fr',
-                        padding: '12px 20px',
-                        background: '#fafaf9',
-                        borderBottom: '1px solid #e7e5e4',
-                        fontSize: '13px',
-                        fontWeight: 600,
-                        color: '#57534e',
-                      }}
-                    >
+                <div className={styles.showcaseTableWrap}>
+                  <div className={styles.showcaseTable}>
+                    <div className={styles.showcaseTableHead}>
                       <span>Customer</span>
                       <span>Plan</span>
                       <span>MRR</span>
                       <span>Status</span>
                     </div>
                     {[
-                      { name: 'Linear', plan: 'Enterprise', mrr: '$12,000', status: 'Active' },
-                      { name: 'Vercel', plan: 'Business', mrr: '$4,800', status: 'Active' },
-                      { name: 'Notion', plan: 'Enterprise', mrr: '$8,400', status: 'Active' },
+                      { name: 'Linear', plan: 'Enterprise', mrr: '$12,000' },
+                      { name: 'Vercel', plan: 'Business', mrr: '$4,800' },
+                      { name: 'Notion', plan: 'Enterprise', mrr: '$8,400' },
                     ].map((row) => (
-                      <div
-                        key={row.name}
-                        style={{
-                          display: 'grid',
-                          gridTemplateColumns: '2fr 1fr 1fr 1fr',
-                          padding: '14px 20px',
-                          borderBottom: '1px solid #f5f5f4',
-                          fontSize: '14px',
-                          color: '#44403c',
-                        }}
-                      >
+                      <div key={row.name} className={styles.showcaseTableRow}>
                         <span style={{ fontWeight: 500, color: '#1c1917' }}>{row.name}</span>
                         <span>{row.plan}</span>
                         <span style={{ fontVariantNumeric: 'tabular-nums' }}>{row.mrr}</span>
                         <span>
-                          <span
-                            style={{
-                              background: '#dcfce7',
-                              color: '#166534',
-                              padding: '2px 8px',
-                              borderRadius: '9999px',
-                              fontSize: '12px',
-                              fontWeight: 500,
-                            }}
-                          >
-                            {row.status}
-                          </span>
+                          <span className={styles.showcaseBadge}>Active</span>
                         </span>
                       </div>
                     ))}
@@ -755,7 +779,7 @@ export default function Landing() {
           <div className={styles.statsGrid}>
             {[
               { value: '60+', label: 'Components' },
-              { value: '120+', label: 'Design Tokens', accent: true },
+              { value: '2,600+', label: 'CSS Variables', accent: true },
               { value: '14', label: 'Theme Presets' },
               { value: '5', label: 'Site Categories' },
             ].map((stat) => (
@@ -865,13 +889,27 @@ export default function Landing() {
           </div>
 
           <div>
-            <h4 className={styles.footerColTitle}>Company</h4>
+            <h4 className={styles.footerColTitle}>Community</h4>
             <ul className={styles.footerLinks}>
               <li>
-                <span className={styles.footerLink}>About</span>
+                <a
+                  href="https://github.com/garrettbear/arcana-ui/blob/main/CONTRIBUTING.md"
+                  className={styles.footerLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Contributing
+                </a>
               </li>
               <li>
-                <span className={styles.footerLink}>Blog</span>
+                <a
+                  href="https://github.com/garrettbear/arcana-ui/blob/main/ROADMAP.md"
+                  className={styles.footerLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Roadmap
+                </a>
               </li>
               <li>
                 <a
