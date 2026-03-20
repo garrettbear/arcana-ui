@@ -95,11 +95,9 @@
   height: 28px;
 }
 
-.navLogoText {
-  font-family: var(--font-family-display, Inter, sans-serif);
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+.navLogoWordmark {
+  height: 18px;
+  width: auto;
 }
 
 .navLinks {

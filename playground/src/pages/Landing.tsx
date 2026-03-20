@@ -121,10 +121,6 @@ function CloseIcon() {
   );
 }
 
-function LogoMark() {
-  return <img src="/favicon.svg" alt="" className={styles.navLogoMark} />;
-}
-
 // ─── Theme Preview Data ────────────────────────────────────────────────────────
 
 const THEME_PREVIEWS = [
@@ -349,8 +345,8 @@ export default function Landing() {
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <Link to="/" className={styles.navLogo} aria-label="Arcana UI home">
-            <LogoMark />
-            <span className={styles.navLogoText}>Arcana</span>
+            <img src="/favicon.svg" alt="" className={styles.navLogoMark} />
+            <img src="/logo-white.svg" alt="Arcana" className={styles.navLogoWordmark} />
           </Link>
 
           <ul className={styles.navLinks}>
