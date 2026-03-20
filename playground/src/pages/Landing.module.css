@@ -6,9 +6,9 @@
 /* ─── Base ──────────────────────────────────────────────────────────────────── */
 
 .landing {
-  --landing-bg: #09090b;
-  --landing-surface: #111114;
-  --landing-surface-elevated: #18181c;
+  --landing-bg: #000000;
+  --landing-surface: #0a0a0a;
+  --landing-surface-elevated: #141414;
   --landing-border: rgba(255, 255, 255, 0.06);
   --landing-border-hover: rgba(255, 255, 255, 0.12);
   --landing-fg: #fafafa;
@@ -66,7 +66,7 @@
   position: sticky;
   top: 0;
   z-index: 500;
-  background: rgba(9, 9, 11, 0.8);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--landing-border);
@@ -150,7 +150,7 @@
 
 .navBtnPrimary {
   background: var(--landing-accent);
-  color: #09090b;
+  color: #000000;
   border: none;
   padding: 8px 20px;
   font-size: 14px;
@@ -370,7 +370,7 @@
   height: 40px;
   border-radius: 10px;
   background: var(--landing-accent);
-  color: #09090b;
+  color: #000000;
   border: none;
   cursor: pointer;
   display: flex;
@@ -406,20 +406,20 @@
 /* ─── Glow Background ──────────────────────────────────────────────────────── */
 
 .heroGlow {
-  position: absolute;
-  top: -120px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 700px;
-  height: 500px;
+  position: fixed;
+  bottom: -200px;
+  right: -150px;
+  width: 800px;
+  height: 800px;
   background: radial-gradient(
-    ellipse at center,
-    var(--landing-accent-glow-strong) 0%,
+    circle at center,
+    rgba(129, 140, 248, 0.2) 0%,
+    rgba(167, 139, 250, 0.1) 30%,
     transparent 70%
   );
   pointer-events: none;
-  z-index: -1;
-  filter: blur(60px);
+  z-index: 0;
+  filter: blur(80px);
 }
 
 /* ─── Logo Cloud ────────────────────────────────────────────────────────────── */
@@ -990,7 +990,7 @@
 
 .ctaBtnPrimary {
   background: var(--landing-accent);
-  color: #09090b;
+  color: #000000;
   border: none;
   padding: 14px 28px;
   font-size: 15px;

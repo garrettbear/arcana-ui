@@ -122,26 +122,7 @@ function CloseIcon() {
 }
 
 function LogoMark() {
-  return (
-    <svg className={styles.navLogoMark} viewBox="0 0 28 28" fill="none">
-      <rect width="28" height="28" rx="6" fill="url(#logo-gradient)" />
-      <path
-        d="M8 19l6-11 6 11"
-        stroke="white"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      <circle cx="14" cy="12" r="2" fill="white" opacity="0.6" />
-      <defs>
-        <linearGradient id="logo-gradient" x1="0" y1="0" x2="28" y2="28">
-          <stop stopColor="#818cf8" />
-          <stop offset="1" stopColor="#a78bfa" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
+  return <img src="/favicon.svg" alt="" className={styles.navLogoMark} />;
 }
 
 // ─── Theme Preview Data ────────────────────────────────────────────────────────
@@ -361,6 +342,9 @@ export default function Landing() {
 
   return (
     <div className={styles.landing}>
+      {/* Purple orb background element */}
+      <div className={styles.heroGlow} aria-hidden="true" />
+
       {/* ═══ SECTION 1: Navbar ═══ */}
       <nav className={styles.nav}>
         <div className={styles.navInner}>
@@ -491,15 +475,14 @@ export default function Landing() {
       <main>
         {/* ═══ SECTION 2: Hero ═══ */}
         <section className={styles.hero}>
-          <div className={styles.heroGlow} aria-hidden="true" />
-
           <div className={styles.heroBadge}>
             <span className={styles.heroBadgeDot} />
             Open Source
           </div>
 
           <h1 className={styles.heroHeadline}>
-            Describe your brand.{' '}
+            Describe your brand.
+            <br />
             <span className={styles.heroHeadlineAccent}>Get a design system.</span>
           </h1>
 
