@@ -392,7 +392,11 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
     // Font size base → derive base size (parse rem/px)
     const baseFontSize = getCSSVar('--font-size-base');
     if (baseFontSize) {
-      const px = Number.parseFloat(baseFontSize);
+      let px = Number.parseFloat(baseFontSize);
+      // Convert rem to px (1rem = 16px default)
+      if (baseFontSize.includes('rem')) {
+        px = px * 16;
+      }
       if (px > 0) setTypeBaseSize(Math.round(px));
     }
 
@@ -736,7 +740,9 @@ export function TokenEditor({ activePresetId, onPresetChange }: TokenEditorProps
           setLineHeight(Number.parseFloat(data['--line-height-normal']) || 1.5);
         }
         if (data['--font-size-base']) {
-          setTypeBaseSize(Math.round(Number.parseFloat(data['--font-size-base'])) || 16);
+          let basePx = Number.parseFloat(data['--font-size-base']);
+          if (data['--font-size-base'].includes('rem')) basePx = basePx * 16;
+          setTypeBaseSize(Math.round(basePx) || 16);
         }
         if (data['--spacing-1']) {
           setSpacingBase(Math.round(Number.parseFloat(data['--spacing-1'])) || 4);

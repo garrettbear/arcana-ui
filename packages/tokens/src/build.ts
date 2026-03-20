@@ -424,9 +424,12 @@ function generateSemanticVars(
   }
 
   // Typography size (overrides primitive --font-size-* with fluid values)
+  // Also emits --font-size-fluid-* aliases so components can reference the fluid variant explicitly
   if (semantic.typography.size) {
     for (const [key, value] of Object.entries(semantic.typography.size)) {
-      vars.push({ name: `--font-size-${key}`, value: resolveValue(preset, value) });
+      const resolved = resolveValue(preset, value);
+      vars.push({ name: `--font-size-${key}`, value: resolved });
+      vars.push({ name: `--font-size-fluid-${key}`, value: resolved });
     }
   }
 
