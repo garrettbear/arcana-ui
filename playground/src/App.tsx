@@ -108,7 +108,8 @@ import {
 } from '@arcana-ui/core';
 import type { ColumnDef, CommandItem } from '@arcana-ui/core';
 import type React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styles from './App.module.css';
 import { AccessibilityPanel } from './components/AccessibilityPanel';
 import { TokenEditor } from './components/TokenEditor';
@@ -3747,9 +3748,30 @@ function KitchenSink() {
 // ─── Root App ─────────────────────────────────────────────────────────────────
 
 export default function App() {
+  const [searchParams] = useSearchParams();
   const [leftOpen, setLeftOpen] = useState(true);
   const [rightOpen, setRightOpen] = useState(false);
-  const [activePresetId, setActivePresetId] = useState<PresetId>('light');
+
+  // Read ?theme= param on mount (from landing page theme links)
+  const initialTheme = (searchParams.get('theme') as PresetId) || 'light';
+  const validPresetIds = PRESETS.map((p) => p.id);
+  const [activePresetId, setActivePresetId] = useState<PresetId>(
+    validPresetIds.includes(initialTheme) ? initialTheme : 'light',
+  );
+
+  // Apply the initial theme from URL on mount
+  useEffect(() => {
+    const themeParam = searchParams.get('theme') as PresetId | null;
+    if (themeParam && validPresetIds.includes(themeParam)) {
+      const preset = PRESETS.find((p) => p.id === themeParam);
+      if (preset) {
+        applyPreset(preset);
+        setActivePresetId(themeParam);
+      }
+    }
+    // Only run on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePresetChange = (id: PresetId) => {
     setActivePresetId(id);
@@ -3763,7 +3785,7 @@ export default function App() {
           <span className={styles.devBannerIcon}>🚧</span>
           <span>
             Arcana UI Playground — token-driven design system with <strong>60+ components</strong>{' '}
-            across 6 themes.
+            across 14 themes.
           </span>
         </div>
 

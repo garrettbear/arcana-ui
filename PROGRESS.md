@@ -1,6 +1,6 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-03-20
+> **Last updated:** 2026-03-21
 > **Current phase:** P — Playground Product
 > **Next priority task:** P.2
 > **Blocking issues:** None
@@ -71,6 +71,7 @@
 
 ## Phase P: Playground Product
 - [x] P.1 — Landing page (dark premium aesthetic, 10 sections, SEO, responsive)
+- [x] P.1.1 — Landing page polish (all 14 themes, responsive showcase, ?theme= linking, dead link fixes)
 - [ ] P.2 — AI theme generation (prompt input → theme JSON)
 
 ## Phase 5: AI Integration & Launch (Weeks 13–16)
