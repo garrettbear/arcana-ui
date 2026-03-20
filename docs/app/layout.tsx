@@ -19,4 +19,7 @@ export const metadata = {
   },
   description:
     'A modern React component library with a warm stone/indigo design system, built for accessibility and AI-first workflows.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };

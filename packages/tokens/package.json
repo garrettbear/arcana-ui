@@ -12,7 +12,15 @@
     "./terminal": "./dist/themes/terminal.css",
     "./retro98": "./dist/themes/retro98.css",
     "./glass": "./dist/themes/glass.css",
-    "./brutalist": "./dist/themes/brutalist.css"
+    "./brutalist": "./dist/themes/brutalist.css",
+    "./corporate": "./dist/themes/corporate.css",
+    "./startup": "./dist/themes/startup.css",
+    "./editorial": "./dist/themes/editorial.css",
+    "./commerce": "./dist/themes/commerce.css",
+    "./midnight": "./dist/themes/midnight.css",
+    "./nature": "./dist/themes/nature.css",
+    "./neon": "./dist/themes/neon.css",
+    "./mono": "./dist/themes/mono.css"
   },
   "files": ["dist"],
   "scripts": {

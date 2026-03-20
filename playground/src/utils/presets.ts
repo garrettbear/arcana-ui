@@ -5,7 +5,21 @@
  * Optional globalCSS can inject extra styles (e.g., body backgrounds).
  */
 
-export type PresetId = 'light' | 'dark' | 'terminal' | 'retro98' | 'glass' | 'brutalist';
+export type PresetId =
+  | 'light'
+  | 'dark'
+  | 'terminal'
+  | 'retro98'
+  | 'glass'
+  | 'brutalist'
+  | 'corporate'
+  | 'startup'
+  | 'editorial'
+  | 'commerce'
+  | 'midnight'
+  | 'nature'
+  | 'neon'
+  | 'mono';
 
 export interface ThemePreset {
   id: PresetId;
@@ -154,6 +168,70 @@ export const PRESETS: ThemePreset[] = [
     description: 'No mercy, no radius, no shadows',
     tokens: {},
     logo: '<svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Impact, sans-serif" font-size="15" font-weight="900" fill="#000000" letter-spacing="-0.03em" text-transform="uppercase">ARCANA</text></svg>',
+  },
+  {
+    id: 'corporate',
+    label: 'Corporate',
+    emoji: '🏢',
+    description: 'Navy/slate, trustworthy, Stripe-inspired',
+    tokens: {},
+  },
+  {
+    id: 'startup',
+    label: 'Startup',
+    emoji: '🚀',
+    description: 'Vibrant purple/pink gradients, energetic',
+    tokens: {},
+  },
+  {
+    id: 'editorial',
+    label: 'Editorial',
+    emoji: '📰',
+    description: 'Elegant serif, high contrast, NYT-inspired',
+    tokens: {},
+  },
+  {
+    id: 'commerce',
+    label: 'Commerce',
+    emoji: '🛍️',
+    description: 'Clean product-focused, Shopify-inspired',
+    tokens: {},
+  },
+  {
+    id: 'midnight',
+    label: 'Midnight',
+    emoji: '🌌',
+    description: 'Deep navy, soft gold accents, premium finance',
+    tokens: {},
+  },
+  {
+    id: 'nature',
+    label: 'Nature',
+    emoji: '🌿',
+    description: 'Earth tones, warm greens, organic wellness',
+    tokens: {},
+  },
+  {
+    id: 'neon',
+    label: 'Neon',
+    emoji: '⚡',
+    description: 'Electric cyan/pink on dark, cyberpunk gaming',
+    tokens: {},
+    globalCSS: `
+      [data-theme="neon"] .arcana-button--primary {
+        box-shadow: 0 0 12px rgba(34, 211, 238, 0.3);
+      }
+      [data-theme="neon"] .arcana-button--primary:hover {
+        box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+      }
+    `,
+  },
+  {
+    id: 'mono',
+    label: 'Mono',
+    emoji: '◼️',
+    description: 'Pure black and white, stark typographic minimalism',
+    tokens: {},
   },
 ];
 

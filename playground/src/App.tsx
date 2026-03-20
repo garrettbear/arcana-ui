@@ -2405,9 +2405,16 @@ function NavigationSection() {
           <Sidebar collapsed={sidebarCollapsed}>
             <SidebarHeader>
               <HStack gap={2}>
-                <span style={{ fontSize: '18px' }}>🔮</span>
-                {!sidebarCollapsed && (
-                  <span style={{ fontWeight: 600, fontSize: 'var(--font-size-sm)' }}>Arcana</span>
+                {sidebarCollapsed ? (
+                  <img
+                    src="/favicon.svg"
+                    alt="Arcana"
+                    width={24}
+                    height={24}
+                    style={{ borderRadius: '4px' }}
+                  />
+                ) : (
+                  <span className={styles.sidebarLogo} role="img" aria-label="Arcana" />
                 )}
               </HStack>
             </SidebarHeader>
@@ -3270,8 +3277,7 @@ export default function App() {
         {/* Top bar */}
         <header className={styles.topbar}>
           <div className={styles.brand}>
-            <span className={styles.brandLogo}>🔮</span>
-            <span className={styles.brandName}>Arcana UI</span>
+            <span className={styles.brandLogo} role="img" aria-label="Arcana" />
             <span className={styles.brandVersion}>v0.1.0</span>
             <span className={styles.componentCount}>60+ components</span>
           </div>

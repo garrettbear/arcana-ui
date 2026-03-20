@@ -59,7 +59,7 @@
 
 ## Phase 4: Theme Presets & Demo Sites (Weeks 10–14)
 - [x] 4.1 — Redesign existing 6 presets for full token architecture
-- [ ] 4.2 — Build new presets: Corporate, Startup, Editorial, Commerce, Midnight, Nature, Neon, Mono
+- [x] 4.2 — Build new presets: Corporate, Startup, Editorial, Commerce, Midnight, Nature, Neon, Mono
 - [ ] 4.3 — Demo: SaaS Dashboard
 - [ ] 4.4 — Demo: Marketing Landing Page
 - [ ] 4.5 — Demo: Editorial Blog
