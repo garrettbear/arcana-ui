@@ -568,7 +568,7 @@ export default function Landing() {
               </div>
               <h3 className={styles.featureTitle}>Token-Driven Theming</h3>
               <p className={styles.featureDesc}>
-                One JSON file controls your entire design system. 120+ tokens across color,
+                One JSON file controls your entire design system. 2,600+ CSS variables across color,
                 typography, spacing, elevation, motion, and more. Change the file, change
                 everything.
               </p>
@@ -618,7 +618,7 @@ export default function Landing() {
               <div className={styles.stepNumber}>2</div>
               <h3 className={styles.stepTitle}>Customize</h3>
               <p className={styles.stepDesc}>
-                Fine-tune with the visual editor. Adjust any of 120+ tokens, preview across 60+
+                Fine-tune with the visual editor. Adjust any of 2,600+ tokens, preview across 60+
                 components in real time. Every change is instant.
               </p>
             </div>

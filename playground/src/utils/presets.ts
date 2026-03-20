@@ -52,7 +52,7 @@ export function applyPreset(preset: ThemePreset): void {
   injectedStyleEl?.remove();
   injectedStyleEl = null;
 
-  // 3. Set data-theme attribute — arcana.css has selectors for all 6 themes
+  // 3. Set data-theme attribute — arcana.css has selectors for all 14 themes
   root.setAttribute('data-theme', preset.id);
 
   // 4. Apply token overrides (if any)
@@ -175,6 +175,7 @@ export const PRESETS: ThemePreset[] = [
     emoji: '🏢',
     description: 'Navy/slate, trustworthy, Stripe-inspired',
     tokens: {},
+    logo: '<svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#1d4ed8" letter-spacing="-0.01em">arcana</text></svg>',
   },
   {
     id: 'startup',
@@ -182,6 +183,7 @@ export const PRESETS: ThemePreset[] = [
     emoji: '🚀',
     description: 'Vibrant purple/pink gradients, energetic',
     tokens: {},
+    logo: '<svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#7c3aed" letter-spacing="-0.02em">arcana</text></svg>',
   },
   {
     id: 'editorial',
@@ -189,6 +191,7 @@ export const PRESETS: ThemePreset[] = [
     emoji: '📰',
     description: 'Elegant serif, high contrast, NYT-inspired',
     tokens: {},
+    logo: '<svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Georgia, serif" font-size="15" font-weight="400" font-style="italic" fill="#1c1917" letter-spacing="-0.01em">arcana</text></svg>',
   },
   {
     id: 'commerce',
@@ -196,6 +199,7 @@ export const PRESETS: ThemePreset[] = [
     emoji: '🛍️',
     description: 'Clean product-focused, Shopify-inspired',
     tokens: {},
+    logo: '<svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#047857" letter-spacing="-0.01em">arcana</text></svg>',
   },
   {
     id: 'midnight',
@@ -203,6 +207,7 @@ export const PRESETS: ThemePreset[] = [
     emoji: '🌌',
     description: 'Deep navy, soft gold accents, premium finance',
     tokens: {},
+    logo: '<svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#fbbf24" letter-spacing="-0.02em">arcana</text></svg>',
   },
   {
     id: 'nature',
@@ -210,6 +215,7 @@ export const PRESETS: ThemePreset[] = [
     emoji: '🌿',
     description: 'Earth tones, warm greens, organic wellness',
     tokens: {},
+    logo: '<svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#15803d" letter-spacing="-0.01em">arcana</text></svg>',
   },
   {
     id: 'neon',
@@ -217,6 +223,7 @@ export const PRESETS: ThemePreset[] = [
     emoji: '⚡',
     description: 'Electric cyan/pink on dark, cyberpunk gaming',
     tokens: {},
+    logo: '<svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#22d3ee" letter-spacing="0.05em">arcana</text></svg>',
     globalCSS: `
       [data-theme="neon"] .arcana-button--primary {
         box-shadow: 0 0 12px rgba(34, 211, 238, 0.3);
@@ -232,6 +239,7 @@ export const PRESETS: ThemePreset[] = [
     emoji: '◼️',
     description: 'Pure black and white, stark typographic minimalism',
     tokens: {},
+    logo: '<svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="monospace" font-size="13" font-weight="400" fill="#000000" letter-spacing="0.02em">arcana</text></svg>',
   },
 ];
 

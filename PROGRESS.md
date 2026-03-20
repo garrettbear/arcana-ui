@@ -72,6 +72,7 @@
 ## Phase P: Playground Product
 - [x] P.1 — Landing page (dark premium aesthetic, 10 sections, SEO, responsive)
 - [x] P.1.1 — Landing page polish (all 14 themes, responsive showcase, ?theme= linking, dead link fixes)
+- [x] P.1.2 — Playground bugfix and polish (preset logos, color-scheme fixes, stale counts)
 - [ ] P.2 — AI theme generation (prompt input → theme JSON)
 
 ## Phase 5: AI Integration & Launch (Weeks 13–16)

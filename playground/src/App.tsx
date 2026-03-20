@@ -697,7 +697,12 @@ function OverviewSection() {
       {/* Stats */}
       <div className={styles.statsGrid}>
         <StatCard label="Components" value="60+" trend={{ value: 12, direction: 'up' }} />
-        <StatCard label="Theme Presets" value="6" trend={{ value: 8, direction: 'up' }} prefix="" />
+        <StatCard
+          label="Theme Presets"
+          value="14"
+          trend={{ value: 8, direction: 'up' }}
+          prefix=""
+        />
         <StatCard label="Design Tokens" value="2,681" trend={{ value: 24, direction: 'up' }} />
         <StatCard label="WCAG Score" value="AA" />
       </div>

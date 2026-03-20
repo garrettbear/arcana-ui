@@ -661,6 +661,14 @@ const COLOR_SCHEMES: Record<string, string> = {
   retro98: 'light',
   glass: 'dark',
   brutalist: 'light',
+  corporate: 'light',
+  startup: 'light',
+  editorial: 'light',
+  commerce: 'light',
+  midnight: 'dark',
+  nature: 'light',
+  neon: 'dark',
+  mono: 'light',
 };
 
 // ─── CSS File Generation ───────────────────────────────────────────────────

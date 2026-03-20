@@ -648,7 +648,7 @@ Phase 2 COMPLETE — ready for Phase 3
   - All 274 tests pass, 0 lint errors, 0 token lint violations, build succeeds
 
 ### Active Phase
-Phase P — Playground Product. Task P.1 COMPLETE + polished. Landing page is investor-demo quality.
+Phase P — Playground Product. Landing page + playground polished to investor-demo quality.
 
 ### Blockers
 None
@@ -700,3 +700,4 @@ None
 | 2026-03-20 | Claude (Claude Code) | Task P.1 — Landing page | Built dark premium landing page at "/" with 10 sections: sticky navbar with logo, hero with "Describe your brand. Get a design system." + AI prompt input, logo cloud (AI tools), 3 feature cards, 3-step how-it-works, 6-theme showcase with mini-previews, component showcase in browser frame, stats bar, CTA with purple glow, footer. Added react-router-dom for "/" (landing) and "/playground" (editor) routing. SEO meta tags (OG, Twitter). Vercel SPA rewrites. Typography tab added to playground. Hero headline bumped to fluid-7xl. 928 tests pass, 0 lint errors, build succeeds. |
 | 2026-03-20 | Claude (Claude Code) | Typography fix | Fixed --font-size-fluid-* aliases missing from build output (added to build.ts). Fixed base size slider parsing "1rem" as 1px (added rem→px conversion). |
 | 2026-03-21 | Claude (Claude Code) | Landing page polish (P.1.1) | Expanded theme showcase from 6→14 presets with accurate colors per theme. Added ?theme= query param handling in playground (App.tsx reads URL param on mount, applies theme). Fixed dead links: Log In/Sign Up→/playground, About/Blog→Contributing/Roadmap on GitHub. Updated stats: "120+ Design Tokens"→"2,600+ CSS Variables". Made component showcase fully responsive (CSS classes instead of inline grid, mobile stack layout). Added focus-visible styles to theme cards, nav buttons, CTA buttons, prompt submit. Added smooth scroll behavior. Widened theme grid to 4-col for 14 items. Updated dev banner to say "14 themes". 928 tests pass, 0 lint errors, build succeeds. |
+| 2026-03-21 | Claude (Claude Code) | Playground polish (P.1.2) | Full playground audit: all 14 sections verified, all interactive components have proper state management, all 14 presets functional. Fixed: (1) Added SVG logos for 8 new presets (corporate, startup, editorial, commerce, midnight, nature, neon, mono) in presets.ts — original 6 had themed wordmarks but new 8 were missing them. (2) Fixed color-scheme: midnight and neon were outputting `color-scheme: light` instead of `dark` in build.ts. (3) Updated stale counts: overview StatCard "6 presets"→"14 presets", landing page "120+ tokens"→"2,600+ CSS variables". (4) Updated comment in presets.ts to reference 14 themes. 928 tests pass, 0 lint errors, build succeeds. |
