@@ -168,7 +168,6 @@ describe('BottomSheet', () => {
 
     // Focus should be inside the dialog
     const closeBtn = screen.getByLabelText('Close');
-    const firstBtn = screen.getByText('First');
     const lastBtn = screen.getByText('Last');
 
     // Tab from last back to first (close button is first focusable)

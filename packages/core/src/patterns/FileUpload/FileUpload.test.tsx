@@ -113,7 +113,7 @@ describe('FileUpload', () => {
   });
 
   it('dropzone is keyboard accessible', async () => {
-    const { container } = render(<FileUpload label="Upload" />);
+    render(<FileUpload label="Upload" />);
     const dropzone = screen.getByRole('button', { name: /dropzone/i });
     dropzone.focus();
     expect(document.activeElement).toBe(dropzone);

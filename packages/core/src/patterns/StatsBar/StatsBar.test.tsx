@@ -13,14 +13,6 @@ const stats = [
 
 // Mock IntersectionObserver
 beforeEach(() => {
-  const mockObserver = {
-    observe: (_el: Element) => {
-      // Immediately trigger callback with isIntersecting: true
-    },
-    disconnect: () => {},
-    unobserve: () => {},
-  };
-
   global.IntersectionObserver = class {
     callback: IntersectionObserverCallback;
     constructor(callback: IntersectionObserverCallback) {

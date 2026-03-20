@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import React from 'react';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { FeatureSection } from './FeatureSection';
 
 const features = [

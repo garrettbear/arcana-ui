@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import { axe } from 'jest-axe';
 import React from 'react';
 import { describe, expect, it } from 'vitest';
 import { Skeleton } from './Skeleton';

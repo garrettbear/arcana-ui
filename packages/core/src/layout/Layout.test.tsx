@@ -434,7 +434,7 @@ describe('GridColumn', () => {
   });
 
   it('applies numeric span as grid-column', () => {
-    const { container } = render(
+    render(
       <Grid>
         <GridColumn span={6} data-testid="col">
           Cell
@@ -446,7 +446,7 @@ describe('GridColumn', () => {
   });
 
   it('defaults to span 12', () => {
-    const { container } = render(
+    render(
       <Grid>
         <GridColumn data-testid="col">Cell</GridColumn>
       </Grid>,
