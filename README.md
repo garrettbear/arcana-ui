@@ -11,6 +11,9 @@
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/@arcana-ui/core"><img src="https://img.shields.io/npm/v/@arcana-ui/core.svg" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/@arcana-ui/core"><img src="https://img.shields.io/npm/dm/@arcana-ui/core.svg" alt="npm downloads" /></a>
+  <a href="https://bundlephobia.com/package/@arcana-ui/core"><img src="https://img.shields.io/bundlephobia/minzip/@arcana-ui/core" alt="bundle size" /></a>
   <a href="https://github.com/Arcana-UI/arcana/actions/workflows/ci.yml"><img src="https://github.com/Arcana-UI/arcana/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="https://github.com/Arcana-UI/arcana/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License" /></a>
   <a href="https://github.com/Arcana-UI/arcana"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>

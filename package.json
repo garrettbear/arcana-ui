@@ -19,6 +19,9 @@
     "validate:tokens": "pnpm --filter @arcana-ui/tokens validate",
     "typecheck": "pnpm -r typecheck",
     "clean": "pnpm -r clean",
+    "dev:dashboard": "pnpm --filter @arcana-ui/demo-dashboard dev",
+    "dev:ecommerce": "pnpm --filter @arcana-ui/demo-ecommerce dev",
+    "dev:demos": "pnpm --filter '@arcana-ui/demo-*' dev",
     "prepare": "husky"
   },
   "lint-staged": {

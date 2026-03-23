@@ -1,0 +1,157 @@
+/* ThemeSwitcher — fixed bottom bar for demo sites */
+
+.arcana-theme-switcher {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  border-top: 1px solid #2a2a4a;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.arcana-theme-switcher__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  flex-wrap: wrap;
+}
+
+.arcana-theme-switcher__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a0a0c0;
+}
+
+.arcana-theme-switcher__select {
+  appearance: none;
+  background: #2a2a4a;
+  color: #e0e0e0;
+  border: 1px solid #3a3a5a;
+  border-radius: 4px;
+  padding: 4px 24px 4px 8px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0a0c0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+}
+
+.arcana-theme-switcher__select:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 1px;
+}
+
+.arcana-theme-switcher__btn {
+  background: #2a2a4a;
+  color: #e0e0e0;
+  border: 1px solid #3a3a5a;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.arcana-theme-switcher__btn:hover {
+  background: #3a3a5a;
+}
+
+.arcana-theme-switcher__btn:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 1px;
+}
+
+.arcana-theme-switcher__btn--remove {
+  color: #f87171;
+  border-color: #7f1d1d;
+}
+
+.arcana-theme-switcher__btn--collapse {
+  margin-left: auto;
+  font-weight: 700;
+}
+
+/* Upload panel */
+
+.arcana-theme-switcher__upload {
+  padding: 12px 16px;
+  border-top: 1px solid #2a2a4a;
+}
+
+.arcana-theme-switcher__dropzone {
+  border: 2px dashed #3a3a5a;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.arcana-theme-switcher__dropzone:hover,
+.arcana-theme-switcher__dropzone--active {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.arcana-theme-switcher__dropzone:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+.arcana-theme-switcher__dropzone p {
+  margin: 0;
+}
+
+.arcana-theme-switcher__hint {
+  font-size: 11px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.arcana-theme-switcher__error {
+  color: #f87171;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+/* Collapsed toggle button */
+
+.arcana-theme-switcher-toggle {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  z-index: 9999;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  border: 1px solid #3a3a5a;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: background 0.15s;
+}
+
+.arcana-theme-switcher-toggle:hover {
+  background: #2a2a4a;
+}
+
+.arcana-theme-switcher-toggle:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}

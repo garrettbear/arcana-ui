@@ -1,9 +1,9 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-03-21
-> **Current phase:** P — Playground Product
-> **Next priority task:** P.2
-> **Blocking issues:** None
+> **Last updated:** 2026-03-23
+> **Current phase:** 4 — Theme Presets & Demo Sites / 5 — AI Integration & Launch
+> **Next priority task:** npm publish (needs npm auth), then 4.3–4.8 demo content
+> **Blocking issues:** npm publish requires `npm login` (no credentials in environment)
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
 - [x] 0.1 — Audit & document current token set
@@ -60,14 +60,14 @@
 ## Phase 4: Theme Presets & Demo Sites (Weeks 10–14)
 - [x] 4.1 — Redesign existing 6 presets for full token architecture
 - [x] 4.2 — Build new presets: Corporate, Startup, Editorial, Commerce, Midnight, Nature, Neon, Mono
-- [ ] 4.3 — Demo: SaaS Dashboard
+- [x] 4.3 — Demo: SaaS Dashboard (structure + ThemeSwitcher, placeholder content)
 - [ ] 4.4 — Demo: Marketing Landing Page
 - [ ] 4.5 — Demo: Editorial Blog
-- [ ] 4.6 — Demo: E-commerce Product Page
+- [x] 4.6 — Demo: E-commerce Product Page (structure + ThemeSwitcher, placeholder content)
 - [ ] 4.7 — Demo: Documentation Site
 - [ ] 4.8 — Demo: Admin Panel
 - [ ] 4.9 — Visual regression test fixtures from demos
-- [ ] 4.10 — Themeable demo switcher
+- [x] 4.10 — Themeable demo switcher (ThemeSwitcher shared component)
 
 ## Phase P: Playground Product
 - [x] P.1 — Landing page (dark premium aesthetic, 10 sections, SEO, responsive)
@@ -79,7 +79,7 @@
 - [ ] 5.1 — Update manifest.ai.json
 - [ ] 5.2 — Build Claude Code skill
 - [ ] 5.3 — Build prompt templates
-- [ ] 5.4 — Publish to npm (v1.0)
+- [ ] 5.4 — Publish to npm (v1.0) — beta packages configured (0.1.0-beta.1), needs npm login to publish
 - [ ] 5.5 — Build documentation site
 - [ ] 5.6 — SEO & discoverability
 - [ ] 5.7 — Community starter templates (Next, Vite, Remix, Astro)

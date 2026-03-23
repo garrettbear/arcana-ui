@@ -648,15 +648,16 @@ Phase 2 COMPLETE — ready for Phase 3
   - All 274 tests pass, 0 lint errors, 0 token lint violations, build succeeds
 
 ### Active Phase
-Phase P — Playground Product. Landing page + playground polished to investor-demo quality.
+Phase 4/5 — NPM beta publish preparation + demo site infrastructure.
 
 ### Blockers
-None
+npm publish requires `npm login` — no credentials in environment. Packages are fully configured and validated; publishing is a single command after auth.
 
 ### What the Next Agent Should Do
-1. Read `PROGRESS.md` to confirm Phase P / Task P.2 is next
-2. Begin Task P.2 — AI theme generation (wire up the prompt input on the landing page)
-3. Or continue Phase 4 demo sites (4.3–4.10)
+1. Run `npm login` then `cd packages/tokens && npm publish --tag beta` and `cd packages/core && npm publish --tag beta`
+2. After publish: update demo package.json files to use `@arcana-ui/core@0.1.0-beta.1` instead of `workspace:*`
+3. Continue Phase 4 demo content (4.4, 4.5, 4.7, 4.8)
+4. Or Task P.2 — AI theme generation
 
 ### Session History
 
@@ -701,3 +702,4 @@ None
 | 2026-03-20 | Claude (Claude Code) | Typography fix | Fixed --font-size-fluid-* aliases missing from build output (added to build.ts). Fixed base size slider parsing "1rem" as 1px (added rem→px conversion). |
 | 2026-03-21 | Claude (Claude Code) | Landing page polish (P.1.1) | Expanded theme showcase from 6→14 presets with accurate colors per theme. Added ?theme= query param handling in playground (App.tsx reads URL param on mount, applies theme). Fixed dead links: Log In/Sign Up→/playground, About/Blog→Contributing/Roadmap on GitHub. Updated stats: "120+ Design Tokens"→"2,600+ CSS Variables". Made component showcase fully responsive (CSS classes instead of inline grid, mobile stack layout). Added focus-visible styles to theme cards, nav buttons, CTA buttons, prompt submit. Added smooth scroll behavior. Widened theme grid to 4-col for 14 items. Updated dev banner to say "14 themes". 928 tests pass, 0 lint errors, build succeeds. |
 | 2026-03-21 | Claude (Claude Code) | Playground polish (P.1.2) | Full playground audit: all 14 sections verified, all interactive components have proper state management, all 14 presets functional. Fixed: (1) Added SVG logos for 8 new presets (corporate, startup, editorial, commerce, midnight, nature, neon, mono) in presets.ts — original 6 had themed wordmarks but new 8 were missing them. (2) Fixed color-scheme: midnight and neon were outputting `color-scheme: light` instead of `dark` in build.ts. (3) Updated stale counts: overview StatCard "6 presets"→"14 presets", landing page "120+ tokens"→"2,600+ CSS variables". (4) Updated comment in presets.ts to reference 14 themes. 928 tests pass, 0 lint errors, build succeeds. |
+| 2026-03-23 | Claude (Claude Code) | NPM beta publish prep + demo infrastructure | **Part A — NPM Beta:** Updated both package.json files (version 0.1.0-beta.1, MIT license, repository, homepage, keywords, publishConfig public, sideEffects, proper ESM/CJS exports with types, prepublishOnly). Verified npm pack --dry-run (tokens: 17 files/134KB, core: 9 files/463KB — dist only, no source). Local integration test passed (all 115 exports, CSS resolves, theme imports work). npm publish blocked by missing credentials. Added npm version/downloads/bundle-size badges to README. **Part B — Demo Infrastructure:** Created demos/ directory with shared ThemeSwitcher component (fixed bottom bar, 14 preset dropdown, density toggle, JSON file upload with drag-drop + validation + sessionStorage, collapsible/minimizable). Built dashboard demo (Vite+React+TS, Navbar, StatCards, DataTable with sort/filter/pagination, ProgressBars, tabbed layout). Built ecommerce demo (Vite+React+TS, ProductCard grid, QuantitySelector, PriceDisplay, cart counter). Updated pnpm-workspace.yaml with demo packages. Added dev:dashboard/dev:ecommerce/dev:demos scripts. Updated repo references (garrettbear/arcana-ui → Arcana-UI/arcana). 928 tests pass, 0 lint errors, both demos build. |

@@ -1,7 +1,8 @@
 {
   "name": "@arcana-ui/tokens",
-  "version": "0.1.0",
-  "description": "Design tokens for Arcana UI — JSON to CSS custom properties",
+  "version": "0.1.0-beta.1",
+  "description": "Design tokens for Arcana UI — AI's #1 design system",
+  "license": "MIT",
   "main": "./dist/arcana.css",
   "exports": {
     ".": "./dist/arcana.css",
@@ -25,9 +26,19 @@
   "files": ["dist"],
   "scripts": {
     "build": "npx tsx src/build.ts",
+    "prepublishOnly": "pnpm build",
     "dev": "npx tsx --watch src/build.ts",
     "clean": "rm -rf dist",
     "validate": "npx tsx src/validate.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Arcana-UI/arcana"
+  },
+  "homepage": "https://arcana-design-system.vercel.app",
+  "keywords": ["design-tokens", "css-custom-properties", "theming", "design-system", "ai"],
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "tsx": "^4.19.2",
