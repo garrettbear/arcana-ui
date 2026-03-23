@@ -54,7 +54,7 @@ For deeper reference:
 ### Picking a Task
 
 1. Check [PROGRESS.md](./PROGRESS.md) for the next unchecked task in the current phase
-2. Browse [GitHub Issues](https://github.com/garrettbear/arcana-ui/issues) for open work
+2. Browse [GitHub Issues](https://github.com/Arcana-UI/arcana/issues) for open work
 3. Comment on the issue before starting so others know it's claimed
 4. Want to propose something not on the roadmap? Open an issue first to discuss
 
@@ -193,7 +193,7 @@ This project follows the spirit of the [Contributor Covenant](https://www.contri
 
 ## Getting Help
 
-- **Bugs or feature requests:** [Open a GitHub Issue](https://github.com/garrettbear/arcana-ui/issues/new)
+- **Bugs or feature requests:** [Open a GitHub Issue](https://github.com/Arcana-UI/arcana/issues/new)
 - **Questions:** Open a GitHub Issue tagged with `question`
 - **Blocked on something:** Tag [@garrettbear](https://github.com/garrettbear) in the issue or PR
 
