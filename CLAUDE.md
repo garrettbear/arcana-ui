@@ -9,7 +9,7 @@
 
 **Arcana UI** is an open-source, token-driven design system built for AI agents to assemble production-grade web interfaces. Tokens in, beautiful UI out.
 
-- **Repo:** `garrettbear/arcana-ui`
+- **Repo:** `Arcana-UI/arcana`
 - **License:** MIT
 - **Packages:** `@arcana-ui/tokens` (design tokens → CSS custom properties), `@arcana-ui/core` (React components)
 - **Playground:** [arcana-design-system.vercel.app](https://arcana-design-system.vercel.app)

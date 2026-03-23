@@ -361,7 +361,7 @@ export default function Landing() {
             </li>
             <li>
               <a
-                href="https://github.com/garrettbear/arcana-ui"
+                href="https://github.com/Arcana-UI/arcana"
                 className={styles.navLink}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -423,7 +423,7 @@ export default function Landing() {
             </li>
             <li>
               <a
-                href="https://github.com/garrettbear/arcana-ui"
+                href="https://github.com/Arcana-UI/arcana"
                 className={styles.mobileMenuLink}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -753,7 +753,7 @@ export default function Landing() {
               Open Playground
             </Link>
             <a
-              href="https://github.com/garrettbear/arcana-ui"
+              href="https://github.com/Arcana-UI/arcana"
               className={styles.ctaBtnSecondary}
               target="_blank"
               rel="noopener noreferrer"
@@ -804,7 +804,7 @@ export default function Landing() {
             <ul className={styles.footerLinks}>
               <li>
                 <a
-                  href="https://github.com/garrettbear/arcana-ui"
+                  href="https://github.com/Arcana-UI/arcana"
                   className={styles.footerLink}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -824,7 +824,7 @@ export default function Landing() {
               </li>
               <li>
                 <a
-                  href="https://github.com/garrettbear/arcana-ui/blob/main/CLAUDE.md"
+                  href="https://github.com/Arcana-UI/arcana/blob/main/CLAUDE.md"
                   className={styles.footerLink}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -840,7 +840,7 @@ export default function Landing() {
             <ul className={styles.footerLinks}>
               <li>
                 <a
-                  href="https://github.com/garrettbear/arcana-ui/blob/main/CONTRIBUTING.md"
+                  href="https://github.com/Arcana-UI/arcana/blob/main/CONTRIBUTING.md"
                   className={styles.footerLink}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -850,7 +850,7 @@ export default function Landing() {
               </li>
               <li>
                 <a
-                  href="https://github.com/garrettbear/arcana-ui/blob/main/ROADMAP.md"
+                  href="https://github.com/Arcana-UI/arcana/blob/main/ROADMAP.md"
                   className={styles.footerLink}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -860,7 +860,7 @@ export default function Landing() {
               </li>
               <li>
                 <a
-                  href="https://github.com/garrettbear/arcana-ui/blob/main/LICENSE"
+                  href="https://github.com/Arcana-UI/arcana/blob/main/LICENSE"
                   className={styles.footerLink}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -876,7 +876,7 @@ export default function Landing() {
           <span>MIT License · Made with Arcana · &copy; 2026</span>
           <div className={styles.footerBottomLinks}>
             <a
-              href="https://github.com/garrettbear/arcana-ui"
+              href="https://github.com/Arcana-UI/arcana"
               className={styles.footerBottomLink}
               target="_blank"
               rel="noopener noreferrer"
