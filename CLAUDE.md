@@ -586,262 +586,75 @@ Decisions made during development that should not be revisited without discussio
 *This section is updated at the end of every AI agent session.*
 
 ### Active Phase
-Phase 2 COMPLETE — ready for Phase 3
+Phase 4 (partial) + Phase P (partial)
 
-### Completed
-- Comprehensive ROADMAP.md created (token architecture, phased plan, component library, preset matrix)
-- AI_OPS.md created (prompt library, tracking system, session management)
-- PROGRESS.md created (task tracker)
-- CLAUDE.md rewritten (this file)
-- Task 0.1 — Token audit completed (`docs/audits/token-audit.md`)
-- Task 0.2 — Token JSON restructured to three-tier hierarchy (primitive → semantic → component)
-  - Created JSON Schema (`packages/tokens/src/schema/tokens.schema.json`)
-  - Migrated all 6 presets to new format (`packages/tokens/src/presets/{light,dark,terminal,retro98,glass,brutalist}.json`)
-  - All 6 presets validated against schema
-  - Created migration guide (`docs/MIGRATION.md`) with old→new token name mapping
-- Task 0.3 — Code standards established
-  - Root `tsconfig.json` created with strict mode + all sub-options
-  - Package tsconfigs updated: `noImplicitAny`, `strictNullChecks`, `noUnusedLocals`, `noUnusedParameters`
-  - `biome.json` updated: trailing commas (all), semicolons (always), import sorting, line width 100
-  - `.editorconfig` created (2-space indent, UTF-8, LF, trim trailing whitespace)
-  - All lint/format violations fixed (zero `any` types, consistent formatting)
-  - Husky + lint-staged pre-commit hook installed (runs biome on staged files)
-  - 54 a11y warnings documented for future component improvement tasks
-- Task 0.4 — Build pipeline for tokens (JSON → CSS)
-  - Created `packages/tokens/src/build.ts` — new main build script
-  - Reads all 6 preset JSON files from `src/presets/`
-  - Validates each preset against schema (structural + naming pattern checks)
-  - Resolves all `{primitive.*}` and `{semantic.*}` references (with circular reference detection)
-  - Generates CSS with new variable naming per MIGRATION.md (e.g., `--color-bg-page`, `--color-fg-primary`)
-  - Outputs individual theme files: `dist/themes/{light,dark,terminal,retro98,glass,brutalist}.css`
-  - Outputs combined `dist/arcana.css` (all 6 themes + global reset + focus utility + color scheme hints)
-  - Outputs `dist/compat.css` (177 backward-compatible aliases mapping old `--arcana-*` to new names)
-  - Updated `packages/tokens/package.json`: build script → `src/build.ts`, exports for all 6 themes + compat
-  - Reports: 195 variables per theme, 1170 total, unreferenced primitive warnings
-  - All builds pass (tokens + core + docs + playground), 238 tests pass, 0 lint errors
-- Task 0.5 — Component API surfaces cleaned up
-  - Migrated all 20 `.module.css` files from old `--arcana-*` token names to new semantic names (511 replacements, 0 old tokens remaining)
-  - Added JSDoc comments to every prop in all 48 components across 4 categories (primitives, composites, layout, patterns)
-  - Added `forwardRef` + `displayName` to 23 components that were missing it (RadioGroup, AvatarGroup, Modal, ModalClose, Alert, Tabs, TabList, Tab, TabPanels, TabPanel, Accordion, AccordionItem, AccordionTrigger, AccordionContent, Navbar, NavbarBrand, NavbarContent, NavbarActions, EmptyState, FormField, FormLabel, FormHelperText, FormErrorMessage)
-  - Renamed Button variant `danger` → `destructive` to match token naming
-  - Fixed inline token references in Layout.tsx and Avatar.tsx
-  - Created `docs/COMPONENT-INVENTORY.md` — full component registry with props, forwardRef status, migration status
-  - All 238 tests pass, 0 lint errors, build succeeds
+### Phase Completion Summary
 
-- Task 0.6 — Testing infrastructure set up
-  - **Part A — Vitest + React Testing Library:**
-    - Added coverage config (v8 provider, 70% thresholds for statements/branches/functions/lines)
-    - Enhanced Button tests: 19 tests (ref forwarding, className, userEvent, keyboard Tab/Enter/Space, disabled focus, icons)
-    - Enhanced Input tests: 23 tests (ref, className, label association, error/helper aria-describedby, prefix/suffix, userEvent typing, onFocus/onBlur, disabled)
-    - Enhanced Modal tests: 28 tests (ModalClose ref/className, Modal ref/className, sizes, overlay click, Escape/closeOnEsc, focus trap, aria-labelledby/describedby, body scroll lock)
-    - Total: 274 tests pass (up from 238)
-  - **Part B — Playwright visual regression:**
-    - Installed @playwright/test@1.56.0 (compatible with cached chromium-1194)
-    - Created playwright.config.ts: 3 viewports (320x568 mobile, 768x1024 tablet, 1280x800 desktop), chromium only
-    - Created test helpers (theme switching, page ready wait)
-    - Visual tests: playground default + dark theme + button section, all at 3 breakpoints
-    - Generated 12 baseline screenshots committed to tests/visual/snapshots/
-    - 13 tests pass, 2 correctly skipped
-  - **Part C — Accessibility testing:**
-    - Installed @axe-core/playwright for Playwright a11y tests
-    - Created a11y test: runs axe-core on playground, fails on critical violations, logs serious/moderate as warnings
-    - Excluded known playground-only issues (TokenEditor sliders/selects missing labels)
-    - Zero critical violations, 1 serious (color contrast in playground sidebar — 35 instances, pre-existing)
-    - jest-axe already integrated in component tests (from pre-existing setup)
-  - **Test template:** Created templates/component-test-template.tsx with all 9 test categories
-  - **Scripts added:** test:visual, test:visual:update, test:all
-  - All 274 Vitest tests pass, 13 Playwright tests pass, 0 lint errors (54 pre-existing warnings)
+| Phase | Status | Notes |
+|-------|--------|-------|
+| Phase 0 — Foundation Cleanup | ✅ Complete | |
+| Phase 1 — Token System Maturity | ✅ Complete | 2,600+ CSS variables, 14 presets |
+| Phase 2 — Responsive & Mobile | ✅ Complete | 5-breakpoint visual regression suite |
+| Phase 3 — Expanded Component Library | ✅ Complete | 60+ components |
+| Phase 4 — Theme Presets & Demo Sites | 🔄 Partial | 4.1, 4.2, 4.3, 4.6, 4.10 done |
+| Phase P — Playground Product | 🔄 Partial | P.1, P.1.1, P.1.2, P.1.3 done |
+| Phase 5 — AI Integration & Launch | ⬜ Not started | |
 
-- Task 0.7 — CSS token usage linter
-  - Created `packages/tokens/src/lint-tokens.ts` — custom CSS linter that scans component CSS for hardcoded values
-  - Detects: hex colors, rgb/rgba/hsl functions, hardcoded px/rem/em in spacing/size/font-size/radius properties, hardcoded box-shadow values, hardcoded animation durations, hardcoded z-index, hardcoded font-weight/font-family/line-height
-  - Allows: 0/0px, percentages, structural keywords (none, auto, inherit, transparent), var() references, calc() with var(), properties like display/position/cursor/flex-direction
-  - Created `packages/tokens/src/lint-tokens.config.json` — configurable ignore paths and allowed properties
-  - Added `pnpm lint:tokens` script; integrated into `pnpm lint` (biome + token lint combined)
-  - Fixed 93 hardcoded violations across 16 CSS files:
-    - Replaced hardcoded sizes with component CSS custom properties (--button-height, --avatar-size, --toggle-width, --modal-max-width, etc.)
-    - Replaced hardcoded colors (#ffffff → var(--color-fg-on-primary), rgba error rings → var(--focus-ring-error))
-    - Replaced hardcoded font-sizes with --font-size-* tokens
-    - Replaced hardcoded spacing with --spacing-* tokens
-    - Replaced hardcoded animation duration with var(--duration-slow)
-  - Added `--focus-ring-error` token to all 6 presets and build script
-  - Suppressed false-positive biome a11y error on TabPanel tabIndex (WAI-ARIA compliant)
-  - All 274 tests pass, 0 lint errors (53 pre-existing warnings), build succeeds
+### Key Milestones Reached
+- **14 theme presets** built and polished: light, dark, terminal, retro98, glass, brutalist, corporate, startup, editorial, commerce, midnight, nature, neon, mono
+- **60+ components** across navigation, forms, data display, overlays, layout, media, feedback, e-commerce, editorial, and utility categories
+- **npm packages published** as `0.1.0-beta.1` on npmjs.com — `@arcana-ui/tokens` and `@arcana-ui/core`
+- **Landing page** live at `arcana-design-system.vercel.app` — dark premium aesthetic, 10 sections, SEO, responsive
+- **Token editor** rebuilt to investor-demo quality: custom HSV color picker, cubic bezier editor, undo/redo (Cmd+Z), search/filter, modified indicators, mobile message
+- **Demo infrastructure** in place: SaaS dashboard + e-commerce demos with shared ThemeSwitcher
+- **Repo** at `github.com/Arcana-UI/arcana`; branching: `develop` (day-to-day), `main` (releases only)
 
-- Task 0.8 — Documentation update and AI integration
-  - Updated `manifest.ai.json`: new token naming (three-tier architecture), updated key token examples with new names (--color-*, --spacing-*, --radius-*, --shadow-*, --font-size-*, --duration-*), changed Button variant "danger" → "destructive"
-  - Updated CLAUDE.md "Current State" section to mark tasks 0.1-0.8 complete
-  - Updated PROGRESS.md: checked off tasks 0.1-0.8, set next task to 0.9
-  - Created `docs/ARCHITECTURE.md` — quick reference guide (system overview, monorepo structure, token pipeline, component architecture, testing strategy, theme switching)
-  - Verified README.md: accurate component count (23 main components), correct theme presets (6 current + 8 planned), working quick start, "For AI Agents" section
-  - Verified all supporting docs: ROADMAP.md, AI_OPS.md, docs/COMPONENT-INVENTORY.md, docs/MIGRATION.md all present and accurate
-  - All 274 tests pass, 0 lint errors, build succeeds
+### Remaining Work
 
-- Task 0.9 — CI/CD setup
-  - Created `.github/workflows/ci.yml` — 5 jobs: Lint, Typecheck, Test, Build (parallel), Visual Regression (after build)
-  - Lint/typecheck/test/build run in parallel; visual-test is non-blocking (`continue-on-error: true`) due to font rendering differences in CI
-  - pnpm store cached via `pnpm/action-setup` + `actions/setup-node` cache; Playwright browsers cached via `actions/cache`
-  - Concurrency group cancels in-progress runs on same branch
-  - Coverage report uploaded as artifact; screenshot diffs uploaded on visual test failure
-  - Created `.github/workflows/pr-title.yml` — validates PR titles follow conventional commits (feat, fix, refactor, style, docs, test, chore, perf)
-  - Added CI status badge to README.md
-  - Added branch protection recommendation to CLAUDE.md (required status checks: Lint, Typecheck, Test, Build)
-  - Verified Vercel deployment: `vercel.json` configured with `buildCommand: "pnpm build"`, `outputDirectory: "playground/dist"` — Vercel GitHub integration handles deployment automatically
-  - All 274 tests pass, 0 lint errors, build succeeds
+**Phase 4:**
+- 4.4 — Demo: Marketing Landing Page
+- 4.5 — Demo: Editorial Blog
+- 4.7 — Demo: Documentation Site
+- 4.8 — Demo: Admin Panel
+- 4.9 — Visual regression test fixtures from demos
 
-- Task 0.10 — CONTRIBUTING.md
-  - Created `CONTRIBUTING.md` at project root with 11 sections: Welcome, Getting Started, Project Orientation, How to Contribute, Code Standards, Adding a Component, Adding a Theme, For AI Agents, Commit Convention, Code of Conduct, Getting Help
-  - Serves both human contributors and AI code agents in one document
-  - All internal links verified to resolve to real files in the repo
-  - Updated README.md to link to CONTRIBUTING.md and mark Phase 0 as complete
-  - Under 300 lines, dense and scannable
-  - All 274 tests pass, 0 lint errors, build succeeds
+**Phase P:**
+- P.2 — AI theme generation (prompt input → theme JSON)
 
-- Task 1.1 — Full color system
-  - Expanded primitive color palettes across all 6 presets:
-    - light/dark/glass: Full 16-hue Tailwind palette (slate, gray, zinc, stone, red, orange, amber, yellow, green, emerald, teal, blue, indigo, violet, purple, pink) × 11 steps + white/black/transparent = 179 primitives each
-    - terminal: Reduced to green + gray only (25 primitives) — no other hues
-    - retro98: Custom Win98-authentic colors (gray, blue, teal, red, green, yellow) with saturated 11-step scales
-    - brutalist: Minimal palette (gray, red, blue, green, amber) — restrained by design
-  - Added missing semantic color tokens to all 6 presets:
-    - `color-accent-primary` and `color-accent-secondary` (new category)
-    - `color-border-muted` and `color-border-success` (new border tokens)
-    - `color-action-primary-disabled` (new state)
-  - Fixed raw hex values in semantic tier → primitive references (light: status.fg/border now use {primitive.color.*})
-  - Dark theme: elevated surfaces are LIGHTER than base (950 → 900 → 800 hierarchy)
-  - Added component color tokens (bg, fg, border-color) to button, input, card in all presets
-  - Updated `build.ts`: added accent token support to SemanticTokens type and CSS generation
-  - Build output: 1703 total variables across 6 themes (up from ~1170)
-  - All 274 tests pass, 0 lint errors, build succeeds
-
-- Task 1.3 — Spacing system
-  - Expanded primitive spacing scale to 29 values (spacing-0 through spacing-48) across all 6 presets
-  - Semantic spacing aliases: xs, sm, md, lg, xl, 2xl, 3xl, section, section-lg
-  - Terminal and retro98 presets use compact-equivalent default spacing (xs=2px, sm=4px, md=8px, lg=12px)
-  - Three density modes via `data-density` attribute: compact, default, comfortable
-  - Density CSS generated theme-independently in arcana.css (composes with any `data-theme`)
-  - Component spacing tokens (button padding-x/y, input padding-x, card padding) use `var(--spacing-*)` for automatic density adaptation
-  - Fixed `resolvePath` in build.ts to handle dotted keys (e.g., "0.5" in spacing)
-  - Updated compat aliases for new spacing values (9, 11, 28, 36, 40, 44, 48)
-  - Build output: 1955 total variables across 6 themes, 188 compat aliases
-  - All 274 tests pass, 0 lint errors (53 pre-existing warnings), build succeeds
-
-- Task 1.4 — Elevation system (shadows + z-index + backdrop blur)
-  - Added primitive shadow values: light=standard Tailwind shadows, dark=higher opacity (0.2-0.5), terminal=all none, retro98=hard pixel shadows (no blur), glass=diffused soft shadows, brutalist=exaggerated hard shadows (no blur)
-  - Added primitive backdrop blur scale (none through 3xl: 0-40px) to all 6 presets; terminal/retro98/brutalist set all to 0
-  - Updated z-index scale: base(0), raised(10), dropdown(100), sticky(200), fixed(300), overlay(400), modal(500), popover(600), toast(700), tooltip(800)
-  - Added 8 semantic contextual elevation tokens: card, card-hover, dropdown, modal, popover, toast, navbar, sidebar
-  - Per-preset elevation strategies: light/dark=shadow-based depth, terminal=zero shadows (borders only), retro98=hard pixel shadows, glass=subtle shadows + backdrop-blur, brutalist=exaggerated hard shadows
-  - Added component elevation tokens: card (shadow, shadow-hover), modal (shadow, overlay-bg), toast (shadow), navbar (shadow, backdrop-blur)
-  - Updated build.ts: added blur to PrimitiveTokens, --blur-* generation, split elevation naming (size-based → --shadow-*, contextual → --elevation-*), added fixed/popover compat aliases
-  - Updated component CSS: Card uses --elevation-card/--elevation-card-hover, Modal uses --elevation-modal, Toast uses --elevation-toast, Navbar uses --elevation-navbar + backdrop-filter with --navbar-backdrop-blur
-  - Build output: 2099 total variables across 6 themes, 190 compat aliases
-  - All 274 tests pass, 0 token lint violations, build succeeds
-
-- Task 1.5 — Layout tokens (breakpoints, containers, grid)
-  - Added primitive layout tokens to all 6 presets: 5 breakpoints (sm/md/lg/xl/2xl), 5 container max-widths, 5 content widths (prose/narrow/default/wide/full), grid-columns (12)
-  - Added semantic layout tokens: grid-gutter (sm/default/lg), grid-margin (default/lg) — all reference spacing tokens
-  - Per-preset variations: terminal=narrower content (56rem/72rem) + tighter gutters (--spacing-sm), brutalist=wider gutters (--spacing-lg); dark/glass/retro98=standard values matching light
-  - Updated build.ts: added layout to PrimitiveTokens/SemanticTokens interfaces, layout variable generation with --{key} naming, added 'layout' to primRequired validation
-  - Created `packages/core/src/styles/layout.css`: container utility (.arcana-container + size variants), content width variants (.arcana-content--*), 12-column grid (.arcana-grid + gutter variants), column spans (.arcana-col-1 through .arcana-col-12 + .arcana-col-full), responsive columns (.arcana-col-sm-*, .arcana-col-lg-*), stack utility (.arcana-stack + modifiers)
-  - Created `packages/core/src/hooks/useMediaQuery.ts`: SSR-safe hook using window.matchMedia, returns boolean
-  - Created `packages/core/src/hooks/useBreakpoint.ts`: returns { breakpoint, isMobile, isTablet, isDesktop } using useMediaQuery
-  - Exported useMediaQuery, useBreakpoint, Breakpoint, UseBreakpointReturn from packages/core/src/index.ts
-  - Integrated layout.css via import in index.ts for automatic bundling
-  - Build output: 2321 total variables across 6 themes
-  - All 274 tests pass, 0 lint errors, build succeeds
-
-- Task 1.6 — Motion tokens (durations, easing, transitions, reduced-motion)
-
-- Tasks 1.7 + 1.8 — Border/shape + opacity tokens (combined)
-  - Added primitive border widths (border-0 through border-8: 0px, 1px, 1.5px, 2px, 4px) and divider (weight, style) to all 6 presets
-  - Added 16 primitive opacity values (0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 95, 100) to all 6 presets
-  - Updated primitive radius scale: added 3xl (1.5rem/24px), adjusted sizes for finer granularity (md=0.375rem, lg=0.5rem, xl=0.75rem, 2xl=1rem)
-  - Added semantic border widths: thin (1px), default (1.5px), thick (2px), heavy (4px) — all referencing primitive border widths
-  - Added composable focus ring tokens: --focus-ring-width, --focus-ring-color, --focus-ring (using var() references)
-  - Added semantic divider-color token referencing color-border-muted
-  - Added 5 semantic opacity tokens: disabled (0.4), placeholder (0.5), hover-overlay (0.08), overlay, overlay-heavy
-  - Per-preset border/radius strategies:
-    - light/dark: standard radius scale, 1.5px default borders, indigo focus rings at 30%
-    - terminal: radius-none everywhere, 1px thin borders, green focus ring at 40%
-    - retro98: radius-none everywhere, chunky 2px default borders, solid 1px black focus ring
-    - glass: generous radius (0.25–3rem), subtle focus ring at 25% opacity
-    - brutalist: radius-none everywhere, thick 3px default borders, bold 3px solid black focus ring
-  - Per-preset opacity: dark=heavier overlays (0.65), terminal=imposing (0.8), retro98=solid (1.0), glass=light (0.3), brutalist=nearly solid (0.95)
-  - Added component tokens: modal.radius, toast.radius, badge.radius, alert.radius to all 6 presets
-  - Fixed hardcoded border values: Avatar 2px→var(--border-width-thick), Toast 3px→var(--border-width-thick), Tabs 1px/2px→border-width tokens, Radio 5px→var(--border-width-heavy)
-  - Replaced hardcoded disabled opacity (0.4–0.6) with var(--opacity-disabled) in 10 components (Button, Input, Checkbox, Radio, Toggle, Select, Textarea, Accordion, Tabs)
-  - Updated build.ts: primitive border/opacity generation, semantic opacity/divider/focus-ring-width/focus-ring-color generation, validation requires border+opacity
-  - Added 197 compat aliases (up from 190) with new border/radius entries
-  - Build output: 2681 total variables across 6 themes (up from 2459)
-  - All 274 tests pass, 0 lint errors (53 pre-existing warnings), 0 token lint violations, build succeeds
-  - Expanded primitive motion to 9 duration values (0–1000ms) and 7 easing curves (linear, default, in, out, in-out, spring, bounce) across all 6 presets
-  - Added semantic duration aliases (instant, fast, normal, slow, slower) with per-preset personalities
-  - Added 5 transition shorthand tokens (transition-colors, transition-shadow, transition-transform, transition-opacity, transition-all)
-  - Per-preset motion personalities: light/dark=standard (fast=100ms, normal=200ms), terminal=instant (fast/normal=0ms, linear easing), retro98=minimal (fast=0ms, normal=75ms, linear), glass=smooth/elegant (fast=150ms, normal=300ms, ease-out default, spring for transforms), brutalist=instant (all 0ms, linear)
-  - Added reduced-motion media query to arcana.css: zeros out ALL duration tokens when prefers-reduced-motion: reduce
-  - Updated 14 component CSS files to use transition shorthand tokens (var(--transition-colors), var(--transition-shadow), etc.)
-  - Fixed hardcoded `linear` in Button spinner → var(--ease-linear)
-  - Created usePrefersReducedMotion hook (SSR-safe, uses useMediaQuery)
-  - Updated token linter to catch hardcoded easing functions (cubic-bezier, ease keywords)
-  - Updated build.ts: primitive motion CSS generation, transition shorthand generation, reduced-motion block
-  - Build output: 2459 total variables across 6 themes
-  - All 274 tests pass, 0 lint errors, 0 token lint violations, build succeeds
-
-### Active Phase
-Phase 4/5 — Playground product quality + demo site infrastructure.
+**Phase 5:** Not started (depends on Phase 4 completion)
 
 ### Blockers
-npm publish requires `npm login` — no credentials in environment.
+None. npm packages are published. Credentials not needed for development work.
 
 ### What the Next Agent Should Do
-1. P.2 — AI theme generation (prompt input → custom theme JSON)
-2. Continue Phase 4 demo content (4.4 marketing landing, 4.5 editorial blog, 4.7 docs, 4.8 admin panel)
-3. Or npm publish: run `npm login` then publish beta packages
-4. Pre-existing test failures: 16 tests in `useTheme.test.tsx` fail due to `localStorage.clear is not a function` — pre-existing issue, investigate vitest environment config
+1. Read CLAUDE.md, PROGRESS.md, ROADMAP.md, AI_OPS.md
+2. Create a new branch from `develop` for the task (NEVER commit directly to develop)
+3. Priority: P.2 — AI theme generation, OR 4.4/4.5/4.7/4.8 demo content
+4. Pre-existing test issue: 16 tests in `useTheme.test.tsx` fail (`localStorage.clear is not a function`) — investigate vitest jsdom environment config when time permits
 
 ### Session History
 
 | Date | Agent | Tasks Completed | Notes |
 |------|-------|-----------------|-------|
 | 2026-03-01 | Claude (claude.ai) | Project planning | Created ROADMAP.md, AI_OPS.md, PROGRESS.md, CLAUDE.md |
-| 2026-03-02 | Claude (Claude Code) | Task 0.1 — Token audit | Scanned 32 CSS files, cataloged ~176 tokens, found 88 hardcoded violations in components, 4 unbuilt themes. Full report at docs/audits/token-audit.md |
-| 2026-03-03 | Claude (Claude Code) | Task 0.2 — Token restructure | Created JSON Schema, migrated 6 presets to three-tier format, validated all against schema, created MIGRATION.md |
-| 2026-03-03 | Claude (Claude Code) | Task 0.3 — Code standards | Strict TS config, biome formatting rules, .editorconfig, husky pre-commit hook, zero `any` types, 238 tests pass |
-| 2026-03-04 | Claude (Claude Code) | Task 0.4 — Build pipeline | New build.ts: reads 6 presets, resolves refs, generates CSS with new naming. 195 vars/theme, compat.css with 177 aliases. All builds + tests pass. |
-| 2026-03-04 | Claude (Claude Code) | Task 0.5 — Component API cleanup | Migrated all 20 CSS files from old `--arcana-*` to new token names (511 replacements). Added JSDoc to all props across 48 components. Added forwardRef to 23 components. Renamed Button `danger` → `destructive`. Created docs/COMPONENT-INVENTORY.md. 238 tests pass, 0 lint errors. |
-| 2026-03-04 | Claude (Claude Code) | Playground bugfix | Fixed theme switching and interactive controls. Root cause: playground files referenced old `--arcana-*` token names after Task 0.5 migration. Fix: rewrote presets.ts to use `data-theme` attribute for all 6 themes (removed ~240 lines of inline token overrides), migrated 322 old token references across 6 playground files, fixed 3 `variant="danger"` → `variant="destructive"`. 238 tests pass, 0 lint errors. |
-| 2026-03-04 | Claude (Claude Code) | Task 0.6 — Testing infrastructure | Enhanced Vitest with coverage (70% thresholds). Rewrote Button (19), Input (23), Modal (28) test suites with ref/className/keyboard/a11y coverage. Set up Playwright 1.56 with 3 viewports, 12 baseline screenshots. Added axe-core a11y Playwright test (0 critical violations). Created test template. 274 unit tests + 13 visual tests pass. |
-| 2026-03-07 | Claude (Claude Code) | Task 0.7 — CSS token linter | Created lint-tokens.ts + config. Fixed 93 hardcoded violations across 16 CSS files using component CSS custom properties. Added --focus-ring-error token to all 6 presets. Integrated into pnpm lint. 274 tests pass, 0 lint errors. |
-| 2026-03-07 | Claude (Claude Code) | Task 0.8 — Documentation update | Updated manifest.ai.json with new token names and destructive variant. Updated CLAUDE.md and PROGRESS.md to mark tasks 0.1-0.8 complete. Created docs/ARCHITECTURE.md. Verified all docs accuracy. |
-| 2026-03-07 | Claude (Claude Code) | Task 0.9 — CI/CD setup | Created ci.yml (5 jobs: lint, typecheck, test, build, visual-test), pr-title.yml (conventional commit validation). Added CI badge to README. Verified Vercel deployment. 274 tests pass, 0 lint errors. |
-| 2026-03-07 | Claude (Claude Code) | Task 0.10 — CONTRIBUTING.md | Created CONTRIBUTING.md (11 sections, under 300 lines). Updated README.md with link. Phase 0 complete. 274 tests pass, 0 lint errors. |
-| 2026-03-08 | Claude (Claude Code) | Task 1.1 — Full color system | Expanded primitive palettes: light/dark/glass get full 16-hue Tailwind palette (179 primitives), terminal green+gray only, retro98 Win98-authentic, brutalist minimal. Added accent, border-muted, border-success, action-disabled semantic tokens. Added component color tokens. 1703 total vars. 274 tests pass, 0 lint errors. |
-| 2026-03-08 | Claude (Claude Code) | Task 1.2 — Typography system | Added display font family, 6xl/7xl sizes, light/black weights to all 6 presets. Changed loose line height from 2 to 1.75. Added semantic typography: fluid clamp() sizes (lg–7xl) for 5 presets, fixed sizes for retro98. Added semantic weight/lineHeight/letterSpacing aliases (heading, body, strong, ui, caps). Added paragraphSpacing token. Added component typography tokens (button font-size/weight/letter-spacing, input font-size). Preset personalities: glass=lighter weights, brutalist=heavy black headings, terminal=monospace everywhere. Removed Google Fonts import from build.ts. Updated build.ts SemanticTokens type. 1883 total vars. 274 tests pass, 0 lint errors. |
-| 2026-03-08 | Claude (Claude Code) | Task 1.3 — Spacing system | Expanded primitive scale to 29 values (0–48). Added semantic aliases (xs–section-lg). Terminal/retro98 use compact defaults. Three density modes (compact/default/comfortable) via data-density attribute. Component spacing tokens use var() for density adaptation. Fixed resolvePath for dotted keys. 1955 total vars. 274 tests pass, 0 lint errors. |
-| 2026-03-09 | Claude (Claude Code) | Task 1.4 — Elevation system | Added primitive shadows (xs–2xl, inner, none), backdrop blur (none–3xl), updated z-index scale (added fixed/popover, reordered 0–800). Added 8 semantic elevation tokens (card, card-hover, dropdown, modal, popover, toast, navbar, sidebar). Per-preset strategies: light=standard shadows, dark=higher opacity shadows, terminal=zero shadows, retro98=hard pixel shadows, glass=subtle shadows + backdrop-blur, brutalist=exaggerated hard shadows. Added component elevation tokens (card shadow/shadow-hover, modal shadow/overlay-bg, toast shadow, navbar shadow/backdrop-blur). Updated Card/Modal/Toast/Navbar CSS to use elevation tokens. Updated build.ts: blur primitive generation, contextual --elevation-* naming. 2099 total vars. 274 tests pass, 0 lint errors. |
-| 2026-03-09 | Claude (Claude Code) | Task 1.5 — Layout tokens | Added primitive layout tokens (5 breakpoints, 5 container sizes, 5 content widths, grid-columns) and semantic layout tokens (grid-gutter variants, grid-margin variants) to all 6 presets. Per-preset variations: terminal=narrower content (56rem/72rem) + tighter gutters, brutalist=wider gutters. Updated build.ts with layout generation + validation. Created layout.css utility classes (container, content width, 12-column grid, responsive columns, stack). Created useMediaQuery and useBreakpoint hooks (SSR-safe). Exported hooks from index.ts. 2321 total vars. 274 tests pass, 0 lint errors. |
-| 2026-03-10 | Claude (Claude Code) | Task 1.6 — Motion tokens | Expanded primitive motion to 9 durations × 7 easings. Added semantic aliases + 5 transition shorthands. Per-preset personalities: light/dark=standard, terminal/brutalist=instant, retro98=minimal, glass=smooth/elegant. Added reduced-motion media query zeroing all durations. Updated 14 component CSS files to use shorthand tokens. Created usePrefersReducedMotion hook. Enhanced token linter for hardcoded easing. 2459 total vars. 274 tests pass, 0 lint errors. |
-| 2026-03-15 | Claude (Claude Code) | Tasks 1.7+1.8 — Border/shape + opacity | Added primitive border widths (0/1/2/4/8), divider (weight/style), 16 opacity values (0–100). Updated primitive radius scale (added 3xl, adjusted sizes for finer granularity). Added semantic border (thin/default/thick/heavy referencing primitives), focus ring (composable ringWidth + ringColor + ring shorthand), divider color, 5 semantic opacity tokens (disabled/placeholder/hover-overlay/overlay/overlay-heavy). Per-preset: terminal/retro98/brutalist=radius-none everywhere; glass=generous radius (0.25–3rem); retro98=chunky 2px borders + solid 1px focus ring; brutalist=3px default borders + 3px solid black focus ring; glass=subtle 25% opacity focus ring. Added component tokens (modal/toast/badge/alert radius). Fixed hardcoded values: Avatar 2px→border-width-thick, Toast 3px→border-width-thick, Tabs 1px/2px→border-width-thin/thick, Radio 5px→border-width-heavy. Replaced hardcoded disabled opacity (0.4–0.6) with var(--opacity-disabled) in 10 components. Updated build.ts: primitive border/opacity generation, semantic opacity/divider/focus-ring-width/focus-ring-color generation, validation. 2681 total vars. 274 tests pass, 0 lint/token-lint errors. |
-| 2026-03-15 | Claude (Claude Code) | Task 1.9 — Token validation CI check | Created validate.ts with 5 checks: structural validation (required fields + naming patterns), reference integrity (broken/circular refs), completeness (all presets match light structure), WCAG AA contrast (11 fg/bg pairs per preset with alpha compositing for rgba backgrounds), value format validation (colors, spacing, durations, opacity, z-index). Created utils/contrast.ts (WCAG 2.1 relative luminance + contrast ratio calculator). Fixed 4 WCAG contrast failures: dark action-primary (indigo-500→600), dark action-destructive (red-500→700), brutalist destructive (red-500→600), terminal destructive (#f85149→#cc0000). Added Validate Tokens CI job. Generated docs/audits/token-validation-report.md. All 6 presets pass, 0 errors. 274 tests pass, 0 lint errors. |
-| 2026-03-15 | Claude (Claude Code) | Task 1.10 — Theme switching | Implemented useTheme hook (useSyncExternalStore, localStorage, system preference detection), ThemeProvider context, theme-transition.css. 16 new tests (290 total). |
-| 2026-03-15 | Claude (Claude Code) | Task 1.12 — Component token layer | Implemented Tier 3 component tokens with density support. Updated build.ts for density-aware DensityValue objects. Expanded component sections in all 6 preset JSONs (19 components × ~5-12 tokens each). Wired all 19 component CSS files to use var(--{component}-{prop}, var(--semantic-fallback)) pattern. Density modes: compact/default/comfortable for button/input/select height, card padding, table cell-padding-y. Created docs/COMPONENT-TOKENS.md reference. 3239+ total vars. 290 tests pass, 0 token lint violations. Phase 1 COMPLETE. |
-| 2026-03-17 | Claude (Claude Code) | Tasks 2.5–2.10 — Mobile patterns + responsive completion | Built BottomSheet, MobileNav, DrawerNav components. Integrated DrawerNav into Navbar (replaced inline mobile panel). Verified tasks 2.6–2.8 already complete (fluid clamp typography from 1.2, density spacing from 1.3, zero max-width queries). Fixed 5 hover-only violations (Card, Table, Tabs, Toast) by adding focus-visible equivalents. Expanded Playwright from 3→5 viewports (320, 375, 768, 1280, 1536). Visual regression tests: 57 baseline screenshots across 5 breakpoints × 2 themes + 2 density modes. Phase 2 COMPLETE. |
-| 2026-03-17 | Claude (Claude Code) | Playground bugfix + restoration | Audited playground for broken features. Found: no density switching, brutalist wildcard !important breaking all transitions/shadows, 8 !important declarations, hardcoded box-shadow. Fixes: (1) Added density toggle (compact/default/comfortable) to Token Editor spacing section, (2) Removed brutalist `* { box-shadow: none !important; transition: none !important; }` — theme tokens already handle this, (3) Replaced all !important with proper specificity via double class selectors, (4) Replaced hardcoded font picker dropdown shadow with var(--shadow-lg). All 359 tests pass, 58 Playwright visual tests pass, 0 lint errors. |
-| 2026-03-18 | Claude (Claude Code) | Playground bugfix + Phase 2 demos | Fixed border radius not cascading to components (build.ts now outputs var() references for component tokens instead of static values). Added referenceToVar() mapper for semantic/primitive→CSS var names. Added Scale slider (50-200%) via CSS zoom on preview area. Fixed refreshValues to sync all editor state (display font, line-height, base size, spacing, scale, density) on preset switch. Fixed handleReset to clear body/mono fonts. Removed !important from preset globalCSS. Added Mobile Patterns section with BottomSheet, DrawerNav, MobileNav, and Container demos. Updated 57 visual regression baselines. 359 tests pass, 58 Playwright visual tests pass, 0 lint errors. |
-| 2026-03-18 | Claude (Claude Code) | Task 3.1 — Refine existing components | Button: added iconOnly prop (square icon buttons). Card: added keyboard handling (Enter/Space) and tabIndex/role for interactive cards. Input: added size prop (sm/md/lg), required indicator with asterisk. Modal: replaced Math.random() IDs with useId() for stable/SSR-safe IDs. Table: added size prop (sm/md/lg) and bordered prop with cell borders. Badge: added size prop (sm/md/lg). Alert: extended HTMLAttributes for full prop spreading. Avatar: replaced hardcoded hex colors with token-based CSS classes (8 color variants using semantic tokens). Toggle: added description prop with aria-describedby. Tabs: added arrow key navigation (Left/Right/Up/Down/Home/End) in TabList per WAI-ARIA. Accordion: wired up controlled value/onChange props. 359 tests pass, 0 token lint violations, build succeeds. |
-| 2026-03-18 | Claude (Claude Code) | Task 3.3 — Marketing components | Rewrote 7 existing components from composition-based to prop-driven APIs: Hero (3 variants: centered/split/fullscreen, overlay, badge, height), PricingCard (popular treatment with badge/elevated shadow, compact variant, feature checklist), FeatureSection (grid/list/alternating variants, section title+subtitle, feature links), Testimonial (card/inline/featured variants, star rating, decorative quote marks, cite element), CTA (banner/card/minimal variants, contrasting bg), StatsBar (animated number counting on scroll via IntersectionObserver, trend up/down indicators, dl/dt/dd semantic structure), Timeline (complete/active/pending status dots, pulsing animation, ol structure, compact/alternating variants). Created LogoCloud from scratch (grid/marquee/fade variants, grayscale-to-color hover, reduced-motion respecting). Added 8 component token sections to all 6 presets (hero, pricing, feature, testimonial, cta, stats, timeline, logocloud). Added Marketing section to playground with realistic demos. Updated manifest.ai.json with all 8 components. 3587 total token vars (up from ~3239). 543 tests pass, 0 token lint violations, build succeeds. |
-| 2026-03-18 | Claude (Claude Code) | Task 3.4 — Data display components | Built 4 data display components: DataTable (generic <T>, sorting, filtering, row selection with select-all/indeterminate, pagination with page size selector, sticky header, sticky columns, loading skeletons, empty state, keyboard navigation on clickable rows), StatCard (dl/dt/dd semantics, trend indicators with colored arrows, prefix/suffix, icon, compact variant, loading skeleton), ProgressBar (default/striped/animated variants, sm/md/lg sizes, 5 color options, indeterminate mode, showValue, prefers-reduced-motion), KPICard (pure SVG sparkline from data array, target dashed line, trend-colored sparkline, period label, compact variant). Added component tokens (datatable, statcard, progress, kpicard) to all 6 presets with per-preset overrides (terminal/retro98/brutalist=radius-none, glass=radius-xl). Added playground demos with Lumina Analytics realistic data (12 users, sortable/filterable/selectable DataTable with pagination, 4 StatCards with trends, all ProgressBar variants, 4 KPICards with sparklines). Updated manifest.ai.json, COMPONENT-TOKENS.md. 621 tests pass (up from 543), 0 lint errors, 0 token lint violations, build succeeds. |
-| 2026-03-18 | Claude (Claude Code) | Task 3.5 — Form components | Enhanced Select: rebuilt as custom combobox dropdown with searchable (type-to-filter), multiple (checkmark pills, stays open), grouped options (section headers), clearable (X button), loading spinner. Added CheckboxGroup (fieldset/legend, vertical/horizontal orientation, array value management). Enhanced RadioGroup: added card variant (selectable cards with border highlight), horizontal orientation, error prop. Built DatePicker from scratch: calendar dropdown with month navigation, day grid, today highlight, min/max date constraints, clearable, keyboard Escape to close, text input parsing. Built FileUpload from scratch: dropzone variant (drag-and-drop with visual feedback, dashed border), button variant, file list with name/size/remove, maxSize/maxFiles validation, onError callback. Added component tokens (datepicker, fileupload) to all 6 presets. Updated playground with enhanced form demos (searchable grouped select, multi-select, checkbox group, card radio, toggle, datepicker, file upload, combined form). 688 tests pass (up from 621), 0 lint errors, 0 token lint violations, build succeeds. |
-| 2026-03-18 | Claude (Claude Code) | Task 3.6 — Overlay components | Verified existing: Modal (complete with focus trap, scroll lock, sizes, escape, overlay click, ARIA), Toast (complete with provider, variants, auto-dismiss, stacking), BottomSheet and DrawerNav (complete). Built Drawer from scratch: general-purpose overlay panel with left/right/top/bottom sides, sm/md/lg/full sizes, focus trap, scroll lock, sticky header/footer, slide animations, escape to close, overlay backdrop. Built Popover from scratch: positioned floating panel with auto-flip viewport detection, click/hover triggers, arrow support, getBoundingClientRect positioning, scroll/resize repositioning, escape to close. Built CommandPalette from scratch: ⌘K search and command interface with grouped items, keyboard arrow nav, Enter to select, search filtering, shortcuts display, focus trap, scroll lock, fast scale+fade animation. Created useHotkey hook: SSR-safe keyboard shortcut listener with meta/ctrl/alt/shift modifiers, ignores editable elements. Added component tokens (drawer, popover, command) to all 6 presets. Playground Overlays section with Drawer (3 sides), Popover (click + arrow), CommandPalette (⌘K). 742 tests pass (up from 688), 0 lint errors, 0 token lint violations, build succeeds. |
-| 2026-03-19 | Claude (Claude Code) | Tasks 3.7+3.8+3.9 — Layout, Media, Feedback | Verified existing: Stack/Grid/Container (complete in layout/), Avatar/AvatarGroup (complete with sizes, initials, overflow), Alert (complete with variants), EmptyState (complete with icon/title/action). Built 9 new components: Divider (horizontal/vertical/labeled with line-break-in-middle pattern), Spacer (minimal spacing utility with token-mapped sizes), AspectRatio (CSS aspect-ratio wrapper with presets), Image (lazy loading with skeleton fallback, error state, radius/objectFit), Carousel (CSS scroll-snap with arrows, dots, auto-play, pause-on-hover, reduced-motion), Banner (full-width notification bar with 5 variants, dismissible, sticky, role=alert/status), Skeleton (text/circular/rectangular variants, multi-line with last-line-shorter, pulse animation), Spinner (SVG circle with stroke-dasharray gap, 5 sizes, reduced-motion static fallback), ErrorBoundary (class component with getDerivedStateFromError, function fallback with reset, default UI). Added component tokens (divider, skeleton, spinner, banner, image, carousel) to all 6 presets. Playground Feedback section with Banner variants, Skeleton/Spinner demos, ErrorBoundary crash-and-recover demo. 812 tests pass (up from 742), 0 lint errors, 0 token lint violations, build succeeds. |
-| 2026-03-19 | Claude (Claude Code) | Tasks 3.10+3.11+3.12 — E-commerce, Editorial, Utilities | **E-commerce (3.10):** ProductCard (default/compact/horizontal variants, badge overlay, sale price with strikethrough, star rating, favorite heart, add-to-cart, loading skeleton, link mode), CartItem (horizontal layout with QuantitySelector, remove, price formatting), QuantitySelector (inline +/-/input with min/max clamping, 44px touch targets), PriceDisplay (Intl.NumberFormat currency, sale mode with original strikethrough, tabular-nums, aria-label), RatingStars (SVG stars with clip-path half-star, interactive radiogroup mode with keyboard arrows, count display). **Editorial (3.11):** ArticleLayout (prose/wide/full width, sticky sidebar, responsive grid, typography-optimized spacing), PullQuote (default/accent/large variants, decorative quote marks, blockquote+cite semantics), AuthorCard (inline/card variants, avatar, bio, social links), RelatedPosts (card/list variants, responsive grid, nav with aria-label), NewsletterSignup (inline/card/banner variants, email validation, success state, loading). **Utilities (3.12):** ScrollArea (themed scrollbar, auto/always/hover modes, cross-browser), Collapsible (animated height, trigger with aria-expanded, reduced-motion), CopyButton (clipboard API with fallback, copied feedback, icon/ghost/default variants, aria-live), KeyboardShortcut (kbd elements, OS detection for ⌘ vs Ctrl, inline variant). Added component tokens (productcard, cartitem, quantity, rating, price, article, pullquote, newsletter, kbd) to all 6 presets. 928 tests pass (up from 812), 0 lint errors, 0 token lint violations, build succeeds. Phase 3 COMPLETE. |
-| 2026-03-19 | Claude (Claude Code) | Playground audit & polish | Comprehensive playground audit and polish. Added 4 missing sections: Navigation (Navbar, Sidebar, Breadcrumb, Pagination, Footer), E-commerce (ProductCard, CartItem, QuantitySelector, PriceDisplay, RatingStars), Editorial (ArticleLayout, PullQuote, AuthorCard, RelatedPosts, NewsletterSignup), Utilities (ScrollArea, Collapsible, CopyButton, KeyboardShortcut, Image, Carousel). Expanded from 9→13 playground sections. Added section headers and descriptions to all sections. Fixed missing Sidebar export from @arcana-ui/core. Used consistent groupTitle styling for sub-sections. Added component count badge (60+) to topbar. Fixed a11y lint errors (anchor hrefs). Added mobile-responsive CSS. Updated visual regression baselines. 928 tests pass, 0 lint errors, build succeeds. |
-| 2026-03-19 | Claude (Claude Code) | Task 4.1 + Playground quality elevation | **Playground fixes:** (1) Made all component demos interactive — replaced static onChange handlers with React state for toggles, checkboxes, switches. (2) Redesigned Overview tab with curated showcase: Hero, StatCards, Navbar, Cards+ProgressBar, forms, all button/badge variants, Tabs+Accordion, Pricing trio, Alerts. (3) Added Motion section to Token Editor: duration presets (Instant/Snappy/Default/Smooth/Dramatic), easing presets (Linear/Ease/In-Out/Spring/Bounce), custom slider, animated dot preview. (4) Fixed font upload with Display/Body/Mono target selector + preview. **Theme redesigns:** Light=warm-tinted shadows (Notion/Anthropic quality), Dark=slate palette with vibrant indigo (Linear quality), Terminal=phosphor green #00ff41 with CRT glow text-shadow, Retro98=pixel-perfect Win98 bevels + navy #000080 + teal desktop, Brutalist=red accent + Impact typography + hard shadows, Glass=backdrop-filter blur + rich gradient background + edge-light highlights. **WCAG:** Fixed 79 broken component token references + 1 dark contrast failure. All 6 presets pass with 0 errors. **Brand logos:** SVG wordmarks for each theme. 928 tests pass, 0 lint errors, build succeeds. |
-| 2026-03-20 | Claude (Claude Code) | Task 4.2 — 8 new presets | Created Corporate (navy/slate), Startup (violet/fuchsia), Editorial (Playfair serif), Commerce (emerald/DM Sans), Midnight (navy+gold), Nature (earth tones/Nunito), Neon (cyan/pink cyberpunk), Mono (black/white stark). All 14 presets pass WCAG AA with 0 errors. Updated playground presets.ts and token package exports. |
-| 2026-03-20 | Claude (Claude Code) | Task P.1 — Landing page | Built dark premium landing page at "/" with 10 sections: sticky navbar with logo, hero with "Describe your brand. Get a design system." + AI prompt input, logo cloud (AI tools), 3 feature cards, 3-step how-it-works, 6-theme showcase with mini-previews, component showcase in browser frame, stats bar, CTA with purple glow, footer. Added react-router-dom for "/" (landing) and "/playground" (editor) routing. SEO meta tags (OG, Twitter). Vercel SPA rewrites. Typography tab added to playground. Hero headline bumped to fluid-7xl. 928 tests pass, 0 lint errors, build succeeds. |
-| 2026-03-20 | Claude (Claude Code) | Typography fix | Fixed --font-size-fluid-* aliases missing from build output (added to build.ts). Fixed base size slider parsing "1rem" as 1px (added rem→px conversion). |
-| 2026-03-21 | Claude (Claude Code) | Landing page polish (P.1.1) | Expanded theme showcase from 6→14 presets with accurate colors per theme. Added ?theme= query param handling in playground (App.tsx reads URL param on mount, applies theme). Fixed dead links: Log In/Sign Up→/playground, About/Blog→Contributing/Roadmap on GitHub. Updated stats: "120+ Design Tokens"→"2,600+ CSS Variables". Made component showcase fully responsive (CSS classes instead of inline grid, mobile stack layout). Added focus-visible styles to theme cards, nav buttons, CTA buttons, prompt submit. Added smooth scroll behavior. Widened theme grid to 4-col for 14 items. Updated dev banner to say "14 themes". 928 tests pass, 0 lint errors, build succeeds. |
-| 2026-03-21 | Claude (Claude Code) | Playground polish (P.1.2) | Full playground audit: all 14 sections verified, all interactive components have proper state management, all 14 presets functional. Fixed: (1) Added SVG logos for 8 new presets (corporate, startup, editorial, commerce, midnight, nature, neon, mono) in presets.ts — original 6 had themed wordmarks but new 8 were missing them. (2) Fixed color-scheme: midnight and neon were outputting `color-scheme: light` instead of `dark` in build.ts. (3) Updated stale counts: overview StatCard "6 presets"→"14 presets", landing page "120+ tokens"→"2,600+ CSS variables". (4) Updated comment in presets.ts to reference 14 themes. 928 tests pass, 0 lint errors, build succeeds. |
-| 2026-03-23 | Claude (Claude Code) | NPM beta publish prep + demo infrastructure | **Part A — NPM Beta:** Updated both package.json files (version 0.1.0-beta.1, MIT license, repository, homepage, keywords, publishConfig public, sideEffects, proper ESM/CJS exports with types, prepublishOnly). Verified npm pack --dry-run (tokens: 17 files/134KB, core: 9 files/463KB — dist only, no source). Local integration test passed (all 115 exports, CSS resolves, theme imports work). npm publish blocked by missing credentials. Added npm version/downloads/bundle-size badges to README. **Part B — Demo Infrastructure:** Created demos/ directory with shared ThemeSwitcher component (fixed bottom bar, 14 preset dropdown, density toggle, JSON file upload with drag-drop + validation + sessionStorage, collapsible/minimizable). Built dashboard demo (Vite+React+TS, Navbar, StatCards, DataTable with sort/filter/pagination, ProgressBars, tabbed layout). Built ecommerce demo (Vite+React+TS, ProductCard grid, QuantitySelector, PriceDisplay, cart counter). Updated pnpm-workspace.yaml with demo packages. Added dev:dashboard/dev:ecommerce/dev:demos scripts. Updated repo references (garrettbear/arcana-ui → Arcana-UI/arcana). 928 tests pass, 0 lint errors, both demos build. |
-| 2026-03-26 | Claude (Claude Code) | Task P.1.3 — Token editor rebuild | **Rebuilt TokenEditor to investor-demo quality.** Created `ColorPicker.tsx` (custom HSV picker with saturation/value canvas, hue slider, alpha slider, hex/RGB inputs, recent colors, EyeDropper API, theme palette swatches — all real-time via requestAnimationFrame). Created `CubicBezierEditor.tsx` (canvas with draggable control points P1/P2, 7 preset curves, animation dot preview). Rebuilt `TokenEditor.tsx`: (1) Collapsible sections with modified-count badges, (2) Search/filter across all tokens with X clear, (3) Color tokens reorganized into 6 sub-groups (Background, Foreground, Actions, Status, Borders, Accent) each collapsible with per-group reset, (4) Per-token modified dot indicator + reset button, (5) Undo/redo with Cmd+Z/Cmd+Shift+Z (50-entry stack with undo toast), (6) FontPicker with search, category groups, custom font upload with Display/Body/Mono target selector, (7) Typography scale preview, (8) Spacing base unit slider with visual scale bars, (9) Motion section with duration segmented control + custom slider + CubicBezierEditor, (10) Mobile responsive: hidden on <640px with desktop message banner, (11) All CSS vars updated in real-time via style.setProperty with no React re-renders during drag. New files: ColorPicker.{tsx,module.css}, CubicBezierEditor.{tsx,module.css}. Updated: TokenEditor.{tsx,module.css}, App.tsx, App.module.css. 928 tests pass (pre-existing 16 useTheme failures unrelated to this change), 0 new lint errors, playground builds successfully. |
+| 2026-03-02 | Claude (Claude Code) | Task 0.1 — Token audit | Scanned 32 CSS files, cataloged ~176 tokens, found 88 hardcoded violations |
+| 2026-03-03 | Claude (Claude Code) | Task 0.2 — Token restructure | Created JSON Schema, migrated 6 presets to three-tier format |
+| 2026-03-03 | Claude (Claude Code) | Task 0.3 — Code standards | Strict TS config, biome rules, husky pre-commit hook |
+| 2026-03-04 | Claude (Claude Code) | Task 0.4 — Build pipeline | build.ts: 195 vars/theme, compat.css with 177 aliases |
+| 2026-03-04 | Claude (Claude Code) | Task 0.5 — Component API cleanup | Migrated 20 CSS files (511 replacements), JSDoc on all props, forwardRef on 23 components |
+| 2026-03-04 | Claude (Claude Code) | Playground bugfix | Fixed theme switching after 0.5 migration |
+| 2026-03-04 | Claude (Claude Code) | Task 0.6 — Testing infrastructure | Vitest coverage, Playwright 5 viewports, axe-core a11y. 274 unit + 13 visual tests |
+| 2026-03-07 | Claude (Claude Code) | Tasks 0.7–0.10 | CSS token linter, documentation update, CI/CD (ci.yml + pr-title.yml), CONTRIBUTING.md. Phase 0 complete. |
+| 2026-03-08 | Claude (Claude Code) | Tasks 1.1–1.3 | Full color system (16-hue palettes), typography system (fluid clamp), spacing system (29-value scale, density modes) |
+| 2026-03-09 | Claude (Claude Code) | Tasks 1.4–1.5 | Elevation system (shadows + backdrop blur + z-index), layout tokens (breakpoints, containers, grid utilities) |
+| 2026-03-10 | Claude (Claude Code) | Task 1.6 | Motion tokens (9 durations × 7 easings, per-preset personalities, reduced-motion media query) |
+| 2026-03-15 | Claude (Claude Code) | Tasks 1.7–1.12 | Border/shape + opacity tokens, token validation CI, theme switching hook, component token layer. Phase 1 complete. |
+| 2026-03-17 | Claude (Claude Code) | Tasks 2.5–2.10 + playground fixes | BottomSheet, MobileNav, DrawerNav. 5-breakpoint Playwright suite. Phase 2 complete. |
+| 2026-03-18 | Claude (Claude Code) | Tasks 3.1–3.6 | Refined 22 components; built DataTable, StatCard, ProgressBar, KPICard; enhanced forms (Select, DatePicker, FileUpload); Drawer, Popover, CommandPalette |
+| 2026-03-19 | Claude (Claude Code) | Tasks 3.7–3.12 + playground audit | Layout/Media/Feedback/E-commerce/Editorial/Utility components. 928 tests pass. Phase 3 complete. 60+ components. |
+| 2026-03-19 | Claude (Claude Code) | Task 4.1 + playground elevation | Redesigned 6 presets to production quality. Token editor Motion section. Interactive demos throughout playground. |
+| 2026-03-20 | Claude (Claude Code) | Task 4.2 + Task P.1 | 8 new presets (corporate, startup, editorial, commerce, midnight, nature, neon, mono). Landing page with 10 sections. |
+| 2026-03-21 | Claude (Claude Code) | Tasks P.1.1 + P.1.2 | Landing page: 14-theme showcase, ?theme= param, dead link fixes. Playground: 8 new preset logos, color-scheme fixes. |
+| 2026-03-23 | Claude (Claude Code) | npm beta prep + demo infrastructure | Published 0.1.0-beta.1 to npm. Built SaaS dashboard + e-commerce demos. ThemeSwitcher shared component. |
+| 2026-03-26 | Claude (Claude Code) | Task P.1.3 — Token editor rebuild | Custom HSV ColorPicker (canvas, EyeDropper, recent colors), CubicBezierEditor (canvas, 7 presets, animation preview), rebuilt TokenEditor (6 color sub-groups, search/filter, undo/redo, per-token modified indicators, FontPicker, mobile message). PR #65. |
+| 2026-03-26 | Claude (Claude Code) | Doc sync + branch rules | Integrated BRANCH_PR_RULES.md into CLAUDE.md + AI_OPS.md. Added release metadata to manifest.ai.json. Updated Current State to reflect actual project status. |

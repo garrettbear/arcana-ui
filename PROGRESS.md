@@ -1,9 +1,9 @@
 # Arcana UI — Progress Tracker
 
 > **Last updated:** 2026-03-26
-> **Current phase:** 4 — Theme Presets & Demo Sites / 5 — AI Integration & Launch
-> **Next priority task:** P.2 AI theme generation, then 4.4–4.8 demo content, then npm publish
-> **Blocking issues:** npm publish requires `npm login` (no credentials in environment)
+> **Current phase:** Phase 4 (partial) + Phase P (partial)
+> **Next priority task:** P.2 — AI theme generation, then 4.4/4.5/4.7/4.8 demo content
+> **Blocking issues:** None — npm packages published as 0.1.0-beta.1
 
 ## Phase 0: Foundation Cleanup (Weeks 1–2)
 - [x] 0.1 — Audit & document current token set
@@ -80,7 +80,7 @@
 - [ ] 5.1 — Update manifest.ai.json
 - [ ] 5.2 — Build Claude Code skill
 - [ ] 5.3 — Build prompt templates
-- [ ] 5.4 — Publish to npm (v1.0) — beta packages configured (0.1.0-beta.1), needs npm login to publish
+- [ ] 5.4 — Publish to npm (v1.0) — beta 0.1.0-beta.1 already published; this task is for the v1.0 stable release
 - [ ] 5.5 — Build documentation site
 - [ ] 5.6 — SEO & discoverability
 - [ ] 5.7 — Community starter templates (Next, Vite, Remix, Astro)
