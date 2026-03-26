@@ -143,17 +143,19 @@ Every session, follow this exact sequence:
 ### Branch Setup
 5. **Create a branch from develop** before writing any code:
    ```
-   git checkout develop && git pull
-   git checkout -b {type}/{task-number}-{short-description}
+   git checkout develop && git pull origin develop
+   git checkout -b {type}/{task-id}-{descriptive-name}
    ```
-   Branch naming examples:
-   - `feat/3.4-data-display-components`
-   - `fix/playground-theme-switching`
-   - `refactor/1.12-component-token-layer`
-   - `docs/0.8-update-documentation`
-   - `test/2.10-visual-regression-matrix`
-   
+
+   **BAD branch names:** `feat/updates`, `fix/bugs`, `feat/playground`, `refactor/improvements`
+
+   **GOOD branch names:** `feat/3.4-datatable-statcard-progressbar-kpicard`, `fix/playground-token-editor-color-picker-lag`, `feat/P1-landing-page-hero-features-pricing`, `fix/navbar-hamburger-not-opening-on-mobile`
+
    Types: feat, fix, refactor, test, docs, chore
+
+   **NEVER reuse a branch from a previous task. Every new task gets a new branch.**
+
+   **If given a new prompt mid-session:** commit and push current work, create a PR for it, then `git checkout develop && git pull && git checkout -b new-branch-name`.
 
 ### During Work
 6. **Do the work** — follow the standards in ROADMAP.md Section 8
@@ -176,7 +178,9 @@ Every session, follow this exact sequence:
     ```
     chore: update progress tracker and session state
     ```
-12. **Push the branch and create a PR**:
+12. **Update CHANGELOG.md** under the `[Unreleased]` section before creating the PR. This is NOT optional. Every `feat` commit → "Added" entry, every `fix` commit → "Fixed" entry.
+
+13. **Push the branch and create a PR**:
     ```
     git push -u origin {branch-name}
     ```
@@ -246,7 +250,7 @@ Every session, follow this exact sequence:
     
     If gh CLI is not available, push the branch and provide the PR title and body text for the user to create manually.
 
-13. **Summarize** — tell the user what was done, what's next, and any blockers
+14. **Summarize** — tell the user what was done, what's next, and any blockers
 ```
 
 ### Critical Rules for AI Agents
@@ -257,6 +261,8 @@ Every session, follow this exact sequence:
 - **The `develop` branch is your working branch.** `main` is releases only.
 - **All feature branches are created from `develop`**, not main.
 - **All PRs target `develop`**, not main.
+- **NEVER reuse a branch from a previous task.** Every new task gets a new branch.
+- **CHANGELOG.md must be updated under `[Unreleased]` before every PR.** Not optional.
 
 ---
 

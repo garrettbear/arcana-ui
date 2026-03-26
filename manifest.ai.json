@@ -1,4 +1,11 @@
 {
+  "release": {
+    "version": "0.1.0-beta.1",
+    "releaseDate": "2026-03-25",
+    "changelog": "https://github.com/arcana-ui/arcana-ui/blob/develop/CHANGELOG.md",
+    "breaking": [],
+    "migration": null
+  },
   "name": "@arcana-ui/core",
   "version": "0.1.0",
   "description": "AI-first React design system with token-driven theming. Warm, clean, accessible. Built for machines, beautiful for humans.",

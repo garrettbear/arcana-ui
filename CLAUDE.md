@@ -53,6 +53,132 @@ This project uses a two-branch model. See `RELEASING.md` for the full strategy.
 
 ---
 
+## Branch Rules
+
+EVERY new task gets a NEW branch. Never reuse a branch from a previous task.
+
+```bash
+# ALWAYS start from a clean, updated develop
+git checkout develop && git pull origin develop
+
+# ALWAYS create a new branch with this EXACT format:
+git checkout -b {type}/{task-id}-{descriptive-name}
+```
+
+The branch name must be descriptive enough that someone reading ONLY the branch name understands what it contains.
+
+```
+# ❌ BAD branch names — vague, not descriptive
+feat/updates
+fix/bugs
+feat/playground
+refactor/improvements
+feat/phase-3
+
+# ✅ GOOD branch names — specific, descriptive
+feat/3.4-datatable-statcard-progressbar-kpicard
+fix/playground-token-editor-color-picker-lag
+feat/P1-landing-page-hero-features-pricing
+refactor/token-editor-collapsible-sections-search
+feat/theme-switcher-json-upload-modal
+fix/navbar-hamburger-not-opening-on-mobile
+docs/releasing-strategy-changelog-setup
+chore/npm-beta-publish-preparation
+```
+
+**Rules:**
+1. Type must be one of: feat, fix, refactor, test, docs, chore
+2. Task ID from the roadmap if applicable (3.4, P.1, 1.12, etc.)
+3. Descriptive name uses kebab-case and lists the key deliverables
+4. Maximum 60 characters total for the branch name
+5. NEVER reuse a branch. Every `git checkout -b` is a new branch name.
+
+**When given a new prompt mid-session:**
+1. Commit and push your current work
+2. Create a PR for the current branch (if it has meaningful changes)
+3. Switch to develop: `git checkout develop && git pull`
+4. Create a NEW branch for the new task
+5. NEVER continue a different task on an existing branch
+
+---
+
+## PR Rules
+
+### PR Title Format
+
+```
+{type}({scope}): {specific description} [{task-id}]
+```
+
+The title must describe WHAT was done, not just reference a task number.
+
+```
+# ❌ BAD PR titles
+feat: updates
+fix: bug fixes
+feat(core): phase 3 work
+refactor: improvements
+
+# ✅ GOOD PR titles
+feat(core): add DataTable, StatCard, ProgressBar, KPICard [3.4]
+fix(playground): fix color picker lag and token editor slider snapping
+feat(playground): add landing page with hero, features, pricing sections [P.1]
+feat(tokens): redesign all 6 presets with per-preset elevation strategies [4.1]
+fix(core): fix Navbar hamburger menu not opening on mobile
+refactor(tokens): add cubic bezier editor and motion duration controls
+docs: add releasing strategy and changelog
+chore: set up npm beta publish and branching infrastructure
+```
+
+### PR Description
+
+The repository has a PR template at `.github/pull_request_template.md`. When creating a PR with `gh pr create`, you MUST fill in EVERY section of the template.
+
+**CRITICAL: Do NOT leave template sections empty or with placeholder text.**
+**CRITICAL: The "Changes Made" section must list EVERY file you touched.**
+**CRITICAL: The "Breaking Changes" section must be filled in — write "None" if there are none.**
+**CRITICAL: CHANGELOG.md must be updated BEFORE creating the PR.**
+
+Always read the template before creating a PR:
+```bash
+cat .github/pull_request_template.md
+```
+
+---
+
+## Changelog Rules
+
+`CHANGELOG.md` must be updated in **every PR**, before the PR is created. This is not optional.
+
+Add entries under the `[Unreleased]` section using the Keep a Changelog format:
+
+```markdown
+## [Unreleased]
+
+### Added
+- DataTable component with sorting, filtering, pagination, and row selection
+
+### Changed
+- Updated manifest.ai.json with data display component entries
+
+### Fixed
+- Fixed color picker not updating preview in real-time
+
+### Breaking
+- Renamed Button prop `type` to `variant` (migration: replace type= with variant=)
+```
+
+**Categories:** Added, Changed, Fixed, Deprecated, Removed, Breaking
+
+**Rules:**
+1. Every `feat` commit = an "Added" entry
+2. Every `fix` commit = a "Fixed" entry
+3. Every breaking change = a "Breaking" entry WITH migration instructions
+4. Entries must be specific — "Added DataTable with sorting and pagination" not "Added new components"
+5. The Unreleased section accumulates until a release, then gets moved under a version header
+
+---
+
 ## Essential Documents
 
 | File | Purpose | When to Read |
