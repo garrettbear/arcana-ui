@@ -13,7 +13,6 @@
  * - All changes update CSS vars directly (<50ms)
  */
 
-import { Badge, Button, Input, Select } from '@arcana-ui/core';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toHex } from '../utils/contrast';
 import { PRESETS, type PresetId, type ThemePreset, applyPreset, getCSSVar } from '../utils/presets';
@@ -1005,33 +1004,31 @@ export function TokenEditor({
       <div className={styles.editorHeader}>
         <span className={styles.editorTitle}>Token Editor</span>
         <div className={styles.headerActions}>
-          <Button
-            variant="ghost"
-            size="sm"
+          <button
+            type="button"
             className={styles.undoBtn}
             onClick={performUndo}
             disabled={!undoRedo.canUndo}
             title="Undo (⌘Z)"
           >
             ↩
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
+          </button>
+          <button
+            type="button"
             className={styles.undoBtn}
             onClick={performRedo}
             disabled={!undoRedo.canRedo}
             title="Redo (⌘⇧Z)"
           >
             ↪
-          </Button>
+          </button>
         </div>
       </div>
 
       {/* ── Search ── */}
       <div className={styles.searchWrap}>
         <span className={styles.searchIcon}>⌕</span>
-        <Input
+        <input
           type="text"
           className={styles.searchInput}
           placeholder="Search tokens…"
@@ -1039,14 +1036,9 @@ export function TokenEditor({
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         {searchQuery && (
-          <Button
-            variant="ghost"
-            size="sm"
-            className={styles.searchClear}
-            onClick={() => setSearchQuery('')}
-          >
+          <button type="button" className={styles.searchClear} onClick={() => setSearchQuery('')}>
             ×
-          </Button>
+          </button>
         )}
       </div>
 
@@ -1091,9 +1083,7 @@ export function TokenEditor({
             <span className={styles.sectionToggle}>{openSections.has('colors') ? '▾' : '▸'}</span>
             <span className={styles.sectionLabel}>Colors</span>
             {colorModifiedCount > 0 && (
-              <Badge variant="info" size="sm" className={styles.modifiedBadge}>
-                {colorModifiedCount}
-              </Badge>
+              <span className={styles.modifiedBadge}>{colorModifiedCount}</span>
             )}
           </button>
           {openSections.has('colors') && (
@@ -1118,9 +1108,8 @@ export function TokenEditor({
                         />
                       )}
                       {openColorGroups.has(group.id) && (
-                        <Button
-                          variant="ghost"
-                          size="sm"
+                        <button
+                          type="button"
                           className={styles.sectionResetBtn}
                           onClick={(e) => {
                             e.stopPropagation();
@@ -1129,7 +1118,7 @@ export function TokenEditor({
                           title={`Reset ${group.label}`}
                         >
                           Reset
-                        </Button>
+                        </button>
                       )}
                     </button>
                     {openColorGroups.has(group.id) && (
@@ -1153,15 +1142,14 @@ export function TokenEditor({
                                   {toHex(currentVal).toUpperCase()}
                                 </span>
                                 {isModified && (
-                                  <Button
-                                    variant="ghost"
-                                    size="sm"
+                                  <button
+                                    type="button"
                                     className={styles.tokenResetBtn}
                                     onClick={() => resetColorToken(token.var)}
                                     title="Reset to preset default"
                                   >
                                     ↺
-                                  </Button>
+                                  </button>
                                 )}
                               </div>
                             </div>
@@ -1190,9 +1178,7 @@ export function TokenEditor({
             </span>
             <span className={styles.sectionLabel}>Typography</span>
             {typographyModifiedCount > 0 && (
-              <Badge variant="info" size="sm" className={styles.modifiedBadge}>
-                {typographyModifiedCount}
-              </Badge>
+              <span className={styles.modifiedBadge}>{typographyModifiedCount}</span>
             )}
           </button>
           {openSections.has('typography') && (
@@ -1254,16 +1240,18 @@ export function TokenEditor({
                 <label htmlFor="type-ratio" className={styles.tokenLabel}>
                   Scale Ratio
                 </label>
-                <Select
+                <select
+                  id="type-ratio"
                   className={styles.fontSelect}
-                  size="sm"
-                  options={TYPE_SCALE_RATIOS.map((r) => ({
-                    value: String(r.value),
-                    label: r.label,
-                  }))}
                   value={String(typeRatio)}
-                  onChange={(v) => handleTypeRatioChange(Number.parseFloat(v as string))}
-                />
+                  onChange={(e) => handleTypeRatioChange(Number.parseFloat(e.target.value))}
+                >
+                  {TYPE_SCALE_RATIOS.map((r) => (
+                    <option key={r.value} value={String(r.value)}>
+                      {r.label}
+                    </option>
+                  ))}
+                </select>
               </div>
               {/* Scale preview */}
               <div className={styles.typeScalePreview}>
@@ -1331,9 +1319,8 @@ export function TokenEditor({
                       to:
                     </div>
                     <div className={styles.fontTargetPreview}>
-                      <Button
-                        variant="ghost"
-                        size="sm"
+                      <button
+                        type="button"
                         className={styles.fontTargetBtn}
                         onClick={() => applyFontToTarget('display')}
                       >
@@ -1348,10 +1335,9 @@ export function TokenEditor({
                         >
                           Headlines
                         </span>
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
+                      </button>
+                      <button
+                        type="button"
                         className={styles.fontTargetBtn}
                         onClick={() => applyFontToTarget('body')}
                       >
@@ -1362,10 +1348,9 @@ export function TokenEditor({
                         >
                           Body text and paragraphs
                         </span>
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
+                      </button>
+                      <button
+                        type="button"
                         className={styles.fontTargetBtn}
                         onClick={() => applyFontToTarget('mono')}
                       >
@@ -1376,16 +1361,15 @@ export function TokenEditor({
                         >
                           {'const code = true;'}
                         </span>
-                      </Button>
+                      </button>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
+                    <button
+                      type="button"
                       className={styles.fontTargetDismiss}
                       onClick={() => setPendingFont(null)}
                     >
                       Dismiss
-                    </Button>
+                    </button>
                   </div>
                 )}
                 {localFonts.length > 0 && (
@@ -1418,9 +1402,7 @@ export function TokenEditor({
             <span className={styles.sectionToggle}>{openSections.has('spacing') ? '▾' : '▸'}</span>
             <span className={styles.sectionLabel}>Spacing</span>
             {spacingModifiedCount > 0 && (
-              <Badge variant="info" size="sm" className={styles.modifiedBadge}>
-                {spacingModifiedCount}
-              </Badge>
+              <span className={styles.modifiedBadge}>{spacingModifiedCount}</span>
             )}
           </button>
           {openSections.has('spacing') && (
@@ -1429,15 +1411,14 @@ export function TokenEditor({
               <p className={styles.subSectionLabel}>Density Mode</p>
               <div className={styles.segmentedControl}>
                 {(['compact', 'default', 'comfortable'] as const).map((mode) => (
-                  <Button
-                    variant={density === mode ? 'primary' : 'ghost'}
-                    size="sm"
+                  <button
+                    type="button"
                     key={mode}
                     className={`${styles.segmentBtn} ${density === mode ? styles.segmentActive : ''}`}
                     onClick={() => handleDensityChange(mode)}
                   >
                     {mode.charAt(0).toUpperCase() + mode.slice(1)}
-                  </Button>
+                  </button>
                 ))}
               </div>
 
@@ -1501,9 +1482,7 @@ export function TokenEditor({
             <span className={styles.sectionToggle}>{openSections.has('shape') ? '▾' : '▸'}</span>
             <span className={styles.sectionLabel}>Shape</span>
             {shapeModifiedCount > 0 && (
-              <Badge variant="info" size="sm" className={styles.modifiedBadge}>
-                {shapeModifiedCount}
-              </Badge>
+              <span className={styles.modifiedBadge}>{shapeModifiedCount}</span>
             )}
           </button>
           {openSections.has('shape') && (
@@ -1581,9 +1560,7 @@ export function TokenEditor({
             <span className={styles.sectionToggle}>{openSections.has('motion') ? '▾' : '▸'}</span>
             <span className={styles.sectionLabel}>Motion</span>
             {motionModifiedCount > 0 && (
-              <Badge variant="info" size="sm" className={styles.modifiedBadge}>
-                {motionModifiedCount}
-              </Badge>
+              <span className={styles.modifiedBadge}>{motionModifiedCount}</span>
             )}
           </button>
           {openSections.has('motion') && (
@@ -1598,15 +1575,14 @@ export function TokenEditor({
                   { label: 'Smooth', value: 300 },
                   { label: 'Dramatic', value: 500 },
                 ].map((preset) => (
-                  <Button
-                    variant={motionDuration === preset.value ? 'primary' : 'ghost'}
-                    size="sm"
+                  <button
+                    type="button"
                     key={preset.label}
                     className={`${styles.segmentBtn} ${motionDuration === preset.value ? styles.segmentActive : ''}`}
                     onClick={() => handleMotionDurationChange(preset.value)}
                   >
                     {preset.label}
-                  </Button>
+                  </button>
                 ))}
               </div>
               <div className={styles.sliderRow}>
@@ -1643,17 +1619,16 @@ export function TokenEditor({
 
       {/* ── Actions ── */}
       <div className={styles.actions}>
-        <Button variant="outline" size="sm" className={styles.actionBtn} onClick={handleReset}>
+        <button type="button" className={styles.actionBtn} onClick={handleReset}>
           Reset All
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
+        </button>
+        <button
+          type="button"
           className={styles.actionBtn}
           onClick={() => importInputRef.current?.click()}
         >
           Import
-        </Button>
+        </button>
         <input
           ref={importInputRef}
           type="file"
@@ -1661,23 +1636,22 @@ export function TokenEditor({
           style={{ display: 'none' }}
           onChange={handleImport}
         />
-        <Button
-          variant="primary"
-          size="sm"
+        <button
+          type="button"
           className={`${styles.actionBtn} ${styles.actionBtnPrimary}`}
           onClick={handleExport}
         >
           Export
-        </Button>
+        </button>
       </div>
 
       {/* ── Undo toast ── */}
       {undoToast && (
         <div className={styles.undoToast}>
           <span>{undoToast}</span>
-          <Button variant="ghost" size="sm" className={styles.undoToastBtn} onClick={performUndo}>
+          <button type="button" className={styles.undoToastBtn} onClick={performUndo}>
             Undo
-          </Button>
+          </button>
         </div>
       )}
     </div>

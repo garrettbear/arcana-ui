@@ -8,7 +8,6 @@
  * a live animation dot demo.
  */
 
-import { Button } from '@arcana-ui/core';
 import type React from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styles from './CubicBezierEditor.module.css';
@@ -352,15 +351,14 @@ export function CubicBezierEditor({
             }}
           />
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
+        <button
+          type="button"
           className={styles.playBtn}
           onClick={playAnimation}
           disabled={animating}
         >
           ▶
-        </Button>
+        </button>
       </div>
 
       {/* Presets */}
@@ -372,15 +370,14 @@ export function CubicBezierEditor({
             Math.abs(p.values.x2 - values.x2) < 0.01 &&
             Math.abs(p.values.y2 - values.y2) < 0.01;
           return (
-            <Button
+            <button
+              type="button"
               key={p.label}
-              variant={active ? 'primary' : 'ghost'}
-              size="sm"
               className={`${styles.presetBtn} ${active ? styles.presetActive : ''}`}
               onClick={() => onChange(p.values, p.css)}
             >
               {p.label}
-            </Button>
+            </button>
           );
         })}
       </div>

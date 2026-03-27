@@ -13,16 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Playground component audit report (`docs/audits/playground-component-audit.md`)
 
 ### Changed
-- Replaced raw HTML buttons in TokenEditor with Arcana `<Button>` (undo/redo, actions, reset, segmented controls)
-- Replaced raw `<input>` search in TokenEditor with Arcana `<Input>`
-- Replaced native `<select>` in TokenEditor with Arcana `<Select>`
-- Replaced modified count `<span>` badges in TokenEditor with Arcana `<Badge>`
-- Replaced raw HTML buttons in AccessibilityPanel with Arcana `<Button>` (section headers, filters, apply)
-- Replaced inline AA/AAA badges in AccessibilityPanel with Arcana `<Badge>`
-- Replaced custom progress bar in AccessibilityPanel with Arcana `<ProgressBar>`
-- Replaced raw buttons/inputs in Landing page with Arcana `<Button>`, `<Input>`, `<Badge>`
-- Replaced eyedropper button in ColorPicker with Arcana `<Button>`
-- Replaced play and preset buttons in CubicBezierEditor with Arcana `<Button>`
+- Landing page buttons (mobile menu, hero CTA, playground CTA, GitHub link) now use Arcana `<Button>`
+- Landing page hero badge and active badge now use Arcana `<Badge>`
+
+### Fixed
+- Reverted Arcana component replacements in token editor tooling (TokenEditor, AccessibilityPanel, ColorPicker, CubicBezierEditor) — Arcana components consume the same CSS tokens the editor modifies, causing circular UI corruption
+- Fixed hero prompt input on landing page — reverted from Arcana `<Input>` (wrapper markup broke layout) to raw `<input>`
+- Fixed Reset All button not working in token editor
+- Fixed token reset buttons (18px) being oversized due to Arcana Button min-height
+- Fixed color picker z-index — Arcana Button's `overflow: hidden` was clipping the popup
+- Fixed segmented control buttons changing color when editing `--color-action-primary` token
 
 ## [0.1.0-beta.1] - 2026-03-24
 
