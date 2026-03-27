@@ -15,7 +15,6 @@
  * Uses requestAnimationFrame for drag performance.
  */
 
-import { Button } from '@arcana-ui/core';
 import type React from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styles from './ColorPicker.module.css';
@@ -603,9 +602,8 @@ export function ColorPicker({
           {/* Actions row: eyedropper */}
           {supportsEyeDropper && (
             <div className={styles.actionsRow}>
-              <Button
-                variant="ghost"
-                size="sm"
+              <button
+                type="button"
                 className={styles.eyedropperBtn}
                 onClick={handleEyeDropper}
                 title="Pick color from screen"
@@ -626,7 +624,7 @@ export function ColorPicker({
                   <circle cx="3.5" cy="20.5" r="1.5" />
                 </svg>
                 Eyedropper
-              </Button>
+              </button>
             </div>
           )}
 

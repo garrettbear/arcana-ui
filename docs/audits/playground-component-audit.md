@@ -1,6 +1,6 @@
 # Playground Component Audit
 
-> **Date:** 2026-03-27
+> **Date:** 2026-03-27 (updated)
 > **Auditor:** Claude (Claude Code)
 > **Scope:** All files in `playground/src/`
 
@@ -11,11 +11,22 @@
 | Metric | Before | After |
 |--------|--------|-------|
 | Total interactive UI elements audited | 68 | 68 |
-| Using Arcana components (Category A) | 60+ (in App.tsx only) | 60+ (App.tsx) + 35 (other files) |
-| Using raw HTML / custom (Category B) | 35 | 6 |
+| Using Arcana components (Category A) | 60+ (in App.tsx only) | 60+ (App.tsx) + 8 (Landing.tsx) |
+| Using raw HTML / custom (Category B) | 35 | ~30 |
 | Using third-party components (Category C) | 0 | 0 |
 | Legitimate non-components (Category D) | ~30 | ~30 |
-| **Arcana component usage rate** | **~63%** | **~91%** |
+| **Arcana component usage rate** | **~63%** | **~70%** |
+
+### Architectural Decision: Token Editor Cannot Use Arcana Components
+
+The token editor tooling files (TokenEditor, AccessibilityPanel, ColorPicker, CubicBezierEditor) **must use raw HTML** instead of Arcana components. This is a fundamental architectural constraint, not a dogfooding gap:
+
+1. **Circular dependency**: Arcana components consume CSS tokens (`--color-action-primary`, `--color-bg-surface`, etc.) that the token editor directly modifies. Editing a token changes the editor's own UI.
+2. **Sizing conflicts**: Arcana Button enforces `min-height: 2.75rem` (44px touch targets), incompatible with the editor's compact 18px reset buttons and 5px segmented controls.
+3. **Wrapper markup**: Arcana Input wraps `<input>` in a div structure (wrapper + label + helper text areas), breaking compact inline layouts.
+4. **Stacking context**: Arcana Button sets `position: relative; overflow: hidden`, which clips the ColorPicker popup.
+
+**Recommendation**: A future `unstyled` prop or headless component variants would solve this for consumers who need theme-independent UI controls (design tools, editor panels, dev tools).
 
 ---
 
@@ -42,33 +53,13 @@ Already uses 60+ Arcana components. No changes needed.
 | App.tsx | Utility | `<Collapsible>`, `<Accordion>`, `<CopyButton>`, `<KeyboardShortcut>`, `<ToastProvider>` |
 | App.tsx | Hooks | `useHotkey`, `useToast` |
 
-### TokenEditor.tsx (After Refactor)
+### TokenEditor.tsx — Raw HTML (Architectural Constraint)
 
-| File | Element | Arcana Component |
-|------|---------|-----------------|
-| TokenEditor.tsx | Undo/Redo buttons | `<Button variant="ghost" size="sm">` |
-| TokenEditor.tsx | Search input | `<Input>` |
-| TokenEditor.tsx | Search clear button | `<Button variant="ghost" size="sm">` |
-| TokenEditor.tsx | Modified count badges (x5) | `<Badge variant="info" size="sm">` |
-| TokenEditor.tsx | Section reset buttons | `<Button variant="ghost" size="sm">` |
-| TokenEditor.tsx | Per-token reset buttons | `<Button variant="ghost" size="sm">` |
-| TokenEditor.tsx | Type ratio select | `<Select size="sm">` |
-| TokenEditor.tsx | Density mode buttons (x3) | `<Button variant="primary/ghost" size="sm">` |
-| TokenEditor.tsx | Motion duration buttons (x5) | `<Button variant="primary/ghost" size="sm">` |
-| TokenEditor.tsx | Action buttons (Reset/Import/Export) | `<Button variant="outline/primary" size="sm">` |
-| TokenEditor.tsx | Undo toast dismiss button | `<Button variant="ghost" size="sm">` |
-| TokenEditor.tsx | Font target buttons (x3) | `<Button variant="ghost" size="sm">` |
-| TokenEditor.tsx | Font dismiss button | `<Button variant="ghost" size="sm">` |
+All interactive elements in TokenEditor use raw HTML. See "Architectural Decision" above.
 
-### AccessibilityPanel.tsx (After Refactor)
+### AccessibilityPanel.tsx — Raw HTML (Architectural Constraint)
 
-| File | Element | Arcana Component |
-|------|---------|-----------------|
-| AccessibilityPanel.tsx | Section headers (x4) | `<Button variant="ghost">` |
-| AccessibilityPanel.tsx | AA/AAA compliance badges | `<Badge variant="success/error" size="sm">` |
-| AccessibilityPanel.tsx | Progress bar | `<ProgressBar>` |
-| AccessibilityPanel.tsx | Color blindness filter buttons (x5) | `<Button variant="primary/ghost" size="sm">` |
-| AccessibilityPanel.tsx | Auto-fix apply buttons | `<Button variant="primary" size="sm">` |
+All interactive elements in AccessibilityPanel use raw HTML. See "Architectural Decision" above.
 
 ### Landing.tsx (After Refactor)
 
@@ -77,24 +68,20 @@ Already uses 60+ Arcana components. No changes needed.
 | Landing.tsx | Mobile menu toggle | `<Button variant="ghost">` |
 | Landing.tsx | Mobile menu close | `<Button variant="ghost">` |
 | Landing.tsx | Hero "Coming Soon" badge | `<Badge variant="info">` |
-| Landing.tsx | Hero prompt input | `<Input>` |
 | Landing.tsx | Hero submit button | `<Button variant="primary">` |
 | Landing.tsx | Showcase "Active" badge | `<Badge variant="success" size="sm">` |
 | Landing.tsx | CTA "Open Playground" button | `<Button variant="primary" size="lg">` |
 | Landing.tsx | CTA "View on GitHub" button | `<Button variant="outline" size="lg">` |
 
-### ColorPicker.tsx (After Refactor)
+**Note:** Hero prompt input uses raw `<input>` — Arcana `<Input>` wrapper markup breaks the custom dark prompt layout.
 
-| File | Element | Arcana Component |
-|------|---------|-----------------|
-| ColorPicker.tsx | Eyedropper button | `<Button variant="ghost" size="sm">` |
+### ColorPicker.tsx — Raw HTML (Architectural Constraint)
 
-### CubicBezierEditor.tsx (After Refactor)
+Eyedropper button uses raw HTML. Arcana Button's `overflow: hidden` clips the popup.
 
-| File | Element | Arcana Component |
-|------|---------|-----------------|
-| CubicBezierEditor.tsx | Play animation button | `<Button variant="ghost" size="sm">` |
-| CubicBezierEditor.tsx | Preset buttons (x7) | `<Button variant="primary/ghost" size="sm">` |
+### CubicBezierEditor.tsx — Raw HTML (Architectural Constraint)
+
+Play and preset buttons use raw HTML. See "Architectural Decision" above.
 
 ---
 
@@ -167,8 +154,9 @@ Components the playground needs that don't exist in Arcana:
 | Check | Result |
 |-------|--------|
 | `pnpm build` | Passes |
-| `pnpm lint` | Passes (only pre-existing warnings) |
+| `pnpm lint` | Passes (only pre-existing warnings/1 error) |
 | `pnpm test` | 928 tests pass |
 | Console errors | None introduced |
-| All standard UI elements use Arcana imports | Yes |
-| Arcana component usage > 90% | ~91% |
+| Landing page uses Arcana Button/Badge | Yes |
+| Token editor uses raw HTML (architectural constraint) | Yes |
+| Arcana component usage | ~70% (limited by token editor constraint) |

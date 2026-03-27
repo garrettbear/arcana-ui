@@ -1,4 +1,3 @@
-import { Badge, Button, ProgressBar } from '@arcana-ui/core';
 import React, { useState, useEffect, useCallback } from 'react';
 import { contrastRatio, suggestFix, wcagLevel } from '../utils/contrast';
 import styles from './AccessibilityPanel.module.css';
@@ -258,14 +257,14 @@ export function AccessibilityPanel() {
 
       {/* Score card */}
       <div className={styles.section}>
-        <Button
-          variant="ghost"
+        <button
+          type="button"
           className={styles.sectionHeader}
           onClick={() => toggleSection('score')}
         >
           <span className={styles.toggle}>{openSections.has('score') ? '▾' : '▸'}</span>
           <span className={styles.sectionLabel}>A11y Score</span>
-        </Button>
+        </button>
         {openSections.has('score') && (
           <div className={styles.scoreCard}>
             <div className={styles.gradeDisplay} style={{ color: gradeColor }}>
@@ -292,11 +291,12 @@ export function AccessibilityPanel() {
               </div>
             </div>
             {checkable.length > 0 && (
-              <ProgressBar
-                value={Math.round((passing.length / checkable.length) * 100)}
-                max={100}
-                className={styles.progressBar}
-              />
+              <div className={styles.progressBar}>
+                <div
+                  className={styles.progressFill}
+                  style={{ width: `${Math.round((passing.length / checkable.length) * 100)}%` }}
+                />
+              </div>
             )}
           </div>
         )}
@@ -304,14 +304,14 @@ export function AccessibilityPanel() {
 
       {/* Contrast checker */}
       <div className={styles.section}>
-        <Button
-          variant="ghost"
+        <button
+          type="button"
           className={styles.sectionHeader}
           onClick={() => toggleSection('contrast')}
         >
           <span className={styles.toggle}>{openSections.has('contrast') ? '▾' : '▸'}</span>
           <span className={styles.sectionLabel}>Contrast Ratios</span>
-        </Button>
+        </button>
         {openSections.has('contrast') && (
           <div className={styles.contrastTable}>
             {results.map((result) => (
@@ -342,24 +342,20 @@ export function AccessibilityPanel() {
                     </span>
                     {result.level !== 'N/A' && (
                       <>
-                        <Badge
-                          variant={result.level !== 'Fail' ? 'success' : 'error'}
-                          size="sm"
+                        <span
                           className={`${styles.badge} ${
                             result.level !== 'Fail' ? styles.badgePass : styles.badgeFail
                           }`}
                         >
                           AA {result.level !== 'Fail' ? '✓' : '✗'}
-                        </Badge>
-                        <Badge
-                          variant={result.level === 'AAA' ? 'success' : 'error'}
-                          size="sm"
+                        </span>
+                        <span
                           className={`${styles.badge} ${
                             result.level === 'AAA' ? styles.badgePass : styles.badgeFail
                           }`}
                         >
                           AAA {result.level === 'AAA' ? '✓' : '✗'}
-                        </Badge>
+                        </span>
                       </>
                     )}
                   </div>
@@ -372,26 +368,25 @@ export function AccessibilityPanel() {
 
       {/* Color blindness simulator */}
       <div className={styles.section}>
-        <Button
-          variant="ghost"
+        <button
+          type="button"
           className={styles.sectionHeader}
           onClick={() => toggleSection('colorblind')}
         >
           <span className={styles.toggle}>{openSections.has('colorblind') ? '▾' : '▸'}</span>
           <span className={styles.sectionLabel}>Color Blindness</span>
-        </Button>
+        </button>
         {openSections.has('colorblind') && (
           <div className={styles.cbGrid}>
             {CB_FILTERS.map((filter) => (
-              <Button
+              <button
+                type="button"
                 key={filter.id}
-                variant={activeFilter === filter.id ? 'primary' : 'ghost'}
-                size="sm"
                 className={`${styles.cbBtn} ${activeFilter === filter.id ? styles.cbActive : ''}`}
                 onClick={() => handleFilterChange(filter.id)}
               >
                 {filter.label}
-              </Button>
+              </button>
             ))}
           </div>
         )}
@@ -400,8 +395,8 @@ export function AccessibilityPanel() {
       {/* Auto-fix suggestions */}
       {failing.length > 0 && (
         <div className={styles.section}>
-          <Button
-            variant="ghost"
+          <button
+            type="button"
             className={styles.sectionHeader}
             onClick={() => toggleSection('fixes')}
           >
@@ -409,7 +404,7 @@ export function AccessibilityPanel() {
             <span className={styles.sectionLabel}>
               Auto-Fix ({failing.length} issue{failing.length !== 1 ? 's' : ''})
             </span>
-          </Button>
+          </button>
           {openSections.has('fixes') && (
             <div className={styles.fixList}>
               {results
@@ -432,14 +427,13 @@ export function AccessibilityPanel() {
                             />
                             <span className={styles.fixColor}>{result.fixSuggestion}</span>
                             {pair && (
-                              <Button
-                                variant="primary"
-                                size="sm"
+                              <button
+                                type="button"
                                 className={styles.fixApplyBtn}
                                 onClick={() => handleApplyFix(pair.fgVar, result.fixSuggestion!)}
                               >
                                 Apply
-                              </Button>
+                              </button>
                             )}
                           </div>
                         )}
