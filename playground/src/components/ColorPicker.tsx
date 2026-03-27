@@ -493,6 +493,38 @@ export function ColorPicker({
   const currentHex = rgbToHex(...rgbInputs);
   const alphaColor = `rgba(${rgbInputs[0]},${rgbInputs[1]},${rgbInputs[2]},`;
 
+  // Position popup so it stays within the editor panel
+  const [popupLeft, setPopupLeft] = useState<number | undefined>(undefined);
+
+  useLayoutEffect(() => {
+    if (!open || !rootRef.current || !popupRef.current) return;
+    const root = rootRef.current;
+    const popup = popupRef.current;
+    const popupWidth = popup.offsetWidth;
+
+    // Find the scrollable editor ancestor
+    let scrollParent: HTMLElement | null = root.parentElement;
+    while (scrollParent && scrollParent.scrollHeight <= scrollParent.clientHeight) {
+      scrollParent = scrollParent.parentElement;
+    }
+    if (!scrollParent) scrollParent = document.documentElement;
+
+    const parentRect = scrollParent.getBoundingClientRect();
+    const rootRect = root.getBoundingClientRect();
+
+    // Calculate ideal centered position relative to root
+    const rootCenter = rootRect.left + rootRect.width / 2;
+    let idealLeft = rootCenter - popupWidth / 2;
+
+    // Clamp within the scroll parent bounds (with 4px padding)
+    const minLeft = parentRect.left + 4;
+    const maxLeft = parentRect.right - popupWidth - 4;
+    idealLeft = Math.max(minLeft, Math.min(idealLeft, maxLeft));
+
+    // Convert to position relative to root element
+    setPopupLeft(idealLeft - rootRect.left);
+  }, [open]);
+
   return (
     <div ref={rootRef} className={styles.root}>
       {/* Trigger swatch */}
@@ -507,7 +539,11 @@ export function ColorPicker({
 
       {/* Popup */}
       {open && (
-        <div ref={popupRef} className={styles.popup}>
+        <div
+          ref={popupRef}
+          className={styles.popup}
+          style={popupLeft !== undefined ? { left: `${popupLeft}px`, right: 'auto' } : undefined}
+        >
           {/* Saturation/Value canvas */}
           <div className={styles.canvasWrap}>
             <canvas
