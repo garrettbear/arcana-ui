@@ -1,3 +1,4 @@
+import { Badge, Button, Input } from '@arcana-ui/core';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Landing.module.css';
@@ -373,14 +374,14 @@ export default function Landing() {
 
           <div className={styles.navActions} />
 
-          <button
-            type="button"
+          <Button
+            variant="ghost"
             className={styles.navMobileToggle}
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Open menu"
           >
             <MenuIcon />
-          </button>
+          </Button>
         </div>
       </nav>
 
@@ -395,14 +396,14 @@ export default function Landing() {
           onClick={(e) => e.stopPropagation()}
           role="presentation"
         >
-          <button
-            type="button"
+          <Button
+            variant="ghost"
             className={styles.mobileMenuClose}
             onClick={() => setMobileMenuOpen(false)}
             aria-label="Close menu"
           >
             <CloseIcon />
-          </button>
+          </Button>
           <ul className={styles.mobileMenuLinks}>
             <li>
               <a
@@ -438,10 +439,10 @@ export default function Landing() {
       <main>
         {/* ═══ SECTION 2: Hero ═══ */}
         <section className={styles.hero}>
-          <div className={styles.heroBadge}>
+          <Badge variant="info" className={styles.heroBadge}>
             <span className={styles.heroBadgeDot} />
             Coming Soon
-          </div>
+          </Badge>
 
           <h1 className={styles.heroHeadline}>
             Describe your brand.
@@ -454,7 +455,7 @@ export default function Landing() {
           </p>
 
           <form onSubmit={handlePromptSubmit} className={styles.promptWrap}>
-            <input
+            <Input
               type="text"
               className={styles.promptInput}
               placeholder="Tell me about your brand — colors, mood, industry..."
@@ -462,13 +463,14 @@ export default function Landing() {
               onChange={(e) => setPromptValue(e.target.value)}
               aria-label="Describe your brand"
             />
-            <button
-              type="submit"
+            <Button
+              variant="primary"
               className={styles.promptSubmit}
+              type="submit"
               aria-label="Generate design system"
             >
               <ArrowIcon />
-            </button>
+            </Button>
             <span className={styles.promptComingSoon}>AI generation coming soon</span>
           </form>
 
@@ -710,7 +712,9 @@ export default function Landing() {
                         <span>{row.plan}</span>
                         <span style={{ fontVariantNumeric: 'tabular-nums' }}>{row.mrr}</span>
                         <span>
-                          <span className={styles.showcaseBadge}>Active</span>
+                          <Badge variant="success" size="sm" className={styles.showcaseBadge}>
+                            Active
+                          </Badge>
                         </span>
                       </div>
                     ))}
@@ -749,17 +753,22 @@ export default function Landing() {
             real time.
           </p>
           <div className={styles.ctaActions}>
-            <Link to="/playground" className={styles.ctaBtnPrimary}>
+            <Button
+              variant="primary"
+              size="lg"
+              className={styles.ctaBtnPrimary}
+              onClick={() => navigate('/playground')}
+            >
               Open Playground
-            </Link>
-            <a
-              href="https://github.com/Arcana-UI/arcana"
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
               className={styles.ctaBtnSecondary}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => window.open('https://github.com/Arcana-UI/arcana', '_blank')}
             >
               View on GitHub
-            </a>
+            </Button>
           </div>
         </section>
       </main>
