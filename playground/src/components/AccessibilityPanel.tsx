@@ -257,7 +257,11 @@ export function AccessibilityPanel() {
 
       {/* Score card */}
       <div className={styles.section}>
-        <button className={styles.sectionHeader} onClick={() => toggleSection('score')}>
+        <button
+          type="button"
+          className={styles.sectionHeader}
+          onClick={() => toggleSection('score')}
+        >
           <span className={styles.toggle}>{openSections.has('score') ? '▾' : '▸'}</span>
           <span className={styles.sectionLabel}>A11y Score</span>
         </button>
@@ -290,13 +294,7 @@ export function AccessibilityPanel() {
               <div className={styles.progressBar}>
                 <div
                   className={styles.progressFill}
-                  style={{
-                    width: `${(passing.length / checkable.length) * 100}%`,
-                    background:
-                      passing.length === checkable.length
-                        ? 'var(--color-status-success)'
-                        : 'var(--color-status-warning)',
-                  }}
+                  style={{ width: `${Math.round((passing.length / checkable.length) * 100)}%` }}
                 />
               </div>
             )}
@@ -306,7 +304,11 @@ export function AccessibilityPanel() {
 
       {/* Contrast checker */}
       <div className={styles.section}>
-        <button className={styles.sectionHeader} onClick={() => toggleSection('contrast')}>
+        <button
+          type="button"
+          className={styles.sectionHeader}
+          onClick={() => toggleSection('contrast')}
+        >
           <span className={styles.toggle}>{openSections.has('contrast') ? '▾' : '▸'}</span>
           <span className={styles.sectionLabel}>Contrast Ratios</span>
         </button>
@@ -366,7 +368,11 @@ export function AccessibilityPanel() {
 
       {/* Color blindness simulator */}
       <div className={styles.section}>
-        <button className={styles.sectionHeader} onClick={() => toggleSection('colorblind')}>
+        <button
+          type="button"
+          className={styles.sectionHeader}
+          onClick={() => toggleSection('colorblind')}
+        >
           <span className={styles.toggle}>{openSections.has('colorblind') ? '▾' : '▸'}</span>
           <span className={styles.sectionLabel}>Color Blindness</span>
         </button>
@@ -374,6 +380,7 @@ export function AccessibilityPanel() {
           <div className={styles.cbGrid}>
             {CB_FILTERS.map((filter) => (
               <button
+                type="button"
                 key={filter.id}
                 className={`${styles.cbBtn} ${activeFilter === filter.id ? styles.cbActive : ''}`}
                 onClick={() => handleFilterChange(filter.id)}
@@ -388,7 +395,11 @@ export function AccessibilityPanel() {
       {/* Auto-fix suggestions */}
       {failing.length > 0 && (
         <div className={styles.section}>
-          <button className={styles.sectionHeader} onClick={() => toggleSection('fixes')}>
+          <button
+            type="button"
+            className={styles.sectionHeader}
+            onClick={() => toggleSection('fixes')}
+          >
             <span className={styles.toggle}>{openSections.has('fixes') ? '▾' : '▸'}</span>
             <span className={styles.sectionLabel}>
               Auto-Fix ({failing.length} issue{failing.length !== 1 ? 's' : ''})
@@ -417,6 +428,7 @@ export function AccessibilityPanel() {
                             <span className={styles.fixColor}>{result.fixSuggestion}</span>
                             {pair && (
                               <button
+                                type="button"
                                 className={styles.fixApplyBtn}
                                 onClick={() => handleApplyFix(pair.fgVar, result.fixSuggestion!)}
                               >

@@ -127,6 +127,7 @@
 .progressFill {
   height: 100%;
   border-radius: 2px;
+  background: var(--color-status-success);
   transition: width 300ms ease;
 }
 

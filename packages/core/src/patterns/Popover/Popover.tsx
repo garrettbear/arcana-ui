@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useFloating } from '../../hooks/useFloating';
 import { cn } from '../../utils/cn';
 import styles from './Popover.module.css';
 
@@ -33,69 +34,6 @@ export interface PopoverProps {
   className?: string;
 }
 
-// ─── Position Calculator ────────────────────────────────────────────────────
-
-interface Position {
-  top: number;
-  left: number;
-  actualSide: 'top' | 'right' | 'bottom' | 'left';
-}
-
-function calcPosition(
-  triggerRect: DOMRect,
-  popoverRect: DOMRect,
-  side: 'top' | 'right' | 'bottom' | 'left',
-  align: 'start' | 'center' | 'end',
-  offset: number,
-): Position {
-  let top = 0;
-  let left = 0;
-  let actualSide = side;
-
-  // Primary positioning
-  if (side === 'bottom') {
-    top = triggerRect.bottom + offset;
-    if (top + popoverRect.height > window.innerHeight) {
-      top = triggerRect.top - popoverRect.height - offset;
-      actualSide = 'top';
-    }
-  } else if (side === 'top') {
-    top = triggerRect.top - popoverRect.height - offset;
-    if (top < 0) {
-      top = triggerRect.bottom + offset;
-      actualSide = 'bottom';
-    }
-  } else if (side === 'right') {
-    left = triggerRect.right + offset;
-    if (left + popoverRect.width > window.innerWidth) {
-      left = triggerRect.left - popoverRect.width - offset;
-      actualSide = 'left';
-    }
-  } else {
-    left = triggerRect.left - popoverRect.width - offset;
-    if (left < 0) {
-      left = triggerRect.right + offset;
-      actualSide = 'right';
-    }
-  }
-
-  // Cross-axis alignment
-  if (actualSide === 'top' || actualSide === 'bottom') {
-    if (align === 'start') left = triggerRect.left;
-    else if (align === 'end') left = triggerRect.right - popoverRect.width;
-    else left = triggerRect.left + (triggerRect.width - popoverRect.width) / 2;
-    // Clamp to viewport
-    left = Math.max(8, Math.min(left, window.innerWidth - popoverRect.width - 8));
-  } else {
-    if (align === 'start') top = triggerRect.top;
-    else if (align === 'end') top = triggerRect.bottom - popoverRect.height;
-    else top = triggerRect.top + (triggerRect.height - popoverRect.height) / 2;
-    top = Math.max(8, Math.min(top, window.innerHeight - popoverRect.height - 8));
-  }
-
-  return { top, left, actualSide };
-}
-
 // ─── Popover ────────────────────────────────────────────────────────────────
 
 export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
@@ -120,10 +58,17 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
     const [internalOpen, setInternalOpen] = useState(defaultOpen);
     const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
 
-    const triggerRef = useRef<HTMLDivElement>(null);
-    const popoverRef = useRef<HTMLDivElement>(null);
     const hoverTimeoutRef = useRef<number>(0);
-    const [position, setPosition] = useState<Position>({ top: 0, left: 0, actualSide: side });
+
+    const { triggerRef, floatingRef, position, floatingStyles } = useFloating<
+      HTMLDivElement,
+      HTMLDivElement
+    >({
+      open: isOpen,
+      placement: side,
+      alignment: align,
+      offset: sideOffset,
+    });
 
     const setOpen = useCallback(
       (value: boolean) => {
@@ -133,43 +78,18 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
       [controlledOpen, onOpenChange],
     );
 
-    // ─── Position calculation ─────────────────────────────────────
-    useLayoutEffect(() => {
-      if (!isOpen || !triggerRef.current || !popoverRef.current) return;
-      const triggerRect = triggerRef.current.getBoundingClientRect();
-      const popoverRect = popoverRef.current.getBoundingClientRect();
-      setPosition(calcPosition(triggerRect, popoverRect, side, align, sideOffset));
-    }, [isOpen, side, align, sideOffset]);
-
-    // Reposition on scroll/resize
-    useEffect(() => {
-      if (!isOpen) return;
-      const update = () => {
-        if (!triggerRef.current || !popoverRef.current) return;
-        const triggerRect = triggerRef.current.getBoundingClientRect();
-        const popoverRect = popoverRef.current.getBoundingClientRect();
-        setPosition(calcPosition(triggerRect, popoverRect, side, align, sideOffset));
-      };
-      window.addEventListener('scroll', update, true);
-      window.addEventListener('resize', update);
-      return () => {
-        window.removeEventListener('scroll', update, true);
-        window.removeEventListener('resize', update);
-      };
-    }, [isOpen, side, align, sideOffset]);
-
     // ─── Click outside ────────────────────────────────────────────
     useEffect(() => {
       if (!isOpen || !closeOnOutsideClick) return;
       const handler = (e: MouseEvent) => {
         const target = e.target as Node;
-        if (!triggerRef.current?.contains(target) && !popoverRef.current?.contains(target)) {
+        if (!triggerRef.current?.contains(target) && !floatingRef.current?.contains(target)) {
           setOpen(false);
         }
       };
       document.addEventListener('mousedown', handler);
       return () => document.removeEventListener('mousedown', handler);
-    }, [isOpen, closeOnOutsideClick, setOpen]);
+    }, [isOpen, closeOnOutsideClick, setOpen, triggerRef, floatingRef]);
 
     // ─── Escape key ───────────────────────────────────────────────
     useEffect(() => {
@@ -211,13 +131,13 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
         setTimeout(() => {
           if (
             !triggerRef.current?.contains(document.activeElement) &&
-            !popoverRef.current?.contains(document.activeElement)
+            !floatingRef.current?.contains(document.activeElement)
           ) {
             setOpen(false);
           }
         }, 100);
       }
-    }, [triggerOn, setOpen]);
+    }, [triggerOn, setOpen, triggerRef, floatingRef]);
 
     return (
       <div ref={ref} className={styles.popoverWrapper} style={{ display: 'inline-block' }}>
@@ -239,18 +159,14 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
         </div>
         {isOpen && (
           <div
-            ref={popoverRef}
-            className={cn(styles.popover, styles[`side-${position.actualSide}`], className)}
-            style={{
-              position: 'fixed',
-              top: `${position.top}px`,
-              left: `${position.left}px`,
-            }}
+            ref={floatingRef}
+            className={cn(styles.popover, styles[`side-${position.placement}`], className)}
+            style={floatingStyles}
             onMouseEnter={triggerOn === 'hover' ? handleMouseEnter : undefined}
             onMouseLeave={triggerOn === 'hover' ? handleMouseLeave : undefined}
           >
             {showArrow && (
-              <div className={cn(styles.arrow, styles[`arrow-${position.actualSide}`])} />
+              <div className={cn(styles.arrow, styles[`arrow-${position.placement}`])} />
             )}
             {content}
           </div>

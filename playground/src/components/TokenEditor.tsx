@@ -1243,11 +1243,11 @@ export function TokenEditor({
                 <select
                   id="type-ratio"
                   className={styles.fontSelect}
-                  value={typeRatio}
+                  value={String(typeRatio)}
                   onChange={(e) => handleTypeRatioChange(Number.parseFloat(e.target.value))}
                 >
                   {TYPE_SCALE_RATIOS.map((r) => (
-                    <option key={r.value} value={r.value}>
+                    <option key={r.value} value={String(r.value)}>
                       {r.label}
                     </option>
                   ))}

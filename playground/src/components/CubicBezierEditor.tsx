@@ -371,8 +371,8 @@ export function CubicBezierEditor({
             Math.abs(p.values.y2 - values.y2) < 0.01;
           return (
             <button
-              key={p.label}
               type="button"
+              key={p.label}
               className={`${styles.presetBtn} ${active ? styles.presetActive : ''}`}
               onClick={() => onChange(p.values, p.css)}
             >

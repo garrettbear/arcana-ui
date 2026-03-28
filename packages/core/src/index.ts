@@ -277,6 +277,14 @@ export { useBreakpoint } from './hooks/useBreakpoint';
 export type { Breakpoint, UseBreakpointReturn } from './hooks/useBreakpoint';
 export { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion';
 export { useHotkey } from './hooks/useHotkey';
+export { useFloating } from './hooks/useFloating';
+export type {
+  Placement,
+  Alignment,
+  FloatingPosition,
+  UseFloatingOptions,
+  UseFloatingReturn,
+} from './hooks/useFloating';
 export { useTheme } from './hooks/useTheme';
 export type { ThemeId, ThemeSource, UseThemeReturn } from './hooks/useTheme';
 

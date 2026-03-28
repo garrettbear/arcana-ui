@@ -15,6 +15,7 @@
  * Uses requestAnimationFrame for drag performance.
  */
 
+import { useFloating } from '@arcana-ui/core';
 import type React from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styles from './ColorPicker.module.css';
@@ -191,7 +192,17 @@ export function ColorPicker({
 }: ColorPickerProps): React.ReactElement {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const popupRef = useRef<HTMLDivElement | null>(null);
+
+  const {
+    triggerRef: swatchRef,
+    floatingRef: popupRef,
+    floatingStyles,
+  } = useFloating<HTMLButtonElement, HTMLDivElement>({
+    open,
+    placement: 'bottom',
+    alignment: 'start',
+    offset: 6,
+  });
 
   // Parse value to initial state
   const [hsv, setHsv] = useState<{ h: number; s: number; v: number }>({ h: 210, s: 0.7, v: 0.9 });
@@ -497,6 +508,7 @@ export function ColorPicker({
     <div ref={rootRef} className={styles.root}>
       {/* Trigger swatch */}
       <button
+        ref={swatchRef}
         type="button"
         className={styles.swatch}
         style={{ background: value }}
@@ -507,7 +519,7 @@ export function ColorPicker({
 
       {/* Popup */}
       {open && (
-        <div ref={popupRef} className={styles.popup}>
+        <div ref={popupRef} className={styles.popup} style={floatingStyles}>
           {/* Saturation/Value canvas */}
           <div className={styles.canvasWrap}>
             <canvas

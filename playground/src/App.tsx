@@ -109,7 +109,7 @@ import {
 import type { ColumnDef, CommandItem } from '@arcana-ui/core';
 import type React from 'react';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import styles from './App.module.css';
 import { AccessibilityPanel } from './components/AccessibilityPanel';
 import { TokenEditor } from './components/TokenEditor';
@@ -3801,6 +3801,18 @@ export default function App() {
             <span className={styles.brandVersion}>v0.1.0</span>
             <span className={styles.componentCount}>60+ components</span>
           </div>
+
+          <nav className={styles.playgroundNav}>
+            <span className={`${styles.playgroundNavLink} ${styles.playgroundNavActive}`}>
+              Editor
+            </span>
+            <Link to="/playground/components" className={styles.playgroundNavLink}>
+              Components
+            </Link>
+            <Link to="/playground/tokens" className={styles.playgroundNavLink}>
+              Tokens
+            </Link>
+          </nav>
 
           <div className={styles.topbarSpacer} />
 

@@ -1,0 +1,191 @@
+/* ─── Page ─────────────────────────────────────────────────────────────────── */
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.header {
+  margin-bottom: var(--spacing-6);
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.subtitle {
+  font-size: var(--font-size-md);
+  color: var(--color-fg-secondary);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+/* ─── Toolbar ─────────────────────────────────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-6);
+}
+
+.searchWrap {
+  max-width: 400px;
+}
+
+.categoryFilter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.categoryChip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-fg-secondary);
+  background: transparent;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-colors);
+  white-space: nowrap;
+  font-family: var(--font-family-body);
+}
+
+.categoryChip:hover {
+  background: var(--color-action-ghost-hover);
+}
+
+.categoryChipActive {
+  background: var(--color-action-outline-hover);
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
+}
+
+/* ─── Groups ──────────────────────────────────────────────────────────────── */
+
+.group {
+  margin-bottom: var(--spacing-8);
+}
+
+.groupTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-1) 0;
+}
+
+.groupDesc {
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-muted);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+/* ─── Token grid ──────────────────────────────────────────────────────────── */
+
+.tokenGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2);
+}
+
+@media (min-width: 640px) {
+  .tokenGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .tokenGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tokenCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  padding: var(--spacing-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-colors), var(--transition-shadow);
+  background: var(--color-bg-page);
+}
+
+.tokenCard:hover {
+  border-color: var(--color-action-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.tokenCardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.tokenCardName {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  color: var(--color-fg-primary);
+  word-break: break-all;
+}
+
+.tokenCardValue {
+  font-size: 11px;
+}
+
+.tokenCardValue code {
+  font-family: var(--font-family-mono);
+  color: var(--color-fg-muted);
+  word-break: break-all;
+}
+
+.tokenCardMeta {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+}
+
+/* ─── Previews ────────────────────────────────────────────────────────────── */
+
+.colorSwatch {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-default);
+  flex-shrink: 0;
+}
+
+.shadowPreview {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  flex-shrink: 0;
+}
+
+.radiusPreview {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: var(--color-action-primary);
+  flex-shrink: 0;
+}
+
+/* ─── Empty ───────────────────────────────────────────────────────────────── */
+
+.empty {
+  text-align: center;
+  padding: var(--spacing-12) var(--spacing-4);
+  color: var(--color-fg-muted);
+}
