@@ -1,0 +1,279 @@
+/* ─── Page ─────────────────────────────────────────────────────────────────── */
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.section {
+  margin: var(--spacing-6) 0;
+}
+
+.sectionTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.sectionDesc {
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+/* ─── Token header ────────────────────────────────────────────────────────── */
+
+.tokenHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-4);
+}
+
+.tokenFullName {
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.tokenFullName code {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-fg-primary);
+}
+
+.tokenMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.usageCount {
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-muted);
+}
+
+.tokenCurrentValue {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.colorSwatchLarge {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-border-default);
+  flex-shrink: 0;
+}
+
+.valueLabel {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+  margin-bottom: 2px;
+}
+
+.valueCode {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-primary);
+}
+
+/* ─── Fallback ────────────────────────────────────────────────────────────── */
+
+.fallbackInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-3);
+}
+
+.fallbackLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+}
+
+.fallbackCode {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-action-primary);
+}
+
+/* ─── Copy row ────────────────────────────────────────────────────────────── */
+
+.copyRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.copyRow code {
+  flex: 1;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-primary);
+}
+
+/* ─── Editor ──────────────────────────────────────────────────────────────── */
+
+.editorRow {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-3);
+  max-width: 500px;
+}
+
+.colorEditorGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: 1;
+}
+
+.colorInputLarge {
+  width: 40px;
+  height: 36px;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: 2px;
+  background: none;
+  flex-shrink: 0;
+}
+
+/* ─── Affected components grid ────────────────────────────────────────────── */
+
+.affectedGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-3);
+}
+
+@media (min-width: 640px) {
+  .affectedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .affectedGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.affectedCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-colors), var(--transition-shadow);
+  background: var(--color-bg-page);
+}
+
+.affectedCard:hover {
+  border-color: var(--color-action-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.affectedPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  padding: var(--spacing-2);
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.affectedName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-fg-primary);
+  text-align: center;
+}
+
+.miniPlaceholder {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+}
+
+/* ─── Related tokens ──────────────────────────────────────────────────────── */
+
+.relatedGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.relatedToken {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: var(--transition-colors);
+}
+
+.relatedToken:hover {
+  border-color: var(--color-action-primary);
+  background: var(--color-action-ghost-hover);
+}
+
+.colorSwatchSmall {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid var(--color-border-default);
+  flex-shrink: 0;
+}
+
+.relatedTokenName {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  color: var(--color-fg-primary);
+}
+
+/* ─── Not found ───────────────────────────────────────────────────────────── */
+
+.notFound {
+  text-align: center;
+  padding: var(--spacing-12) var(--spacing-4);
+}
+
+.notFound h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.notFound p {
+  color: var(--color-fg-secondary);
+  margin: 0 0 var(--spacing-4) 0;
+}

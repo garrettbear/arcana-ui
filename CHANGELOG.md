@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Playground site map architecture with individual component pages, token impact views, and relationship graph
+- Component gallery at `/playground/components` with search, category filter, and visual previews
+- Individual component deep-dive pages at `/playground/components/:name` with variants, sizes, states, interactive demo, component tokens editor, props reference, and token dependencies
+- Token explorer at `/playground/tokens` with search, category filter, and usage counts
+- Token impact pages at `/playground/tokens/:category/:name` showing inline editor and all affected components rendered live
+- Token-component relationship graph at `/playground/graph` — interactive Canvas visualization with hover highlighting, zoom, pan, and node clicking
+- Component-to-token mapping build script (`scripts/generate-token-map.mjs`) that scans all 67 component CSS files and generates a JSON registry of 551 tokens
+- Shared `PlaygroundLayout` with top navigation (Editor, Components, Tokens, Graph), theme switcher bar, and breadcrumb navigation
+- Component registry data (`playground/src/data/component-registry.ts`) with metadata for 55+ components
+- Deep linking support — all routes accept `?theme=` parameter for shareable links
+- Theme persistence across all playground routes
+- Navigation links added to main editor page for cross-navigation
 - Component-level token editor in playground
 - ThemeSwitcher component for demo sites
 - Playground component audit report (`docs/audits/playground-component-audit.md`)

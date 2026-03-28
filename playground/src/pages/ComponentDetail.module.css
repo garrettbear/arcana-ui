@@ -1,0 +1,398 @@
+/* ─── Page ─────────────────────────────────────────────────────────────────── */
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+/* ─── Section ─────────────────────────────────────────────────────────────── */
+
+.section {
+  margin-bottom: var(--spacing-8);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.sectionHeader .sectionTitle {
+  margin-bottom: 0;
+}
+
+.sectionSubtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+  margin: 0 0 var(--spacing-3) 0;
+}
+
+/* ─── Overview ────────────────────────────────────────────────────────────── */
+
+.overviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.componentName {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.componentDesc {
+  font-size: var(--font-size-md);
+  color: var(--color-fg-secondary);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.overviewBadges {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.importBlock {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.importCode {
+  flex: 1;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-primary);
+  overflow-x: auto;
+}
+
+/* ─── Variant/Size/State grids ────────────────────────────────────────────── */
+
+.variantGrid,
+.sizeGrid,
+.stateGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+}
+
+.variantItem,
+.sizeItem,
+.stateItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.variantPreview,
+.sizePreview,
+.statePreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  min-height: 60px;
+  padding: var(--spacing-3);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.variantLabel,
+.sizeLabel,
+.stateLabel {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+  color: var(--color-fg-muted);
+}
+
+/* ─── Interactive demo ────────────────────────────────────────────────────── */
+
+.demoLayout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.demoPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  padding: var(--spacing-6);
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-md);
+}
+
+.demoControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  align-items: flex-end;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  min-width: 120px;
+}
+
+.controlLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-fg-secondary);
+}
+
+/* ─── Token table ─────────────────────────────────────────────────────────── */
+
+.tokenTable {
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.tokenTableHeader,
+.tokenTableRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 120px;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  align-items: center;
+}
+
+.tokenTableHeader {
+  background: var(--color-bg-surface);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-secondary);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.tokenTableRow {
+  border-bottom: 1px solid var(--color-border-default);
+  font-size: var(--font-size-xs);
+}
+
+.tokenTableRow:last-child {
+  border-bottom: none;
+}
+
+.tokenName {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-action-primary);
+  word-break: break-all;
+}
+
+.tokenFallback {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+  word-break: break-all;
+}
+
+.tokenValue {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.colorSwatch {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-default);
+  flex-shrink: 0;
+}
+
+.colorInput {
+  width: 32px;
+  height: 24px;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+
+/* ─── Props table ─────────────────────────────────────────────────────────── */
+
+.propsTable {
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.propsTableHeader,
+.propsTableRow {
+  display: grid;
+  grid-template-columns: 140px 1fr 100px 1fr;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  align-items: center;
+}
+
+.propsTableHeader {
+  background: var(--color-bg-surface);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-secondary);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.propsTableRow {
+  border-bottom: 1px solid var(--color-border-default);
+  font-size: var(--font-size-xs);
+}
+
+.propsTableRow:last-child {
+  border-bottom: none;
+}
+
+.propName {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-action-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.required {
+  color: var(--color-status-error-fg);
+  margin-left: 2px;
+}
+
+.propType {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  color: var(--color-fg-muted);
+  word-break: break-all;
+}
+
+.propDefault {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-secondary);
+}
+
+.propDesc {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-secondary);
+}
+
+/* ─── Token Dependencies ──────────────────────────────────────────────────── */
+
+.depGroups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.depGroup {
+}
+
+.depGroupTitle {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-2) 0;
+  text-transform: capitalize;
+}
+
+.depTokenList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.depToken {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-colors);
+}
+
+.depToken:hover {
+  background: var(--color-action-ghost-hover);
+}
+
+.depToken code {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-primary);
+}
+
+/* ─── Generic placeholder ─────────────────────────────────────────────────── */
+
+.genericPlaceholder {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-muted);
+  padding: var(--spacing-4);
+}
+
+/* ─── Not found ───────────────────────────────────────────────────────────── */
+
+.notFound {
+  text-align: center;
+  padding: var(--spacing-12) var(--spacing-4);
+}
+
+.notFound h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.notFound p {
+  color: var(--color-fg-secondary);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 639px) {
+  .tokenTableHeader,
+  .tokenTableRow {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-1);
+  }
+
+  .propsTableHeader,
+  .propsTableRow {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-1);
+  }
+
+  .tokenTableHeader,
+  .propsTableHeader {
+    display: none;
+  }
+}

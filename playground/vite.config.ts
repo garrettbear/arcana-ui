@@ -9,4 +9,8 @@ export default defineConfig({
       '@arcana-ui/core': path.resolve(__dirname, '../packages/core/src/index.ts'),
     },
   },
+  // Enable JSON imports for token-map.json
+  json: {
+    stringify: false,
+  },
 });
