@@ -1,44 +1,18 @@
 /* ─── Page ─────────────────────────────────────────────────────────────────── */
 
 .page {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: var(--spacing-6) var(--spacing-4);
 }
 
-/* ─── Section ─────────────────────────────────────────────────────────────── */
+/* ─── Header ─────────────────────────────────────────────────────────────── */
 
-.section {
-  margin-bottom: var(--spacing-8);
+.header {
+  margin-bottom: var(--spacing-6);
 }
 
-.sectionHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--spacing-4);
-}
-
-.sectionTitle {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-fg-primary);
-  margin: 0 0 var(--spacing-4) 0;
-}
-
-.sectionHeader .sectionTitle {
-  margin-bottom: 0;
-}
-
-.sectionSubtitle {
-  font-size: var(--font-size-sm);
-  color: var(--color-fg-secondary);
-  margin: 0 0 var(--spacing-3) 0;
-}
-
-/* ─── Overview ────────────────────────────────────────────────────────────── */
-
-.overviewHeader {
+.headerTop {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -51,7 +25,7 @@
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-fg-primary);
-  margin: 0 0 var(--spacing-2) 0;
+  margin: 0 0 var(--spacing-1) 0;
 }
 
 .componentDesc {
@@ -61,7 +35,7 @@
   line-height: var(--line-height-relaxed);
 }
 
-.overviewBadges {
+.headerBadges {
   display: flex;
   gap: var(--spacing-2);
   flex-wrap: wrap;
@@ -86,28 +60,318 @@
   overflow-x: auto;
 }
 
-/* ─── Variant/Size/State grids ────────────────────────────────────────────── */
+/* ─── Playground: side-by-side layout ──────────────────────────────────────── */
 
-.variantGrid,
-.sizeGrid,
-.stateGrid {
+.playground {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-8);
+  min-height: 400px;
+}
+
+/* ─── Controls sidebar (left) ────────────────────────────────────────────── */
+
+.controlsSidebar {
+  position: sticky;
+  top: var(--spacing-4);
+  align-self: start;
+  max-height: calc(100vh - var(--spacing-8));
+  overflow-y: auto;
+}
+
+.controlsPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-3);
+}
+
+.controlsSection {
+  padding: var(--spacing-2) 0;
+}
+
+.controlsSection + .controlsSection {
+  border-top: 1px solid var(--color-border-default);
+}
+
+.controlsSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-2);
+}
+
+.controlsSectionTitle {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.controlsSectionHeader .controlsSectionTitle {
+  margin-bottom: 0;
+}
+
+.resetButton {
+  font-size: var(--font-size-xs);
+  color: var(--color-action-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  transition: var(--transition-colors);
+}
+
+.resetButton:hover {
+  background: var(--color-action-ghost-hover);
+}
+
+/* ─── Control rows ───────────────────────────────────────────────────────── */
+
+.controlRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  padding: var(--spacing-1) 0;
+}
+
+.controlLabel {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-secondary);
+}
+
+.nativeSelect {
+  flex: 0 0 auto;
+  min-width: 100px;
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+  background: var(--color-bg-primary);
+  color: var(--color-fg-primary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition-colors);
+}
+
+.nativeSelect:focus {
+  border-color: var(--color-action-primary);
+  box-shadow: 0 0 0 2px var(--color-action-primary-light, rgba(99, 102, 241, 0.2));
+}
+
+.nativeCheckbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--color-action-primary);
+}
+
+/* ─── Token editor rows ──────────────────────────────────────────────────── */
+
+.tokenList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.tokenEditRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tokenEditLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.tokenEditName {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  color: var(--color-fg-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modifiedDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-action-primary);
+  flex-shrink: 0;
+}
+
+.tokenEditControl {
+  display: flex;
+  align-items: center;
+}
+
+.colorEditGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+.colorInput {
+  width: 28px;
+  height: 22px;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  flex-shrink: 0;
+}
+
+.tokenEditValue {
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  color: var(--color-fg-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.textInput {
+  width: 100%;
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+  background: var(--color-bg-primary);
+  color: var(--color-fg-primary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: var(--transition-colors);
+}
+
+.textInput:focus {
+  border-color: var(--color-action-primary);
+}
+
+.textInput::placeholder {
+  color: var(--color-fg-muted);
+}
+
+/* ─── Token dependency links ─────────────────────────────────────────────── */
+
+.depList {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.depLink {
+  display: block;
+  padding: 2px var(--spacing-1);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: var(--transition-colors);
+}
+
+.depLink:hover {
+  background: var(--color-action-ghost-hover);
+}
+
+.depLink code {
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  color: var(--color-fg-secondary);
+}
+
+.depLink:hover code {
+  color: var(--color-action-primary);
+}
+
+/* ─── Preview area (right) ───────────────────────────────────────────────── */
+
+.previewArea {
+  display: flex;
+  flex-direction: column;
+}
+
+.previewCanvas {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  min-height: 300px;
+}
+
+/* ─── Generic placeholder ────────────────────────────────────────────────── */
+
+.genericPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-6);
+}
+
+.genericPlaceholder code {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-lg);
+  color: var(--color-fg-muted);
+}
+
+.placeholderHint {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+}
+
+.testimonialWrap {
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+  font-style: italic;
+  padding: var(--spacing-4);
+}
+
+/* ─── Gallery sections (below fold) ──────────────────────────────────────── */
+
+.gallerySection {
+  margin-bottom: var(--spacing-8);
+}
+
+.gallerySectionTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.galleryGrid {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-4);
 }
 
-.variantItem,
-.sizeItem,
-.stateItem {
+.galleryItem {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-2);
 }
 
-.variantPreview,
-.sizePreview,
-.statePreview {
+.galleryPreview {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,126 +383,13 @@
   border-radius: var(--radius-md);
 }
 
-.variantLabel,
-.sizeLabel,
-.stateLabel {
+.galleryLabel {
   font-size: var(--font-size-xs);
   font-family: var(--font-family-mono);
   color: var(--color-fg-muted);
 }
 
-/* ─── Interactive demo ────────────────────────────────────────────────────── */
-
-.demoLayout {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-.demoPreview {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100px;
-  padding: var(--spacing-6);
-  background: var(--color-bg-surface);
-  border-radius: var(--radius-md);
-}
-
-.demoControls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-4);
-  align-items: flex-end;
-}
-
-.controlGroup {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-  min-width: 120px;
-}
-
-.controlLabel {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-fg-secondary);
-}
-
-/* ─── Token table ─────────────────────────────────────────────────────────── */
-
-.tokenTable {
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-.tokenTableHeader,
-.tokenTableRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 120px;
-  gap: var(--spacing-2);
-  padding: var(--spacing-2) var(--spacing-3);
-  align-items: center;
-}
-
-.tokenTableHeader {
-  background: var(--color-bg-surface);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-fg-secondary);
-  border-bottom: 1px solid var(--color-border-default);
-}
-
-.tokenTableRow {
-  border-bottom: 1px solid var(--color-border-default);
-  font-size: var(--font-size-xs);
-}
-
-.tokenTableRow:last-child {
-  border-bottom: none;
-}
-
-.tokenName {
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-xs);
-  color: var(--color-action-primary);
-  word-break: break-all;
-}
-
-.tokenFallback {
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-xs);
-  color: var(--color-fg-muted);
-  word-break: break-all;
-}
-
-.tokenValue {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-1);
-}
-
-.colorSwatch {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border-default);
-  flex-shrink: 0;
-}
-
-.colorInput {
-  width: 32px;
-  height: 24px;
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  padding: 0;
-  background: none;
-}
-
-/* ─── Props table ─────────────────────────────────────────────────────────── */
+/* ─── Props table ────────────────────────────────────────────────────────── */
 
 .propsTable {
   border: 1px solid var(--color-border-default);
@@ -302,62 +453,7 @@
   color: var(--color-fg-secondary);
 }
 
-/* ─── Token Dependencies ──────────────────────────────────────────────────── */
-
-.depGroups {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-.depGroup {
-}
-
-.depGroupTitle {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-fg-primary);
-  margin: 0 0 var(--spacing-2) 0;
-  text-transform: capitalize;
-}
-
-.depTokenList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-}
-
-.depToken {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-1) var(--spacing-2);
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  color: inherit;
-  transition: var(--transition-colors);
-}
-
-.depToken:hover {
-  background: var(--color-action-ghost-hover);
-}
-
-.depToken code {
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-xs);
-  color: var(--color-fg-primary);
-}
-
-/* ─── Generic placeholder ─────────────────────────────────────────────────── */
-
-.genericPlaceholder {
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-sm);
-  color: var(--color-fg-muted);
-  padding: var(--spacing-4);
-}
-
-/* ─── Not found ───────────────────────────────────────────────────────────── */
+/* ─── Not found ──────────────────────────────────────────────────────────── */
 
 .notFound {
   text-align: center;
@@ -376,13 +472,21 @@
   margin: 0 0 var(--spacing-4) 0;
 }
 
-/* ─── Responsive ──────────────────────────────────────────────────────────── */
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
 
-@media (max-width: 639px) {
-  .tokenTableHeader,
-  .tokenTableRow {
+@media (max-width: 767px) {
+  .playground {
     grid-template-columns: 1fr;
-    gap: var(--spacing-1);
+  }
+
+  .controlsSidebar {
+    position: static;
+    max-height: none;
+  }
+
+  .previewCanvas {
+    min-height: 200px;
+    padding: var(--spacing-4);
   }
 
   .propsTableHeader,
@@ -391,7 +495,6 @@
     gap: var(--spacing-1);
   }
 
-  .tokenTableHeader,
   .propsTableHeader {
     display: none;
   }
