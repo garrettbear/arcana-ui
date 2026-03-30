@@ -27,9 +27,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,json,css}": [
-      "biome check --write --no-errors-on-unmatched"
-    ]
+    "*.{ts,tsx,js,jsx,json,css}": ["biome check --write --no-errors-on-unmatched"]
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.1",
@@ -37,7 +35,7 @@
     "@playwright/test": "^1.56.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.3.1",
-    "typescript": "^5.9.3",
+    "typescript": "^5.6.3",
     "vitest": "^2.1.8"
   }
 }

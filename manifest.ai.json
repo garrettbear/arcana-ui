@@ -20,11 +20,7 @@
   ],
   "themeSetup": "Set data-theme='light' or data-theme='dark' on <html> element",
   "tokens": {
-    "categories": [
-      "primitive",
-      "semantic",
-      "component"
-    ],
+    "categories": ["primitive", "semantic", "component"],
     "naming": "Three-tier architecture: primitives (raw values) → semantic (contextual) → component (scoped)",
     "themeSwitch": "Set data-theme attribute on root element: 'brutalist' | 'commerce' | 'corporate' | 'dark' | 'editorial' | 'glass' | 'light' | 'midnight' | 'mono' | 'nature' | 'neon' | 'retro98' | 'startup' | 'terminal'",
     "customization": "Override any CSS custom property in your CSS to customize. All tokens are prefixed with -- (e.g., --color-action-primary)",
@@ -119,24 +115,14 @@
       "props": {
         "variant": {
           "type": "enum",
-          "values": [
-            "primary",
-            "secondary",
-            "ghost",
-            "destructive",
-            "outline"
-          ],
+          "values": ["primary", "secondary", "ghost", "destructive", "outline"],
           "required": false,
           "description": "Visual style variant",
           "default": "primary"
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["sm", "md", "lg"],
           "required": false,
           "description": "Size of the button",
           "default": "md"
@@ -183,11 +169,7 @@
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["sm", "md", "lg"],
           "required": false,
           "description": "Size of the input",
           "default": "md"
@@ -336,11 +318,7 @@
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["sm", "md", "lg"],
           "required": false,
           "description": "Size variant",
           "default": "md"
@@ -414,10 +392,7 @@
         },
         "orientation": {
           "type": "enum",
-          "values": [
-            "vertical",
-            "horizontal"
-          ],
+          "values": ["vertical", "horizontal"],
           "required": false,
           "description": "Layout direction",
           "default": "vertical"
@@ -481,20 +456,14 @@
         },
         "orientation": {
           "type": "enum",
-          "values": [
-            "vertical",
-            "horizontal"
-          ],
+          "values": ["vertical", "horizontal"],
           "required": false,
           "description": "Layout direction",
           "default": "vertical"
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "card"
-          ],
+          "values": ["default", "card"],
           "required": false,
           "description": "Visual variant — \"card\" renders each option as a selectable card",
           "default": "default"
@@ -537,11 +506,7 @@
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["sm", "md", "lg"],
           "required": false,
           "description": "Size of the toggle",
           "default": "md"
@@ -560,25 +525,14 @@
       "props": {
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "success",
-            "warning",
-            "error",
-            "info",
-            "secondary"
-          ],
+          "values": ["default", "success", "warning", "error", "info", "secondary"],
           "required": false,
           "description": "Visual style variant",
           "default": "default"
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["sm", "md", "lg"],
           "required": false,
           "description": "Size of the badge",
           "default": "md"
@@ -613,13 +567,7 @@
         },
         "size": {
           "type": "enum",
-          "values": [
-            "xs",
-            "sm",
-            "md",
-            "lg",
-            "xl"
-          ],
+          "values": ["xs", "sm", "md", "lg", "xl"],
           "required": false,
           "description": "Size of the avatar",
           "default": "md"
@@ -645,23 +593,14 @@
       "props": {
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "outlined",
-            "elevated"
-          ],
+          "values": ["default", "outlined", "elevated"],
           "required": false,
           "description": "Visual style variant",
           "default": "default"
         },
         "padding": {
           "type": "enum",
-          "values": [
-            "none",
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["none", "sm", "md", "lg"],
           "required": false,
           "description": "Padding size applied to the card",
           "default": "md"
@@ -708,12 +647,7 @@
       "props": {
         "align": {
           "type": "enum",
-          "values": [
-            "left",
-            "center",
-            "right",
-            "space-between"
-          ],
+          "values": ["left", "center", "right", "space-between"],
           "required": false,
           "description": "Horizontal alignment of footer content",
           "default": "right"
@@ -745,13 +679,7 @@
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg",
-            "xl",
-            "full"
-          ],
+          "values": ["sm", "md", "lg", "xl", "full"],
           "required": false,
           "description": "Size of the modal dialog"
         },
@@ -790,12 +718,7 @@
       "props": {
         "variant": {
           "type": "enum",
-          "values": [
-            "info",
-            "success",
-            "warning",
-            "error"
-          ],
+          "values": ["info", "success", "warning", "error"],
           "required": false,
           "description": "Visual style variant indicating the alert type",
           "default": "info"
@@ -839,10 +762,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "line",
-            "pills"
-          ],
+          "values": ["line", "pills"],
           "required": false,
           "description": "Visual style variant",
           "default": "line"
@@ -893,10 +813,7 @@
       "props": {
         "type": {
           "type": "enum",
-          "values": [
-            "single",
-            "multiple"
-          ],
+          "values": ["single", "multiple"],
           "required": false,
           "description": "Whether one or multiple items can be open at once",
           "default": "single"
@@ -935,10 +852,7 @@
       "props": {
         "direction": {
           "type": "enum",
-          "values": [
-            "vertical",
-            "horizontal"
-          ],
+          "values": ["vertical", "horizontal"],
           "required": false,
           "description": "Direction of the stack layout",
           "default": "vertical"
@@ -951,24 +865,13 @@
         },
         "align": {
           "type": "enum",
-          "values": [
-            "start",
-            "center",
-            "end",
-            "stretch"
-          ],
+          "values": ["start", "center", "end", "stretch"],
           "required": false,
           "description": "Cross-axis alignment of children"
         },
         "justify": {
           "type": "enum",
-          "values": [
-            "start",
-            "center",
-            "end",
-            "between",
-            "around"
-          ],
+          "values": ["start", "center", "end", "between", "around"],
           "required": false,
           "description": "Main-axis alignment of children"
         },
@@ -997,25 +900,14 @@
         },
         "align": {
           "type": "enum",
-          "values": [
-            "start",
-            "center",
-            "end",
-            "stretch"
-          ],
+          "values": ["start", "center", "end", "stretch"],
           "required": false,
           "description": "Cross-axis alignment of children",
           "default": "center"
         },
         "justify": {
           "type": "enum",
-          "values": [
-            "start",
-            "center",
-            "end",
-            "between",
-            "around"
-          ],
+          "values": ["start", "center", "end", "between", "around"],
           "required": false,
           "description": "Main-axis alignment of children"
         },
@@ -1060,24 +952,13 @@
         },
         "align": {
           "type": "enum",
-          "values": [
-            "start",
-            "center",
-            "end",
-            "stretch"
-          ],
+          "values": ["start", "center", "end", "stretch"],
           "required": false,
           "description": "Vertical alignment of grid items"
         },
         "justify": {
           "type": "enum",
-          "values": [
-            "start",
-            "center",
-            "end",
-            "stretch",
-            "between"
-          ],
+          "values": ["start", "center", "end", "stretch", "between"],
           "required": false,
           "description": "Horizontal alignment of grid items"
         },
@@ -1204,10 +1085,7 @@
         },
         "position": {
           "type": "enum",
-          "values": [
-            "left",
-            "right"
-          ],
+          "values": ["left", "right"],
           "required": false,
           "description": "Position of the sidebar"
         }
@@ -1353,10 +1231,7 @@
         },
         "side": {
           "type": "enum",
-          "values": [
-            "left",
-            "right"
-          ],
+          "values": ["left", "right"],
           "required": false,
           "description": "Which side the drawer slides in from",
           "default": "left"
@@ -1395,11 +1270,7 @@
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["sm", "md", "lg"],
           "required": false,
           "description": "Size variant affecting cell padding density"
         },
@@ -1500,10 +1371,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "compact"
-          ],
+          "values": ["default", "compact"],
           "required": false,
           "description": "Display variant — \"default\" shows page buttons, \"compact\" shows \"Page X of Y\"",
           "default": "default"
@@ -1523,10 +1391,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "standard",
-            "minimal"
-          ],
+          "values": ["standard", "minimal"],
           "required": false,
           "description": "Layout variant",
           "default": "standard"
@@ -1594,32 +1459,21 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "centered",
-            "split",
-            "fullscreen"
-          ],
+          "values": ["centered", "split", "fullscreen"],
           "required": false,
           "description": "Layout variant",
           "default": "centered"
         },
         "align": {
           "type": "enum",
-          "values": [
-            "left",
-            "center"
-          ],
+          "values": ["left", "center"],
           "required": false,
           "description": "Text alignment (only applies to centered variant)",
           "default": "center"
         },
         "height": {
           "type": "enum",
-          "values": [
-            "viewport",
-            "large",
-            "auto"
-          ],
+          "values": ["viewport", "large", "auto"],
           "required": false,
           "description": "Height behavior",
           "default": "auto"
@@ -1664,11 +1518,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "grid",
-            "list",
-            "alternating"
-          ],
+          "values": ["grid", "list", "alternating"],
           "required": false,
           "description": "Layout variant",
           "default": "grid"
@@ -1705,11 +1555,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "card",
-            "inline",
-            "featured"
-          ],
+          "values": ["card", "inline", "featured"],
           "required": false,
           "description": "Layout variant",
           "default": "card"
@@ -1762,10 +1608,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "compact"
-          ],
+          "values": ["default", "compact"],
           "required": false,
           "description": "Visual density variant",
           "default": "default"
@@ -1798,11 +1641,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "banner",
-            "card",
-            "minimal"
-          ],
+          "values": ["banner", "card", "minimal"],
           "required": false,
           "description": "Visual variant",
           "default": "banner"
@@ -1820,10 +1659,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "inline",
-            "card"
-          ],
+          "values": ["inline", "card"],
           "required": false,
           "description": "Layout variant",
           "default": "inline"
@@ -1841,11 +1677,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "standard",
-            "compact",
-            "alternating"
-          ],
+          "values": ["standard", "compact", "alternating"],
           "required": false,
           "description": "Layout variant",
           "default": "standard"
@@ -1868,11 +1700,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "grid",
-            "marquee",
-            "fade"
-          ],
+          "values": ["grid", "marquee", "fade"],
           "required": false,
           "description": "Layout variant",
           "default": "grid"
@@ -2007,10 +1835,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "compact"
-          ],
+          "values": ["default", "compact"],
           "required": false,
           "description": "Visual variant — \"compact\" uses smaller spacing and no icon",
           "default": "default"
@@ -2040,35 +1865,21 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "striped",
-            "animated"
-          ],
+          "values": ["default", "striped", "animated"],
           "required": false,
           "description": "Visual variant",
           "default": "default"
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["sm", "md", "lg"],
           "required": false,
           "description": "Bar height size",
           "default": "md"
         },
         "color": {
           "type": "enum",
-          "values": [
-            "primary",
-            "success",
-            "warning",
-            "error",
-            "info"
-          ],
+          "values": ["primary", "success", "warning", "error", "info"],
           "required": false,
           "description": "Color mapped to semantic status colors",
           "default": "primary"
@@ -2142,10 +1953,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "compact"
-          ],
+          "values": ["default", "compact"],
           "required": false,
           "description": "Visual variant — \"compact\" uses smaller spacing",
           "default": "default"
@@ -2228,11 +2036,7 @@
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["sm", "md", "lg"],
           "required": false,
           "description": "Size variant",
           "default": "md"
@@ -2293,10 +2097,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "dropzone",
-            "button"
-          ],
+          "values": ["dropzone", "button"],
           "required": false,
           "description": "Visual variant",
           "default": "dropzone"
@@ -2318,24 +2119,14 @@
         },
         "side": {
           "type": "enum",
-          "values": [
-            "left",
-            "right",
-            "top",
-            "bottom"
-          ],
+          "values": ["left", "right", "top", "bottom"],
           "required": false,
           "description": "Which side the drawer slides in from",
           "default": "right"
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg",
-            "full"
-          ],
+          "values": ["sm", "md", "lg", "full"],
           "required": false,
           "description": "Size preset — sm: 320px, md: 420px, lg: 640px, full: 100%",
           "default": "md"
@@ -2411,23 +2202,14 @@
         },
         "side": {
           "type": "enum",
-          "values": [
-            "top",
-            "right",
-            "bottom",
-            "left"
-          ],
+          "values": ["top", "right", "bottom", "left"],
           "required": false,
           "description": "Preferred side relative to trigger",
           "default": "bottom"
         },
         "align": {
           "type": "enum",
-          "values": [
-            "start",
-            "center",
-            "end"
-          ],
+          "values": ["start", "center", "end"],
           "required": false,
           "description": "Alignment along the side axis",
           "default": "center"
@@ -2440,10 +2222,7 @@
         },
         "triggerOn": {
           "type": "enum",
-          "values": [
-            "click",
-            "hover"
-          ],
+          "values": ["click", "hover"],
           "required": false,
           "description": "What interaction opens the popover",
           "default": "click"
@@ -2521,21 +2300,14 @@
       "props": {
         "orientation": {
           "type": "enum",
-          "values": [
-            "horizontal",
-            "vertical"
-          ],
+          "values": ["horizontal", "vertical"],
           "required": false,
           "description": "Divider direction",
           "default": "horizontal"
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "solid",
-            "dashed",
-            "dotted"
-          ],
+          "values": ["solid", "dashed", "dotted"],
           "required": false,
           "description": "Line style",
           "default": "solid"
@@ -2547,12 +2319,7 @@
         },
         "spacing": {
           "type": "enum",
-          "values": [
-            "none",
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["none", "sm", "md", "lg"],
           "required": false,
           "description": "Spacing above and below (or left/right for vertical)",
           "default": "md"
@@ -2566,26 +2333,14 @@
       "props": {
         "size": {
           "type": "enum",
-          "values": [
-            "xs",
-            "sm",
-            "md",
-            "lg",
-            "xl",
-            "2xl",
-            "3xl",
-            "section"
-          ],
+          "values": ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "section"],
           "required": false,
           "description": "Spacing size mapped to spacing tokens",
           "default": "md"
         },
         "axis": {
           "type": "enum",
-          "values": [
-            "vertical",
-            "horizontal"
-          ],
+          "values": ["vertical", "horizontal"],
           "required": false,
           "description": "Direction of spacing",
           "default": "vertical"
@@ -2630,12 +2385,7 @@
         },
         "objectFit": {
           "type": "enum",
-          "values": [
-            "cover",
-            "contain",
-            "fill",
-            "none"
-          ],
+          "values": ["cover", "contain", "fill", "none"],
           "required": false,
           "description": "How the image fills its container",
           "default": "cover"
@@ -2648,14 +2398,7 @@
         },
         "radius": {
           "type": "enum",
-          "values": [
-            "none",
-            "sm",
-            "md",
-            "lg",
-            "xl",
-            "full"
-          ],
+          "values": ["none", "sm", "md", "lg", "xl", "full"],
           "required": false,
           "description": "Border radius",
           "default": "none"
@@ -2699,12 +2442,7 @@
         },
         "gap": {
           "type": "enum",
-          "values": [
-            "none",
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["none", "sm", "md", "lg"],
           "required": false,
           "description": "Gap between slides",
           "default": "md"
@@ -2724,13 +2462,7 @@
       "props": {
         "variant": {
           "type": "enum",
-          "values": [
-            "info",
-            "success",
-            "warning",
-            "error",
-            "neutral"
-          ],
+          "values": ["info", "success", "warning", "error", "neutral"],
           "required": false,
           "description": "Visual variant",
           "default": "info"
@@ -2776,11 +2508,7 @@
       "props": {
         "variant": {
           "type": "enum",
-          "values": [
-            "text",
-            "circular",
-            "rectangular"
-          ],
+          "values": ["text", "circular", "rectangular"],
           "required": false,
           "description": "Shape variant",
           "default": "text"
@@ -2809,13 +2537,7 @@
         },
         "radius": {
           "type": "enum",
-          "values": [
-            "none",
-            "sm",
-            "md",
-            "lg",
-            "full"
-          ],
+          "values": ["none", "sm", "md", "lg", "full"],
           "required": false,
           "description": "Border radius override"
         }
@@ -2828,24 +2550,14 @@
       "props": {
         "size": {
           "type": "enum",
-          "values": [
-            "xs",
-            "sm",
-            "md",
-            "lg",
-            "xl"
-          ],
+          "values": ["xs", "sm", "md", "lg", "xl"],
           "required": false,
           "description": "Spinner size",
           "default": "md"
         },
         "color": {
           "type": "enum",
-          "values": [
-            "primary",
-            "current",
-            "white"
-          ],
+          "values": ["primary", "current", "white"],
           "required": false,
           "description": "Color variant — \"current\" inherits parent text color",
           "default": "primary"
@@ -2904,11 +2616,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "compact",
-            "horizontal"
-          ],
+          "values": ["default", "compact", "horizontal"],
           "required": false,
           "description": "Layout variant",
           "default": "default"
@@ -2963,10 +2671,7 @@
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md"
-          ],
+          "values": ["sm", "md"],
           "required": false,
           "description": "Size variant",
           "default": "md"
@@ -3007,12 +2712,7 @@
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg",
-            "xl"
-          ],
+          "values": ["sm", "md", "lg", "xl"],
           "required": false,
           "description": "Size of the price text",
           "default": "md"
@@ -3041,11 +2741,7 @@
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md",
-            "lg"
-          ],
+          "values": ["sm", "md", "lg"],
           "required": false,
           "description": "Size of the star icons",
           "default": "md"
@@ -3070,11 +2766,7 @@
       "props": {
         "maxWidth": {
           "type": "enum",
-          "values": [
-            "prose",
-            "wide",
-            "full"
-          ],
+          "values": ["prose", "wide", "full"],
           "required": false,
           "description": "Maximum content width",
           "default": "prose"
@@ -3086,10 +2778,7 @@
         },
         "sidebarPosition": {
           "type": "enum",
-          "values": [
-            "left",
-            "right"
-          ],
+          "values": ["left", "right"],
           "required": false,
           "description": "Sidebar position",
           "default": "right"
@@ -3118,11 +2807,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "accent",
-            "large"
-          ],
+          "values": ["default", "accent", "large"],
           "required": false,
           "description": "Visual variant",
           "default": "default"
@@ -3160,10 +2845,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "inline",
-            "card"
-          ],
+          "values": ["inline", "card"],
           "required": false,
           "description": "Layout variant",
           "default": "inline"
@@ -3192,10 +2874,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "card",
-            "list"
-          ],
+          "values": ["card", "list"],
           "required": false,
           "description": "Layout variant",
           "default": "card"
@@ -3235,11 +2914,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "inline",
-            "card",
-            "banner"
-          ],
+          "values": ["inline", "card", "banner"],
           "required": false,
           "description": "Layout variant",
           "default": "inline"
@@ -3263,22 +2938,14 @@
         },
         "orientation": {
           "type": "enum",
-          "values": [
-            "vertical",
-            "horizontal",
-            "both"
-          ],
+          "values": ["vertical", "horizontal", "both"],
           "required": false,
           "description": "Scroll direction",
           "default": "vertical"
         },
         "showScrollbar": {
           "type": "enum",
-          "values": [
-            "auto",
-            "always",
-            "hover"
-          ],
+          "values": ["auto", "always", "hover"],
           "required": false,
           "description": "Scrollbar visibility",
           "default": "auto"
@@ -3346,21 +3013,14 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "ghost",
-            "icon"
-          ],
+          "values": ["default", "ghost", "icon"],
           "required": false,
           "description": "Visual variant",
           "default": "default"
         },
         "size": {
           "type": "enum",
-          "values": [
-            "sm",
-            "md"
-          ],
+          "values": ["sm", "md"],
           "required": false,
           "description": "Size",
           "default": "sm"
@@ -3378,10 +3038,7 @@
         },
         "variant": {
           "type": "enum",
-          "values": [
-            "default",
-            "inline"
-          ],
+          "values": ["default", "inline"],
           "required": false,
           "description": "Visual variant",
           "default": "default"
@@ -3456,7 +3113,7 @@
     }
   ],
   "_generated": {
-    "at": "2026-03-30T17:53:34.554Z",
+    "at": "2026-03-30T18:48:05.592Z",
     "by": "scripts/generate-manifest.mjs",
     "componentCount": 102,
     "hookCount": 8

@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Automated `manifest.ai.json` generation pipeline (`scripts/generate-manifest.mjs`) that parses TypeScript source to extract component props, hook metadata, and token information
+- `pnpm manifest` and `pnpm manifest:check` scripts for generating and validating the AI discovery manifest
 - Playground site map architecture with individual component pages, token impact views, and relationship graph
 - Component gallery at `/playground/components` with search, category filter, and visual previews
 - Individual component deep-dive pages at `/playground/components/:name` with variants, sizes, states, interactive demo, component tokens editor, props reference, and token dependencies
