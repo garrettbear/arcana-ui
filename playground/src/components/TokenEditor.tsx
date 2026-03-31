@@ -13,68 +13,14 @@
  * - All changes update CSS vars directly (<50ms)
  */
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ColorPicker, FontPicker, useUndoRedo } from '@arcana-ui/core';
+import type { LocalFontEntryEntry } from '@arcana-ui/core';
+import type React from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toHex } from '../utils/contrast';
 import { PRESETS, type PresetId, type ThemePreset, applyPreset, getCSSVar } from '../utils/presets';
-import { ColorPicker } from './ColorPicker';
 import { type BezierValues, CubicBezierEditor } from './CubicBezierEditor';
 import styles from './TokenEditor.module.css';
-
-// ─── Google Fonts ─────────────────────────────────────────────────────────────
-
-const GOOGLE_FONTS = [
-  { name: 'Inter', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Plus Jakarta Sans', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'DM Sans', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Nunito', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Poppins', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Raleway', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Lato', category: 'sans' as const, weights: '400;700' },
-  { name: 'Montserrat', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Open Sans', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Roboto', category: 'sans' as const, weights: '400;500;700' },
-  { name: 'Figtree', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Sora', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Outfit', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Work Sans', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Manrope', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'IBM Plex Sans', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Bricolage Grotesque', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Playfair Display', category: 'serif' as const, weights: '400;500;600;700' },
-  { name: 'Libre Baskerville', category: 'serif' as const, weights: '400;700' },
-  { name: 'Merriweather', category: 'serif' as const, weights: '400;700' },
-  { name: 'EB Garamond', category: 'serif' as const, weights: '400;500;600;700' },
-  { name: 'Lora', category: 'serif' as const, weights: '400;500;600;700' },
-  { name: 'Source Serif 4', category: 'serif' as const, weights: '400;500;600;700' },
-  { name: 'Bitter', category: 'serif' as const, weights: '400;500;600;700' },
-  { name: 'JetBrains Mono', category: 'mono' as const, weights: '400;500' },
-  { name: 'Fira Code', category: 'mono' as const, weights: '400;500' },
-  { name: 'Source Code Pro', category: 'mono' as const, weights: '400;500' },
-  { name: 'IBM Plex Mono', category: 'mono' as const, weights: '400;500' },
-  { name: 'Roboto Mono', category: 'mono' as const, weights: '400;500' },
-  { name: 'Inconsolata', category: 'mono' as const, weights: '400;500' },
-  { name: 'Space Mono', category: 'mono' as const, weights: '400;700' },
-];
-
-type GoogleFont = (typeof GOOGLE_FONTS)[number];
-
-function fontToStack(
-  font: GoogleFont | { name: string; category: 'sans' | 'serif' | 'mono' },
-): string {
-  const fallback =
-    font.category === 'mono' ? 'monospace' : font.category === 'serif' ? 'serif' : 'sans-serif';
-  return `'${font.name}', ${fallback}`;
-}
-
-function loadGoogleFont(font: GoogleFont): void {
-  const id = `gf-${font.name.replace(/\s+/g, '-').toLowerCase()}`;
-  if (document.getElementById(id)) return;
-  const link = document.createElement('link');
-  link.id = id;
-  link.rel = 'stylesheet';
-  link.href = `https://fonts.googleapis.com/css2?family=${font.name.replace(/\s+/g, '+')}:wght@${font.weights}&display=swap`;
-  document.head.appendChild(link);
-}
 
 // ─── Color Token Groups ───────────────────────────────────────────────────────
 
@@ -230,191 +176,11 @@ interface HistoryEntry {
   newValue: string;
 }
 
-const MAX_HISTORY = 50;
+// Uses useUndoRedo from @arcana-ui/core (imported above)
 
-function useUndoRedo() {
-  const history = useRef<HistoryEntry[]>([]);
-  const index = useRef<number>(-1);
-  const [, forceUpdate] = useState(0);
+// FontPicker is now imported from @arcana-ui/core
 
-  const push = useCallback((entry: HistoryEntry) => {
-    // Trim redo branch
-    history.current = history.current.slice(0, index.current + 1);
-    history.current.push(entry);
-    if (history.current.length > MAX_HISTORY) {
-      history.current.shift();
-    }
-    index.current = history.current.length - 1;
-    forceUpdate((n) => n + 1);
-  }, []);
-
-  const undo = useCallback((): HistoryEntry | null => {
-    if (index.current < 0) return null;
-    const entry = history.current[index.current];
-    index.current -= 1;
-    forceUpdate((n) => n + 1);
-    return entry;
-  }, []);
-
-  const redo = useCallback((): HistoryEntry | null => {
-    if (index.current >= history.current.length - 1) return null;
-    index.current += 1;
-    const entry = history.current[index.current];
-    forceUpdate((n) => n + 1);
-    return entry;
-  }, []);
-
-  const clear = useCallback(() => {
-    history.current = [];
-    index.current = -1;
-    forceUpdate((n) => n + 1);
-  }, []);
-
-  return {
-    push,
-    undo,
-    redo,
-    clear,
-    canUndo: index.current >= 0,
-    canRedo: index.current < history.current.length - 1,
-  };
-}
-
-// ─── FontPicker ───────────────────────────────────────────────────────────────
-
-interface LocalFont {
-  name: string;
-  stack: string;
-}
-
-interface FontPickerProps {
-  label: string;
-  value: string;
-  localFonts: LocalFont[];
-  onChange: (stack: string) => void;
-}
-
-function getFirstFontName(stack: string): string {
-  return stack.split(',')[0].trim().replace(/['"]/g, '');
-}
-
-function FontPicker({ label, value, localFonts, onChange }: FontPickerProps) {
-  const [search, setSearch] = useState('');
-  const [open, setOpen] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const filtered = useMemo(() => {
-    const q = search.toLowerCase();
-    const gf = q ? GOOGLE_FONTS.filter((f) => f.name.toLowerCase().includes(q)) : GOOGLE_FONTS;
-    const lf = localFonts.filter((f) => !q || f.name.toLowerCase().includes(q));
-    return { googleFonts: gf, localFonts: lf };
-  }, [search, localFonts]);
-
-  const handleSelect = (font: GoogleFont) => {
-    loadGoogleFont(font);
-    onChange(fontToStack(font));
-    setOpen(false);
-    setSearch('');
-  };
-
-  const handleLocalSelect = (font: LocalFont) => {
-    onChange(font.stack);
-    setOpen(false);
-    setSearch('');
-  };
-
-  useEffect(() => {
-    if (!open) return;
-    const handleOutside = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-        setOpen(false);
-        setSearch('');
-      }
-    };
-    document.addEventListener('mousedown', handleOutside);
-    return () => document.removeEventListener('mousedown', handleOutside);
-  }, [open]);
-
-  useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 0);
-  }, [open]);
-
-  const currentName = getFirstFontName(value);
-
-  return (
-    <div ref={wrapperRef} className={styles.fontPicker}>
-      <button type="button" className={styles.fontPickerTrigger} onClick={() => setOpen((o) => !o)}>
-        <span className={styles.fontPickerTriggerLabel}>{label}</span>
-        <span className={styles.fontPickerTriggerValue} style={{ fontFamily: value }}>
-          {currentName}
-        </span>
-        <span className={styles.fontPickerChevron}>{open ? '▴' : '▾'}</span>
-      </button>
-
-      {open && (
-        <div className={styles.fontPickerDropdown}>
-          <div className={styles.fontPickerSearchWrapper}>
-            <input
-              ref={inputRef}
-              type="text"
-              className={styles.fontPickerSearch}
-              placeholder="Search fonts…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div className={styles.fontPickerList}>
-            {filtered.localFonts.length > 0 && (
-              <>
-                <div className={styles.fontPickerGroupLabel}>Uploaded</div>
-                {filtered.localFonts.map((font) => (
-                  <button
-                    key={font.name}
-                    type="button"
-                    className={`${styles.fontPickerOption} ${currentName === font.name ? styles.fontPickerOptionActive : ''}`}
-                    style={{ fontFamily: font.stack }}
-                    onClick={() => handleLocalSelect(font)}
-                  >
-                    {font.name}
-                    <span className={styles.fontPickerOptionBadge}>local</span>
-                  </button>
-                ))}
-              </>
-            )}
-            {(['sans', 'serif', 'mono'] as const).map((cat) => {
-              const catFonts = filtered.googleFonts.filter((f) => f.category === cat);
-              if (!catFonts.length) return null;
-              const catLabel =
-                cat === 'sans' ? 'Sans-Serif' : cat === 'serif' ? 'Serif' : 'Monospace';
-              return (
-                <React.Fragment key={cat}>
-                  <div className={styles.fontPickerGroupLabel}>{catLabel}</div>
-                  {catFonts.map((font) => (
-                    <button
-                      key={font.name}
-                      type="button"
-                      className={`${styles.fontPickerOption} ${currentName === font.name ? styles.fontPickerOptionActive : ''}`}
-                      style={{
-                        fontFamily: `'${font.name}', ${font.category === 'mono' ? 'monospace' : font.category}`,
-                      }}
-                      onClick={() => handleSelect(font)}
-                    >
-                      {font.name}
-                    </button>
-                  ))}
-                </React.Fragment>
-              );
-            })}
-            {filtered.googleFonts.length === 0 && filtered.localFonts.length === 0 && (
-              <div className={styles.fontPickerEmpty}>No fonts match "{search}"</div>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+// FontPicker component was here — now imported from @arcana-ui/core
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
@@ -444,10 +210,10 @@ export function TokenEditor({
   const [spacingBase, setSpacingBase] = useState(4);
   const [density, setDensity] = useState<DensityMode>('default');
   const [scale, setScale] = useState(1);
-  const [localFonts, setLocalFonts] = useState<LocalFont[]>([]);
+  const [localFonts, setLocalFontEntrys] = useState<LocalFontEntry[]>([]);
   const [motionDuration, setMotionDuration] = useState(200);
   const [bezier, setBezier] = useState<BezierValues>({ x1: 0.25, y1: 0.1, x2: 0.25, y2: 1 });
-  const [pendingFont, setPendingFont] = useState<LocalFont | null>(null);
+  const [pendingFont, setPendingFont] = useState<LocalFontEntry | null>(null);
 
   // Sections: which are open
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['presets', 'colors']));
@@ -463,7 +229,7 @@ export function TokenEditor({
   const [modifiedScalars, setModifiedScalars] = useState<Set<string>>(new Set());
 
   // Undo/Redo
-  const undoRedo = useUndoRedo();
+  const undoRedo = useUndoRedo<HistoryEntry>();
 
   // Undo toast
   const [undoToast, setUndoToast] = useState<string | null>(null);
@@ -724,7 +490,7 @@ export function TokenEditor({
     setModifiedScalars((prev) => new Set([...prev, 'motion']));
   };
 
-  const handleLocalFontUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLocalFontEntryUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const fontName = file.name
@@ -738,8 +504,8 @@ export function TokenEditor({
     const styleEl = document.createElement('style');
     styleEl.textContent = `@font-face { font-family: '${fontName}'; src: url('${url}') format('${format}'); font-display: swap; }`;
     document.head.appendChild(styleEl);
-    const newFont: LocalFont = { name: fontName, stack: `'${fontName}', sans-serif` };
-    setLocalFonts((prev) => [...prev, newFont]);
+    const newFont: LocalFontEntry = { name: fontName, stack: `'${fontName}', sans-serif` };
+    setLocalFontEntrys((prev) => [...prev, newFont]);
     setPendingFont(newFont);
     e.target.value = '';
   };
@@ -1136,7 +902,7 @@ export function TokenEditor({
                                 <ColorPicker
                                   value={currentVal}
                                   onChange={(v) => handleColorChange(token.var, v)}
-                                  presetPalette={themePalette}
+                                  presetColors={themePalette}
                                 />
                                 <span className={styles.colorValue}>
                                   {toHex(currentVal).toUpperCase()}
@@ -1308,7 +1074,7 @@ export function TokenEditor({
                     type="file"
                     accept=".woff2,.woff,.ttf,.otf"
                     className={styles.localFontInput}
-                    onChange={handleLocalFontUpload}
+                    onChange={handleLocalFontEntryUpload}
                   />
                 </label>
                 {pendingFont && (
