@@ -13,7 +13,7 @@
  * - All changes update CSS vars directly (<50ms)
  */
 
-import { ColorPicker, FontPicker, useUndoRedo } from '@arcana-ui/core';
+import { Button, ColorPicker, FontPicker, Input, useUndoRedo } from '@arcana-ui/core';
 import type { LocalFontEntryEntry } from '@arcana-ui/core';
 import type React from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -793,19 +793,24 @@ export function TokenEditor({
 
       {/* ── Search ── */}
       <div className={styles.searchWrap}>
-        <span className={styles.searchIcon}>⌕</span>
-        <input
-          type="text"
-          className={styles.searchInput}
+        <Input
+          size="sm"
           placeholder="Search tokens…"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          prefix={<span aria-hidden="true">⌕</span>}
+          suffix={
+            searchQuery ? (
+              <button
+                type="button"
+                className={styles.searchClear}
+                onClick={() => setSearchQuery('')}
+              >
+                ×
+              </button>
+            ) : undefined
+          }
         />
-        {searchQuery && (
-          <button type="button" className={styles.searchClear} onClick={() => setSearchQuery('')}>
-            ×
-          </button>
-        )}
       </div>
 
       {/* ── 1. Theme Presets ── */}
@@ -874,8 +879,9 @@ export function TokenEditor({
                         />
                       )}
                       {openColorGroups.has(group.id) && (
-                        <button
-                          type="button"
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           className={styles.sectionResetBtn}
                           onClick={(e) => {
                             e.stopPropagation();
@@ -884,7 +890,7 @@ export function TokenEditor({
                           title={`Reset ${group.label}`}
                         >
                           Reset
-                        </button>
+                        </Button>
                       )}
                     </button>
                     {openColorGroups.has(group.id) && (

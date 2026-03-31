@@ -1,4 +1,4 @@
-import { Badge, Button } from '@arcana-ui/core';
+import { Badge, Button, Input } from '@arcana-ui/core';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Landing.module.css';
@@ -455,8 +455,7 @@ export default function Landing() {
           </p>
 
           <form onSubmit={handlePromptSubmit} className={styles.promptWrap}>
-            <input
-              type="text"
+            <Input
               className={styles.promptInput}
               placeholder="Tell me about your brand — colors, mood, industry..."
               value={promptValue}
