@@ -76,6 +76,141 @@ import { getCSSVar as getCSSVarValue } from '../utils/presets';
 const tokenMapData = tokenMapRaw as unknown as TokenMapData;
 import styles from './ComponentDetail.module.css';
 
+// ─── Variant color token map ──────────────────────────────────────────────────
+
+interface VariantTokenEntry {
+  /** CSS custom property name */
+  token: string;
+  /** Short human-readable label */
+  label: string;
+  /** Fallback token to resolve current value when the primary token is unset */
+  fallback?: string;
+}
+
+/**
+ * Maps component slug → variant name → list of color tokens that drive that variant.
+ * Used to render inline color pickers per variant in the Variants Gallery.
+ */
+const VARIANT_COLOR_TOKENS: Record<string, Record<string, VariantTokenEntry[]>> = {
+  button: {
+    primary: [
+      { token: '--button-bg', label: 'Background', fallback: '--color-action-primary' },
+      { token: '--button-bg-hover', label: 'Hover bg', fallback: '--color-action-primary-hover' },
+      { token: '--button-fg', label: 'Text', fallback: '--color-fg-on-primary' },
+    ],
+    secondary: [
+      { token: '--color-action-secondary', label: 'Background' },
+      { token: '--color-action-secondary-hover', label: 'Hover bg' },
+      { token: '--color-fg-primary', label: 'Text' },
+      { token: '--color-border-default', label: 'Border' },
+    ],
+    ghost: [
+      { token: '--color-action-ghost', label: 'Background' },
+      { token: '--color-action-ghost-hover', label: 'Hover bg' },
+      { token: '--color-fg-primary', label: 'Text' },
+    ],
+    destructive: [
+      { token: '--color-action-destructive', label: 'Background' },
+      { token: '--color-action-destructive-hover', label: 'Hover bg' },
+      { token: '--color-fg-on-primary', label: 'Text' },
+    ],
+    outline: [
+      { token: '--color-action-outline', label: 'Background' },
+      { token: '--color-action-outline-hover', label: 'Hover bg' },
+      { token: '--color-action-primary', label: 'Border / Text' },
+    ],
+  },
+  badge: {
+    default: [
+      { token: '--color-bg-subtle', label: 'Background' },
+      { token: '--color-fg-secondary', label: 'Text' },
+      { token: '--color-border-default', label: 'Border' },
+    ],
+    secondary: [
+      { token: '--color-bg-subtle', label: 'Background' },
+      { token: '--color-fg-muted', label: 'Text' },
+    ],
+    success: [
+      { token: '--color-status-success-bg', label: 'Background' },
+      { token: '--color-status-success-fg', label: 'Text' },
+      { token: '--color-status-success-border', label: 'Border' },
+    ],
+    warning: [
+      { token: '--color-status-warning-bg', label: 'Background' },
+      { token: '--color-status-warning-fg', label: 'Text' },
+      { token: '--color-status-warning-border', label: 'Border' },
+    ],
+    error: [
+      { token: '--color-status-error-bg', label: 'Background' },
+      { token: '--color-status-error-fg', label: 'Text' },
+      { token: '--color-status-error-border', label: 'Border' },
+    ],
+    info: [
+      { token: '--color-status-info-bg', label: 'Background' },
+      { token: '--color-status-info-fg', label: 'Text' },
+      { token: '--color-status-info-border', label: 'Border' },
+    ],
+  },
+  alert: {
+    info: [
+      { token: '--color-status-info-bg', label: 'Background' },
+      { token: '--color-status-info-fg', label: 'Text' },
+      { token: '--color-status-info-border', label: 'Border' },
+    ],
+    success: [
+      { token: '--color-status-success-bg', label: 'Background' },
+      { token: '--color-status-success-fg', label: 'Text' },
+      { token: '--color-status-success-border', label: 'Border' },
+    ],
+    warning: [
+      { token: '--color-status-warning-bg', label: 'Background' },
+      { token: '--color-status-warning-fg', label: 'Text' },
+      { token: '--color-status-warning-border', label: 'Border' },
+    ],
+    error: [
+      { token: '--color-status-error-bg', label: 'Background' },
+      { token: '--color-status-error-fg', label: 'Text' },
+      { token: '--color-status-error-border', label: 'Border' },
+    ],
+  },
+  'progress-bar': {
+    primary: [
+      { token: '--progress-fill-color', label: 'Fill', fallback: '--color-action-primary' },
+      { token: '--progress-bg', label: 'Track', fallback: '--color-bg-surface' },
+    ],
+    success: [
+      { token: '--color-status-success-fg', label: 'Fill' },
+      { token: '--progress-bg', label: 'Track', fallback: '--color-bg-surface' },
+    ],
+    warning: [
+      { token: '--color-status-warning-fg', label: 'Fill' },
+      { token: '--progress-bg', label: 'Track', fallback: '--color-bg-surface' },
+    ],
+    error: [
+      { token: '--color-status-error-fg', label: 'Fill' },
+      { token: '--progress-bg', label: 'Track', fallback: '--color-bg-surface' },
+    ],
+  },
+  banner: {
+    info: [
+      { token: '--color-status-info-bg', label: 'Background' },
+      { token: '--color-status-info-fg', label: 'Text' },
+    ],
+    success: [
+      { token: '--color-status-success-bg', label: 'Background' },
+      { token: '--color-status-success-fg', label: 'Text' },
+    ],
+    warning: [
+      { token: '--color-status-warning-bg', label: 'Background' },
+      { token: '--color-status-warning-fg', label: 'Text' },
+    ],
+    error: [
+      { token: '--color-status-error-bg', label: 'Background' },
+      { token: '--color-status-error-fg', label: 'Text' },
+    ],
+  },
+};
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function tokenCategory(token: string): string {
@@ -671,18 +806,89 @@ function ControlsPanel({
 
 // ─── Variants Gallery ────────────────────────────────────────────────────────
 
-function VariantsGallery({ meta }: { meta: ComponentMeta }) {
+function VariantColorEditor({
+  slug,
+  variant,
+  tokenOverrides,
+  onTokenChange,
+}: {
+  slug: string;
+  variant: string;
+  tokenOverrides: Record<string, string>;
+  onTokenChange: (token: string, value: string) => void;
+}) {
+  const entries = VARIANT_COLOR_TOKENS[slug]?.[variant];
+  if (!entries || entries.length === 0) return null;
+
+  return (
+    <div className={styles.variantTokens}>
+      {entries.map(({ token, label, fallback }) => {
+        const resolved =
+          tokenOverrides[token] ||
+          getCSSVarValue(token) ||
+          (fallback ? getCSSVarValue(fallback) : '') ||
+          '#000000';
+        const isModified = Boolean(tokenOverrides[token]);
+        return (
+          <label key={token} className={styles.variantTokenChip} title={token}>
+            <span
+              className={styles.variantTokenSwatch}
+              style={{
+                background: resolved,
+                outline: isModified
+                  ? '2px solid var(--color-action-primary)'
+                  : '1px solid var(--color-border-default)',
+              }}
+            >
+              <input
+                type="color"
+                className={styles.variantTokenColorInput}
+                value={resolved.startsWith('#') ? resolved : '#000000'}
+                onChange={(e) => onTokenChange(token, e.target.value)}
+              />
+            </span>
+            <span className={styles.variantTokenLabel}>{label}</span>
+          </label>
+        );
+      })}
+    </div>
+  );
+}
+
+function VariantsGallery({
+  meta,
+  tokenOverrides,
+  onTokenChange,
+}: {
+  meta: ComponentMeta;
+  tokenOverrides: Record<string, string>;
+  onTokenChange: (token: string, value: string) => void;
+}) {
   if (!meta.variants || meta.variants.length <= 1) return null;
+  const hasVariantTokens = Boolean(VARIANT_COLOR_TOKENS[meta.slug]);
   return (
     <section className={styles.gallerySection}>
-      <h2 className={styles.gallerySectionTitle}>All Variants</h2>
+      <div className={styles.gallerySectionHeader}>
+        <h2 className={styles.gallerySectionTitle}>All Variants</h2>
+        {hasVariantTokens && (
+          <span className={styles.gallerySectionHint}>Click a color swatch to edit</span>
+        )}
+      </div>
       <div className={styles.galleryGrid}>
         {meta.variants.map((v) => (
-          <div key={v} className={styles.galleryItem}>
+          <div key={v} className={styles.galleryCard}>
             <div className={styles.galleryPreview}>
               <RenderComponent slug={meta.slug} variant={v} />
             </div>
-            <span className={styles.galleryLabel}>{v}</span>
+            <div className={styles.galleryCardFooter}>
+              <span className={styles.galleryLabel}>{v}</span>
+              <VariantColorEditor
+                slug={meta.slug}
+                variant={v}
+                tokenOverrides={tokenOverrides}
+                onTokenChange={onTokenChange}
+              />
+            </div>
           </div>
         ))}
       </div>
@@ -845,7 +1051,11 @@ export default function ComponentDetail() {
       </div>
 
       {/* Below-fold sections */}
-      <VariantsGallery meta={meta} />
+      <VariantsGallery
+        meta={meta}
+        tokenOverrides={tokenOverrides}
+        onTokenChange={handleTokenChange}
+      />
       <SizesGallery meta={meta} />
       <PropsReferenceSection meta={meta} />
     </div>
