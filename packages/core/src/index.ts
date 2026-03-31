@@ -285,6 +285,11 @@ export type {
   UseFloatingOptions,
   UseFloatingReturn,
 } from './hooks/useFloating';
+export { useClickOutside } from './hooks/useClickOutside';
+export { useDrag } from './hooks/useDrag';
+export type { DragPosition, UseDragOptions, UseDragReturn } from './hooks/useDrag';
+export { useUndoRedo } from './hooks/useUndoRedo';
+export type { UseUndoRedoReturn } from './hooks/useUndoRedo';
 export { useTheme } from './hooks/useTheme';
 export type { ThemeId, ThemeSource, UseThemeReturn } from './hooks/useTheme';
 
