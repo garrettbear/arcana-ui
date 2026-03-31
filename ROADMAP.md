@@ -695,6 +695,12 @@ The build step converts the JSON to CSS like:
 | 5.8 | **Figma token sync** — export tokens to Figma via Tokens Studio integration | P2 | L |
 | 5.9 | **Performance audit** — bundle size analysis, tree-shaking verification, CSS size per theme | P1 | M |
 | 5.10 | **Launch checklist** — changelog, migration guide, announcement post, social | P0 | M |
+| 5.11 | **CLI: `npx arcana-ui init`** — Interactive project scaffolding. Prompts for framework (Next.js/Vite/Remix/Astro), preset, site type (Dashboard/Marketing/E-commerce/Editorial). Generates a running project with Arcana installed, theme configured, and layout components in place. Terminal output should feel fast and impressive ("✓ Theme generated in 0.8s"). | P0 | L |
+| 5.12 | **CLI: `npx arcana-ui validate`** — Validate a theme JSON file. Checks WCAG contrast for all fg/bg pairs, reports missing required tokens, suggests fixes with specific color values. Uses the same validation logic as the token validator from task 1.9. | P1 | M |
+| 5.13 | **CLI: `npx arcana-ui add-theme`** — Add a preset theme to an existing project. Downloads the preset JSON, adds it to the theme config, shows switching instructions. Supports all 14 presets. | P1 | S |
+| 5.14 | **CLI: `npx arcana-ui impact`** — Token impact check. Given a token name, lists every component affected and the CSS property it controls in each. Reads from token-component-map.json. Useful for understanding ripple effects before changing a token value. | P2 | S |
+| 5.15 | **CLI: `npx arcana-ui scaffold`** — Generate complete page layouts. `scaffold dashboard` generates Navbar + Sidebar + Grid + StatCards + DataTable. `scaffold marketing` generates Hero + Features + Pricing + Testimonials + CTA + Footer. Uses real Arcana components with the active preset. | P2 | M |
+| 5.16 | **CLI: `npx arcana-ui info`** — Terminal docs for any component. `info Button` shows props table, import statement, token list, and usage examples. Pulled directly from manifest.ai.json so it's always accurate. | P2 | S |
 
 ---
 
@@ -870,7 +876,48 @@ Each demo site is a standalone Next.js or Vite app in the `demos/` directory tha
 3. Includes realistic content (not lorem ipsum).
 4. Serves as a **Playwright visual regression fixture**.
 5. Deploys to Vercel as `{preset}-demo.arcana-ui.dev`.
-6. Can switch presets via a floating theme picker (proves token portability).
+6. Includes the **Arcana Theme Switcher** (see below).
+
+### 5.2.1 Demo Site Theme Switcher
+
+Every demo site includes a floating theme switcher bar fixed to the bottom of the viewport. This is the most powerful proof of Arcana's theming system — visitors can see the same real-world site transform across completely different visual identities in real-time.
+
+**UI Design:**
+```
+┌──────────────────────────────────────────────────────────────────┐
+│  🎨 Theme: [Light ▾]  [Compact|Default|Comfortable]  [Upload ↑] │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+**Components:**
+
+1. **Preset dropdown**: Lists all available presets (all 14). Selecting one switches the entire demo site instantly via `data-theme` attribute. Current preset is highlighted.
+
+2. **Density toggle**: Switch between compact, default, and comfortable. The entire demo site adjusts spacing in real-time.
+
+3. **Upload button**: Opens a modal that lets users upload their own preset JSON file:
+   - Modal headline: "Try your own theme"
+   - Description: "Built a theme in the Arcana Playground? Upload the JSON file to preview it on this demo site."
+   - Drag-and-drop zone or file picker (accepts .json only)
+   - After upload: validates the JSON against the token schema
+   - If valid: applies the custom theme immediately, adds "Custom" to the preset dropdown
+   - If invalid: shows a clear error message explaining what's wrong
+   - Link to playground: "Don't have a theme yet? Build one in the Playground →"
+
+4. **Collapse/minimize**: Small arrow to collapse the bar to just an icon, so it doesn't obstruct content when not needed.
+
+**Why this matters:**
+
+- **For visitors**: "I can actually see what my brand would look like as a SaaS dashboard / e-commerce store / marketing site" — this is the conversion moment.
+- **For investors**: proves Arcana's core thesis live — one component library, infinite visual identities.
+- **For AI agents**: the demo sites ARE the proof that AI-generated themes produce real, usable UIs.
+- **For developers evaluating Arcana**: they can build a theme in the playground, export the JSON, upload it to the dashboard demo, and see it running on a real application before committing to adoption.
+
+**Technical implementation:**
+- Build as a shared component: `packages/core/src/components/ThemeSwitcher/` or a standalone package
+- The switcher reads the uploaded JSON, converts to CSS custom properties in-memory (using the same logic as the build pipeline), and injects them as a `<style>` block
+- Custom themes are stored in sessionStorage so they persist during the visit but not permanently
+- The switcher itself should be styled to be unobtrusive — small, fixed bottom, neutral dark styling that doesn't clash with any theme
 
 **Minimum demo page set per site type:**
 
