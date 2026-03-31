@@ -282,7 +282,28 @@
 
 ## Raw HTML Where Arcana Components Should Be Used
 
-These are not custom components per se, but places where raw `<input>`, `<button>`, or `<div>` elements are used with custom CSS instead of importing the equivalent Arcana component.
+These are not custom components per se, but places where raw `<input>`, `<button>`, `<nav>`, or `<div>` elements are used with custom CSS instead of importing the equivalent Arcana component.
+
+### Landing Page Navbar
+
+- **File:** `playground/src/pages/Landing.tsx` (lines 346–386)
+- **Element:** Raw `<nav className={styles.nav}>` with `<ul className={styles.navLinks}>`, `<li>`, `<a className={styles.navLink}>`, and a mobile menu toggle
+- **What it should use:** Arcana `<Navbar>`, `<NavbarBrand>`, `<NavbarContent>`, `<NavbarActions>` — which handle responsive collapse, ARIA attributes, and consistent styling out of the box
+- **Issues:**
+  - ~50 lines of custom CSS for `.nav`, `.navInner`, `.navLinks`, `.navLink`, `.navActions`, `.navMobileToggle`
+  - Custom mobile menu implementation (`.mobileMenu`, `.mobileMenuOpen`, `.mobileMenuPanel`) with raw `<div onClick>` instead of Arcana's `<DrawerNav>` or `<Drawer>`
+  - No `aria-label="Main navigation"` on the `<nav>` element
+  - Link hover/active states use hardcoded `--landing-*` vars instead of Arcana tokens
+
+### PlaygroundLayout Top Navigation
+
+- **File:** `playground/src/pages/PlaygroundLayout.tsx` (lines 133–155)
+- **Element:** Raw `<header className={styles.topbar}>` with `<nav className={styles.nav}>` and `<Link className={styles.navLink}>` elements
+- **What it should use:** Arcana `<Navbar>`, `<NavbarBrand>`, `<NavbarContent>` — the playground's own component pages showcase Navbar but the playground itself doesn't use it
+- **Issues:**
+  - Custom `.topbar`, `.nav`, `.navLink`, `.navLinkActive`, `.brand` CSS classes
+  - Active link styling manually computed with `className` string concatenation
+  - No responsive collapse behavior (nav items may overflow on narrow screens)
 
 ### Landing Page Prompt Input
 
