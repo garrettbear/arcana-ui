@@ -22,7 +22,7 @@
   justify-content: center;
   min-width: 2.75rem;
   min-height: 2.75rem;
-  padding: var(--spacing-1) var(--spacing-2);
+  padding: var(--spacing-element-y-sm) var(--spacing-element-x-sm);
   background: none;
   border: var(--border-width-default) solid transparent;
   border-radius: var(--radius-md);
@@ -37,8 +37,8 @@
 /* @breakpoint-sm (640px) — relax touch target */
 @media (min-width: 640px) {
   .button {
-    min-width: var(--spacing-9);
-    min-height: var(--spacing-9);
+    min-width: var(--element-height-sm);
+    min-height: var(--element-height-sm);
   }
 }
 

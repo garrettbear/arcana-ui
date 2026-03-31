@@ -78,6 +78,7 @@ interface SemanticTokens {
     easing: Record<string, string>;
     transition?: Record<string, string>;
   };
+  elementSizing?: Record<string, string>;
 }
 
 interface TokenPreset {
@@ -467,6 +468,13 @@ function generateSemanticVars(
     vars.push({ name: `--spacing-${key}`, value: resolveValue(preset, value) });
   }
 
+  // Element sizing (heights and padding for interactive elements)
+  if (semantic.elementSizing) {
+    for (const [key, value] of Object.entries(semantic.elementSizing)) {
+      vars.push({ name: `--${key}`, value: resolveValue(preset, value) });
+    }
+  }
+
   // Elevation → --shadow-* (size-based) + --elevation-* (contextual)
   for (const [key, value] of Object.entries(semantic.elevation)) {
     const prefix = SHADOW_SIZE_KEYS_SET.has(key) ? '--shadow' : '--elevation';
@@ -776,6 +784,25 @@ function generateCombinedCSS(presets: TokenPreset[]): string {
     '  --spacing-3xl: var(--spacing-12);',
     '  --spacing-section: var(--spacing-16);',
     '  --spacing-section-lg: var(--spacing-24);',
+    '',
+    '  /* Element sizing — compact */  ',
+    '  --element-height-xs: 1.25rem;',
+    '  --element-height-sm: 1.75rem;',
+    '  --element-height-md: 2.25rem;',
+    '  --element-height-lg: 2.75rem;',
+    '  --element-height-xl: 3.25rem;',
+    '',
+    '  --spacing-element-y-xs: 1px;',
+    '  --spacing-element-y-sm: 2px;',
+    '  --spacing-element-y-md: 4px;',
+    '  --spacing-element-y-lg: 8px;',
+    '  --spacing-element-y-xl: 12px;',
+    '',
+    '  --spacing-element-x-xs: 4px;',
+    '  --spacing-element-x-sm: 6px;',
+    '  --spacing-element-x-md: 8px;',
+    '  --spacing-element-x-lg: 12px;',
+    '  --spacing-element-x-xl: 16px;',
     '}',
     '',
     '/* ─── Density: Comfortable ─── */',
@@ -789,6 +816,25 @@ function generateCombinedCSS(presets: TokenPreset[]): string {
     '  --spacing-3xl: var(--spacing-24);',
     '  --spacing-section: var(--spacing-32);',
     '  --spacing-section-lg: var(--spacing-40);',
+    '',
+    '  /* Element sizing — comfortable */  ',
+    '  --element-height-xs: 1.75rem;',
+    '  --element-height-sm: 2.25rem;',
+    '  --element-height-md: 2.75rem;',
+    '  --element-height-lg: 3.25rem;',
+    '  --element-height-xl: 3.75rem;',
+    '',
+    '  --spacing-element-y-xs: 4px;',
+    '  --spacing-element-y-sm: 6px;',
+    '  --spacing-element-y-md: 12px;',
+    '  --spacing-element-y-lg: 16px;',
+    '  --spacing-element-y-xl: 20px;',
+    '',
+    '  --spacing-element-x-xs: 8px;',
+    '  --spacing-element-x-sm: 12px;',
+    '  --spacing-element-x-md: 16px;',
+    '  --spacing-element-x-lg: 20px;',
+    '  --spacing-element-x-xl: 28px;',
     '}',
     '',
   );

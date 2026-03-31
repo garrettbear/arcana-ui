@@ -7,12 +7,14 @@
  *   --button-border-width   Border width (fallback: --border-width-default)
  *   --button-radius         Border radius (fallback: --radius-md)
  *   --button-shadow         Box shadow (fallback: --shadow-none)
- *   --button-padding-x      Horizontal padding (fallback: --spacing-md)
- *   --button-padding-y      Vertical padding (fallback: --spacing-sm)
- *   --button-font-size      Font size (fallback: --font-size-sm)
  *   --button-font-weight    Font weight (fallback: --font-weight-medium)
  *   --button-letter-spacing Letter spacing (fallback: --letter-spacing-normal)
- *   --button-height         Element height (density-aware, fallback: 2.5rem)
+ *
+ * Per-size tokens (fall back to global element sizing):
+ *   --button-height-sm/md/lg          → --button-height → --element-height-sm/md/lg
+ *   --button-padding-y-sm/md/lg       → --spacing-element-y-sm/md/lg
+ *   --button-padding-x-sm/md/lg       → --spacing-element-x-sm/md/lg
+ *   --button-font-size-sm/md/lg       → --font-size-xs/sm/base
  */
 
 /* Button base — mobile-first */
@@ -27,7 +29,6 @@
   border-radius: var(--button-radius, var(--radius-md));
   font-family: var(--font-family-body);
   font-weight: var(--button-font-weight, var(--font-weight-medium));
-  font-size: var(--button-font-size, var(--font-size-sm));
   letter-spacing: var(--button-letter-spacing, var(--letter-spacing-normal));
   line-height: var(--line-height-tight);
   box-shadow: var(--button-shadow, var(--shadow-none));
@@ -40,7 +41,7 @@
   overflow: hidden;
 }
 
-/* @breakpoint-sm (640px) — relax min-height for desktop */
+/* @breakpoint-sm (640px) — relax mobile touch target floor */
 @media (min-width: 640px) {
   .button {
     min-height: auto;
@@ -116,33 +117,43 @@
 /* Sizes — mobile-first: all sizes get 44px minimum touch target */
 .sm {
   --button-icon-size: var(--spacing-3-5);
-  height: 2.75rem;
-  padding: 0 var(--spacing-3);
-  font-size: var(--font-size-xs);
+  padding-top: var(--button-padding-y-sm, var(--spacing-element-y-sm));
+  padding-bottom: var(--button-padding-y-sm, var(--spacing-element-y-sm));
+  padding-left: var(--button-padding-x-sm, var(--spacing-element-x-sm));
+  padding-right: var(--button-padding-x-sm, var(--spacing-element-x-sm));
+  font-size: var(--button-font-size-sm, var(--font-size-xs));
 }
 
 .md {
   --button-icon-size: var(--spacing-4);
-  height: 2.75rem;
-  padding: 0 var(--button-padding-x, var(--spacing-md));
-  font-size: var(--button-font-size, var(--font-size-sm));
+  padding-top: var(--button-padding-y-md, var(--spacing-element-y-md));
+  padding-bottom: var(--button-padding-y-md, var(--spacing-element-y-md));
+  padding-left: var(--button-padding-x-md, var(--spacing-element-x-md));
+  padding-right: var(--button-padding-x-md, var(--spacing-element-x-md));
+  font-size: var(--button-font-size-md, var(--font-size-sm));
 }
 
 .lg {
   --button-icon-size: var(--spacing-5);
-  height: var(--button-height, 3rem);
-  padding: 0 var(--spacing-6);
-  font-size: var(--font-size-base);
+  padding-top: var(--button-padding-y-lg, var(--spacing-element-y-lg));
+  padding-bottom: var(--button-padding-y-lg, var(--spacing-element-y-lg));
+  padding-left: var(--button-padding-x-lg, var(--spacing-element-x-lg));
+  padding-right: var(--button-padding-x-lg, var(--spacing-element-x-lg));
+  font-size: var(--button-font-size-lg, var(--font-size-base));
 }
 
-/* @breakpoint-sm (640px) — restore intended sizes */
+/* @breakpoint-sm (640px) — apply element height tokens */
 @media (min-width: 640px) {
   .sm {
-    height: var(--button-height, 2rem);
+    min-height: var(--button-height-sm, var(--button-height, var(--element-height-sm)));
   }
 
   .md {
-    height: var(--button-height, 2.5rem);
+    min-height: var(--button-height-md, var(--button-height, var(--element-height-md)));
+  }
+
+  .lg {
+    min-height: var(--button-height-lg, var(--button-height, var(--element-height-lg)));
   }
 }
 

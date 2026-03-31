@@ -643,6 +643,23 @@
       "hover-overlay": "0.08",
       "overlay": "0.65",
       "overlay-heavy": "{primitive.opacity.80}"
+    },
+    "elementSizing": {
+      "element-height-xs": "1.5rem",
+      "element-height-sm": "2rem",
+      "element-height-md": "2.5rem",
+      "element-height-lg": "3rem",
+      "element-height-xl": "3.5rem",
+      "spacing-element-y-xs": "2px",
+      "spacing-element-y-sm": "4px",
+      "spacing-element-y-md": "8px",
+      "spacing-element-y-lg": "12px",
+      "spacing-element-y-xl": "16px",
+      "spacing-element-x-xs": "6px",
+      "spacing-element-x-sm": "8px",
+      "spacing-element-x-md": "12px",
+      "spacing-element-x-lg": "16px",
+      "spacing-element-x-xl": "24px"
     }
   },
   "component": {

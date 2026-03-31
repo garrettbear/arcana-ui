@@ -7,10 +7,14 @@
  *   --input-border-error     Error border color (fallback: --color-border-error)
  *   --input-border-width     Border width (fallback: --border-width-default)
  *   --input-radius           Border radius (fallback: --radius-md)
- *   --input-padding-x        Horizontal padding (fallback: --spacing-sm)
- *   --input-font-size        Font size (fallback: --font-size-sm)
  *   --input-placeholder-color Placeholder color (fallback: --color-fg-muted)
- *   --input-height           Element height (density-aware, fallback: 2.5rem)
+ *   --input-height           Element height legacy (fallback for all sizes)
+ *
+ * Per-size tokens (fall back to global element sizing):
+ *   --input-height-sm/md/lg          → --input-height → --element-height-sm/md/lg
+ *   --input-padding-y-sm/md/lg       → --spacing-element-y-sm/md/lg
+ *   --input-padding-x-sm/md/lg       → --spacing-element-x-sm/md/lg
+ *   --input-font-size-sm/md/lg       → --font-size-xs/sm/base
  */
 
 /* Input wrapper — mobile-first */
@@ -71,33 +75,15 @@
   margin-left: var(--spacing-1);
 }
 
-/* Size variants */
-.size-sm .input {
-  font-size: var(--font-size-xs);
-}
-
-.size-lg .input {
-  font-size: var(--font-size-base);
-}
-
-@media (min-width: 640px) {
-  .size-sm .input {
-    height: var(--spacing-8);
-    min-height: auto;
-  }
-
-  .size-lg .input {
-    height: var(--spacing-12);
-    min-height: auto;
-  }
-}
-
 /* Input element — mobile-first: 44px min-height, 16px font to prevent iOS zoom */
 .input {
   flex: 1;
   min-width: 0;
   min-height: 2.75rem;
-  padding: 0 var(--input-padding-x, var(--spacing-sm));
+  padding-top: var(--input-padding-y-md, var(--spacing-element-y-md));
+  padding-bottom: var(--input-padding-y-md, var(--spacing-element-y-md));
+  padding-left: var(--input-padding-x-md, var(--spacing-element-x-md));
+  padding-right: var(--input-padding-x-md, var(--spacing-element-x-md));
   background: transparent;
   border: none;
   outline: none;
@@ -107,12 +93,38 @@
   line-height: var(--line-height-normal);
 }
 
-/* @breakpoint-sm (640px) — restore density-aware height and smaller font */
+/* @breakpoint-sm (640px) — apply element height tokens */
 @media (min-width: 640px) {
   .input {
-    min-height: auto;
-    height: var(--input-height, 2.5rem);
-    font-size: var(--input-font-size, var(--font-size-sm));
+    min-height: var(--input-height-md, var(--input-height, var(--element-height-md)));
+    font-size: var(--input-font-size-md, var(--font-size-sm));
+  }
+}
+
+/* Size variants */
+.size-sm .input {
+  padding-top: var(--input-padding-y-sm, var(--spacing-element-y-sm));
+  padding-bottom: var(--input-padding-y-sm, var(--spacing-element-y-sm));
+  padding-left: var(--input-padding-x-sm, var(--spacing-element-x-sm));
+  padding-right: var(--input-padding-x-sm, var(--spacing-element-x-sm));
+  font-size: var(--input-font-size-sm, var(--font-size-xs));
+}
+
+.size-lg .input {
+  padding-top: var(--input-padding-y-lg, var(--spacing-element-y-lg));
+  padding-bottom: var(--input-padding-y-lg, var(--spacing-element-y-lg));
+  padding-left: var(--input-padding-x-lg, var(--spacing-element-x-lg));
+  padding-right: var(--input-padding-x-lg, var(--spacing-element-x-lg));
+  font-size: var(--input-font-size-lg, var(--font-size-base));
+}
+
+@media (min-width: 640px) {
+  .size-sm .input {
+    min-height: var(--input-height-sm, var(--input-height, var(--element-height-sm)));
+  }
+
+  .size-lg .input {
+    min-height: var(--input-height-lg, var(--input-height, var(--element-height-lg)));
   }
 }
 
@@ -140,15 +152,15 @@
   align-items: center;
   flex-shrink: 0;
   color: var(--color-fg-secondary);
-  font-size: var(--input-font-size, var(--font-size-sm));
+  font-size: var(--input-font-size-md, var(--font-size-sm));
 }
 
 .prefix {
-  padding-left: var(--input-padding-x, var(--spacing-sm));
+  padding-left: var(--input-padding-x-md, var(--spacing-element-x-md));
 }
 
 .suffix {
-  padding-right: var(--input-padding-x, var(--spacing-sm));
+  padding-right: var(--input-padding-x-md, var(--spacing-element-x-md));
 }
 
 /* Helper / Error text */

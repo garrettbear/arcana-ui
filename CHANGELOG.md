@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Global element sizing token system: `--element-height-{xs..xl}`, `--spacing-element-y-{xs..xl}`, `--spacing-element-x-{xs..xl}` with density scaling (compact/comfortable)
+- Per-size component tokens for Button, Input, Select, QuantitySelector with three-level fallback chain (`--button-height-md → --button-height → --element-height-md`)
+- Element Sizing section in token editor with height/padding-y/padding-x sliders per size and visual alignment preview (Button + Input + Select row)
+- Personality-appropriate element sizing overrides for 8 presets (terminal/retro98/mono=compact, glass/editorial/nature=spacious, startup/brutalist=slightly spacious)
+
+### Changed
+- Refactored 11 component CSS files (Button, Input, Select, Textarea, DatePicker, QuantitySelector, Pagination, Tabs, Badge, Sidebar, Drawer) to use element sizing tokens with proper fallbacks
+- Badge now uses `--spacing-element-y-xs` / `--spacing-element-x-xs` for density-aware padding
+- Tabs now uses `--spacing-element-y-sm` / `--spacing-element-x-sm` for density-aware padding
+- Sidebar items and Pagination buttons now reference element sizing tokens
+- All sized components use `min-height` (not `height`) with 44px mobile touch target floor
 - `useClickOutside` hook — fires callback on mousedown outside a ref element, SSR-safe, with enabled flag
 - `useDrag` hook — generic drag handling with RAF throttling, touch support, relative positioning, and ref-based callbacks
 - `useUndoRedo<T>` hook — generic history stack with branch trimming, configurable max history, and reactive canUndo/canRedo

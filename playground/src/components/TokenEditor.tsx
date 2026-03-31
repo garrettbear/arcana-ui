@@ -155,6 +155,35 @@ const ALL_SPACING_STEPS = [
   { multiplier: 32, cssVar: '--spacing-32' },
 ];
 
+// ─── Element Sizing ──────────────────────────────────────────────────────────
+
+const ELEMENT_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+type ElementSize = (typeof ELEMENT_SIZES)[number];
+
+const ELEMENT_HEIGHT_VARS: Record<ElementSize, string> = {
+  xs: '--element-height-xs',
+  sm: '--element-height-sm',
+  md: '--element-height-md',
+  lg: '--element-height-lg',
+  xl: '--element-height-xl',
+};
+
+const ELEMENT_PADDING_Y_VARS: Record<ElementSize, string> = {
+  xs: '--spacing-element-y-xs',
+  sm: '--spacing-element-y-sm',
+  md: '--spacing-element-y-md',
+  lg: '--spacing-element-y-lg',
+  xl: '--spacing-element-y-xl',
+};
+
+const ELEMENT_PADDING_X_VARS: Record<ElementSize, string> = {
+  xs: '--spacing-element-x-xs',
+  sm: '--spacing-element-x-sm',
+  md: '--spacing-element-x-md',
+  lg: '--spacing-element-x-lg',
+  xl: '--spacing-element-x-xl',
+};
+
 // ─── Radius ───────────────────────────────────────────────────────────────────
 
 const RADIUS_SCALE = [
@@ -214,6 +243,29 @@ export function TokenEditor({
   const [motionDuration, setMotionDuration] = useState(200);
   const [bezier, setBezier] = useState<BezierValues>({ x1: 0.25, y1: 0.1, x2: 0.25, y2: 1 });
   const [pendingFont, setPendingFont] = useState<LocalFontEntry | null>(null);
+
+  // Element sizing state
+  const [elementHeights, setElementHeights] = useState<Record<ElementSize, number>>({
+    xs: 24,
+    sm: 32,
+    md: 40,
+    lg: 48,
+    xl: 56,
+  });
+  const [elementPaddingY, setElementPaddingY] = useState<Record<ElementSize, number>>({
+    xs: 2,
+    sm: 4,
+    md: 8,
+    lg: 12,
+    xl: 16,
+  });
+  const [elementPaddingX, setElementPaddingX] = useState<Record<ElementSize, number>>({
+    xs: 6,
+    sm: 8,
+    md: 12,
+    lg: 16,
+    xl: 24,
+  });
 
   // Sections: which are open
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['presets', 'colors']));
@@ -304,6 +356,30 @@ export function TokenEditor({
       const ms = Number.parseInt(durNormal);
       if (!Number.isNaN(ms)) setMotionDuration(ms);
     }
+
+    // Element sizing
+    const parseRemOrPx = (val: string): number => {
+      const n = Number.parseFloat(val);
+      if (val.includes('rem')) return Math.round(n * 16);
+      return Math.round(n);
+    };
+    const newHeights: Record<string, number> = {};
+    const newPadY: Record<string, number> = {};
+    const newPadX: Record<string, number> = {};
+    for (const size of ELEMENT_SIZES) {
+      const h = getCSSVar(ELEMENT_HEIGHT_VARS[size]);
+      if (h) newHeights[size] = parseRemOrPx(h);
+      const py = getCSSVar(ELEMENT_PADDING_Y_VARS[size]);
+      if (py) newPadY[size] = parseRemOrPx(py);
+      const px = getCSSVar(ELEMENT_PADDING_X_VARS[size]);
+      if (px) newPadX[size] = parseRemOrPx(px);
+    }
+    if (Object.keys(newHeights).length === 5)
+      setElementHeights(newHeights as Record<ElementSize, number>);
+    if (Object.keys(newPadY).length === 5)
+      setElementPaddingY(newPadY as Record<ElementSize, number>);
+    if (Object.keys(newPadX).length === 5)
+      setElementPaddingX(newPadX as Record<ElementSize, number>);
   }, []);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: activePresetId intentionally triggers refresh
@@ -476,6 +552,24 @@ export function TokenEditor({
     const preview = document.getElementById('preview-area');
     if (preview) preview.style.zoom = String(value);
     document.documentElement.style.setProperty('--arcana-scale', String(value));
+  };
+
+  const handleElementHeightChange = (size: ElementSize, value: number) => {
+    setElementHeights((prev) => ({ ...prev, [size]: value }));
+    document.documentElement.style.setProperty(ELEMENT_HEIGHT_VARS[size], `${value / 16}rem`);
+    setModifiedScalars((prev) => new Set([...prev, 'elementSizing']));
+  };
+
+  const handleElementPaddingYChange = (size: ElementSize, value: number) => {
+    setElementPaddingY((prev) => ({ ...prev, [size]: value }));
+    document.documentElement.style.setProperty(ELEMENT_PADDING_Y_VARS[size], `${value}px`);
+    setModifiedScalars((prev) => new Set([...prev, 'elementSizing']));
+  };
+
+  const handleElementPaddingXChange = (size: ElementSize, value: number) => {
+    setElementPaddingX((prev) => ({ ...prev, [size]: value }));
+    document.documentElement.style.setProperty(ELEMENT_PADDING_X_VARS[size], `${value}px`);
+    setModifiedScalars((prev) => new Set([...prev, 'elementSizing']));
   };
 
   const handleMotionDurationChange = (ms: number) => {
@@ -747,6 +841,8 @@ export function TokenEditor({
   const showShape = !q || 'shape radius border rounded'.includes(q);
   const showMotion = !q || 'motion animation duration easing bezier spring bounce'.includes(q);
   const showScale = !q || 'scale zoom preview'.includes(q);
+  const showElementSizing =
+    !q || 'element sizing height padding button input select alignment'.includes(q);
 
   // ── Modified counts ───────────────────────────────────────────────────────
 
@@ -759,6 +855,7 @@ export function TokenEditor({
     'lineHeight',
   ].filter((k) => modifiedScalars.has(k)).length;
   const spacingModifiedCount = ['spacing', 'density'].filter((k) => modifiedScalars.has(k)).length;
+  const elementSizingModifiedCount = modifiedScalars.has('elementSizing') ? 1 : 0;
   const shapeModifiedCount = modifiedScalars.has('radius') ? 1 : 0;
   const motionModifiedCount = modifiedScalars.has('motion') ? 1 : 0;
 
@@ -1237,6 +1334,175 @@ export function TokenEditor({
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ── 4b. Element Sizing ── */}
+      {showElementSizing && (
+        <div className={styles.section}>
+          <button
+            type="button"
+            className={styles.sectionHeader}
+            onClick={() => toggleSection('elementSizing')}
+          >
+            <span className={styles.sectionToggle}>
+              {openSections.has('elementSizing') ? '▾' : '▸'}
+            </span>
+            <span className={styles.sectionLabel}>Element Sizing</span>
+            {elementSizingModifiedCount > 0 && (
+              <span className={styles.modifiedBadge}>{elementSizingModifiedCount}</span>
+            )}
+          </button>
+          {openSections.has('elementSizing') && (
+            <div className={styles.sectionBody}>
+              {/* Heights */}
+              <p className={styles.subSectionLabel}>Heights</p>
+              {ELEMENT_SIZES.map((size) => (
+                <div key={`h-${size}`} className={styles.sliderRow}>
+                  <span className={styles.sliderLabel}>{size.toUpperCase()}</span>
+                  <div className={styles.sliderControl}>
+                    <input
+                      type="range"
+                      className={styles.slider}
+                      min={16}
+                      max={64}
+                      step={1}
+                      value={elementHeights[size]}
+                      onChange={(e) =>
+                        handleElementHeightChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <input
+                      type="number"
+                      className={styles.sliderNumberInput}
+                      min={16}
+                      max={64}
+                      step={1}
+                      value={elementHeights[size]}
+                      onChange={(e) =>
+                        handleElementHeightChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <span className={styles.sliderUnit}>px</span>
+                  </div>
+                </div>
+              ))}
+
+              {/* Padding Y */}
+              <p className={styles.subSectionLabel}>Padding Y</p>
+              {ELEMENT_SIZES.map((size) => (
+                <div key={`py-${size}`} className={styles.sliderRow}>
+                  <span className={styles.sliderLabel}>{size.toUpperCase()}</span>
+                  <div className={styles.sliderControl}>
+                    <input
+                      type="range"
+                      className={styles.slider}
+                      min={0}
+                      max={24}
+                      step={1}
+                      value={elementPaddingY[size]}
+                      onChange={(e) =>
+                        handleElementPaddingYChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <input
+                      type="number"
+                      className={styles.sliderNumberInput}
+                      min={0}
+                      max={24}
+                      step={1}
+                      value={elementPaddingY[size]}
+                      onChange={(e) =>
+                        handleElementPaddingYChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <span className={styles.sliderUnit}>px</span>
+                  </div>
+                </div>
+              ))}
+
+              {/* Padding X */}
+              <p className={styles.subSectionLabel}>Padding X</p>
+              {ELEMENT_SIZES.map((size) => (
+                <div key={`px-${size}`} className={styles.sliderRow}>
+                  <span className={styles.sliderLabel}>{size.toUpperCase()}</span>
+                  <div className={styles.sliderControl}>
+                    <input
+                      type="range"
+                      className={styles.slider}
+                      min={0}
+                      max={32}
+                      step={1}
+                      value={elementPaddingX[size]}
+                      onChange={(e) =>
+                        handleElementPaddingXChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <input
+                      type="number"
+                      className={styles.sliderNumberInput}
+                      min={0}
+                      max={32}
+                      step={1}
+                      value={elementPaddingX[size]}
+                      onChange={(e) =>
+                        handleElementPaddingXChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <span className={styles.sliderUnit}>px</span>
+                  </div>
+                </div>
+              ))}
+
+              {/* Visual alignment preview */}
+              <p className={styles.subSectionLabel}>Alignment Preview</p>
+              <div className={styles.alignmentPreview}>
+                {(['sm', 'md', 'lg'] as const).map((size) => (
+                  <div key={size} className={styles.alignmentRow}>
+                    <span className={styles.alignmentLabel}>{size.toUpperCase()}</span>
+                    <div className={styles.alignmentElements}>
+                      <div
+                        className={styles.alignmentBox}
+                        style={{
+                          minHeight: `${elementHeights[size]}px`,
+                          paddingTop: `${elementPaddingY[size]}px`,
+                          paddingBottom: `${elementPaddingY[size]}px`,
+                          paddingLeft: `${elementPaddingX[size]}px`,
+                          paddingRight: `${elementPaddingX[size]}px`,
+                        }}
+                      >
+                        Button
+                      </div>
+                      <div
+                        className={styles.alignmentBox}
+                        style={{
+                          minHeight: `${elementHeights[size]}px`,
+                          paddingTop: `${elementPaddingY[size]}px`,
+                          paddingBottom: `${elementPaddingY[size]}px`,
+                          paddingLeft: `${elementPaddingX[size]}px`,
+                          paddingRight: `${elementPaddingX[size]}px`,
+                        }}
+                      >
+                        Input
+                      </div>
+                      <div
+                        className={styles.alignmentBox}
+                        style={{
+                          minHeight: `${elementHeights[size]}px`,
+                          paddingTop: `${elementPaddingY[size]}px`,
+                          paddingBottom: `${elementPaddingY[size]}px`,
+                          paddingLeft: `${elementPaddingX[size]}px`,
+                          paddingRight: `${elementPaddingX[size]}px`,
+                        }}
+                      >
+                        Select
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}

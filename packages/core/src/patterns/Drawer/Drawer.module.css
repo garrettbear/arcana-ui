@@ -205,8 +205,8 @@
 
 @media (min-width: 640px) {
   .closeButton {
-    min-width: auto;
-    min-height: auto;
+    min-width: var(--element-height-sm);
+    min-height: var(--element-height-sm);
   }
 }
 
