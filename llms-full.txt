@@ -2,7 +2,7 @@
 
 > Auto-generated file. Do not edit manually.
 > Source: scripts/generate-docs.mjs | Regenerate: pnpm generate-docs
-> Last generated: 2026-03-31T00:01:52.669Z
+> Last generated: 2026-03-31T04:53:17.732Z
 
 ## Overview
 
@@ -1912,6 +1912,62 @@ import { KeyboardShortcut } from '@arcana-ui/core'
 <KeyboardShortcut variant="default">Content</KeyboardShortcut>
 ```
 
+### ColorPicker
+
+```tsx
+import { ColorPicker } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | — | Current CSS color value (hex, rgb, rgba) |
+| onChange | (value: string) => void | — | Called on every change with a hex value (or rgba for semi-transparent) |
+| format | 'hex' \| 'rgb' \| 'rgba' \| 'hsl' | `hex` | Color output format |
+| showAlpha | boolean | `true` | Show alpha/opacity slider (default true) |
+| showInputs | boolean | `true` | Show hex/RGB text inputs (default true) |
+| showEyeDropper | boolean | — | Show eyedropper button when supported (default true) |
+| presetColors | string[] | `[]` | Optional palette swatches (e.g. current theme colors) |
+| showRecent | boolean | `true` | Track and show recent colors (default true) |
+| placement | 'top' \| 'bottom' \| 'left' \| 'right' | `bottom` | Placement of popup relative to trigger |
+| size | 'sm' \| 'md' \| 'lg' | `md` | Size variant |
+| disabled | boolean | `false` | Disabled state |
+
+**Example:**
+
+```tsx
+<ColorPicker size="md">Content</ColorPicker>
+```
+
+### rgbaToHex
+
+```tsx
+import { rgbaToHex } from '@arcana-ui/core'
+```
+
+### FontPicker
+
+```tsx
+import { FontPicker } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | — | Current font-family stack value |
+| onChange | (fontStack: string) => void | — | Called when a font is selected |
+| label | string | — | Label text displayed on the trigger |
+| googleFonts | GoogleFontEntry[] | — | Google Fonts to offer (defaults to a curated list of ~31 fonts) |
+| localFonts | LocalFontEntry[] | `[]` | Locally uploaded fonts |
+| searchable | boolean | `true` | Show search input (default true) |
+| searchPlaceholder | string | — | Placeholder text for search |
+| size | 'sm' \| 'md' \| 'lg' | `md` | Size variant |
+| disabled | boolean | `false` | Disabled state |
+
+**Example:**
+
+```tsx
+<FontPicker size="md">Content</FontPicker>
+```
+
 ### ThemeProvider
 
 ```tsx
@@ -1971,6 +2027,30 @@ import { useFloating } from '@arcana-ui/core'
 ```
 
 Positions a floating element relative to a trigger, with smart flip and viewport clamping. Zero dependencies — a lightweight alternative to Floating UI / Popper.js.
+
+### useClickOutside
+
+```tsx
+import { useClickOutside } from '@arcana-ui/core'
+```
+
+Fires a callback when a click (mousedown) occurs outside of the referenced element. SSR-safe: does nothing when `document` is unavailable.
+
+### useDrag
+
+```tsx
+import { useDrag } from '@arcana-ui/core'
+```
+
+Generic drag interaction hook. Handles mousedown/touchstart → document mousemove/touchmove → mouseup/touchend with optional RAF throttling and coordinate normalization.
+
+### useUndoRedo
+
+```tsx
+import { useUndoRedo } from '@arcana-ui/core'
+```
+
+Generic undo/redo history stack. New pushes after an undo clear the forward (redo) history. Stack size is bounded by `maxHistory`.
 
 ### useTheme
 

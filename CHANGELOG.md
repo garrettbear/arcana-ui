@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `useClickOutside` hook — fires callback on mousedown outside a ref element, SSR-safe, with enabled flag
+- `useDrag` hook — generic drag handling with RAF throttling, touch support, relative positioning, and ref-based callbacks
+- `useUndoRedo<T>` hook — generic history stack with branch trimming, configurable max history, and reactive canUndo/canRedo
+- `ColorPicker` component — full HSV color picker with canvas rendering, hue/alpha sliders, hex/RGB inputs, EyeDropper API, preset colors, recent colors, and size variants (sm/md/lg)
+- `FontPicker` component — searchable font dropdown with Google Fonts integration, category grouping, font preview, and click-outside dismissal
 - Unified single-source-of-truth documentation pipeline (`scripts/generate-docs.mjs`) with 7 generators producing all docs from source code
 - `pnpm generate-docs` command that runs all generators: manifest, token map, component inventory, component tokens reference, export verification, llms.txt/llms-full.txt, and version sync
 - Auto-generated `docs/generated/token-component-map.json` mapping 67 components to 551 tokens with both component→token and token→component lookups
@@ -36,16 +41,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Playground component audit report (`docs/audits/playground-component-audit.md`)
 
 ### Changed
+- TokenEditor now uses Arcana `<ColorPicker>` instead of custom playground implementation (deleted playground/src/components/ColorPicker.tsx)
+- TokenEditor now uses Arcana `<FontPicker>` instead of inline 120-line custom font picker
+- TokenEditor now uses Arcana `useUndoRedo` hook instead of inline implementation
+- TokenEditor search input replaced with Arcana `<Input prefix={...} suffix={...} />`
+- TokenEditor reset buttons replaced with Arcana `<Button variant="ghost" size="sm">`
+- CubicBezierEditor now uses Arcana `useMediaQuery` and `usePrefersReducedMotion` hooks instead of raw window.matchMedia
+- AccessibilityPanel, ComponentDetail, TokenExplorer, TokenImpact: deduplicated `getCSSVar` utility (removed 4 inline copies)
+- Landing page prompt input replaced with Arcana `<Input>`
 - Landing page buttons (mobile menu, hero CTA, playground CTA, GitHub link) now use Arcana `<Button>`
 - Landing page hero badge and active badge now use Arcana `<Badge>`
 
 ### Fixed
-- Reverted Arcana component replacements in token editor tooling (TokenEditor, AccessibilityPanel, ColorPicker, CubicBezierEditor) — Arcana components consume the same CSS tokens the editor modifies, causing circular UI corruption
-- Fixed hero prompt input on landing page — reverted from Arcana `<Input>` (wrapper markup broke layout) to raw `<input>`
-- Fixed Reset All button not working in token editor
-- Fixed token reset buttons (18px) being oversized due to Arcana Button min-height
-- Fixed color picker z-index — Arcana Button's `overflow: hidden` was clipping the popup
-- Fixed segmented control buttons changing color when editing `--color-action-primary` token
+- Fixed token CSS lint violations in ColorPicker (hardcoded font-size and transition values replaced with token references)
 
 ## [0.1.0-beta.1] - 2026-03-24
 

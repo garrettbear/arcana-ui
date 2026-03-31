@@ -1,7 +1,7 @@
 > **Auto-generated file.** Do not edit manually.
 > Source: `scripts/generate-docs.mjs`
 > Regenerate: `pnpm generate-docs`
-> Last generated: 2026-03-31T00:01:52.669Z
+> Last generated: 2026-03-31T04:53:17.732Z
 
 # Component Token Reference
 
@@ -590,6 +590,55 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--focus-ring` | box-shadow |
 | `--radius-sm` | border-radius |
 
+## Colorpicker
+
+### Semantic Tokens Used
+
+| Token | CSS Property |
+|-------|--------------|
+| `--alpha-color-end` | background |
+| `--alpha-color-start` | background |
+| `--color-action-ghost-hover` | background |
+| `--color-action-primary` | box-shadow |
+| `--color-bg-elevated` | --colorpicker-bg |
+| `--color-bg-page` | background |
+| `--color-border-default` | border |
+| `--color-border-focus` | border-color |
+| `--color-fg-muted` | color |
+| `--color-fg-primary` | color |
+| `--color-fg-secondary` | color |
+| `--colorpicker-bg` | background |
+| `--colorpicker-canvas-height` | height |
+| `--colorpicker-canvas-width` | width |
+| `--colorpicker-padding` | padding |
+| `--colorpicker-radius` | border-radius |
+| `--colorpicker-shadow` | box-shadow |
+| `--colorpicker-slider-height` | height |
+| `--colorpicker-swatch-size` | width |
+| `--colorpicker-thumb-size` | top |
+| `--duration-fast` | transition |
+| `--ease-default` | transition |
+| `--focus-ring` | outline |
+| `--font-family-body` | font-family |
+| `--font-family-mono` | font-family |
+| `--font-size-xs` | font-size |
+| `--opacity-disabled` | opacity |
+| `--radius-full` | border-radius |
+| `--radius-lg` | --colorpicker-radius |
+| `--radius-sm` | border-radius |
+| `--radius-xs` | border-radius |
+| `--shadow-xl` | --colorpicker-shadow |
+| `--spacing-0-5` | gap |
+| `--spacing-1` | gap |
+| `--spacing-1-5` | gap |
+| `--spacing-2` | --colorpicker-padding |
+| `--spacing-2-5` | --colorpicker-padding |
+| `--spacing-3` | --colorpicker-padding |
+| `--spacing-4` | width |
+| `--spacing-7` | width |
+| `--spacing-9` | width |
+| `--z-popover` | z-index |
+
 ## Commandpalette
 
 ### Component Tokens
@@ -1083,6 +1132,45 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--spacing-px` | width |
 | `--spacing-xl` | padding |
 | `--transition-colors` | transition |
+
+## Fontpicker
+
+### Semantic Tokens Used
+
+| Token | CSS Property |
+|-------|--------------|
+| `--color-action-ghost-hover` | --fontpicker-option-hover-bg |
+| `--color-bg-elevated` | --fontpicker-dropdown-bg |
+| `--color-bg-page` | background |
+| `--color-bg-sunken` | background |
+| `--color-border-default` | border |
+| `--color-border-focus` | border-color |
+| `--color-border-muted` | border-bottom |
+| `--color-fg-muted` | color |
+| `--color-fg-primary` | color |
+| `--duration-fast` | transition |
+| `--ease-default` | transition |
+| `--focus-ring` | outline |
+| `--font-family-body` | font-family |
+| `--font-size-sm` | font-size |
+| `--font-size-xs` | font-size |
+| `--fontpicker-dropdown-bg` | background |
+| `--fontpicker-dropdown-max-height` | max-height |
+| `--fontpicker-dropdown-shadow` | box-shadow |
+| `--fontpicker-option-hover-bg` | background |
+| `--fontpicker-option-padding` | padding |
+| `--opacity-disabled` | opacity |
+| `--radius-md` | border-radius |
+| `--radius-sm` | border-radius |
+| `--shadow-lg` | --fontpicker-dropdown-shadow |
+| `--spacing-0-5` | padding |
+| `--spacing-1` | margin-top |
+| `--spacing-1-5` | padding |
+| `--spacing-2` | --fontpicker-option-padding |
+| `--spacing-2-5` | padding |
+| `--spacing-3` | --fontpicker-option-padding |
+| `--spacing-4` | padding |
+| `--z-popover` | z-index |
 
 ## Footer
 

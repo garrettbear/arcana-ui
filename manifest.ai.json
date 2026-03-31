@@ -3046,6 +3046,137 @@
       }
     },
     {
+      "name": "ColorPicker",
+      "category": "other",
+      "import": "import { ColorPicker } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string",
+          "description": "Current CSS color value (hex, rgb, rgba)"
+        },
+        "onChange": {
+          "type": "(value: string) => void",
+          "description": "Called on every change with a hex value (or rgba for semi-transparent)"
+        },
+        "format": {
+          "type": "enum",
+          "values": ["hex", "rgb", "rgba", "hsl"],
+          "required": false,
+          "description": "Color output format",
+          "default": "hex"
+        },
+        "showAlpha": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show alpha/opacity slider (default true)",
+          "default": true
+        },
+        "showInputs": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show hex/RGB text inputs (default true)",
+          "default": true
+        },
+        "showEyeDropper": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show eyedropper button when supported (default true)"
+        },
+        "presetColors": {
+          "type": "string[]",
+          "required": false,
+          "description": "Optional palette swatches (e.g. current theme colors)",
+          "default": "[]"
+        },
+        "showRecent": {
+          "type": "boolean",
+          "required": false,
+          "description": "Track and show recent colors (default true)",
+          "default": true
+        },
+        "placement": {
+          "type": "enum",
+          "values": ["top", "bottom", "left", "right"],
+          "required": false,
+          "description": "Placement of popup relative to trigger",
+          "default": "bottom"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "required": false,
+          "description": "Size variant",
+          "default": "md"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "rgbaToHex",
+      "category": "other",
+      "import": "import { rgbaToHex } from '@arcana-ui/core'"
+    },
+    {
+      "name": "FontPicker",
+      "category": "other",
+      "import": "import { FontPicker } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string",
+          "description": "Current font-family stack value"
+        },
+        "onChange": {
+          "type": "(fontStack: string) => void",
+          "description": "Called when a font is selected"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text displayed on the trigger"
+        },
+        "googleFonts": {
+          "type": "GoogleFontEntry[]",
+          "required": false,
+          "description": "Google Fonts to offer (defaults to a curated list of ~31 fonts)"
+        },
+        "localFonts": {
+          "type": "LocalFontEntry[]",
+          "required": false,
+          "description": "Locally uploaded fonts",
+          "default": "[]"
+        },
+        "searchable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show search input (default true)",
+          "default": true
+        },
+        "searchPlaceholder": {
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text for search"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "required": false,
+          "description": "Size variant",
+          "default": "md"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": false
+        }
+      }
+    },
+    {
       "name": "ThemeProvider",
       "category": "context",
       "import": "import { ThemeProvider } from '@arcana-ui/core'",
@@ -3102,6 +3233,21 @@
       "description": "Positions a floating element relative to a trigger, with smart flip and viewport clamping. Zero dependencies — a lightweight alternative to Floating UI / Popper.js."
     },
     {
+      "name": "useClickOutside",
+      "import": "import { useClickOutside } from '@arcana-ui/core'",
+      "description": "Fires a callback when a click (mousedown) occurs outside of the referenced element. SSR-safe: does nothing when `document` is unavailable."
+    },
+    {
+      "name": "useDrag",
+      "import": "import { useDrag } from '@arcana-ui/core'",
+      "description": "Generic drag interaction hook. Handles mousedown/touchstart → document mousemove/touchmove → mouseup/touchend with optional RAF throttling and coordinate normalization."
+    },
+    {
+      "name": "useUndoRedo",
+      "import": "import { useUndoRedo } from '@arcana-ui/core'",
+      "description": "Generic undo/redo history stack. New pushes after an undo clear the forward (redo) history. Stack size is bounded by `maxHistory`."
+    },
+    {
       "name": "useTheme",
       "import": "import { useTheme } from '@arcana-ui/core'",
       "description": "Reads the persisted theme from localStorage. Returns `null` if no preference is stored or if running on the server. / function getStoredTheme(): ThemeId | null { if (typeof window === 'undefined') return null; try { const stored = localStorage.getItem(STORAGE_KEY); if (stored && THEME_IDS.includes(stored as ThemeId)) { return stored as ThemeId; } } catch { // localStorage may be unavailable (e.g., private browsing) } return null; } /** Persists the theme choice to localStorage, or removes it to follow system. / function storeTheme(theme: ThemeId | null): void { if (typeof window === 'undefined') return; try { if (theme === null) { localStorage.removeItem(STORAGE_KEY); } else { localStorage.setItem(STORAGE_KEY, theme); } } catch { // Silently fail if localStorage is unavailable } } /** Applies the theme to the document root element. / function applyTheme(theme: ThemeId): void { if (typeof document === 'undefined') return; document.documentElement.setAttribute(ATTRIBUTE, theme); } /** SSR-safe subscription to `prefers-color-scheme: dark` media query. / function useSystemPrefersDark(): boolean { const query = '(prefers-color-scheme: dark)'; const subscribe = useCallback((callback: () => void) => { if (typeof window === 'undefined') return () => {}; const mql = window.matchMedia(query); mql.addEventListener('change', callback); return () => mql.removeEventListener('change', callback); }, []); const getSnapshot = useCallback((): boolean => { if (typeof window === 'undefined') return false; return window.matchMedia(query).matches; }, []); const getServerSnapshot = useCallback((): boolean => false, []); return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot); } /** Manages theme switching with system preference detection, manual override, and localStorage persistence. SSR-safe: defaults to `\"light\"` when `window` is unavailable."
@@ -3113,9 +3259,9 @@
     }
   ],
   "_generated": {
-    "at": "2026-03-31T00:01:52.741Z",
+    "at": "2026-03-31T04:53:17.806Z",
     "by": "scripts/generate-manifest.mjs",
-    "componentCount": 102,
-    "hookCount": 8
+    "componentCount": 105,
+    "hookCount": 11
   }
 }

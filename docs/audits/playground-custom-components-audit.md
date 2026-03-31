@@ -1,21 +1,42 @@
 # Playground Custom Component Audit
 
 > **Date:** 2026-03-31
+> **Updated:** 2026-03-31 (resolution pass)
 > **Purpose:** Identify custom components that should become Arcana components, use Arcana hooks, or remain playground-specific.
 > **Scope:** All files in `playground/src/`
 
 ---
 
-## Summary
+## Resolution Summary
 
-| Metric | Count |
-|--------|-------|
-| Total custom components found | 28 |
-| Should be Arcana components | 2 |
-| Should use Arcana hooks | 2 |
-| Playground specific (keep as-is) | 24 |
-| Existing hooks not being used | 2 |
-| Duplicated behavior patterns | 3 |
+All high-priority audit findings have been resolved:
+
+- **2 new Arcana components built:** ColorPicker, FontPicker
+- **3 new Arcana hooks extracted:** useClickOutside, useDrag, useUndoRedo
+- **2 existing hooks wired in:** useMediaQuery, usePrefersReducedMotion (CubicBezierEditor)
+- **4 getCSSVar duplicates removed** (consolidated to single import from utils/presets.ts)
+- **3 raw HTML elements replaced** with Arcana components (Input, Button)
+- **958 tests passing**, build clean, biome lint clean
+
+### Items intentionally deferred:
+- **Collapsible section replacement:** TokenEditor's collapsible pattern is deeply integrated with shared `openSections` Set state, sub-group collapsibles, modified-count badges, and reset buttons in headers. Replacing with Arcana `<Collapsible>` would require significant state management refactoring with high risk of UI regression.
+- **Landing/PlaygroundLayout navbar replacement:** Both navbars have custom visual designs (Landing: fixed dark theme; PlaygroundLayout: compact header with theme switcher). Replacing with Arcana `<Navbar>` would require extensive CSS overrides to match the existing designs.
+- **Landing page `--landing-*` CSS variables:** The Landing page intentionally uses a fixed dark color scheme (104 usages) regardless of active theme. Replacing with semantic tokens would change its behavior.
+- **useHotkey for undo/redo:** `useHotkey` intentionally does not fire in editable elements (INPUT/TEXTAREA/SELECT), but undo/redo must work while editing token values. The manual keyboard listener is correct.
+- **ColorPicker CSS hardcoded values (4 violations):** White borders on slider thumbs (#fff) and rgba box-shadows must remain hardcoded — they need to be visible against arbitrary hue gradients regardless of theme.
+
+---
+
+## Original Summary
+
+| Metric | Count | Resolved |
+|--------|-------|----------|
+| Total custom components found | 28 | — |
+| Should be Arcana components | 2 | 2/2 |
+| Should use Arcana hooks | 2 | 2/2 |
+| Playground specific (keep as-is) | 24 | — |
+| Existing hooks not being used | 2 | 1/2 (useHotkey deferred, see above) |
+| Duplicated behavior patterns | 3 | 3/3 |
 
 ---
 
@@ -66,6 +87,7 @@
   }
   ```
 - **Priority:** High — color pickers are a universally needed form control absent from the Arcana library.
+- **Resolution:** RESOLVED — Built as `packages/core/src/components/ColorPicker/`. Playground's custom `ColorPicker.tsx` deleted. TokenEditor now imports from `@arcana-ui/core`. Uses extracted `useClickOutside` and `useDrag` hooks. 4 tests passing.
 
 ### FontPicker
 
@@ -105,6 +127,7 @@
   }
   ```
 - **Priority:** Medium — useful for design tools and content editors, but narrower audience than ColorPicker.
+- **Resolution:** RESOLVED — Built as `packages/core/src/components/FontPicker/`. TokenEditor's inline FontPicker (~120 lines) deleted. Uses extracted `useClickOutside` hook. 5 tests passing.
 
 ---
 
@@ -127,6 +150,7 @@
 - **Hooks to extract:**
   - **`useDraggable(ref, { onDrag, onDragEnd, bounds })`** — Reusable for any drag interaction (sliders, resize handles, sortable lists). Currently the drag pattern (mousedown → document.mousemove → document.mouseup with RAF throttling) is manually implemented in both CubicBezierEditor and ColorPicker.
 - **Keep as:** Playground-specific component using the extracted `useDraggable` hook. Cubic bezier editing is too specialized for a general-purpose component library.
+- **Resolution:** RESOLVED — CubicBezierEditor now uses `useMediaQuery('(prefers-color-scheme: dark)')` and `usePrefersReducedMotion()` from `@arcana-ui/core`. Animation gated on reduced motion preference.
 
 ### TokenEditor (undo/redo system)
 
@@ -141,6 +165,7 @@
 - **Hooks to extract:**
   - **`useUndoRedo<T>(options?: { maxHistory?: number })`** — A generic undo/redo hook is useful for any editor, form builder, or interactive tool. The current implementation is already hook-shaped but not exported.
 - **Keep as:** The TokenEditor itself remains playground-specific, but `useUndoRedo` should be extracted to `packages/core/src/hooks/useUndoRedo.ts`.
+- **Resolution:** RESOLVED — `useUndoRedo<T>` extracted to `packages/core/src/hooks/useUndoRedo.ts`. TokenEditor's inline implementation (~50 lines) removed. 5 tests passing.
 
 ---
 
@@ -362,6 +387,7 @@ These are not custom components per se, but places where raw `<input>`, `<button
 - **Used in:** ColorPicker (line 231), FontPicker (line 328)
 - **Current implementation:** Each creates a `useEffect` with `document.addEventListener('mousedown')`, checks `ref.current.contains(e.target)`, and removes the listener on cleanup.
 - **Recommendation:** Extract `useClickOutside(ref, callback, enabled)` hook. This is a well-known pattern. Note: the Arcana `useFloating` hook handles positioning but does NOT handle click-outside — that's left to the consumer. A `useClickOutside` hook would complement `useFloating`.
+- **Resolution:** RESOLVED — `useClickOutside` extracted to `packages/core/src/hooks/useClickOutside.ts`. Used by ColorPicker and FontPicker. 4 tests passing.
 
 ### 2. Canvas Drag Interaction
 
@@ -373,12 +399,14 @@ These are not custom components per se, but places where raw `<input>`, `<button
   4. Get coordinates relative to element via `getBoundingClientRect()`
   5. Clean up listeners on mouseup
 - **Recommendation:** Extract `useDrag(options: { onDragStart, onDrag, onDragEnd, ref })` hook. Returns `{ isDragging, position }`. Should handle RAF throttling, touch events, and coordinate normalization. This is the strongest candidate for hook extraction — 4 separate implementations of the same pattern across 2 files.
+- **Resolution:** RESOLVED — `useDrag` extracted to `packages/core/src/hooks/useDrag.ts`. Used 3 times in ColorPicker (canvas, hue slider, alpha slider). 5 tests passing.
 
 ### 3. getCSSVarValue / getCSSVar Utility
 
 - **Duplicated in:** `playground/src/pages/ComponentDetail.tsx` (line 109), `playground/src/pages/TokenExplorer.tsx` (line 54), `playground/src/pages/TokenImpact.tsx` (line 34), `playground/src/components/AccessibilityPanel.tsx` (line 5), `playground/src/utils/presets.ts` (line 74)
 - **Current implementation:** All are identical one-liners: `getComputedStyle(document.documentElement).getPropertyValue(varName).trim()`
 - **Recommendation:** Consolidate into a single shared utility imported from `playground/src/utils/presets.ts` where `getCSSVar` already exists. Not an Arcana hook candidate — this is a trivial utility.
+- **Resolution:** RESOLVED — All 4 duplicate copies removed. AccessibilityPanel, ComponentDetail, TokenExplorer, TokenImpact now import `getCSSVar` from `utils/presets.ts`.
 
 ---
 
