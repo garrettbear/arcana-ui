@@ -280,6 +280,60 @@
 
 ---
 
+## Raw HTML Where Arcana Components Should Be Used
+
+These are not custom components per se, but places where raw `<input>`, `<button>`, or `<div>` elements are used with custom CSS instead of importing the equivalent Arcana component.
+
+### Landing Page Prompt Input
+
+- **File:** `playground/src/pages/Landing.tsx` (lines 458–474)
+- **Element:** Raw `<input type="text" className={styles.promptInput}>` inside a `<form>`
+- **What it should use:** Arcana `<Input>` with custom `className` for any visual overrides
+- **Issues:**
+  - Hardcoded `border-radius: 14px` in CSS (should use `--radius-*` token)
+  - Custom focus ring (`box-shadow: 0 0 0 3px var(--landing-accent-glow)`) instead of `--focus-ring` token
+  - Entire landing page uses its own `--landing-*` CSS variable namespace (20+ custom variables at line 8–20 of `Landing.module.css`) instead of Arcana semantic tokens
+  - The submit button next to it DOES correctly use `<Button variant="primary">`, making the raw input inconsistent
+
+### TokenEditor Search Input
+
+- **File:** `playground/src/components/TokenEditor.tsx` (lines 1029–1043)
+- **Element:** Raw `<input type="text" className={styles.searchInput}>` with a Unicode `⌕` icon and a raw `<button>` clear (`×`) button
+- **What it should use:** Arcana `<Input>` with `prefix` prop for the search icon (exactly how `ComponentGallery.tsx` line 46 and `TokenExplorer.tsx` line 134 do it correctly)
+- **Issues:**
+  - Hardcoded `6px` gap, `12px` font-size in CSS
+  - Custom clear button instead of a proper Arcana `<Button variant="ghost" size="sm">`
+  - Inconsistent with the rest of the playground — ComponentGallery and TokenExplorer both use Arcana `<Input>` for their search bars
+
+### Token Reset Buttons
+
+- **File:** `playground/src/components/TokenEditor.tsx` (lines 1145–1152)
+- **Element:** Raw `<button className={styles.tokenResetBtn}>↺</button>` for per-token reset
+- **What it should use:** Arcana `<Button variant="ghost" size="sm" iconOnly>` with a proper icon
+- **Issues:**
+  - Hardcoded `18×18px` dimensions in CSS (`.tokenResetBtn`)
+  - Uses a Unicode character (`↺`) instead of an SVG icon
+  - Custom hover style instead of using Button's built-in ghost hover
+
+### Modified Dot Indicators
+
+- **File:** `playground/src/components/TokenEditor.tsx` (line 1132)
+- **Element:** `<span className={styles.modifiedDot}>` — a 5×5px colored circle next to modified tokens
+- **What it should use:** Arcana `<Badge>` with a `dot` variant, or keep as-is since it's a 5px indicator dot (too small to warrant a full component). However, the hardcoded `5px` width/height and `background: var(--color-action-primary)` should at least use `--spacing-1` for sizing.
+
+### Section Toggle Buttons (Collapsible Headers)
+
+- **File:** `playground/src/components/TokenEditor.tsx` (lines 1048–1055, and throughout)
+- **Element:** Raw `<button className={styles.sectionHeader}>` with Unicode `▾`/`▸` chevrons for collapsible sections
+- **What it should use:** Arcana `<Collapsible>` or `<Accordion>` components, which already handle expand/collapse state, keyboard accessibility, and ARIA attributes. The TokenEditor manually manages `openSections` state with a `Set<string>`.
+- **Issues:**
+  - No ARIA attributes (`aria-expanded`, `aria-controls`) on the toggle buttons
+  - Unicode chevrons instead of SVG icons
+  - Duplicated toggle pattern across 5+ sections in the editor
+  - Also duplicated in `AccessibilityPanel.tsx` (lines 260–266) with the same pattern
+
+---
+
 ## Duplicated Behavior Patterns
 
 ### 1. Click-Outside Detection
@@ -346,7 +400,12 @@
 
 ### Quick Wins (No New Components Needed)
 
-1. **Deduplicate `getCSSVarValue`** — 5 copies of the same one-liner across playground files. Import from `utils/presets.ts`.
-2. **Use `useHotkey`** in TokenEditor for undo/redo instead of manual event listener.
-3. **Use `usePrefersReducedMotion`** in CubicBezierEditor to disable animation preview when reduced motion is preferred.
-4. **Make CubicBezierEditor dark mode reactive** — currently reads `prefers-color-scheme` once on render; should use `useMediaQuery` to react to changes.
+1. **Replace raw `<input>` in TokenEditor search** with Arcana `<Input prefix={...}>` — matches how ComponentGallery and TokenExplorer already do it.
+2. **Replace raw `<input>` in Landing page prompt** with Arcana `<Input>` — the adjacent submit button already uses Arcana `<Button>`.
+3. **Replace raw `<button>` reset buttons** in TokenEditor with Arcana `<Button variant="ghost" size="sm" iconOnly>`.
+4. **Replace manual collapsible sections** in TokenEditor (and AccessibilityPanel) with Arcana `<Collapsible>` or `<Accordion>` — adds ARIA attributes for free.
+5. **Replace Landing page `--landing-*` CSS variables** with Arcana semantic tokens where possible (at minimum `--color-fg-primary`, `--radius-md`, `--font-family-body`).
+6. **Deduplicate `getCSSVarValue`** — 5 copies of the same one-liner across playground files. Import from `utils/presets.ts`.
+7. **Use `useHotkey`** in TokenEditor for undo/redo instead of manual event listener.
+8. **Use `usePrefersReducedMotion`** in CubicBezierEditor to disable animation preview when reduced motion is preferred.
+9. **Make CubicBezierEditor dark mode reactive** — currently reads `prefers-color-scheme` once on render; should use `useMediaQuery` to react to changes.
