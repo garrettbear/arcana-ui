@@ -252,8 +252,7 @@ export const FontPicker = forwardRef<HTMLDivElement, FontPickerProps>(
                       <button
                         key={font.name}
                         type="button"
-                        role="option"
-                        aria-selected={currentName === font.name}
+                        aria-pressed={currentName === font.name}
                         className={cn(
                           styles.option,
                           currentName === font.name && styles.optionActive,

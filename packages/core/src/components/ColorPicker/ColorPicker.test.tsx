@@ -41,7 +41,6 @@ describe('ColorPicker', () => {
     const swatch = screen.getByRole('button', { name: /color picker/i });
     fireEvent.click(swatch);
     // Should only have 1 slider (hue), not 2 (hue + alpha)
-    const sliders = container.querySelectorAll('[class*="Slider"]');
     // The hue slider should exist but alpha should not
     const alphaSlider = container.querySelector('[class*="alphaSlider"]');
     expect(alphaSlider).toBeNull();
