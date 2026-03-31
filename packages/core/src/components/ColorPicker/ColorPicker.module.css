@@ -10,6 +10,9 @@
   --colorpicker-shadow: var(--shadow-xl);
   --colorpicker-padding: var(--spacing-2-5);
   --colorpicker-swatch-size: 24px;
+  --colorpicker-thumb-border: var(--color-bg-page, #fff);
+  --colorpicker-thumb-shadow: var(--shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.35));
+  --colorpicker-cursor-shadow: var(--shadow-xs, 0 0 0 1px rgba(0, 0, 0, 0.4));
 
   position: relative;
   display: inline-block;
@@ -99,8 +102,8 @@
   width: var(--spacing-3);
   height: var(--spacing-3);
   border-radius: var(--radius-full, 50%);
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  border: 2px solid var(--colorpicker-thumb-border);
+  box-shadow: var(--colorpicker-cursor-shadow);
   pointer-events: none;
   transform: translate(-50%, -50%);
 }
@@ -187,8 +190,8 @@
   width: var(--colorpicker-thumb-size);
   height: var(--colorpicker-thumb-size);
   border-radius: var(--radius-full, 50%);
-  border: 2px solid #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  border: 2px solid var(--colorpicker-thumb-border);
+  box-shadow: var(--colorpicker-thumb-shadow);
   background: transparent;
   pointer-events: none;
   z-index: 1;
