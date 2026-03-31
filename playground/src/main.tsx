@@ -6,6 +6,7 @@ import ComponentDetail from './pages/ComponentDetail';
 import ComponentGallery from './pages/ComponentGallery';
 import Landing from './pages/Landing';
 import PlaygroundLayout from './pages/PlaygroundLayout';
+import RelationshipGraph from './pages/RelationshipGraph';
 import TokenExplorer from './pages/TokenExplorer';
 import TokenImpact from './pages/TokenImpact';
 
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/playground/components/:name" element={<ComponentDetail />} />
           <Route path="/playground/tokens" element={<TokenExplorer />} />
           <Route path="/playground/tokens/:category/:name" element={<TokenImpact />} />
+          <Route path="/playground/graph" element={<RelationshipGraph />} />
         </Route>
       </Routes>
     </BrowserRouter>
