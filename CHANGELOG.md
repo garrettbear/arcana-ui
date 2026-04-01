@@ -8,17 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Global element sizing token system: `--element-height-{xs..xl}`, `--spacing-element-y-{xs..xl}`, `--spacing-element-x-{xs..xl}` with density scaling (compact/comfortable)
+- Global element sizing token system: `--element-height-{xs..xl}`, `--element-padding-y-{xs..xl}`, `--element-padding-x-{xs..xl}`, `--element-font-size-{xs..xl}`, `--element-icon-size-{xs..xl}` with density scaling (compact/comfortable)
+- Button xs and xl sizes, plus icon-only sizes (`icon-xs`, `icon-sm`, `icon`, `icon-lg`, `icon-xl`) that create square buttons
+- Button `shape` prop with `default`, `circle`, and `pill` options
+- Input and Select xs and xl sizes matching Button heights
 - Per-size component tokens for Button, Input, Select, QuantitySelector with three-level fallback chain (`--button-height-md → --button-height → --element-height-md`)
-- Element Sizing section in token editor with height/padding-y/padding-x sliders per size and visual alignment preview (Button + Input + Select row)
+- Element Sizing section in token editor with height/padding-y/padding-x sliders per size and visual alignment preview across all 5 sizes
+- Button shapes gallery and cross-component alignment proof in playground component detail page
 - Personality-appropriate element sizing overrides for 8 presets (terminal/retro98/mono=compact, glass/editorial/nature=spacious, startup/brutalist=slightly spacious)
 
 ### Changed
 - Refactored 11 component CSS files (Button, Input, Select, Textarea, DatePicker, QuantitySelector, Pagination, Tabs, Badge, Sidebar, Drawer) to use element sizing tokens with proper fallbacks
-- Badge now uses `--spacing-element-y-xs` / `--spacing-element-x-xs` for density-aware padding
-- Tabs now uses `--spacing-element-y-sm` / `--spacing-element-x-sm` for density-aware padding
-- Sidebar items and Pagination buttons now reference element sizing tokens
+- Renamed element padding tokens from `--spacing-element-y-*` / `--spacing-element-x-*` to `--element-padding-y-*` / `--element-padding-x-*`
 - All sized components use `min-height` (not `height`) with 44px mobile touch target floor
+
+### Fixed
+- Fixed spacing editor base unit showing 0px when preset uses rem values (rem-to-px conversion was missing)
 - `useClickOutside` hook — fires callback on mousedown outside a ref element, SSR-safe, with enabled flag
 - `useDrag` hook — generic drag handling with RAF throttling, touch support, relative positioning, and ref-based callbacks
 - `useUndoRedo<T>` hook — generic history stack with branch trimming, configurable max history, and reactive canUndo/canRedo

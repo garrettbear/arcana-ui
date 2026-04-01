@@ -169,19 +169,19 @@ const ELEMENT_HEIGHT_VARS: Record<ElementSize, string> = {
 };
 
 const ELEMENT_PADDING_Y_VARS: Record<ElementSize, string> = {
-  xs: '--spacing-element-y-xs',
-  sm: '--spacing-element-y-sm',
-  md: '--spacing-element-y-md',
-  lg: '--spacing-element-y-lg',
-  xl: '--spacing-element-y-xl',
+  xs: '--element-padding-y-xs',
+  sm: '--element-padding-y-sm',
+  md: '--element-padding-y-md',
+  lg: '--element-padding-y-lg',
+  xl: '--element-padding-y-xl',
 };
 
 const ELEMENT_PADDING_X_VARS: Record<ElementSize, string> = {
-  xs: '--spacing-element-x-xs',
-  sm: '--spacing-element-x-sm',
-  md: '--spacing-element-x-md',
-  lg: '--spacing-element-x-lg',
-  xl: '--spacing-element-x-xl',
+  xs: '--element-padding-x-xs',
+  sm: '--element-padding-x-sm',
+  md: '--element-padding-x-md',
+  lg: '--element-padding-x-lg',
+  xl: '--element-padding-x-xl',
 };
 
 // ─── Radius ───────────────────────────────────────────────────────────────────
@@ -246,24 +246,24 @@ export function TokenEditor({
 
   // Element sizing state
   const [elementHeights, setElementHeights] = useState<Record<ElementSize, number>>({
-    xs: 24,
+    xs: 28,
     sm: 32,
     md: 40,
     lg: 48,
     xl: 56,
   });
   const [elementPaddingY, setElementPaddingY] = useState<Record<ElementSize, number>>({
-    xs: 2,
-    sm: 4,
+    xs: 4,
+    sm: 6,
     md: 8,
-    lg: 12,
-    xl: 16,
+    lg: 10,
+    xl: 12,
   });
   const [elementPaddingX, setElementPaddingX] = useState<Record<ElementSize, number>>({
-    xs: 6,
-    sm: 8,
-    md: 12,
-    lg: 16,
+    xs: 8,
+    sm: 12,
+    md: 16,
+    lg: 20,
     xl: 24,
   });
 
@@ -333,7 +333,8 @@ export function TokenEditor({
 
     const sp1 = getCSSVar('--spacing-1');
     if (sp1) {
-      const px = Number.parseFloat(sp1);
+      let px = Number.parseFloat(sp1);
+      if (sp1.includes('rem')) px = px * 16;
       if (px > 0) setSpacingBase(Math.round(px));
     }
 
@@ -771,8 +772,11 @@ export function TokenEditor({
           if (data['--font-size-base'].includes('rem')) px = px * 16;
           setTypeBaseSize(Math.round(px) || 16);
         }
-        if (data['--spacing-1'])
-          setSpacingBase(Math.round(Number.parseFloat(data['--spacing-1'])) || 4);
+        if (data['--spacing-1']) {
+          let spPx = Number.parseFloat(data['--spacing-1']);
+          if (data['--spacing-1'].includes('rem')) spPx = spPx * 16;
+          setSpacingBase(Math.round(spPx) || 4);
+        }
         if (data['--radius-md']) setRadius(Number.parseInt(data['--radius-md']) || 8);
         if (data['--arcana-scale']) {
           const s = Number.parseFloat(data['--arcana-scale']);
@@ -1460,7 +1464,7 @@ export function TokenEditor({
               {/* Visual alignment preview */}
               <p className={styles.subSectionLabel}>Alignment Preview</p>
               <div className={styles.alignmentPreview}>
-                {(['sm', 'md', 'lg'] as const).map((size) => (
+                {ELEMENT_SIZES.map((size) => (
                   <div key={size} className={styles.alignmentRow}>
                     <span className={styles.alignmentLabel}>{size.toUpperCase()}</span>
                     <div className={styles.alignmentElements}>

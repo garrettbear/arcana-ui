@@ -138,8 +138,31 @@ function RenderComponent({
   if (loading) p.loading = true;
 
   switch (slug) {
-    case 'button':
+    case 'button': {
+      const isIconSize = typeof size === 'string' && size.startsWith('icon');
+      const iconSvg = (
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      );
+      if (isIconSize) {
+        return (
+          <Button {...p} aria-label="Add item">
+            {iconSvg}
+          </Button>
+        );
+      }
       return <Button {...p}>{variant || 'Button'}</Button>;
+    }
     case 'badge':
       return <Badge {...p}>{variant || 'Badge'}</Badge>;
     case 'input':
@@ -709,6 +732,88 @@ function SizesGallery({ meta }: { meta: ComponentMeta }) {
   );
 }
 
+// ─── Button Shapes Gallery ───────────────────────────────────────────────────
+
+function ButtonShapesGallery({ meta }: { meta: ComponentMeta }) {
+  if (meta.slug !== 'button') return null;
+  const shapes = ['default', 'circle', 'pill'] as const;
+  const plusIcon = (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+  return (
+    <section className={styles.gallerySection}>
+      <h2 className={styles.gallerySectionTitle}>Shapes</h2>
+      <div className={styles.galleryGrid}>
+        {shapes.map((shape) => (
+          <div key={shape} className={styles.galleryItem}>
+            <div
+              className={styles.galleryPreview}
+              style={{ display: 'flex', gap: 'var(--spacing-2)', alignItems: 'center' }}
+            >
+              <Button shape={shape}>Label</Button>
+              <Button shape={shape} size="icon" aria-label="Add">
+                {plusIcon}
+              </Button>
+            </div>
+            <span className={styles.galleryLabel}>{shape}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ─── Alignment Proof ─────────────────────────────────────────────────────────
+
+function AlignmentProof({ meta }: { meta: ComponentMeta }) {
+  if (meta.slug !== 'button') return null;
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  return (
+    <section className={styles.gallerySection}>
+      <h2 className={styles.gallerySectionTitle}>Alignment Proof</h2>
+      <p
+        style={{
+          fontSize: 'var(--font-size-sm)',
+          color: 'var(--color-fg-secondary)',
+          marginBottom: 'var(--spacing-4)',
+        }}
+      >
+        Button, Input, and Select at each size should share the same height.
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)' }}>
+        {sizes.map((s) => (
+          <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-3)' }}>
+            <span
+              style={{
+                width: '2rem',
+                fontSize: 'var(--font-size-xs)',
+                color: 'var(--color-fg-muted)',
+                fontWeight: 'var(--font-weight-semibold)',
+              }}
+            >
+              {s.toUpperCase()}
+            </span>
+            <Button size={s}>Button</Button>
+            <Input size={s} placeholder="Input" style={{ width: '10rem' }} />
+            <Select size={s} options={[{ value: '1', label: 'Select' }]} value="1" />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // ─── Props Reference ─────────────────────────────────────────────────────────
 
 function PropsReferenceSection({ meta }: { meta: ComponentMeta }) {
@@ -847,6 +952,8 @@ export default function ComponentDetail() {
       {/* Below-fold sections */}
       <VariantsGallery meta={meta} />
       <SizesGallery meta={meta} />
+      <ButtonShapesGallery meta={meta} />
+      <AlignmentProof meta={meta} />
       <PropsReferenceSection meta={meta} />
     </div>
   );

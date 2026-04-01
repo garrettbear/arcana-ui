@@ -11,10 +11,10 @@
  *   --input-height           Element height legacy (fallback for all sizes)
  *
  * Per-size tokens (fall back to global element sizing):
- *   --input-height-sm/md/lg          → --input-height → --element-height-sm/md/lg
- *   --input-padding-y-sm/md/lg       → --spacing-element-y-sm/md/lg
- *   --input-padding-x-sm/md/lg       → --spacing-element-x-sm/md/lg
- *   --input-font-size-sm/md/lg       → --font-size-xs/sm/base
+ *   --input-height-{xs..xl}      → --input-height → --element-height-{xs..xl}
+ *   --input-padding-y-{xs..xl}   → --element-padding-y-{xs..xl}
+ *   --input-padding-x-{xs..xl}   → --element-padding-x-{xs..xl}
+ *   --input-font-size-{xs..xl}   → --element-font-size-{xs..xl}
  */
 
 /* Input wrapper — mobile-first */
@@ -80,10 +80,8 @@
   flex: 1;
   min-width: 0;
   min-height: 2.75rem;
-  padding-top: var(--input-padding-y-md, var(--spacing-element-y-md));
-  padding-bottom: var(--input-padding-y-md, var(--spacing-element-y-md));
-  padding-left: var(--input-padding-x-md, var(--spacing-element-x-md));
-  padding-right: var(--input-padding-x-md, var(--spacing-element-x-md));
+  padding: var(--input-padding-y-md, var(--element-padding-y-md))
+    var(--input-padding-x-md, var(--element-padding-x-md));
   background: transparent;
   border: none;
   outline: none;
@@ -97,34 +95,50 @@
 @media (min-width: 640px) {
   .input {
     min-height: var(--input-height-md, var(--input-height, var(--element-height-md)));
-    font-size: var(--input-font-size-md, var(--font-size-sm));
+    font-size: var(--input-font-size-md, var(--element-font-size-md));
   }
 }
 
 /* Size variants */
+.size-xs .input {
+  padding: var(--input-padding-y-xs, var(--element-padding-y-xs))
+    var(--input-padding-x-xs, var(--element-padding-x-xs));
+  font-size: var(--input-font-size-xs, var(--element-font-size-xs));
+}
+
 .size-sm .input {
-  padding-top: var(--input-padding-y-sm, var(--spacing-element-y-sm));
-  padding-bottom: var(--input-padding-y-sm, var(--spacing-element-y-sm));
-  padding-left: var(--input-padding-x-sm, var(--spacing-element-x-sm));
-  padding-right: var(--input-padding-x-sm, var(--spacing-element-x-sm));
-  font-size: var(--input-font-size-sm, var(--font-size-xs));
+  padding: var(--input-padding-y-sm, var(--element-padding-y-sm))
+    var(--input-padding-x-sm, var(--element-padding-x-sm));
+  font-size: var(--input-font-size-sm, var(--element-font-size-sm));
 }
 
 .size-lg .input {
-  padding-top: var(--input-padding-y-lg, var(--spacing-element-y-lg));
-  padding-bottom: var(--input-padding-y-lg, var(--spacing-element-y-lg));
-  padding-left: var(--input-padding-x-lg, var(--spacing-element-x-lg));
-  padding-right: var(--input-padding-x-lg, var(--spacing-element-x-lg));
-  font-size: var(--input-font-size-lg, var(--font-size-base));
+  padding: var(--input-padding-y-lg, var(--element-padding-y-lg))
+    var(--input-padding-x-lg, var(--element-padding-x-lg));
+  font-size: var(--input-font-size-lg, var(--element-font-size-lg));
+}
+
+.size-xl .input {
+  padding: var(--input-padding-y-xl, var(--element-padding-y-xl))
+    var(--input-padding-x-xl, var(--element-padding-x-xl));
+  font-size: var(--input-font-size-xl, var(--element-font-size-xl));
 }
 
 @media (min-width: 640px) {
+  .size-xs .input {
+    min-height: var(--input-height-xs, var(--input-height, var(--element-height-xs)));
+  }
+
   .size-sm .input {
     min-height: var(--input-height-sm, var(--input-height, var(--element-height-sm)));
   }
 
   .size-lg .input {
     min-height: var(--input-height-lg, var(--input-height, var(--element-height-lg)));
+  }
+
+  .size-xl .input {
+    min-height: var(--input-height-xl, var(--input-height, var(--element-height-xl)));
   }
 }
 
@@ -152,15 +166,15 @@
   align-items: center;
   flex-shrink: 0;
   color: var(--color-fg-secondary);
-  font-size: var(--input-font-size-md, var(--font-size-sm));
+  font-size: var(--input-font-size-md, var(--element-font-size-md));
 }
 
 .prefix {
-  padding-left: var(--input-padding-x-md, var(--spacing-element-x-md));
+  padding-left: var(--input-padding-x-md, var(--element-padding-x-md));
 }
 
 .suffix {
-  padding-right: var(--input-padding-x-md, var(--spacing-element-x-md));
+  padding-right: var(--input-padding-x-md, var(--element-padding-x-md));
 }
 
 /* Helper / Error text */

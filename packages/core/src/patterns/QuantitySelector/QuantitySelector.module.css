@@ -5,7 +5,7 @@
  *
  * Per-size tokens (fall back to global element sizing):
  *   --qty-height-sm/md            → --element-height-sm/md
- *   --qty-padding-sm/md           → --spacing-element-y-sm/md
+ *   --qty-padding-sm/md           → --element-padding-y-sm/md
  */
 
 .root {
@@ -22,7 +22,7 @@
 .size-md .button {
   min-width: var(--spacing-10);
   min-height: 2.75rem;
-  padding: var(--qty-padding-md, var(--spacing-element-y-md));
+  padding: var(--qty-padding-md, var(--element-padding-y-md));
 }
 
 .size-md .input {
@@ -34,7 +34,7 @@
 .size-sm .button {
   min-width: var(--spacing-8);
   min-height: 2.75rem;
-  padding: var(--qty-padding-sm, var(--spacing-element-y-sm));
+  padding: var(--qty-padding-sm, var(--element-padding-y-sm));
 }
 
 .size-sm .input {

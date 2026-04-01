@@ -7,7 +7,7 @@ export interface InputProps
   /** Label text displayed above the input */
   label?: string;
   /** Size of the input */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** Error message string or boolean error state */
   error?: string | boolean;
   /** Helper text displayed below the input */

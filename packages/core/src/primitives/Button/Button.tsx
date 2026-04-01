@@ -2,11 +2,29 @@ import React from 'react';
 import { cn } from '../../utils/cn';
 import styles from './Button.module.css';
 
+/** All available button size options */
+export type ButtonSize =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'icon-xs'
+  | 'icon-sm'
+  | 'icon'
+  | 'icon-lg'
+  | 'icon-xl';
+
+/** Button shape options */
+export type ButtonShape = 'default' | 'circle' | 'pill';
+
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual style variant */
   variant?: 'primary' | 'secondary' | 'ghost' | 'destructive' | 'outline';
   /** Size of the button */
-  size?: 'sm' | 'md' | 'lg';
+  size?: ButtonSize;
+  /** Shape of the button */
+  shape?: ButtonShape;
   /** Whether the button is in a loading state */
   loading?: boolean;
   /** Icon element displayed before the label */
@@ -15,9 +33,28 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   iconRight?: React.ReactNode;
   /** Whether the button stretches to fill its container */
   fullWidth?: boolean;
-  /** Render as an icon-only button (square shape, requires aria-label) */
+  /** @deprecated Use size="icon" instead. Render as an icon-only button (square shape, requires aria-label) */
   iconOnly?: boolean;
 }
+
+const SIZE_CLASS_MAP: Record<ButtonSize, string> = {
+  xs: styles.xs,
+  sm: styles.sm,
+  md: styles.md,
+  lg: styles.lg,
+  xl: styles.xl,
+  'icon-xs': styles.iconXs,
+  'icon-sm': styles.iconSm,
+  icon: styles.icon,
+  'icon-lg': styles.iconLg,
+  'icon-xl': styles.iconXl,
+};
+
+const SHAPE_CLASS_MAP: Record<ButtonShape, string | undefined> = {
+  default: undefined,
+  circle: styles.circle,
+  pill: styles.pill,
+};
 
 const Spinner = () => (
   <svg
@@ -48,6 +85,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     {
       variant = 'primary',
       size = 'md',
+      shape = 'default',
       loading = false,
       icon,
       iconRight,
@@ -61,6 +99,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const isDisabled = disabled || loading;
+    const isIconSize = size.startsWith('icon');
 
     return (
       <button
@@ -70,7 +109,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           styles.button,
           styles[variant],
-          styles[size],
+          SIZE_CLASS_MAP[size],
+          SHAPE_CLASS_MAP[shape],
           fullWidth && styles.fullWidth,
           iconOnly && styles.iconOnly,
           loading && styles.loading,
@@ -84,7 +124,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {icon}
           </span>
         )}
-        {children && <span className={styles.label}>{children}</span>}
+        {children && !isIconSize && <span className={styles.label}>{children}</span>}
         {iconRight && (
           <span className={styles.iconTrailing} aria-hidden="true">
             {iconRight}

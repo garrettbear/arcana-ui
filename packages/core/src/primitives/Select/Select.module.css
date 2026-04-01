@@ -12,10 +12,10 @@
  *   --select-option-selected-bg Selected option bg (fallback: --color-action-primary)
  *
  * Per-size tokens (fall back to global element sizing):
- *   --select-height-sm/md/lg          → --select-height → --element-height-sm/md/lg
- *   --select-padding-y-sm/md/lg       → --spacing-element-y-sm/md/lg
- *   --select-padding-x-sm/md/lg       → --spacing-element-x-sm/md/lg
- *   --select-font-size-sm/md/lg       → --font-size-xs/sm/base
+ *   --select-height-{xs..xl}      → --select-height → --element-height-{xs..xl}
+ *   --select-padding-y-{xs..xl}   → --element-padding-y-{xs..xl}
+ *   --select-padding-x-{xs..xl}   → --element-padding-x-{xs..xl}
+ *   --select-font-size-{xs..xl}   → --element-font-size-{xs..xl}
  */
 
 .wrapper {
@@ -56,9 +56,9 @@
   gap: var(--spacing-2);
   width: 100%;
   min-height: 2.75rem;
-  padding-top: var(--select-padding-y-md, var(--spacing-element-y-md));
-  padding-bottom: var(--select-padding-y-md, var(--spacing-element-y-md));
-  padding-left: var(--select-padding-x-md, var(--spacing-element-x-md));
+  padding-top: var(--select-padding-y-md, var(--element-padding-y-md));
+  padding-bottom: var(--select-padding-y-md, var(--element-padding-y-md));
+  padding-left: var(--select-padding-x-md, var(--element-padding-x-md));
   padding-right: var(--spacing-3);
   background-color: var(--select-bg, var(--color-bg-page));
   border: var(--select-border-width, var(--border-width-default)) solid
@@ -75,31 +75,53 @@
 @media (min-width: 640px) {
   .trigger {
     min-height: var(--select-height-md, var(--select-height, var(--element-height-md)));
-    font-size: var(--select-font-size-md, var(--font-size-sm));
+    font-size: var(--select-font-size-md, var(--element-font-size-md));
   }
 }
 
+.size-xs .trigger {
+  padding-top: var(--select-padding-y-xs, var(--element-padding-y-xs));
+  padding-bottom: var(--select-padding-y-xs, var(--element-padding-y-xs));
+  padding-left: var(--select-padding-x-xs, var(--element-padding-x-xs));
+  font-size: var(--select-font-size-xs, var(--element-font-size-xs));
+}
+
 .size-sm .trigger {
-  padding-top: var(--select-padding-y-sm, var(--spacing-element-y-sm));
-  padding-bottom: var(--select-padding-y-sm, var(--spacing-element-y-sm));
-  padding-left: var(--select-padding-x-sm, var(--spacing-element-x-sm));
-  font-size: var(--select-font-size-sm, var(--font-size-xs));
+  padding-top: var(--select-padding-y-sm, var(--element-padding-y-sm));
+  padding-bottom: var(--select-padding-y-sm, var(--element-padding-y-sm));
+  padding-left: var(--select-padding-x-sm, var(--element-padding-x-sm));
+  font-size: var(--select-font-size-sm, var(--element-font-size-sm));
 }
 
 .size-lg .trigger {
-  padding-top: var(--select-padding-y-lg, var(--spacing-element-y-lg));
-  padding-bottom: var(--select-padding-y-lg, var(--spacing-element-y-lg));
-  padding-left: var(--select-padding-x-lg, var(--spacing-element-x-lg));
-  font-size: var(--select-font-size-lg, var(--font-size-base));
+  padding-top: var(--select-padding-y-lg, var(--element-padding-y-lg));
+  padding-bottom: var(--select-padding-y-lg, var(--element-padding-y-lg));
+  padding-left: var(--select-padding-x-lg, var(--element-padding-x-lg));
+  font-size: var(--select-font-size-lg, var(--element-font-size-lg));
+}
+
+.size-xl .trigger {
+  padding-top: var(--select-padding-y-xl, var(--element-padding-y-xl));
+  padding-bottom: var(--select-padding-y-xl, var(--element-padding-y-xl));
+  padding-left: var(--select-padding-x-xl, var(--element-padding-x-xl));
+  font-size: var(--select-font-size-xl, var(--element-font-size-xl));
 }
 
 @media (min-width: 640px) {
+  .size-xs .trigger {
+    min-height: var(--select-height-xs, var(--select-height, var(--element-height-xs)));
+  }
+
   .size-sm .trigger {
     min-height: var(--select-height-sm, var(--select-height, var(--element-height-sm)));
   }
 
   .size-lg .trigger {
     min-height: var(--select-height-lg, var(--select-height, var(--element-height-lg)));
+  }
+
+  .size-xl .trigger {
+    min-height: var(--select-height-xl, var(--select-height, var(--element-height-xl)));
   }
 }
 

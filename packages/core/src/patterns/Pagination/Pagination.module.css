@@ -22,7 +22,7 @@
   justify-content: center;
   min-width: 2.75rem;
   min-height: 2.75rem;
-  padding: var(--spacing-element-y-sm) var(--spacing-element-x-sm);
+  padding: var(--element-padding-y-sm) var(--element-padding-x-sm);
   background: none;
   border: var(--border-width-default) solid transparent;
   border-radius: var(--radius-md);
