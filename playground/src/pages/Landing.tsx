@@ -456,20 +456,25 @@ export default function Landing() {
 
           <form onSubmit={handlePromptSubmit} className={styles.promptWrap}>
             <Input
-              className={styles.promptInput}
+              wrapperClassName={styles.promptInputWrapper}
               placeholder="Tell me about your brand — colors, mood, industry..."
               value={promptValue}
               onChange={(e) => setPromptValue(e.target.value)}
               aria-label="Describe your brand"
+              size="lg"
+              fullWidth
+              suffix={
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className={styles.promptSubmit}
+                  type="submit"
+                  aria-label="Generate design system"
+                >
+                  <ArrowIcon />
+                </Button>
+              }
             />
-            <Button
-              variant="primary"
-              className={styles.promptSubmit}
-              type="submit"
-              aria-label="Generate design system"
-            >
-              <ArrowIcon />
-            </Button>
             <span className={styles.promptComingSoon}>AI generation coming soon</span>
           </form>
 

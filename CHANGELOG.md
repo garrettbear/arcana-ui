@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Personality-appropriate element sizing overrides for 8 presets (terminal/retro98/mono=compact, glass/editorial/nature=spacious, startup/brutalist=slightly spacious)
 
 ### Changed
+- Input component: border, background, height, padding now live on the wrapper div; inner `<input>` is fully transparent — prefix/suffix elements are visually contained inside the border and focus ring
+- Input component: added `wrapperClassName` prop for custom wrapper styling
+- Landing page hero input: submit button rendered inside Input via `suffix` prop instead of absolute positioning
 - Refactored 11 component CSS files (Button, Input, Select, Textarea, DatePicker, QuantitySelector, Pagination, Tabs, Badge, Sidebar, Drawer) to use element sizing tokens with proper fallbacks
 - Renamed element padding tokens from `--spacing-element-y-*` / `--spacing-element-x-*` to `--element-padding-y-*` / `--element-padding-x-*`
 - All sized components use `min-height` (not `height`) with 44px mobile touch target floor

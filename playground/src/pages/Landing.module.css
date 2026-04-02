@@ -336,50 +336,29 @@
   position: relative;
 }
 
-.promptInput {
-  width: 100%;
+.promptInputWrapper {
   background: var(--landing-surface);
   color: var(--landing-fg);
   border: 1px solid var(--landing-border-hover);
   border-radius: 14px;
-  padding: 18px 56px 18px 24px;
-  font-size: 16px;
-  font-family: inherit;
-  outline: none;
+  padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-5);
+  font-size: var(--font-size-md);
+  height: auto;
+  min-height: auto;
   transition: border-color 0.2s, box-shadow 0.2s;
-  box-sizing: border-box;
 }
 
-.promptInput::placeholder {
-  color: var(--landing-fg-muted);
-}
-
-.promptInput:focus {
+.promptInputWrapper:focus-within {
   border-color: var(--landing-accent);
   box-shadow: 0 0 0 3px var(--landing-accent-glow), 0 0 40px var(--landing-accent-glow);
 }
 
 .promptSubmit {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
   width: 40px;
   height: 40px;
+  min-width: 40px;
   border-radius: 10px;
-  background: var(--landing-accent);
-  color: #000000;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s, box-shadow 0.15s;
-}
-
-.promptSubmit:hover {
-  background: var(--landing-accent-bright);
-  box-shadow: 0 0 16px var(--landing-accent-glow);
+  padding: 0;
 }
 
 .promptLinks {
