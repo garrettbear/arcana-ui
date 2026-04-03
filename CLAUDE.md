@@ -12,7 +12,8 @@
 - **Repo:** `Arcana-UI/arcana`
 - **License:** MIT
 - **Packages:** `@arcana-ui/tokens` (design tokens → CSS custom properties), `@arcana-ui/core` (React components)
-- **Playground:** [arcana-design-system.vercel.app](https://arcana-design-system.vercel.app)
+- **Production:** [arcana-ui.com](https://arcana-ui.com)
+- **Staging (develop branch):** [develop.arcana-ui.com](https://develop.arcana-ui.com) — auto-deploys on every push to `develop`
 - **Maintainer:** Garrett Bear (@garrettbear)
 
 ---
@@ -604,7 +605,7 @@ Phase 4 (partial) + Phase P (partial)
 - **14 theme presets** built and polished: light, dark, terminal, retro98, glass, brutalist, corporate, startup, editorial, commerce, midnight, nature, neon, mono
 - **60+ components** across navigation, forms, data display, overlays, layout, media, feedback, e-commerce, editorial, and utility categories
 - **npm packages published** as `0.1.0-beta.1` on npmjs.com — `@arcana-ui/tokens` and `@arcana-ui/core`
-- **Landing page** live at `arcana-design-system.vercel.app` — dark premium aesthetic, 10 sections, SEO, responsive
+- **Landing page** live at `arcana-ui.com` — dark premium aesthetic, 10 sections, SEO, responsive
 - **Token editor** rebuilt to investor-demo quality: custom HSV color picker, cubic bezier editor, undo/redo (Cmd+Z), search/filter, modified indicators, mobile message
 - **Demo infrastructure** in place: SaaS dashboard + e-commerce demos with shared ThemeSwitcher
 - **Playground site map** with 6 route types: editor, component gallery, component detail, token explorer, token impact, and D3 force-directed relationship graph
