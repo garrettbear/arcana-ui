@@ -13,9 +13,9 @@
  *   node scripts/sync-notion.mjs --session "Fixed useTheme tests (PR #85)" --prs "85"
  */
 
-import { readFileSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -59,10 +59,17 @@ function parseClaudeState() {
   const phases = {};
   if (tableMatch) {
     for (const line of tableMatch[1].split('\n')) {
-      const cols = line.split('|').map((s) => s.trim()).filter(Boolean);
+      const cols = line
+        .split('|')
+        .map((s) => s.trim())
+        .filter(Boolean);
       if (cols.length >= 2 && !cols[0].startsWith('-')) {
         const [phase, status] = cols;
-        phases[phase] = status.includes('✅') ? 'Done' : status.includes('🔄') ? 'In Progress' : 'Not Started';
+        phases[phase] = status.includes('✅')
+          ? 'Done'
+          : status.includes('🔄')
+            ? 'In Progress'
+            : 'Not Started';
       }
     }
   }
