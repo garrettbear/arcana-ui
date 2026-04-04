@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Wavefront music player demo: midnight-themed listening app with 3 curated collections (20 tracks), sidebar navigation, now-playing bar with playback controls, collection detail view, expanded now-playing view, favorites with toast notifications, keyboard shortcuts (Space = play/pause), volume control, and 20+ Arcana UI components rendered across the app
 - Forma ecommerce demo: luxury objects brand with 4 pages (Home, Shop, Product Detail, Cart), 12-product catalog, cart state management, and 33+ Arcana UI components rendered across the app
 - Demo uses react-router-dom for client-side routing with `/`, `/shop`, `/shop/:slug`, and `/cart` routes
 - Cart context with add/remove/update/clear operations and derived totals

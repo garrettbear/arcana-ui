@@ -5,3 +5,7 @@ packages:
   - 'demos/shared'
   - 'demos/dashboard'
   - 'demos/ecommerce'
+  - 'demos/wavefront'
+  - 'demos/mosaic'
+  - 'demos/atelier'
+  - 'demos/control'
