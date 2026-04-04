@@ -157,8 +157,8 @@ export function Shop(): React.JSX.Element {
           <div className="forma-shop-loading">
             <Spinner size="lg" label="Loading products..." />
             <div className="forma-shop-grid">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={`skeleton-${i}`} className="forma-skeleton-card">
+              {['s1', 's2', 's3', 's4', 's5', 's6'].map((id) => (
+                <div key={id} className="forma-skeleton-card">
                   <Skeleton variant="rectangular" width="100%" height="240px" />
                   <Skeleton variant="text" width="70%" />
                   <Skeleton variant="text" width="40%" />

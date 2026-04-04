@@ -62,6 +62,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-xs);
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .forma-pill {
