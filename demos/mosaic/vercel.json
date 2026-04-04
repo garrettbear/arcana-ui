@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd ../.. && pnpm --filter @arcana-ui/tokens build && pnpm --filter @arcana-ui/core build && pnpm --filter @arcana-ui/demo-shared build && pnpm --filter @arcana-ui/demo-mosaic build",
+  "outputDirectory": "dist",
+  "installCommand": "cd ../.. && pnpm install",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
