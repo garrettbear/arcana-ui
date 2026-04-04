@@ -1,0 +1,258 @@
+/* Atelier — editorial theme overrides */
+:root,
+[data-theme="editorial"] {
+  --color-action-primary: #1c1c1c;
+  --color-action-primary-hover: #000000;
+  --color-bg-page: #f8f6f1;
+  --color-bg-surface: #ffffff;
+  --color-fg-primary: #1c1c1c;
+  --color-fg-secondary: #6b6860;
+  --color-border-default: #d8d4cb;
+  --font-family-base: "DM Sans", system-ui, sans-serif;
+  --font-family-display: "Cormorant Garamond", Georgia, serif;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-full: 0px;
+  --radius-sm: 0px;
+  --radius-xl: 0px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg-page);
+  color: var(--color-fg-primary);
+  font-family: var(--font-family-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Typography ──────────────────────────────────────────────────────────── */
+
+.atelier-display {
+  font-family: var(--font-family-display);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.atelier-display--lg {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+.atelier-display--md {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.atelier-display--sm {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.atelier-smallcaps {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-fg-secondary);
+}
+
+.atelier-body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md, 1rem);
+  line-height: 1.7;
+  color: var(--color-fg-primary);
+}
+
+.atelier-body--serif {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg, 1.125rem);
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+/* ─── Links ───────────────────────────────────────────────────────────────── */
+
+.atelier-link {
+  color: var(--color-fg-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: opacity var(--duration-fast, 150ms) ease;
+}
+
+.atelier-link:hover,
+.atelier-link:focus-visible {
+  opacity: 0.7;
+}
+
+/* ─── Layout helpers ──────────────────────────────────────────────────────── */
+
+.atelier-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md, 1rem);
+}
+
+@media (min-width: 640px) {
+  .atelier-container {
+    padding: 0 var(--spacing-lg, 1.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .atelier-container {
+    padding: 0 var(--spacing-xl, 2rem);
+  }
+}
+
+.atelier-reading-column {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ─── Placeholder images ──────────────────────────────────────────────────── */
+
+.atelier-placeholder-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg, 1.125rem);
+  font-style: italic;
+  font-weight: 300;
+  user-select: none;
+}
+
+/* ─── Section spacing ─────────────────────────────────────────────────────── */
+
+.atelier-section {
+  padding: var(--spacing-2xl, 3rem) 0;
+}
+
+@media (min-width: 640px) {
+  .atelier-section {
+    padding: var(--spacing-3xl, 4rem) 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .atelier-section {
+    padding: var(--spacing-4xl, 5rem) 0;
+  }
+}
+
+/* ─── Grid layouts ────────────────────────────────────────────────────────── */
+
+.atelier-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl, 2rem);
+}
+
+@media (min-width: 640px) {
+  .atelier-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .atelier-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.atelier-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl, 2rem);
+}
+
+@media (min-width: 640px) {
+  .atelier-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ─── Hero layout ─────────────────────────────────────────────────────────── */
+
+.atelier-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl, 2rem);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .atelier-hero {
+    grid-template-columns: 3fr 2fr;
+    gap: var(--spacing-2xl, 3rem);
+  }
+}
+
+/* ─── Issue strip ─────────────────────────────────────────────────────────── */
+
+.atelier-issue-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md, 1rem);
+  padding: var(--spacing-lg, 1.5rem) 0;
+}
+
+.atelier-issue-strip__line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-default);
+}
+
+.atelier-issue-strip__text {
+  white-space: nowrap;
+}
+
+/* ─── Article list (archive) ──────────────────────────────────────────────── */
+
+.atelier-article-list-item {
+  padding: var(--spacing-md, 1rem) 0;
+}
+
+/* ─── Gallery grid ────────────────────────────────────────────────────────── */
+
+.atelier-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md, 1rem);
+}
+
+/* ─── Keyboard shortcut hint ──────────────────────────────────────────────── */
+
+.atelier-kb-hint {
+  position: fixed;
+  bottom: var(--spacing-lg, 1.5rem);
+  right: var(--spacing-lg, 1.5rem);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm, 0.5rem);
+  padding: var(--spacing-sm, 0.5rem) var(--spacing-md, 1rem);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-fg-secondary);
+  z-index: 50;
+  opacity: 0.8;
+  transition: opacity var(--duration-fast, 150ms) ease;
+}
+
+.atelier-kb-hint:hover {
+  opacity: 1;
+}
+
+@media (max-width: 639px) {
+  .atelier-kb-hint {
+    display: none;
+  }
+}
