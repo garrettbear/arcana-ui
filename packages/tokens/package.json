@@ -1,12 +1,13 @@
 {
   "name": "@arcana-ui/tokens",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
   "description": "Design tokens for Arcana UI — AI's #1 design system",
   "license": "MIT",
   "main": "./dist/arcana.css",
   "exports": {
     ".": "./dist/arcana.css",
     "./base": "./dist/arcana.css",
+    "./styles": "./dist/arcana.css",
     "./compat": "./dist/compat.css",
     "./light": "./dist/themes/light.css",
     "./dark": "./dist/themes/dark.css",
@@ -21,7 +22,9 @@
     "./midnight": "./dist/themes/midnight.css",
     "./nature": "./dist/themes/nature.css",
     "./neon": "./dist/themes/neon.css",
-    "./mono": "./dist/themes/mono.css"
+    "./mono": "./dist/themes/mono.css",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
   },
   "files": ["dist"],
   "scripts": {
