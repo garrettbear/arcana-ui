@@ -1,9 +1,9 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-04-04 (Sage session 2)
-> **Current sprint:** Sprint 1 — Demo-Quality Playground + Demo Sites
+> **Last updated:** 2026-04-06 (package audit session)
+> **Current sprint:** Week 1 launch sprint — Developer experience / package audit
 > **Source of truth for current state:** CLAUDE.md "Current State" section
-> **Next priority task:** Sprint 2 — AI Theme Generation
+> **Next priority task:** Sprint 2 — AI Theme Generation (after beta.2 publish)
 
 ---
 
@@ -77,7 +77,24 @@ All foundation work, token system, component library (68 components), 14 theme p
 
 | Blocker | Owner | Status |
 |---------|-------|--------|
+| `npm publish` of `@arcana-ui/core@0.1.0-beta.2` and `@arcana-ui/tokens@0.1.0-beta.2` | Bear | Waiting on maintainer — agents cannot publish |
 | Vercel deploy for 5 demo sites | Bear | Pending |
 | OpenClaw gateway re-pairing | Bear | Pending |
 | Anthropic API key for AI generation (Sprint 2) | Bear | Not yet needed |
 | Vercel CLI configured | Bear | Not yet needed |
+
+---
+
+## Package Audit (2026-04-06)
+
+- [x] Consumer-test `@arcana-ui/core@beta` + `@arcana-ui/tokens@beta` from a fresh project outside the monorepo
+- [x] Document all findings in CHANGELOG.md and KNOWN_ISSUES.md
+- [x] Fix `@arcana-ui/tokens` exports map (added `./styles`, `./dist/*`, `./package.json`)
+- [x] Fix `@arcana-ui/core` exports map (added `./dist/*`, `./package.json`)
+- [x] Bump both packages to `0.1.0-beta.2`
+- [x] Rebuild; `npm pack --dry-run` lists only `dist/` + `package.json`
+- [x] Write `docs/QUICKSTART.md` (consumer doc + CLI spec)
+- [x] Commit `examples/quickstart/` (reproducible consumer test fixture)
+- [ ] Publish beta.2 to npm (**Bear action**)
+- [ ] Re-verify after publish: `cd examples/quickstart && npm install && npm run build`
+- [ ] Follow-up: per-component entry points in `tsup.config.ts` to fix tree-shaking (tracked in KNOWN_ISSUES.md for beta.3)

@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `@arcana-ui/core@0.1.0-beta.2` and `@arcana-ui/tokens@0.1.0-beta.2` — consumer package audit pass. Rebuilt from current source so all 122 exports (including `useClickOutside`, `useDrag`, `useUndoRedo`, `ColorPicker`, `FontPicker`, `BottomSheet`, `DrawerNav`, `LogoCloud`, etc.) are now present in the published package (beta.1 was stale and shipped only 115 exports).
+- `@arcana-ui/tokens` exports map: added `./styles` alias, `./dist/*` subpath, and `./package.json` subpath so strict Node ESM resolvers can import `@arcana-ui/tokens/dist/arcana.css` and `@arcana-ui/tokens/styles` directly.
+- `@arcana-ui/core` exports map: added `./dist/*` and `./package.json` subpaths for tooling compatibility.
+- `examples/quickstart/` — minimal Vite + React + TypeScript consumer that installs Arcana from the registry (not via workspace link), exercises 8 components, theme switching, density switching, and type exports. Serves as both quickstart docs and the reproducible consumer test fixture for future package audits.
+- `docs/QUICKSTART.md` — three-step consumer guide (install, import CSS, set `data-theme`). Doubles as the spec for the forthcoming `npx arcana-ui init` CLI.
+- `KNOWN_ISSUES.md` at the repo root documenting tree-shaking limitations in beta.2, missing `Video` component, and the vitest jsdom `localStorage` test regression.
+
+### Fixed
+- `@arcana-ui/tokens@0.1.0-beta.1` did not expose `./dist/arcana.css` through its package.json `exports` field, causing `ERR_PACKAGE_PATH_NOT_EXPORTED` for consumers using `import '@arcana-ui/tokens/dist/arcana.css'`.
+
+### Added
 - Atelier editorial magazine demo: luxury architecture/interiors publication with 3 pages (Home, Article Detail, Archive), editorial theme overrides (zero-radius, warm paper background, Cormorant Garamond + DM Sans typography), full-bleed hero layout, 6 long-form articles with real editorial prose, article tabs (Article/Gallery with lightbox modal), archive with filters/search/pagination, timeline milestones, stat cards, by-the-numbers table, and 25+ Arcana UI components (Navbar, AuthorCard, PullQuote, RelatedPosts, NewsletterSignup, Timeline, StatCard, Tabs, ScrollArea, Modal, Image, Badge, Divider, Breadcrumb, Pagination, Table, Banner, KeyboardShortcut, Skeleton, Toast, Footer, and more)
 - Mosaic visual discovery demo: light-themed inspiration/collection app with 3 pages (Discover feed, Collections, Collection Detail), CSS-columns masonry grid, 20 curated feed items, 5 user collections, filter pills, item detail modal with save-to-collection, create collection form, sidebar with suggested collections/people/logo cloud, and 25+ Arcana UI components (Card, Image, Badge, Button, Avatar, Modal, Select, Tabs, Banner, StatCard, Breadcrumb, EmptyState, LogoCloud, ScrollArea, Skeleton, Divider, Toast, and more)
 - Wavefront music player demo: midnight-themed listening app with 3 curated collections (20 tracks), sidebar navigation, now-playing bar with playback controls, collection detail view, expanded now-playing view, favorites with toast notifications, keyboard shortcuts (Space = play/pause), volume control, and 20+ Arcana UI components rendered across the app
