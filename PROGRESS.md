@@ -95,6 +95,6 @@ All foundation work, token system, component library (68 components), 14 theme p
 - [x] Rebuild; `npm pack --dry-run` lists only `dist/` + `package.json`
 - [x] Write `docs/QUICKSTART.md` (consumer doc + CLI spec)
 - [x] Commit `examples/quickstart/` (reproducible consumer test fixture)
-- [ ] Publish beta.2 to npm (**Bear action**)
-- [ ] Re-verify after publish: `cd examples/quickstart && npm install && npm run build`
+- [x] Publish beta.2 to npm (**Bear — done 2026-04-06 21:45/21:55 UTC**)
+- [x] Re-verify after publish: fresh `npm install @arcana-ui/core@beta @arcana-ui/tokens@beta` in `/tmp` — both resolve to `0.1.0-beta.2`, 122 exports, `useClickOutside`/`useDrag`/`useUndoRedo` present, `@arcana-ui/tokens/dist/arcana.css` subpath resolves, `examples/quickstart` builds cleanly (280.34 kB JS / 570.07 kB CSS)
 - [ ] Follow-up: per-component entry points in `tsup.config.ts` to fix tree-shaking (tracked in KNOWN_ISSUES.md for beta.3)
