@@ -38,6 +38,16 @@ When an AI agent builds a web interface, it needs a design system that speaks it
 
 ## Quick Start
 
+The fastest path is the CLI — one command scaffolds a working app:
+
+```bash
+npx @arcana-ui/cli init my-app
+```
+
+It walks you through framework (Vite or Next.js), theme (any of the 14 presets), density, and a starter layout (`dashboard`, `marketing`, `ecommerce`, `editorial`, or `general`), then generates a working project. See [`packages/cli/README.md`](./packages/cli/README.md) for the full command reference, including `validate` (theme linter with WCAG AA checks) and `add-theme`.
+
+Or wire it up by hand:
+
 ```bash
 npm install @arcana-ui/core @arcana-ui/tokens
 ```

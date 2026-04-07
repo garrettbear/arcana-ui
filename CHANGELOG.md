@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `@arcana-ui/cli@0.1.0-beta.1` — new package: command-line tool for scaffolding Arcana UI projects, validating themes, and managing presets. Three commands:
+  - `arcana-ui init [name]` — interactive (or non-interactive via flags) project scaffolder. Pick framework (Vite + React + TS or Next.js App Router), theme (any of 14 presets), density, and one of 5 starter layouts (`dashboard`, `marketing`, `ecommerce`, `editorial`, `general`). Detects package manager from `npm_config_user_agent`, runs install, prints next-steps banner. All 5 layouts use real `@arcana-ui/core` imports and typecheck against the published package.
+  - `arcana-ui validate <file>` — theme JSON linter. Checks structure (top-level shape), completeness (required semantic groups), reference resolution (`{primitive.x.y}` lookups), and WCAG AA contrast on 5 key foreground/background pairs. `--strict` promotes warnings to errors. Exits 1 on any error so it slots into CI.
+  - `arcana-ui add-theme [preset]` — show the activation snippet (CSS import + `data-theme` attribute) for any of the 14 built-in presets. `--list` dumps all preset ids.
+- `packages/cli/README.md` — full command reference with options tables and layout descriptions.
+
+### Changed
+- Root `README.md` — quickstart now leads with `npx @arcana-ui/cli init my-app` before the manual install instructions.
+
+### Added
 - `@arcana-ui/core@0.1.0-beta.2` and `@arcana-ui/tokens@0.1.0-beta.2` — consumer package audit pass. Rebuilt from current source so all 122 exports (including `useClickOutside`, `useDrag`, `useUndoRedo`, `ColorPicker`, `FontPicker`, `BottomSheet`, `DrawerNav`, `LogoCloud`, etc.) are now present in the published package (beta.1 was stale and shipped only 115 exports).
 - `@arcana-ui/tokens` exports map: added `./styles` alias, `./dist/*` subpath, and `./package.json` subpath so strict Node ESM resolvers can import `@arcana-ui/tokens/dist/arcana.css` and `@arcana-ui/tokens/styles` directly.
 - `@arcana-ui/core` exports map: added `./dist/*` and `./package.json` subpaths for tooling compatibility.
