@@ -10,9 +10,11 @@ export default defineConfig({
   dts: false,
   shims: false,
   splitting: false,
-  // Bundle dependencies so consumers get one small file with no extra
-  // node_modules hop when running via `npx arcana-ui`.
-  noExternal: ['@clack/prompts', 'picocolors', 'commander'],
+  // Keep deps external. Bundling commander (a CJS package) into ESM
+  // breaks its internal `require('events')` calls because esbuild's
+  // dynamic-require shim is not allowed in ESM mode. `npx` will install
+  // the runtime deps from package.json before invoking the binary.
+  external: ['@clack/prompts', 'picocolors', 'commander'],
   banner: {
     js: '#!/usr/bin/env node',
   },

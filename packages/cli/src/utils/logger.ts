@@ -18,14 +18,14 @@ const isTTY = process.stdout.isTTY === true;
 
 /** Arcana wordmark block — printed once at the top of each command. */
 export function logo(): void {
-  const top = pc.dim('┌─────────────────────────────────────────────┐');
-  const bot = pc.dim('└─────────────────────────────────────────────┘');
-  const mid = pc.dim('│                                             │');
-  const title = `  ${pc.bold(pc.magenta('✦ Arcana UI'))}  ${pc.dim('·')}  ${pc.white('tokens in, beautiful UI out')}`;
-  // Pad title to fit inside the 47-char-wide box
+  // Box is 49 chars wide (47 inside + 2 borders).
+  const top = pc.dim('┌───────────────────────────────────────────────┐');
+  const bot = pc.dim('└───────────────────────────────────────────────┘');
+  const mid = pc.dim('│                                               │');
   const titleRaw = '  ✦ Arcana UI  ·  tokens in, beautiful UI out';
-  const padding = ' '.repeat(Math.max(0, 45 - titleRaw.length));
-  const titleLine = `${pc.dim('│')} ${title}${padding} ${pc.dim('│')}`;
+  const styled = `  ${pc.bold(pc.magenta('✦ Arcana UI'))}  ${pc.dim('·')}  ${pc.white('tokens in, beautiful UI out')}`;
+  const padding = ' '.repeat(Math.max(0, 47 - titleRaw.length));
+  const titleLine = `${pc.dim('│')}${styled}${padding}${pc.dim('│')}`;
   process.stdout.write(`\n${top}\n${mid}\n${titleLine}\n${mid}\n${bot}\n\n`);
 }
 
