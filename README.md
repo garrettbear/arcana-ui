@@ -11,7 +11,12 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@arcana-ui/core"><img src="https://img.shields.io/npm/v/@arcana-ui/core.svg" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/@arcana-ui/core"><img src="https://img.shields.io/npm/v/@arcana-ui/core.svg?label=%40arcana-ui%2Fcore&color=cb3837&logo=npm" alt="@arcana-ui/core on npm" /></a>
+  <a href="https://www.npmjs.com/package/@arcana-ui/tokens"><img src="https://img.shields.io/npm/v/@arcana-ui/tokens.svg?label=%40arcana-ui%2Ftokens&color=cb3837&logo=npm" alt="@arcana-ui/tokens on npm" /></a>
+  <a href="https://www.npmjs.com/package/@arcana-ui/cli"><img src="https://img.shields.io/npm/v/@arcana-ui/cli.svg?label=%40arcana-ui%2Fcli&color=cb3837&logo=npm" alt="@arcana-ui/cli on npm" /></a>
+</p>
+
+<p align="center">
   <a href="https://www.npmjs.com/package/@arcana-ui/core"><img src="https://img.shields.io/npm/dm/@arcana-ui/core.svg" alt="npm downloads" /></a>
   <a href="https://bundlephobia.com/package/@arcana-ui/core"><img src="https://img.shields.io/bundlephobia/minzip/@arcana-ui/core" alt="bundle size" /></a>
   <a href="https://github.com/Arcana-UI/arcana/actions/workflows/ci.yml"><img src="https://github.com/Arcana-UI/arcana/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
@@ -78,6 +83,16 @@ Switch themes with a single attribute:
 <!-- Any preset -->
 <html data-theme="terminal">
 ```
+
+### Packages
+
+Arcana is published as three scoped packages on npm:
+
+| Package | Version | Description |
+|---|---|---|
+| [`@arcana-ui/core`](https://www.npmjs.com/package/@arcana-ui/core) | [![npm](https://img.shields.io/npm/v/@arcana-ui/core.svg?color=cb3837&logo=npm&label=)](https://www.npmjs.com/package/@arcana-ui/core) | React component library — 60+ components, `"use client"`-ready |
+| [`@arcana-ui/tokens`](https://www.npmjs.com/package/@arcana-ui/tokens) | [![npm](https://img.shields.io/npm/v/@arcana-ui/tokens.svg?color=cb3837&logo=npm&label=)](https://www.npmjs.com/package/@arcana-ui/tokens) | Design tokens + compiled CSS, 14 theme presets |
+| [`@arcana-ui/cli`](https://www.npmjs.com/package/@arcana-ui/cli) | [![npm](https://img.shields.io/npm/v/@arcana-ui/cli.svg?color=cb3837&logo=npm&label=)](https://www.npmjs.com/package/@arcana-ui/cli) | `npx @arcana-ui/cli init` — scaffold a project, validate themes |
 
 ---
 
