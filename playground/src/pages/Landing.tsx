@@ -362,6 +362,16 @@ export default function Landing() {
             </li>
             <li>
               <a
+                href="https://www.npmjs.com/package/@arcana-ui/core"
+                className={styles.navLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                npm
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://github.com/Arcana-UI/arcana"
                 className={styles.navLink}
                 target="_blank"
@@ -424,6 +434,16 @@ export default function Landing() {
             </li>
             <li>
               <a
+                href="https://www.npmjs.com/package/@arcana-ui/core"
+                className={styles.mobileMenuLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                npm
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://github.com/Arcana-UI/arcana"
                 className={styles.mobileMenuLink}
                 target="_blank"
@@ -483,6 +503,15 @@ export default function Landing() {
             <Link to="/playground" className={styles.promptTextLink}>
               Browse themes
             </Link>
+            {' · '}
+            <a
+              href="https://www.npmjs.com/package/@arcana-ui/cli"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.promptTextLink}
+            >
+              <code>npx @arcana-ui/cli init</code>
+            </a>
             {' · '}
             <Link to="/playground" className={styles.promptTextLink}>
               Start from scratch

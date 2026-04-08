@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Root `README.md` — quickstart now leads with `npx @arcana-ui/cli init my-app` before the manual install instructions.
+- `@arcana-ui/cli@0.1.0-beta.1` published to npm under the `beta` dist-tag. Installable via `npx @arcana-ui/cli init my-app`. All three Arcana packages (`@arcana-ui/tokens`, `@arcana-ui/core`, `@arcana-ui/cli`) are now live on the registry.
 
 ### Added
 - `@arcana-ui/core@0.1.0-beta.2` and `@arcana-ui/tokens@0.1.0-beta.2` — consumer package audit pass. Rebuilt from current source so all 122 exports (including `useClickOutside`, `useDrag`, `useUndoRedo`, `ColorPicker`, `FontPicker`, `BottomSheet`, `DrawerNav`, `LogoCloud`, etc.) are now present in the published package (beta.1 was stale and shipped only 115 exports).
