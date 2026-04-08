@@ -1,116 +1,101 @@
 import {
   AuthorCard,
-  Banner,
   Divider,
   Footer,
   FooterBottom,
   FooterLink,
   FooterSection,
-  KeyboardShortcut,
   NewsletterSignup,
   useToast,
 } from '@arcana-ui/core';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArticleCard } from '../components/ArticleCard';
 import { ArticleHero } from '../components/ArticleHero';
 import { AtelierNavbar } from '../components/AtelierNavbar';
-import { articles } from '../data/articles';
+import { articles, categories, getArticlesByCategory } from '../data/articles';
 import { authors, getAuthor } from '../data/authors';
 
 export function Home(): React.JSX.Element {
   const toast = useToast();
+  const [activeCategory, setActiveCategory] = useState('All');
+  const filtered = getArticlesByCategory(activeCategory);
+
+  // Featured = first article, rest in the grid
   const featured = articles[0];
-  const secondary = articles.slice(1, 4);
-  const essayArticle = articles[4];
-  const essayAuthor = getAuthor(essayArticle.authorSlug);
+  const gridArticles = filtered.filter((a) => a.slug !== featured.slug);
+
+  // Secondary row: first two of grid
+  const secondaryLeft = gridArticles[0];
+  const secondaryRight = gridArticles[1];
+  const remaining = gridArticles.slice(2);
+
   const spotlightAuthors = authors.slice(0, 2);
 
   function handleNewsletterSubmit(_email: string): void {
-    toast.toast({ title: 'You\u2019re on the list.', variant: 'success' });
+    toast.toast({ title: "You're on the list.", variant: 'success' });
   }
 
   return (
     <>
-      <Banner variant="neutral" dismissible>
-        Atelier is reader-supported. No advertising.
-      </Banner>
-
       <AtelierNavbar />
 
-      {/* Hero */}
+      {/* Full-bleed hero — always shows featured article */}
       <ArticleHero article={featured} />
 
       {/* Issue strip */}
       <div className="atelier-container">
         <div className="atelier-issue-strip">
           <span className="atelier-issue-strip__line" />
-          <span className="atelier-smallcaps atelier-issue-strip__text">
-            Volume XXIV &mdash; Spring 2026
-          </span>
+          <span className="atelier-issue-strip__text">Volume XXIV &mdash; Spring 2026</span>
           <span className="atelier-issue-strip__line" />
         </div>
       </div>
 
-      {/* Secondary grid */}
-      <section className="atelier-section">
-        <div className="atelier-container">
-          <div className="atelier-grid-3">
-            {secondary.map((article) => (
-              <ArticleCard key={article.slug} article={article} />
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* Category filter */}
       <div className="atelier-container">
-        <Divider />
+        <nav className="atelier-category-filter" aria-label="Filter by category">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              className={`atelier-category-btn${activeCategory === cat ? ' atelier-category-btn--active' : ''}`}
+              onClick={() => setActiveCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </nav>
       </div>
 
-      {/* Featured essay */}
-      <section className="atelier-section">
+      {/* Asymmetric article grid */}
+      <section className="atelier-section" style={{ paddingTop: 0 }}>
         <div className="atelier-container">
-          <Link
-            to={`/article/${essayArticle.slug}`}
-            style={{ textDecoration: 'none', color: 'inherit' }}
-          >
-            <div
-              className="atelier-placeholder-image"
-              style={{
-                background: essayArticle.image.bg,
-                color: essayArticle.image.fg,
-                aspectRatio: `${essayArticle.image.width} / ${essayArticle.image.height}`,
-                width: '100%',
-                minHeight: '300px',
-                marginBottom: 'var(--spacing-lg, 1.5rem)',
-              }}
-            >
-              {essayArticle.title}
+          {secondaryLeft || secondaryRight ? (
+            <div className="atelier-grid-asymmetric" style={{ marginBottom: '3rem' }}>
+              {secondaryLeft && <ArticleCard article={secondaryLeft} size="featured" />}
+              {secondaryRight && <ArticleCard article={secondaryRight} size="standard" />}
             </div>
-          </Link>
-          <p className="atelier-smallcaps" style={{ margin: '0 0 var(--spacing-xs, 0.25rem)' }}>
-            {essayArticle.category}
-          </p>
-          <h2
-            className="atelier-display atelier-display--md"
-            style={{ margin: '0 0 var(--spacing-md, 1rem)' }}
-          >
-            <Link
-              to={`/article/${essayArticle.slug}`}
-              style={{ textDecoration: 'none', color: 'inherit' }}
+          ) : null}
+
+          {remaining.length > 0 && (
+            <>
+              <hr className="atelier-rule" style={{ marginBottom: '3rem' }} />
+              <div className="atelier-grid-3">
+                {remaining.map((article) => (
+                  <ArticleCard key={article.slug} article={article} size="small" />
+                ))}
+              </div>
+            </>
+          )}
+
+          {filtered.length === 0 && (
+            <p
+              style={{ color: 'var(--color-fg-secondary)', textAlign: 'center', padding: '4rem 0' }}
             >
-              {essayArticle.title}
-            </Link>
-          </h2>
-          <p
-            className="atelier-body--serif"
-            style={{ maxWidth: '720px', margin: '0 0 var(--spacing-sm, 0.5rem)' }}
-          >
-            {essayArticle.excerpt} {essayAuthor?.name} traces the arc of a career dedicated to
-            making structure disappear.
-          </p>
-          <Link to={`/article/${essayArticle.slug}`} className="atelier-link">
-            Continue Reading
-          </Link>
+              No articles in this category yet.
+            </p>
+          )}
         </div>
       </section>
 
@@ -121,10 +106,7 @@ export function Home(): React.JSX.Element {
       {/* Writer spotlight */}
       <section className="atelier-section">
         <div className="atelier-container">
-          <h2
-            className="atelier-display atelier-display--sm"
-            style={{ marginBottom: 'var(--spacing-lg, 1.5rem)' }}
-          >
+          <h2 className="atelier-display atelier-display--sm" style={{ marginBottom: '2rem' }}>
             From the Contributors
           </h2>
           <div className="atelier-grid-2">
@@ -150,7 +132,7 @@ export function Home(): React.JSX.Element {
         <div className="atelier-container" style={{ maxWidth: '600px' }}>
           <h2
             className="atelier-display atelier-display--sm"
-            style={{ textAlign: 'center', marginBottom: 'var(--spacing-sm, 0.5rem)' }}
+            style={{ textAlign: 'center', marginBottom: '0.5rem' }}
           >
             The Atelier Letter
           </h2>
@@ -158,7 +140,10 @@ export function Home(): React.JSX.Element {
             style={{
               textAlign: 'center',
               color: 'var(--color-fg-secondary)',
-              marginBottom: 'var(--spacing-lg, 1.5rem)',
+              marginBottom: '1.75rem',
+              fontFamily: 'var(--font-family-display)',
+              fontStyle: 'italic',
+              fontSize: '1.0625rem',
             }}
           >
             Twice a month. No advertising. No aggregation.
@@ -168,7 +153,7 @@ export function Home(): React.JSX.Element {
             placeholder="Your email address"
             buttonText="Subscribe"
             onSubmit={handleNewsletterSubmit}
-            successMessage="You\u2019re on the list."
+            successMessage="You're on the list."
           />
         </div>
       </section>
@@ -182,7 +167,7 @@ export function Home(): React.JSX.Element {
         <FooterSection title="Categories">
           <FooterLink href="/archive?category=Architecture">Architecture</FooterLink>
           <FooterLink href="/archive?category=Interiors">Interiors</FooterLink>
-          <FooterLink href="/archive?category=Material">Material</FooterLink>
+          <FooterLink href="/archive?category=Design">Design</FooterLink>
         </FooterSection>
         <FooterSection title="About">
           <FooterLink href="/archive">Contributors</FooterLink>
@@ -195,29 +180,16 @@ export function Home(): React.JSX.Element {
               fontWeight: 300,
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
-              marginRight: 'var(--spacing-lg, 1.5rem)',
+              marginRight: '1.5rem',
             }}
           >
             Atelier
           </span>
-          <span
-            style={{
-              color: 'var(--color-fg-secondary)',
-              fontSize: 'var(--font-size-sm, 0.875rem)',
-            }}
-          >
+          <span style={{ color: 'var(--color-fg-secondary)', fontSize: '0.875rem' }}>
             &copy; 2026 Atelier Publications Ltd.
           </span>
         </FooterBottom>
       </Footer>
-
-      {/* Keyboard shortcut hint */}
-      <div className="atelier-kb-hint">
-        <span>Navigate articles:</span>
-        <KeyboardShortcut keys={['J']} variant="inline" />
-        <span>/</span>
-        <KeyboardShortcut keys={['K']} variant="inline" />
-      </div>
     </>
   );
 }
