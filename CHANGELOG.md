@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `demos/mosaic` — replaced all 20 placeholder images (`placehold.co`) with real Unsplash photographs matched to the design/architecture/typography content; expanded feed from 20 to 30 items; added `@arcana-ui/demo-shared` dependency and wired ThemeSwitcher (defaultTheme: "light").
+
+### Added
 - `@arcana-ui/cli@0.1.0-beta.1` — new package: command-line tool for scaffolding Arcana UI projects, validating themes, and managing presets. Three commands:
   - `arcana-ui init [name]` — interactive (or non-interactive via flags) project scaffolder. Pick framework (Vite + React + TS or Next.js App Router), theme (any of 14 presets), density, and one of 5 starter layouts (`dashboard`, `marketing`, `ecommerce`, `editorial`, `general`). Detects package manager from `npm_config_user_agent`, runs install, prints next-steps banner. All 5 layouts use real `@arcana-ui/core` imports and typecheck against the published package.
   - `arcana-ui validate <file>` — theme JSON linter. Checks structure (top-level shape), completeness (required semantic groups), reference resolution (`{primitive.x.y}` lookups), and WCAG AA contrast on 5 key foreground/background pairs. `--strict` promotes warnings to errors. Exits 1 on any error so it slots into CI.
