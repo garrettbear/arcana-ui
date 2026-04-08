@@ -3,14 +3,16 @@
  * each command can call prompts and trust that a Ctrl-C bails out
  * cleanly with a friendly message instead of a stack trace.
  */
-import { cancel, isCancel, select, text } from '@clack/prompts';
+import {
+  type SelectOptions,
+  type TextOptions,
+  cancel,
+  isCancel,
+  select,
+  text,
+} from '@clack/prompts';
 
-export async function askText(options: {
-  message: string;
-  placeholder?: string;
-  initialValue?: string;
-  validate?: (value: string) => string | undefined;
-}): Promise<string> {
+export async function askText(options: TextOptions): Promise<string> {
   const result = await text(options);
   if (isCancel(result)) {
     cancel('Operation cancelled.');
@@ -19,11 +21,7 @@ export async function askText(options: {
   return result as string;
 }
 
-export async function askSelect<T extends string>(options: {
-  message: string;
-  options: { value: T; label: string; hint?: string }[];
-  initialValue?: T;
-}): Promise<T> {
+export async function askSelect<T extends string>(options: SelectOptions<T>): Promise<T> {
   const result = await select(options);
   if (isCancel(result)) {
     cancel('Operation cancelled.');
