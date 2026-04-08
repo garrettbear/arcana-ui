@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `demos/wavefront` — replaced all `placehold.co` collection and artist artwork with real Unsplash photos matched to each station's mood (night city, coastal sunset, piano, tropical highway, neon cityscape); added 2 new channels: "Sunset Drive" (Tame Impala, Beach House, Washed Out) and "Neo Seoul" (Bonobo, Four Tet, Bicep) bringing the total to 5 stations; added `@arcana-ui/demo-shared` dep and wired ThemeSwitcher (defaultTheme: "midnight").
+
+### Added
 - `@arcana-ui/cli@0.1.0-beta.1` — new package: command-line tool for scaffolding Arcana UI projects, validating themes, and managing presets. Three commands:
   - `arcana-ui init [name]` — interactive (or non-interactive via flags) project scaffolder. Pick framework (Vite + React + TS or Next.js App Router), theme (any of 14 presets), density, and one of 5 starter layouts (`dashboard`, `marketing`, `ecommerce`, `editorial`, `general`). Detects package manager from `npm_config_user_agent`, runs install, prints next-steps banner. All 5 layouts use real `@arcana-ui/core` imports and typecheck against the published package.
   - `arcana-ui validate <file>` — theme JSON linter. Checks structure (top-level shape), completeness (required semantic groups), reference resolution (`{primitive.x.y}` lookups), and WCAG AA contrast on 5 key foreground/background pairs. `--strict` promotes warnings to errors. Exits 1 on any error so it slots into CI.

@@ -1,4 +1,5 @@
 import { Button, KeyboardShortcut, Modal, ToastProvider, useToast } from '@arcana-ui/core';
+import { ThemeSwitcher } from '@arcana-ui/demo-shared/theme-switcher';
 import { useEffect, useRef, useState } from 'react';
 import { NowPlayingBar } from './components/NowPlayingBar';
 import { WavefrontSidebar } from './components/WavefrontSidebar';
@@ -111,6 +112,7 @@ export function App(): React.JSX.Element {
         <div className="wavefront-layout">
           <AppInner />
         </div>
+        <ThemeSwitcher defaultTheme="midnight" />
       </PlayerProvider>
     </ToastProvider>
   );

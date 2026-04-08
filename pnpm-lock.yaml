@@ -230,6 +230,9 @@ importers:
       '@arcana-ui/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@arcana-ui/demo-shared':
+        specifier: workspace:*
+        version: link:../shared
       '@arcana-ui/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
