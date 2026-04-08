@@ -57,7 +57,7 @@ All foundation work, token system, component library (68 components), 14 theme p
 - [ ] 5.8 — Figma Code Connect + token export
 - [ ] 5.9 — Performance audit
 - [ ] 5.10 — Launch checklist
-- [x] 5.11 — CLI: `@arcana-ui/cli` (init / validate / add-theme commands; 5 starter layouts × 2 frameworks; smoke-tested against published `@arcana-ui/core` types — not yet `npm publish`ed)
+- [x] 5.11 — CLI: `@arcana-ui/cli@0.1.0-beta.1` published to npm (init / validate / add-theme commands; 5 starter layouts × 2 frameworks; all 10 combos typecheck against published `@arcana-ui/core`)
 
 ---
 
