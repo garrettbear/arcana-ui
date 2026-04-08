@@ -599,7 +599,7 @@ Phase 4 (partial) + Phase P (partial)
 | Phase 3 — Expanded Component Library | ✅ Complete | 60+ components |
 | Phase 4 — Theme Presets & Demo Sites | 🔄 Partial | 4.1, 4.2, 4.3, 4.6, 4.10 done |
 | Phase P — Playground Product | 🔄 Partial | P.1, P.1.1, P.1.2, P.1.3, P.1.4 done |
-| Phase 5 — AI Integration & Launch | ⬜ Not started | |
+| Phase 5 — AI Integration & Launch | 🔄 Partial | 5.1, 5.2, 5.11 done |
 
 ### Key Milestones Reached
 - **14 theme presets** built and polished: light, dark, terminal, retro98, glass, brutalist, corporate, startup, editorial, commerce, midnight, nature, neon, mono
@@ -610,6 +610,7 @@ Phase 4 (partial) + Phase P (partial)
 - **Demo infrastructure** in place: SaaS dashboard + e-commerce demos with shared ThemeSwitcher
 - **Playground site map** with 6 route types: editor, component gallery, component detail, token explorer, token impact, and D3 force-directed relationship graph
 - **Repo** at `github.com/Arcana-UI/arcana`; branching: `develop` (day-to-day), `main` (releases only)
+- **CLI** built as new `@arcana-ui/cli` package: `init` (5 starter layouts × Vite/Next), `validate` (theme JSON linter with WCAG AA contrast checks), `add-theme` (preset activation snippet). All 10 layout/framework combos typecheck against published `@arcana-ui/core`.
 
 ### Remaining Work
 
@@ -623,7 +624,16 @@ Phase 4 (partial) + Phase P (partial)
 **Phase P:**
 - P.2 — AI theme generation (prompt input → theme JSON)
 
-**Phase 5:** Not started (depends on Phase 4 completion)
+**Phase 5:**
+- 5.3 — Claude Code skill (planned, not published)
+- 5.4 — MCP server
+- 5.5 — Documentation site
+- 5.6 — SEO & discoverability
+- 5.7 — Community starter templates beyond Vite + Next
+- 5.8 — Figma Code Connect
+- 5.9 — Performance audit
+- 5.10 — Launch checklist
+- 5.11 follow-up — `npm publish @arcana-ui/cli@0.1.0-beta.1` (awaiting Bear)
 
 ### Blockers
 None. npm packages are published. Credentials not needed for development work.
@@ -663,4 +673,5 @@ None. npm packages are published. Credentials not needed for development work.
 | 2026-03-27 | Claude (Claude Code) | Playground component audit + dogfooding | Audited all playground UI elements. Replaced 35+ raw HTML elements with Arcana components (Button, Badge, Input, Select, ProgressBar) across TokenEditor, AccessibilityPanel, Landing, ColorPicker, CubicBezierEditor. Audit report at docs/audits/. Arcana usage: 63% → 91%. |
 | 2026-03-28 | Claude (Claude Code) | Task P.1.4 — Playground site map architecture | Built 6 new routes: component gallery, component detail, token explorer, token impact, relationship graph. Component-to-token mapping build script (67 components, 551 tokens). Canvas-based graph visualization. All pages use Arcana components, token-driven CSS. 928 tests pass. |
 | 2026-03-31 | Claude (Claude Code) | Graph visualization upgrade — D3 force simulation | Replaced Canvas-based graph with D3 force-directed SVG visualization. Added glow filters, hover highlighting with connection tracing, zoom/pan, drag interaction, search-to-focus, legend, category color coding, tooltip, loading spinner, mobile fallback message, click-to-navigate. 958 tests pass. |
+| 2026-04-07 | Claude (Claude Code) | Task 5.11 — `@arcana-ui/cli` package | Built new CLI package with three commands: `init` (interactive scaffolder, 5 starter layouts × Vite/Next, package-manager detection, --yes for non-interactive use), `validate` (theme JSON linter — structure, completeness, references, WCAG AA contrast on 5 key fg/bg pairs, --strict promotes warnings, exits 1 on error), `add-theme` (preset activation snippet, --list for all 14 presets). Layouts use real `@arcana-ui/core` imports — all 10 combos typecheck against the published package via local `file:` link. Bundled with tsup ESM (deps externalized — bundling commander into ESM broke `require('events')`). New `packages/cli/README.md` + root README quickstart now leads with `npx @arcana-ui/cli init`. Five logical commits on `feat/5.11-cli-init-validate-add-theme`. **Awaiting Bear to `npm publish @arcana-ui/cli@0.1.0-beta.1`.** |
 | 2026-04-06 | Claude (Claude Code) | Consumer package audit → beta.2 | Installed `@arcana-ui/core@beta` + `@arcana-ui/tokens@beta` from registry into a fresh project; found beta.1 was stale (115/122 exports, missing `useClickOutside`/`useDrag`/`useUndoRedo`/`ColorPicker`/`FontPicker`/`BottomSheet`/`DrawerNav`/`LogoCloud`), `@arcana-ui/tokens` exports map blocked `./dist/arcana.css` subpath (`ERR_PACKAGE_PATH_NOT_EXPORTED`), and tree-shaking was broken (Button-only import = 278 kB, same as 8-component app). Fixed exports maps on both packages, bumped to `0.1.0-beta.2`, scaffolded `examples/quickstart/` Vite + React + TS consumer test fixture, wrote `docs/QUICKSTART.md` (consumer setup + CLI spec) and `KNOWN_ISSUES.md`. Tree-shaking fix deferred to beta.3 — documented because it requires per-component entry points that conflict with the `"use client"` banner in single-entry mode. **Awaiting Bear to `npm publish` beta.2.** |
