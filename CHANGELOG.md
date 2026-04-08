@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `demos/control` — full analytics dashboard polish: 63-component registry with token counts, test coverage, bundle sizes, and WCAG scores; npm download trend chart (inline SVG, 30-day area fill + sparkline); component-by-category horizontal bar chart; new Performance page (bundle analysis by category, tree-shaking table, build times); new Accessibility page (WCAG 2.1 AA criteria progress bars, score by category, contrast matrix). ThemeSwitcher wired with `defaultTheme: "dark"`.
+
+### Added
 - `@arcana-ui/cli@0.1.0-beta.1` — new package: command-line tool for scaffolding Arcana UI projects, validating themes, and managing presets. Three commands:
   - `arcana-ui init [name]` — interactive (or non-interactive via flags) project scaffolder. Pick framework (Vite + React + TS or Next.js App Router), theme (any of 14 presets), density, and one of 5 starter layouts (`dashboard`, `marketing`, `ecommerce`, `editorial`, `general`). Detects package manager from `npm_config_user_agent`, runs install, prints next-steps banner. All 5 layouts use real `@arcana-ui/core` imports and typecheck against the published package.
   - `arcana-ui validate <file>` — theme JSON linter. Checks structure (top-level shape), completeness (required semantic groups), reference resolution (`{primitive.x.y}` lookups), and WCAG AA contrast on 5 key foreground/background pairs. `--strict` promotes warnings to errors. Exits 1 on any error so it slots into CI.
