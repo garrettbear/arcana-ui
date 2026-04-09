@@ -1,4 +1,4 @@
-import { Badge, Button, Input } from '@arcana-ui/core';
+import { Badge, Button, Input, ToastProvider, useToast } from '@arcana-ui/core';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Landing.module.css';
@@ -8,6 +8,7 @@ import styles from './Landing.module.css';
 function ArrowIcon() {
   return (
     <svg
+      aria-hidden="true"
       width="18"
       height="18"
       viewBox="0 0 24 24"
@@ -26,6 +27,7 @@ function ArrowIcon() {
 function TokensIcon() {
   return (
     <svg
+      aria-hidden="true"
       width="22"
       height="22"
       viewBox="0 0 24 24"
@@ -46,6 +48,7 @@ function TokensIcon() {
 function ComponentsIcon() {
   return (
     <svg
+      aria-hidden="true"
       width="22"
       height="22"
       viewBox="0 0 24 24"
@@ -65,6 +68,7 @@ function ComponentsIcon() {
 function AIIcon() {
   return (
     <svg
+      aria-hidden="true"
       width="22"
       height="22"
       viewBox="0 0 24 24"
@@ -90,6 +94,7 @@ function AIIcon() {
 function MenuIcon() {
   return (
     <svg
+      aria-hidden="true"
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -108,6 +113,7 @@ function MenuIcon() {
 function CloseIcon() {
   return (
     <svg
+      aria-hidden="true"
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -327,10 +333,18 @@ const THEME_PREVIEWS = [
 // Landing Page Component
 // ═══════════════════════════════════════════════════════════════════════════════
 
-export default function Landing() {
+function LandingContent() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [promptValue, setPromptValue] = useState('');
+
+  const handleComingSoon = (feature: string) => {
+    toast({
+      title: `${feature} coming soon`,
+      description: "We're working on it! Follow the repo for updates.",
+    });
+  };
 
   const handlePromptSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -351,9 +365,13 @@ export default function Landing() {
 
           <ul className={styles.navLinks}>
             <li>
-              <a href="https://arcana-design-system.vercel.app/docs" className={styles.navLink}>
+              <button
+                type="button"
+                className={styles.navLinkBtn}
+                onClick={() => handleComingSoon('Docs')}
+              >
                 Docs
-              </a>
+              </button>
             </li>
             <li>
               <Link to="/playground" className={styles.navLink}>
@@ -382,7 +400,22 @@ export default function Landing() {
             </li>
           </ul>
 
-          <div className={styles.navActions} />
+          <div className={styles.navActions}>
+            <button
+              type="button"
+              className={styles.navBtnGhost}
+              onClick={() => handleComingSoon('Login')}
+            >
+              Log in
+            </button>
+            <button
+              type="button"
+              className={styles.navBtnPrimary}
+              onClick={() => handleComingSoon('Sign up')}
+            >
+              Sign up
+            </button>
+          </div>
 
           <Button
             variant="ghost"
@@ -399,11 +432,13 @@ export default function Landing() {
       <div
         className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.mobileMenuOpen : ''}`}
         onClick={() => setMobileMenuOpen(false)}
+        onKeyDown={(e) => e.key === 'Escape' && setMobileMenuOpen(false)}
         role="presentation"
       >
         <div
           className={styles.mobileMenuPanel}
           onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
           role="presentation"
         >
           <Button
@@ -416,12 +451,16 @@ export default function Landing() {
           </Button>
           <ul className={styles.mobileMenuLinks}>
             <li>
-              <a
-                href="https://arcana-design-system.vercel.app/docs"
-                className={styles.mobileMenuLink}
+              <button
+                type="button"
+                className={styles.mobileMenuLinkBtn}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleComingSoon('Docs');
+                }}
               >
                 Docs
-              </a>
+              </button>
             </li>
             <li>
               <Link
@@ -500,9 +539,9 @@ export default function Landing() {
 
           <div className={styles.promptLinks}>
             or{' '}
-            <Link to="/playground" className={styles.promptTextLink}>
+            <a href="#themes" className={styles.promptTextLink}>
               Browse themes
-            </Link>
+            </a>
             {' · '}
             <a
               href="https://www.npmjs.com/package/@arcana-ui/cli"
@@ -525,7 +564,12 @@ export default function Landing() {
           <div className={styles.logoCloudGrid}>
             {['Claude Code', 'Cursor', 'GitHub Copilot', 'v0', 'Bolt', 'Lovable'].map((name) => (
               <span key={name} className={styles.logoCloudItem}>
-                <svg className={styles.logoCloudIcon} viewBox="0 0 20 20" fill="currentColor">
+                <svg
+                  aria-hidden="true"
+                  className={styles.logoCloudIcon}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
                   <rect x="2" y="2" width="16" height="16" rx="4" opacity="0.3" />
                   <rect x="5" y="5" width="10" height="10" rx="2" opacity="0.6" />
                 </svg>
@@ -616,7 +660,7 @@ export default function Landing() {
         </section>
 
         {/* ═══ SECTION 6: Theme Showcase ═══ */}
-        <section className={styles.section}>
+        <section id="themes" className={styles.section}>
           <h2 className={styles.sectionTitle}>One system, infinite looks</h2>
           <p className={styles.sectionSubtitle}>
             Same components, completely different personalities. Each theme is a single JSON file.
@@ -720,7 +764,11 @@ export default function Landing() {
                       <div className={styles.showcaseStatValue}>{stat.value}</div>
                       <div
                         className={styles.showcaseStatTrend}
-                        style={{ color: stat.up ? '#16a34a' : '#dc2626' }}
+                        style={{
+                          color: stat.up
+                            ? 'var(--color-status-success-fg, #16a34a)'
+                            : 'var(--color-status-error-fg, #dc2626)',
+                        }}
                       >
                         {stat.trend} from last month
                       </div>
@@ -762,7 +810,7 @@ export default function Landing() {
         <section className={styles.statsSection}>
           <div className={styles.statsGrid}>
             {[
-              { value: '60+', label: 'Components' },
+              { value: '108+', label: 'Components' },
               { value: '2,600+', label: 'CSS Variables', accent: true },
               { value: '14', label: 'Theme Presets' },
               { value: '5', label: 'Site Categories' },
@@ -826,15 +874,16 @@ export default function Landing() {
                 </Link>
               </li>
               <li>
-                <a
-                  href="https://arcana-design-system.vercel.app/docs"
-                  className={styles.footerLink}
+                <button
+                  type="button"
+                  className={styles.footerLinkBtn}
+                  onClick={() => handleComingSoon('Docs')}
                 >
                   Docs
-                </a>
+                </button>
               </li>
               <li>
-                <Link to="/playground" className={styles.footerLink}>
+                <Link to="/playground/components" className={styles.footerLink}>
                   Components
                 </Link>
               </li>
@@ -929,5 +978,13 @@ export default function Landing() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function Landing() {
+  return (
+    <ToastProvider>
+      <LandingContent />
+    </ToastProvider>
   );
 }
