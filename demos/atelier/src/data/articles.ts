@@ -1,81 +1,104 @@
 export interface Article {
   slug: string;
   title: string;
+  subtitle: string;
   authorSlug: string;
   category: string;
   readTime: number;
   excerpt: string;
   date: string;
-  image: {
-    bg: string;
-    fg: string;
-    width: number;
-    height: number;
-  };
+  imageUrl: string;
+  imageAlt: string;
+  /** aspect ratio w/h for layout hints */
+  aspectRatio: '16/9' | '3/4' | '1/1' | '4/3';
 }
 
 export const articles: Article[] = [
   {
-    slug: 'the-weight-of-silence',
-    title: 'The Weight of Silence: Tadao Ando\u2019s New Chapel in Kagawa',
+    slug: 'the-quiet-power-of-concrete',
+    title: 'The Quiet Power of Concrete: A Brutalist Revival in Lisbon',
+    subtitle: "How a new generation of architects is reclaiming brutalism's emotional depth",
     authorSlug: 'elena-marchetti',
     category: 'Architecture',
     readTime: 12,
-    excerpt: 'The building does not ask for your attention. It assumes it.',
-    date: '2026-03-15',
-    image: { bg: '#1C1C1C', fg: '#F8F6F1', width: 600, height: 800 },
+    excerpt:
+      "In the winding streets of Lisbon's Mouraria district, a former textile factory has been reborn as something quietly radical. Architect Paulo Mendes has stripped the building to its structural bones, exposing the raw concrete that previous renovators had spent decades hiding. The result is an ode to honesty — a building that wears its age and its materials with pride.",
+    date: '2026-01-15',
+    imageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&q=85',
+    imageAlt: 'Raw concrete architectural facade with deep shadows',
+    aspectRatio: '16/9',
   },
   {
-    slug: 'the-most-honest-apartment-in-berlin',
-    title: 'Inside the Most Honest Apartment in Berlin',
-    authorSlug: 'jonas-brandt',
+    slug: 'living-light-norwegian-fjords',
+    title: 'Living Light: Floor-to-Ceiling Glass in the Norwegian Fjords',
+    subtitle: 'A family retreat dissolves the boundary between inside and out',
+    authorSlug: 'james-holbrook',
     category: 'Interiors',
     readTime: 8,
     excerpt:
-      'When Katrin M\u00FCller moved in, she removed the ceilings. What remained was the truth of the building.',
-    date: '2026-03-10',
-    image: { bg: '#E8E4DC', fg: '#1C1C1C', width: 800, height: 500 },
+      'The brief was simple: wake up to the fjord. The execution, however, required a structural engineering feat that took two years to resolve. The result is a 240-square-meter retreat where every room opens to a panorama of water and stone, light and absence.',
+    date: '2026-02-03',
+    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=85',
+    imageAlt: 'Norwegian fjord landscape with dramatic mountains and still water',
+    aspectRatio: '3/4',
   },
   {
-    slug: 'concrete-revisited',
-    title:
-      'Concrete, Revisited: How a Generation of Architects Learned to Love What They\u2019d Been Taught to Hate',
-    authorSlug: 'sophie-laurent',
-    category: 'Material',
-    readTime: 15,
-    excerpt: 'The rehabilitation of concrete is not aesthetic. It is moral.',
-    date: '2026-02-28',
-    image: { bg: '#9C9488', fg: '#F8F6F1', width: 600, height: 600 },
-  },
-  {
-    slug: 'the-invisible-house',
-    title: 'The Invisible House: A Conversation with Bijoy Jain',
-    authorSlug: 'elena-marchetti',
-    category: 'Interview',
+    slug: 'wabi-sabi-interiors',
+    title: 'Wabi-Sabi Interiors: Finding Beauty in Imperfection',
+    subtitle: 'The Japanese philosophy of impermanence is transforming Western interior design',
+    authorSlug: 'yuki-tanaka',
+    category: 'Design',
     readTime: 10,
-    excerpt: 'Studio Mumbai builds nothing that the site does not already know.',
-    date: '2026-02-20',
-    image: { bg: '#C8C4BC', fg: '#1C1C1C', width: 800, height: 450 },
+    excerpt:
+      'Cracked plaster walls. Mismatched ceramics. A wooden table worn smooth by decades of use. These are not accidents to be corrected — they are the point. Wabi-sabi, the Japanese aesthetic philosophy that finds beauty in imperfection and transience, is quietly reshaping how designers think about the lived-in home.',
+    date: '2026-02-18',
+    imageUrl: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1400&q=85',
+    imageAlt: 'Minimalist Japanese-inspired interior with natural materials',
+    aspectRatio: '1/1',
   },
   {
-    slug: 'renzo-pianos-last-work',
-    title: 'Renzo Piano\u2019s Last Work',
-    authorSlug: 'marcus-webb',
+    slug: 'new-desert-modernism',
+    title: 'The New Desert Modernism: Palm Springs Reimagined',
+    subtitle:
+      "A new cohort of architects is redefining the California desert's iconic residential style",
+    authorSlug: 'sarah-chen',
     category: 'Architecture',
-    readTime: 18,
-    excerpt: 'He has always been interested in lightness. His late buildings have achieved it.',
-    date: '2026-02-10',
-    image: { bg: '#4C4840', fg: '#F8F6F1', width: 500, height: 700 },
+    readTime: 9,
+    excerpt:
+      "The mid-century modern homes of Palm Springs have always been about the dialogue between indoor and outdoor living. Now, a generation of architects is pushing that dialogue further — using passive cooling strategies, rammed earth walls, and native landscaping to create homes that don't just reference the desert but emerge from it.",
+    date: '2026-03-02',
+    imageUrl: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1400&q=85',
+    imageAlt: 'Desert modernist home with clean lines and open sky',
+    aspectRatio: '4/3',
   },
   {
-    slug: 'the-archive-ten-spaces',
-    title: 'The Archive: Ten Spaces That Changed How We Live',
-    authorSlug: 'elena-marchetti',
-    category: 'Archive',
-    readTime: 22,
-    excerpt: 'From Maison de Verre to the Kimbell, the rooms we return to.',
-    date: '2026-01-15',
-    image: { bg: '#D8D0C4', fg: '#1C1C1C', width: 900, height: 500 },
+    slug: 'material-conversations',
+    title: 'Material Conversations: When Wood Meets Steel',
+    subtitle:
+      'The tension between organic warmth and industrial strength drives a new design vocabulary',
+    authorSlug: 'olivier-beaumont',
+    category: 'Design',
+    readTime: 7,
+    excerpt:
+      'There is something inherently tense about pairing wood and steel. One is warm, organic, shaped by centuries of growth. The other is cold, precise, wrought in furnaces. When skilled hands bring them together, that tension becomes a kind of poetry.',
+    date: '2026-03-14',
+    imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=85',
+    imageAlt: 'Architectural detail of wood and steel joinery',
+    aspectRatio: '3/4',
+  },
+  {
+    slug: 'tokyo-micro-living',
+    title: 'Tokyo Micro-Living: 28 Square Meters of Genius',
+    subtitle: 'Inside the ultra-compact apartments redefining urban domesticity',
+    authorSlug: 'kenji-watanabe',
+    category: 'Interiors',
+    readTime: 11,
+    excerpt:
+      "In a city where space has always been a luxury, Tokyo's architects have spent decades perfecting the art of compression. The result is a body of residential work that is, paradoxically, one of the most liberating in the world — because when you have nothing to hide, you design with total honesty.",
+    date: '2026-04-01',
+    imageUrl: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1400&q=85',
+    imageAlt: 'Compact Tokyo apartment interior with clever storage solutions',
+    aspectRatio: '1/1',
   },
 ];
 
@@ -84,7 +107,8 @@ export function getArticle(slug: string): Article | undefined {
 }
 
 export function getArticlesByCategory(category: string): Article[] {
+  if (category === 'All') return articles;
   return articles.filter((a) => a.category === category);
 }
 
-export const categories = ['Architecture', 'Interiors', 'Material', 'Interview', 'Archive'];
+export const categories = ['All', 'Architecture', 'Interiors', 'Design'];
