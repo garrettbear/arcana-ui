@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- `demos/mosaic` — replaced all 20 placeholder images (`placehold.co`) with real Unsplash photographs matched to the design/architecture/typography content; expanded feed from 20 to 30 items; added `@arcana-ui/demo-shared` dependency and wired ThemeSwitcher (defaultTheme: "light").
+- `demos/wavefront` — replaced all `placehold.co` collection and artist artwork with real Unsplash photos matched to each station's mood (night city, coastal sunset, piano, tropical highway, neon cityscape); added 2 new channels: "Sunset Drive" (Tame Impala, Beach House, Washed Out) and "Neo Seoul" (Bonobo, Four Tet, Bicep) bringing the total to 5 stations; added `@arcana-ui/demo-shared` dep and wired ThemeSwitcher (defaultTheme: "midnight").
 
 ### Added
 - `@arcana-ui/cli@0.1.0-beta.1` — new package: command-line tool for scaffolding Arcana UI projects, validating themes, and managing presets. Three commands:

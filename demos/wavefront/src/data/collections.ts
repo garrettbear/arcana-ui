@@ -15,9 +15,7 @@ export interface Collection {
   tracks: Track[];
 }
 
-function makeArtUrl(bg: string, fg: string, initials: string): string {
-  return `https://placehold.co/400x400/${bg.replace('#', '')}/${fg.replace('#', '')}?text=${encodeURIComponent(initials)}`;
-}
+// ─── Track lists ──────────────────────────────────────────────────────────────
 
 const lateNightTracks: Track[] = [
   {
@@ -144,6 +142,58 @@ const deepFocusTracks: Track[] = [
   },
 ];
 
+const sunsetDriveTracks: Track[] = [
+  {
+    id: 'sd-1',
+    title: 'Let It Happen',
+    artist: 'Tame Impala',
+    duration: '7:47',
+    durationSeconds: 467,
+  },
+  {
+    id: 'sd-2',
+    title: 'Feels Like We Only Go Backwards',
+    artist: 'Tame Impala',
+    duration: '3:13',
+    durationSeconds: 193,
+  },
+  {
+    id: 'sd-3',
+    title: 'Multi-Love',
+    artist: 'Unknown Mortal Orchestra',
+    duration: '4:29',
+    durationSeconds: 269,
+  },
+  {
+    id: 'sd-4',
+    title: 'Space Song',
+    artist: 'Beach House',
+    duration: '5:09',
+    durationSeconds: 309,
+  },
+  { id: 'sd-5', title: 'Runnin', artist: 'Neon Trees', duration: '3:55', durationSeconds: 235 },
+  {
+    id: 'sd-6',
+    title: 'Feel It All Around',
+    artist: 'Washed Out',
+    duration: '4:01',
+    durationSeconds: 241,
+  },
+  { id: 'sd-7', title: 'Home', artist: 'Caribou', duration: '5:29', durationSeconds: 329 },
+];
+
+const neoSeoulTracks: Track[] = [
+  { id: 'ns-1', title: 'Kong', artist: 'Bonobo', duration: '6:14', durationSeconds: 374 },
+  { id: 'ns-2', title: 'Kiara', artist: 'Bonobo', duration: '4:54', durationSeconds: 294 },
+  { id: 'ns-3', title: 'My Own', artist: 'Four Tet', duration: '7:22', durationSeconds: 442 },
+  { id: 'ns-4', title: 'Octan', artist: 'Floating Points', duration: '8:03', durationSeconds: 483 },
+  { id: 'ns-5', title: 'Wanderlust', artist: 'Bicep', duration: '5:44', durationSeconds: 344 },
+  { id: 'ns-6', title: 'Glue', artist: 'Bicep', duration: '6:29', durationSeconds: 389 },
+  { id: 'ns-7', title: 'Surrender', artist: 'Bonobo', duration: '5:55', durationSeconds: 355 },
+];
+
+// ─── Collections ──────────────────────────────────────────────────────────────
+
 export const collections: Collection[] = [
   {
     id: 'late-night-sessions',
@@ -151,7 +201,7 @@ export const collections: Collection[] = [
     type: 'playlist',
     description:
       'A carefully curated playlist for those hours when the city gets quiet and the music gets honest. Khruangbin grooves, Bon Iver harmonics, and Radiohead at its most tender.',
-    artworkUrl: makeArtUrl('#1A1A2E', '#C9A84C', 'LN'),
+    artworkUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&q=85',
     tracks: lateNightTracks,
   },
   {
@@ -160,7 +210,7 @@ export const collections: Collection[] = [
     type: 'station',
     description:
       'Fleetwood Mac from front to back — the definitive Rumours-era station. Stevie Nicks and Lindsey Buckingham at the height of their creative tension. Best played with the windows down.',
-    artworkUrl: makeArtUrl('#1A1A1A', '#D4AF37', 'PC'),
+    artworkUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=85',
     tracks: pacificCoastTracks,
   },
   {
@@ -169,28 +219,63 @@ export const collections: Collection[] = [
     type: 'playlist',
     description:
       'Piano, strings, and silence. Einaudi, Pärt, Satie, and Debussy — composers who understood that the space between notes matters as much as the notes themselves. For deep work.',
-    artworkUrl: makeArtUrl('#0D0D1A', '#A0B0FF', 'DF'),
+    artworkUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&q=85',
     tracks: deepFocusTracks,
+  },
+  {
+    id: 'sunset-drive',
+    name: 'Sunset Drive',
+    type: 'station',
+    description:
+      'Tame Impala, Beach House, and Washed Out — the hazy, saturated end of the day. Best experienced on a highway with no destination and the sun at 15 degrees.',
+    artworkUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=85',
+    tracks: sunsetDriveTracks,
+  },
+  {
+    id: 'neo-seoul',
+    name: 'Neo Seoul',
+    type: 'station',
+    description:
+      'Bonobo, Four Tet, Floating Points, Bicep — the music of cities that never sleep. Electronic textures, organic percussion, and bass that arrives late but stays long.',
+    artworkUrl: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=400&q=85',
+    tracks: neoSeoulTracks,
   },
 ];
 
+// ─── Artist artwork ───────────────────────────────────────────────────────────
+
 export function getTrackArtwork(track: Track): string {
   const artworkMap: Record<string, string> = {
-    Khruangbin: makeArtUrl('#1A1A2E', '#C9A84C', 'K'),
-    'Novo Amor': makeArtUrl('#2D1B30', '#E8C5F0', 'NA'),
-    'James Blake': makeArtUrl('#0D1F2D', '#4FC3F7', 'JB'),
-    'Bon Iver': makeArtUrl('#1A2A1A', '#A8D5A2', 'BI'),
-    Radiohead: makeArtUrl('#1A0D0D', '#FF6B6B', 'RH'),
-    'The Cinematic Orchestra': makeArtUrl('#0D1A2A', '#7EB8F7', 'CO'),
-    'Vampire Weekend': makeArtUrl('#2A1A0D', '#FFB347', 'VW'),
-    'Jack Johnson': makeArtUrl('#2A1A0D', '#FFB347', 'JJ'),
-    'Fleetwood Mac': makeArtUrl('#1A1A1A', '#D4AF37', 'FM'),
-    'Ludovico Einaudi': makeArtUrl('#0D0D1A', '#A0B0FF', 'LE'),
-    'Arvo Pärt': makeArtUrl('#1A1A14', '#F0ECC8', 'AP'),
-    'Erik Satie': makeArtUrl('#0D1A14', '#78C5A0', 'ES'),
-    'Claude Debussy': makeArtUrl('#0D1A14', '#78C5A0', 'CD'),
+    Khruangbin: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=80&q=80',
+    'Novo Amor': 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=80&q=80',
+    'James Blake': 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=80&q=80',
+    'Bon Iver': 'https://images.unsplash.com/photo-1418985991508-e47386d96a71?w=80&q=80',
+    Radiohead: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=80&q=80',
+    'The Cinematic Orchestra':
+      'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=80&q=80',
+    'Vampire Weekend': 'https://images.unsplash.com/photo-1474650914696-cdb0a4b5b7a4?w=80&q=80',
+    'Jack Johnson': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80',
+    'Fleetwood Mac': 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=80&q=80',
+    'Ludovico Einaudi': 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=80&q=80',
+    'Arvo Pärt': 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=80&q=80',
+    'Erik Satie': 'https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=80&q=80',
+    'Claude Debussy': 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=80&q=80',
+    'Tame Impala': 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=80&q=80',
+    'Unknown Mortal Orchestra':
+      'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=80&q=80',
+    'Beach House': 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=80&q=80',
+    'Neon Trees': 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=80&q=80',
+    'Washed Out': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=80&q=80',
+    Caribou: 'https://images.unsplash.com/photo-1490750967868-88df5691cc12?w=80&q=80',
+    Bonobo: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=80&q=80',
+    'Four Tet': 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=80&q=80',
+    'Floating Points': 'https://images.unsplash.com/photo-1478144592103-25e218a04891?w=80&q=80',
+    Bicep: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=80&q=80',
   };
-  return artworkMap[track.artist] ?? makeArtUrl('#1A1A2E', '#C9A84C', '??');
+  return (
+    artworkMap[track.artist] ??
+    'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=80&q=80'
+  );
 }
 
 export function formatTotalDuration(tracks: Track[]): string {
