@@ -27,14 +27,10 @@ import { Link, useParams } from 'react-router-dom';
 import { COMPONENT_REGISTRY } from '../data/component-registry';
 import type { TokenMapData, TokenUsage } from '../data/token-map-types';
 import tokenMapRaw from '../data/token-map.json';
+import { getCSSVar as getCSSVarValue } from '../utils/presets';
 import styles from './TokenImpact.module.css';
 
 const tokenMapData = tokenMapRaw as unknown as TokenMapData;
-
-function getCSSVarValue(varName: string): string {
-  if (typeof window === 'undefined') return '';
-  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-}
 
 /** Render a small representative version of a component */
 function MiniComponent({ slug }: { slug: string }) {

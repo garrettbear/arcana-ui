@@ -1,8 +1,184 @@
 {
-  "generatedAt": "2026-03-28T12:40:44.281Z",
-  "componentCount": 67,
-  "tokenCount": 551,
+  "generatedAt": "2026-04-09T17:22:56.002Z",
+  "componentCount": 69,
+  "tokenCount": 656,
   "components": {
+    "colorpicker": {
+      "componentTokens": [],
+      "semanticTokens": [
+        "--alpha-color-end",
+        "--alpha-color-start",
+        "--color-action-ghost-hover",
+        "--color-action-primary",
+        "--color-bg-elevated",
+        "--color-bg-page",
+        "--color-border-default",
+        "--color-border-focus",
+        "--color-fg-muted",
+        "--color-fg-primary",
+        "--color-fg-secondary",
+        "--colorpicker-bg",
+        "--colorpicker-canvas-height",
+        "--colorpicker-canvas-width",
+        "--colorpicker-cursor-shadow",
+        "--colorpicker-padding",
+        "--colorpicker-radius",
+        "--colorpicker-shadow",
+        "--colorpicker-slider-height",
+        "--colorpicker-swatch-size",
+        "--colorpicker-thumb-border",
+        "--colorpicker-thumb-shadow",
+        "--colorpicker-thumb-size",
+        "--duration-fast",
+        "--ease-default",
+        "--focus-ring",
+        "--font-family-body",
+        "--font-family-mono",
+        "--font-size-xs",
+        "--opacity-disabled",
+        "--radius-full",
+        "--radius-lg",
+        "--radius-sm",
+        "--radius-xs",
+        "--shadow-sm",
+        "--shadow-xl",
+        "--shadow-xs",
+        "--spacing-0-5",
+        "--spacing-1",
+        "--spacing-1-5",
+        "--spacing-2",
+        "--spacing-2-5",
+        "--spacing-3",
+        "--spacing-4",
+        "--spacing-7",
+        "--spacing-9",
+        "--z-popover"
+      ],
+      "allTokens": [
+        "--alpha-color-end",
+        "--alpha-color-start",
+        "--color-action-ghost-hover",
+        "--color-action-primary",
+        "--color-bg-elevated",
+        "--color-bg-page",
+        "--color-border-default",
+        "--color-border-focus",
+        "--color-fg-muted",
+        "--color-fg-primary",
+        "--color-fg-secondary",
+        "--colorpicker-bg",
+        "--colorpicker-canvas-height",
+        "--colorpicker-canvas-width",
+        "--colorpicker-cursor-shadow",
+        "--colorpicker-padding",
+        "--colorpicker-radius",
+        "--colorpicker-shadow",
+        "--colorpicker-slider-height",
+        "--colorpicker-swatch-size",
+        "--colorpicker-thumb-border",
+        "--colorpicker-thumb-shadow",
+        "--colorpicker-thumb-size",
+        "--duration-fast",
+        "--ease-default",
+        "--focus-ring",
+        "--font-family-body",
+        "--font-family-mono",
+        "--font-size-xs",
+        "--opacity-disabled",
+        "--radius-full",
+        "--radius-lg",
+        "--radius-sm",
+        "--radius-xs",
+        "--shadow-sm",
+        "--shadow-xl",
+        "--shadow-xs",
+        "--spacing-0-5",
+        "--spacing-1",
+        "--spacing-1-5",
+        "--spacing-2",
+        "--spacing-2-5",
+        "--spacing-3",
+        "--spacing-4",
+        "--spacing-7",
+        "--spacing-9",
+        "--z-popover"
+      ],
+      "fallbacks": {},
+      "cssFile": "packages/core/src/components/ColorPicker/ColorPicker.module.css"
+    },
+    "fontpicker": {
+      "componentTokens": [],
+      "semanticTokens": [
+        "--color-action-ghost-hover",
+        "--color-bg-elevated",
+        "--color-bg-page",
+        "--color-bg-sunken",
+        "--color-border-default",
+        "--color-border-focus",
+        "--color-border-muted",
+        "--color-fg-muted",
+        "--color-fg-primary",
+        "--duration-fast",
+        "--ease-default",
+        "--focus-ring",
+        "--font-family-body",
+        "--font-size-sm",
+        "--font-size-xs",
+        "--fontpicker-dropdown-bg",
+        "--fontpicker-dropdown-max-height",
+        "--fontpicker-dropdown-shadow",
+        "--fontpicker-option-hover-bg",
+        "--fontpicker-option-padding",
+        "--opacity-disabled",
+        "--radius-md",
+        "--radius-sm",
+        "--shadow-lg",
+        "--spacing-0-5",
+        "--spacing-1",
+        "--spacing-1-5",
+        "--spacing-2",
+        "--spacing-2-5",
+        "--spacing-3",
+        "--spacing-4",
+        "--z-popover"
+      ],
+      "allTokens": [
+        "--color-action-ghost-hover",
+        "--color-bg-elevated",
+        "--color-bg-page",
+        "--color-bg-sunken",
+        "--color-border-default",
+        "--color-border-focus",
+        "--color-border-muted",
+        "--color-fg-muted",
+        "--color-fg-primary",
+        "--duration-fast",
+        "--ease-default",
+        "--focus-ring",
+        "--font-family-body",
+        "--font-size-sm",
+        "--font-size-xs",
+        "--fontpicker-dropdown-bg",
+        "--fontpicker-dropdown-max-height",
+        "--fontpicker-dropdown-shadow",
+        "--fontpicker-option-hover-bg",
+        "--fontpicker-option-padding",
+        "--opacity-disabled",
+        "--radius-md",
+        "--radius-sm",
+        "--shadow-lg",
+        "--spacing-0-5",
+        "--spacing-1",
+        "--spacing-1-5",
+        "--spacing-2",
+        "--spacing-2-5",
+        "--spacing-3",
+        "--spacing-4",
+        "--z-popover"
+      ],
+      "fallbacks": {},
+      "cssFile": "packages/core/src/components/FontPicker/FontPicker.module.css"
+    },
     "accordion": {
       "componentTokens": [
         "--accordion-border-color",
@@ -519,6 +695,8 @@
         "--color-border-default",
         "--color-fg-primary",
         "--color-fg-secondary",
+        "--element-padding-x-sm",
+        "--element-padding-y-sm",
         "--focus-ring",
         "--font-family-body",
         "--font-size-base",
@@ -529,8 +707,6 @@
         "--radius-sm",
         "--shadow-sm",
         "--spacing-1",
-        "--spacing-2",
-        "--spacing-3",
         "--spacing-4",
         "--spacing-px",
         "--transition-colors"
@@ -544,6 +720,8 @@
         "--color-border-default",
         "--color-fg-primary",
         "--color-fg-secondary",
+        "--element-padding-x-sm",
+        "--element-padding-y-sm",
         "--focus-ring",
         "--font-family-body",
         "--font-size-base",
@@ -554,8 +732,6 @@
         "--radius-sm",
         "--shadow-sm",
         "--spacing-1",
-        "--spacing-2",
-        "--spacing-3",
         "--spacing-4",
         "--spacing-px",
         "--tabs-active-color",
@@ -568,8 +744,8 @@
       ],
       "fallbacks": {
         "--tabs-border-color": "--color-border-default",
-        "--tabs-padding-y": "--spacing-2",
-        "--tabs-padding-x": "--spacing-3",
+        "--tabs-padding-y": "--element-padding-y-sm",
+        "--tabs-padding-x": "--element-padding-x-sm",
         "--tabs-font-size": "--font-size-sm",
         "--tabs-font-weight": "--font-weight-medium",
         "--tabs-active-color": "--color-action-primary"
@@ -1478,7 +1654,7 @@
       "cssFile": "packages/core/src/patterns/DataTable/DataTable.module.css"
     },
     "datepicker": {
-      "componentTokens": ["--input-height"],
+      "componentTokens": [],
       "semanticTokens": [
         "--border-width-default",
         "--color-action-primary",
@@ -1504,6 +1680,9 @@
         "--datepicker-day-size",
         "--datepicker-day-today-border",
         "--datepicker-radius",
+        "--element-height-md",
+        "--element-padding-x-md",
+        "--element-padding-y-md",
         "--focus-ring",
         "--focus-ring-error",
         "--font-family-body",
@@ -1521,7 +1700,6 @@
         "--spacing-2",
         "--spacing-3",
         "--spacing-9",
-        "--spacing-sm",
         "--transition-colors",
         "--transition-shadow",
         "--z-dropdown"
@@ -1551,6 +1729,9 @@
         "--datepicker-day-size",
         "--datepicker-day-today-border",
         "--datepicker-radius",
+        "--element-height-md",
+        "--element-padding-x-md",
+        "--element-padding-y-md",
         "--focus-ring",
         "--focus-ring-error",
         "--font-family-body",
@@ -1558,7 +1739,6 @@
         "--font-size-xs",
         "--font-weight-medium",
         "--font-weight-semibold",
-        "--input-height",
         "--line-height-tight",
         "--opacity-disabled",
         "--radius-md",
@@ -1569,7 +1749,6 @@
         "--spacing-2",
         "--spacing-3",
         "--spacing-9",
-        "--spacing-sm",
         "--transition-colors",
         "--transition-shadow",
         "--z-dropdown"
@@ -1660,6 +1839,7 @@
         "--duration-normal",
         "--ease-default",
         "--ease-out",
+        "--element-height-sm",
         "--focus-ring",
         "--font-family-body",
         "--font-size-lg",
@@ -1696,6 +1876,7 @@
         "--duration-normal",
         "--ease-default",
         "--ease-out",
+        "--element-height-sm",
         "--focus-ring",
         "--font-family-body",
         "--font-size-lg",
@@ -2636,6 +2817,9 @@
         "--color-fg-on-primary",
         "--color-fg-primary",
         "--color-fg-secondary",
+        "--element-height-sm",
+        "--element-padding-x-sm",
+        "--element-padding-y-sm",
         "--focus-ring",
         "--font-family-body",
         "--font-size-sm",
@@ -2657,6 +2841,9 @@
         "--color-fg-on-primary",
         "--color-fg-primary",
         "--color-fg-secondary",
+        "--element-height-sm",
+        "--element-padding-x-sm",
+        "--element-padding-y-sm",
         "--focus-ring",
         "--font-family-body",
         "--font-size-sm",
@@ -3122,15 +3309,22 @@
         "--color-border-default",
         "--color-fg-muted",
         "--color-fg-primary",
+        "--element-height-md",
+        "--element-height-sm",
+        "--element-padding-y-md",
+        "--element-padding-y-sm",
         "--focus-ring",
         "--font-size-md",
         "--font-size-sm",
         "--opacity-disabled",
+        "--qty-height-md",
+        "--qty-height-sm",
+        "--qty-padding-md",
+        "--qty-padding-sm",
         "--radius-md",
         "--spacing-1",
         "--spacing-10",
         "--spacing-12",
-        "--spacing-2",
         "--spacing-8",
         "--transition-colors"
       ],
@@ -3142,19 +3336,31 @@
         "--color-border-default",
         "--color-fg-muted",
         "--color-fg-primary",
+        "--element-height-md",
+        "--element-height-sm",
+        "--element-padding-y-md",
+        "--element-padding-y-sm",
         "--focus-ring",
         "--font-size-md",
         "--font-size-sm",
         "--opacity-disabled",
+        "--qty-height-md",
+        "--qty-height-sm",
+        "--qty-padding-md",
+        "--qty-padding-sm",
         "--radius-md",
         "--spacing-1",
         "--spacing-10",
         "--spacing-12",
-        "--spacing-2",
         "--spacing-8",
         "--transition-colors"
       ],
-      "fallbacks": {},
+      "fallbacks": {
+        "--qty-padding-md": "--element-padding-y-md",
+        "--qty-padding-sm": "--element-padding-y-sm",
+        "--qty-height-md": "--element-height-md",
+        "--qty-height-sm": "--element-height-sm"
+      },
       "cssFile": "packages/core/src/patterns/QuantitySelector/QuantitySelector.module.css"
     },
     "ratingstars": {
@@ -3341,6 +3547,7 @@
         "--color-fg-muted",
         "--color-fg-primary",
         "--color-fg-secondary",
+        "--element-padding-y-sm",
         "--focus-ring",
         "--font-family-body",
         "--font-size-sm",
@@ -3368,6 +3575,7 @@
         "--color-fg-muted",
         "--color-fg-primary",
         "--color-fg-secondary",
+        "--element-padding-y-sm",
         "--focus-ring",
         "--font-family-body",
         "--font-size-sm",
@@ -3945,6 +4153,8 @@
         "--color-status-warning-bg",
         "--color-status-warning-border",
         "--color-status-warning-fg",
+        "--element-padding-x-xs",
+        "--element-padding-y-xs",
         "--font-family-body",
         "--font-size-2xs",
         "--font-size-sm",
@@ -3952,10 +4162,8 @@
         "--font-weight-medium",
         "--line-height-tight",
         "--radius-full",
-        "--spacing-0-5",
         "--spacing-1",
         "--spacing-1-5",
-        "--spacing-2",
         "--spacing-3",
         "--spacing-px"
       ],
@@ -3983,6 +4191,8 @@
         "--color-status-warning-bg",
         "--color-status-warning-border",
         "--color-status-warning-fg",
+        "--element-padding-x-xs",
+        "--element-padding-y-xs",
         "--font-family-body",
         "--font-size-2xs",
         "--font-size-sm",
@@ -3990,16 +4200,14 @@
         "--font-weight-medium",
         "--line-height-tight",
         "--radius-full",
-        "--spacing-0-5",
         "--spacing-1",
         "--spacing-1-5",
-        "--spacing-2",
         "--spacing-3",
         "--spacing-px"
       ],
       "fallbacks": {
-        "--badge-padding-y": "--spacing-0-5",
-        "--badge-padding-x": "--spacing-2",
+        "--badge-padding-y": "--element-padding-y-xs",
+        "--badge-padding-x": "--element-padding-x-xs",
         "--badge-radius": "--radius-full",
         "--badge-font-size": "--font-size-xs",
         "--badge-font-weight": "--font-weight-medium"
@@ -4013,12 +4221,29 @@
         "--button-border-color",
         "--button-border-width",
         "--button-fg",
-        "--button-font-size",
+        "--button-font-size-lg",
+        "--button-font-size-md",
+        "--button-font-size-sm",
+        "--button-font-size-xl",
+        "--button-font-size-xs",
         "--button-font-weight",
-        "--button-height",
+        "--button-height-lg",
+        "--button-height-md",
+        "--button-height-sm",
+        "--button-height-xl",
+        "--button-height-xs",
         "--button-icon-size",
         "--button-letter-spacing",
-        "--button-padding-x",
+        "--button-padding-x-lg",
+        "--button-padding-x-md",
+        "--button-padding-x-sm",
+        "--button-padding-x-xl",
+        "--button-padding-x-xs",
+        "--button-padding-y-lg",
+        "--button-padding-y-md",
+        "--button-padding-y-sm",
+        "--button-padding-y-xl",
+        "--button-padding-y-xs",
         "--button-radius",
         "--button-shadow",
         "--spinner-speed"
@@ -4040,24 +4265,44 @@
         "--color-fg-on-primary",
         "--color-fg-primary",
         "--ease-linear",
+        "--element-font-size-lg",
+        "--element-font-size-md",
+        "--element-font-size-sm",
+        "--element-font-size-xl",
+        "--element-font-size-xs",
+        "--element-height-lg",
+        "--element-height-md",
+        "--element-height-sm",
+        "--element-height-xl",
+        "--element-height-xs",
+        "--element-icon-size-lg",
+        "--element-icon-size-md",
+        "--element-icon-size-sm",
+        "--element-icon-size-xl",
+        "--element-icon-size-xs",
+        "--element-padding-x-lg",
+        "--element-padding-x-md",
+        "--element-padding-x-sm",
+        "--element-padding-x-xl",
+        "--element-padding-x-xs",
+        "--element-padding-y-lg",
+        "--element-padding-y-md",
+        "--element-padding-y-sm",
+        "--element-padding-y-xl",
+        "--element-padding-y-xs",
         "--focus-ring",
         "--font-family-body",
-        "--font-size-base",
-        "--font-size-sm",
-        "--font-size-xs",
         "--font-weight-medium",
         "--letter-spacing-normal",
         "--line-height-tight",
         "--opacity-disabled",
+        "--radius-full",
         "--radius-md",
         "--shadow-none",
+        "--spacing-1",
+        "--spacing-1-5",
         "--spacing-2",
         "--spacing-3",
-        "--spacing-3-5",
-        "--spacing-4",
-        "--spacing-5",
-        "--spacing-6",
-        "--spacing-md",
         "--transition-colors",
         "--transition-opacity",
         "--transition-shadow"
@@ -4069,12 +4314,29 @@
         "--button-border-color",
         "--button-border-width",
         "--button-fg",
-        "--button-font-size",
+        "--button-font-size-lg",
+        "--button-font-size-md",
+        "--button-font-size-sm",
+        "--button-font-size-xl",
+        "--button-font-size-xs",
         "--button-font-weight",
-        "--button-height",
+        "--button-height-lg",
+        "--button-height-md",
+        "--button-height-sm",
+        "--button-height-xl",
+        "--button-height-xs",
         "--button-icon-size",
         "--button-letter-spacing",
-        "--button-padding-x",
+        "--button-padding-x-lg",
+        "--button-padding-x-md",
+        "--button-padding-x-sm",
+        "--button-padding-x-xl",
+        "--button-padding-x-xs",
+        "--button-padding-y-lg",
+        "--button-padding-y-md",
+        "--button-padding-y-sm",
+        "--button-padding-y-xl",
+        "--button-padding-y-xs",
         "--button-radius",
         "--button-shadow",
         "--color-action-destructive",
@@ -4092,24 +4354,44 @@
         "--color-fg-on-primary",
         "--color-fg-primary",
         "--ease-linear",
+        "--element-font-size-lg",
+        "--element-font-size-md",
+        "--element-font-size-sm",
+        "--element-font-size-xl",
+        "--element-font-size-xs",
+        "--element-height-lg",
+        "--element-height-md",
+        "--element-height-sm",
+        "--element-height-xl",
+        "--element-height-xs",
+        "--element-icon-size-lg",
+        "--element-icon-size-md",
+        "--element-icon-size-sm",
+        "--element-icon-size-xl",
+        "--element-icon-size-xs",
+        "--element-padding-x-lg",
+        "--element-padding-x-md",
+        "--element-padding-x-sm",
+        "--element-padding-x-xl",
+        "--element-padding-x-xs",
+        "--element-padding-y-lg",
+        "--element-padding-y-md",
+        "--element-padding-y-sm",
+        "--element-padding-y-xl",
+        "--element-padding-y-xs",
         "--focus-ring",
         "--font-family-body",
-        "--font-size-base",
-        "--font-size-sm",
-        "--font-size-xs",
         "--font-weight-medium",
         "--letter-spacing-normal",
         "--line-height-tight",
         "--opacity-disabled",
+        "--radius-full",
         "--radius-md",
         "--shadow-none",
+        "--spacing-1",
+        "--spacing-1-5",
         "--spacing-2",
         "--spacing-3",
-        "--spacing-3-5",
-        "--spacing-4",
-        "--spacing-5",
-        "--spacing-6",
-        "--spacing-md",
         "--spinner-speed",
         "--transition-colors",
         "--transition-opacity",
@@ -4119,14 +4401,32 @@
         "--button-border-width": "--border-width-default",
         "--button-radius": "--radius-md",
         "--button-font-weight": "--font-weight-medium",
-        "--button-font-size": "--font-size-sm",
         "--button-letter-spacing": "--letter-spacing-normal",
         "--button-shadow": "--shadow-none",
         "--button-bg": "--color-action-primary",
         "--button-fg": "--color-fg-on-primary",
         "--button-bg-hover": "--color-action-primary-hover",
-        "--button-padding-x": "--spacing-md",
-        "--button-icon-size": "--spacing-4"
+        "--button-padding-y-xs": "--element-padding-y-xs",
+        "--button-padding-x-xs": "--element-padding-x-xs",
+        "--button-font-size-xs": "--element-font-size-xs",
+        "--button-padding-y-sm": "--element-padding-y-sm",
+        "--button-padding-x-sm": "--element-padding-x-sm",
+        "--button-font-size-sm": "--element-font-size-sm",
+        "--button-padding-y-md": "--element-padding-y-md",
+        "--button-padding-x-md": "--element-padding-x-md",
+        "--button-font-size-md": "--element-font-size-md",
+        "--button-padding-y-lg": "--element-padding-y-lg",
+        "--button-padding-x-lg": "--element-padding-x-lg",
+        "--button-font-size-lg": "--element-font-size-lg",
+        "--button-padding-y-xl": "--element-padding-y-xl",
+        "--button-padding-x-xl": "--element-padding-x-xl",
+        "--button-font-size-xl": "--element-font-size-xl",
+        "--button-height-xs": "--element-height-xs",
+        "--button-height-sm": "--element-height-sm",
+        "--button-height-md": "--element-height-md",
+        "--button-height-lg": "--element-height-lg",
+        "--button-height-xl": "--element-height-xl",
+        "--button-icon-size": "--element-icon-size-md"
       },
       "cssFile": "packages/core/src/primitives/Button/Button.module.css"
     },
@@ -4224,8 +4524,26 @@
         "--input-border-width",
         "--input-fg",
         "--input-font-size",
-        "--input-height",
-        "--input-padding-x",
+        "--input-font-size-lg",
+        "--input-font-size-md",
+        "--input-font-size-sm",
+        "--input-font-size-xl",
+        "--input-font-size-xs",
+        "--input-height-lg",
+        "--input-height-md",
+        "--input-height-sm",
+        "--input-height-xl",
+        "--input-height-xs",
+        "--input-padding-x-lg",
+        "--input-padding-x-md",
+        "--input-padding-x-sm",
+        "--input-padding-x-xl",
+        "--input-padding-x-xs",
+        "--input-padding-y-lg",
+        "--input-padding-y-md",
+        "--input-padding-y-sm",
+        "--input-padding-y-xl",
+        "--input-padding-y-xs",
         "--input-placeholder-color",
         "--input-radius"
       ],
@@ -4241,10 +4559,30 @@
         "--color-fg-primary",
         "--color-fg-secondary",
         "--color-status-error-fg",
+        "--element-font-size-lg",
+        "--element-font-size-md",
+        "--element-font-size-sm",
+        "--element-font-size-xl",
+        "--element-font-size-xs",
+        "--element-height-lg",
+        "--element-height-md",
+        "--element-height-sm",
+        "--element-height-xl",
+        "--element-height-xs",
+        "--element-icon-size-md",
+        "--element-padding-x-lg",
+        "--element-padding-x-md",
+        "--element-padding-x-sm",
+        "--element-padding-x-xl",
+        "--element-padding-x-xs",
+        "--element-padding-y-lg",
+        "--element-padding-y-md",
+        "--element-padding-y-sm",
+        "--element-padding-y-xl",
+        "--element-padding-y-xs",
         "--focus-ring",
         "--focus-ring-error",
         "--font-family-body",
-        "--font-size-base",
         "--font-size-sm",
         "--font-size-xs",
         "--font-weight-medium",
@@ -4253,10 +4591,7 @@
         "--opacity-disabled",
         "--radius-md",
         "--spacing-1",
-        "--spacing-12",
         "--spacing-2",
-        "--spacing-8",
-        "--spacing-sm",
         "--transition-colors",
         "--transition-shadow"
       ],
@@ -4272,10 +4607,30 @@
         "--color-fg-primary",
         "--color-fg-secondary",
         "--color-status-error-fg",
+        "--element-font-size-lg",
+        "--element-font-size-md",
+        "--element-font-size-sm",
+        "--element-font-size-xl",
+        "--element-font-size-xs",
+        "--element-height-lg",
+        "--element-height-md",
+        "--element-height-sm",
+        "--element-height-xl",
+        "--element-height-xs",
+        "--element-icon-size-md",
+        "--element-padding-x-lg",
+        "--element-padding-x-md",
+        "--element-padding-x-sm",
+        "--element-padding-x-xl",
+        "--element-padding-x-xs",
+        "--element-padding-y-lg",
+        "--element-padding-y-md",
+        "--element-padding-y-sm",
+        "--element-padding-y-xl",
+        "--element-padding-y-xs",
         "--focus-ring",
         "--focus-ring-error",
         "--font-family-body",
-        "--font-size-base",
         "--font-size-sm",
         "--font-size-xs",
         "--font-weight-medium",
@@ -4286,8 +4641,26 @@
         "--input-border-width",
         "--input-fg",
         "--input-font-size",
-        "--input-height",
-        "--input-padding-x",
+        "--input-font-size-lg",
+        "--input-font-size-md",
+        "--input-font-size-sm",
+        "--input-font-size-xl",
+        "--input-font-size-xs",
+        "--input-height-lg",
+        "--input-height-md",
+        "--input-height-sm",
+        "--input-height-xl",
+        "--input-height-xs",
+        "--input-padding-x-lg",
+        "--input-padding-x-md",
+        "--input-padding-x-sm",
+        "--input-padding-x-xl",
+        "--input-padding-x-xs",
+        "--input-padding-y-lg",
+        "--input-padding-y-md",
+        "--input-padding-y-sm",
+        "--input-padding-y-xl",
+        "--input-padding-y-xs",
         "--input-placeholder-color",
         "--input-radius",
         "--line-height-normal",
@@ -4295,23 +4668,39 @@
         "--opacity-disabled",
         "--radius-md",
         "--spacing-1",
-        "--spacing-12",
         "--spacing-2",
-        "--spacing-8",
-        "--spacing-sm",
         "--transition-colors",
         "--transition-shadow"
       ],
       "fallbacks": {
         "--input-font-size": "--font-size-sm",
+        "--input-padding-y-md": "--element-padding-y-md",
+        "--input-padding-x-md": "--element-padding-x-md",
         "--input-bg": "--color-bg-page",
         "--input-border-width": "--border-width-default",
         "--input-border-color": "--color-border-default",
         "--input-radius": "--radius-md",
+        "--input-fg": "--color-fg-primary",
+        "--input-height-md": "--element-height-md",
+        "--input-font-size-md": "--element-font-size-md",
+        "--input-padding-y-xs": "--element-padding-y-xs",
+        "--input-padding-x-xs": "--element-padding-x-xs",
+        "--input-font-size-xs": "--element-font-size-xs",
+        "--input-padding-y-sm": "--element-padding-y-sm",
+        "--input-padding-x-sm": "--element-padding-x-sm",
+        "--input-font-size-sm": "--element-font-size-sm",
+        "--input-padding-y-lg": "--element-padding-y-lg",
+        "--input-padding-x-lg": "--element-padding-x-lg",
+        "--input-font-size-lg": "--element-font-size-lg",
+        "--input-padding-y-xl": "--element-padding-y-xl",
+        "--input-padding-x-xl": "--element-padding-x-xl",
+        "--input-font-size-xl": "--element-font-size-xl",
+        "--input-height-xs": "--element-height-xs",
+        "--input-height-sm": "--element-height-sm",
+        "--input-height-lg": "--element-height-lg",
+        "--input-height-xl": "--element-height-xl",
         "--input-border-focus": "--color-border-focus",
         "--input-border-error": "--color-border-error",
-        "--input-padding-x": "--spacing-sm",
-        "--input-fg": "--color-fg-primary",
         "--input-placeholder-color": "--color-fg-muted"
       },
       "cssFile": "packages/core/src/primitives/Input/Input.module.css"
@@ -4412,9 +4801,27 @@
         "--select-dropdown-bg",
         "--select-dropdown-shadow",
         "--select-font-size",
-        "--select-height",
+        "--select-font-size-lg",
+        "--select-font-size-md",
+        "--select-font-size-sm",
+        "--select-font-size-xl",
+        "--select-font-size-xs",
+        "--select-height-lg",
+        "--select-height-md",
+        "--select-height-sm",
+        "--select-height-xl",
+        "--select-height-xs",
         "--select-option-hover-bg",
-        "--select-padding-x",
+        "--select-padding-x-lg",
+        "--select-padding-x-md",
+        "--select-padding-x-sm",
+        "--select-padding-x-xl",
+        "--select-padding-x-xs",
+        "--select-padding-y-lg",
+        "--select-padding-y-md",
+        "--select-padding-y-sm",
+        "--select-padding-y-xl",
+        "--select-padding-y-xs",
         "--select-radius",
         "--spinner-speed"
       ],
@@ -4432,6 +4839,26 @@
         "--color-fg-primary",
         "--color-fg-secondary",
         "--color-status-error-fg",
+        "--element-font-size-lg",
+        "--element-font-size-md",
+        "--element-font-size-sm",
+        "--element-font-size-xl",
+        "--element-font-size-xs",
+        "--element-height-lg",
+        "--element-height-md",
+        "--element-height-sm",
+        "--element-height-xl",
+        "--element-height-xs",
+        "--element-padding-x-lg",
+        "--element-padding-x-md",
+        "--element-padding-x-sm",
+        "--element-padding-x-xl",
+        "--element-padding-x-xs",
+        "--element-padding-y-lg",
+        "--element-padding-y-md",
+        "--element-padding-y-sm",
+        "--element-padding-y-xl",
+        "--element-padding-y-xs",
         "--focus-ring",
         "--focus-ring-error",
         "--font-family-body",
@@ -4450,13 +4877,10 @@
         "--spacing-0-5",
         "--spacing-1",
         "--spacing-1-5",
-        "--spacing-12",
         "--spacing-2",
         "--spacing-3",
         "--spacing-4",
         "--spacing-48",
-        "--spacing-8",
-        "--spacing-sm",
         "--transition-colors",
         "--transition-shadow",
         "--transition-transform",
@@ -4476,6 +4900,26 @@
         "--color-fg-primary",
         "--color-fg-secondary",
         "--color-status-error-fg",
+        "--element-font-size-lg",
+        "--element-font-size-md",
+        "--element-font-size-sm",
+        "--element-font-size-xl",
+        "--element-font-size-xs",
+        "--element-height-lg",
+        "--element-height-md",
+        "--element-height-sm",
+        "--element-height-xl",
+        "--element-height-xs",
+        "--element-padding-x-lg",
+        "--element-padding-x-md",
+        "--element-padding-x-sm",
+        "--element-padding-x-xl",
+        "--element-padding-x-xs",
+        "--element-padding-y-lg",
+        "--element-padding-y-md",
+        "--element-padding-y-sm",
+        "--element-padding-y-xl",
+        "--element-padding-y-xs",
         "--focus-ring",
         "--focus-ring-error",
         "--font-family-body",
@@ -4497,21 +4941,36 @@
         "--select-dropdown-bg",
         "--select-dropdown-shadow",
         "--select-font-size",
-        "--select-height",
+        "--select-font-size-lg",
+        "--select-font-size-md",
+        "--select-font-size-sm",
+        "--select-font-size-xl",
+        "--select-font-size-xs",
+        "--select-height-lg",
+        "--select-height-md",
+        "--select-height-sm",
+        "--select-height-xl",
+        "--select-height-xs",
         "--select-option-hover-bg",
-        "--select-padding-x",
+        "--select-padding-x-lg",
+        "--select-padding-x-md",
+        "--select-padding-x-sm",
+        "--select-padding-x-xl",
+        "--select-padding-x-xs",
+        "--select-padding-y-lg",
+        "--select-padding-y-md",
+        "--select-padding-y-sm",
+        "--select-padding-y-xl",
+        "--select-padding-y-xs",
         "--select-radius",
         "--shadow-lg",
         "--spacing-0-5",
         "--spacing-1",
         "--spacing-1-5",
-        "--spacing-12",
         "--spacing-2",
         "--spacing-3",
         "--spacing-4",
         "--spacing-48",
-        "--spacing-8",
-        "--spacing-sm",
         "--spinner-speed",
         "--transition-colors",
         "--transition-shadow",
@@ -4520,11 +4979,30 @@
       ],
       "fallbacks": {
         "--select-font-size": "--font-size-sm",
-        "--select-padding-x": "--spacing-sm",
+        "--select-padding-y-md": "--element-padding-y-md",
+        "--select-padding-x-md": "--element-padding-x-md",
         "--select-bg": "--color-bg-page",
         "--select-border-width": "--border-width-default",
         "--select-border-color": "--color-border-default",
         "--select-radius": "--radius-md",
+        "--select-height-md": "--element-height-md",
+        "--select-font-size-md": "--element-font-size-md",
+        "--select-padding-y-xs": "--element-padding-y-xs",
+        "--select-padding-x-xs": "--element-padding-x-xs",
+        "--select-font-size-xs": "--element-font-size-xs",
+        "--select-padding-y-sm": "--element-padding-y-sm",
+        "--select-padding-x-sm": "--element-padding-x-sm",
+        "--select-font-size-sm": "--element-font-size-sm",
+        "--select-padding-y-lg": "--element-padding-y-lg",
+        "--select-padding-x-lg": "--element-padding-x-lg",
+        "--select-font-size-lg": "--element-font-size-lg",
+        "--select-padding-y-xl": "--element-padding-y-xl",
+        "--select-padding-x-xl": "--element-padding-x-xl",
+        "--select-font-size-xl": "--element-font-size-xl",
+        "--select-height-xs": "--element-height-xs",
+        "--select-height-sm": "--element-height-sm",
+        "--select-height-lg": "--element-height-lg",
+        "--select-height-xl": "--element-height-xl",
         "--select-border-focus": "--color-border-focus",
         "--select-dropdown-bg": "--color-bg-page",
         "--select-dropdown-shadow": "--shadow-lg",
@@ -4556,6 +5034,8 @@
         "--color-fg-primary",
         "--color-fg-secondary",
         "--color-status-error-fg",
+        "--element-padding-x-md",
+        "--element-padding-y-md",
         "--focus-ring",
         "--focus-ring-error",
         "--font-family-body",
@@ -4570,7 +5050,6 @@
         "--spacing-2",
         "--spacing-20",
         "--spacing-4",
-        "--spacing-sm",
         "--transition-colors",
         "--transition-shadow"
       ],
@@ -4586,6 +5065,8 @@
         "--color-fg-primary",
         "--color-fg-secondary",
         "--color-status-error-fg",
+        "--element-padding-x-md",
+        "--element-padding-y-md",
         "--focus-ring",
         "--focus-ring-error",
         "--font-family-body",
@@ -4600,7 +5081,6 @@
         "--spacing-2",
         "--spacing-20",
         "--spacing-4",
-        "--spacing-sm",
         "--textarea-bg",
         "--textarea-border-color",
         "--textarea-border-focus",
@@ -4616,8 +5096,8 @@
       "fallbacks": {
         "--textarea-font-size": "--font-size-sm",
         "--textarea-min-height": "--spacing-20",
-        "--textarea-padding-y": "--spacing-2",
-        "--textarea-padding-x": "--spacing-sm",
+        "--textarea-padding-y": "--element-padding-y-md",
+        "--textarea-padding-x": "--element-padding-x-md",
         "--textarea-bg": "--color-bg-page",
         "--textarea-border-width": "--border-width-default",
         "--textarea-border-color": "--color-border-default",
@@ -4711,27 +5191,1043 @@
     }
   },
   "tokens": {
-    "--accordion-border-color": {
-      "usedBy": ["accordion"],
-      "tier": "component",
-      "category": "component"
+    "--color-bg-elevated": {
+      "usedBy": [
+        "bottomsheet",
+        "card",
+        "colorpicker",
+        "cta",
+        "drawernav",
+        "fontpicker",
+        "hero",
+        "modal",
+        "pricingcard",
+        "toast"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--radius-lg": {
+      "usedBy": [
+        "authorcard",
+        "colorpicker",
+        "drawer",
+        "featuresection",
+        "fileupload",
+        "hero",
+        "image",
+        "kpicard",
+        "popover",
+        "productcard",
+        "pullquote",
+        "relatedposts",
+        "skeleton",
+        "statcard",
+        "statsbar",
+        "testimonial"
+      ],
+      "tier": "semantic",
+      "category": "shape"
+    },
+    "--shadow-xl": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
+    "--spacing-2-5": {
+      "usedBy": ["checkbox", "colorpicker", "fontpicker", "radio", "toggle"],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--color-bg-page": {
+      "usedBy": [
+        "avatar",
+        "card",
+        "carousel",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "cta",
+        "datatable",
+        "datepicker",
+        "divider",
+        "drawer",
+        "fileupload",
+        "fontpicker",
+        "hero",
+        "input",
+        "kpicard",
+        "navbar",
+        "newslettersignup",
+        "popover",
+        "productcard",
+        "radio",
+        "select",
+        "statcard",
+        "tabs",
+        "textarea",
+        "timeline"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--shadow-sm": {
+      "usedBy": ["colorpicker", "productcard", "tabs", "toggle"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
+    "--shadow-xs": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
+    "--spacing-2": {
+      "usedBy": [
+        "authorcard",
+        "avatar",
+        "banner",
+        "button",
+        "carousel",
+        "cartitem",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "copybutton",
+        "datatable",
+        "datepicker",
+        "divider",
+        "errorboundary",
+        "fileupload",
+        "fontpicker",
+        "input",
+        "kpicard",
+        "navbar",
+        "newslettersignup",
+        "pagination",
+        "popover",
+        "pricedisplay",
+        "productcard",
+        "progressbar",
+        "radio",
+        "ratingstars",
+        "relatedposts",
+        "select",
+        "sidebar",
+        "skeleton",
+        "statcard",
+        "textarea",
+        "toast"
+      ],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--spacing-3": {
+      "usedBy": [
+        "alert",
+        "authorcard",
+        "badge",
+        "banner",
+        "bottomsheet",
+        "button",
+        "card",
+        "carousel",
+        "colorpicker",
+        "commandpalette",
+        "copybutton",
+        "datatable",
+        "datepicker",
+        "drawer",
+        "drawernav",
+        "emptystate",
+        "errorboundary",
+        "fileupload",
+        "fontpicker",
+        "footer",
+        "hero",
+        "modal",
+        "newslettersignup",
+        "pricingcard",
+        "progressbar",
+        "pullquote",
+        "radio",
+        "relatedposts",
+        "select",
+        "sidebar",
+        "table",
+        "timeline",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--colorpicker-swatch-size": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--radius-sm": {
+      "usedBy": [
+        "alert",
+        "authorcard",
+        "banner",
+        "bottomsheet",
+        "breadcrumb",
+        "checkbox",
+        "collapsible",
+        "colorpicker",
+        "commandpalette",
+        "datatable",
+        "datepicker",
+        "drawer",
+        "drawernav",
+        "featuresection",
+        "fileupload",
+        "fontpicker",
+        "footer",
+        "image",
+        "keyboardshortcut",
+        "kpicard",
+        "logocloud",
+        "modal",
+        "navbar",
+        "productcard",
+        "ratingstars",
+        "select",
+        "skeleton",
+        "statcard",
+        "tabs",
+        "toast"
+      ],
+      "tier": "semantic",
+      "category": "shape"
+    },
+    "--color-border-default": {
+      "usedBy": [
+        "accordion",
+        "authorcard",
+        "badge",
+        "banner",
+        "button",
+        "card",
+        "carousel",
+        "cartitem",
+        "colorpicker",
+        "commandpalette",
+        "copybutton",
+        "cta",
+        "datatable",
+        "datepicker",
+        "drawer",
+        "drawernav",
+        "fileupload",
+        "fontpicker",
+        "footer",
+        "hero",
+        "input",
+        "keyboardshortcut",
+        "kpicard",
+        "mobilenav",
+        "modal",
+        "navbar",
+        "newslettersignup",
+        "popover",
+        "pricingcard",
+        "productcard",
+        "quantityselector",
+        "radio",
+        "ratingstars",
+        "relatedposts",
+        "scrollarea",
+        "select",
+        "sidebar",
+        "statcard",
+        "statsbar",
+        "table",
+        "tabs",
+        "testimonial",
+        "textarea",
+        "timeline",
+        "toast"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--duration-fast": {
+      "usedBy": ["colorpicker", "commandpalette", "fontpicker", "logocloud", "popover"],
+      "tier": "semantic",
+      "category": "motion"
+    },
+    "--ease-default": {
+      "usedBy": [
+        "bottomsheet",
+        "collapsible",
+        "colorpicker",
+        "commandpalette",
+        "drawer",
+        "drawernav",
+        "fontpicker",
+        "image",
+        "logocloud",
+        "modal",
+        "productcard",
+        "progressbar"
+      ],
+      "tier": "semantic",
+      "category": "motion"
+    },
+    "--color-action-primary": {
+      "usedBy": [
+        "authorcard",
+        "avatar",
+        "button",
+        "carousel",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "cta",
+        "datatable",
+        "datepicker",
+        "errorboundary",
+        "featuresection",
+        "fileupload",
+        "hero",
+        "mobilenav",
+        "newslettersignup",
+        "pagination",
+        "pricingcard",
+        "productcard",
+        "progressbar",
+        "pullquote",
+        "radio",
+        "relatedposts",
+        "select",
+        "sidebar",
+        "spinner",
+        "tabs",
+        "testimonial",
+        "timeline",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--focus-ring": {
+      "usedBy": [
+        "accordion",
+        "alert",
+        "authorcard",
+        "banner",
+        "bottomsheet",
+        "breadcrumb",
+        "button",
+        "carousel",
+        "cartitem",
+        "checkbox",
+        "collapsible",
+        "colorpicker",
+        "copybutton",
+        "cta",
+        "datatable",
+        "datepicker",
+        "drawer",
+        "drawernav",
+        "errorboundary",
+        "featuresection",
+        "fileupload",
+        "fontpicker",
+        "footer",
+        "hero",
+        "input",
+        "logocloud",
+        "mobilenav",
+        "modal",
+        "navbar",
+        "newslettersignup",
+        "pagination",
+        "pricingcard",
+        "productcard",
+        "quantityselector",
+        "radio",
+        "ratingstars",
+        "relatedposts",
+        "select",
+        "sidebar",
+        "table",
+        "tabs",
+        "textarea",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "shape"
+    },
+    "--opacity-disabled": {
+      "usedBy": [
+        "accordion",
+        "button",
+        "carousel",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "datatable",
+        "datepicker",
+        "fileupload",
+        "fontpicker",
+        "input",
+        "newslettersignup",
+        "pagination",
+        "quantityselector",
+        "radio",
+        "select",
+        "sidebar",
+        "tabs",
+        "textarea",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "opacity"
+    },
+    "--z-popover": {
+      "usedBy": ["colorpicker", "fontpicker", "popover"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
+    "--colorpicker-bg": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--colorpicker-radius": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--colorpicker-shadow": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--colorpicker-padding": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--colorpicker-canvas-width": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--colorpicker-canvas-height": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--radius-full": {
+      "usedBy": [
+        "authorcard",
+        "avatar",
+        "badge",
+        "bottomsheet",
+        "button",
+        "carousel",
+        "colorpicker",
+        "commandpalette",
+        "hero",
+        "image",
+        "pricingcard",
+        "productcard",
+        "progressbar",
+        "radio",
+        "scrollarea",
+        "select",
+        "sidebar",
+        "skeleton",
+        "testimonial",
+        "timeline",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "shape"
+    },
+    "--colorpicker-thumb-border": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--colorpicker-cursor-shadow": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--spacing-7": {
+      "usedBy": ["colorpicker", "toggle"],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--spacing-1-5": {
+      "usedBy": [
+        "alert",
+        "badge",
+        "button",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "copybutton",
+        "fontpicker",
+        "form",
+        "keyboardshortcut",
+        "radio",
+        "scrollarea",
+        "select",
+        "sidebar",
+        "table",
+        "timeline",
+        "toast"
+      ],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--colorpicker-slider-height": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--alpha-color-start": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--alpha-color-end": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--colorpicker-thumb-size": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--colorpicker-thumb-shadow": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--spacing-1": {
+      "usedBy": [
+        "alert",
+        "badge",
+        "banner",
+        "bottomsheet",
+        "breadcrumb",
+        "button",
+        "card",
+        "cartitem",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "datatable",
+        "datepicker",
+        "drawer",
+        "drawernav",
+        "emptystate",
+        "fileupload",
+        "fontpicker",
+        "footer",
+        "hero",
+        "input",
+        "keyboardshortcut",
+        "kpicard",
+        "mobilenav",
+        "modal",
+        "pagination",
+        "pricingcard",
+        "productcard",
+        "quantityselector",
+        "radio",
+        "relatedposts",
+        "select",
+        "statcard",
+        "statsbar",
+        "table",
+        "tabs",
+        "textarea",
+        "timeline",
+        "toast"
+      ],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--spacing-0-5": {
+      "usedBy": [
+        "authorcard",
+        "breadcrumb",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "datepicker",
+        "fileupload",
+        "fontpicker",
+        "keyboardshortcut",
+        "kpicard",
+        "mobilenav",
+        "productcard",
+        "radio",
+        "ratingstars",
+        "select",
+        "statcard",
+        "testimonial",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--font-size-xs": {
+      "usedBy": [
+        "authorcard",
+        "avatar",
+        "badge",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "copybutton",
+        "datatable",
+        "datepicker",
+        "emptystate",
+        "fileupload",
+        "fontpicker",
+        "form",
+        "hero",
+        "input",
+        "keyboardshortcut",
+        "kpicard",
+        "mobilenav",
+        "newslettersignup",
+        "pricedisplay",
+        "pricingcard",
+        "productcard",
+        "radio",
+        "ratingstars",
+        "relatedposts",
+        "select",
+        "sidebar",
+        "statcard",
+        "table",
+        "testimonial",
+        "textarea",
+        "timeline",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "typography"
+    },
+    "--font-family-mono": {
+      "usedBy": ["colorpicker", "commandpalette", "keyboardshortcut"],
+      "tier": "semantic",
+      "category": "typography"
+    },
+    "--color-fg-primary": {
+      "usedBy": [
+        "accordion",
+        "articlelayout",
+        "authorcard",
+        "banner",
+        "bottomsheet",
+        "breadcrumb",
+        "button",
+        "card",
+        "carousel",
+        "cartitem",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "copybutton",
+        "cta",
+        "datatable",
+        "datepicker",
+        "drawer",
+        "drawernav",
+        "emptystate",
+        "errorboundary",
+        "featuresection",
+        "fileupload",
+        "fontpicker",
+        "footer",
+        "form",
+        "hero",
+        "input",
+        "keyboardshortcut",
+        "kpicard",
+        "modal",
+        "navbar",
+        "newslettersignup",
+        "pagination",
+        "pricedisplay",
+        "pricingcard",
+        "productcard",
+        "pullquote",
+        "quantityselector",
+        "radio",
+        "relatedposts",
+        "select",
+        "sidebar",
+        "statcard",
+        "statsbar",
+        "table",
+        "tabs",
+        "testimonial",
+        "textarea",
+        "timeline",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--color-border-focus": {
+      "usedBy": [
+        "colorpicker",
+        "datatable",
+        "datepicker",
+        "fontpicker",
+        "input",
+        "newslettersignup",
+        "select",
+        "textarea"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--color-fg-muted": {
+      "usedBy": [
+        "accordion",
+        "avatar",
+        "badge",
+        "bottomsheet",
+        "breadcrumb",
+        "cartitem",
+        "colorpicker",
+        "commandpalette",
+        "copybutton",
+        "datatable",
+        "datepicker",
+        "divider",
+        "drawer",
+        "drawernav",
+        "emptystate",
+        "fileupload",
+        "fontpicker",
+        "footer",
+        "image",
+        "input",
+        "keyboardshortcut",
+        "kpicard",
+        "logocloud",
+        "mobilenav",
+        "modal",
+        "newslettersignup",
+        "pagination",
+        "pricedisplay",
+        "pricingcard",
+        "productcard",
+        "quantityselector",
+        "relatedposts",
+        "scrollarea",
+        "select",
+        "sidebar",
+        "statcard",
+        "table",
+        "testimonial",
+        "textarea",
+        "timeline",
+        "toast"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--color-fg-secondary": {
+      "usedBy": [
+        "accordion",
+        "authorcard",
+        "avatar",
+        "badge",
+        "bottomsheet",
+        "breadcrumb",
+        "card",
+        "cartitem",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "copybutton",
+        "cta",
+        "datatable",
+        "datepicker",
+        "drawer",
+        "emptystate",
+        "errorboundary",
+        "featuresection",
+        "fileupload",
+        "footer",
+        "form",
+        "hero",
+        "input",
+        "kpicard",
+        "modal",
+        "newslettersignup",
+        "pagination",
+        "pricingcard",
+        "progressbar",
+        "pullquote",
+        "radio",
+        "ratingstars",
+        "relatedposts",
+        "select",
+        "sidebar",
+        "statcard",
+        "statsbar",
+        "table",
+        "tabs",
+        "textarea",
+        "timeline",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--font-family-body": {
+      "usedBy": [
+        "accordion",
+        "alert",
+        "articlelayout",
+        "avatar",
+        "badge",
+        "banner",
+        "bottomsheet",
+        "breadcrumb",
+        "button",
+        "card",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "copybutton",
+        "cta",
+        "datatable",
+        "datepicker",
+        "divider",
+        "drawer",
+        "drawernav",
+        "emptystate",
+        "errorboundary",
+        "featuresection",
+        "fileupload",
+        "fontpicker",
+        "footer",
+        "form",
+        "hero",
+        "input",
+        "logocloud",
+        "mobilenav",
+        "modal",
+        "pagination",
+        "pricingcard",
+        "productcard",
+        "radio",
+        "relatedposts",
+        "select",
+        "sidebar",
+        "statsbar",
+        "table",
+        "tabs",
+        "testimonial",
+        "textarea",
+        "timeline",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "typography"
+    },
+    "--color-action-ghost-hover": {
+      "usedBy": ["bottomsheet", "button", "colorpicker", "drawernav", "fontpicker", "modal"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--spacing-9": {
+      "usedBy": ["colorpicker", "datepicker", "pagination"],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--spacing-4": {
+      "usedBy": [
+        "accordion",
+        "bottomsheet",
+        "breadcrumb",
+        "card",
+        "checkbox",
+        "colorpicker",
+        "commandpalette",
+        "drawernav",
+        "emptystate",
+        "fontpicker",
+        "footer",
+        "form",
+        "modal",
+        "navbar",
+        "pagination",
+        "radio",
+        "select",
+        "sidebar",
+        "table",
+        "tabs",
+        "textarea",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--radius-xs": {
+      "usedBy": ["colorpicker"],
+      "tier": "semantic",
+      "category": "shape"
+    },
+    "--shadow-lg": {
+      "usedBy": ["datepicker", "fontpicker", "popover", "select"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
+    "--radius-md": {
+      "usedBy": [
+        "accordion",
+        "alert",
+        "button",
+        "card",
+        "cartitem",
+        "copybutton",
+        "cta",
+        "datatable",
+        "datepicker",
+        "errorboundary",
+        "fileupload",
+        "fontpicker",
+        "hero",
+        "image",
+        "input",
+        "newslettersignup",
+        "pagination",
+        "pricingcard",
+        "productcard",
+        "quantityselector",
+        "radio",
+        "select",
+        "skeleton",
+        "statcard",
+        "table",
+        "tabs",
+        "textarea",
+        "toast"
+      ],
+      "tier": "semantic",
+      "category": "shape"
+    },
+    "--font-size-sm": {
+      "usedBy": [
+        "accordion",
+        "alert",
+        "articlelayout",
+        "authorcard",
+        "avatar",
+        "badge",
+        "banner",
+        "bottomsheet",
+        "breadcrumb",
+        "card",
+        "cartitem",
+        "checkbox",
+        "commandpalette",
+        "copybutton",
+        "datatable",
+        "datepicker",
+        "divider",
+        "drawer",
+        "emptystate",
+        "errorboundary",
+        "featuresection",
+        "fileupload",
+        "fontpicker",
+        "footer",
+        "form",
+        "input",
+        "kpicard",
+        "logocloud",
+        "modal",
+        "newslettersignup",
+        "pagination",
+        "pricedisplay",
+        "pricingcard",
+        "productcard",
+        "progressbar",
+        "pullquote",
+        "quantityselector",
+        "radio",
+        "ratingstars",
+        "relatedposts",
+        "select",
+        "sidebar",
+        "skeleton",
+        "statcard",
+        "statsbar",
+        "table",
+        "tabs",
+        "testimonial",
+        "textarea",
+        "timeline",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "typography"
+    },
+    "--fontpicker-dropdown-bg": {
+      "usedBy": ["fontpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--fontpicker-dropdown-shadow": {
+      "usedBy": ["fontpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--color-border-muted": {
+      "usedBy": ["datatable", "divider", "featuresection", "fontpicker", "statsbar"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--fontpicker-dropdown-max-height": {
+      "usedBy": ["fontpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--fontpicker-option-padding": {
+      "usedBy": ["fontpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--fontpicker-option-hover-bg": {
+      "usedBy": ["fontpicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--color-bg-sunken": {
+      "usedBy": ["fontpicker"],
+      "tier": "semantic",
+      "category": "color"
     },
     "--accordion-border-width": {
-      "usedBy": ["accordion"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--accordion-font-size": {
-      "usedBy": ["accordion"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--accordion-padding": {
-      "usedBy": ["accordion"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--accordion-radius": {
       "usedBy": ["accordion"],
       "tier": "component",
       "category": "component"
@@ -4785,399 +6281,25 @@
       "tier": "semantic",
       "category": "shape"
     },
-    "--color-bg-surface": {
-      "usedBy": [
-        "accordion",
-        "authorcard",
-        "banner",
-        "carousel",
-        "commandpalette",
-        "copybutton",
-        "datatable",
-        "datepicker",
-        "drawer",
-        "fileupload",
-        "footer",
-        "image",
-        "input",
-        "keyboardshortcut",
-        "kpicard",
-        "mobilenav",
-        "newslettersignup",
-        "pricingcard",
-        "productcard",
-        "progressbar",
-        "quantityselector",
-        "radio",
-        "relatedposts",
-        "select",
-        "sidebar",
-        "skeleton",
-        "statcard",
-        "statsbar",
-        "table",
-        "tabs",
-        "testimonial",
-        "textarea"
-      ],
-      "tier": "semantic",
-      "category": "color"
+    "--accordion-border-color": {
+      "usedBy": ["accordion"],
+      "tier": "component",
+      "category": "component"
     },
-    "--color-border-default": {
-      "usedBy": [
-        "accordion",
-        "authorcard",
-        "badge",
-        "banner",
-        "button",
-        "card",
-        "carousel",
-        "cartitem",
-        "commandpalette",
-        "copybutton",
-        "cta",
-        "datatable",
-        "datepicker",
-        "drawer",
-        "drawernav",
-        "fileupload",
-        "footer",
-        "hero",
-        "input",
-        "keyboardshortcut",
-        "kpicard",
-        "mobilenav",
-        "modal",
-        "navbar",
-        "newslettersignup",
-        "popover",
-        "pricingcard",
-        "productcard",
-        "quantityselector",
-        "radio",
-        "ratingstars",
-        "relatedposts",
-        "scrollarea",
-        "select",
-        "sidebar",
-        "statcard",
-        "statsbar",
-        "table",
-        "tabs",
-        "testimonial",
-        "textarea",
-        "timeline",
-        "toast"
-      ],
-      "tier": "semantic",
-      "category": "color"
+    "--accordion-radius": {
+      "usedBy": ["accordion"],
+      "tier": "component",
+      "category": "component"
     },
-    "--color-fg-muted": {
-      "usedBy": [
-        "accordion",
-        "avatar",
-        "badge",
-        "bottomsheet",
-        "breadcrumb",
-        "cartitem",
-        "commandpalette",
-        "copybutton",
-        "datatable",
-        "datepicker",
-        "divider",
-        "drawer",
-        "drawernav",
-        "emptystate",
-        "fileupload",
-        "footer",
-        "image",
-        "input",
-        "keyboardshortcut",
-        "kpicard",
-        "logocloud",
-        "mobilenav",
-        "modal",
-        "newslettersignup",
-        "pagination",
-        "pricedisplay",
-        "pricingcard",
-        "productcard",
-        "quantityselector",
-        "relatedposts",
-        "scrollarea",
-        "select",
-        "sidebar",
-        "statcard",
-        "table",
-        "testimonial",
-        "textarea",
-        "timeline",
-        "toast"
-      ],
-      "tier": "semantic",
-      "category": "color"
+    "--accordion-padding": {
+      "usedBy": ["accordion"],
+      "tier": "component",
+      "category": "component"
     },
-    "--color-fg-primary": {
-      "usedBy": [
-        "accordion",
-        "articlelayout",
-        "authorcard",
-        "banner",
-        "bottomsheet",
-        "breadcrumb",
-        "button",
-        "card",
-        "carousel",
-        "cartitem",
-        "checkbox",
-        "commandpalette",
-        "copybutton",
-        "cta",
-        "datatable",
-        "datepicker",
-        "drawer",
-        "drawernav",
-        "emptystate",
-        "errorboundary",
-        "featuresection",
-        "fileupload",
-        "footer",
-        "form",
-        "hero",
-        "input",
-        "keyboardshortcut",
-        "kpicard",
-        "modal",
-        "navbar",
-        "newslettersignup",
-        "pagination",
-        "pricedisplay",
-        "pricingcard",
-        "productcard",
-        "pullquote",
-        "quantityselector",
-        "radio",
-        "relatedposts",
-        "select",
-        "sidebar",
-        "statcard",
-        "statsbar",
-        "table",
-        "tabs",
-        "testimonial",
-        "textarea",
-        "timeline",
-        "toast",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-fg-secondary": {
-      "usedBy": [
-        "accordion",
-        "authorcard",
-        "avatar",
-        "badge",
-        "bottomsheet",
-        "breadcrumb",
-        "card",
-        "cartitem",
-        "checkbox",
-        "commandpalette",
-        "copybutton",
-        "cta",
-        "datatable",
-        "datepicker",
-        "drawer",
-        "emptystate",
-        "errorboundary",
-        "featuresection",
-        "fileupload",
-        "footer",
-        "form",
-        "hero",
-        "input",
-        "kpicard",
-        "modal",
-        "newslettersignup",
-        "pagination",
-        "pricingcard",
-        "progressbar",
-        "pullquote",
-        "radio",
-        "ratingstars",
-        "relatedposts",
-        "select",
-        "sidebar",
-        "statcard",
-        "statsbar",
-        "table",
-        "tabs",
-        "textarea",
-        "timeline",
-        "toast",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--focus-ring": {
-      "usedBy": [
-        "accordion",
-        "alert",
-        "authorcard",
-        "banner",
-        "bottomsheet",
-        "breadcrumb",
-        "button",
-        "carousel",
-        "cartitem",
-        "checkbox",
-        "collapsible",
-        "copybutton",
-        "cta",
-        "datatable",
-        "datepicker",
-        "drawer",
-        "drawernav",
-        "errorboundary",
-        "featuresection",
-        "fileupload",
-        "footer",
-        "hero",
-        "input",
-        "logocloud",
-        "mobilenav",
-        "modal",
-        "navbar",
-        "newslettersignup",
-        "pagination",
-        "pricingcard",
-        "productcard",
-        "quantityselector",
-        "radio",
-        "ratingstars",
-        "relatedposts",
-        "select",
-        "sidebar",
-        "table",
-        "tabs",
-        "textarea",
-        "toast",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "shape"
-    },
-    "--font-family-body": {
-      "usedBy": [
-        "accordion",
-        "alert",
-        "articlelayout",
-        "avatar",
-        "badge",
-        "banner",
-        "bottomsheet",
-        "breadcrumb",
-        "button",
-        "card",
-        "checkbox",
-        "commandpalette",
-        "copybutton",
-        "cta",
-        "datatable",
-        "datepicker",
-        "divider",
-        "drawer",
-        "drawernav",
-        "emptystate",
-        "errorboundary",
-        "featuresection",
-        "fileupload",
-        "footer",
-        "form",
-        "hero",
-        "input",
-        "logocloud",
-        "mobilenav",
-        "modal",
-        "pagination",
-        "pricingcard",
-        "productcard",
-        "radio",
-        "relatedposts",
-        "select",
-        "sidebar",
-        "statsbar",
-        "table",
-        "tabs",
-        "testimonial",
-        "textarea",
-        "timeline",
-        "toast",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "typography"
-    },
-    "--font-size-sm": {
-      "usedBy": [
-        "accordion",
-        "alert",
-        "articlelayout",
-        "authorcard",
-        "avatar",
-        "badge",
-        "banner",
-        "bottomsheet",
-        "breadcrumb",
-        "button",
-        "card",
-        "cartitem",
-        "checkbox",
-        "commandpalette",
-        "copybutton",
-        "datatable",
-        "datepicker",
-        "divider",
-        "drawer",
-        "emptystate",
-        "errorboundary",
-        "featuresection",
-        "fileupload",
-        "footer",
-        "form",
-        "input",
-        "kpicard",
-        "logocloud",
-        "modal",
-        "newslettersignup",
-        "pagination",
-        "pricedisplay",
-        "pricingcard",
-        "productcard",
-        "progressbar",
-        "pullquote",
-        "quantityselector",
-        "radio",
-        "ratingstars",
-        "relatedposts",
-        "select",
-        "sidebar",
-        "skeleton",
-        "statcard",
-        "statsbar",
-        "table",
-        "tabs",
-        "testimonial",
-        "textarea",
-        "timeline",
-        "toast",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "typography"
+    "--accordion-font-size": {
+      "usedBy": ["accordion"],
+      "tier": "component",
+      "category": "component"
     },
     "--font-weight-medium": {
       "usedBy": [
@@ -5242,107 +6364,6 @@
       "tier": "semantic",
       "category": "typography"
     },
-    "--line-height-relaxed": {
-      "usedBy": [
-        "accordion",
-        "articlelayout",
-        "authorcard",
-        "cta",
-        "featuresection",
-        "hero",
-        "pricingcard",
-        "pullquote",
-        "testimonial",
-        "timeline"
-      ],
-      "tier": "semantic",
-      "category": "typography"
-    },
-    "--opacity-disabled": {
-      "usedBy": [
-        "accordion",
-        "button",
-        "carousel",
-        "checkbox",
-        "commandpalette",
-        "datatable",
-        "datepicker",
-        "fileupload",
-        "input",
-        "newslettersignup",
-        "pagination",
-        "quantityselector",
-        "radio",
-        "select",
-        "sidebar",
-        "tabs",
-        "textarea",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "opacity"
-    },
-    "--radius-md": {
-      "usedBy": [
-        "accordion",
-        "alert",
-        "button",
-        "card",
-        "cartitem",
-        "copybutton",
-        "cta",
-        "datatable",
-        "datepicker",
-        "errorboundary",
-        "fileupload",
-        "hero",
-        "image",
-        "input",
-        "newslettersignup",
-        "pagination",
-        "pricingcard",
-        "productcard",
-        "quantityselector",
-        "radio",
-        "select",
-        "skeleton",
-        "statcard",
-        "table",
-        "tabs",
-        "textarea",
-        "toast"
-      ],
-      "tier": "semantic",
-      "category": "shape"
-    },
-    "--spacing-4": {
-      "usedBy": [
-        "accordion",
-        "bottomsheet",
-        "breadcrumb",
-        "button",
-        "card",
-        "checkbox",
-        "commandpalette",
-        "drawernav",
-        "emptystate",
-        "footer",
-        "form",
-        "modal",
-        "navbar",
-        "pagination",
-        "radio",
-        "select",
-        "sidebar",
-        "table",
-        "tabs",
-        "textarea",
-        "toast",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "spacing"
-    },
     "--transition-colors": {
       "usedBy": [
         "accordion",
@@ -5385,124 +6406,142 @@
       "tier": "semantic",
       "category": "motion"
     },
+    "--color-bg-surface": {
+      "usedBy": [
+        "accordion",
+        "authorcard",
+        "banner",
+        "carousel",
+        "commandpalette",
+        "copybutton",
+        "datatable",
+        "datepicker",
+        "drawer",
+        "fileupload",
+        "footer",
+        "image",
+        "input",
+        "keyboardshortcut",
+        "kpicard",
+        "mobilenav",
+        "newslettersignup",
+        "pricingcard",
+        "productcard",
+        "progressbar",
+        "quantityselector",
+        "radio",
+        "relatedposts",
+        "select",
+        "sidebar",
+        "skeleton",
+        "statcard",
+        "statsbar",
+        "table",
+        "tabs",
+        "testimonial",
+        "textarea"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
     "--transition-transform": {
       "usedBy": ["accordion", "card", "select", "toggle"],
       "tier": "semantic",
       "category": "motion"
     },
-    "--alert-border-width": {
-      "usedBy": ["alert"],
-      "tier": "component",
-      "category": "component"
+    "--line-height-relaxed": {
+      "usedBy": [
+        "accordion",
+        "articlelayout",
+        "authorcard",
+        "cta",
+        "featuresection",
+        "hero",
+        "pricingcard",
+        "pullquote",
+        "testimonial",
+        "timeline"
+      ],
+      "tier": "semantic",
+      "category": "typography"
     },
     "--alert-padding": {
       "usedBy": ["alert"],
       "tier": "component",
       "category": "component"
     },
+    "--spacing-md": {
+      "usedBy": [
+        "alert",
+        "articlelayout",
+        "banner",
+        "card",
+        "carousel",
+        "cartitem",
+        "commandpalette",
+        "cta",
+        "datatable",
+        "divider",
+        "errorboundary",
+        "featuresection",
+        "fileupload",
+        "hero",
+        "kpicard",
+        "layout",
+        "newslettersignup",
+        "popover",
+        "pricingcard",
+        "productcard",
+        "radio",
+        "relatedposts",
+        "spacer",
+        "statcard",
+        "testimonial",
+        "timeline",
+        "toast"
+      ],
+      "tier": "semantic",
+      "category": "spacing"
+    },
     "--alert-radius": {
       "usedBy": ["alert"],
       "tier": "component",
       "category": "component"
     },
-    "--color-status-error-bg": {
-      "usedBy": ["alert", "badge", "banner"],
-      "tier": "semantic",
-      "category": "color"
+    "--alert-border-width": {
+      "usedBy": ["alert"],
+      "tier": "component",
+      "category": "component"
     },
-    "--color-status-error-border": {
-      "usedBy": ["alert", "badge", "banner"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-error-fg": {
+    "--spacing-5": {
       "usedBy": [
         "alert",
-        "avatar",
+        "bottomsheet",
+        "card",
+        "drawernav",
+        "form",
+        "sidebar",
+        "statcard",
+        "table",
+        "toast",
+        "toggle"
+      ],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--spacing-px": {
+      "usedBy": [
+        "alert",
         "badge",
-        "banner",
-        "cartitem",
-        "datepicker",
-        "errorboundary",
+        "checkbox",
+        "copybutton",
         "fileupload",
-        "input",
-        "kpicard",
-        "newslettersignup",
-        "pricedisplay",
-        "productcard",
-        "progressbar",
-        "select",
-        "statcard",
-        "statsbar",
-        "textarea"
+        "radio",
+        "spinner",
+        "tabs"
       ],
       "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-info-bg": {
-      "usedBy": ["alert", "badge", "banner"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-info-border": {
-      "usedBy": ["alert", "badge", "banner"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-info-fg": {
-      "usedBy": ["alert", "avatar", "badge", "banner", "progressbar"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-success-bg": {
-      "usedBy": ["alert", "badge", "banner"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-success-border": {
-      "usedBy": ["alert", "badge", "banner"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-success-fg": {
-      "usedBy": [
-        "alert",
-        "avatar",
-        "badge",
-        "banner",
-        "kpicard",
-        "newslettersignup",
-        "pricingcard",
-        "progressbar",
-        "statcard",
-        "statsbar"
-      ],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-warning-bg": {
-      "usedBy": ["alert", "badge", "banner"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-warning-border": {
-      "usedBy": ["alert", "badge", "banner"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-warning-fg": {
-      "usedBy": [
-        "alert",
-        "avatar",
-        "badge",
-        "banner",
-        "productcard",
-        "progressbar",
-        "ratingstars",
-        "testimonial"
-      ],
-      "tier": "semantic",
-      "category": "color"
+      "category": "spacing"
     },
     "--font-weight-semibold": {
       "usedBy": [
@@ -5571,164 +6610,16 @@
       "tier": "semantic",
       "category": "typography"
     },
-    "--radius-sm": {
-      "usedBy": [
-        "alert",
-        "authorcard",
-        "banner",
-        "bottomsheet",
-        "breadcrumb",
-        "checkbox",
-        "collapsible",
-        "commandpalette",
-        "datatable",
-        "datepicker",
-        "drawer",
-        "drawernav",
-        "featuresection",
-        "fileupload",
-        "footer",
-        "image",
-        "keyboardshortcut",
-        "kpicard",
-        "logocloud",
-        "modal",
-        "navbar",
-        "productcard",
-        "ratingstars",
-        "select",
-        "skeleton",
-        "statcard",
-        "tabs",
-        "toast"
-      ],
+    "--transition-opacity": {
+      "usedBy": ["alert", "button", "checkbox", "logocloud"],
       "tier": "semantic",
-      "category": "shape"
-    },
-    "--spacing-1": {
-      "usedBy": [
-        "alert",
-        "badge",
-        "banner",
-        "bottomsheet",
-        "breadcrumb",
-        "card",
-        "cartitem",
-        "checkbox",
-        "commandpalette",
-        "datatable",
-        "datepicker",
-        "drawer",
-        "drawernav",
-        "emptystate",
-        "fileupload",
-        "footer",
-        "hero",
-        "input",
-        "keyboardshortcut",
-        "kpicard",
-        "mobilenav",
-        "modal",
-        "pagination",
-        "pricingcard",
-        "productcard",
-        "quantityselector",
-        "radio",
-        "relatedposts",
-        "select",
-        "statcard",
-        "statsbar",
-        "table",
-        "tabs",
-        "textarea",
-        "timeline",
-        "toast"
-      ],
-      "tier": "semantic",
-      "category": "spacing"
-    },
-    "--spacing-1-5": {
-      "usedBy": [
-        "alert",
-        "badge",
-        "checkbox",
-        "commandpalette",
-        "copybutton",
-        "form",
-        "keyboardshortcut",
-        "radio",
-        "scrollarea",
-        "select",
-        "sidebar",
-        "table",
-        "timeline",
-        "toast"
-      ],
-      "tier": "semantic",
-      "category": "spacing"
-    },
-    "--spacing-3": {
-      "usedBy": [
-        "alert",
-        "authorcard",
-        "badge",
-        "banner",
-        "bottomsheet",
-        "button",
-        "card",
-        "carousel",
-        "commandpalette",
-        "copybutton",
-        "datatable",
-        "datepicker",
-        "drawer",
-        "drawernav",
-        "emptystate",
-        "errorboundary",
-        "fileupload",
-        "footer",
-        "hero",
-        "modal",
-        "newslettersignup",
-        "pricingcard",
-        "progressbar",
-        "pullquote",
-        "radio",
-        "relatedposts",
-        "select",
-        "sidebar",
-        "table",
-        "tabs",
-        "timeline",
-        "toast",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "spacing"
-    },
-    "--spacing-5": {
-      "usedBy": [
-        "alert",
-        "bottomsheet",
-        "button",
-        "card",
-        "drawernav",
-        "form",
-        "sidebar",
-        "statcard",
-        "table",
-        "toast",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "spacing"
+      "category": "motion"
     },
     "--spacing-6": {
       "usedBy": [
         "alert",
         "articlelayout",
         "avatar",
-        "button",
         "card",
         "footer",
         "keyboardshortcut",
@@ -5741,75 +6632,106 @@
       "tier": "semantic",
       "category": "spacing"
     },
-    "--spacing-md": {
-      "usedBy": [
-        "alert",
-        "articlelayout",
-        "banner",
-        "button",
-        "card",
-        "carousel",
-        "cartitem",
-        "commandpalette",
-        "cta",
-        "datatable",
-        "divider",
-        "errorboundary",
-        "featuresection",
-        "fileupload",
-        "hero",
-        "kpicard",
-        "layout",
-        "newslettersignup",
-        "popover",
-        "pricingcard",
-        "productcard",
-        "radio",
-        "relatedposts",
-        "spacer",
-        "statcard",
-        "testimonial",
-        "timeline",
-        "toast"
-      ],
+    "--color-status-info-bg": {
+      "usedBy": ["alert", "badge", "banner"],
       "tier": "semantic",
-      "category": "spacing"
+      "category": "color"
     },
-    "--spacing-px": {
+    "--color-status-info-border": {
+      "usedBy": ["alert", "badge", "banner"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--color-status-info-fg": {
+      "usedBy": ["alert", "avatar", "badge", "banner", "progressbar"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--color-status-success-bg": {
+      "usedBy": ["alert", "badge", "banner"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--color-status-success-border": {
+      "usedBy": ["alert", "badge", "banner"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--color-status-success-fg": {
       "usedBy": [
         "alert",
+        "avatar",
         "badge",
-        "checkbox",
-        "copybutton",
-        "fileupload",
-        "radio",
-        "spinner",
-        "tabs"
+        "banner",
+        "kpicard",
+        "newslettersignup",
+        "pricingcard",
+        "progressbar",
+        "statcard",
+        "statsbar"
       ],
       "tier": "semantic",
-      "category": "spacing"
+      "category": "color"
     },
-    "--transition-opacity": {
-      "usedBy": ["alert", "button", "checkbox", "logocloud"],
+    "--color-status-warning-bg": {
+      "usedBy": ["alert", "badge", "banner"],
       "tier": "semantic",
-      "category": "motion"
+      "category": "color"
     },
-    "--banner-error-bg": {
-      "usedBy": ["banner"],
-      "tier": "component",
-      "category": "component"
+    "--color-status-warning-border": {
+      "usedBy": ["alert", "badge", "banner"],
+      "tier": "semantic",
+      "category": "color"
     },
-    "--banner-info-bg": {
-      "usedBy": ["banner"],
-      "tier": "component",
-      "category": "component"
+    "--color-status-warning-fg": {
+      "usedBy": [
+        "alert",
+        "avatar",
+        "badge",
+        "banner",
+        "productcard",
+        "progressbar",
+        "ratingstars",
+        "testimonial"
+      ],
+      "tier": "semantic",
+      "category": "color"
     },
-    "--banner-info-border": {
-      "usedBy": ["banner"],
-      "tier": "component",
-      "category": "component"
+    "--color-status-error-bg": {
+      "usedBy": ["alert", "badge", "banner"],
+      "tier": "semantic",
+      "category": "color"
     },
-    "--banner-neutral-bg": {
+    "--color-status-error-border": {
+      "usedBy": ["alert", "badge", "banner"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--color-status-error-fg": {
+      "usedBy": [
+        "alert",
+        "avatar",
+        "badge",
+        "banner",
+        "cartitem",
+        "datepicker",
+        "errorboundary",
+        "fileupload",
+        "input",
+        "kpicard",
+        "newslettersignup",
+        "pricedisplay",
+        "productcard",
+        "progressbar",
+        "select",
+        "statcard",
+        "statsbar",
+        "textarea"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--banner-padding-y": {
       "usedBy": ["banner"],
       "tier": "component",
       "category": "component"
@@ -5819,7 +6741,17 @@
       "tier": "component",
       "category": "component"
     },
-    "--banner-padding-y": {
+    "--z-sticky": {
+      "usedBy": ["banner", "datatable", "navbar"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
+    "--banner-info-bg": {
+      "usedBy": ["banner"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--banner-info-border": {
       "usedBy": ["banner"],
       "tier": "component",
       "category": "component"
@@ -5834,68 +6766,17 @@
       "tier": "component",
       "category": "component"
     },
-    "--spacing-2": {
-      "usedBy": [
-        "authorcard",
-        "avatar",
-        "badge",
-        "banner",
-        "button",
-        "carousel",
-        "cartitem",
-        "checkbox",
-        "commandpalette",
-        "copybutton",
-        "datatable",
-        "datepicker",
-        "divider",
-        "errorboundary",
-        "fileupload",
-        "input",
-        "kpicard",
-        "navbar",
-        "newslettersignup",
-        "pagination",
-        "popover",
-        "pricedisplay",
-        "productcard",
-        "progressbar",
-        "quantityselector",
-        "radio",
-        "ratingstars",
-        "relatedposts",
-        "select",
-        "sidebar",
-        "skeleton",
-        "statcard",
-        "tabs",
-        "textarea",
-        "toast"
-      ],
-      "tier": "semantic",
-      "category": "spacing"
+    "--banner-error-bg": {
+      "usedBy": ["banner"],
+      "tier": "component",
+      "category": "component"
     },
-    "--z-sticky": {
-      "usedBy": ["banner", "datatable", "navbar"],
-      "tier": "semantic",
-      "category": "elevation"
+    "--banner-neutral-bg": {
+      "usedBy": ["banner"],
+      "tier": "component",
+      "category": "component"
     },
     "--card-bg": {
-      "usedBy": ["card"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--card-border-color": {
-      "usedBy": ["card"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--card-border-width": {
-      "usedBy": ["card"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--card-padding": {
       "usedBy": ["card"],
       "tier": "component",
       "category": "component"
@@ -5905,114 +6786,66 @@
       "tier": "component",
       "category": "component"
     },
+    "--transition-shadow": {
+      "usedBy": [
+        "button",
+        "card",
+        "carousel",
+        "datepicker",
+        "input",
+        "productcard",
+        "radio",
+        "relatedposts",
+        "select",
+        "textarea"
+      ],
+      "tier": "semantic",
+      "category": "motion"
+    },
+    "--card-border-width": {
+      "usedBy": ["card"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--card-border-color": {
+      "usedBy": ["card"],
+      "tier": "component",
+      "category": "component"
+    },
     "--card-shadow": {
       "usedBy": ["card"],
       "tier": "component",
       "category": "component"
-    },
-    "--card-shadow-hover": {
-      "usedBy": ["card"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--color-bg-elevated": {
-      "usedBy": [
-        "bottomsheet",
-        "card",
-        "cta",
-        "drawernav",
-        "hero",
-        "modal",
-        "pricingcard",
-        "toast"
-      ],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-bg-page": {
-      "usedBy": [
-        "avatar",
-        "card",
-        "carousel",
-        "checkbox",
-        "commandpalette",
-        "cta",
-        "datatable",
-        "datepicker",
-        "divider",
-        "drawer",
-        "fileupload",
-        "hero",
-        "input",
-        "kpicard",
-        "navbar",
-        "newslettersignup",
-        "popover",
-        "productcard",
-        "radio",
-        "select",
-        "statcard",
-        "tabs",
-        "textarea",
-        "timeline"
-      ],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-border-strong": {
-      "usedBy": ["bottomsheet", "button", "card", "checkbox", "radio", "toggle"],
-      "tier": "semantic",
-      "category": "color"
     },
     "--elevation-card": {
       "usedBy": ["card", "kpicard", "pricingcard", "statcard"],
       "tier": "semantic",
       "category": "elevation"
     },
-    "--elevation-card-hover": {
-      "usedBy": ["card", "pricingcard"],
+    "--color-border-strong": {
+      "usedBy": ["bottomsheet", "button", "card", "checkbox", "radio", "toggle"],
       "tier": "semantic",
-      "category": "elevation"
-    },
-    "--font-size-lg": {
-      "usedBy": [
-        "bottomsheet",
-        "card",
-        "commandpalette",
-        "drawer",
-        "drawernav",
-        "errorboundary",
-        "featuresection",
-        "newslettersignup",
-        "pricedisplay",
-        "pricingcard",
-        "pullquote",
-        "statsbar"
-      ],
-      "tier": "semantic",
-      "category": "typography"
+      "category": "color"
     },
     "--shadow-md": {
       "usedBy": ["card", "carousel", "productcard", "relatedposts"],
       "tier": "semantic",
       "category": "elevation"
     },
-    "--spacing-8": {
-      "usedBy": [
-        "avatar",
-        "card",
-        "datatable",
-        "emptystate",
-        "footer",
-        "input",
-        "kpicard",
-        "modal",
-        "quantityselector",
-        "select",
-        "toggle"
-      ],
+    "--card-shadow-hover": {
+      "usedBy": ["card"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--elevation-card-hover": {
+      "usedBy": ["card", "pricingcard"],
       "tier": "semantic",
-      "category": "spacing"
+      "category": "elevation"
+    },
+    "--card-padding": {
+      "usedBy": ["card"],
+      "tier": "component",
+      "category": "component"
     },
     "--spacing-lg": {
       "usedBy": [
@@ -6039,101 +6872,38 @@
       "tier": "semantic",
       "category": "spacing"
     },
-    "--transition-shadow": {
+    "--spacing-8": {
       "usedBy": [
-        "button",
-        "card",
-        "carousel",
-        "datepicker",
-        "input",
-        "productcard",
-        "radio",
-        "relatedposts",
-        "select",
-        "textarea"
-      ],
-      "tier": "semantic",
-      "category": "motion"
-    },
-    "--color-action-primary": {
-      "usedBy": [
-        "authorcard",
         "avatar",
-        "button",
-        "carousel",
-        "checkbox",
-        "commandpalette",
-        "cta",
+        "card",
         "datatable",
-        "datepicker",
-        "errorboundary",
-        "featuresection",
-        "fileupload",
-        "hero",
-        "mobilenav",
-        "newslettersignup",
-        "pagination",
-        "pricingcard",
-        "productcard",
-        "progressbar",
-        "pullquote",
-        "radio",
-        "relatedposts",
-        "select",
-        "sidebar",
-        "spinner",
-        "tabs",
-        "testimonial",
-        "timeline",
-        "toast",
+        "emptystate",
+        "footer",
+        "kpicard",
+        "modal",
+        "quantityselector",
         "toggle"
       ],
       "tier": "semantic",
-      "category": "color"
+      "category": "spacing"
     },
-    "--color-action-primary-hover": {
+    "--font-size-lg": {
       "usedBy": [
-        "avatar",
-        "button",
-        "cta",
+        "bottomsheet",
+        "card",
+        "commandpalette",
+        "drawer",
+        "drawernav",
         "errorboundary",
         "featuresection",
-        "hero",
         "newslettersignup",
-        "pagination",
+        "pricedisplay",
         "pricingcard",
-        "productcard",
-        "toast"
+        "pullquote",
+        "statsbar"
       ],
       "tier": "semantic",
-      "category": "color"
-    },
-    "--color-fg-on-primary": {
-      "usedBy": [
-        "avatar",
-        "button",
-        "cta",
-        "datepicker",
-        "errorboundary",
-        "hero",
-        "newslettersignup",
-        "pagination",
-        "pricingcard",
-        "productcard",
-        "timeline"
-      ],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--content-narrow": {
-      "usedBy": ["datatable", "errorboundary"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--spacing-48": {
-      "usedBy": ["errorboundary", "select"],
-      "tier": "semantic",
-      "category": "spacing"
+      "category": "typography"
     },
     "--spacing-xl": {
       "usedBy": [
@@ -6159,10 +6929,59 @@
       "tier": "semantic",
       "category": "spacing"
     },
-    "--color-action-ghost-hover": {
-      "usedBy": ["bottomsheet", "button", "drawernav", "modal"],
+    "--spacing-48": {
+      "usedBy": ["errorboundary", "select"],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--content-narrow": {
+      "usedBy": ["datatable", "errorboundary"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--color-fg-on-primary": {
+      "usedBy": [
+        "avatar",
+        "button",
+        "cta",
+        "datepicker",
+        "errorboundary",
+        "hero",
+        "newslettersignup",
+        "pagination",
+        "pricingcard",
+        "productcard",
+        "timeline"
+      ],
       "tier": "semantic",
       "category": "color"
+    },
+    "--color-action-primary-hover": {
+      "usedBy": [
+        "avatar",
+        "button",
+        "cta",
+        "errorboundary",
+        "featuresection",
+        "hero",
+        "newslettersignup",
+        "pagination",
+        "pricingcard",
+        "productcard",
+        "toast"
+      ],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--z-overlay": {
+      "usedBy": ["drawer", "drawernav", "modal"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
+    "--modal-overlay-bg": {
+      "usedBy": ["modal"],
+      "tier": "component",
+      "category": "component"
     },
     "--color-bg-overlay": {
       "usedBy": ["bottomsheet", "commandpalette", "drawer", "drawernav", "modal"],
@@ -6183,98 +7002,17 @@
       "tier": "semantic",
       "category": "motion"
     },
-    "--ease-default": {
-      "usedBy": [
-        "bottomsheet",
-        "collapsible",
-        "commandpalette",
-        "drawer",
-        "drawernav",
-        "image",
-        "logocloud",
-        "modal",
-        "productcard",
-        "progressbar"
-      ],
-      "tier": "semantic",
-      "category": "motion"
-    },
-    "--elevation-modal": {
-      "usedBy": ["bottomsheet", "drawernav", "modal"],
+    "--z-modal": {
+      "usedBy": ["bottomsheet", "commandpalette", "drawernav", "modal"],
       "tier": "semantic",
       "category": "elevation"
-    },
-    "--font-size-base": {
-      "usedBy": [
-        "avatar",
-        "bottomsheet",
-        "button",
-        "emptystate",
-        "input",
-        "modal",
-        "pricedisplay",
-        "ratingstars",
-        "tabs"
-      ],
-      "tier": "semantic",
-      "category": "typography"
-    },
-    "--font-size-xl": {
-      "usedBy": ["avatar", "kpicard", "modal", "pricedisplay", "relatedposts", "statcard"],
-      "tier": "semantic",
-      "category": "typography"
     },
     "--modal-bg": {
       "usedBy": ["modal"],
       "tier": "component",
       "category": "component"
     },
-    "--modal-border-color": {
-      "usedBy": ["modal"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--modal-border-width": {
-      "usedBy": ["modal"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--modal-max-width": {
-      "usedBy": ["modal"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--modal-max-width-lg": {
-      "usedBy": ["modal"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--modal-max-width-sm": {
-      "usedBy": ["modal"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--modal-max-width-xl": {
-      "usedBy": ["modal"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--modal-overlay-bg": {
-      "usedBy": ["modal"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--modal-padding": {
-      "usedBy": ["modal"],
-      "tier": "component",
-      "category": "component"
-    },
     "--modal-radius": {
-      "usedBy": ["modal"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--modal-shadow": {
       "usedBy": ["modal"],
       "tier": "component",
       "category": "component"
@@ -6292,66 +7030,68 @@
       "tier": "semantic",
       "category": "shape"
     },
-    "--z-modal": {
-      "usedBy": ["bottomsheet", "commandpalette", "drawernav", "modal"],
-      "tier": "semantic",
-      "category": "elevation"
-    },
-    "--z-overlay": {
-      "usedBy": ["drawer", "drawernav", "modal"],
-      "tier": "semantic",
-      "category": "elevation"
-    },
-    "--radius-full": {
-      "usedBy": [
-        "authorcard",
-        "avatar",
-        "badge",
-        "bottomsheet",
-        "carousel",
-        "commandpalette",
-        "hero",
-        "image",
-        "pricingcard",
-        "productcard",
-        "progressbar",
-        "radio",
-        "scrollarea",
-        "select",
-        "sidebar",
-        "skeleton",
-        "testimonial",
-        "timeline",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "shape"
-    },
-    "--radius-lg": {
-      "usedBy": [
-        "authorcard",
-        "drawer",
-        "featuresection",
-        "fileupload",
-        "hero",
-        "image",
-        "kpicard",
-        "popover",
-        "productcard",
-        "pullquote",
-        "relatedposts",
-        "skeleton",
-        "statcard",
-        "statsbar",
-        "testimonial"
-      ],
-      "tier": "semantic",
-      "category": "shape"
-    },
-    "--skeleton-animation-duration": {
-      "usedBy": ["skeleton"],
+    "--modal-shadow": {
+      "usedBy": ["modal"],
       "tier": "component",
       "category": "component"
+    },
+    "--elevation-modal": {
+      "usedBy": ["bottomsheet", "drawernav", "modal"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
+    "--modal-border-width": {
+      "usedBy": ["modal"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--modal-border-color": {
+      "usedBy": ["modal"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--modal-max-width-sm": {
+      "usedBy": ["modal"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--modal-max-width": {
+      "usedBy": ["modal"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--modal-max-width-lg": {
+      "usedBy": ["modal"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--modal-max-width-xl": {
+      "usedBy": ["modal"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--modal-padding": {
+      "usedBy": ["modal"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--font-size-xl": {
+      "usedBy": ["avatar", "kpicard", "modal", "pricedisplay", "relatedposts", "statcard"],
+      "tier": "semantic",
+      "category": "typography"
+    },
+    "--font-size-base": {
+      "usedBy": [
+        "avatar",
+        "bottomsheet",
+        "emptystate",
+        "modal",
+        "pricedisplay",
+        "ratingstars",
+        "tabs"
+      ],
+      "tier": "semantic",
+      "category": "typography"
     },
     "--skeleton-bg": {
       "usedBy": ["skeleton"],
@@ -6386,13 +7126,58 @@
       "tier": "semantic",
       "category": "spacing"
     },
-    "--spinner-color": {
-      "usedBy": ["spinner"],
+    "--skeleton-animation-duration": {
+      "usedBy": ["skeleton"],
       "tier": "component",
       "category": "component"
     },
     "--spinner-speed": {
       "usedBy": ["button", "commandpalette", "select", "spinner"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--spinner-color": {
+      "usedBy": ["spinner"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--border-width-thin": {
+      "usedBy": ["cartitem", "featuresection", "quantityselector", "statsbar", "tabs"],
+      "tier": "semantic",
+      "category": "shape"
+    },
+    "--tabs-border-color": {
+      "usedBy": ["tabs"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--tabs-padding-y": {
+      "usedBy": ["tabs"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-padding-y-sm": {
+      "usedBy": ["button", "input", "pagination", "quantityselector", "select", "sidebar", "tabs"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--tabs-padding-x": {
+      "usedBy": ["tabs"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-padding-x-sm": {
+      "usedBy": ["button", "input", "pagination", "select", "tabs"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--tabs-font-size": {
+      "usedBy": ["tabs"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--tabs-font-weight": {
+      "usedBy": ["tabs"],
       "tier": "component",
       "category": "component"
     },
@@ -6410,160 +7195,40 @@
       "tier": "semantic",
       "category": "shape"
     },
-    "--border-width-thin": {
-      "usedBy": ["cartitem", "featuresection", "quantityselector", "statsbar", "tabs"],
-      "tier": "semantic",
-      "category": "shape"
-    },
-    "--shadow-sm": {
-      "usedBy": ["productcard", "tabs", "toggle"],
-      "tier": "semantic",
-      "category": "elevation"
-    },
     "--tabs-active-color": {
       "usedBy": ["tabs"],
       "tier": "component",
       "category": "component"
     },
-    "--tabs-border-color": {
-      "usedBy": ["tabs"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--tabs-font-size": {
-      "usedBy": ["tabs"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--tabs-font-weight": {
-      "usedBy": ["tabs"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--tabs-padding-x": {
-      "usedBy": ["tabs"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--tabs-padding-y": {
-      "usedBy": ["tabs"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--color-status-error": {
-      "usedBy": ["checkbox", "form", "radio", "toast"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-success": {
-      "usedBy": ["toast"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--color-status-warning": {
-      "usedBy": ["toast"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--duration-slow": {
-      "usedBy": ["bottomsheet", "drawernav", "toast"],
-      "tier": "semantic",
-      "category": "motion"
-    },
-    "--ease-out": {
-      "usedBy": ["bottomsheet", "commandpalette", "drawer", "drawernav", "popover", "toast"],
-      "tier": "semantic",
-      "category": "motion"
-    },
-    "--elevation-toast": {
+    "--z-toast": {
       "usedBy": ["toast"],
       "tier": "semantic",
       "category": "elevation"
     },
-    "--font-size-xs": {
-      "usedBy": [
-        "authorcard",
-        "avatar",
-        "badge",
-        "button",
-        "checkbox",
-        "commandpalette",
-        "copybutton",
-        "datatable",
-        "datepicker",
-        "emptystate",
-        "fileupload",
-        "form",
-        "hero",
-        "input",
-        "keyboardshortcut",
-        "kpicard",
-        "mobilenav",
-        "newslettersignup",
-        "pricedisplay",
-        "pricingcard",
-        "productcard",
-        "radio",
-        "ratingstars",
-        "relatedposts",
-        "select",
-        "sidebar",
-        "statcard",
-        "table",
-        "testimonial",
-        "textarea",
-        "timeline",
-        "toast",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "typography"
-    },
-    "--spacing-0-5": {
-      "usedBy": [
-        "authorcard",
-        "badge",
-        "breadcrumb",
-        "checkbox",
-        "commandpalette",
-        "datepicker",
-        "fileupload",
-        "keyboardshortcut",
-        "kpicard",
-        "mobilenav",
-        "productcard",
-        "radio",
-        "ratingstars",
-        "select",
-        "statcard",
-        "testimonial",
-        "toast",
-        "toggle"
-      ],
-      "tier": "semantic",
-      "category": "spacing"
+    "--toast-max-width": {
+      "usedBy": ["toast"],
+      "tier": "component",
+      "category": "component"
     },
     "--spacing-12": {
       "usedBy": [
         "avatar",
         "emptystate",
         "featuresection",
-        "input",
         "kpicard",
         "quantityselector",
-        "select",
         "testimonial",
         "toast"
       ],
       "tier": "semantic",
       "category": "spacing"
     },
-    "--toast-bg": {
+    "--toast-padding": {
       "usedBy": ["toast"],
       "tier": "component",
       "category": "component"
     },
-    "--toast-border-color": {
+    "--toast-bg": {
       "usedBy": ["toast"],
       "tier": "component",
       "category": "component"
@@ -6573,12 +7238,7 @@
       "tier": "component",
       "category": "component"
     },
-    "--toast-max-width": {
-      "usedBy": ["toast"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--toast-padding": {
+    "--toast-border-color": {
       "usedBy": ["toast"],
       "tier": "component",
       "category": "component"
@@ -6593,32 +7253,37 @@
       "tier": "component",
       "category": "component"
     },
-    "--z-toast": {
+    "--elevation-toast": {
       "usedBy": ["toast"],
       "tier": "semantic",
       "category": "elevation"
     },
-    "--col-span-lg": {
-      "usedBy": ["layout"],
+    "--duration-slow": {
+      "usedBy": ["bottomsheet", "drawernav", "toast"],
       "tier": "semantic",
-      "category": "other"
+      "category": "motion"
     },
-    "--col-span-sm": {
-      "usedBy": ["layout"],
+    "--ease-out": {
+      "usedBy": ["bottomsheet", "commandpalette", "drawer", "drawernav", "popover", "toast"],
       "tier": "semantic",
-      "category": "other"
+      "category": "motion"
     },
-    "--col-span-xl": {
-      "usedBy": ["layout"],
+    "--color-status-success": {
+      "usedBy": ["toast"],
       "tier": "semantic",
-      "category": "other"
+      "category": "color"
     },
-    "--container-2xl": {
-      "usedBy": ["layout"],
+    "--color-status-warning": {
+      "usedBy": ["toast"],
       "tier": "semantic",
-      "category": "layout"
+      "category": "color"
     },
-    "--container-lg": {
+    "--color-status-error": {
+      "usedBy": ["checkbox", "form", "radio", "toast"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--container-sm": {
       "usedBy": ["layout"],
       "tier": "semantic",
       "category": "layout"
@@ -6628,12 +7293,7 @@
       "tier": "semantic",
       "category": "layout"
     },
-    "--container-padding-x": {
-      "usedBy": ["layout"],
-      "tier": "semantic",
-      "category": "layout"
-    },
-    "--container-sm": {
+    "--container-lg": {
       "usedBy": ["layout"],
       "tier": "semantic",
       "category": "layout"
@@ -6643,30 +7303,43 @@
       "tier": "semantic",
       "category": "layout"
     },
+    "--container-2xl": {
+      "usedBy": ["layout"],
+      "tier": "semantic",
+      "category": "layout"
+    },
     "--content-prose": {
       "usedBy": ["layout"],
       "tier": "semantic",
       "category": "other"
     },
-    "--grid-cols-lg": {
+    "--spacing-sm": {
+      "usedBy": [
+        "carousel",
+        "cartitem",
+        "cta",
+        "datatable",
+        "divider",
+        "featuresection",
+        "hero",
+        "layout",
+        "pricingcard",
+        "productcard",
+        "spacer",
+        "testimonial"
+      ],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--container-padding-x": {
       "usedBy": ["layout"],
       "tier": "semantic",
       "category": "layout"
     },
-    "--grid-cols-md": {
-      "usedBy": ["layout"],
+    "--spacing-2xl": {
+      "usedBy": ["layout", "spacer"],
       "tier": "semantic",
-      "category": "layout"
-    },
-    "--grid-cols-sm": {
-      "usedBy": ["layout"],
-      "tier": "semantic",
-      "category": "layout"
-    },
-    "--grid-cols-xl": {
-      "usedBy": ["layout"],
-      "tier": "semantic",
-      "category": "layout"
+      "category": "spacing"
     },
     "--grid-gap": {
       "usedBy": ["layout"],
@@ -6678,64 +7351,42 @@
       "tier": "semantic",
       "category": "layout"
     },
-    "--spacing-2xl": {
-      "usedBy": ["layout", "spacer"],
+    "--grid-cols-sm": {
+      "usedBy": ["layout"],
       "tier": "semantic",
-      "category": "spacing"
+      "category": "layout"
     },
-    "--spacing-sm": {
-      "usedBy": [
-        "carousel",
-        "cartitem",
-        "cta",
-        "datatable",
-        "datepicker",
-        "divider",
-        "featuresection",
-        "hero",
-        "input",
-        "layout",
-        "pricingcard",
-        "productcard",
-        "select",
-        "spacer",
-        "testimonial",
-        "textarea"
-      ],
+    "--grid-cols-lg": {
+      "usedBy": ["layout"],
       "tier": "semantic",
-      "category": "spacing"
+      "category": "layout"
+    },
+    "--grid-cols-md": {
+      "usedBy": ["layout"],
+      "tier": "semantic",
+      "category": "layout"
+    },
+    "--grid-cols-xl": {
+      "usedBy": ["layout"],
+      "tier": "semantic",
+      "category": "layout"
+    },
+    "--col-span-sm": {
+      "usedBy": ["layout"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--col-span-lg": {
+      "usedBy": ["layout"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--col-span-xl": {
+      "usedBy": ["layout"],
+      "tier": "semantic",
+      "category": "other"
     },
     "--article-font-size": {
-      "usedBy": ["articlelayout"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--article-heading-spacing": {
-      "usedBy": ["articlelayout"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--article-line-height": {
-      "usedBy": ["articlelayout"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--article-paragraph-spacing": {
-      "usedBy": ["articlelayout"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--article-sidebar-gap": {
-      "usedBy": ["articlelayout"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--article-sidebar-width": {
-      "usedBy": ["articlelayout"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--content-wide": {
       "usedBy": ["articlelayout"],
       "tier": "semantic",
       "category": "other"
@@ -6756,12 +7407,42 @@
       "tier": "semantic",
       "category": "typography"
     },
-    "--author-card-bg": {
+    "--article-line-height": {
+      "usedBy": ["articlelayout"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--content-wide": {
+      "usedBy": ["articlelayout"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--article-paragraph-spacing": {
+      "usedBy": ["articlelayout"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--article-heading-spacing": {
+      "usedBy": ["articlelayout"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--article-sidebar-gap": {
+      "usedBy": ["articlelayout"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--article-sidebar-width": {
+      "usedBy": ["articlelayout"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--author-card-padding": {
       "usedBy": ["authorcard"],
       "tier": "component",
       "category": "component"
     },
-    "--author-card-padding": {
+    "--author-card-bg": {
       "usedBy": ["authorcard"],
       "tier": "component",
       "category": "component"
@@ -6770,6 +7451,11 @@
       "usedBy": ["authorcard"],
       "tier": "component",
       "category": "component"
+    },
+    "--spacing-16": {
+      "usedBy": ["authorcard", "avatar", "cartitem", "mobilenav", "testimonial"],
+      "tier": "semantic",
+      "category": "spacing"
     },
     "--author-name-size": {
       "usedBy": ["authorcard"],
@@ -6786,22 +7472,12 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--spacing-16": {
-      "usedBy": ["authorcard", "avatar", "cartitem", "mobilenav", "testimonial"],
+    "--bottomsheet-overlay-bg": {
+      "usedBy": ["bottomsheet"],
       "tier": "semantic",
-      "category": "spacing"
+      "category": "other"
     },
     "--bottomsheet-bg": {
-      "usedBy": ["bottomsheet"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--bottomsheet-handle-color": {
-      "usedBy": ["bottomsheet"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--bottomsheet-overlay-bg": {
       "usedBy": ["bottomsheet"],
       "tier": "semantic",
       "category": "other"
@@ -6816,18 +7492,23 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--color-bg-subtle": {
-      "usedBy": ["avatar", "badge", "cta", "hero", "pagination", "pricingcard", "sidebar"],
-      "tier": "semantic",
-      "category": "color"
-    },
-    "--content-width-default": {
-      "usedBy": ["cta", "featuresection"],
+    "--bottomsheet-handle-color": {
+      "usedBy": ["bottomsheet"],
       "tier": "semantic",
       "category": "other"
     },
-    "--content-width-prose": {
-      "usedBy": ["cta", "hero"],
+    "--cta-padding-y": {
+      "usedBy": ["cta"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--spacing-section": {
+      "usedBy": ["cta", "featuresection", "hero", "spacer"],
+      "tier": "semantic",
+      "category": "spacing"
+    },
+    "--content-width-default": {
+      "usedBy": ["cta", "featuresection"],
       "tier": "semantic",
       "category": "other"
     },
@@ -6841,15 +7522,15 @@
       "tier": "component",
       "category": "component"
     },
-    "--cta-headline-size": {
+    "--opacity-hover-overlay": {
       "usedBy": ["cta"],
-      "tier": "component",
-      "category": "component"
+      "tier": "semantic",
+      "category": "opacity"
     },
-    "--cta-padding-y": {
-      "usedBy": ["cta"],
-      "tier": "component",
-      "category": "component"
+    "--color-bg-subtle": {
+      "usedBy": ["avatar", "badge", "cta", "hero", "pagination", "pricingcard", "sidebar"],
+      "tier": "semantic",
+      "category": "color"
     },
     "--cta-radius": {
       "usedBy": ["cta"],
@@ -6860,6 +7541,11 @@
       "usedBy": ["cta", "featuresection", "hero", "pricingcard", "statsbar", "testimonial"],
       "tier": "semantic",
       "category": "typography"
+    },
+    "--cta-headline-size": {
+      "usedBy": ["cta"],
+      "tier": "component",
+      "category": "component"
     },
     "--font-size-fluid-3xl": {
       "usedBy": ["cta", "featuresection", "kpicard", "pricingcard", "statcard", "statsbar"],
@@ -6880,25 +7566,25 @@
       "tier": "semantic",
       "category": "typography"
     },
-    "--opacity-hover-overlay": {
-      "usedBy": ["cta"],
+    "--content-width-prose": {
+      "usedBy": ["cta", "hero"],
       "tier": "semantic",
-      "category": "opacity"
+      "category": "other"
+    },
+    "--spacing-xs": {
+      "usedBy": ["cta", "featuresection", "pricingcard", "spacer", "statsbar", "timeline"],
+      "tier": "semantic",
+      "category": "spacing"
     },
     "--spacing-11": {
       "usedBy": ["cta", "hero", "pricingcard", "ratingstars"],
       "tier": "semantic",
       "category": "spacing"
     },
-    "--spacing-section": {
-      "usedBy": ["cta", "featuresection", "hero", "spacer"],
-      "tier": "semantic",
-      "category": "spacing"
-    },
-    "--spacing-xs": {
-      "usedBy": ["cta", "featuresection", "pricingcard", "spacer", "statsbar", "timeline"],
-      "tier": "semantic",
-      "category": "spacing"
+    "--carousel-arrow-size": {
+      "usedBy": ["carousel"],
+      "tier": "component",
+      "category": "component"
     },
     "--carousel-arrow-bg": {
       "usedBy": ["carousel"],
@@ -6915,12 +7601,12 @@
       "tier": "component",
       "category": "component"
     },
-    "--carousel-arrow-size": {
-      "usedBy": ["carousel"],
-      "tier": "component",
-      "category": "component"
+    "--z-raised": {
+      "usedBy": ["carousel", "datatable"],
+      "tier": "semantic",
+      "category": "elevation"
     },
-    "--carousel-dot-active-color": {
+    "--carousel-dot-size": {
       "usedBy": ["carousel"],
       "tier": "component",
       "category": "component"
@@ -6930,20 +7616,10 @@
       "tier": "component",
       "category": "component"
     },
-    "--carousel-dot-size": {
+    "--carousel-dot-active-color": {
       "usedBy": ["carousel"],
       "tier": "component",
       "category": "component"
-    },
-    "--z-raised": {
-      "usedBy": ["carousel", "datatable"],
-      "tier": "semantic",
-      "category": "elevation"
-    },
-    "--color-bg-hover": {
-      "usedBy": ["cartitem", "quantityselector"],
-      "tier": "semantic",
-      "category": "color"
     },
     "--color-bg-muted": {
       "usedBy": ["cartitem"],
@@ -6955,47 +7631,22 @@
       "tier": "semantic",
       "category": "spacing"
     },
+    "--color-bg-hover": {
+      "usedBy": ["cartitem", "quantityselector"],
+      "tier": "semantic",
+      "category": "color"
+    },
     "--collapsible-duration": {
       "usedBy": ["collapsible"],
       "tier": "component",
       "category": "component"
     },
-    "--command-bg": {
-      "usedBy": ["commandpalette"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--command-group-label-color": {
-      "usedBy": ["commandpalette"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--command-input-font-size": {
-      "usedBy": ["commandpalette"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--command-input-height": {
-      "usedBy": ["commandpalette"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--command-item-hover-bg": {
-      "usedBy": ["commandpalette"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--command-item-padding": {
-      "usedBy": ["commandpalette"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--command-max-height": {
-      "usedBy": ["commandpalette"],
-      "tier": "semantic",
-      "category": "other"
-    },
     "--command-max-width": {
+      "usedBy": ["commandpalette"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--command-bg": {
       "usedBy": ["commandpalette"],
       "tier": "semantic",
       "category": "other"
@@ -7010,20 +7661,30 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--command-shortcut-color": {
+    "--shadow-2xl": {
+      "usedBy": ["commandpalette", "drawer"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
+    "--command-input-height": {
       "usedBy": ["commandpalette"],
       "tier": "semantic",
       "category": "other"
     },
-    "--duration-fast": {
-      "usedBy": ["commandpalette", "logocloud", "popover"],
+    "--command-input-font-size": {
+      "usedBy": ["commandpalette"],
       "tier": "semantic",
-      "category": "motion"
+      "category": "other"
     },
-    "--font-family-mono": {
-      "usedBy": ["commandpalette", "keyboardshortcut"],
+    "--command-max-height": {
+      "usedBy": ["commandpalette"],
       "tier": "semantic",
-      "category": "typography"
+      "category": "other"
+    },
+    "--command-group-label-color": {
+      "usedBy": ["commandpalette"],
+      "tier": "semantic",
+      "category": "other"
     },
     "--letter-spacing-wide": {
       "usedBy": [
@@ -7038,42 +7699,22 @@
       "tier": "semantic",
       "category": "typography"
     },
-    "--shadow-2xl": {
-      "usedBy": ["commandpalette", "drawer"],
+    "--command-item-padding": {
+      "usedBy": ["commandpalette"],
       "tier": "semantic",
-      "category": "elevation"
+      "category": "other"
     },
-    "--color-border-focus": {
-      "usedBy": ["datatable", "datepicker", "input", "newslettersignup", "select", "textarea"],
+    "--command-item-hover-bg": {
+      "usedBy": ["commandpalette"],
       "tier": "semantic",
-      "category": "color"
+      "category": "other"
     },
-    "--color-border-muted": {
-      "usedBy": ["datatable", "divider", "featuresection", "statsbar"],
+    "--command-shortcut-color": {
+      "usedBy": ["commandpalette"],
       "tier": "semantic",
-      "category": "color"
+      "category": "other"
     },
     "--content-default": {
-      "usedBy": ["datatable"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--datatable-border-color": {
-      "usedBy": ["datatable"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--datatable-cell-padding-x": {
-      "usedBy": ["datatable"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--datatable-cell-padding-y": {
-      "usedBy": ["datatable"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--datatable-checkbox-width": {
       "usedBy": ["datatable"],
       "tier": "semantic",
       "category": "other"
@@ -7083,22 +7724,7 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--datatable-header-bg": {
-      "usedBy": ["datatable"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--datatable-header-font-size": {
-      "usedBy": ["datatable"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--datatable-header-font-weight": {
-      "usedBy": ["datatable"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--datatable-page-button-size": {
+    "--datatable-border-color": {
       "usedBy": ["datatable"],
       "tier": "semantic",
       "category": "other"
@@ -7108,22 +7734,37 @@
       "tier": "semantic",
       "category": "other"
     },
+    "--datatable-sticky-max-height": {
+      "usedBy": ["datatable"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--datatable-header-bg": {
+      "usedBy": ["datatable"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--datatable-cell-padding-y": {
+      "usedBy": ["datatable"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--datatable-cell-padding-x": {
+      "usedBy": ["datatable"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--datatable-header-font-weight": {
+      "usedBy": ["datatable"],
+      "tier": "semantic",
+      "category": "other"
+    },
     "--datatable-row-border": {
       "usedBy": ["datatable"],
       "tier": "semantic",
       "category": "other"
     },
-    "--datatable-row-hover-bg": {
-      "usedBy": ["datatable"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--datatable-row-selected-bg": {
-      "usedBy": ["datatable"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--datatable-row-stripe-bg": {
+    "--datatable-header-font-size": {
       "usedBy": ["datatable"],
       "tier": "semantic",
       "category": "other"
@@ -7133,20 +7774,35 @@
       "tier": "semantic",
       "category": "other"
     },
+    "--datatable-row-hover-bg": {
+      "usedBy": ["datatable"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--datatable-row-stripe-bg": {
+      "usedBy": ["datatable"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--datatable-row-selected-bg": {
+      "usedBy": ["datatable"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--datatable-checkbox-width": {
+      "usedBy": ["datatable"],
+      "tier": "semantic",
+      "category": "other"
+    },
     "--datatable-sticky-edge-width": {
       "usedBy": ["datatable"],
       "tier": "semantic",
       "category": "other"
     },
-    "--datatable-sticky-max-height": {
+    "--datatable-page-button-size": {
       "usedBy": ["datatable"],
       "tier": "semantic",
       "category": "other"
-    },
-    "--color-border-error": {
-      "usedBy": ["checkbox", "datepicker", "input", "select", "textarea"],
-      "tier": "semantic",
-      "category": "color"
     },
     "--datepicker-bg": {
       "usedBy": ["datepicker"],
@@ -7158,6 +7814,41 @@
       "tier": "semantic",
       "category": "other"
     },
+    "--datepicker-radius": {
+      "usedBy": ["datepicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--color-border-error": {
+      "usedBy": ["checkbox", "datepicker", "input", "select", "textarea"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--focus-ring-error": {
+      "usedBy": ["datepicker", "input", "select", "textarea"],
+      "tier": "semantic",
+      "category": "shape"
+    },
+    "--element-padding-y-md": {
+      "usedBy": ["button", "datepicker", "input", "quantityselector", "select", "textarea"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--element-padding-x-md": {
+      "usedBy": ["button", "datepicker", "input", "select", "textarea"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--element-height-md": {
+      "usedBy": ["button", "datepicker", "input", "quantityselector", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--z-dropdown": {
+      "usedBy": ["datepicker", "select"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
     "--datepicker-calendar-bg": {
       "usedBy": ["datepicker"],
       "tier": "semantic",
@@ -7168,7 +7859,12 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--datepicker-day-disabled-color": {
+    "--datepicker-day-size": {
+      "usedBy": ["datepicker"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--datepicker-day-radius": {
       "usedBy": ["datepicker"],
       "tier": "semantic",
       "category": "other"
@@ -7178,7 +7874,7 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--datepicker-day-radius": {
+    "--datepicker-day-today-border": {
       "usedBy": ["datepicker"],
       "tier": "semantic",
       "category": "other"
@@ -7193,57 +7889,17 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--datepicker-day-size": {
+    "--datepicker-day-disabled-color": {
       "usedBy": ["datepicker"],
       "tier": "semantic",
       "category": "other"
     },
-    "--datepicker-day-today-border": {
-      "usedBy": ["datepicker"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--datepicker-radius": {
-      "usedBy": ["datepicker"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--focus-ring-error": {
-      "usedBy": ["datepicker", "input", "select", "textarea"],
-      "tier": "semantic",
-      "category": "shape"
-    },
-    "--input-height": {
-      "usedBy": ["datepicker", "input"],
+    "--divider-weight": {
+      "usedBy": ["divider"],
       "tier": "component",
       "category": "component"
-    },
-    "--shadow-lg": {
-      "usedBy": ["datepicker", "popover", "select"],
-      "tier": "semantic",
-      "category": "elevation"
-    },
-    "--spacing-9": {
-      "usedBy": ["datepicker", "pagination"],
-      "tier": "semantic",
-      "category": "spacing"
-    },
-    "--z-dropdown": {
-      "usedBy": ["datepicker", "select"],
-      "tier": "semantic",
-      "category": "elevation"
     },
     "--divider-color": {
-      "usedBy": ["divider"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--divider-label-bg": {
-      "usedBy": ["divider"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--divider-label-color": {
       "usedBy": ["divider"],
       "tier": "component",
       "category": "component"
@@ -7253,8 +7909,18 @@
       "tier": "component",
       "category": "component"
     },
-    "--divider-weight": {
+    "--divider-label-color": {
       "usedBy": ["divider"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--divider-label-bg": {
+      "usedBy": ["divider"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--drawer-overlay-bg": {
+      "usedBy": ["drawer"],
       "tier": "component",
       "category": "component"
     },
@@ -7262,6 +7928,36 @@
       "usedBy": ["drawer"],
       "tier": "component",
       "category": "component"
+    },
+    "--drawer-shadow": {
+      "usedBy": ["drawer"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--drawer-width-sm": {
+      "usedBy": ["drawer"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--drawer-width-md": {
+      "usedBy": ["drawer"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--drawer-width-lg": {
+      "usedBy": ["drawer"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--drawer-header-padding": {
+      "usedBy": ["drawer"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-height-sm": {
+      "usedBy": ["button", "drawer", "input", "pagination", "quantityselector", "select"],
+      "tier": "semantic",
+      "category": "other"
     },
     "--drawer-body-padding": {
       "usedBy": ["drawer"],
@@ -7273,35 +7969,10 @@
       "tier": "component",
       "category": "component"
     },
-    "--drawer-header-padding": {
-      "usedBy": ["drawer"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--drawer-overlay-bg": {
-      "usedBy": ["drawer"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--drawer-shadow": {
-      "usedBy": ["drawer"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--drawer-width-lg": {
-      "usedBy": ["drawer"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--drawer-width-md": {
-      "usedBy": ["drawer"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--drawer-width-sm": {
-      "usedBy": ["drawer"],
-      "tier": "component",
-      "category": "component"
+    "--drawernav-width": {
+      "usedBy": ["drawernav"],
+      "tier": "semantic",
+      "category": "other"
     },
     "--drawernav-bg": {
       "usedBy": ["drawernav"],
@@ -7313,17 +7984,12 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--drawernav-width": {
-      "usedBy": ["drawernav"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--emptystate-icon-color": {
+    "--emptystate-padding": {
       "usedBy": ["emptystate"],
       "tier": "semantic",
       "category": "other"
     },
-    "--emptystate-padding": {
+    "--emptystate-icon-color": {
       "usedBy": ["emptystate"],
       "tier": "semantic",
       "category": "other"
@@ -7333,12 +7999,12 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--feature-card-bg": {
+    "--feature-card-padding": {
       "usedBy": ["featuresection"],
       "tier": "semantic",
       "category": "other"
     },
-    "--feature-card-padding": {
+    "--feature-card-bg": {
       "usedBy": ["featuresection"],
       "tier": "semantic",
       "category": "other"
@@ -7348,12 +8014,12 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--feature-icon-color": {
+    "--feature-icon-size": {
       "usedBy": ["featuresection"],
       "tier": "semantic",
       "category": "other"
     },
-    "--feature-icon-size": {
+    "--feature-icon-color": {
       "usedBy": ["featuresection"],
       "tier": "semantic",
       "category": "other"
@@ -7373,12 +8039,7 @@
       "tier": "semantic",
       "category": "typography"
     },
-    "--fileupload-bg": {
-      "usedBy": ["fileupload"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--fileupload-bg-active": {
+    "--fileupload-padding": {
       "usedBy": ["fileupload"],
       "tier": "semantic",
       "category": "other"
@@ -7388,7 +8049,27 @@
       "tier": "semantic",
       "category": "other"
     },
+    "--fileupload-radius": {
+      "usedBy": ["fileupload"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--fileupload-bg": {
+      "usedBy": ["fileupload"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--spacing-32": {
+      "usedBy": ["fileupload"],
+      "tier": "semantic",
+      "category": "spacing"
+    },
     "--fileupload-border-active": {
+      "usedBy": ["fileupload"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--fileupload-bg-active": {
       "usedBy": ["fileupload"],
       "tier": "semantic",
       "category": "other"
@@ -7398,25 +8079,10 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--fileupload-padding": {
-      "usedBy": ["fileupload"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--fileupload-radius": {
-      "usedBy": ["fileupload"],
-      "tier": "semantic",
-      "category": "other"
-    },
     "--fileupload-text-color": {
       "usedBy": ["fileupload"],
       "tier": "semantic",
       "category": "other"
-    },
-    "--spacing-32": {
-      "usedBy": ["fileupload"],
-      "tier": "semantic",
-      "category": "spacing"
     },
     "--form-gap": {
       "usedBy": ["form"],
@@ -7433,20 +8099,20 @@
       "tier": "component",
       "category": "component"
     },
-    "--font-size-fluid-7xl": {
+    "--hero-padding-y": {
+      "usedBy": ["hero"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--opacity-overlay": {
       "usedBy": ["hero"],
       "tier": "semantic",
-      "category": "typography"
+      "category": "opacity"
     },
-    "--font-size-fluid-lg": {
+    "--hero-max-width": {
       "usedBy": ["hero"],
-      "tier": "semantic",
-      "category": "typography"
-    },
-    "--font-weight-normal": {
-      "usedBy": ["hero", "kpicard", "pricedisplay", "sidebar", "statcard"],
-      "tier": "semantic",
-      "category": "typography"
+      "tier": "component",
+      "category": "component"
     },
     "--hero-badge-bg": {
       "usedBy": ["hero"],
@@ -7463,37 +8129,22 @@
       "tier": "component",
       "category": "component"
     },
-    "--hero-headline-line-height": {
-      "usedBy": ["hero"],
-      "tier": "component",
-      "category": "component"
-    },
     "--hero-headline-size": {
       "usedBy": ["hero"],
       "tier": "component",
       "category": "component"
+    },
+    "--font-size-fluid-7xl": {
+      "usedBy": ["hero"],
+      "tier": "semantic",
+      "category": "typography"
     },
     "--hero-headline-weight": {
       "usedBy": ["hero"],
       "tier": "component",
       "category": "component"
     },
-    "--hero-max-width": {
-      "usedBy": ["hero"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--hero-padding-y": {
-      "usedBy": ["hero"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--hero-subheadline-color": {
-      "usedBy": ["hero"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--hero-subheadline-size": {
+    "--hero-headline-line-height": {
       "usedBy": ["hero"],
       "tier": "component",
       "category": "component"
@@ -7503,10 +8154,25 @@
       "tier": "semantic",
       "category": "typography"
     },
-    "--opacity-overlay": {
+    "--hero-subheadline-size": {
+      "usedBy": ["hero"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--font-size-fluid-lg": {
       "usedBy": ["hero"],
       "tier": "semantic",
-      "category": "opacity"
+      "category": "typography"
+    },
+    "--font-weight-normal": {
+      "usedBy": ["hero", "kpicard", "pricedisplay", "sidebar", "statcard"],
+      "tier": "semantic",
+      "category": "typography"
+    },
+    "--hero-subheadline-color": {
+      "usedBy": ["hero"],
+      "tier": "component",
+      "category": "component"
     },
     "--image-fallback-bg": {
       "usedBy": ["image"],
@@ -7518,12 +8184,12 @@
       "tier": "component",
       "category": "component"
     },
-    "--kpicard-bg": {
+    "--kpicard-padding": {
       "usedBy": ["kpicard"],
       "tier": "semantic",
       "category": "other"
     },
-    "--kpicard-padding": {
+    "--kpicard-bg": {
       "usedBy": ["kpicard"],
       "tier": "semantic",
       "category": "other"
@@ -7538,8 +8204,8 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--kpicard-sparkline-height": {
-      "usedBy": ["kpicard"],
+    "--statcard-trend-up": {
+      "usedBy": ["kpicard", "statcard"],
       "tier": "semantic",
       "category": "other"
     },
@@ -7548,8 +8214,13 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--statcard-trend-up": {
-      "usedBy": ["kpicard", "statcard"],
+    "--kpicard-sparkline-height": {
+      "usedBy": ["kpicard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--kbd-padding": {
+      "usedBy": ["keyboardshortcut"],
       "tier": "semantic",
       "category": "other"
     },
@@ -7559,21 +8230,6 @@
       "category": "other"
     },
     "--kbd-border": {
-      "usedBy": ["keyboardshortcut"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--kbd-font-family": {
-      "usedBy": ["keyboardshortcut"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--kbd-font-size": {
-      "usedBy": ["keyboardshortcut"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--kbd-padding": {
       "usedBy": ["keyboardshortcut"],
       "tier": "semantic",
       "category": "other"
@@ -7588,28 +8244,13 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--duration-slower": {
-      "usedBy": ["logocloud"],
-      "tier": "semantic",
-      "category": "motion"
-    },
-    "--ease-in-out": {
-      "usedBy": ["logocloud", "timeline"],
-      "tier": "semantic",
-      "category": "motion"
-    },
-    "--ease-linear": {
-      "usedBy": ["button", "logocloud"],
-      "tier": "semantic",
-      "category": "motion"
-    },
-    "--logocloud-gap": {
-      "usedBy": ["logocloud"],
+    "--kbd-font-family": {
+      "usedBy": ["keyboardshortcut"],
       "tier": "semantic",
       "category": "other"
     },
-    "--logocloud-hover-opacity": {
-      "usedBy": ["logocloud"],
+    "--kbd-font-size": {
+      "usedBy": ["keyboardshortcut"],
       "tier": "semantic",
       "category": "other"
     },
@@ -7623,10 +8264,35 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--mobilenav-active-color": {
-      "usedBy": ["mobilenav"],
+    "--logocloud-hover-opacity": {
+      "usedBy": ["logocloud"],
       "tier": "semantic",
       "category": "other"
+    },
+    "--logocloud-gap": {
+      "usedBy": ["logocloud"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--duration-slower": {
+      "usedBy": ["logocloud"],
+      "tier": "semantic",
+      "category": "motion"
+    },
+    "--ease-linear": {
+      "usedBy": ["button", "logocloud"],
+      "tier": "semantic",
+      "category": "motion"
+    },
+    "--ease-in-out": {
+      "usedBy": ["logocloud", "timeline"],
+      "tier": "semantic",
+      "category": "motion"
+    },
+    "--z-fixed": {
+      "usedBy": ["mobilenav"],
+      "tier": "semantic",
+      "category": "elevation"
     },
     "--mobilenav-bg": {
       "usedBy": ["mobilenav"],
@@ -7643,10 +8309,20 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--z-fixed": {
+    "--mobilenav-active-color": {
       "usedBy": ["mobilenav"],
       "tier": "semantic",
-      "category": "elevation"
+      "category": "other"
+    },
+    "--navbar-bg": {
+      "usedBy": ["navbar"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--navbar-shadow": {
+      "usedBy": ["navbar"],
+      "tier": "component",
+      "category": "component"
     },
     "--elevation-navbar": {
       "usedBy": ["navbar"],
@@ -7654,11 +8330,6 @@
       "category": "elevation"
     },
     "--navbar-backdrop-blur": {
-      "usedBy": ["navbar"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--navbar-bg": {
       "usedBy": ["navbar"],
       "tier": "component",
       "category": "component"
@@ -7673,27 +8344,22 @@
       "tier": "component",
       "category": "component"
     },
-    "--navbar-max-width": {
-      "usedBy": ["navbar"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--navbar-shadow": {
-      "usedBy": ["navbar"],
-      "tier": "component",
-      "category": "component"
-    },
     "--spacing-14": {
       "usedBy": ["navbar", "toggle"],
       "tier": "semantic",
       "category": "spacing"
     },
-    "--newsletter-bg": {
+    "--navbar-max-width": {
+      "usedBy": ["navbar"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--newsletter-padding": {
       "usedBy": ["newslettersignup"],
       "tier": "semantic",
       "category": "other"
     },
-    "--newsletter-padding": {
+    "--newsletter-bg": {
       "usedBy": ["newslettersignup"],
       "tier": "semantic",
       "category": "other"
@@ -7708,27 +8374,12 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--popover-arrow-size": {
-      "usedBy": ["popover"],
-      "tier": "component",
-      "category": "component"
-    },
     "--popover-bg": {
       "usedBy": ["popover"],
       "tier": "component",
       "category": "component"
     },
     "--popover-border": {
-      "usedBy": ["popover"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--popover-max-width": {
-      "usedBy": ["popover"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--popover-padding": {
       "usedBy": ["popover"],
       "tier": "component",
       "category": "component"
@@ -7743,22 +8394,22 @@
       "tier": "component",
       "category": "component"
     },
-    "--z-popover": {
+    "--popover-padding": {
       "usedBy": ["popover"],
-      "tier": "semantic",
-      "category": "elevation"
+      "tier": "component",
+      "category": "component"
     },
-    "--font-size-3xl": {
-      "usedBy": ["pricedisplay"],
-      "tier": "semantic",
-      "category": "typography"
+    "--popover-max-width": {
+      "usedBy": ["popover"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--popover-arrow-size": {
+      "usedBy": ["popover"],
+      "tier": "component",
+      "category": "component"
     },
     "--price-current-color": {
-      "usedBy": ["pricedisplay"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--price-original-color": {
       "usedBy": ["pricedisplay"],
       "tier": "semantic",
       "category": "other"
@@ -7768,57 +8419,22 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--font-size-fluid-4xl": {
-      "usedBy": ["pricingcard"],
+    "--price-original-color": {
+      "usedBy": ["pricedisplay"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--font-size-3xl": {
+      "usedBy": ["pricedisplay"],
       "tier": "semantic",
       "category": "typography"
-    },
-    "--line-height-none": {
-      "usedBy": ["pricingcard", "statsbar", "testimonial"],
-      "tier": "semantic",
-      "category": "typography"
-    },
-    "--pricing-bg": {
-      "usedBy": ["pricingcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--pricing-feature-excluded-color": {
-      "usedBy": ["pricingcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--pricing-feature-included-color": {
-      "usedBy": ["pricingcard"],
-      "tier": "semantic",
-      "category": "other"
     },
     "--pricing-padding": {
       "usedBy": ["pricingcard"],
       "tier": "semantic",
       "category": "other"
     },
-    "--pricing-popular-bg": {
-      "usedBy": ["pricingcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--pricing-popular-border": {
-      "usedBy": ["pricingcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--pricing-popular-shadow": {
-      "usedBy": ["pricingcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--pricing-price-size": {
-      "usedBy": ["pricingcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--pricing-price-weight": {
+    "--pricing-bg": {
       "usedBy": ["pricingcard"],
       "tier": "semantic",
       "category": "other"
@@ -7833,6 +8449,66 @@
       "tier": "semantic",
       "category": "other"
     },
+    "--pricing-popular-border": {
+      "usedBy": ["pricingcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--pricing-popular-bg": {
+      "usedBy": ["pricingcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--pricing-popular-shadow": {
+      "usedBy": ["pricingcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--pricing-price-size": {
+      "usedBy": ["pricingcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--font-size-fluid-4xl": {
+      "usedBy": ["pricingcard"],
+      "tier": "semantic",
+      "category": "typography"
+    },
+    "--pricing-price-weight": {
+      "usedBy": ["pricingcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--line-height-none": {
+      "usedBy": ["pricingcard", "statsbar", "testimonial"],
+      "tier": "semantic",
+      "category": "typography"
+    },
+    "--pricing-feature-included-color": {
+      "usedBy": ["pricingcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--pricing-feature-excluded-color": {
+      "usedBy": ["pricingcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--product-card-bg": {
+      "usedBy": ["productcard"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--product-card-radius": {
+      "usedBy": ["productcard"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--product-card-hover-shadow": {
+      "usedBy": ["productcard"],
+      "tier": "component",
+      "category": "component"
+    },
     "--product-card-badge-bg": {
       "usedBy": ["productcard"],
       "tier": "component",
@@ -7843,12 +8519,22 @@
       "tier": "component",
       "category": "component"
     },
-    "--product-card-bg": {
+    "--product-card-padding": {
       "usedBy": ["productcard"],
       "tier": "component",
       "category": "component"
     },
-    "--product-card-hover-shadow": {
+    "--rating-filled-color": {
+      "usedBy": ["productcard", "ratingstars"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--rating-empty-color": {
+      "usedBy": ["productcard", "ratingstars"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--product-card-sale-color": {
       "usedBy": ["productcard"],
       "tier": "component",
       "category": "component"
@@ -7858,52 +8544,7 @@
       "tier": "component",
       "category": "component"
     },
-    "--product-card-padding": {
-      "usedBy": ["productcard"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--product-card-radius": {
-      "usedBy": ["productcard"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--product-card-sale-color": {
-      "usedBy": ["productcard"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--rating-empty-color": {
-      "usedBy": ["productcard", "ratingstars"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--rating-filled-color": {
-      "usedBy": ["productcard", "ratingstars"],
-      "tier": "semantic",
-      "category": "other"
-    },
     "--progress-bg": {
-      "usedBy": ["progressbar"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--progress-fill-color": {
-      "usedBy": ["progressbar"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--progress-height-lg": {
-      "usedBy": ["progressbar"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--progress-height-md": {
-      "usedBy": ["progressbar"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--progress-height-sm": {
       "usedBy": ["progressbar"],
       "tier": "semantic",
       "category": "other"
@@ -7913,37 +8554,52 @@
       "tier": "semantic",
       "category": "other"
     },
+    "--progress-height-sm": {
+      "usedBy": ["progressbar"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--progress-height-md": {
+      "usedBy": ["progressbar"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--progress-height-lg": {
+      "usedBy": ["progressbar"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--progress-fill-color": {
+      "usedBy": ["progressbar"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--pullquote-border-width": {
+      "usedBy": ["pullquote"],
+      "tier": "semantic",
+      "category": "other"
+    },
     "--border-width-heavy": {
       "usedBy": ["pullquote", "radio"],
       "tier": "semantic",
       "category": "shape"
-    },
-    "--font-size-fluid-5xl": {
-      "usedBy": ["pullquote", "testimonial"],
-      "tier": "semantic",
-      "category": "typography"
-    },
-    "--font-size-fluid-xl": {
-      "usedBy": ["pullquote", "testimonial"],
-      "tier": "semantic",
-      "category": "typography"
-    },
-    "--pullquote-accent-bg": {
-      "usedBy": ["pullquote"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--pullquote-attribution-color": {
-      "usedBy": ["pullquote"],
-      "tier": "semantic",
-      "category": "other"
     },
     "--pullquote-border-color": {
       "usedBy": ["pullquote"],
       "tier": "semantic",
       "category": "other"
     },
-    "--pullquote-border-width": {
+    "--pullquote-accent-bg": {
+      "usedBy": ["pullquote"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--font-size-fluid-5xl": {
+      "usedBy": ["pullquote", "testimonial"],
+      "tier": "semantic",
+      "category": "typography"
+    },
+    "--pullquote-quote-mark-color": {
       "usedBy": ["pullquote"],
       "tier": "semantic",
       "category": "other"
@@ -7958,18 +8614,33 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--pullquote-quote-mark-color": {
+    "--font-size-fluid-xl": {
+      "usedBy": ["pullquote", "testimonial"],
+      "tier": "semantic",
+      "category": "typography"
+    },
+    "--pullquote-attribution-color": {
       "usedBy": ["pullquote"],
       "tier": "semantic",
       "category": "other"
     },
-    "--opacity-70": {
-      "usedBy": ["ratingstars"],
+    "--qty-padding-md": {
+      "usedBy": ["quantityselector"],
       "tier": "semantic",
-      "category": "opacity"
+      "category": "other"
     },
-    "--rating-count-color": {
-      "usedBy": ["ratingstars"],
+    "--qty-padding-sm": {
+      "usedBy": ["quantityselector"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--qty-height-md": {
+      "usedBy": ["quantityselector"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--qty-height-sm": {
+      "usedBy": ["quantityselector"],
       "tier": "semantic",
       "category": "other"
     },
@@ -7979,7 +8650,7 @@
       "category": "other"
     },
     "--spacing-3-5": {
-      "usedBy": ["button", "ratingstars", "toggle"],
+      "usedBy": ["ratingstars", "toggle"],
       "tier": "semantic",
       "category": "spacing"
     },
@@ -7988,7 +8659,17 @@
       "tier": "semantic",
       "category": "spacing"
     },
-    "--related-card-padding": {
+    "--rating-count-color": {
+      "usedBy": ["ratingstars"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--opacity-70": {
+      "usedBy": ["ratingstars"],
+      "tier": "semantic",
+      "category": "opacity"
+    },
+    "--related-cols": {
       "usedBy": ["relatedposts"],
       "tier": "semantic",
       "category": "other"
@@ -8003,17 +8684,7 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--related-cols": {
-      "usedBy": ["relatedposts"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--related-date-color": {
-      "usedBy": ["relatedposts"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--related-excerpt-color": {
+    "--related-card-padding": {
       "usedBy": ["relatedposts"],
       "tier": "semantic",
       "category": "other"
@@ -8023,18 +8694,13 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--scroll-thumb-color": {
-      "usedBy": ["scrollarea"],
+    "--related-excerpt-color": {
+      "usedBy": ["relatedposts"],
       "tier": "semantic",
       "category": "other"
     },
-    "--scroll-thumb-hover-color": {
-      "usedBy": ["scrollarea"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--scroll-thumb-radius": {
-      "usedBy": ["scrollarea"],
+    "--related-date-color": {
+      "usedBy": ["relatedposts"],
       "tier": "semantic",
       "category": "other"
     },
@@ -8048,6 +8714,26 @@
       "tier": "semantic",
       "category": "other"
     },
+    "--scroll-thumb-color": {
+      "usedBy": ["scrollarea"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--scroll-thumb-radius": {
+      "usedBy": ["scrollarea"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--scroll-thumb-hover-color": {
+      "usedBy": ["scrollarea"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--sidebar-width": {
+      "usedBy": ["sidebar"],
+      "tier": "component",
+      "category": "component"
+    },
     "--sidebar-bg": {
       "usedBy": ["sidebar"],
       "tier": "component",
@@ -8058,52 +8744,27 @@
       "tier": "component",
       "category": "component"
     },
-    "--sidebar-collapsed-width": {
-      "usedBy": ["sidebar"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--sidebar-width": {
-      "usedBy": ["sidebar"],
-      "tier": "component",
-      "category": "component"
-    },
     "--transition-all": {
       "usedBy": ["sidebar"],
       "tier": "semantic",
       "category": "motion"
+    },
+    "--sidebar-collapsed-width": {
+      "usedBy": ["sidebar"],
+      "tier": "component",
+      "category": "component"
     },
     "--spacing-3xl": {
       "usedBy": ["spacer"],
       "tier": "semantic",
       "category": "spacing"
     },
-    "--statcard-bg": {
-      "usedBy": ["statcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--statcard-icon-color": {
-      "usedBy": ["statcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--statcard-icon-size": {
-      "usedBy": ["statcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--statcard-label-color": {
-      "usedBy": ["statcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--statcard-label-size": {
-      "usedBy": ["statcard"],
-      "tier": "semantic",
-      "category": "other"
-    },
     "--statcard-padding": {
+      "usedBy": ["statcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--statcard-bg": {
       "usedBy": ["statcard"],
       "tier": "semantic",
       "category": "other"
@@ -8114,6 +8775,26 @@
       "category": "other"
     },
     "--statcard-shadow": {
+      "usedBy": ["statcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--statcard-icon-size": {
+      "usedBy": ["statcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--statcard-icon-color": {
+      "usedBy": ["statcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--statcard-label-size": {
+      "usedBy": ["statcard"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--statcard-label-color": {
       "usedBy": ["statcard"],
       "tier": "semantic",
       "category": "other"
@@ -8133,26 +8814,6 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--stats-label-color": {
-      "usedBy": ["statsbar"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--stats-label-size": {
-      "usedBy": ["statsbar"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--stats-trend-down-color": {
-      "usedBy": ["statsbar"],
-      "tier": "semantic",
-      "category": "other"
-    },
-    "--stats-trend-up-color": {
-      "usedBy": ["statsbar"],
-      "tier": "semantic",
-      "category": "other"
-    },
     "--stats-value-size": {
       "usedBy": ["statsbar"],
       "tier": "semantic",
@@ -8163,22 +8824,37 @@
       "tier": "semantic",
       "category": "other"
     },
-    "--table-border-color": {
-      "usedBy": ["table"],
-      "tier": "component",
-      "category": "component"
+    "--stats-trend-up-color": {
+      "usedBy": ["statsbar"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--stats-trend-down-color": {
+      "usedBy": ["statsbar"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--stats-label-size": {
+      "usedBy": ["statsbar"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--stats-label-color": {
+      "usedBy": ["statsbar"],
+      "tier": "semantic",
+      "category": "other"
     },
     "--table-border-width": {
       "usedBy": ["table"],
       "tier": "component",
       "category": "component"
     },
-    "--table-cell-padding-x": {
+    "--table-border-color": {
       "usedBy": ["table"],
       "tier": "component",
       "category": "component"
     },
-    "--table-cell-padding-y": {
+    "--table-radius": {
       "usedBy": ["table"],
       "tier": "component",
       "category": "component"
@@ -8193,17 +8869,17 @@
       "tier": "component",
       "category": "component"
     },
-    "--table-radius": {
+    "--table-cell-padding-y": {
       "usedBy": ["table"],
       "tier": "component",
       "category": "component"
     },
-    "--opacity-placeholder": {
-      "usedBy": ["testimonial", "timeline"],
-      "tier": "semantic",
-      "category": "opacity"
+    "--table-cell-padding-x": {
+      "usedBy": ["table"],
+      "tier": "component",
+      "category": "component"
     },
-    "--testimonial-author-size": {
+    "--testimonial-padding": {
       "usedBy": ["testimonial"],
       "tier": "component",
       "category": "component"
@@ -8213,12 +8889,17 @@
       "tier": "component",
       "category": "component"
     },
-    "--testimonial-padding": {
+    "--testimonial-radius": {
       "usedBy": ["testimonial"],
       "tier": "component",
       "category": "component"
     },
-    "--testimonial-quote-color": {
+    "--opacity-placeholder": {
+      "usedBy": ["testimonial", "timeline"],
+      "tier": "semantic",
+      "category": "opacity"
+    },
+    "--testimonial-star-color": {
       "usedBy": ["testimonial"],
       "tier": "component",
       "category": "component"
@@ -8228,12 +8909,12 @@
       "tier": "component",
       "category": "component"
     },
-    "--testimonial-radius": {
+    "--testimonial-quote-color": {
       "usedBy": ["testimonial"],
       "tier": "component",
       "category": "component"
     },
-    "--testimonial-star-color": {
+    "--testimonial-author-size": {
       "usedBy": ["testimonial"],
       "tier": "component",
       "category": "component"
@@ -8243,7 +8924,7 @@
       "tier": "component",
       "category": "component"
     },
-    "--timeline-dot-active-color": {
+    "--timeline-dot-size": {
       "usedBy": ["timeline"],
       "tier": "component",
       "category": "component"
@@ -8253,17 +8934,12 @@
       "tier": "component",
       "category": "component"
     },
+    "--timeline-dot-active-color": {
+      "usedBy": ["timeline"],
+      "tier": "component",
+      "category": "component"
+    },
     "--timeline-dot-pending-color": {
-      "usedBy": ["timeline"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--timeline-dot-size": {
-      "usedBy": ["timeline"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--timeline-line-color": {
       "usedBy": ["timeline"],
       "tier": "component",
       "category": "component"
@@ -8273,12 +8949,17 @@
       "tier": "component",
       "category": "component"
     },
-    "--avatar-bg": {
+    "--timeline-line-color": {
+      "usedBy": ["timeline"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--avatar-radius": {
       "usedBy": ["avatar"],
       "tier": "component",
       "category": "component"
     },
-    "--avatar-border-color": {
+    "--avatar-bg": {
       "usedBy": ["avatar"],
       "tier": "component",
       "category": "component"
@@ -8288,7 +8969,7 @@
       "tier": "component",
       "category": "component"
     },
-    "--avatar-radius": {
+    "--avatar-border-color": {
       "usedBy": ["avatar"],
       "tier": "component",
       "category": "component"
@@ -8313,7 +8994,27 @@
       "tier": "semantic",
       "category": "color"
     },
-    "--badge-dot-size": {
+    "--badge-padding-y": {
+      "usedBy": ["badge"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-padding-y-xs": {
+      "usedBy": ["badge", "button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--badge-padding-x": {
+      "usedBy": ["badge"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-padding-x-xs": {
+      "usedBy": ["badge", "button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--badge-radius": {
       "usedBy": ["badge"],
       "tier": "component",
       "category": "component"
@@ -8328,32 +9029,17 @@
       "tier": "component",
       "category": "component"
     },
-    "--badge-padding-x": {
-      "usedBy": ["badge"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--badge-padding-y": {
-      "usedBy": ["badge"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--badge-radius": {
-      "usedBy": ["badge"],
-      "tier": "component",
-      "category": "component"
-    },
     "--font-size-2xs": {
       "usedBy": ["badge"],
       "tier": "semantic",
       "category": "typography"
     },
-    "--button-bg": {
-      "usedBy": ["button"],
+    "--badge-dot-size": {
+      "usedBy": ["badge"],
       "tier": "component",
       "category": "component"
     },
-    "--button-bg-hover": {
+    "--button-border-width": {
       "usedBy": ["button"],
       "tier": "component",
       "category": "component"
@@ -8363,17 +9049,7 @@
       "tier": "component",
       "category": "component"
     },
-    "--button-border-width": {
-      "usedBy": ["button"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--button-fg": {
-      "usedBy": ["button"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--button-font-size": {
+    "--button-radius": {
       "usedBy": ["button"],
       "tier": "component",
       "category": "component"
@@ -8383,42 +9059,57 @@
       "tier": "component",
       "category": "component"
     },
-    "--button-height": {
-      "usedBy": ["button"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--button-icon-size": {
-      "usedBy": ["button"],
-      "tier": "component",
-      "category": "component"
-    },
     "--button-letter-spacing": {
       "usedBy": ["button"],
       "tier": "component",
       "category": "component"
     },
-    "--button-padding-x": {
+    "--letter-spacing-normal": {
       "usedBy": ["button"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--button-radius": {
-      "usedBy": ["button"],
-      "tier": "component",
-      "category": "component"
+      "tier": "semantic",
+      "category": "typography"
     },
     "--button-shadow": {
       "usedBy": ["button"],
       "tier": "component",
       "category": "component"
     },
-    "--color-action-destructive-hover": {
+    "--shadow-none": {
+      "usedBy": ["button"],
+      "tier": "semantic",
+      "category": "elevation"
+    },
+    "--button-bg": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--button-fg": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--button-bg-hover": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--color-action-secondary": {
+      "usedBy": ["button"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--color-action-secondary-hover": {
       "usedBy": ["button"],
       "tier": "semantic",
       "category": "color"
     },
     "--color-action-ghost": {
+      "usedBy": ["button"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--color-action-destructive-hover": {
       "usedBy": ["button"],
       "tier": "semantic",
       "category": "color"
@@ -8433,32 +9124,212 @@
       "tier": "semantic",
       "category": "color"
     },
-    "--color-action-secondary": {
+    "--element-icon-size-xs": {
       "usedBy": ["button"],
       "tier": "semantic",
-      "category": "color"
+      "category": "other"
     },
-    "--color-action-secondary-hover": {
+    "--button-padding-y-xs": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--button-padding-x-xs": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--button-font-size-xs": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-font-size-xs": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--element-icon-size-sm": {
       "usedBy": ["button"],
       "tier": "semantic",
-      "category": "color"
+      "category": "other"
     },
-    "--letter-spacing-normal": {
+    "--button-padding-y-sm": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--button-padding-x-sm": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--button-font-size-sm": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-font-size-sm": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--element-icon-size-md": {
+      "usedBy": ["button", "input"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--button-padding-y-md": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--button-padding-x-md": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--button-font-size-md": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-font-size-md": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--element-icon-size-lg": {
       "usedBy": ["button"],
       "tier": "semantic",
-      "category": "typography"
+      "category": "other"
     },
-    "--shadow-none": {
+    "--button-padding-y-lg": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-padding-y-lg": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--button-padding-x-lg": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-padding-x-lg": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--button-font-size-lg": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-font-size-lg": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--element-icon-size-xl": {
       "usedBy": ["button"],
       "tier": "semantic",
-      "category": "elevation"
+      "category": "other"
     },
-    "--checkbox-bg": {
+    "--button-padding-y-xl": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-padding-y-xl": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--button-padding-x-xl": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-padding-x-xl": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--button-font-size-xl": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-font-size-xl": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--button-height-xs": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-height-xs": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--button-height-sm": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--button-height-md": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--button-height-lg": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-height-lg": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--button-height-xl": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--element-height-xl": {
+      "usedBy": ["button", "input", "select"],
+      "tier": "semantic",
+      "category": "other"
+    },
+    "--button-icon-size": {
+      "usedBy": ["button"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--checkbox-size": {
+      "usedBy": ["checkbox"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--checkbox-radius": {
       "usedBy": ["checkbox"],
       "tier": "component",
       "category": "component"
     },
     "--checkbox-border-color": {
+      "usedBy": ["checkbox"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--checkbox-bg": {
       "usedBy": ["checkbox"],
       "tier": "component",
       "category": "component"
@@ -8473,47 +9344,27 @@
       "tier": "component",
       "category": "component"
     },
-    "--checkbox-radius": {
-      "usedBy": ["checkbox"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--checkbox-size": {
-      "usedBy": ["checkbox"],
-      "tier": "component",
-      "category": "component"
-    },
     "--color-fg-inverse": {
       "usedBy": ["checkbox", "select"],
       "tier": "semantic",
       "category": "color"
     },
-    "--spacing-2-5": {
-      "usedBy": ["checkbox", "radio", "toggle"],
-      "tier": "semantic",
-      "category": "spacing"
+    "--input-font-size": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
     },
-    "--color-fg-disabled": {
-      "usedBy": ["input", "textarea"],
-      "tier": "semantic",
-      "category": "color"
+    "--input-padding-y-md": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-padding-x-md": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
     },
     "--input-bg": {
-      "usedBy": ["input"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--input-border-color": {
-      "usedBy": ["input"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--input-border-error": {
-      "usedBy": ["input"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--input-border-focus": {
       "usedBy": ["input"],
       "tier": "component",
       "category": "component"
@@ -8523,22 +9374,7 @@
       "tier": "component",
       "category": "component"
     },
-    "--input-fg": {
-      "usedBy": ["input"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--input-font-size": {
-      "usedBy": ["input"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--input-padding-x": {
-      "usedBy": ["input"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--input-placeholder-color": {
+    "--input-border-color": {
       "usedBy": ["input"],
       "tier": "component",
       "category": "component"
@@ -8548,7 +9384,122 @@
       "tier": "component",
       "category": "component"
     },
-    "--radio-bg": {
+    "--input-fg": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-height-md": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-font-size-md": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-padding-y-xs": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-padding-x-xs": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-font-size-xs": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-padding-y-sm": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-padding-x-sm": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-font-size-sm": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-padding-y-lg": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-padding-x-lg": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-font-size-lg": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-padding-y-xl": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-padding-x-xl": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-font-size-xl": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-height-xs": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-height-sm": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-height-lg": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-height-xl": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-border-focus": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-border-error": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--input-placeholder-color": {
+      "usedBy": ["input"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--color-fg-disabled": {
+      "usedBy": ["input", "textarea"],
+      "tier": "semantic",
+      "category": "color"
+    },
+    "--radio-size": {
       "usedBy": ["radio"],
       "tier": "component",
       "category": "component"
@@ -8558,17 +9509,37 @@
       "tier": "component",
       "category": "component"
     },
+    "--radio-bg": {
+      "usedBy": ["radio"],
+      "tier": "component",
+      "category": "component"
+    },
     "--radio-checked-border": {
       "usedBy": ["radio"],
       "tier": "component",
       "category": "component"
     },
-    "--radio-size": {
-      "usedBy": ["radio"],
+    "--select-font-size": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-padding-y-md": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-padding-x-md": {
+      "usedBy": ["select"],
       "tier": "component",
       "category": "component"
     },
     "--select-bg": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-border-width": {
       "usedBy": ["select"],
       "tier": "component",
       "category": "component"
@@ -8578,12 +9549,102 @@
       "tier": "component",
       "category": "component"
     },
-    "--select-border-focus": {
+    "--select-radius": {
       "usedBy": ["select"],
       "tier": "component",
       "category": "component"
     },
-    "--select-border-width": {
+    "--select-height-md": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-font-size-md": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-padding-y-xs": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-padding-x-xs": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-font-size-xs": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-padding-y-sm": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-padding-x-sm": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-font-size-sm": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-padding-y-lg": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-padding-x-lg": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-font-size-lg": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-padding-y-xl": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-padding-x-xl": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-font-size-xl": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-height-xs": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-height-sm": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-height-lg": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-height-xl": {
+      "usedBy": ["select"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--select-border-focus": {
       "usedBy": ["select"],
       "tier": "component",
       "category": "component"
@@ -8598,48 +9659,8 @@
       "tier": "component",
       "category": "component"
     },
-    "--select-font-size": {
-      "usedBy": ["select"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--select-height": {
-      "usedBy": ["select"],
-      "tier": "component",
-      "category": "component"
-    },
     "--select-option-hover-bg": {
       "usedBy": ["select"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--select-padding-x": {
-      "usedBy": ["select"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--select-radius": {
-      "usedBy": ["select"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--textarea-bg": {
-      "usedBy": ["textarea"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--textarea-border-color": {
-      "usedBy": ["textarea"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--textarea-border-focus": {
-      "usedBy": ["textarea"],
-      "tier": "component",
-      "category": "component"
-    },
-    "--textarea-border-width": {
-      "usedBy": ["textarea"],
       "tier": "component",
       "category": "component"
     },
@@ -8653,12 +9674,27 @@
       "tier": "component",
       "category": "component"
     },
+    "--textarea-padding-y": {
+      "usedBy": ["textarea"],
+      "tier": "component",
+      "category": "component"
+    },
     "--textarea-padding-x": {
       "usedBy": ["textarea"],
       "tier": "component",
       "category": "component"
     },
-    "--textarea-padding-y": {
+    "--textarea-bg": {
+      "usedBy": ["textarea"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--textarea-border-width": {
+      "usedBy": ["textarea"],
+      "tier": "component",
+      "category": "component"
+    },
+    "--textarea-border-color": {
       "usedBy": ["textarea"],
       "tier": "component",
       "category": "component"
@@ -8668,22 +9704,22 @@
       "tier": "component",
       "category": "component"
     },
-    "--primitive-white": {
-      "usedBy": ["toggle"],
-      "tier": "primitive",
-      "category": "color"
+    "--textarea-border-focus": {
+      "usedBy": ["textarea"],
+      "tier": "component",
+      "category": "component"
     },
-    "--spacing-7": {
+    "--toggle-radius": {
       "usedBy": ["toggle"],
-      "tier": "semantic",
-      "category": "spacing"
+      "tier": "component",
+      "category": "component"
     },
     "--toggle-bg": {
       "usedBy": ["toggle"],
       "tier": "component",
       "category": "component"
     },
-    "--toggle-checked-bg": {
+    "--toggle-width": {
       "usedBy": ["toggle"],
       "tier": "component",
       "category": "component"
@@ -8693,7 +9729,7 @@
       "tier": "component",
       "category": "component"
     },
-    "--toggle-radius": {
+    "--toggle-checked-bg": {
       "usedBy": ["toggle"],
       "tier": "component",
       "category": "component"
@@ -8703,12 +9739,12 @@
       "tier": "component",
       "category": "component"
     },
-    "--toggle-thumb-size": {
+    "--primitive-white": {
       "usedBy": ["toggle"],
-      "tier": "component",
-      "category": "component"
+      "tier": "primitive",
+      "category": "color"
     },
-    "--toggle-width": {
+    "--toggle-thumb-size": {
       "usedBy": ["toggle"],
       "tier": "component",
       "category": "component"
@@ -8749,8 +9785,8 @@
     "--skeleton-radius": "--radius-md",
     "--spinner-color": "--color-action-primary",
     "--tabs-border-color": "--color-border-default",
-    "--tabs-padding-y": "--spacing-2",
-    "--tabs-padding-x": "--spacing-3",
+    "--tabs-padding-y": "--element-padding-y-sm",
+    "--tabs-padding-x": "--element-padding-x-sm",
     "--tabs-font-size": "--font-size-sm",
     "--tabs-font-weight": "--font-weight-medium",
     "--tabs-active-color": "--color-action-primary",
@@ -8933,6 +9969,10 @@
     "--pullquote-quote-mark-color": "--color-action-primary",
     "--pullquote-font-size": "--font-size-lg",
     "--pullquote-attribution-color": "--color-fg-secondary",
+    "--qty-padding-md": "--element-padding-y-md",
+    "--qty-padding-sm": "--element-padding-y-sm",
+    "--qty-height-md": "--element-height-md",
+    "--qty-height-sm": "--element-height-sm",
     "--rating-gap": "--spacing-0-5",
     "--rating-count-color": "--color-fg-secondary",
     "--related-card-radius": "--radius-lg",
@@ -8990,22 +10030,40 @@
     "--avatar-border-color": "--color-bg-page",
     "--color-accent-primary": "--color-action-primary",
     "--color-accent-secondary": "--color-action-destructive",
-    "--badge-padding-y": "--spacing-0-5",
-    "--badge-padding-x": "--spacing-2",
+    "--badge-padding-y": "--element-padding-y-xs",
+    "--badge-padding-x": "--element-padding-x-xs",
     "--badge-radius": "--radius-full",
     "--badge-font-size": "--font-size-xs",
     "--badge-font-weight": "--font-weight-medium",
     "--button-border-width": "--border-width-default",
     "--button-radius": "--radius-md",
     "--button-font-weight": "--font-weight-medium",
-    "--button-font-size": "--font-size-sm",
     "--button-letter-spacing": "--letter-spacing-normal",
     "--button-shadow": "--shadow-none",
     "--button-bg": "--color-action-primary",
     "--button-fg": "--color-fg-on-primary",
     "--button-bg-hover": "--color-action-primary-hover",
-    "--button-padding-x": "--spacing-md",
-    "--button-icon-size": "--spacing-4",
+    "--button-padding-y-xs": "--element-padding-y-xs",
+    "--button-padding-x-xs": "--element-padding-x-xs",
+    "--button-font-size-xs": "--element-font-size-xs",
+    "--button-padding-y-sm": "--element-padding-y-sm",
+    "--button-padding-x-sm": "--element-padding-x-sm",
+    "--button-font-size-sm": "--element-font-size-sm",
+    "--button-padding-y-md": "--element-padding-y-md",
+    "--button-padding-x-md": "--element-padding-x-md",
+    "--button-font-size-md": "--element-font-size-md",
+    "--button-padding-y-lg": "--element-padding-y-lg",
+    "--button-padding-x-lg": "--element-padding-x-lg",
+    "--button-font-size-lg": "--element-font-size-lg",
+    "--button-padding-y-xl": "--element-padding-y-xl",
+    "--button-padding-x-xl": "--element-padding-x-xl",
+    "--button-font-size-xl": "--element-font-size-xl",
+    "--button-height-xs": "--element-height-xs",
+    "--button-height-sm": "--element-height-sm",
+    "--button-height-md": "--element-height-md",
+    "--button-height-lg": "--element-height-lg",
+    "--button-height-xl": "--element-height-xl",
+    "--button-icon-size": "--element-icon-size-md",
     "--checkbox-size": "--spacing-4",
     "--checkbox-radius": "--radius-sm",
     "--checkbox-border-color": "--color-border-strong",
@@ -9013,33 +10071,71 @@
     "--checkbox-checked-bg": "--color-action-primary",
     "--checkbox-checked-border": "--color-action-primary",
     "--input-font-size": "--font-size-sm",
+    "--input-padding-y-md": "--element-padding-y-md",
+    "--input-padding-x-md": "--element-padding-x-md",
     "--input-bg": "--color-bg-page",
     "--input-border-width": "--border-width-default",
     "--input-border-color": "--color-border-default",
     "--input-radius": "--radius-md",
+    "--input-fg": "--color-fg-primary",
+    "--input-height-md": "--element-height-md",
+    "--input-font-size-md": "--element-font-size-md",
+    "--input-padding-y-xs": "--element-padding-y-xs",
+    "--input-padding-x-xs": "--element-padding-x-xs",
+    "--input-font-size-xs": "--element-font-size-xs",
+    "--input-padding-y-sm": "--element-padding-y-sm",
+    "--input-padding-x-sm": "--element-padding-x-sm",
+    "--input-font-size-sm": "--element-font-size-sm",
+    "--input-padding-y-lg": "--element-padding-y-lg",
+    "--input-padding-x-lg": "--element-padding-x-lg",
+    "--input-font-size-lg": "--element-font-size-lg",
+    "--input-padding-y-xl": "--element-padding-y-xl",
+    "--input-padding-x-xl": "--element-padding-x-xl",
+    "--input-font-size-xl": "--element-font-size-xl",
+    "--input-height-xs": "--element-height-xs",
+    "--input-height-sm": "--element-height-sm",
+    "--input-height-lg": "--element-height-lg",
+    "--input-height-xl": "--element-height-xl",
     "--input-border-focus": "--color-border-focus",
     "--input-border-error": "--color-border-error",
-    "--input-padding-x": "--spacing-sm",
-    "--input-fg": "--color-fg-primary",
     "--input-placeholder-color": "--color-fg-muted",
     "--radio-size": "--spacing-4",
     "--radio-border-color": "--color-border-strong",
     "--radio-bg": "--color-bg-page",
     "--radio-checked-border": "--color-action-primary",
     "--select-font-size": "--font-size-sm",
-    "--select-padding-x": "--spacing-sm",
+    "--select-padding-y-md": "--element-padding-y-md",
+    "--select-padding-x-md": "--element-padding-x-md",
     "--select-bg": "--color-bg-page",
     "--select-border-width": "--border-width-default",
     "--select-border-color": "--color-border-default",
     "--select-radius": "--radius-md",
+    "--select-height-md": "--element-height-md",
+    "--select-font-size-md": "--element-font-size-md",
+    "--select-padding-y-xs": "--element-padding-y-xs",
+    "--select-padding-x-xs": "--element-padding-x-xs",
+    "--select-font-size-xs": "--element-font-size-xs",
+    "--select-padding-y-sm": "--element-padding-y-sm",
+    "--select-padding-x-sm": "--element-padding-x-sm",
+    "--select-font-size-sm": "--element-font-size-sm",
+    "--select-padding-y-lg": "--element-padding-y-lg",
+    "--select-padding-x-lg": "--element-padding-x-lg",
+    "--select-font-size-lg": "--element-font-size-lg",
+    "--select-padding-y-xl": "--element-padding-y-xl",
+    "--select-padding-x-xl": "--element-padding-x-xl",
+    "--select-font-size-xl": "--element-font-size-xl",
+    "--select-height-xs": "--element-height-xs",
+    "--select-height-sm": "--element-height-sm",
+    "--select-height-lg": "--element-height-lg",
+    "--select-height-xl": "--element-height-xl",
     "--select-border-focus": "--color-border-focus",
     "--select-dropdown-bg": "--color-bg-page",
     "--select-dropdown-shadow": "--shadow-lg",
     "--select-option-hover-bg": "--color-bg-surface",
     "--textarea-font-size": "--font-size-sm",
     "--textarea-min-height": "--spacing-20",
-    "--textarea-padding-y": "--spacing-2",
-    "--textarea-padding-x": "--spacing-sm",
+    "--textarea-padding-y": "--element-padding-y-md",
+    "--textarea-padding-x": "--element-padding-x-md",
     "--textarea-bg": "--color-bg-page",
     "--textarea-border-width": "--border-width-default",
     "--textarea-border-color": "--color-border-default",

@@ -1,0 +1,234 @@
+/* Home page styles — tokens only */
+
+.forma-home {
+  padding-bottom: 80px;
+}
+
+/* Hero */
+.forma-hero {
+  background: var(--color-bg-surface);
+  padding: var(--spacing-3xl) 0;
+}
+
+@media (min-width: 640px) {
+  .forma-hero {
+    padding: var(--spacing-4xl) 0;
+  }
+}
+
+.forma-hero-headline {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-4xl);
+  font-weight: 400;
+  margin: 0 0 var(--spacing-md);
+  color: var(--color-fg-primary);
+  line-height: 1.1;
+}
+
+@media (min-width: 640px) {
+  .forma-hero-headline {
+    font-size: var(--font-size-5xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .forma-hero-headline {
+    font-size: 4rem;
+  }
+}
+
+.forma-hero-sub {
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--spacing-xl);
+  font-weight: 300;
+}
+
+.forma-hero-cta {
+  letter-spacing: 0.04em;
+}
+
+/* Sections */
+.forma-section {
+  padding: var(--spacing-2xl) 0;
+}
+
+@media (min-width: 640px) {
+  .forma-section {
+    padding: var(--spacing-3xl) 0;
+  }
+}
+
+.forma-section--muted {
+  background: var(--color-bg-subtle);
+}
+
+.forma-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+@media (min-width: 1024px) {
+  .forma-container {
+    padding: 0 var(--spacing-xl);
+  }
+}
+
+.forma-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xl);
+}
+
+.forma-section-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  color: var(--color-fg-primary);
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .forma-section-title {
+    font-size: var(--font-size-3xl);
+  }
+}
+
+.forma-section-link {
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border-default);
+  padding-bottom: 2px;
+  transition: color var(--duration-fast) var(--ease-default);
+}
+
+.forma-section-link:hover {
+  color: var(--color-fg-primary);
+}
+
+.forma-section-link:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.forma-section-title--center {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Stats grid */
+.forma-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 640px) {
+  .forma-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .forma-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Editorial strip */
+.forma-editorial-strip {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 640px) {
+  .forma-editorial-strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.forma-editorial-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.forma-editorial-value {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  color: var(--color-fg-primary);
+}
+
+.forma-editorial-label {
+  color: var(--color-fg-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Testimonials */
+.forma-testimonials {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .forma-testimonials {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .forma-testimonials {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.forma-quote {
+  margin: 0;
+}
+
+.forma-quote-text {
+  font-family: var(--font-family-display);
+  font-style: italic;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-loose);
+  color: var(--color-fg-primary);
+  margin: 0 0 var(--spacing-md);
+}
+
+.forma-quote-attr {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* About section */
+.forma-about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .forma-about-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.forma-about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.forma-about-description {
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-loose);
+}

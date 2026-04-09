@@ -71,9 +71,145 @@ import { Link, useParams } from 'react-router-dom';
 import { type ComponentMeta, getComponentBySlug } from '../data/component-registry';
 import type { TokenMapData } from '../data/token-map-types';
 import tokenMapRaw from '../data/token-map.json';
+import { getCSSVar as getCSSVarValue } from '../utils/presets';
 
 const tokenMapData = tokenMapRaw as unknown as TokenMapData;
 import styles from './ComponentDetail.module.css';
+
+// ─── Variant color token map ──────────────────────────────────────────────────
+
+interface VariantTokenEntry {
+  /** CSS custom property name */
+  token: string;
+  /** Short human-readable label */
+  label: string;
+  /** Fallback token to resolve current value when the primary token is unset */
+  fallback?: string;
+}
+
+/**
+ * Maps component slug → variant name → list of color tokens that drive that variant.
+ * Used to render inline color pickers per variant in the Variants Gallery.
+ */
+const VARIANT_COLOR_TOKENS: Record<string, Record<string, VariantTokenEntry[]>> = {
+  button: {
+    primary: [
+      { token: '--button-bg', label: 'Background', fallback: '--color-action-primary' },
+      { token: '--button-bg-hover', label: 'Hover bg', fallback: '--color-action-primary-hover' },
+      { token: '--button-fg', label: 'Text', fallback: '--color-fg-on-primary' },
+    ],
+    secondary: [
+      { token: '--color-action-secondary', label: 'Background' },
+      { token: '--color-action-secondary-hover', label: 'Hover bg' },
+      { token: '--color-fg-primary', label: 'Text' },
+      { token: '--color-border-default', label: 'Border' },
+    ],
+    ghost: [
+      { token: '--color-action-ghost', label: 'Background' },
+      { token: '--color-action-ghost-hover', label: 'Hover bg' },
+      { token: '--color-fg-primary', label: 'Text' },
+    ],
+    destructive: [
+      { token: '--color-action-destructive', label: 'Background' },
+      { token: '--color-action-destructive-hover', label: 'Hover bg' },
+      { token: '--color-fg-on-primary', label: 'Text' },
+    ],
+    outline: [
+      { token: '--color-action-outline', label: 'Background' },
+      { token: '--color-action-outline-hover', label: 'Hover bg' },
+      { token: '--color-action-primary', label: 'Border / Text' },
+    ],
+  },
+  badge: {
+    default: [
+      { token: '--color-bg-subtle', label: 'Background' },
+      { token: '--color-fg-secondary', label: 'Text' },
+      { token: '--color-border-default', label: 'Border' },
+    ],
+    secondary: [
+      { token: '--color-bg-subtle', label: 'Background' },
+      { token: '--color-fg-muted', label: 'Text' },
+    ],
+    success: [
+      { token: '--color-status-success-bg', label: 'Background' },
+      { token: '--color-status-success-fg', label: 'Text' },
+      { token: '--color-status-success-border', label: 'Border' },
+    ],
+    warning: [
+      { token: '--color-status-warning-bg', label: 'Background' },
+      { token: '--color-status-warning-fg', label: 'Text' },
+      { token: '--color-status-warning-border', label: 'Border' },
+    ],
+    error: [
+      { token: '--color-status-error-bg', label: 'Background' },
+      { token: '--color-status-error-fg', label: 'Text' },
+      { token: '--color-status-error-border', label: 'Border' },
+    ],
+    info: [
+      { token: '--color-status-info-bg', label: 'Background' },
+      { token: '--color-status-info-fg', label: 'Text' },
+      { token: '--color-status-info-border', label: 'Border' },
+    ],
+  },
+  alert: {
+    info: [
+      { token: '--color-status-info-bg', label: 'Background' },
+      { token: '--color-status-info-fg', label: 'Text' },
+      { token: '--color-status-info-border', label: 'Border' },
+    ],
+    success: [
+      { token: '--color-status-success-bg', label: 'Background' },
+      { token: '--color-status-success-fg', label: 'Text' },
+      { token: '--color-status-success-border', label: 'Border' },
+    ],
+    warning: [
+      { token: '--color-status-warning-bg', label: 'Background' },
+      { token: '--color-status-warning-fg', label: 'Text' },
+      { token: '--color-status-warning-border', label: 'Border' },
+    ],
+    error: [
+      { token: '--color-status-error-bg', label: 'Background' },
+      { token: '--color-status-error-fg', label: 'Text' },
+      { token: '--color-status-error-border', label: 'Border' },
+    ],
+  },
+  'progress-bar': {
+    primary: [
+      { token: '--progress-fill-color', label: 'Fill', fallback: '--color-action-primary' },
+      { token: '--progress-bg', label: 'Track', fallback: '--color-bg-surface' },
+    ],
+    success: [
+      { token: '--color-status-success-fg', label: 'Fill' },
+      { token: '--progress-bg', label: 'Track', fallback: '--color-bg-surface' },
+    ],
+    warning: [
+      { token: '--color-status-warning-fg', label: 'Fill' },
+      { token: '--progress-bg', label: 'Track', fallback: '--color-bg-surface' },
+    ],
+    error: [
+      { token: '--color-status-error-fg', label: 'Fill' },
+      { token: '--progress-bg', label: 'Track', fallback: '--color-bg-surface' },
+    ],
+  },
+  banner: {
+    info: [
+      { token: '--color-status-info-bg', label: 'Background' },
+      { token: '--color-status-info-fg', label: 'Text' },
+    ],
+    success: [
+      { token: '--color-status-success-bg', label: 'Background' },
+      { token: '--color-status-success-fg', label: 'Text' },
+    ],
+    warning: [
+      { token: '--color-status-warning-bg', label: 'Background' },
+      { token: '--color-status-warning-fg', label: 'Text' },
+    ],
+    error: [
+      { token: '--color-status-error-bg', label: 'Background' },
+      { token: '--color-status-error-fg', label: 'Text' },
+    ],
+  },
+};
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -106,10 +242,7 @@ function tokenToUrlPath(token: string): string {
   return `/playground/tokens/${cat}/${tokenName || name}`;
 }
 
-function getCSSVarValue(varName: string): string {
-  if (typeof window === 'undefined') return '';
-  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-}
+// getCSSVarValue imported from presets (at top of file)
 
 function slugToDisplayName(slug: string): string {
   return slug
@@ -140,8 +273,31 @@ function RenderComponent({
   if (loading) p.loading = true;
 
   switch (slug) {
-    case 'button':
+    case 'button': {
+      const isIconSize = typeof size === 'string' && size.startsWith('icon');
+      const iconSvg = (
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      );
+      if (isIconSize) {
+        return (
+          <Button {...p} aria-label="Add item">
+            {iconSvg}
+          </Button>
+        );
+      }
       return <Button {...p}>{variant || 'Button'}</Button>;
+    }
     case 'badge':
       return <Badge {...p}>{variant || 'Badge'}</Badge>;
     case 'input':
@@ -673,18 +829,89 @@ function ControlsPanel({
 
 // ─── Variants Gallery ────────────────────────────────────────────────────────
 
-function VariantsGallery({ meta }: { meta: ComponentMeta }) {
+function VariantColorEditor({
+  slug,
+  variant,
+  tokenOverrides,
+  onTokenChange,
+}: {
+  slug: string;
+  variant: string;
+  tokenOverrides: Record<string, string>;
+  onTokenChange: (token: string, value: string) => void;
+}) {
+  const entries = VARIANT_COLOR_TOKENS[slug]?.[variant];
+  if (!entries || entries.length === 0) return null;
+
+  return (
+    <div className={styles.variantTokens}>
+      {entries.map(({ token, label, fallback }) => {
+        const resolved =
+          tokenOverrides[token] ||
+          getCSSVarValue(token) ||
+          (fallback ? getCSSVarValue(fallback) : '') ||
+          '#000000';
+        const isModified = Boolean(tokenOverrides[token]);
+        return (
+          <label key={token} className={styles.variantTokenChip} title={token}>
+            <span
+              className={styles.variantTokenSwatch}
+              style={{
+                background: resolved,
+                outline: isModified
+                  ? '2px solid var(--color-action-primary)'
+                  : '1px solid var(--color-border-default)',
+              }}
+            >
+              <input
+                type="color"
+                className={styles.variantTokenColorInput}
+                value={resolved.startsWith('#') ? resolved : '#000000'}
+                onChange={(e) => onTokenChange(token, e.target.value)}
+              />
+            </span>
+            <span className={styles.variantTokenLabel}>{label}</span>
+          </label>
+        );
+      })}
+    </div>
+  );
+}
+
+function VariantsGallery({
+  meta,
+  tokenOverrides,
+  onTokenChange,
+}: {
+  meta: ComponentMeta;
+  tokenOverrides: Record<string, string>;
+  onTokenChange: (token: string, value: string) => void;
+}) {
   if (!meta.variants || meta.variants.length <= 1) return null;
+  const hasVariantTokens = Boolean(VARIANT_COLOR_TOKENS[meta.slug]);
   return (
     <section className={styles.gallerySection}>
-      <h2 className={styles.gallerySectionTitle}>All Variants</h2>
+      <div className={styles.gallerySectionHeader}>
+        <h2 className={styles.gallerySectionTitle}>All Variants</h2>
+        {hasVariantTokens && (
+          <span className={styles.gallerySectionHint}>Click a color swatch to edit</span>
+        )}
+      </div>
       <div className={styles.galleryGrid}>
         {meta.variants.map((v) => (
-          <div key={v} className={styles.galleryItem}>
+          <div key={v} className={styles.galleryCard}>
             <div className={styles.galleryPreview}>
               <RenderComponent slug={meta.slug} variant={v} />
             </div>
-            <span className={styles.galleryLabel}>{v}</span>
+            <div className={styles.galleryCardFooter}>
+              <span className={styles.galleryLabel}>{v}</span>
+              <VariantColorEditor
+                slug={meta.slug}
+                variant={v}
+                tokenOverrides={tokenOverrides}
+                onTokenChange={onTokenChange}
+              />
+            </div>
           </div>
         ))}
       </div>
@@ -704,6 +931,88 @@ function SizesGallery({ meta }: { meta: ComponentMeta }) {
               <RenderComponent slug={meta.slug} size={s} />
             </div>
             <span className={styles.galleryLabel}>{s}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ─── Button Shapes Gallery ───────────────────────────────────────────────────
+
+function ButtonShapesGallery({ meta }: { meta: ComponentMeta }) {
+  if (meta.slug !== 'button') return null;
+  const shapes = ['default', 'circle', 'pill'] as const;
+  const plusIcon = (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+  return (
+    <section className={styles.gallerySection}>
+      <h2 className={styles.gallerySectionTitle}>Shapes</h2>
+      <div className={styles.galleryGrid}>
+        {shapes.map((shape) => (
+          <div key={shape} className={styles.galleryItem}>
+            <div
+              className={styles.galleryPreview}
+              style={{ display: 'flex', gap: 'var(--spacing-2)', alignItems: 'center' }}
+            >
+              <Button shape={shape}>Label</Button>
+              <Button shape={shape} size="icon" aria-label="Add">
+                {plusIcon}
+              </Button>
+            </div>
+            <span className={styles.galleryLabel}>{shape}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ─── Alignment Proof ─────────────────────────────────────────────────────────
+
+function AlignmentProof({ meta }: { meta: ComponentMeta }) {
+  if (meta.slug !== 'button') return null;
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  return (
+    <section className={styles.gallerySection}>
+      <h2 className={styles.gallerySectionTitle}>Alignment Proof</h2>
+      <p
+        style={{
+          fontSize: 'var(--font-size-sm)',
+          color: 'var(--color-fg-secondary)',
+          marginBottom: 'var(--spacing-4)',
+        }}
+      >
+        Button, Input, and Select at each size should share the same height.
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)' }}>
+        {sizes.map((s) => (
+          <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-3)' }}>
+            <span
+              style={{
+                width: '2rem',
+                fontSize: 'var(--font-size-xs)',
+                color: 'var(--color-fg-muted)',
+                fontWeight: 'var(--font-weight-semibold)',
+              }}
+            >
+              {s.toUpperCase()}
+            </span>
+            <Button size={s}>Button</Button>
+            <Input size={s} placeholder="Input" style={{ width: '10rem' }} />
+            <Select size={s} options={[{ value: '1', label: 'Select' }]} value="1" />
           </div>
         ))}
       </div>
@@ -847,8 +1156,14 @@ export default function ComponentDetail() {
       </div>
 
       {/* Below-fold sections */}
-      <VariantsGallery meta={meta} />
+      <VariantsGallery
+        meta={meta}
+        tokenOverrides={tokenOverrides}
+        onTokenChange={handleTokenChange}
+      />
       <SizesGallery meta={meta} />
+      <ButtonShapesGallery meta={meta} />
+      <AlignmentProof meta={meta} />
       <PropsReferenceSection meta={meta} />
     </div>
   );

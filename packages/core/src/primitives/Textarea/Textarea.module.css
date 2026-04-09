@@ -6,8 +6,8 @@
  *   --textarea-border-width   Border width (fallback: --border-width-default)
  *   --textarea-radius         Border radius (fallback: --radius-md)
  *   --textarea-font-size      Font size (fallback: --font-size-sm)
- *   --textarea-padding-x      Horizontal padding (fallback: --spacing-sm)
- *   --textarea-padding-y      Vertical padding (fallback: --spacing-2)
+ *   --textarea-padding-x      Horizontal padding (fallback: --element-padding-x-md)
+ *   --textarea-padding-y      Vertical padding (fallback: --element-padding-y-md)
  *   --textarea-min-height     Minimum height (fallback: --spacing-20)
  */
 
@@ -31,7 +31,8 @@
 .textarea {
   width: 100%;
   min-height: var(--textarea-min-height, var(--spacing-20));
-  padding: var(--textarea-padding-y, var(--spacing-2)) var(--textarea-padding-x, var(--spacing-sm));
+  padding: var(--textarea-padding-y, var(--element-padding-y-md))
+    var(--textarea-padding-x, var(--element-padding-x-md));
   background-color: var(--textarea-bg, var(--color-bg-page));
   border: var(--textarea-border-width, var(--border-width-default)) solid
     var(--textarea-border-color, var(--color-border-default));

@@ -7,13 +7,16 @@
  *   --input-border-error     Error border color (fallback: --color-border-error)
  *   --input-border-width     Border width (fallback: --border-width-default)
  *   --input-radius           Border radius (fallback: --radius-md)
- *   --input-padding-x        Horizontal padding (fallback: --spacing-sm)
- *   --input-font-size        Font size (fallback: --font-size-sm)
  *   --input-placeholder-color Placeholder color (fallback: --color-fg-muted)
- *   --input-height           Element height (density-aware, fallback: 2.5rem)
+ *
+ * Per-size tokens (fall back to global element sizing):
+ *   --input-height-{xs..xl}      → --element-height-{xs..xl}
+ *   --input-padding-y-{xs..xl}   → --element-padding-y-{xs..xl}
+ *   --input-padding-x-{xs..xl}   → --element-padding-x-{xs..xl}
+ *   --input-font-size-{xs..xl}   → --element-font-size-{xs..xl}
  */
 
-/* Input wrapper — mobile-first */
+/* Outer wrapper — stacks label, input container, helper/error text */
 .wrapper {
   display: inline-flex;
   flex-direction: column;
@@ -33,17 +36,90 @@
   line-height: var(--line-height-tight);
 }
 
-/* Input container */
+/* Required indicator */
+.required {
+  color: var(--color-status-error-fg);
+  margin-left: var(--spacing-1);
+}
+
+/* ─── Input container (border, bg, focus ring, height, padding) ───── */
+
 .inputWrapper {
   display: flex;
   align-items: center;
-  position: relative;
+  gap: var(--spacing-2);
+  min-height: 2.75rem;
+  padding: var(--input-padding-y-md, var(--element-padding-y-md))
+    var(--input-padding-x-md, var(--element-padding-x-md));
   background-color: var(--input-bg, var(--color-bg-page));
   border: var(--input-border-width, var(--border-width-default)) solid
     var(--input-border-color, var(--color-border-default));
   border-radius: var(--input-radius, var(--radius-md));
+  font-family: var(--font-family-body);
+  font-size: 1rem;
+  color: var(--input-fg, var(--color-fg-primary));
+  line-height: var(--line-height-normal);
   transition: var(--transition-colors), var(--transition-shadow);
 }
+
+/* @breakpoint-sm (640px) — apply element height tokens + font-size */
+@media (min-width: 640px) {
+  .inputWrapper {
+    height: var(--input-height-md, var(--element-height-md));
+    min-height: auto;
+    font-size: var(--input-font-size-md, var(--element-font-size-md));
+  }
+}
+
+/* ─── Size variants (on wrapper) ───────────────────────────────────── */
+
+.size-xs {
+  padding: var(--input-padding-y-xs, var(--element-padding-y-xs))
+    var(--input-padding-x-xs, var(--element-padding-x-xs));
+  font-size: var(--input-font-size-xs, var(--element-font-size-xs));
+}
+
+.size-sm {
+  padding: var(--input-padding-y-sm, var(--element-padding-y-sm))
+    var(--input-padding-x-sm, var(--element-padding-x-sm));
+  font-size: var(--input-font-size-sm, var(--element-font-size-sm));
+}
+
+.size-lg {
+  padding: var(--input-padding-y-lg, var(--element-padding-y-lg))
+    var(--input-padding-x-lg, var(--element-padding-x-lg));
+  font-size: var(--input-font-size-lg, var(--element-font-size-lg));
+}
+
+.size-xl {
+  padding: var(--input-padding-y-xl, var(--element-padding-y-xl))
+    var(--input-padding-x-xl, var(--element-padding-x-xl));
+  font-size: var(--input-font-size-xl, var(--element-font-size-xl));
+}
+
+@media (min-width: 640px) {
+  .size-xs {
+    height: var(--input-height-xs, var(--element-height-xs));
+    min-height: auto;
+  }
+
+  .size-sm {
+    height: var(--input-height-sm, var(--element-height-sm));
+    min-height: auto;
+  }
+
+  .size-lg {
+    height: var(--input-height-lg, var(--element-height-lg));
+    min-height: auto;
+  }
+
+  .size-xl {
+    height: var(--input-height-xl, var(--element-height-xl));
+    min-height: auto;
+  }
+}
+
+/* ─── Focus / Error / Disabled states (on wrapper) ────────────────── */
 
 .inputWrapper:focus-within {
   border-color: var(--input-border-focus, var(--color-border-focus));
@@ -65,55 +141,24 @@
   opacity: var(--opacity-disabled);
 }
 
-/* Required indicator */
-.required {
-  color: var(--color-status-error-fg);
-  margin-left: var(--spacing-1);
-}
+/* ─── Inner input element (transparent — wrapper owns all visuals) ── */
 
-/* Size variants */
-.size-sm .input {
-  font-size: var(--font-size-xs);
-}
-
-.size-lg .input {
-  font-size: var(--font-size-base);
-}
-
-@media (min-width: 640px) {
-  .size-sm .input {
-    height: var(--spacing-8);
-    min-height: auto;
-  }
-
-  .size-lg .input {
-    height: var(--spacing-12);
-    min-height: auto;
-  }
-}
-
-/* Input element — mobile-first: 44px min-height, 16px font to prevent iOS zoom */
 .input {
   flex: 1;
   min-width: 0;
-  min-height: 2.75rem;
-  padding: 0 var(--input-padding-x, var(--spacing-sm));
+  padding: 0;
   background: transparent;
   border: none;
   outline: none;
-  font-family: var(--font-family-body);
-  font-size: 1rem;
-  color: var(--input-fg, var(--color-fg-primary));
-  line-height: var(--line-height-normal);
+  box-shadow: none;
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
 }
 
-/* @breakpoint-sm (640px) — restore density-aware height and smaller font */
-@media (min-width: 640px) {
-  .input {
-    min-height: auto;
-    height: var(--input-height, 2.5rem);
-    font-size: var(--input-font-size, var(--font-size-sm));
-  }
+.input:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .input::placeholder {
@@ -125,33 +170,24 @@
   color: var(--color-fg-disabled);
 }
 
-.input.hasPrefix {
-  padding-left: var(--spacing-2);
-}
+/* ─── Prefix / Suffix slots ──────────────────────────────────────── */
 
-.input.hasSuffix {
-  padding-right: var(--spacing-2);
-}
-
-/* Prefix / Suffix */
 .prefix,
 .suffix {
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
   color: var(--color-fg-secondary);
-  font-size: var(--input-font-size, var(--font-size-sm));
 }
 
-.prefix {
-  padding-left: var(--input-padding-x, var(--spacing-sm));
+.prefix svg,
+.suffix svg {
+  width: var(--element-icon-size-md);
+  height: var(--element-icon-size-md);
 }
 
-.suffix {
-  padding-right: var(--input-padding-x, var(--spacing-sm));
-}
+/* ─── Helper / Error text ─────────────────────────────────────────── */
 
-/* Helper / Error text */
 .helperText {
   font-family: var(--font-family-body);
   font-size: var(--font-size-xs);

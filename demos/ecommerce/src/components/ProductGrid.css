@@ -1,0 +1,40 @@
+/* ProductGrid — responsive product grid */
+
+.forma-product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .forma-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .forma-product-grid--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .forma-product-grid--cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.forma-product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border-radius: var(--radius-md);
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+
+.forma-product-link:hover {
+  transform: translateY(-2px);
+}
+
+.forma-product-link:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}

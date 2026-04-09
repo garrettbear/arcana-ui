@@ -17,6 +17,9 @@
     "test:visual:update": "playwright test --update-snapshots",
     "test:all": "vitest run && playwright test",
     "validate:tokens": "pnpm --filter @arcana-ui/tokens validate",
+    "generate-docs": "node scripts/generate-docs.mjs",
+    "manifest": "node scripts/generate-manifest.mjs",
+    "manifest:check": "node scripts/generate-manifest.mjs --check",
     "typecheck": "pnpm -r typecheck",
     "clean": "pnpm -r clean",
     "dev:dashboard": "pnpm --filter @arcana-ui/demo-dashboard dev",
@@ -35,5 +38,11 @@
     "lint-staged": "^16.3.1",
     "typescript": "^5.6.3",
     "vitest": "^2.1.8"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "^18.3.12",
+      "@types/react-dom": "^18.3.1"
+    }
   }
 }

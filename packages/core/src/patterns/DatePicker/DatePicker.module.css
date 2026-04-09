@@ -64,7 +64,10 @@
   flex: 1;
   min-width: 0;
   min-height: 2.75rem;
-  padding: 0 var(--spacing-2) 0 var(--spacing-sm);
+  padding-top: var(--element-padding-y-md);
+  padding-bottom: var(--element-padding-y-md);
+  padding-left: var(--element-padding-x-md);
+  padding-right: var(--spacing-2);
   border: none;
   background: transparent;
   color: var(--color-fg-primary);
@@ -76,8 +79,7 @@
 
 @media (min-width: 640px) {
   .input {
-    min-height: auto;
-    height: var(--input-height, 2.5rem);
+    min-height: var(--element-height-md);
     font-size: var(--font-size-sm);
   }
 }

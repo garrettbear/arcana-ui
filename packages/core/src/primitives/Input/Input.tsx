@@ -7,7 +7,7 @@ export interface InputProps
   /** Label text displayed above the input */
   label?: string;
   /** Size of the input */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** Error message string or boolean error state */
   error?: string | boolean;
   /** Helper text displayed below the input */
@@ -20,6 +20,8 @@ export interface InputProps
   fullWidth?: boolean;
   /** Whether the input is required (shows indicator on label) */
   required?: boolean;
+  /** Additional className for the outer wrapper containing border and focus ring */
+  wrapperClassName?: string;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -35,6 +37,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       required,
       id,
       className,
+      wrapperClassName,
       disabled,
       ...props
     },
@@ -64,16 +67,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <div
           className={cn(
             styles.inputWrapper,
-            styles[`size-${size}`],
+            size !== 'md' && styles[`size-${size}`],
             hasError && styles.hasError,
             disabled && styles.disabled,
+            wrapperClassName,
           )}
         >
-          {prefix && (
-            <span className={styles.prefix} aria-hidden="true">
-              {prefix}
-            </span>
-          )}
+          {prefix && <span className={styles.prefix}>{prefix}</span>}
           <input
             ref={ref}
             id={inputId}
@@ -84,19 +84,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               [errorMessage && errorId, helperText && helperId].filter(Boolean).join(' ') ||
               undefined
             }
-            className={cn(
-              styles.input,
-              prefix && styles.hasPrefix,
-              suffix && styles.hasSuffix,
-              className,
-            )}
+            className={cn(styles.input, className)}
             {...props}
           />
-          {suffix && (
-            <span className={styles.suffix} aria-hidden="true">
-              {suffix}
-            </span>
-          )}
+          {suffix && <span className={styles.suffix}>{suffix}</span>}
         </div>
 
         {errorMessage && (

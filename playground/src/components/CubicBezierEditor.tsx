@@ -8,6 +8,7 @@
  * a live animation dot demo.
  */
 
+import { useMediaQuery, usePrefersReducedMotion } from '@arcana-ui/core';
 import type React from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styles from './CubicBezierEditor.module.css';
@@ -163,7 +164,8 @@ export function CubicBezierEditor({
   const PAD = 16;
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const draggingPoint = useRef<'p1' | 'p2' | null>(null);
-  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const [animating, setAnimating] = useState(false);
   const [animProgress, setAnimProgress] = useState(0);
@@ -261,7 +263,7 @@ export function CubicBezierEditor({
   // ── Animation preview ─────────────────────────────────────────────────────
 
   const playAnimation = () => {
-    if (animating) return;
+    if (animating || prefersReducedMotion) return;
     setAnimating(true);
     setAnimProgress(0);
 

@@ -271,6 +271,13 @@ export type { CopyButtonProps } from './patterns/CopyButton';
 export { KeyboardShortcut } from './patterns/KeyboardShortcut';
 export type { KeyboardShortcutProps } from './patterns/KeyboardShortcut';
 
+// ─── Components ──────────────────────────────────────────────────────────────
+export { ColorPicker, rgbaToHex } from './components/ColorPicker';
+export type { ColorPickerProps } from './components/ColorPicker';
+
+export { FontPicker } from './components/FontPicker';
+export type { FontPickerProps, GoogleFontEntry, LocalFontEntry } from './components/FontPicker';
+
 // ─── Hooks ────────────────────────────────────────────────────────────────────
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useBreakpoint } from './hooks/useBreakpoint';
@@ -285,6 +292,11 @@ export type {
   UseFloatingOptions,
   UseFloatingReturn,
 } from './hooks/useFloating';
+export { useClickOutside } from './hooks/useClickOutside';
+export { useDrag } from './hooks/useDrag';
+export type { DragPosition, UseDragOptions, UseDragReturn } from './hooks/useDrag';
+export { useUndoRedo } from './hooks/useUndoRedo';
+export type { UseUndoRedoReturn } from './hooks/useUndoRedo';
 export { useTheme } from './hooks/useTheme';
 export type { ThemeId, ThemeSource, UseThemeReturn } from './hooks/useTheme';
 
@@ -294,3 +306,6 @@ export type { ThemeProviderProps } from './context/ThemeProvider';
 
 // ─── Utils ────────────────────────────────────────────────────────────────────
 export { cn } from './utils/cn';
+
+// ─── Version ─────────────────────────────────────────────────────────────────
+export { VERSION } from './version';

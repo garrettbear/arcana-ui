@@ -7,13 +7,150 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+_No unreleased changes. The next feature or fix merged to `develop` lands here._
+
+## [0.1.0] - 2026-04-09
+
+First stable release of Arcana UI. Everything below was accumulated across the
+`0.1.0-beta.1` and `0.1.0-beta.2` pre-releases plus the final launch-polish
+sprint on `develop`. All four packages — `@arcana-ui/tokens`,
+`@arcana-ui/core`, `@arcana-ui/cli`, and `@arcana-ui/mcp` — are published to
+npm at `0.1.0` on the `latest` tag.
+
+### Release Overview
+
+**Shipping in 0.1.0:**
+
+- **108 React components** across primitives, navigation, forms, data
+  display, overlays, layout, media, feedback, content/marketing, e-commerce,
+  editorial, and utility categories.
+- **14 theme presets:** light, dark, terminal, retro98, glass, brutalist,
+  corporate, startup, editorial, commerce, midnight, nature, neon, mono.
+- **Three-tier token architecture** (primitive → semantic → component) with
+  density modes (compact/default/comfortable), global element sizing, WCAG
+  contrast validation, per-preset motion personalities, and
+  `prefers-reduced-motion` support.
+- **11 hooks:** `useTheme`, `useMediaQuery`, `useBreakpoint`,
+  `usePrefersReducedMotion`, `useHotkey`, `useFloating`, `useClickOutside`,
+  `useDrag`, `useUndoRedo`, plus the `ThemeProvider` context.
+- **`@arcana-ui/cli`** with `init`, `validate`, and `add-theme` commands (5
+  starter layouts × Vite/Next frameworks).
+- **`@arcana-ui/mcp`** — Model Context Protocol server with 7 tools for AI
+  agents (Claude Code, Cursor, Codex, Figma Make).
+- **Claude Code skill** at `.claude/skills/arcana/SKILL.md` (1,821 lines —
+  complete component reference, hooks, token system, 4 layout patterns).
+- **`llms.txt` + `llms-full.txt`** AI discovery files served from
+  `arcana-ui.com` with correct `text/plain` headers.
+- **6 demo sites** deployed to Vercel: Forma (ecommerce), Meridian
+  (dashboard), Atelier (editorial), Control (analytics), Wavefront (music),
+  Mosaic (visual discovery).
+- **Landing page + playground** at `arcana-ui.com` with visual token editor,
+  ComponentGallery, D3 token-component relationship graph, export to JSON
+  + CSS, and `?theme=` deep-link sync.
+- **Version control + migration infrastructure:** `docs/migrations/` scaffold
+  and `manifest.ai.json` `releaseHistory` array so AI agents can
+  programmatically track breaking changes across releases.
+
 ### Added
+- Version control + migration infrastructure: `docs/migrations/README.md` documents how AI agents should read `manifest.ai.json` for breaking-change metadata when upgrading between versions, and `docs/migrations/TEMPLATE.md` is the scaffold for every future release with breaking changes.
+- `manifest.ai.json` — new top-level `releaseHistory` array records every past release (version, date, breaking changes, migration guide URL, one-line summary) so AI agents upgrading across multiple versions can walk the array forward and apply every guide in order.
+- `packages/core/src/version.ts` — runtime-exposed `VERSION` constant, re-exported from the package entry point. Consumers, the CLI, and AI agents can now read the package version without touching the filesystem.
+- Playground Token Editor: `Export CSS` button alongside existing `Export JSON`. Generates a ready-to-paste `:root { --token: value }` block (with a `[data-density="..."]` companion selector when the density override is set) so users can copy a tuned theme straight into their own stylesheet.
+- Playground `?theme=` URL sync: switching presets from the Token Editor now rewrites the `?theme=` query param via `setSearchParams({ replace: true })`, so a refresh or shared URL preserves the active theme instead of reverting to the landing-page deep-link.
+
+### Fixed
+- Landing page and playground copy: replaced outdated "60+ components" language with the real, current count ("108 components") across `playground/index.html` meta tags (description, og:description, twitter:description), `playground/src/pages/Landing.tsx` hero subheadline, "Production Components" feature card, and "How it works" step copy, and `playground/src/App.tsx` Hero subheadline, `StatCard`, and FAQ accordion.
+- Playground: removed stray `console.log('Undo!')` from the Toast "With action" demo in `playground/src/App.tsx`; undo now triggers a real restore toast.
+
+### Added
+- `@arcana-ui/mcp@0.1.0-beta.1` — new package: MCP (Model Context Protocol) server for Arcana UI. Gives AI agents (Claude Code, Cursor, Codex, Figma Make) programmatic access to component docs, theme presets, and token impact data. Seven tools: `list_components` (filter by category), `get_component` (full props + examples + token surface), `list_presets`, `get_preset` (complete JSON), `validate_theme` (structure + WCAG contrast), `generate_theme` (AI generation via Anthropic API or playground fallback), `get_token_impact` (blast-radius for any token). Ships all data bundled (manifest, token-map, 14 presets) as a fully self-contained 130 kB npm package. Setup: add one entry to `.claude/settings.json` → MCP active.
+- `.claude/skills/arcana/SKILL.md` — Claude Code skill with complete Arcana reference: quick start, all 108 components with props tables and examples, 11 hooks, token system guide, 4 complete layout patterns (dashboard, marketing, ecommerce, editorial), all 14 preset descriptions + best-use guide, responsive breakpoints and mobile behavior, rules. 1,821 lines — sufficient to build a full multi-page application without external references.
+- `scripts/generate-docs.mjs` Generator 8: copies `llms.txt` and `llms-full.txt` to `playground/public/` after generation so they are served at `/llms.txt` and `/llms-full.txt` on the Vercel deployment.
+
+### Changed
+- `llms.txt` — enhanced: components now grouped by category, density switching (`data-density`) added to Quick Start, resources section with GitHub / playground / manifest links.
+- `llms-full.txt` — enhanced: added 4 complete layout pattern code examples (dashboard, marketing, ecommerce, editorial), full theme customization JSON guide, responsive breakpoints section with `useBreakpoint` example, density switching docs. 2370 lines (up from 2070).
+- `vercel.json` — added `Content-Type: text/plain; charset=utf-8` and `Cache-Control` headers for `/llms.txt` and `/llms-full.txt` so AI crawlers receive correct MIME type.
+
+### Added
+- `demos/wavefront` — replaced all `placehold.co` collection and artist artwork with real Unsplash photos matched to each station's mood (night city, coastal sunset, piano, tropical highway, neon cityscape); added 2 new channels: "Sunset Drive" (Tame Impala, Beach House, Washed Out) and "Neo Seoul" (Bonobo, Four Tet, Bicep) bringing the total to 5 stations; added `@arcana-ui/demo-shared` dep and wired ThemeSwitcher (defaultTheme: "midnight").
+
+### Added
+- `@arcana-ui/cli@0.1.0-beta.1` — new package: command-line tool for scaffolding Arcana UI projects, validating themes, and managing presets. Three commands:
+  - `arcana-ui init [name]` — interactive (or non-interactive via flags) project scaffolder. Pick framework (Vite + React + TS or Next.js App Router), theme (any of 14 presets), density, and one of 5 starter layouts (`dashboard`, `marketing`, `ecommerce`, `editorial`, `general`). Detects package manager from `npm_config_user_agent`, runs install, prints next-steps banner. All 5 layouts use real `@arcana-ui/core` imports and typecheck against the published package.
+  - `arcana-ui validate <file>` — theme JSON linter. Checks structure (top-level shape), completeness (required semantic groups), reference resolution (`{primitive.x.y}` lookups), and WCAG AA contrast on 5 key foreground/background pairs. `--strict` promotes warnings to errors. Exits 1 on any error so it slots into CI.
+  - `arcana-ui add-theme [preset]` — show the activation snippet (CSS import + `data-theme` attribute) for any of the 14 built-in presets. `--list` dumps all preset ids.
+- `packages/cli/README.md` — full command reference with options tables and layout descriptions.
+
+### Changed
+- Root `README.md` — quickstart now leads with `npx @arcana-ui/cli init my-app` before the manual install instructions.
+- `@arcana-ui/cli@0.1.0-beta.1` published to npm under the `beta` dist-tag. Installable via `npx @arcana-ui/cli init my-app`. All three Arcana packages (`@arcana-ui/tokens`, `@arcana-ui/core`, `@arcana-ui/cli`) are now live on the registry.
+
+### Added
+- `@arcana-ui/core@0.1.0-beta.2` and `@arcana-ui/tokens@0.1.0-beta.2` — consumer package audit pass. Rebuilt from current source so all 122 exports (including `useClickOutside`, `useDrag`, `useUndoRedo`, `ColorPicker`, `FontPicker`, `BottomSheet`, `DrawerNav`, `LogoCloud`, etc.) are now present in the published package (beta.1 was stale and shipped only 115 exports).
+- `@arcana-ui/tokens` exports map: added `./styles` alias, `./dist/*` subpath, and `./package.json` subpath so strict Node ESM resolvers can import `@arcana-ui/tokens/dist/arcana.css` and `@arcana-ui/tokens/styles` directly.
+- `@arcana-ui/core` exports map: added `./dist/*` and `./package.json` subpaths for tooling compatibility.
+- `examples/quickstart/` — minimal Vite + React + TypeScript consumer that installs Arcana from the registry (not via workspace link), exercises 8 components, theme switching, density switching, and type exports. Serves as both quickstart docs and the reproducible consumer test fixture for future package audits.
+- `docs/QUICKSTART.md` — three-step consumer guide (install, import CSS, set `data-theme`). Doubles as the spec for the forthcoming `npx arcana-ui init` CLI.
+- `KNOWN_ISSUES.md` at the repo root documenting tree-shaking limitations in beta.2, missing `Video` component, and the vitest jsdom `localStorage` test regression.
+
+### Fixed
+- `@arcana-ui/tokens@0.1.0-beta.1` did not expose `./dist/arcana.css` through its package.json `exports` field, causing `ERR_PACKAGE_PATH_NOT_EXPORTED` for consumers using `import '@arcana-ui/tokens/dist/arcana.css'`.
+
+### Added
+- Atelier editorial magazine demo: luxury architecture/interiors publication with 3 pages (Home, Article Detail, Archive), editorial theme overrides (zero-radius, warm paper background, Cormorant Garamond + DM Sans typography), full-bleed hero layout, 6 long-form articles with real editorial prose, article tabs (Article/Gallery with lightbox modal), archive with filters/search/pagination, timeline milestones, stat cards, by-the-numbers table, and 25+ Arcana UI components (Navbar, AuthorCard, PullQuote, RelatedPosts, NewsletterSignup, Timeline, StatCard, Tabs, ScrollArea, Modal, Image, Badge, Divider, Breadcrumb, Pagination, Table, Banner, KeyboardShortcut, Skeleton, Toast, Footer, and more)
+- Mosaic visual discovery demo: light-themed inspiration/collection app with 3 pages (Discover feed, Collections, Collection Detail), CSS-columns masonry grid, 20 curated feed items, 5 user collections, filter pills, item detail modal with save-to-collection, create collection form, sidebar with suggested collections/people/logo cloud, and 25+ Arcana UI components (Card, Image, Badge, Button, Avatar, Modal, Select, Tabs, Banner, StatCard, Breadcrumb, EmptyState, LogoCloud, ScrollArea, Skeleton, Divider, Toast, and more)
+- Wavefront music player demo: midnight-themed listening app with 3 curated collections (20 tracks), sidebar navigation, now-playing bar with playback controls, collection detail view, expanded now-playing view, favorites with toast notifications, keyboard shortcuts (Space = play/pause), volume control, and 20+ Arcana UI components rendered across the app
+- Forma ecommerce demo: luxury objects brand with 4 pages (Home, Shop, Product Detail, Cart), 12-product catalog, cart state management, and 33+ Arcana UI components rendered across the app
+- Demo uses react-router-dom for client-side routing with `/`, `/shop`, `/shop/:slug`, and `/cart` routes
+- Cart context with add/remove/update/clear operations and derived totals
+- Quick view modal on shop page, promo code form in cart, shipping progress tracker, testimonials, timeline, newsletter signup
+
+### Fixed
+- `useTheme.test.tsx`: 16 failing tests caused by missing `localStorage.clear` in vitest+jsdom environment. Fixed by patching `globalThis.localStorage` with an in-memory implementation in `packages/core/src/test/setup.ts`. Also added `environmentOptions.jsdom.url` to `vitest.config.ts` for proper jsdom origin context.
+
+### Added
+- Global element sizing token system: `--element-height-{xs..xl}`, `--element-padding-y-{xs..xl}`, `--element-padding-x-{xs..xl}`, `--element-font-size-{xs..xl}`, `--element-icon-size-{xs..xl}` with density scaling (compact/comfortable)
+- Button xs and xl sizes, plus icon-only sizes (`icon-xs`, `icon-sm`, `icon`, `icon-lg`, `icon-xl`) that create square buttons
+- Button `shape` prop with `default`, `circle`, and `pill` options
+- Input and Select xs and xl sizes matching Button heights
+- Per-size component tokens for Button, Input, Select, QuantitySelector with three-level fallback chain (`--button-height-md → --button-height → --element-height-md`)
+- Element Sizing section in token editor with height/padding-y/padding-x sliders per size and visual alignment preview across all 5 sizes
+- Button shapes gallery and cross-component alignment proof in playground component detail page
+- Personality-appropriate element sizing overrides for 8 presets (terminal/retro98/mono=compact, glass/editorial/nature=spacious, startup/brutalist=slightly spacious)
+
+### Changed
+- Input component: border, background, height, padding now live on the wrapper div; inner `<input>` is fully transparent — prefix/suffix elements are visually contained inside the border and focus ring
+- Input component: added `wrapperClassName` prop for custom wrapper styling
+- Landing page hero input: submit button rendered inside Input via `suffix` prop instead of absolute positioning
+- Refactored 11 component CSS files (Button, Input, Select, Textarea, DatePicker, QuantitySelector, Pagination, Tabs, Badge, Sidebar, Drawer) to use element sizing tokens with proper fallbacks
+- Renamed element padding tokens from `--spacing-element-y-*` / `--spacing-element-x-*` to `--element-padding-y-*` / `--element-padding-x-*`
+- All sized components use `min-height` (not `height`) with 44px mobile touch target floor
+
+### Fixed
+- Fixed spacing editor base unit showing 0px when preset uses rem values (rem-to-px conversion was missing)
+- `useClickOutside` hook — fires callback on mousedown outside a ref element, SSR-safe, with enabled flag
+- `useDrag` hook — generic drag handling with RAF throttling, touch support, relative positioning, and ref-based callbacks
+- `useUndoRedo<T>` hook — generic history stack with branch trimming, configurable max history, and reactive canUndo/canRedo
+- `ColorPicker` component — full HSV color picker with canvas rendering, hue/alpha sliders, hex/RGB inputs, EyeDropper API, preset colors, recent colors, and size variants (sm/md/lg)
+- `FontPicker` component — searchable font dropdown with Google Fonts integration, category grouping, font preview, and click-outside dismissal
+- Unified single-source-of-truth documentation pipeline (`scripts/generate-docs.mjs`) with 7 generators producing all docs from source code
+- `pnpm generate-docs` command that runs all generators: manifest, token map, component inventory, component tokens reference, export verification, llms.txt/llms-full.txt, and version sync
+- Auto-generated `docs/generated/token-component-map.json` mapping 67 components to 551 tokens with both component→token and token→component lookups
+- Auto-generated `docs/generated/COMPONENT-INVENTORY.md` listing all 102 components with variants, sizes, and sub-components
+- Auto-generated `docs/generated/COMPONENT-TOKENS.md` documenting the complete token surface per component
+- Export verification that checks all component directories have corresponding barrel exports
+- `llms.txt` (short) and `llms-full.txt` (complete) AI agent reference files generated from manifest and token data
+- Version sync between `packages/core/package.json` and `manifest.ai.json`
+- Source-of-truth audit report at `docs/audits/source-of-truth-audit.md`
+- Automated `manifest.ai.json` generation pipeline (`scripts/generate-manifest.mjs`) that parses TypeScript source to extract component props, hook metadata, and token information
+- `pnpm manifest` and `pnpm manifest:check` scripts for generating and validating the AI discovery manifest
 - Playground site map architecture with individual component pages, token impact views, and relationship graph
 - Component gallery at `/playground/components` with search, category filter, and visual previews
 - Individual component deep-dive pages at `/playground/components/:name` with variants, sizes, states, interactive demo, component tokens editor, props reference, and token dependencies
 - Token explorer at `/playground/tokens` with search, category filter, and usage counts
 - Token impact pages at `/playground/tokens/:category/:name` showing inline editor and all affected components rendered live
-- Token-component relationship graph at `/playground/graph` — interactive Canvas visualization with hover highlighting, zoom, pan, and node clicking
+- Token-component relationship graph at `/playground/graph` — D3 force-directed SVG visualization with glow effects, hover highlighting, zoom/pan, drag, search-to-focus, and node click navigation
 - Component-to-token mapping build script (`scripts/generate-token-map.mjs`) that scans all 67 component CSS files and generates a JSON registry of 551 tokens
 - Shared `PlaygroundLayout` with top navigation (Editor, Components, Tokens, Graph), theme switcher bar, and breadcrumb navigation
 - Component registry data (`playground/src/data/component-registry.ts`) with metadata for 55+ components
@@ -25,16 +162,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Playground component audit report (`docs/audits/playground-component-audit.md`)
 
 ### Changed
+- TokenEditor now uses Arcana `<ColorPicker>` instead of custom playground implementation (deleted playground/src/components/ColorPicker.tsx)
+- TokenEditor now uses Arcana `<FontPicker>` instead of inline 120-line custom font picker
+- TokenEditor now uses Arcana `useUndoRedo` hook instead of inline implementation
+- TokenEditor search input replaced with Arcana `<Input prefix={...} suffix={...} />`
+- TokenEditor reset buttons replaced with Arcana `<Button variant="ghost" size="sm">`
+- CubicBezierEditor now uses Arcana `useMediaQuery` and `usePrefersReducedMotion` hooks instead of raw window.matchMedia
+- AccessibilityPanel, ComponentDetail, TokenExplorer, TokenImpact: deduplicated `getCSSVar` utility (removed 4 inline copies)
+- Landing page prompt input replaced with Arcana `<Input>`
 - Landing page buttons (mobile menu, hero CTA, playground CTA, GitHub link) now use Arcana `<Button>`
 - Landing page hero badge and active badge now use Arcana `<Badge>`
 
 ### Fixed
-- Reverted Arcana component replacements in token editor tooling (TokenEditor, AccessibilityPanel, ColorPicker, CubicBezierEditor) — Arcana components consume the same CSS tokens the editor modifies, causing circular UI corruption
-- Fixed hero prompt input on landing page — reverted from Arcana `<Input>` (wrapper markup broke layout) to raw `<input>`
-- Fixed Reset All button not working in token editor
-- Fixed token reset buttons (18px) being oversized due to Arcana Button min-height
-- Fixed color picker z-index — Arcana Button's `overflow: hidden` was clipping the popup
-- Fixed segmented control buttons changing color when editing `--color-action-primary` token
+- Fixed token CSS lint violations in ColorPicker (hardcoded font-size and transition values replaced with token references)
 
 ## [0.1.0-beta.1] - 2026-03-24
 

@@ -1,0 +1,198 @@
+# Arcana UI
+
+> Auto-generated file. Do not edit manually.
+> Source: scripts/generate-docs.mjs | Regenerate: pnpm generate-docs
+> Last generated: 2026-04-09T17:22:56.002Z
+
+Arcana UI is a token-driven React design system for AI agents to assemble production-grade web interfaces.
+
+## Install
+
+```bash
+npm install @arcana-ui/core @arcana-ui/tokens
+```
+
+## Quick Start
+
+```tsx
+import '@arcana-ui/tokens/dist/arcana.css'; // Required CSS tokens
+import { Button, Card, Input } from '@arcana-ui/core';
+
+// Theme switching (14 presets, no JS runtime — pure CSS)
+document.documentElement.setAttribute('data-theme', 'midnight');
+
+// Density switching
+document.documentElement.setAttribute('data-density', 'compact'); // compact | normal | comfortable
+```
+
+## Themes (14)
+
+- **brutalist**: Bloomberg Terminal meets Swiss poster — bold red accent, dramatic typography, thick structural borders
+- **commerce**: Clean product-focused design — warm neutrals with green accent, Shopify-inspired
+- **corporate**: Conservative navy/slate palette — trustworthy, enterprise-grade, Stripe-inspired
+- **dark**: Deep slate dark with vibrant indigo accent — focused, rich, Linear-inspired
+- **editorial**: Elegant serif typography, high contrast — publishing, NYT-inspired
+- **glass**: Apple iOS glassmorphism — frosted translucent surfaces on gradient, elegant light typography
+- **light**: Warm stone palette with indigo accent — clean, precise, Notion-inspired
+- **midnight**: Deep navy with soft gold accents — premium, finance-grade, Bloomberg-inspired
+- **mono**: Pure black and white — stark typographic minimalism, portfolio/architecture-inspired
+- **nature**: Earth tones with warm greens — organic, wellness, sustainability-inspired
+- **neon**: Electric neon on dark — vivid cyan/pink accents, cyberpunk, gaming-inspired
+- **retro98**: Authentic Windows 98 recreation — pixel-perfect bevels, navy blue title bars, silver surfaces
+- **startup**: Vibrant purple-to-pink gradient energy — modern SaaS, Vercel/Linear-inspired
+- **terminal**: Premium terminal emulator — green phosphor on black, monospace everything, Warp/Hyper-inspired
+
+## Components (108)
+
+
+### primitives (12)
+
+- **Button** — props: variant, size, shape
+- **Input** — props: label, size, error
+- **Textarea** — props: label, error, helperText
+- **Select** — props: label, error, helperText
+- **Checkbox** — props: label, description, indeterminate
+- **CheckboxGroup** — props: options, value, onChange
+- **Radio** — props: label, description
+- **RadioGroup** — props: name, label, value
+- **Toggle** — props: label, description, checked
+- **Badge** — props: variant, size, dot
+- **Avatar** — props: src, alt, name
+- **AvatarGroup** — props: max
+
+### composites (21)
+
+- **Card** — props: variant, padding, interactive
+- **CardHeader** — props: title, description, action
+- **CardBody**
+- **CardFooter** — props: align
+- **Modal** — props: open, onClose, title
+- **ModalClose** — props: onClick
+- **Alert** — props: variant, title, onClose
+- **ToastProvider**
+- **Tabs** — props: value, onChange, defaultValue
+- **TabList**
+- **Tab** — props: value, disabled
+- **TabPanels**
+- **TabPanel** — props: value
+- **Accordion** — props: type, defaultValue, value
+- **AccordionItem** — props: value, disabled
+- **AccordionTrigger**
+- **AccordionContent**
+- **Banner** — props: variant, title, icon
+- **Skeleton** — props: variant, width, height
+- **Spinner** — props: size, color, label
+- **ErrorBoundary** — props: fallback, onError
+
+### layout (5)
+
+- **Stack** — props: direction, gap, align
+- **HStack** — props: gap, align, justify
+- **Grid** — props: columns, gap, rowGap
+- **GridColumn** — props: span, start, as
+- **Container** — props: size, prose, padding
+
+### patterns (67)
+
+- **Navbar** — props: sticky, border, mobileContent
+- **NavbarBrand**
+- **NavbarContent**
+- **NavbarActions**
+- **Sidebar** — props: collapsed, position
+- **SidebarHeader**
+- **SidebarContent**
+- **SidebarFooter**
+- **SidebarItem** — props: icon, active, disabled
+- **SidebarSection** — props: label
+- **Form**
+- **FormField** — props: isRequired, isInvalid
+- **FormLabel**
+- **FormHelperText**
+- **FormErrorMessage**
+- **BottomSheet** — props: open, onClose, title
+- **MobileNav** — props: items, activeKey, onChange
+- **DrawerNav** — props: open, onClose, side
+- **Table** — props: striped, hoverable, size
+- **TableHeader**
+- **TableBody**
+- **TableRow**
+- **TableHead** — props: sortable, sortDirection, onSort
+- **TableCell**
+- **Breadcrumb** — props: separator, maxItems
+- **BreadcrumbItem** — props: href, current
+- **Pagination** — props: page, totalPages, onPageChange
+- **Footer** — props: border, variant
+- **FooterSection** — props: title
+- **FooterLink** — props: external
+- **FooterBottom**
+- **Hero** — props: headline, subheadline, primaryCTA
+- **FeatureSection** — props: title, subtitle, features
+- **Testimonial** — props: quote, author, jobTitle
+- **PricingCard** — props: name, price, period
+- **CTA** — props: headline, description, primaryCTA
+- **StatsBar** — props: stats, variant
+- **Timeline** — props: items, variant
+- **LogoCloud** — props: logos, title, variant
+- **DataTable** — props: data, columns, sortable
+- **StatCard** — props: value, label, prefix
+- **ProgressBar** — props: value, max, variant
+- **KPICard** — props: value, label, prefix
+- **DatePicker** — props: value, defaultValue, onChange
+- **FileUpload** — props: accept, multiple, maxSize
+- **Drawer** — props: open, onClose, side
+- **Popover** — props: trigger, content, open
+- **CommandPalette** — props: open, onClose, items
+- **Divider** — props: orientation, variant, label
+- **Spacer** — props: size, axis
+- **AspectRatio** — props: ratio
+- **Image** — props: src, alt, fallback
+- **Carousel** — props: autoPlay, autoPlayInterval, loop
+- **ProductCard** — props: image, title, price
+- **CartItem** — props: image, title, variant
+- **QuantitySelector** — props: value, onChange, min
+- **PriceDisplay** — props: value, originalValue, currency
+- **RatingStars** — props: value, max, count
+- **ArticleLayout** — props: maxWidth, sidebar, sidebarPosition
+- **PullQuote** — props: quote, attribution, variant
+- **AuthorCard** — props: name, role, avatar
+- **RelatedPosts** — props: title, posts, columns
+- **NewsletterSignup** — props: title, description, placeholder
+- **ScrollArea** — props: maxHeight, orientation, showScrollbar
+- **Collapsible** — props: open, defaultOpen, onOpenChange
+- **CopyButton** — props: value, label, copiedLabel
+- **KeyboardShortcut** — props: keys, variant
+
+### other (2)
+
+- **ColorPicker** — props: value, onChange, format
+- **FontPicker** — props: value, onChange, label
+
+### context (1)
+
+- **ThemeProvider** — props: defaultTheme, storageKey, enableTransitions
+
+## Hooks (11)
+
+- **useToast**
+- **useMediaQuery**: Reactively matches a CSS media query string. SSR-safe: returns `false` when `window` is unavailable.
+- **useBreakpoint**: Returns the current active breakpoint and convenience booleans. SSR-safe: defaults to `"lg"` (desktop) when `window` is 
+- **usePrefersReducedMotion**: Returns `true` when the user has enabled "Prefer reduced motion" in their OS or browser settings. SSR-safe: returns `fal
+- **useHotkey**: Hook to listen for keyboard shortcuts. Automatically handles Cmd (Mac) vs Ctrl (Windows/Linux) when modifier includes "m
+- **useFloating**: Positions a floating element relative to a trigger, with smart flip and viewport clamping. Zero dependencies — a lightwe
+- **useClickOutside**: Fires a callback when a click (mousedown) occurs outside of the referenced element. SSR-safe: does nothing when `documen
+- **useDrag**: Generic drag interaction hook. Handles mousedown/touchstart → document mousemove/touchmove → mouseup/touchend with optio
+- **useUndoRedo**: Generic undo/redo history stack. New pushes after an undo clear the forward (redo) history. Stack size is bounded by `ma
+- **useTheme**: Reads the persisted theme from localStorage. Returns `null` if no preference is stored or if running on the server. / fu
+- **useThemeContext**: Reads the persisted theme from localStorage. / function getStoredTheme(key: string): ThemeId | null { if (typeof window 
+
+## Resources
+
+- Full reference: https://arcana-ui.dev/llms-full.txt
+- Machine-readable manifest: https://raw.githubusercontent.com/Arcana-UI/arcana/develop/manifest.ai.json
+- GitHub: https://github.com/Arcana-UI/arcana
+- Playground / theme editor: https://arcana-ui.dev
+- npm: @arcana-ui/core @arcana-ui/tokens @arcana-ui/cli @arcana-ui/mcp
+
+## Full Reference
+
+See llms-full.txt for complete props tables, usage examples, layout patterns, token reference, and theme customization guide.

@@ -1,20 +1,49 @@
-/* ─── Root ─── */
+/* ─── Component Tokens ─── */
 
 .root {
+  --colorpicker-canvas-width: 192px;
+  --colorpicker-canvas-height: 120px;
+  --colorpicker-slider-height: 10px;
+  --colorpicker-thumb-size: 14px;
+  --colorpicker-bg: var(--color-bg-elevated);
+  --colorpicker-radius: var(--radius-lg);
+  --colorpicker-shadow: var(--shadow-xl);
+  --colorpicker-padding: var(--spacing-2-5);
+  --colorpicker-swatch-size: 24px;
+  --colorpicker-thumb-border: var(--color-bg-page, #fff);
+  --colorpicker-thumb-shadow: var(--shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.35));
+  --colorpicker-cursor-shadow: var(--shadow-xs, 0 0 0 1px rgba(0, 0, 0, 0.4));
+
   position: relative;
   display: inline-block;
+}
+
+/* ─── Size variants ─── */
+
+.root--sm {
+  --colorpicker-canvas-width: 160px;
+  --colorpicker-canvas-height: 100px;
+  --colorpicker-swatch-size: 20px;
+  --colorpicker-padding: var(--spacing-2);
+}
+
+.root--lg {
+  --colorpicker-canvas-width: 240px;
+  --colorpicker-canvas-height: 150px;
+  --colorpicker-swatch-size: 32px;
+  --colorpicker-padding: var(--spacing-3);
 }
 
 /* ─── Trigger Swatch ─── */
 
 .swatch {
-  width: 24px;
-  height: 24px;
+  width: var(--colorpicker-swatch-size);
+  height: var(--colorpicker-swatch-size);
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border-default);
   cursor: pointer;
   padding: 0;
-  transition: box-shadow var(--transition-shadow);
+  transition: box-shadow var(--duration-fast, 100ms) var(--ease-default, ease);
   flex-shrink: 0;
   display: block;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Crect width='4' height='4' fill='%23ccc'/%3E%3Crect x='4' y='4' width='4' height='4' fill='%23ccc'/%3E%3C/svg%3E");
@@ -30,27 +59,32 @@
   outline-offset: 1px;
 }
 
+.swatch:disabled {
+  opacity: var(--opacity-disabled, 0.5);
+  cursor: not-allowed;
+}
+
 /* ─── Popup ─── */
 
 .popup {
-  z-index: 500;
-  background: var(--color-bg-elevated);
+  z-index: var(--z-popover, 500);
+  background: var(--colorpicker-bg);
   border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xl);
-  padding: 10px;
-  width: 214px;
+  border-radius: var(--colorpicker-radius);
+  box-shadow: var(--colorpicker-shadow);
+  padding: var(--colorpicker-padding);
+  width: calc(var(--colorpicker-canvas-width) + var(--colorpicker-padding) * 2 + 2px);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--spacing-2);
 }
 
 /* ─── Canvas ─── */
 
 .canvasWrap {
   position: relative;
-  width: 192px;
-  height: 120px;
+  width: var(--colorpicker-canvas-width);
+  height: var(--colorpicker-canvas-height);
   border-radius: var(--radius-sm);
   overflow: hidden;
   cursor: crosshair;
@@ -59,17 +93,17 @@
 
 .canvas {
   display: block;
-  width: 192px;
-  height: 120px;
+  width: var(--colorpicker-canvas-width);
+  height: var(--colorpicker-canvas-height);
 }
 
 .cursor {
   position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  width: var(--spacing-3);
+  height: var(--spacing-3);
+  border-radius: var(--radius-full, 50%);
+  border: 2px solid var(--colorpicker-thumb-border);
+  box-shadow: var(--colorpicker-cursor-shadow);
   pointer-events: none;
   transform: translate(-50%, -50%);
 }
@@ -79,12 +113,12 @@
 .slidersRow {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-2);
 }
 
 .previewSwatch {
-  width: 28px;
-  height: 28px;
+  width: var(--spacing-7);
+  height: var(--spacing-7);
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border-default);
   flex-shrink: 0;
@@ -97,15 +131,15 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--spacing-1-5);
 }
 
 /* ─── Hue slider ─── */
 
 .hueSlider {
   position: relative;
-  height: 10px;
-  border-radius: 5px;
+  height: var(--colorpicker-slider-height);
+  border-radius: calc(var(--colorpicker-slider-height) / 2);
   cursor: pointer;
   background: linear-gradient(
     to right,
@@ -129,8 +163,8 @@
 
 .alphaSlider {
   position: relative;
-  height: 10px;
-  border-radius: 5px;
+  height: var(--colorpicker-slider-height);
+  border-radius: calc(var(--colorpicker-slider-height) / 2);
   cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Crect width='3' height='3' fill='%23ccc'/%3E%3Crect x='3' y='3' width='3' height='3' fill='%23ccc'/%3E%3C/svg%3E");
   background-size: 6px 6px;
@@ -140,7 +174,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 5px;
+  border-radius: calc(var(--colorpicker-slider-height) / 2);
   background: linear-gradient(
     to right,
     var(--alpha-color-start, transparent),
@@ -152,12 +186,12 @@
 
 .sliderThumb {
   position: absolute;
-  top: -2px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  top: calc((var(--colorpicker-slider-height) - var(--colorpicker-thumb-size)) / 2);
+  width: var(--colorpicker-thumb-size);
+  height: var(--colorpicker-thumb-size);
+  border-radius: var(--radius-full, 50%);
+  border: 2px solid var(--colorpicker-thumb-border);
+  box-shadow: var(--colorpicker-thumb-shadow);
   background: transparent;
   pointer-events: none;
   z-index: 1;
@@ -167,7 +201,7 @@
 
 .inputs {
   display: flex;
-  gap: 4px;
+  gap: var(--spacing-1);
   align-items: stretch;
 }
 
@@ -176,7 +210,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: var(--spacing-0-5);
 }
 
 .hexWrap {
@@ -190,9 +224,9 @@
 .hexInput,
 .rgbInput {
   width: 100%;
-  padding: 4px 5px;
-  font-size: 11px;
-  font-family: "JetBrains Mono", "Fira Code", monospace;
+  padding: var(--spacing-1) var(--spacing-1);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-sm);
   background: var(--color-bg-page);
@@ -219,7 +253,7 @@
 }
 
 .inputLabel {
-  font-size: 9px;
+  font-size: var(--font-size-xs);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -230,21 +264,21 @@
 
 .actionsRow {
   display: flex;
-  gap: 6px;
+  gap: var(--spacing-1-5);
 }
 
 .eyedropperBtn {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 4px 8px;
-  font-size: 11px;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--font-size-xs);
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-sm);
   background: var(--color-bg-page);
   color: var(--color-fg-secondary);
   cursor: pointer;
-  transition: background var(--transition-colors);
+  transition: background var(--duration-fast, 100ms) var(--ease-default, ease);
   font-family: var(--font-family-body);
 }
 
@@ -258,34 +292,34 @@
 .swatchRow {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--spacing-1-5);
 }
 
 .swatchRowLabel {
-  font-size: 9px;
+  font-size: var(--font-size-xs);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
   color: var(--color-fg-muted);
-  width: 36px;
+  width: var(--spacing-9);
   flex-shrink: 0;
 }
 
 .swatchList {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: var(--spacing-1);
   flex: 1;
 }
 
 .miniSwatch {
-  width: 16px;
-  height: 16px;
+  width: var(--spacing-4);
+  height: var(--spacing-4);
   border-radius: var(--radius-xs);
   border: 1px solid var(--color-border-default);
   cursor: pointer;
   padding: 0;
-  transition: transform 80ms, box-shadow 80ms;
+  transition: transform var(--duration-fast, 80ms), box-shadow var(--duration-fast, 80ms);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='2' height='2' fill='%23ccc'/%3E%3Crect x='2' y='2' width='2' height='2' fill='%23ccc'/%3E%3C/svg%3E");
   background-size: 4px 4px;
 }

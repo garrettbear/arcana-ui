@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { path: '/playground', label: 'Editor', exact: true },
   { path: '/playground/components', label: 'Components' },
   { path: '/playground/tokens', label: 'Tokens' },
+  { path: '/playground/graph', label: 'Graph' },
 ];
 
 function ThemeSwitcherBar({

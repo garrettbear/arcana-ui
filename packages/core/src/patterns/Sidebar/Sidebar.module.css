@@ -91,7 +91,7 @@
   gap: var(--spacing-3);
   width: 100%;
   min-height: 2.75rem;
-  padding: var(--spacing-2) var(--spacing-4);
+  padding: var(--element-padding-y-sm) var(--spacing-4);
   background: none;
   border: none;
   border-radius: 0;
@@ -109,7 +109,7 @@
 @media (min-width: 640px) {
   .item {
     min-height: auto;
-    padding: var(--spacing-2) var(--spacing-4);
+    padding: var(--element-padding-y-sm) var(--spacing-4);
   }
 }
 

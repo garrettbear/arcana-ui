@@ -2,6 +2,10 @@
  * QuantitySelector tokens:
  *   Uses semantic tokens for all visual properties.
  *   Mobile-first: 44px touch targets on mobile, auto on desktop.
+ *
+ * Per-size tokens (fall back to global element sizing):
+ *   --qty-height-sm/md            → --element-height-sm/md
+ *   --qty-padding-sm/md           → --element-padding-y-sm/md
  */
 
 .root {
@@ -18,7 +22,7 @@
 .size-md .button {
   min-width: var(--spacing-10);
   min-height: 2.75rem;
-  padding: var(--spacing-2);
+  padding: var(--qty-padding-md, var(--element-padding-y-md));
 }
 
 .size-md .input {
@@ -30,7 +34,7 @@
 .size-sm .button {
   min-width: var(--spacing-8);
   min-height: 2.75rem;
-  padding: var(--spacing-1);
+  padding: var(--qty-padding-sm, var(--element-padding-y-sm));
 }
 
 .size-sm .input {
@@ -41,19 +45,19 @@
 
 @media (min-width: 640px) {
   .size-md .button {
-    min-height: auto;
+    min-height: var(--qty-height-md, var(--element-height-md));
   }
 
   .size-md .input {
-    min-height: auto;
+    min-height: var(--qty-height-md, var(--element-height-md));
   }
 
   .size-sm .button {
-    min-height: auto;
+    min-height: var(--qty-height-sm, var(--element-height-sm));
   }
 
   .size-sm .input {
-    min-height: auto;
+    min-height: var(--qty-height-sm, var(--element-height-sm));
   }
 }
 

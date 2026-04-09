@@ -1,0 +1,114 @@
+/* Cart page styles — tokens only */
+
+.forma-cart {
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.forma-cart-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+@media (min-width: 1024px) {
+  .forma-cart-container {
+    padding: var(--spacing-xl);
+  }
+}
+
+.forma-cart-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  margin: 0 0 var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.forma-cart-badge {
+  vertical-align: middle;
+}
+
+/* Layout */
+.forma-cart-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .forma-cart-layout {
+    grid-template-columns: 1fr 380px;
+    align-items: start;
+  }
+}
+
+/* Cart items */
+.forma-cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Summary */
+.forma-cart-summary {
+  position: sticky;
+  top: var(--spacing-xl);
+}
+
+.forma-summary-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  margin: 0 0 var(--spacing-lg);
+}
+
+.forma-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+}
+
+.forma-summary-row--total {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-fg-primary);
+  padding: var(--spacing-sm) 0;
+}
+
+.forma-summary-shipping {
+  font-style: italic;
+}
+
+.forma-shipping-progress {
+  margin: var(--spacing-md) 0;
+}
+
+.forma-shipping-text {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+  margin: 0 0 var(--spacing-xs);
+}
+
+.forma-promo-form {
+  margin-top: var(--spacing-md);
+}
+
+.forma-promo-row {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: flex-end;
+}
+
+.forma-promo-row > :first-child {
+  flex: 1;
+}
+
+.forma-checkout-btn {
+  margin-top: var(--spacing-md);
+}

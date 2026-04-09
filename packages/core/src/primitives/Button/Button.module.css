@@ -7,12 +7,14 @@
  *   --button-border-width   Border width (fallback: --border-width-default)
  *   --button-radius         Border radius (fallback: --radius-md)
  *   --button-shadow         Box shadow (fallback: --shadow-none)
- *   --button-padding-x      Horizontal padding (fallback: --spacing-md)
- *   --button-padding-y      Vertical padding (fallback: --spacing-sm)
- *   --button-font-size      Font size (fallback: --font-size-sm)
  *   --button-font-weight    Font weight (fallback: --font-weight-medium)
  *   --button-letter-spacing Letter spacing (fallback: --letter-spacing-normal)
- *   --button-height         Element height (density-aware, fallback: 2.5rem)
+ *
+ * Per-size tokens (fall back to global element sizing):
+ *   --button-height-{xs..xl}      → --button-height → --element-height-{xs..xl}
+ *   --button-padding-y-{xs..xl}   → --element-padding-y-{xs..xl}
+ *   --button-padding-x-{xs..xl}   → --element-padding-x-{xs..xl}
+ *   --button-font-size-{xs..xl}   → --element-font-size-{xs..xl}
  */
 
 /* Button base — mobile-first */
@@ -27,7 +29,6 @@
   border-radius: var(--button-radius, var(--radius-md));
   font-family: var(--font-family-body);
   font-weight: var(--button-font-weight, var(--font-weight-medium));
-  font-size: var(--button-font-size, var(--font-size-sm));
   letter-spacing: var(--button-letter-spacing, var(--letter-spacing-normal));
   line-height: var(--line-height-tight);
   box-shadow: var(--button-shadow, var(--shadow-none));
@@ -40,7 +41,7 @@
   overflow: hidden;
 }
 
-/* @breakpoint-sm (640px) — relax min-height for desktop */
+/* @breakpoint-sm (640px) — relax mobile touch target floor */
 @media (min-width: 640px) {
   .button {
     min-height: auto;
@@ -57,7 +58,8 @@
   opacity: var(--opacity-disabled);
 }
 
-/* Variants */
+/* ─── Variants ────────────────────────────────────────────────────────────── */
+
 .primary {
   background-color: var(--button-bg, var(--color-action-primary));
   color: var(--button-fg, var(--color-fg-on-primary));
@@ -113,45 +115,155 @@
   color: var(--color-action-primary-hover);
 }
 
-/* Sizes — mobile-first: all sizes get 44px minimum touch target */
+/* ─── Sizes — mobile-first: all sizes get 44px minimum touch target ───── */
+
+.xs {
+  --button-icon-size: var(--element-icon-size-xs);
+  padding: var(--button-padding-y-xs, var(--element-padding-y-xs))
+    var(--button-padding-x-xs, var(--element-padding-x-xs));
+  font-size: var(--button-font-size-xs, var(--element-font-size-xs));
+  gap: var(--spacing-1);
+}
+
 .sm {
-  --button-icon-size: var(--spacing-3-5);
-  height: 2.75rem;
-  padding: 0 var(--spacing-3);
-  font-size: var(--font-size-xs);
+  --button-icon-size: var(--element-icon-size-sm);
+  padding: var(--button-padding-y-sm, var(--element-padding-y-sm))
+    var(--button-padding-x-sm, var(--element-padding-x-sm));
+  font-size: var(--button-font-size-sm, var(--element-font-size-sm));
+  gap: var(--spacing-1-5);
 }
 
 .md {
-  --button-icon-size: var(--spacing-4);
-  height: 2.75rem;
-  padding: 0 var(--button-padding-x, var(--spacing-md));
-  font-size: var(--button-font-size, var(--font-size-sm));
+  --button-icon-size: var(--element-icon-size-md);
+  padding: var(--button-padding-y-md, var(--element-padding-y-md))
+    var(--button-padding-x-md, var(--element-padding-x-md));
+  font-size: var(--button-font-size-md, var(--element-font-size-md));
 }
 
 .lg {
-  --button-icon-size: var(--spacing-5);
-  height: var(--button-height, 3rem);
-  padding: 0 var(--spacing-6);
-  font-size: var(--font-size-base);
+  --button-icon-size: var(--element-icon-size-lg);
+  padding: var(--button-padding-y-lg, var(--element-padding-y-lg))
+    var(--button-padding-x-lg, var(--element-padding-x-lg));
+  font-size: var(--button-font-size-lg, var(--element-font-size-lg));
 }
 
-/* @breakpoint-sm (640px) — restore intended sizes */
+.xl {
+  --button-icon-size: var(--element-icon-size-xl);
+  padding: var(--button-padding-y-xl, var(--element-padding-y-xl))
+    var(--button-padding-x-xl, var(--element-padding-x-xl));
+  font-size: var(--button-font-size-xl, var(--element-font-size-xl));
+  gap: var(--spacing-3);
+}
+
+/* @breakpoint-sm (640px) — apply element height tokens */
 @media (min-width: 640px) {
+  .xs {
+    height: var(--button-height-xs, var(--element-height-xs));
+    min-height: auto;
+  }
+
   .sm {
-    height: var(--button-height, 2rem);
+    height: var(--button-height-sm, var(--element-height-sm));
+    min-height: auto;
   }
 
   .md {
-    height: var(--button-height, 2.5rem);
+    height: var(--button-height-md, var(--element-height-md));
+    min-height: auto;
+  }
+
+  .lg {
+    height: var(--button-height-lg, var(--element-height-lg));
+    min-height: auto;
+  }
+
+  .xl {
+    height: var(--button-height-xl, var(--element-height-xl));
+    min-height: auto;
   }
 }
 
-/* Full width */
+/* ─── Icon-only sizes (square — width equals height) ─────────────────── */
+
+.iconXs,
+.iconSm,
+.icon,
+.iconLg,
+.iconXl {
+  padding: 0;
+  gap: 0;
+}
+
+.iconXs {
+  --button-icon-size: var(--element-icon-size-xs);
+  font-size: var(--element-font-size-xs);
+}
+
+.iconSm {
+  --button-icon-size: var(--element-icon-size-sm);
+  font-size: var(--element-font-size-sm);
+}
+
+.icon {
+  --button-icon-size: var(--element-icon-size-md);
+  font-size: var(--element-font-size-md);
+}
+
+.iconLg {
+  --button-icon-size: var(--element-icon-size-lg);
+  font-size: var(--element-font-size-lg);
+}
+
+.iconXl {
+  --button-icon-size: var(--element-icon-size-xl);
+  font-size: var(--element-font-size-xl);
+}
+
+@media (min-width: 640px) {
+  .iconXs {
+    min-height: var(--element-height-xs);
+    width: var(--element-height-xs);
+  }
+
+  .iconSm {
+    min-height: var(--element-height-sm);
+    width: var(--element-height-sm);
+  }
+
+  .icon {
+    min-height: var(--element-height-md);
+    width: var(--element-height-md);
+  }
+
+  .iconLg {
+    min-height: var(--element-height-lg);
+    width: var(--element-height-lg);
+  }
+
+  .iconXl {
+    min-height: var(--element-height-xl);
+    width: var(--element-height-xl);
+  }
+}
+
+/* ─── Shape variants ─────────────────────────────────────────────────── */
+
+.circle {
+  border-radius: var(--radius-full);
+}
+
+.pill {
+  border-radius: var(--radius-full);
+}
+
+/* ─── Full width ─────────────────────────────────────────────────────── */
+
 .fullWidth {
   width: 100%;
 }
 
-/* Icon-only: square button with equal padding */
+/* ─── Icon-only legacy (square button with equal padding) ────────────── */
+
 .iconOnly {
   padding: 0;
   aspect-ratio: 1;
@@ -162,12 +274,14 @@
   display: none;
 }
 
-/* Loading state */
+/* ─── Loading state ──────────────────────────────────────────────────── */
+
 .loading {
   pointer-events: none;
 }
 
-/* Icon slots */
+/* ─── Icon slots ─────────────────────────────────────────────────────── */
+
 .iconLeading,
 .iconTrailing {
   display: inline-flex;
@@ -177,21 +291,23 @@
 
 .iconLeading svg,
 .iconTrailing svg {
-  width: var(--button-icon-size, var(--spacing-4));
-  height: var(--button-icon-size, var(--spacing-4));
+  width: var(--button-icon-size, var(--element-icon-size-md));
+  height: var(--button-icon-size, var(--element-icon-size-md));
 }
 
-/* Label */
+/* ─── Label ──────────────────────────────────────────────────────────── */
+
 .label {
   display: inline-flex;
   align-items: center;
 }
 
-/* Spinner */
+/* ─── Spinner ────────────────────────────────────────────────────────── */
+
 .spinner {
   animation: spin var(--spinner-speed, 1000ms) var(--ease-linear) infinite;
-  width: var(--button-icon-size, var(--spacing-4));
-  height: var(--button-icon-size, var(--spacing-4));
+  width: var(--button-icon-size, var(--element-icon-size-md));
+  height: var(--button-icon-size, var(--element-icon-size-md));
   flex-shrink: 0;
 }
 

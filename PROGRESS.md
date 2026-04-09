@@ -1,90 +1,100 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-03-28
-> **Current phase:** Phase 4 (partial) + Phase P (partial)
-> **Next priority task:** P.2 — AI theme generation, then 4.4/4.5/4.7/4.8 demo content
-> **Blocking issues:** None — npm packages published as 0.1.0-beta.1
+> **Last updated:** 2026-04-09 (v0.1.0 stable release prep)
+> **Current sprint:** v0.1.0 stable release — final cut
+> **Source of truth for current state:** CLAUDE.md "Current State" section
+> **Next priority task:** Merge `release/0.1.0` → `main`, tag, publish `@arcana-ui/{tokens,core,cli,mcp}@0.1.0` (Bear actions); then Sprint 2 — AI Theme Generation (P.5)
 
-## Phase 0: Foundation Cleanup (Weeks 1–2)
-- [x] 0.1 — Audit & document current token set
-- [x] 0.2 — Restructure token JSON to three-tier hierarchy
-- [x] 0.3 — Establish code standards (strict TS, naming, exports)
-- [x] 0.4 — Add build pipeline for tokens (JSON → CSS)
-- [x] 0.5 — Clean up component API surfaces
-- [x] 0.6 — Set up testing infrastructure (Vitest + Playwright)
-- [x] 0.7 — Add linting rules (enforce token usage)
-- [x] 0.8 — Update README, CLAUDE.md, SPEC.md
-- [x] 0.9 — Set up CI/CD
-- [x] 0.10 — Establish CONTRIBUTING.md
+---
 
-## Phase 1: Token System Maturity (Weeks 3–5)
-- [x] 1.1 — Full color system
-- [x] 1.2 — Typography system
-- [x] 1.3 — Spacing system
-- [x] 1.4 — Elevation system (shadows + z-index + backdrop blur)
-- [x] 1.5 — Layout tokens (breakpoints, containers, grid)
-- [x] 1.6 — Motion tokens
-- [x] 1.7 — Border & shape tokens
-- [x] 1.8 — Opacity tokens
-- [x] 1.9 — Token validation CI check
-- [x] 1.10 — Theme switching (data-theme + system pref)
-- [x] 1.11 — WCAG contrast validation
-- [x] 1.12 — Component token layer (Tier 3) with density support
+## Phases 0–3: Complete
 
-## Phase 2: Responsive & Mobile (Weeks 5–7)
-- [x] 2.1 — Responsive behavior matrix (docs)
-- [x] 2.2 — Responsive container component
-- [x] 2.3 — Responsive grid system
-- [x] 2.4 — Audit & fix all 22 existing components for mobile
-- [x] 2.5 — Mobile-specific patterns (bottom sheet, drawer nav)
-- [x] 2.6 — Responsive typography (fluid clamp)
-- [x] 2.7 — Viewport-aware spacing
-- [x] 2.8 — Mobile-first CSS refactor
-- [x] 2.9 — Touch & interaction (44px targets, no hover-only)
-- [x] 2.10 — Visual regression test matrix (5 breakpoints)
+All foundation work, token system, component library (68 components), 14 theme presets, test infrastructure, CI/CD, and npm publish are done. See CLAUDE.md for details.
 
-## Phase 3: Expanded Component Library (Weeks 7–12)
-- [x] 3.1 — Refine existing 22 components
-- [x] 3.2 — Navigation: Sidebar, Breadcrumb, Pagination, Footer (Navbar, Tabs, MobileNav already exist)
-- [x] 3.3 — Content: Hero, FeatureSection, Testimonial, PricingCard, CTA, StatsBar, Timeline, LogoCloud
-- [x] 3.4 — Data display: DataTable, StatCard, ProgressBar, KPICard
-- [x] 3.5 — Forms: Select, Checkbox, Radio, Toggle, Textarea, DatePicker, FileUpload, FormField
-- [x] 3.6 — Overlays: Modal, Drawer, Popover, Toast, CommandPalette
-- [x] 3.7 — Layout: Stack, Grid, Container, Divider, Spacer, AspectRatio
-- [x] 3.8 — Media: Avatar, AvatarGroup, Image, Video, Carousel
-- [x] 3.9 — Feedback: Alert, Banner, Skeleton, Spinner, EmptyState, ErrorBoundary
-- [x] 3.10 — E-commerce: ProductCard, CartItem, QuantitySelector, PriceDisplay, RatingStars
-- [x] 3.11 — Editorial: ArticleLayout, PullQuote, AuthorCard, RelatedPosts, NewsletterSignup
-- [x] 3.12 — Utility: ScrollArea, Collapsible, Accordion, CopyButton, KeyboardShortcut
+---
 
-## Phase 4: Theme Presets & Demo Sites (Weeks 10–14)
-- [x] 4.1 — Redesign existing 6 presets for full token architecture
-- [x] 4.2 — Build new presets: Corporate, Startup, Editorial, Commerce, Midnight, Nature, Neon, Mono
-- [x] 4.3 — Demo: SaaS Dashboard (structure + ThemeSwitcher, placeholder content)
-- [ ] 4.4 — Demo: Marketing Landing Page
-- [ ] 4.5 — Demo: Editorial Blog
-- [x] 4.6 — Demo: E-commerce Product Page (structure + ThemeSwitcher, placeholder content)
-- [ ] 4.7 — Demo: Documentation Site
-- [ ] 4.8 — Demo: Admin Panel
-- [ ] 4.9 — Visual regression test fixtures from demos
-- [x] 4.10 — Themeable demo switcher (ThemeSwitcher shared component)
+## Phase 4: Demo Sites ✅ COMPLETE (2026-04-03 to 2026-04-04)
+
+- [x] 4.1 — Manifest generator: type alias resolution, skip filter fixes (commit `2ddea82`)
+- [x] 4.2 — Component audit: 68 components, 95.6%→100% manifest coverage (`.sage/COMPONENT_AUDIT.md`)
+- [x] 4.3 — Demo: Forma — luxury ecommerce (`commerce` theme, 4 pages, 47 components)
+- [x] 4.4 — Demo: Wavefront — music player (`midnight` theme, sidebar + player bar, 3 views)
+- [x] 4.5 — Demo: Mosaic — visual discovery app (`light` theme, masonry grid, 3 pages)
+- [x] 4.6 — Demo: Atelier — editorial magazine (`editorial` theme, zero-radius, real prose, 3 pages)
+- [x] 4.7 — Demo: Control — component analytics dashboard (`dark` theme, 4 pages, full registry)
+- [ ] 4.8 — Deploy all 5 demos to Vercel (**Bear action: needs Vercel CLI or manual deploy**)
+- [ ] 4.9 — ComponentGallery: wire live manifest coverage data (currently hardcoded 95.6%)
+- [ ] 4.10 — Add `vercel.json` to each demo for zero-config Vercel import
+
+---
 
 ## Phase P: Playground Product
-- [x] P.1 — Landing page (dark premium aesthetic, 10 sections, SEO, responsive)
-- [x] P.1.1 — Landing page polish (all 14 themes, responsive showcase, ?theme= linking, dead link fixes)
-- [x] P.1.2 — Playground bugfix and polish (preset logos, color-scheme fixes, stale counts)
-- [x] P.1.3 — Token editor rebuild (custom color picker, bezier editor, search/filter, undo/redo, modified indicators, mobile)
-- [x] P.1.4 — Playground site map architecture (component pages, token impact views, relationship graph, routing, navigation)
-- [ ] P.2 — AI theme generation (prompt input → theme JSON)
 
-## Phase 5: AI Integration & Launch (Weeks 13–16)
-- [ ] 5.1 — Update manifest.ai.json
-- [ ] 5.2 — Build Claude Code skill
-- [ ] 5.3 — Build prompt templates
-- [ ] 5.4 — Publish to npm (v1.0) — beta 0.1.0-beta.1 already published; this task is for the v1.0 stable release
-- [ ] 5.5 — Build documentation site
+- [x] P.1 — Landing page (original Vercel deploy live)
+- [x] P.2 — ComponentGallery with stats bar, richer cards, audit table mode
+- [x] P.3 — Visual token editor (color pickers, sliders)
+- [x] P.4 — Live component preview with category filter
+- [ ] P.5 — AI theme generation flow (Sprint 2)
+- [ ] P.6 — Theme gallery (browse presets, one-click load, fork)
+- [ ] P.7 — Authentication (GitHub + Google OAuth)
+- [ ] P.8 — Theme save/load
+- [ ] P.9 — Export (JSON, CSS, starter project)
+- [ ] P.10 — Monetization infrastructure
+- [ ] P.11 — AI generation rate limiting
+- [ ] P.12 — Accessibility panel (live WCAG scoring)
+
+---
+
+## Phase 5: AI Integration & Launch
+
+- [x] 5.1 — manifest.ai.json (generated, fixed, 100% coverage)
+- [x] 5.2 — llms.txt + llms-full.txt (enhanced: grouped by category, density docs, links, layout patterns, theme guide, responsive section; auto-copied to playground/public/)
+- [x] 5.3 — Claude Code skill at `.claude/skills/arcana/SKILL.md` (1,821 lines — all 108 components, hooks, token system, 4 layout patterns, presets, responsive, rules)
+- [x] 5.4 — MCP server: `@arcana-ui/mcp@0.1.0-beta.1` published to npm (2026-04-08) — 7 tools (list_components, get_component, list_presets, get_preset, validate_theme, generate_theme, get_token_impact); self-contained 1.16 MB unpacked, shasum `186d547829f4a0ba0f8cdad739fdffdc3bb5eabd`
+- [ ] 5.5 — Documentation site
 - [ ] 5.6 — SEO & discoverability
 - [ ] 5.7 — Community starter templates (Next, Vite, Remix, Astro)
-- [ ] 5.8 — Figma token sync
+- [ ] 5.8 — Figma Code Connect + token export
 - [ ] 5.9 — Performance audit
 - [ ] 5.10 — Launch checklist
+- [x] 5.11 — CLI: `@arcana-ui/cli@0.1.0-beta.1` published to npm (init / validate / add-theme commands; 5 starter layouts × 2 frameworks; all 10 combos typecheck against published `@arcana-ui/core`)
+
+---
+
+## 8-Week Sprint Plan Status
+
+| Sprint | Goal | Status |
+|--------|------|--------|
+| 1 | Playground to demo quality + demo sites | ✅ Done |
+| 2 | AI theme generation | Not started |
+| 3 | MCP server + llms.txt + Claude Code skill | ✅ Done (2026-04-08) |
+| 4 | CLI MVP + Figma Code Connect | Not started |
+| 5 | Launch | Not started |
+
+---
+
+## Open Blockers
+
+| Blocker | Owner | Status |
+|---------|-------|--------|
+| `npm publish` of `@arcana-ui/core@0.1.0-beta.2` and `@arcana-ui/tokens@0.1.0-beta.2` | Bear | ✅ Published (2026-04-06) |
+| Vercel deploy for 5 demo sites | Bear | Pending |
+| OpenClaw gateway re-pairing | Bear | Pending |
+| Anthropic API key for AI generation (Sprint 2) | Bear | Not yet needed |
+| Vercel CLI configured | Bear | Not yet needed |
+
+---
+
+## Package Audit (2026-04-06)
+
+- [x] Consumer-test `@arcana-ui/core@beta` + `@arcana-ui/tokens@beta` from a fresh project outside the monorepo
+- [x] Document all findings in CHANGELOG.md and KNOWN_ISSUES.md
+- [x] Fix `@arcana-ui/tokens` exports map (added `./styles`, `./dist/*`, `./package.json`)
+- [x] Fix `@arcana-ui/core` exports map (added `./dist/*`, `./package.json`)
+- [x] Bump both packages to `0.1.0-beta.2`
+- [x] Rebuild; `npm pack --dry-run` lists only `dist/` + `package.json`
+- [x] Write `docs/QUICKSTART.md` (consumer doc + CLI spec)
+- [x] Commit `examples/quickstart/` (reproducible consumer test fixture)
+- [x] Publish beta.2 to npm (**Bear — done 2026-04-06 21:45/21:55 UTC**)
+- [x] Re-verify after publish: fresh `npm install @arcana-ui/core@beta @arcana-ui/tokens@beta` in `/tmp` — both resolve to `0.1.0-beta.2`, 122 exports, `useClickOutside`/`useDrag`/`useUndoRedo` present, `@arcana-ui/tokens/dist/arcana.css` subpath resolves, `examples/quickstart` builds cleanly (280.34 kB JS / 570.07 kB CSS)
+- [ ] Follow-up: per-component entry points in `tsup.config.ts` to fix tree-shaking (tracked in KNOWN_ISSUES.md for beta.3)

@@ -1,7 +1,21 @@
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 
 /** Supported theme identifiers. */
-export type ThemeId = 'light' | 'dark' | 'terminal' | 'retro98' | 'glass' | 'brutalist';
+export type ThemeId =
+  | 'brutalist'
+  | 'commerce'
+  | 'corporate'
+  | 'dark'
+  | 'editorial'
+  | 'glass'
+  | 'light'
+  | 'midnight'
+  | 'mono'
+  | 'nature'
+  | 'neon'
+  | 'retro98'
+  | 'startup'
+  | 'terminal';
 
 /** The resolved source of the current theme. */
 export type ThemeSource = 'manual' | 'system';

@@ -13,68 +13,14 @@
  * - All changes update CSS vars directly (<50ms)
  */
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Button, ColorPicker, FontPicker, Input, useUndoRedo } from '@arcana-ui/core';
+import type { LocalFontEntryEntry } from '@arcana-ui/core';
+import type React from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toHex } from '../utils/contrast';
 import { PRESETS, type PresetId, type ThemePreset, applyPreset, getCSSVar } from '../utils/presets';
-import { ColorPicker } from './ColorPicker';
 import { type BezierValues, CubicBezierEditor } from './CubicBezierEditor';
 import styles from './TokenEditor.module.css';
-
-// ─── Google Fonts ─────────────────────────────────────────────────────────────
-
-const GOOGLE_FONTS = [
-  { name: 'Inter', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Plus Jakarta Sans', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'DM Sans', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Nunito', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Poppins', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Raleway', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Lato', category: 'sans' as const, weights: '400;700' },
-  { name: 'Montserrat', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Open Sans', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Roboto', category: 'sans' as const, weights: '400;500;700' },
-  { name: 'Figtree', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Sora', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Outfit', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Work Sans', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Manrope', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'IBM Plex Sans', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Bricolage Grotesque', category: 'sans' as const, weights: '400;500;600;700' },
-  { name: 'Playfair Display', category: 'serif' as const, weights: '400;500;600;700' },
-  { name: 'Libre Baskerville', category: 'serif' as const, weights: '400;700' },
-  { name: 'Merriweather', category: 'serif' as const, weights: '400;700' },
-  { name: 'EB Garamond', category: 'serif' as const, weights: '400;500;600;700' },
-  { name: 'Lora', category: 'serif' as const, weights: '400;500;600;700' },
-  { name: 'Source Serif 4', category: 'serif' as const, weights: '400;500;600;700' },
-  { name: 'Bitter', category: 'serif' as const, weights: '400;500;600;700' },
-  { name: 'JetBrains Mono', category: 'mono' as const, weights: '400;500' },
-  { name: 'Fira Code', category: 'mono' as const, weights: '400;500' },
-  { name: 'Source Code Pro', category: 'mono' as const, weights: '400;500' },
-  { name: 'IBM Plex Mono', category: 'mono' as const, weights: '400;500' },
-  { name: 'Roboto Mono', category: 'mono' as const, weights: '400;500' },
-  { name: 'Inconsolata', category: 'mono' as const, weights: '400;500' },
-  { name: 'Space Mono', category: 'mono' as const, weights: '400;700' },
-];
-
-type GoogleFont = (typeof GOOGLE_FONTS)[number];
-
-function fontToStack(
-  font: GoogleFont | { name: string; category: 'sans' | 'serif' | 'mono' },
-): string {
-  const fallback =
-    font.category === 'mono' ? 'monospace' : font.category === 'serif' ? 'serif' : 'sans-serif';
-  return `'${font.name}', ${fallback}`;
-}
-
-function loadGoogleFont(font: GoogleFont): void {
-  const id = `gf-${font.name.replace(/\s+/g, '-').toLowerCase()}`;
-  if (document.getElementById(id)) return;
-  const link = document.createElement('link');
-  link.id = id;
-  link.rel = 'stylesheet';
-  link.href = `https://fonts.googleapis.com/css2?family=${font.name.replace(/\s+/g, '+')}:wght@${font.weights}&display=swap`;
-  document.head.appendChild(link);
-}
 
 // ─── Color Token Groups ───────────────────────────────────────────────────────
 
@@ -209,6 +155,35 @@ const ALL_SPACING_STEPS = [
   { multiplier: 32, cssVar: '--spacing-32' },
 ];
 
+// ─── Element Sizing ──────────────────────────────────────────────────────────
+
+const ELEMENT_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+type ElementSize = (typeof ELEMENT_SIZES)[number];
+
+const ELEMENT_HEIGHT_VARS: Record<ElementSize, string> = {
+  xs: '--element-height-xs',
+  sm: '--element-height-sm',
+  md: '--element-height-md',
+  lg: '--element-height-lg',
+  xl: '--element-height-xl',
+};
+
+const ELEMENT_PADDING_Y_VARS: Record<ElementSize, string> = {
+  xs: '--element-padding-y-xs',
+  sm: '--element-padding-y-sm',
+  md: '--element-padding-y-md',
+  lg: '--element-padding-y-lg',
+  xl: '--element-padding-y-xl',
+};
+
+const ELEMENT_PADDING_X_VARS: Record<ElementSize, string> = {
+  xs: '--element-padding-x-xs',
+  sm: '--element-padding-x-sm',
+  md: '--element-padding-x-md',
+  lg: '--element-padding-x-lg',
+  xl: '--element-padding-x-xl',
+};
+
 // ─── Radius ───────────────────────────────────────────────────────────────────
 
 const RADIUS_SCALE = [
@@ -230,191 +205,11 @@ interface HistoryEntry {
   newValue: string;
 }
 
-const MAX_HISTORY = 50;
+// Uses useUndoRedo from @arcana-ui/core (imported above)
 
-function useUndoRedo() {
-  const history = useRef<HistoryEntry[]>([]);
-  const index = useRef<number>(-1);
-  const [, forceUpdate] = useState(0);
+// FontPicker is now imported from @arcana-ui/core
 
-  const push = useCallback((entry: HistoryEntry) => {
-    // Trim redo branch
-    history.current = history.current.slice(0, index.current + 1);
-    history.current.push(entry);
-    if (history.current.length > MAX_HISTORY) {
-      history.current.shift();
-    }
-    index.current = history.current.length - 1;
-    forceUpdate((n) => n + 1);
-  }, []);
-
-  const undo = useCallback((): HistoryEntry | null => {
-    if (index.current < 0) return null;
-    const entry = history.current[index.current];
-    index.current -= 1;
-    forceUpdate((n) => n + 1);
-    return entry;
-  }, []);
-
-  const redo = useCallback((): HistoryEntry | null => {
-    if (index.current >= history.current.length - 1) return null;
-    index.current += 1;
-    const entry = history.current[index.current];
-    forceUpdate((n) => n + 1);
-    return entry;
-  }, []);
-
-  const clear = useCallback(() => {
-    history.current = [];
-    index.current = -1;
-    forceUpdate((n) => n + 1);
-  }, []);
-
-  return {
-    push,
-    undo,
-    redo,
-    clear,
-    canUndo: index.current >= 0,
-    canRedo: index.current < history.current.length - 1,
-  };
-}
-
-// ─── FontPicker ───────────────────────────────────────────────────────────────
-
-interface LocalFont {
-  name: string;
-  stack: string;
-}
-
-interface FontPickerProps {
-  label: string;
-  value: string;
-  localFonts: LocalFont[];
-  onChange: (stack: string) => void;
-}
-
-function getFirstFontName(stack: string): string {
-  return stack.split(',')[0].trim().replace(/['"]/g, '');
-}
-
-function FontPicker({ label, value, localFonts, onChange }: FontPickerProps) {
-  const [search, setSearch] = useState('');
-  const [open, setOpen] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const filtered = useMemo(() => {
-    const q = search.toLowerCase();
-    const gf = q ? GOOGLE_FONTS.filter((f) => f.name.toLowerCase().includes(q)) : GOOGLE_FONTS;
-    const lf = localFonts.filter((f) => !q || f.name.toLowerCase().includes(q));
-    return { googleFonts: gf, localFonts: lf };
-  }, [search, localFonts]);
-
-  const handleSelect = (font: GoogleFont) => {
-    loadGoogleFont(font);
-    onChange(fontToStack(font));
-    setOpen(false);
-    setSearch('');
-  };
-
-  const handleLocalSelect = (font: LocalFont) => {
-    onChange(font.stack);
-    setOpen(false);
-    setSearch('');
-  };
-
-  useEffect(() => {
-    if (!open) return;
-    const handleOutside = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-        setOpen(false);
-        setSearch('');
-      }
-    };
-    document.addEventListener('mousedown', handleOutside);
-    return () => document.removeEventListener('mousedown', handleOutside);
-  }, [open]);
-
-  useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 0);
-  }, [open]);
-
-  const currentName = getFirstFontName(value);
-
-  return (
-    <div ref={wrapperRef} className={styles.fontPicker}>
-      <button type="button" className={styles.fontPickerTrigger} onClick={() => setOpen((o) => !o)}>
-        <span className={styles.fontPickerTriggerLabel}>{label}</span>
-        <span className={styles.fontPickerTriggerValue} style={{ fontFamily: value }}>
-          {currentName}
-        </span>
-        <span className={styles.fontPickerChevron}>{open ? '▴' : '▾'}</span>
-      </button>
-
-      {open && (
-        <div className={styles.fontPickerDropdown}>
-          <div className={styles.fontPickerSearchWrapper}>
-            <input
-              ref={inputRef}
-              type="text"
-              className={styles.fontPickerSearch}
-              placeholder="Search fonts…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div className={styles.fontPickerList}>
-            {filtered.localFonts.length > 0 && (
-              <>
-                <div className={styles.fontPickerGroupLabel}>Uploaded</div>
-                {filtered.localFonts.map((font) => (
-                  <button
-                    key={font.name}
-                    type="button"
-                    className={`${styles.fontPickerOption} ${currentName === font.name ? styles.fontPickerOptionActive : ''}`}
-                    style={{ fontFamily: font.stack }}
-                    onClick={() => handleLocalSelect(font)}
-                  >
-                    {font.name}
-                    <span className={styles.fontPickerOptionBadge}>local</span>
-                  </button>
-                ))}
-              </>
-            )}
-            {(['sans', 'serif', 'mono'] as const).map((cat) => {
-              const catFonts = filtered.googleFonts.filter((f) => f.category === cat);
-              if (!catFonts.length) return null;
-              const catLabel =
-                cat === 'sans' ? 'Sans-Serif' : cat === 'serif' ? 'Serif' : 'Monospace';
-              return (
-                <React.Fragment key={cat}>
-                  <div className={styles.fontPickerGroupLabel}>{catLabel}</div>
-                  {catFonts.map((font) => (
-                    <button
-                      key={font.name}
-                      type="button"
-                      className={`${styles.fontPickerOption} ${currentName === font.name ? styles.fontPickerOptionActive : ''}`}
-                      style={{
-                        fontFamily: `'${font.name}', ${font.category === 'mono' ? 'monospace' : font.category}`,
-                      }}
-                      onClick={() => handleSelect(font)}
-                    >
-                      {font.name}
-                    </button>
-                  ))}
-                </React.Fragment>
-              );
-            })}
-            {filtered.googleFonts.length === 0 && filtered.localFonts.length === 0 && (
-              <div className={styles.fontPickerEmpty}>No fonts match "{search}"</div>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+// FontPicker component was here — now imported from @arcana-ui/core
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
@@ -444,10 +239,33 @@ export function TokenEditor({
   const [spacingBase, setSpacingBase] = useState(4);
   const [density, setDensity] = useState<DensityMode>('default');
   const [scale, setScale] = useState(1);
-  const [localFonts, setLocalFonts] = useState<LocalFont[]>([]);
+  const [localFonts, setLocalFontEntrys] = useState<LocalFontEntry[]>([]);
   const [motionDuration, setMotionDuration] = useState(200);
   const [bezier, setBezier] = useState<BezierValues>({ x1: 0.25, y1: 0.1, x2: 0.25, y2: 1 });
-  const [pendingFont, setPendingFont] = useState<LocalFont | null>(null);
+  const [pendingFont, setPendingFont] = useState<LocalFontEntry | null>(null);
+
+  // Element sizing state
+  const [elementHeights, setElementHeights] = useState<Record<ElementSize, number>>({
+    xs: 28,
+    sm: 32,
+    md: 40,
+    lg: 48,
+    xl: 56,
+  });
+  const [elementPaddingY, setElementPaddingY] = useState<Record<ElementSize, number>>({
+    xs: 4,
+    sm: 6,
+    md: 8,
+    lg: 10,
+    xl: 12,
+  });
+  const [elementPaddingX, setElementPaddingX] = useState<Record<ElementSize, number>>({
+    xs: 8,
+    sm: 12,
+    md: 16,
+    lg: 20,
+    xl: 24,
+  });
 
   // Sections: which are open
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['presets', 'colors']));
@@ -463,7 +281,7 @@ export function TokenEditor({
   const [modifiedScalars, setModifiedScalars] = useState<Set<string>>(new Set());
 
   // Undo/Redo
-  const undoRedo = useUndoRedo();
+  const undoRedo = useUndoRedo<HistoryEntry>();
 
   // Undo toast
   const [undoToast, setUndoToast] = useState<string | null>(null);
@@ -515,7 +333,8 @@ export function TokenEditor({
 
     const sp1 = getCSSVar('--spacing-1');
     if (sp1) {
-      const px = Number.parseFloat(sp1);
+      let px = Number.parseFloat(sp1);
+      if (sp1.includes('rem')) px = px * 16;
       if (px > 0) setSpacingBase(Math.round(px));
     }
 
@@ -538,6 +357,30 @@ export function TokenEditor({
       const ms = Number.parseInt(durNormal);
       if (!Number.isNaN(ms)) setMotionDuration(ms);
     }
+
+    // Element sizing
+    const parseRemOrPx = (val: string): number => {
+      const n = Number.parseFloat(val);
+      if (val.includes('rem')) return Math.round(n * 16);
+      return Math.round(n);
+    };
+    const newHeights: Record<string, number> = {};
+    const newPadY: Record<string, number> = {};
+    const newPadX: Record<string, number> = {};
+    for (const size of ELEMENT_SIZES) {
+      const h = getCSSVar(ELEMENT_HEIGHT_VARS[size]);
+      if (h) newHeights[size] = parseRemOrPx(h);
+      const py = getCSSVar(ELEMENT_PADDING_Y_VARS[size]);
+      if (py) newPadY[size] = parseRemOrPx(py);
+      const px = getCSSVar(ELEMENT_PADDING_X_VARS[size]);
+      if (px) newPadX[size] = parseRemOrPx(px);
+    }
+    if (Object.keys(newHeights).length === 5)
+      setElementHeights(newHeights as Record<ElementSize, number>);
+    if (Object.keys(newPadY).length === 5)
+      setElementPaddingY(newPadY as Record<ElementSize, number>);
+    if (Object.keys(newPadX).length === 5)
+      setElementPaddingX(newPadX as Record<ElementSize, number>);
   }, []);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: activePresetId intentionally triggers refresh
@@ -712,6 +555,24 @@ export function TokenEditor({
     document.documentElement.style.setProperty('--arcana-scale', String(value));
   };
 
+  const handleElementHeightChange = (size: ElementSize, value: number) => {
+    setElementHeights((prev) => ({ ...prev, [size]: value }));
+    document.documentElement.style.setProperty(ELEMENT_HEIGHT_VARS[size], `${value / 16}rem`);
+    setModifiedScalars((prev) => new Set([...prev, 'elementSizing']));
+  };
+
+  const handleElementPaddingYChange = (size: ElementSize, value: number) => {
+    setElementPaddingY((prev) => ({ ...prev, [size]: value }));
+    document.documentElement.style.setProperty(ELEMENT_PADDING_Y_VARS[size], `${value}px`);
+    setModifiedScalars((prev) => new Set([...prev, 'elementSizing']));
+  };
+
+  const handleElementPaddingXChange = (size: ElementSize, value: number) => {
+    setElementPaddingX((prev) => ({ ...prev, [size]: value }));
+    document.documentElement.style.setProperty(ELEMENT_PADDING_X_VARS[size], `${value}px`);
+    setModifiedScalars((prev) => new Set([...prev, 'elementSizing']));
+  };
+
   const handleMotionDurationChange = (ms: number) => {
     setMotionDuration(ms);
     applyMotionDuration(ms);
@@ -724,7 +585,7 @@ export function TokenEditor({
     setModifiedScalars((prev) => new Set([...prev, 'motion']));
   };
 
-  const handleLocalFontUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLocalFontEntryUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const fontName = file.name
@@ -738,8 +599,8 @@ export function TokenEditor({
     const styleEl = document.createElement('style');
     styleEl.textContent = `@font-face { font-family: '${fontName}'; src: url('${url}') format('${format}'); font-display: swap; }`;
     document.head.appendChild(styleEl);
-    const newFont: LocalFont = { name: fontName, stack: `'${fontName}', sans-serif` };
-    setLocalFonts((prev) => [...prev, newFont]);
+    const newFont: LocalFontEntry = { name: fontName, stack: `'${fontName}', sans-serif` };
+    setLocalFontEntrys((prev) => [...prev, newFont]);
     setPendingFont(newFont);
     e.target.value = '';
   };
@@ -868,16 +729,32 @@ export function TokenEditor({
     return exportObj;
   }, [radius, scale, displayFont, bodyFont, monoFont, lineHeight, motionDuration, density]);
 
-  const handleExport = () => {
-    const exportObj = collectTokenSnapshot();
-    const json = JSON.stringify(exportObj, null, 2);
-    const blob = new Blob([json], { type: 'application/json' });
+  const downloadFile = (contents: string, filename: string, mime: string) => {
+    const blob = new Blob([contents], { type: mime });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `arcana-theme-${activePresetId}.json`;
+    a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const handleExportJson = () => {
+    const exportObj = collectTokenSnapshot();
+    const json = JSON.stringify(exportObj, null, 2);
+    downloadFile(json, `arcana-theme-${activePresetId}.json`, 'application/json');
+  };
+
+  const handleExportCss = () => {
+    const exportObj = collectTokenSnapshot();
+    const density = exportObj['--data-density'];
+    const tokenLines = Object.entries(exportObj)
+      .filter(([key]) => key.startsWith('--') && key !== '--data-density')
+      .map(([key, value]) => `  ${key}: ${value};`)
+      .join('\n');
+    const densityAttr = density && density !== 'default' ? `[data-density="${density}"] ` : '';
+    const css = `/* Arcana UI — ${activePresetId} theme (exported ${new Date().toISOString().slice(0, 10)}) */\n:root${densityAttr ? `,\n${densityAttr}:root` : ''} {\n${tokenLines}\n}\n`;
+    downloadFile(css, `arcana-theme-${activePresetId}.css`, 'text/css');
   };
 
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -911,8 +788,11 @@ export function TokenEditor({
           if (data['--font-size-base'].includes('rem')) px = px * 16;
           setTypeBaseSize(Math.round(px) || 16);
         }
-        if (data['--spacing-1'])
-          setSpacingBase(Math.round(Number.parseFloat(data['--spacing-1'])) || 4);
+        if (data['--spacing-1']) {
+          let spPx = Number.parseFloat(data['--spacing-1']);
+          if (data['--spacing-1'].includes('rem')) spPx = spPx * 16;
+          setSpacingBase(Math.round(spPx) || 4);
+        }
         if (data['--radius-md']) setRadius(Number.parseInt(data['--radius-md']) || 8);
         if (data['--arcana-scale']) {
           const s = Number.parseFloat(data['--arcana-scale']);
@@ -981,6 +861,8 @@ export function TokenEditor({
   const showShape = !q || 'shape radius border rounded'.includes(q);
   const showMotion = !q || 'motion animation duration easing bezier spring bounce'.includes(q);
   const showScale = !q || 'scale zoom preview'.includes(q);
+  const showElementSizing =
+    !q || 'element sizing height padding button input select alignment'.includes(q);
 
   // ── Modified counts ───────────────────────────────────────────────────────
 
@@ -993,6 +875,7 @@ export function TokenEditor({
     'lineHeight',
   ].filter((k) => modifiedScalars.has(k)).length;
   const spacingModifiedCount = ['spacing', 'density'].filter((k) => modifiedScalars.has(k)).length;
+  const elementSizingModifiedCount = modifiedScalars.has('elementSizing') ? 1 : 0;
   const shapeModifiedCount = modifiedScalars.has('radius') ? 1 : 0;
   const motionModifiedCount = modifiedScalars.has('motion') ? 1 : 0;
 
@@ -1027,19 +910,24 @@ export function TokenEditor({
 
       {/* ── Search ── */}
       <div className={styles.searchWrap}>
-        <span className={styles.searchIcon}>⌕</span>
-        <input
-          type="text"
-          className={styles.searchInput}
+        <Input
+          size="sm"
           placeholder="Search tokens…"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          prefix={<span aria-hidden="true">⌕</span>}
+          suffix={
+            searchQuery ? (
+              <button
+                type="button"
+                className={styles.searchClear}
+                onClick={() => setSearchQuery('')}
+              >
+                ×
+              </button>
+            ) : undefined
+          }
         />
-        {searchQuery && (
-          <button type="button" className={styles.searchClear} onClick={() => setSearchQuery('')}>
-            ×
-          </button>
-        )}
       </div>
 
       {/* ── 1. Theme Presets ── */}
@@ -1108,8 +996,9 @@ export function TokenEditor({
                         />
                       )}
                       {openColorGroups.has(group.id) && (
-                        <button
-                          type="button"
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           className={styles.sectionResetBtn}
                           onClick={(e) => {
                             e.stopPropagation();
@@ -1118,7 +1007,7 @@ export function TokenEditor({
                           title={`Reset ${group.label}`}
                         >
                           Reset
-                        </button>
+                        </Button>
                       )}
                     </button>
                     {openColorGroups.has(group.id) && (
@@ -1136,7 +1025,7 @@ export function TokenEditor({
                                 <ColorPicker
                                   value={currentVal}
                                   onChange={(v) => handleColorChange(token.var, v)}
-                                  presetPalette={themePalette}
+                                  presetColors={themePalette}
                                 />
                                 <span className={styles.colorValue}>
                                   {toHex(currentVal).toUpperCase()}
@@ -1308,7 +1197,7 @@ export function TokenEditor({
                     type="file"
                     accept=".woff2,.woff,.ttf,.otf"
                     className={styles.localFontInput}
-                    onChange={handleLocalFontUpload}
+                    onChange={handleLocalFontEntryUpload}
                   />
                 </label>
                 {pendingFont && (
@@ -1465,6 +1354,175 @@ export function TokenEditor({
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ── 4b. Element Sizing ── */}
+      {showElementSizing && (
+        <div className={styles.section}>
+          <button
+            type="button"
+            className={styles.sectionHeader}
+            onClick={() => toggleSection('elementSizing')}
+          >
+            <span className={styles.sectionToggle}>
+              {openSections.has('elementSizing') ? '▾' : '▸'}
+            </span>
+            <span className={styles.sectionLabel}>Element Sizing</span>
+            {elementSizingModifiedCount > 0 && (
+              <span className={styles.modifiedBadge}>{elementSizingModifiedCount}</span>
+            )}
+          </button>
+          {openSections.has('elementSizing') && (
+            <div className={styles.sectionBody}>
+              {/* Heights */}
+              <p className={styles.subSectionLabel}>Heights</p>
+              {ELEMENT_SIZES.map((size) => (
+                <div key={`h-${size}`} className={styles.sliderRow}>
+                  <span className={styles.sliderLabel}>{size.toUpperCase()}</span>
+                  <div className={styles.sliderControl}>
+                    <input
+                      type="range"
+                      className={styles.slider}
+                      min={16}
+                      max={64}
+                      step={1}
+                      value={elementHeights[size]}
+                      onChange={(e) =>
+                        handleElementHeightChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <input
+                      type="number"
+                      className={styles.sliderNumberInput}
+                      min={16}
+                      max={64}
+                      step={1}
+                      value={elementHeights[size]}
+                      onChange={(e) =>
+                        handleElementHeightChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <span className={styles.sliderUnit}>px</span>
+                  </div>
+                </div>
+              ))}
+
+              {/* Padding Y */}
+              <p className={styles.subSectionLabel}>Padding Y</p>
+              {ELEMENT_SIZES.map((size) => (
+                <div key={`py-${size}`} className={styles.sliderRow}>
+                  <span className={styles.sliderLabel}>{size.toUpperCase()}</span>
+                  <div className={styles.sliderControl}>
+                    <input
+                      type="range"
+                      className={styles.slider}
+                      min={0}
+                      max={24}
+                      step={1}
+                      value={elementPaddingY[size]}
+                      onChange={(e) =>
+                        handleElementPaddingYChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <input
+                      type="number"
+                      className={styles.sliderNumberInput}
+                      min={0}
+                      max={24}
+                      step={1}
+                      value={elementPaddingY[size]}
+                      onChange={(e) =>
+                        handleElementPaddingYChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <span className={styles.sliderUnit}>px</span>
+                  </div>
+                </div>
+              ))}
+
+              {/* Padding X */}
+              <p className={styles.subSectionLabel}>Padding X</p>
+              {ELEMENT_SIZES.map((size) => (
+                <div key={`px-${size}`} className={styles.sliderRow}>
+                  <span className={styles.sliderLabel}>{size.toUpperCase()}</span>
+                  <div className={styles.sliderControl}>
+                    <input
+                      type="range"
+                      className={styles.slider}
+                      min={0}
+                      max={32}
+                      step={1}
+                      value={elementPaddingX[size]}
+                      onChange={(e) =>
+                        handleElementPaddingXChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <input
+                      type="number"
+                      className={styles.sliderNumberInput}
+                      min={0}
+                      max={32}
+                      step={1}
+                      value={elementPaddingX[size]}
+                      onChange={(e) =>
+                        handleElementPaddingXChange(size, Number.parseInt(e.target.value))
+                      }
+                    />
+                    <span className={styles.sliderUnit}>px</span>
+                  </div>
+                </div>
+              ))}
+
+              {/* Visual alignment preview */}
+              <p className={styles.subSectionLabel}>Alignment Preview</p>
+              <div className={styles.alignmentPreview}>
+                {ELEMENT_SIZES.map((size) => (
+                  <div key={size} className={styles.alignmentRow}>
+                    <span className={styles.alignmentLabel}>{size.toUpperCase()}</span>
+                    <div className={styles.alignmentElements}>
+                      <div
+                        className={styles.alignmentBox}
+                        style={{
+                          minHeight: `${elementHeights[size]}px`,
+                          paddingTop: `${elementPaddingY[size]}px`,
+                          paddingBottom: `${elementPaddingY[size]}px`,
+                          paddingLeft: `${elementPaddingX[size]}px`,
+                          paddingRight: `${elementPaddingX[size]}px`,
+                        }}
+                      >
+                        Button
+                      </div>
+                      <div
+                        className={styles.alignmentBox}
+                        style={{
+                          minHeight: `${elementHeights[size]}px`,
+                          paddingTop: `${elementPaddingY[size]}px`,
+                          paddingBottom: `${elementPaddingY[size]}px`,
+                          paddingLeft: `${elementPaddingX[size]}px`,
+                          paddingRight: `${elementPaddingX[size]}px`,
+                        }}
+                      >
+                        Input
+                      </div>
+                      <div
+                        className={styles.alignmentBox}
+                        style={{
+                          minHeight: `${elementHeights[size]}px`,
+                          paddingTop: `${elementPaddingY[size]}px`,
+                          paddingBottom: `${elementPaddingY[size]}px`,
+                          paddingLeft: `${elementPaddingX[size]}px`,
+                          paddingRight: `${elementPaddingX[size]}px`,
+                        }}
+                      >
+                        Select
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -1638,10 +1696,19 @@ export function TokenEditor({
         />
         <button
           type="button"
-          className={`${styles.actionBtn} ${styles.actionBtnPrimary}`}
-          onClick={handleExport}
+          className={styles.actionBtn}
+          onClick={handleExportCss}
+          title="Download a ready-to-paste :root { --token: value } CSS block"
         >
-          Export
+          Export CSS
+        </button>
+        <button
+          type="button"
+          className={`${styles.actionBtn} ${styles.actionBtnPrimary}`}
+          onClick={handleExportJson}
+          title="Download a theme JSON file you can reimport or feed into Arcana tools"
+        >
+          Export JSON
         </button>
       </div>
 

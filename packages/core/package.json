@@ -1,6 +1,6 @@
 {
   "name": "@arcana-ui/core",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0",
   "description": "React components for Arcana UI — AI's #1 design system",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -17,7 +17,9 @@
         "default": "./dist/index.js"
       }
     },
-    "./styles": "./dist/index.css"
+    "./styles": "./dist/index.css",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
   },
   "files": ["dist"],
   "sideEffects": ["*.css"],

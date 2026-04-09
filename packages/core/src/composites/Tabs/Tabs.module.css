@@ -3,8 +3,8 @@
  *   --tabs-border-color    Border color (fallback: --color-border-default)
  *   --tabs-font-size       Tab font size (fallback: --font-size-sm)
  *   --tabs-font-weight     Tab font weight (fallback: --font-weight-medium)
- *   --tabs-padding-x       Tab horizontal padding (fallback: --spacing-3)
- *   --tabs-padding-y       Tab vertical padding (fallback: --spacing-2)
+ *   --tabs-padding-x       Tab horizontal padding (fallback: --element-padding-x-sm)
+ *   --tabs-padding-y       Tab vertical padding (fallback: --element-padding-y-sm)
  *   --tabs-active-color    Active tab color (fallback: --color-action-primary)
  */
 
@@ -44,7 +44,8 @@
   align-items: center;
   justify-content: center;
   min-height: 2.75rem;
-  padding: var(--tabs-padding-y, var(--spacing-2)) var(--tabs-padding-x, var(--spacing-3));
+  padding: var(--tabs-padding-y, var(--element-padding-y-sm))
+    var(--tabs-padding-x, var(--element-padding-x-sm));
   font-family: var(--font-family-body);
   font-size: var(--tabs-font-size, var(--font-size-sm));
   font-weight: var(--tabs-font-weight, var(--font-weight-medium));

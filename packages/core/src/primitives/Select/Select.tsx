@@ -44,7 +44,7 @@ export interface SelectProps
   /** Show loading spinner in dropdown */
   loading?: boolean;
   /** Size variant */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** Whether the select stretches to fill its container */
   fullWidth?: boolean;
   /** Whether the select is disabled */

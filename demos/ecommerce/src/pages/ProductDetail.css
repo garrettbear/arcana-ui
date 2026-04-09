@@ -1,0 +1,195 @@
+/* Product Detail page styles — tokens only */
+
+.forma-pdp {
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.forma-pdp-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+@media (min-width: 1024px) {
+  .forma-pdp-container {
+    padding: var(--spacing-xl);
+  }
+}
+
+/* Two-column layout */
+.forma-pdp-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .forma-pdp-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+  }
+}
+
+.forma-pdp-image {
+  position: relative;
+}
+
+.forma-pdp-spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-surface);
+  z-index: 1;
+}
+
+.forma-pdp-badge {
+  position: absolute;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+}
+
+/* Info column */
+.forma-pdp-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.forma-pdp-category {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.forma-pdp-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .forma-pdp-title {
+    font-size: var(--font-size-3xl);
+  }
+}
+
+.forma-pdp-description {
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-loose);
+  margin: 0;
+}
+
+/* Actions */
+.forma-pdp-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.forma-pdp-qty-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xs);
+}
+
+.forma-pdp-qty-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-fg-secondary);
+}
+
+/* Accordion */
+.forma-pdp-accordion-text {
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-body);
+  margin: 0;
+}
+
+/* Tabs section */
+.forma-pdp-tabs-section {
+  padding-top: var(--spacing-lg);
+}
+
+.forma-pdp-tab-content {
+  padding: var(--spacing-md) 0;
+}
+
+/* Reviews */
+.forma-pdp-reviews {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.forma-review-text {
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-body);
+  margin: var(--spacing-xs) 0;
+}
+
+.forma-review-author {
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Related products */
+.forma-pdp-related {
+  padding-top: var(--spacing-lg);
+}
+
+.forma-pdp-related-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  margin: 0 0 var(--spacing-xl);
+}
+
+.forma-pdp-related-scroll {
+  display: flex;
+  gap: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+}
+
+.forma-pdp-related-card {
+  flex: 0 0 220px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius-md);
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+
+@media (min-width: 640px) {
+  .forma-pdp-related-card {
+    flex: 0 0 260px;
+  }
+}
+
+.forma-pdp-related-card:hover {
+  transform: translateY(-2px);
+}
+
+.forma-pdp-related-card:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 4px;
+}
+
+.forma-pdp-related-name {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}

@@ -1,0 +1,46 @@
+/* DemoFooter — Forma footer */
+
+.forma-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 640px) {
+  .forma-footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--spacing-2xl);
+  }
+}
+
+.forma-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.forma-footer-logo {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: var(--color-fg-primary);
+  text-decoration: none;
+}
+
+.forma-footer-logo:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.forma-footer-tagline {
+  color: var(--color-fg-muted);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+}
+
+.forma-footer-copy {
+  color: var(--color-fg-muted);
+  font-size: var(--font-size-xs);
+}

@@ -8,6 +8,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { TokenMapData } from '../data/token-map-types';
 import tokenMapRaw from '../data/token-map.json';
+import { getCSSVar as getCSSVarValue } from '../utils/presets';
 import styles from './TokenExplorer.module.css';
 
 const tokenMapData = tokenMapRaw as unknown as TokenMapData;
@@ -51,10 +52,7 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   other: 'Miscellaneous tokens.',
 };
 
-function getCSSVarValue(varName: string): string {
-  if (typeof window === 'undefined') return '';
-  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-}
+// getCSSVarValue imported from presets above
 
 function TokenPreview({ token, value }: { token: string; value: string }) {
   const cat = tokenMapData.tokens[token]?.category || 'other';

@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { contrastRatio, suggestFix, wcagLevel } from '../utils/contrast';
+import { getCSSVar } from '../utils/presets';
 import styles from './AccessibilityPanel.module.css';
-
-function getCSSVar(varName: string): string {
-  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-}
 
 // ─── Contrast pairs to evaluate ──────────────────────────────────────────────
 

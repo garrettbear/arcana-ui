@@ -1,0 +1,221 @@
+/* Shop page styles — tokens only */
+
+.forma-shop {
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.forma-shop-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+@media (min-width: 1024px) {
+  .forma-shop-container {
+    padding: var(--spacing-xl);
+  }
+}
+
+.forma-shop-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.forma-shop-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .forma-shop-title {
+    font-size: var(--font-size-3xl);
+  }
+}
+
+.forma-shop-count {
+  color: var(--color-fg-muted);
+  font-size: var(--font-size-lg);
+}
+
+/* Filters */
+.forma-shop-filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (min-width: 640px) {
+  .forma-shop-filters {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.forma-category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.forma-pill {
+  background: none;
+  border: 1px solid var(--color-border-default);
+  color: var(--color-fg-secondary);
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.forma-pill:hover {
+  border-color: var(--color-fg-secondary);
+  color: var(--color-fg-primary);
+}
+
+.forma-pill:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.forma-pill--active {
+  background: var(--color-fg-primary);
+  border-color: var(--color-fg-primary);
+  color: var(--color-bg-page);
+}
+
+.forma-pill--active:hover {
+  background: var(--color-fg-secondary);
+  border-color: var(--color-fg-secondary);
+  color: var(--color-bg-page);
+}
+
+/* Grid */
+.forma-shop-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .forma-shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .forma-shop-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.forma-product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border-radius: var(--radius-md);
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+
+.forma-product-link:hover {
+  transform: translateY(-2px);
+}
+
+.forma-product-link:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}
+
+.forma-shop-pagination {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--spacing-2xl);
+}
+
+/* Filter controls */
+.forma-filter-scroll {
+  flex: 1;
+  min-width: 0;
+}
+
+.forma-filter-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* Card wrapper */
+.forma-shop-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.forma-quick-view-btn {
+  align-self: flex-start;
+  font-size: var(--font-size-xs);
+}
+
+/* Loading */
+.forma-shop-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xl);
+}
+
+/* Skeleton loading */
+.forma-skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* Quick View Modal */
+.forma-quick-view {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .forma-quick-view {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.forma-quick-view-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.forma-quick-view-desc {
+  color: var(--color-fg-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-body);
+  margin: 0;
+}
+
+.forma-quick-view-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: auto;
+}

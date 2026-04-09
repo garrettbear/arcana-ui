@@ -1,0 +1,68 @@
+/* ─── Forma — Token Overrides ─────────────────────────────────────────────── */
+
+:root {
+  --color-action-primary: #8b5e4a;
+  --color-action-primary-hover: #7a5040;
+  --color-fg-primary: #1c1915;
+  --color-fg-secondary: #4a443c;
+  --color-fg-muted: #8a8278;
+  --color-bg-page: #f7f4ef;
+  --color-bg-surface: #fdfcf9;
+  --color-border-default: #e5ddd3;
+  --font-family-body: "DM Sans", system-ui, sans-serif;
+  --font-family-display: "DM Serif Display", Georgia, serif;
+  --radius-sm: 1px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 4px;
+  --radius-full: 2px;
+  --letter-spacing-normal: 0.02em;
+}
+
+/* ─── Reset ───────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-body);
+  color: var(--color-fg-primary);
+  background: var(--color-bg-page);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

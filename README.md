@@ -2,7 +2,7 @@
   <h1 align="center">Arcana UI</h1>
   <p align="center">
     The design system built for AI.<br>
-    Token-driven theming. Responsive React components. Beautiful by default.
+    Token-driven theming. 108+ React components. Beautiful by default.
   </p>
 </p>
 
@@ -11,7 +11,13 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@arcana-ui/core"><img src="https://img.shields.io/npm/v/@arcana-ui/core.svg" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/@arcana-ui/core"><img src="https://img.shields.io/npm/v/@arcana-ui/core/beta.svg?label=%40arcana-ui%2Fcore&color=cb3837&logo=npm" alt="@arcana-ui/core on npm" /></a>
+  <a href="https://www.npmjs.com/package/@arcana-ui/tokens"><img src="https://img.shields.io/npm/v/@arcana-ui/tokens/beta.svg?label=%40arcana-ui%2Ftokens&color=cb3837&logo=npm" alt="@arcana-ui/tokens on npm" /></a>
+  <a href="https://www.npmjs.com/package/@arcana-ui/cli"><img src="https://img.shields.io/npm/v/@arcana-ui/cli/beta.svg?label=%40arcana-ui%2Fcli&color=cb3837&logo=npm" alt="@arcana-ui/cli on npm" /></a>
+  <a href="https://www.npmjs.com/package/@arcana-ui/mcp"><img src="https://img.shields.io/npm/v/@arcana-ui/mcp/beta.svg?label=%40arcana-ui%2Fmcp&color=cb3837&logo=npm" alt="@arcana-ui/mcp on npm" /></a>
+</p>
+
+<p align="center">
   <a href="https://www.npmjs.com/package/@arcana-ui/core"><img src="https://img.shields.io/npm/dm/@arcana-ui/core.svg" alt="npm downloads" /></a>
   <a href="https://bundlephobia.com/package/@arcana-ui/core"><img src="https://img.shields.io/bundlephobia/minzip/@arcana-ui/core" alt="bundle size" /></a>
   <a href="https://github.com/Arcana-UI/arcana/actions/workflows/ci.yml"><img src="https://github.com/Arcana-UI/arcana/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
@@ -32,14 +38,24 @@ When an AI agent builds a web interface, it needs a design system that speaks it
 
 **No Tailwind. No CSS-in-JS.** Pure CSS custom properties. Framework-agnostic. Zero runtime overhead. Works everywhere React runs.
 
-**AI-first developer experience.** Semantic token naming, a machine-readable manifest (`manifest.ai.json`), and predictable component APIs that any AI agent can compose without documentation lookups.
+**AI-first developer experience.** Semantic token naming, a machine-readable manifest (`manifest.ai.json`), an MCP server, and predictable component APIs that any AI agent can compose without documentation lookups.
 
 ---
 
 ## Quick Start
 
+The fastest path is the CLI — one command scaffolds a working app:
+
 ```bash
-npm install @arcana-ui/core @arcana-ui/tokens
+npx @arcana-ui/cli@beta init my-app
+```
+
+It walks you through framework (Vite or Next.js), theme (any of the 14 presets), density, and a starter layout (`dashboard`, `marketing`, `ecommerce`, `editorial`, or `general`), then generates a working project. See [`packages/cli/README.md`](./packages/cli/README.md) for the full command reference, including `validate` (theme linter with WCAG AA checks) and `add-theme`.
+
+Or wire it up by hand:
+
+```bash
+npm install @arcana-ui/core@beta @arcana-ui/tokens@beta
 ```
 
 ```tsx
@@ -69,6 +85,17 @@ Switch themes with a single attribute:
 <html data-theme="terminal">
 ```
 
+### Packages
+
+Arcana is published as four scoped packages on npm:
+
+| Package | Version | Description |
+|---|---|---|
+| [`@arcana-ui/core`](https://www.npmjs.com/package/@arcana-ui/core) | [![npm](https://img.shields.io/npm/v/@arcana-ui/core/beta.svg?color=cb3837&logo=npm&label=)](https://www.npmjs.com/package/@arcana-ui/core) | React component library — 108+ components, `"use client"`-ready |
+| [`@arcana-ui/tokens`](https://www.npmjs.com/package/@arcana-ui/tokens) | [![npm](https://img.shields.io/npm/v/@arcana-ui/tokens/beta.svg?color=cb3837&logo=npm&label=)](https://www.npmjs.com/package/@arcana-ui/tokens) | Design tokens + compiled CSS, 14 theme presets, 2,600+ CSS variables |
+| [`@arcana-ui/cli`](https://www.npmjs.com/package/@arcana-ui/cli) | [![npm](https://img.shields.io/npm/v/@arcana-ui/cli/beta.svg?color=cb3837&logo=npm&label=)](https://www.npmjs.com/package/@arcana-ui/cli) | `npx @arcana-ui/cli init` — scaffold a project, validate themes |
+| [`@arcana-ui/mcp`](https://www.npmjs.com/package/@arcana-ui/mcp) | [![npm](https://img.shields.io/npm/v/@arcana-ui/mcp/beta.svg?color=cb3837&logo=npm&label=)](https://www.npmjs.com/package/@arcana-ui/mcp) | MCP server — gives AI agents live access to components, presets, and token impact |
+
 ---
 
 ## How It Works
@@ -90,7 +117,7 @@ Primitive tokens define the palette. Semantic tokens assign meaning. Components 
 
 ## Themes
 
-Set `data-theme` on your root element. That's it.
+Set `data-theme` on your root element. That's it. All 14 presets ship in the published package.
 
 | Preset | Description |
 |--------|-------------|
@@ -100,16 +127,14 @@ Set `data-theme` on your root element. That's it.
 | `retro98` | Windows 98 nostalgia. |
 | `glass` | Translucent blur, Apple-inspired. |
 | `brutalist` | Raw, bold, no frills. |
-| `corporate`* | Conservative navy. Enterprise-ready. |
-| `startup`* | Vibrant gradients. Energetic. |
-| `editorial`* | Elegant serif. Publishing-quality. |
-| `commerce`* | Clean, product-focused. Retail-ready. |
-| `midnight`* | Deep navy + soft gold. Finance-grade. |
-| `nature`* | Earth tones. Organic. |
-| `neon`* | Electric accents on dark. |
-| `mono`* | Black and white. Typographic. |
-
-<sub>* Coming soon — see <a href="./ROADMAP.md">ROADMAP.md</a></sub>
+| `corporate` | Conservative navy. Enterprise-ready. |
+| `startup` | Vibrant gradients. Energetic. |
+| `editorial` | Elegant serif. Publishing-quality. |
+| `commerce` | Clean, product-focused. Retail-ready. |
+| `midnight` | Deep navy + soft gold. Finance-grade. |
+| `nature` | Earth tones. Organic. |
+| `neon` | Electric accents on dark. |
+| `mono` | Black and white. Typographic. |
 
 ### Create Your Own
 
@@ -131,30 +156,24 @@ A theme is just a JSON file that maps semantic tokens to primitive values:
 }
 ```
 
-Drop it in `packages/tokens/src/presets/`, run the build, and your theme is ready.
+Drop it in `packages/tokens/src/presets/`, run `pnpm build:tokens`, and your theme is ready. Use `npx @arcana-ui/cli@beta validate my-theme.json` to check for WCAG AA contrast issues before shipping.
 
 ---
 
 ## Components
 
-Arcana ships production-ready React components with consistent APIs, full accessibility, and responsive behavior at every breakpoint.
+Arcana ships 108+ production-ready React components across six categories — all responsive, accessible, and fully token-driven.
 
-**Current:**
-Button, Card, Input, Badge, Alert, Avatar, Tooltip, Modal, Table, and 13 more — 22 components total.
+| Category | Components |
+|----------|-----------|
+| **Primitives** | Button, Badge, Input, Textarea, Select, Checkbox, Radio, Toggle, Slider, Avatar, Spinner, Skeleton, Divider, Spacer, Image, AspectRatio, CopyButton, KeyboardShortcut |
+| **Composites** | Card, Alert, Modal, Drawer, Popover, Tabs, Accordion, Toast, Banner, Table, DataTable, Form, DatePicker, FileUpload, CommandPalette, Collapsible, Tooltip, ScrollArea, Carousel |
+| **Navigation** | Navbar, Sidebar, Breadcrumb, Pagination, Footer, MobileNav, DrawerNav, BottomSheet |
+| **Data Display** | StatCard, KPICard, ProgressBar, StatsBar, Timeline, RatingStars, EmptyState, AvatarGroup |
+| **Patterns** | Hero, FeatureSection, PricingCard, CTA, LogoCloud, Testimonial, NewsletterSignup, ProductCard, CartItem, PriceDisplay, QuantitySelector, ArticleLayout, PullQuote, AuthorCard, RelatedPosts |
+| **Layout** | Container, Grid, Stack, HStack, Sidebar layout, ErrorBoundary |
 
-**In development:**
-Navbar, Sidebar, Tabs, Hero, PricingCard, DataTable, Select, Toast, CommandPalette, Drawer, ProductCard, ArticleLayout, and 40+ more — targeting 60+ components across six categories:
-
-| Category | What's Included |
-|----------|----------------|
-| **Navigation** | Navbar, Sidebar, Breadcrumb, Pagination, Tabs, Footer |
-| **Content & Marketing** | Hero, Features, Testimonials, Pricing, CTA, Stats, Timeline |
-| **Data Display** | DataTable, StatCard, ProgressBar, KPI Card |
-| **Forms** | Select, Checkbox, Radio, Toggle, DatePicker, FileUpload |
-| **Overlays** | Modal, Drawer, Popover, Toast, Command Palette |
-| **E-commerce & Editorial** | ProductCard, CartItem, ArticleLayout, PullQuote |
-
-See the full component plan in [ROADMAP.md](./ROADMAP.md#4-component-library-plan).
+Every component uses consistent prop patterns (`variant`, `size`, `disabled`, `loading`) and ships with TypeScript types, JSDoc, and `forwardRef`.
 
 ---
 
@@ -163,6 +182,24 @@ See the full component plan in [ROADMAP.md](./ROADMAP.md#4-component-library-pla
 Arcana is purpose-built for AI-assisted development. If you're an AI code agent (Claude Code, Cursor, Copilot, etc.), here's what makes Arcana work for you:
 
 **`manifest.ai.json`** — A machine-readable registry of every component, prop, token, and preset. Parse this to understand the full API surface without reading source code.
+
+**`llms.txt` / `llms-full.txt`** — AI discovery files served at `/llms.txt` and `/llms-full.txt` on the playground. Full component reference, layout patterns, and theme guide in AI-optimized format.
+
+**`@arcana-ui/mcp`** — MCP server with 7 tools: browse components, fetch preset JSON, validate theme contrast, get token impact, and generate themes via the Anthropic API. Works with Claude Code, Cursor, and any MCP-compatible client.
+
+```json
+// .claude/settings.json
+{
+  "mcpServers": {
+    "arcana": {
+      "command": "npx",
+      "args": ["-y", "@arcana-ui/mcp@beta"]
+    }
+  }
+}
+```
+
+**Claude Code skill** — `.claude/skills/arcana/SKILL.md` (1,821 lines) covers all 108 components with props tables, hooks, token system, 4 complete layout patterns, and usage rules.
 
 **`CLAUDE.md`** — Project instructions, code standards, and current state. Claude Code reads this automatically at session start.
 
@@ -191,16 +228,20 @@ pnpm install && pnpm build && pnpm test
 arcana-ui/
 ├── packages/
 │   ├── tokens/          # Design tokens → CSS custom properties
-│   │   ├── src/presets/  # Theme JSON files
-│   │   └── dist/         # Built CSS
-│   └── core/            # React component library
-│       └── src/components/
-├── playground/          # Live theme editor
+│   │   ├── src/presets/  # 14 theme JSON files
+│   │   └── dist/         # Built CSS (arcana.css + per-theme files)
+│   ├── core/            # React component library (108+ components)
+│   │   └── src/components/
+│   ├── cli/             # @arcana-ui/cli — init, validate, add-theme
+│   └── mcp/             # @arcana-ui/mcp — MCP server for AI agents
+├── playground/          # Live theme editor (arcana-design-system.vercel.app)
 ├── demos/               # Example sites (dashboard, marketing, editorial, ecom)
 ├── CLAUDE.md            # AI agent instructions
 ├── ROADMAP.md           # Architecture + phased development plan
 ├── AI_OPS.md            # Prompt library + workflow for AI agents
 ├── PROGRESS.md          # Task tracker
+├── llms.txt             # AI discovery file (short form)
+├── llms-full.txt        # AI discovery file (full reference)
 └── manifest.ai.json     # Machine-readable component registry
 ```
 
@@ -248,16 +289,14 @@ We welcome contributions from humans and AI agents alike. See **[CONTRIBUTING.md
 
 ## Roadmap
 
-Arcana is in active development across five phases:
-
 | Phase | Focus | Status |
 |-------|-------|--------|
-| **0** | Foundation cleanup — code standards, token restructure, CI/CD | ✅ Complete |
-| **1** | Token system maturity — full color, typography, elevation, motion | ⬜ Planned |
-| **2** | Responsive & mobile — mobile-first CSS, touch targets, breakpoints | ⬜ Planned |
-| **3** | Expanded components — 22 → 60+ across all categories | ⬜ Planned |
-| **4** | Theme presets & demo sites — 14 presets, each with a showcase site | ⬜ Planned |
-| **5** | AI integration & launch — npm publish, docs site, community templates | ⬜ Planned |
+| **0** | Foundation — code standards, token restructure, CI/CD | ✅ Complete |
+| **1** | Token system — full color, typography, elevation, motion, 2,600+ variables | ✅ Complete |
+| **2** | Responsive & mobile — mobile-first CSS, touch targets, 5-breakpoint visual regression | ✅ Complete |
+| **3** | Component library — 108+ components across all categories | ✅ Complete |
+| **4** | Theme presets & demos — 14 presets + 5 demo sites | ✅ Complete |
+| **5** | AI integration — MCP server, CLI, llms.txt, Claude Code skill, npm publish | ✅ Complete |
 
 See [ROADMAP.md](./ROADMAP.md) for the full plan with task-level detail.
 

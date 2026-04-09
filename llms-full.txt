@@ -1,0 +1,2369 @@
+# Arcana UI — Complete AI Agent Reference
+
+> Auto-generated file. Do not edit manually.
+> Source: scripts/generate-docs.mjs | Regenerate: pnpm generate-docs
+> Last generated: 2026-04-09T17:22:56.002Z
+
+## Overview
+
+Arcana UI is a token-driven React design system. Install:
+
+```bash
+npm install @arcana-ui/core @arcana-ui/tokens
+```
+
+Import the CSS tokens and use components:
+
+```tsx
+import '@arcana-ui/tokens/dist/arcana.css';
+import { Button, Card, Input } from '@arcana-ui/core';
+```
+
+## Theme Switching
+
+Set the `data-theme` attribute on the root element:
+
+```tsx
+document.documentElement.setAttribute('data-theme', 'dark');
+```
+
+Available themes: `brutalist`, `commerce`, `corporate`, `dark`, `editorial`, `glass`, `light`, `midnight`, `mono`, `nature`, `neon`, `retro98`, `startup`, `terminal`
+
+- **brutalist**: Bloomberg Terminal meets Swiss poster — bold red accent, dramatic typography, thick structural borders
+- **commerce**: Clean product-focused design — warm neutrals with green accent, Shopify-inspired
+- **corporate**: Conservative navy/slate palette — trustworthy, enterprise-grade, Stripe-inspired
+- **dark**: Deep slate dark with vibrant indigo accent — focused, rich, Linear-inspired
+- **editorial**: Elegant serif typography, high contrast — publishing, NYT-inspired
+- **glass**: Apple iOS glassmorphism — frosted translucent surfaces on gradient, elegant light typography
+- **light**: Warm stone palette with indigo accent — clean, precise, Notion-inspired
+- **midnight**: Deep navy with soft gold accents — premium, finance-grade, Bloomberg-inspired
+- **mono**: Pure black and white — stark typographic minimalism, portfolio/architecture-inspired
+- **nature**: Earth tones with warm greens — organic, wellness, sustainability-inspired
+- **neon**: Electric neon on dark — vivid cyan/pink accents, cyberpunk, gaming-inspired
+- **retro98**: Authentic Windows 98 recreation — pixel-perfect bevels, navy blue title bars, silver surfaces
+- **startup**: Vibrant purple-to-pink gradient energy — modern SaaS, Vercel/Linear-inspired
+- **terminal**: Premium terminal emulator — green phosphor on black, monospace everything, Warp/Hyper-inspired
+
+## Token Architecture
+
+Three-tier system: Primitive → Semantic → Component
+
+- **Primitive**: Raw values (colors, spacing). Never used directly by components.
+- **Semantic**: Contextual tokens that reference primitives. Components use these.
+- **Component**: Optional per-component overrides (e.g., `--button-bg`).
+
+Override any token in CSS:
+
+```css
+:root {
+  --color-action-primary: #ff6600;
+  --button-radius: 0;
+}
+```
+
+### Key Tokens
+
+- `--color-action-primary`: Primary brand color for actions (button, link, highlight)
+- `--color-bg-page`: Main background surface for page content
+- `--color-fg-primary`: Primary text color (body text, labels)
+- `--radius-md`: Medium border radius (commonly used in components)
+- `--shadow-md`: Medium drop shadow for elevation
+- `--spacing-md`: Medium spacing unit (used for padding, margin, gaps)
+- `--font-size-base`: Base text size for body copy
+- `--duration-normal`: Default animation duration for transitions
+
+## Component Reference
+
+### Button
+
+```tsx
+import { Button } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'primary' \| 'secondary' \| 'ghost' \| 'destructive' \| 'outline' | `primary` | Visual style variant |
+| size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg' \| 'icon-xl' | `md` | Size of the button |
+| shape | 'default' \| 'circle' \| 'pill' | `default` | Shape of the button |
+| loading | boolean | `false` | Whether the button is in a loading state |
+| icon | ReactNode | — | Icon element displayed before the label |
+| iconRight | ReactNode | — | Icon element displayed after the label |
+| fullWidth | boolean | `false` | Whether the button stretches to fill its container |
+| iconOnly | boolean | `false` | @deprecated Use size="icon" instead. Render as an icon-only button (square shape, requires aria-label) |
+
+**Example:**
+
+```tsx
+<Button variant="primary" size="sm">Content</Button>
+```
+
+**Component Tokens:**
+
+- `--button-bg` (fallback: `--color-action-primary`)
+- `--button-bg-hover` (fallback: `--color-action-primary-hover`)
+- `--button-border-color`
+- `--button-border-width` (fallback: `--border-width-default`)
+- `--button-fg` (fallback: `--color-fg-on-primary`)
+- `--button-font-size-lg` (fallback: `--element-font-size-lg`)
+- `--button-font-size-md` (fallback: `--element-font-size-md`)
+- `--button-font-size-sm` (fallback: `--element-font-size-sm`)
+- `--button-font-size-xl` (fallback: `--element-font-size-xl`)
+- `--button-font-size-xs` (fallback: `--element-font-size-xs`)
+- `--button-font-weight` (fallback: `--font-weight-medium`)
+- `--button-height-lg` (fallback: `--element-height-lg`)
+- `--button-height-md` (fallback: `--element-height-md`)
+- `--button-height-sm` (fallback: `--element-height-sm`)
+- `--button-height-xl` (fallback: `--element-height-xl`)
+- `--button-height-xs` (fallback: `--element-height-xs`)
+- `--button-icon-size` (fallback: `--element-icon-size-md`)
+- `--button-letter-spacing` (fallback: `--letter-spacing-normal`)
+- `--button-padding-x-lg` (fallback: `--element-padding-x-lg`)
+- `--button-padding-x-md` (fallback: `--element-padding-x-md`)
+- `--button-padding-x-sm` (fallback: `--element-padding-x-sm`)
+- `--button-padding-x-xl` (fallback: `--element-padding-x-xl`)
+- `--button-padding-x-xs` (fallback: `--element-padding-x-xs`)
+- `--button-padding-y-lg` (fallback: `--element-padding-y-lg`)
+- `--button-padding-y-md` (fallback: `--element-padding-y-md`)
+- `--button-padding-y-sm` (fallback: `--element-padding-y-sm`)
+- `--button-padding-y-xl` (fallback: `--element-padding-y-xl`)
+- `--button-padding-y-xs` (fallback: `--element-padding-y-xs`)
+- `--button-radius` (fallback: `--radius-md`)
+- `--button-shadow` (fallback: `--shadow-none`)
+- `--spinner-speed`
+
+### Input
+
+```tsx
+import { Input } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | string | — | Label text displayed above the input |
+| size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' | `md` | Size of the input |
+| error | string | boolean | — | Error message string or boolean error state |
+| helperText | string | — | Helper text displayed below the input |
+| prefix | ReactNode | — | Element rendered before the input field |
+| suffix | ReactNode | — | Element rendered after the input field |
+| fullWidth | boolean | `false` | Whether the input stretches to fill its container |
+| required | boolean | — | Whether the input is required (shows indicator on label) |
+| wrapperClassName | string | — | Additional className for the outer wrapper containing border and focus ring |
+
+**Example:**
+
+```tsx
+<Input size="sm">Content</Input>
+```
+
+**Component Tokens:**
+
+- `--input-bg` (fallback: `--color-bg-page`)
+- `--input-border-color` (fallback: `--color-border-default`)
+- `--input-border-error` (fallback: `--color-border-error`)
+- `--input-border-focus` (fallback: `--color-border-focus`)
+- `--input-border-width` (fallback: `--border-width-default`)
+- `--input-fg` (fallback: `--color-fg-primary`)
+- `--input-font-size` (fallback: `--font-size-sm`)
+- `--input-font-size-lg` (fallback: `--element-font-size-lg`)
+- `--input-font-size-md` (fallback: `--element-font-size-md`)
+- `--input-font-size-sm` (fallback: `--element-font-size-sm`)
+- `--input-font-size-xl` (fallback: `--element-font-size-xl`)
+- `--input-font-size-xs` (fallback: `--element-font-size-xs`)
+- `--input-height-lg` (fallback: `--element-height-lg`)
+- `--input-height-md` (fallback: `--element-height-md`)
+- `--input-height-sm` (fallback: `--element-height-sm`)
+- `--input-height-xl` (fallback: `--element-height-xl`)
+- `--input-height-xs` (fallback: `--element-height-xs`)
+- `--input-padding-x-lg` (fallback: `--element-padding-x-lg`)
+- `--input-padding-x-md` (fallback: `--element-padding-x-md`)
+- `--input-padding-x-sm` (fallback: `--element-padding-x-sm`)
+- `--input-padding-x-xl` (fallback: `--element-padding-x-xl`)
+- `--input-padding-x-xs` (fallback: `--element-padding-x-xs`)
+- `--input-padding-y-lg` (fallback: `--element-padding-y-lg`)
+- `--input-padding-y-md` (fallback: `--element-padding-y-md`)
+- `--input-padding-y-sm` (fallback: `--element-padding-y-sm`)
+- `--input-padding-y-xl` (fallback: `--element-padding-y-xl`)
+- `--input-padding-y-xs` (fallback: `--element-padding-y-xs`)
+- `--input-placeholder-color` (fallback: `--color-fg-muted`)
+- `--input-radius` (fallback: `--radius-md`)
+
+### Textarea
+
+```tsx
+import { Textarea } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | string | — | Label text displayed above the textarea |
+| error | string | boolean | — | Error message string or boolean error state |
+| helperText | string | — | Helper text displayed below the textarea |
+| autoResize | boolean | `false` | Whether the textarea automatically grows to fit content |
+| showCount | boolean | `false` | Whether to display a character count |
+| maxLength | number | — | Maximum number of characters allowed |
+
+**Component Tokens:**
+
+- `--textarea-bg` (fallback: `--color-bg-page`)
+- `--textarea-border-color` (fallback: `--color-border-default`)
+- `--textarea-border-focus` (fallback: `--color-border-focus`)
+- `--textarea-border-width` (fallback: `--border-width-default`)
+- `--textarea-font-size` (fallback: `--font-size-sm`)
+- `--textarea-min-height` (fallback: `--spacing-20`)
+- `--textarea-padding-x` (fallback: `--element-padding-x-md`)
+- `--textarea-padding-y` (fallback: `--element-padding-y-md`)
+- `--textarea-radius` (fallback: `--radius-md`)
+
+### Select
+
+```tsx
+import { Select } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | string | — | Label text displayed above the select |
+| error | string | boolean | — | Error message string or boolean error state |
+| helperText | string | — | Helper text displayed below the select |
+| placeholder | string | — | Placeholder text when no option is selected |
+| options | SelectOption[] | `[]` | Array of options to render |
+| value | string | string[] | — | Controlled selected value (string for single, string[] for multiple) |
+| defaultValue | string | string[] | — | Default value for uncontrolled usage |
+| onChange | (value: string | string[]) => void | — | Callback fired when the selection changes |
+| multiple | boolean | `false` | Allow multiple selections |
+| searchable | boolean | `false` | Enable type-to-filter search in dropdown |
+| clearable | boolean | `false` | Show clear button to reset selection |
+| loading | boolean | `false` | Show loading spinner in dropdown |
+| size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' | `md` | Size variant |
+| fullWidth | boolean | `false` | Whether the select stretches to fill its container |
+| disabled | boolean | `false` | Whether the select is disabled |
+| name | string | — | Form input name attribute |
+
+**Example:**
+
+```tsx
+<Select size="sm">Content</Select>
+```
+
+**Component Tokens:**
+
+- `--select-bg` (fallback: `--color-bg-page`)
+- `--select-border-color` (fallback: `--color-border-default`)
+- `--select-border-focus` (fallback: `--color-border-focus`)
+- `--select-border-width` (fallback: `--border-width-default`)
+- `--select-dropdown-bg` (fallback: `--color-bg-page`)
+- `--select-dropdown-shadow` (fallback: `--shadow-lg`)
+- `--select-font-size` (fallback: `--font-size-sm`)
+- `--select-font-size-lg` (fallback: `--element-font-size-lg`)
+- `--select-font-size-md` (fallback: `--element-font-size-md`)
+- `--select-font-size-sm` (fallback: `--element-font-size-sm`)
+- `--select-font-size-xl` (fallback: `--element-font-size-xl`)
+- `--select-font-size-xs` (fallback: `--element-font-size-xs`)
+- `--select-height-lg` (fallback: `--element-height-lg`)
+- `--select-height-md` (fallback: `--element-height-md`)
+- `--select-height-sm` (fallback: `--element-height-sm`)
+- `--select-height-xl` (fallback: `--element-height-xl`)
+- `--select-height-xs` (fallback: `--element-height-xs`)
+- `--select-option-hover-bg` (fallback: `--color-bg-surface`)
+- `--select-padding-x-lg` (fallback: `--element-padding-x-lg`)
+- `--select-padding-x-md` (fallback: `--element-padding-x-md`)
+- `--select-padding-x-sm` (fallback: `--element-padding-x-sm`)
+- `--select-padding-x-xl` (fallback: `--element-padding-x-xl`)
+- `--select-padding-x-xs` (fallback: `--element-padding-x-xs`)
+- `--select-padding-y-lg` (fallback: `--element-padding-y-lg`)
+- `--select-padding-y-md` (fallback: `--element-padding-y-md`)
+- `--select-padding-y-sm` (fallback: `--element-padding-y-sm`)
+- `--select-padding-y-xl` (fallback: `--element-padding-y-xl`)
+- `--select-padding-y-xs` (fallback: `--element-padding-y-xs`)
+- `--select-radius` (fallback: `--radius-md`)
+- `--spinner-speed`
+
+### Checkbox
+
+```tsx
+import { Checkbox } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | string | — | Label text displayed next to the checkbox |
+| description | string | — | Description text displayed below the label |
+| indeterminate | boolean | `false` | Whether the checkbox is in an indeterminate state |
+| error | string | boolean | — | Error message string or boolean error state |
+
+**Component Tokens:**
+
+- `--checkbox-bg` (fallback: `--color-bg-page`)
+- `--checkbox-border-color` (fallback: `--color-border-strong`)
+- `--checkbox-checked-bg` (fallback: `--color-action-primary`)
+- `--checkbox-checked-border` (fallback: `--color-action-primary`)
+- `--checkbox-radius` (fallback: `--radius-sm`)
+- `--checkbox-size` (fallback: `--spacing-4`)
+
+### CheckboxGroup
+
+```tsx
+import { CheckboxGroup } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| options | CheckboxGroupOption[] | — | Array of checkbox options |
+| value | string[] | `[]` | Currently selected values |
+| onChange | (values: string[]) => void | — | Callback fired when selection changes |
+| orientation | 'vertical' \| 'horizontal' | `vertical` | Layout direction |
+| label | string | — | Group label |
+| error | string | — | Error message |
+
+### Radio
+
+```tsx
+import { Radio } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | string | — | Label text displayed next to the radio button |
+| description | string | — | Description text displayed below the label |
+
+**Component Tokens:**
+
+- `--radio-bg` (fallback: `--color-bg-page`)
+- `--radio-border-color` (fallback: `--color-border-strong`)
+- `--radio-checked-border` (fallback: `--color-action-primary`)
+- `--radio-size` (fallback: `--spacing-4`)
+
+### RadioGroup
+
+```tsx
+import { RadioGroup } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| name | string | — | Name attribute shared by all radio inputs in the group |
+| label | string | — | Label text displayed as the fieldset legend |
+| value | string | — | Currently selected value |
+| onChange | (value: string) => void | — | Callback fired when the selected value changes |
+| options | RadioOption[] | — | Array of radio options to render |
+| orientation | 'vertical' \| 'horizontal' | `vertical` | Layout direction |
+| variant | 'default' \| 'card' | `default` | Visual variant — "card" renders each option as a selectable card |
+| error | string | — | Error message |
+
+**Example:**
+
+```tsx
+<RadioGroup variant="default">Content</RadioGroup>
+```
+
+### Toggle
+
+```tsx
+import { Toggle } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | string | — | Label text displayed next to the toggle |
+| description | string | — | Description text displayed below the label |
+| checked | boolean | — | Whether the toggle is in the on state |
+| onChange | (checked: boolean) => void | — | Callback fired when the toggle state changes |
+| disabled | boolean | `false` | Whether the toggle is disabled |
+| size | 'sm' \| 'md' \| 'lg' | `md` | Size of the toggle |
+| id | string | — | HTML id attribute |
+
+**Example:**
+
+```tsx
+<Toggle size="md">Content</Toggle>
+```
+
+**Component Tokens:**
+
+- `--toggle-bg` (fallback: `--color-border-strong`)
+- `--toggle-checked-bg` (fallback: `--color-action-primary`)
+- `--toggle-height`
+- `--toggle-radius` (fallback: `--radius-full`)
+- `--toggle-thumb-bg` (fallback: `--primitive-white`)
+- `--toggle-thumb-size`
+- `--toggle-width`
+
+### Badge
+
+```tsx
+import { Badge } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'default' \| 'success' \| 'warning' \| 'error' \| 'info' \| 'secondary' | `default` | Visual style variant |
+| size | 'sm' \| 'md' \| 'lg' | `md` | Size of the badge |
+| dot | boolean | `false` | Whether to display a status dot indicator |
+
+**Example:**
+
+```tsx
+<Badge variant="default" size="md">Content</Badge>
+```
+
+**Component Tokens:**
+
+- `--badge-dot-size`
+- `--badge-font-size` (fallback: `--font-size-xs`)
+- `--badge-font-weight` (fallback: `--font-weight-medium`)
+- `--badge-padding-x` (fallback: `--element-padding-x-xs`)
+- `--badge-padding-y` (fallback: `--element-padding-y-xs`)
+- `--badge-radius` (fallback: `--radius-full`)
+
+### Avatar
+
+```tsx
+import { Avatar } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| src | string | — | Image source URL |
+| alt | string | — | Alt text for the avatar image |
+| name | string | — | User name for generating initials and background color |
+| size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' | `md` | Size of the avatar |
+
+**Example:**
+
+```tsx
+<Avatar size="sm">Content</Avatar>
+```
+
+**Component Tokens:**
+
+- `--avatar-bg` (fallback: `--color-bg-subtle`)
+- `--avatar-border-color` (fallback: `--color-bg-page`)
+- `--avatar-border-width` (fallback: `--border-width-thick`)
+- `--avatar-radius` (fallback: `--radius-full`)
+- `--avatar-size`
+
+### AvatarGroup
+
+```tsx
+import { AvatarGroup } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| max | number | — | Maximum number of avatars to display before truncating |
+
+### Card
+
+```tsx
+import { Card } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'default' \| 'outlined' \| 'elevated' | `default` | Visual style variant |
+| padding | 'none' \| 'sm' \| 'md' \| 'lg' | `md` | Padding size applied to the card |
+| interactive | boolean | `false` | Whether the card has hover and focus interactions |
+
+**Example:**
+
+```tsx
+<Card variant="default">Content</Card>
+```
+
+**Component Tokens:**
+
+- `--card-bg` (fallback: `--color-bg-page`)
+- `--card-border-color` (fallback: `--color-border-default`)
+- `--card-border-width` (fallback: `--border-width-default`)
+- `--card-padding` (fallback: `--spacing-lg`)
+- `--card-radius` (fallback: `--radius-md`)
+- `--card-shadow` (fallback: `--elevation-card`)
+- `--card-shadow-hover` (fallback: `--elevation-card-hover`)
+
+### CardHeader
+
+```tsx
+import { CardHeader } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| title | string | — | Header title text |
+| description | string | — | Description text below the title |
+| action | ReactNode | — | Action element rendered on the right side |
+
+### CardBody
+
+```tsx
+import { CardBody } from '@arcana-ui/core'
+```
+
+### CardFooter
+
+```tsx
+import { CardFooter } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| align | 'left' \| 'center' \| 'right' \| 'space-between' | `right` | Horizontal alignment of footer content |
+
+### Modal
+
+```tsx
+import { Modal } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| open | boolean | — | Whether the modal is visible |
+| onClose | () => void | — | Callback fired when the modal should close |
+| title | string | — | Dialog title text |
+| description | string | — | Dialog description text |
+| size | 'sm' \| 'md' \| 'lg' \| 'xl' \| 'full' | — | Size of the modal dialog |
+| closeOnOverlayClick | boolean | — | Whether clicking the overlay closes the modal |
+| closeOnEsc | boolean | — | Whether pressing Escape closes the modal |
+| footer | ReactNode | — | Footer content rendered at the bottom of the modal |
+
+**Example:**
+
+```tsx
+<Modal size="md">Content</Modal>
+```
+
+**Component Tokens:**
+
+- `--modal-bg` (fallback: `--color-bg-elevated`)
+- `--modal-border-color` (fallback: `--color-border-default`)
+- `--modal-border-width` (fallback: `--border-width-default`)
+- `--modal-max-width`
+- `--modal-max-width-lg`
+- `--modal-max-width-sm`
+- `--modal-max-width-xl`
+- `--modal-overlay-bg` (fallback: `--color-bg-overlay`)
+- `--modal-padding` (fallback: `--spacing-xl`)
+- `--modal-radius` (fallback: `--radius-xl`)
+- `--modal-shadow` (fallback: `--elevation-modal`)
+
+### ModalClose
+
+```tsx
+import { ModalClose } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| onClick | () => void | — | Callback fired when the close button is clicked |
+
+### Alert
+
+```tsx
+import { Alert } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'info' \| 'success' \| 'warning' \| 'error' | `info` | Visual style variant indicating the alert type |
+| title | string | — | Alert title text |
+| onClose | () => void | — | Callback fired when the dismiss button is clicked |
+
+**Example:**
+
+```tsx
+<Alert variant="info">Content</Alert>
+```
+
+**Component Tokens:**
+
+- `--alert-border-width` (fallback: `--border-width-default`)
+- `--alert-padding` (fallback: `--spacing-md`)
+- `--alert-radius` (fallback: `--radius-md`)
+
+### ToastProvider
+
+```tsx
+import { ToastProvider } from '@arcana-ui/core'
+```
+
+### Tabs
+
+```tsx
+import { Tabs } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | — | Controlled active tab value |
+| onChange | (value: string) => void | — | Callback fired when the active tab changes |
+| defaultValue | string | — | Default active tab value for uncontrolled mode |
+| variant | 'line' \| 'pills' | `line` | Visual style variant |
+
+**Example:**
+
+```tsx
+<Tabs variant="line">Content</Tabs>
+```
+
+**Component Tokens:**
+
+- `--tabs-active-color` (fallback: `--color-action-primary`)
+- `--tabs-border-color` (fallback: `--color-border-default`)
+- `--tabs-font-size` (fallback: `--font-size-sm`)
+- `--tabs-font-weight` (fallback: `--font-weight-medium`)
+- `--tabs-padding-x` (fallback: `--element-padding-x-sm`)
+- `--tabs-padding-y` (fallback: `--element-padding-y-sm`)
+
+### TabList
+
+```tsx
+import { TabList } from '@arcana-ui/core'
+```
+
+### Tab
+
+```tsx
+import { Tab } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | — | Unique identifier for this tab |
+| disabled | boolean | — | Whether the tab is disabled |
+
+### TabPanels
+
+```tsx
+import { TabPanels } from '@arcana-ui/core'
+```
+
+### TabPanel
+
+```tsx
+import { TabPanel } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | — | Value matching the corresponding Tab |
+
+### Accordion
+
+```tsx
+import { Accordion } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | 'single' \| 'multiple' | `single` | Whether one or multiple items can be open at once |
+| defaultValue | string | string[] | — | Default open item value(s) for uncontrolled mode |
+| value | string | string[] | — | Controlled open item value(s) |
+| onChange | (value: string | string[]) => void | — | Callback fired when the open items change |
+
+**Component Tokens:**
+
+- `--accordion-border-color` (fallback: `--color-border-default`)
+- `--accordion-border-width` (fallback: `--border-width-default`)
+- `--accordion-font-size` (fallback: `--font-size-sm`)
+- `--accordion-padding` (fallback: `--spacing-4`)
+- `--accordion-radius` (fallback: `--radius-md`)
+
+### AccordionItem
+
+```tsx
+import { AccordionItem } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | — | Unique identifier for this item |
+| disabled | boolean | — | Whether the item is disabled |
+
+### AccordionTrigger
+
+```tsx
+import { AccordionTrigger } from '@arcana-ui/core'
+```
+
+### AccordionContent
+
+```tsx
+import { AccordionContent } from '@arcana-ui/core'
+```
+
+### Stack
+
+```tsx
+import { Stack } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| direction | 'vertical' \| 'horizontal' | `vertical` | Direction of the stack layout |
+| gap | GapSize | number | string | `md` | Spacing between children — semantic name, number (maps to token), or raw CSS |
+| align | 'start' \| 'center' \| 'end' \| 'stretch' | — | Cross-axis alignment of children |
+| justify | 'start' \| 'center' \| 'end' \| 'between' \| 'around' | — | Main-axis alignment of children |
+| wrap | boolean | — | Whether children should wrap to the next line |
+| as | React.ElementType | — | HTML element to render as |
+
+### HStack
+
+```tsx
+import { HStack } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| gap | GapSize | number | string | `md` | Spacing between children — semantic name, number (maps to token), or raw CSS |
+| align | 'start' \| 'center' \| 'end' \| 'stretch' | `center` | Cross-axis alignment of children |
+| justify | 'start' \| 'center' \| 'end' \| 'between' \| 'around' | — | Main-axis alignment of children |
+| wrap | boolean | — | Whether children should wrap to the next line |
+| as | React.ElementType | — | HTML element to render as |
+
+### Grid
+
+```tsx
+import { Grid } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| columns | number | ResponsiveColumns | `12` | Number of columns or responsive column object. Default: auto-collapses (1 mobile, 12 desktop). |
+| gap | GapSize | number | string | `md` | Gap between grid items — semantic name, number, or raw CSS |
+| rowGap | GapSize | number | string | — | Vertical gap between grid rows |
+| colGap | GapSize | number | string | — | Horizontal gap between grid columns |
+| align | 'start' \| 'center' \| 'end' \| 'stretch' | — | Vertical alignment of grid items |
+| justify | 'start' \| 'center' \| 'end' \| 'stretch' \| 'between' | — | Horizontal alignment of grid items |
+| as | React.ElementType | — | HTML element to render as |
+
+### GridColumn
+
+```tsx
+import { GridColumn } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| span | number | ResponsiveSpan | `12` | Number of columns to span, or responsive span object |
+| start | number | — | Grid column start position |
+| as | React.ElementType | — | HTML element to render as |
+
+### Container
+
+```tsx
+import { Container } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| size | 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| 'full' | `xl` | Maximum width of the container |
+| prose | boolean | `false` | When true, sets max-width to optimal reading width (65ch). Overrides size. |
+| padding | 'none' \| 'sm' \| 'md' \| 'lg' | `md` | Horizontal edge padding. Responsive by default. |
+| center | boolean | `true` | Centers the container with auto margins |
+| as | React.ElementType | — | HTML element to render as |
+
+**Example:**
+
+```tsx
+<Container size="md">Content</Container>
+```
+
+### Navbar
+
+```tsx
+import { Navbar } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| sticky | boolean | `false` | Whether the navbar sticks to the top of the viewport |
+| border | boolean | `false` | Whether to show a bottom border |
+| mobileContent | ReactNode | — | Content for the mobile drawer (rendered in a DrawerNav on mobile) |
+| mobileMenuTitle | string | `Menu` | Title for the mobile drawer header |
+
+**Component Tokens:**
+
+- `--navbar-backdrop-blur`
+- `--navbar-bg` (fallback: `--color-bg-page`)
+- `--navbar-border-color` (fallback: `--color-border-default`)
+- `--navbar-height` (fallback: `--spacing-14`)
+- `--navbar-max-width`
+- `--navbar-shadow` (fallback: `--elevation-navbar`)
+
+### NavbarBrand
+
+```tsx
+import { NavbarBrand } from '@arcana-ui/core'
+```
+
+### NavbarContent
+
+```tsx
+import { NavbarContent } from '@arcana-ui/core'
+```
+
+### NavbarActions
+
+```tsx
+import { NavbarActions } from '@arcana-ui/core'
+```
+
+### Sidebar
+
+```tsx
+import { Sidebar } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| collapsed | boolean | — | Whether the sidebar is collapsed to icon-only mode |
+| position | 'left' \| 'right' | — | Position of the sidebar |
+
+**Component Tokens:**
+
+- `--sidebar-bg` (fallback: `--color-bg-surface`)
+- `--sidebar-border-color` (fallback: `--color-border-default`)
+- `--sidebar-collapsed-width`
+- `--sidebar-width`
+
+### SidebarHeader
+
+```tsx
+import { SidebarHeader } from '@arcana-ui/core'
+```
+
+### SidebarContent
+
+```tsx
+import { SidebarContent } from '@arcana-ui/core'
+```
+
+### SidebarFooter
+
+```tsx
+import { SidebarFooter } from '@arcana-ui/core'
+```
+
+### SidebarItem
+
+```tsx
+import { SidebarItem } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| icon | ReactNode | — | Icon element displayed before the label |
+| active | boolean | `false` | Whether this item is currently active |
+| disabled | boolean | `false` | Whether this item is disabled |
+| href | string | — | Render as an anchor element instead of button |
+| badge | string | number | — | Badge count or text displayed on the right |
+
+### SidebarSection
+
+```tsx
+import { SidebarSection } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | string | — | Section heading label |
+
+### Form
+
+```tsx
+import { Form } from '@arcana-ui/core'
+```
+
+**Component Tokens:**
+
+- `--form-gap` (fallback: `--spacing-4`)
+- `--form-label-font-size` (fallback: `--font-size-sm`)
+- `--form-label-font-weight` (fallback: `--font-weight-medium`)
+
+### FormField
+
+```tsx
+import { FormField } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| isRequired | boolean | — | Whether the field is required |
+| isInvalid | boolean | — | Whether the field has a validation error |
+
+### FormLabel
+
+```tsx
+import { FormLabel } from '@arcana-ui/core'
+```
+
+### FormHelperText
+
+```tsx
+import { FormHelperText } from '@arcana-ui/core'
+```
+
+### FormErrorMessage
+
+```tsx
+import { FormErrorMessage } from '@arcana-ui/core'
+```
+
+### BottomSheet
+
+```tsx
+import { BottomSheet } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| open | boolean | — | Whether the bottom sheet is visible |
+| onClose | () => void | — | Callback fired when the sheet should close |
+| title | string | — | Optional header title |
+| description | string | — | Optional header description |
+| snapPoints | number[] | — | Snap points as fractions of viewport height |
+| dismissible | boolean | `true` | Whether the sheet can be dismissed by tapping the overlay |
+| showHandle | boolean | `true` | Whether to show the drag handle bar |
+
+### MobileNav
+
+```tsx
+import { MobileNav } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| items | MobileNavItem[] | — | Navigation items (maximum 5) |
+| activeKey | string | — | Key of the currently active item |
+| onChange | (key: string) => void | — | Callback fired when an item is selected |
+
+### DrawerNav
+
+```tsx
+import { DrawerNav } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| open | boolean | — | Whether the drawer is visible |
+| onClose | () => void | — | Callback fired when the drawer should close |
+| side | 'left' \| 'right' | `left` | Which side the drawer slides in from |
+| width | string | — | Drawer width (CSS value) |
+| title | string | — | Optional title shown at top of drawer |
+| overlay | boolean | — | Whether to show the backdrop overlay |
+
+### Table
+
+```tsx
+import { Table } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| striped | boolean | — | Whether to alternate row background colors |
+| hoverable | boolean | — | Whether rows highlight on hover |
+| size | 'sm' \| 'md' \| 'lg' | — | Size variant affecting cell padding density |
+| bordered | boolean | — | Whether to show borders between all cells |
+
+**Example:**
+
+```tsx
+<Table size="md">Content</Table>
+```
+
+**Component Tokens:**
+
+- `--table-border-color` (fallback: `--color-border-default`)
+- `--table-border-width` (fallback: `--border-width-default`)
+- `--table-cell-padding-x` (fallback: `--spacing-4`)
+- `--table-cell-padding-y` (fallback: `--spacing-3`)
+- `--table-font-size` (fallback: `--font-size-sm`)
+- `--table-header-bg` (fallback: `--color-bg-surface`)
+- `--table-radius` (fallback: `--radius-md`)
+
+### TableHeader
+
+```tsx
+import { TableHeader } from '@arcana-ui/core'
+```
+
+### TableBody
+
+```tsx
+import { TableBody } from '@arcana-ui/core'
+```
+
+### TableRow
+
+```tsx
+import { TableRow } from '@arcana-ui/core'
+```
+
+### TableHead
+
+```tsx
+import { TableHead } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| sortable | boolean | — | Whether the column is sortable |
+| sortDirection | 'asc' | 'desc' | null | — | Current sort direction — null means unsorted |
+| onSort | () => void | — | Callback fired when the sort button is clicked |
+
+### TableCell
+
+```tsx
+import { TableCell } from '@arcana-ui/core'
+```
+
+### Breadcrumb
+
+```tsx
+import { Breadcrumb } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| separator | ReactNode | — | Custom separator element between items |
+| maxItems | number | — | Maximum items to display before truncating with ellipsis |
+
+### BreadcrumbItem
+
+```tsx
+import { BreadcrumbItem } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| href | string | — | URL for the breadcrumb link |
+| current | boolean | `false` | Whether this is the current (last) page |
+
+### Pagination
+
+```tsx
+import { Pagination } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| page | number | — | Current active page (1-indexed) |
+| totalPages | number | — | Total number of pages |
+| onPageChange | (page: number) => void | — | Callback fired when the page changes |
+| siblingCount | number | `1` | Number of sibling pages to show on each side of the current page |
+| showEdges | boolean | `true` | Whether to show first/last page buttons |
+| variant | 'default' \| 'compact' | `default` | Display variant — "default" shows page buttons, "compact" shows "Page X of Y" |
+
+**Example:**
+
+```tsx
+<Pagination variant="default">Content</Pagination>
+```
+
+### Footer
+
+```tsx
+import { Footer } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| border | boolean | `true` | Whether to show a top border |
+| variant | 'standard' \| 'minimal' | `standard` | Layout variant |
+
+**Example:**
+
+```tsx
+<Footer variant="standard">Content</Footer>
+```
+
+### FooterSection
+
+```tsx
+import { FooterSection } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| title | string | — | Section heading |
+
+### FooterLink
+
+```tsx
+import { FooterLink } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| external | boolean | `false` | Whether this links to an external site |
+
+### FooterBottom
+
+```tsx
+import { FooterBottom } from '@arcana-ui/core'
+```
+
+### Hero
+
+```tsx
+import { Hero } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| headline | string | — | Main headline text (rendered as h1) |
+| subheadline | string | — | Supporting text below the headline |
+| primaryCTA | HeroCTAAction | — | Primary call-to-action button/link |
+| secondaryCTA | HeroCTAAction | — | Secondary call-to-action button/link |
+| media | ReactNode | — | Media element (image, video, or illustration) for split/fullscreen variants |
+| variant | 'centered' \| 'split' \| 'fullscreen' | `centered` | Layout variant |
+| align | 'left' \| 'center' | `center` | Text alignment (only applies to centered variant) |
+| height | 'viewport' \| 'large' \| 'auto' | `auto` | Height behavior |
+| overlay | boolean | `false` | Adds a semi-transparent dark overlay for text readability over media |
+| badge | string | — | Small announcement badge displayed above the headline |
+
+**Example:**
+
+```tsx
+<Hero variant="centered">Content</Hero>
+```
+
+**Component Tokens:**
+
+- `--hero-badge-bg` (fallback: `--color-bg-elevated`)
+- `--hero-badge-color` (fallback: `--color-fg-primary`)
+- `--hero-badge-radius` (fallback: `--radius-full`)
+- `--hero-headline-line-height` (fallback: `--line-height-tight`)
+- `--hero-headline-size` (fallback: `--font-size-fluid-7xl`)
+- `--hero-headline-weight` (fallback: `--font-weight-bold`)
+- `--hero-max-width` (fallback: `--content-width-wide`)
+- `--hero-padding-y` (fallback: `--spacing-section`)
+- `--hero-subheadline-color` (fallback: `--color-fg-secondary`)
+- `--hero-subheadline-size` (fallback: `--font-size-fluid-lg`)
+
+### FeatureSection
+
+```tsx
+import { FeatureSection } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| title | string | — | Section heading |
+| subtitle | string | — | Section description displayed below the title |
+| features | FeatureItemData[] | — | Array of feature items to display |
+| columns | 2 | 3 | 4 | `3` | Number of columns in the grid layout (desktop) |
+| variant | 'grid' \| 'list' \| 'alternating' | `grid` | Layout variant |
+
+**Example:**
+
+```tsx
+<FeatureSection variant="grid">Content</FeatureSection>
+```
+
+### Testimonial
+
+```tsx
+import { Testimonial } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| quote | string | — | The testimonial quote text |
+| author | string | — | Author's full name |
+| jobTitle | string | — | Author's job title or role |
+| company | string | — | Author's company or organization |
+| avatar | string | — | URL of the author's avatar image |
+| variant | 'card' \| 'inline' \| 'featured' | `card` | Layout variant |
+| rating | number | — | Star rating from 1 to 5 |
+
+**Example:**
+
+```tsx
+<Testimonial variant="card">Content</Testimonial>
+```
+
+**Component Tokens:**
+
+- `--testimonial-author-size` (fallback: `--font-size-sm`)
+- `--testimonial-bg` (fallback: `--color-bg-surface`)
+- `--testimonial-padding` (fallback: `--spacing-xl`)
+- `--testimonial-quote-color` (fallback: `--color-fg-primary`)
+- `--testimonial-quote-size` (fallback: `--font-size-md`)
+- `--testimonial-radius` (fallback: `--radius-lg`)
+- `--testimonial-star-color` (fallback: `--color-status-warning-fg`)
+
+### PricingCard
+
+```tsx
+import { PricingCard } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| name | string | — | Plan/tier name (e.g., "Pro", "Enterprise") |
+| price | string | number | — | Price amount — displayed as-is if string, or formatted as number |
+| period | string | — | Billing period text (e.g., "/month", "/year", "one-time") |
+| description | string | — | Short plan description |
+| features | PricingFeature[] | — | List of features with included/excluded status |
+| cta | PricingCTAAction | — | Call-to-action button/link |
+| popular | boolean | `false` | Highlights this tier as recommended (badge + elevated styling) |
+| variant | 'default' \| 'compact' | `default` | Visual density variant |
+
+**Example:**
+
+```tsx
+<PricingCard variant="default">Content</PricingCard>
+```
+
+### CTA
+
+```tsx
+import { CTA } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| headline | string | — | Main headline text |
+| description | string | — | Supporting description text |
+| primaryCTA | CTAAction | — | Primary call-to-action button/link |
+| secondaryCTA | CTAAction | — | Secondary call-to-action button/link |
+| variant | 'banner' \| 'card' \| 'minimal' | `banner` | Visual variant |
+
+**Example:**
+
+```tsx
+<CTA variant="banner">Content</CTA>
+```
+
+**Component Tokens:**
+
+- `--cta-bg` (fallback: `--color-action-primary`)
+- `--cta-fg` (fallback: `--color-fg-on-primary`)
+- `--cta-headline-size` (fallback: `--font-size-fluid-3xl`)
+- `--cta-padding-y` (fallback: `--spacing-section`)
+- `--cta-radius` (fallback: `--radius-xl`)
+
+### StatsBar
+
+```tsx
+import { StatsBar } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| stats | StatItemData[] | — | Array of stat items to display |
+| variant | 'inline' \| 'card' | `inline` | Layout variant |
+
+**Example:**
+
+```tsx
+<StatsBar variant="inline">Content</StatsBar>
+```
+
+### Timeline
+
+```tsx
+import { Timeline } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| items | TimelineItemData[] | — | Array of timeline items |
+| variant | 'standard' \| 'compact' \| 'alternating' | `standard` | Layout variant |
+
+**Example:**
+
+```tsx
+<Timeline variant="standard">Content</Timeline>
+```
+
+**Component Tokens:**
+
+- `--timeline-content-padding` (fallback: `--spacing-md`)
+- `--timeline-dot-active-color` (fallback: `--color-action-primary`)
+- `--timeline-dot-complete-color` (fallback: `--color-action-primary`)
+- `--timeline-dot-pending-color` (fallback: `--color-border-default`)
+- `--timeline-dot-size` (fallback: `--spacing-3`)
+- `--timeline-line-color` (fallback: `--color-border-default`)
+- `--timeline-line-width` (fallback: `--border-width-default`)
+
+### LogoCloud
+
+```tsx
+import { LogoCloud } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| logos | LogoItem[] | — | Array of logo items to display |
+| title | string | — | Optional section title (e.g., "Trusted by") |
+| variant | 'grid' \| 'marquee' \| 'fade' | `grid` | Layout variant |
+
+**Example:**
+
+```tsx
+<LogoCloud variant="grid">Content</LogoCloud>
+```
+
+### DataTable
+
+```tsx
+import { DataTable } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data | T[] | — | Array of data objects to display |
+| columns | ColumnDef<T>[] | — | Column definitions |
+| sortable | boolean | `false` | Enable column header click to sort |
+| filterable | boolean | `false` | Show filter input for searching |
+| selectable | boolean | `false` | Enable row selection with checkboxes |
+| pagination | boolean | PaginationConfig | `false` | Enable pagination — true for default (10 rows), or provide config |
+| striped | boolean | `false` | Show alternating row background colors |
+| hoverable | boolean | `true` | Highlight rows on hover |
+| stickyHeader | boolean | `false` | Keep header row fixed when scrolling table body |
+| emptyState | ReactNode | — | Content shown when data array is empty |
+| loading | boolean | `false` | Show skeleton loading rows |
+| onSort | (column: string, direction: 'asc' | 'desc') => void | — | Callback fired when a column sort changes |
+| onFilter | (filters: Record<string, string>) => void | — | Callback fired when the filter value changes |
+| onSelect | (selectedRows: T[]) => void | — | Callback fired when row selection changes |
+| onRowClick | (row: T) => void | — | Callback fired when a row is clicked |
+
+### StatCard
+
+```tsx
+import { StatCard } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | number | — | The main metric value |
+| label | string | — | Label describing the metric |
+| prefix | string | — | Prefix displayed before the value (e.g., "$", "€") |
+| suffix | string | — | Suffix displayed after the value (e.g., "%", "+", "users") |
+| trend | StatTrend | — | Trend indicator with direction and percentage |
+| comparison | string | — | Comparison text (e.g., "vs last month") |
+| icon | ReactNode | — | Icon displayed in the card |
+| variant | 'default' \| 'compact' | `default` | Visual variant — "compact" uses smaller spacing and no icon |
+| loading | boolean | `false` | Show skeleton loading state |
+
+**Example:**
+
+```tsx
+<StatCard variant="default">Content</StatCard>
+```
+
+### ProgressBar
+
+```tsx
+import { ProgressBar } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | number | — | Current progress value (0-100 by default, or 0-max) |
+| max | number | `100` | Maximum value (default 100) |
+| variant | 'default' \| 'striped' \| 'animated' | `default` | Visual variant |
+| size | 'sm' \| 'md' \| 'lg' | `md` | Bar height size |
+| color | 'primary' \| 'success' \| 'warning' \| 'error' \| 'info' | `primary` | Color mapped to semantic status colors |
+| label | string | — | Accessible label for the progress bar |
+| showValue | boolean | `false` | Display percentage text alongside the bar |
+| indeterminate | boolean | `false` | Indeterminate mode — shows infinite loading animation |
+
+**Example:**
+
+```tsx
+<ProgressBar variant="default" size="md">Content</ProgressBar>
+```
+
+### KPICard
+
+```tsx
+import { KPICard } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | number | — | The main metric value |
+| label | string | — | Label describing the metric |
+| prefix | string | — | Prefix displayed before the value (e.g., "$", "€") |
+| suffix | string | — | Suffix displayed after the value (e.g., "%", "ms") |
+| trend | KPITrend | — | Trend indicator with direction and percentage |
+| data | number[] | — | Array of recent values for the sparkline chart |
+| sparklineColor | string | — | Custom sparkline color (defaults to trend color) |
+| target | KPITarget | — | Target line on the sparkline |
+| period | string | — | Time period label (e.g., "Last 7 days") |
+| variant | 'default' \| 'compact' | `default` | Visual variant — "compact" uses smaller spacing |
+| loading | boolean | `false` | Show skeleton loading state |
+
+**Example:**
+
+```tsx
+<KPICard variant="default">Content</KPICard>
+```
+
+### DatePicker
+
+```tsx
+import { DatePicker } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | Date | null | — | Controlled selected date |
+| defaultValue | Date | null | `null` | Default date for uncontrolled usage |
+| onChange | (date: Date | null) => void | — | Callback fired when date changes |
+| label | string | — | Label text |
+| placeholder | string | — | Placeholder text |
+| error | string | boolean | — | Error message or boolean |
+| helperText | string | — | Helper text |
+| disabled | boolean | `false` | Whether the picker is disabled |
+| min | Date | — | Earliest selectable date |
+| max | Date | — | Latest selectable date |
+| format | string | — | Display format (default "MM/DD/YYYY") |
+| clearable | boolean | `true` | Show clear button |
+| size | 'sm' \| 'md' \| 'lg' | `md` | Size variant |
+
+**Example:**
+
+```tsx
+<DatePicker size="md">Content</DatePicker>
+```
+
+### FileUpload
+
+```tsx
+import { FileUpload } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| accept | string | — | File type filter (e.g., "image/*,.pdf") |
+| multiple | boolean | `false` | Allow multiple file selection |
+| maxSize | number | — | Maximum file size in bytes |
+| maxFiles | number | — | Maximum number of files when multiple |
+| onChange | (files: File[]) => void | — | Callback fired when files are selected |
+| onError | (error: string) => void | — | Callback fired on validation errors |
+| label | string | — | Label text |
+| description | string | — | Description text (e.g., "PNG, JPG, PDF up to 10MB") |
+| disabled | boolean | `false` | Whether the uploader is disabled |
+| variant | 'dropzone' \| 'button' | `dropzone` | Visual variant |
+
+**Example:**
+
+```tsx
+<FileUpload variant="dropzone">Content</FileUpload>
+```
+
+### Drawer
+
+```tsx
+import { Drawer } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| open | boolean | — | Whether the drawer is visible |
+| onClose | () => void | — | Callback fired when the drawer should close |
+| side | 'left' \| 'right' \| 'top' \| 'bottom' | `right` | Which side the drawer slides in from |
+| size | 'sm' \| 'md' \| 'lg' \| 'full' | `md` | Size preset — sm: 320px, md: 420px, lg: 640px, full: 100% |
+| title | string | — | Optional title in the header |
+| description | string | — | Optional description below title |
+| overlay | boolean | — | Whether to show the backdrop overlay |
+| closeOnOverlayClick | boolean | `true` | Close when clicking the overlay backdrop |
+| closeOnEsc | boolean | `true` | Close when pressing Escape |
+| showClose | boolean | `true` | Show close button in header |
+| footer | ReactNode | — | Optional sticky footer content |
+
+**Example:**
+
+```tsx
+<Drawer size="md">Content</Drawer>
+```
+
+**Component Tokens:**
+
+- `--drawer-bg` (fallback: `--color-bg-page`)
+- `--drawer-body-padding` (fallback: `--spacing-lg`)
+- `--drawer-footer-padding` (fallback: `--spacing-lg`)
+- `--drawer-header-padding` (fallback: `--spacing-lg`)
+- `--drawer-overlay-bg` (fallback: `--color-bg-overlay`)
+- `--drawer-shadow` (fallback: `--shadow-2xl`)
+- `--drawer-width-lg`
+- `--drawer-width-md`
+- `--drawer-width-sm`
+
+### Popover
+
+```tsx
+import { Popover } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| trigger | ReactNode | — | The trigger element that opens the popover |
+| content | ReactNode | — | Popover content |
+| open | boolean | — | Controlled open state |
+| defaultOpen | boolean | `false` | Default open state for uncontrolled usage |
+| onOpenChange | (open: boolean) => void | — | Callback fired when open state changes |
+| side | 'top' \| 'right' \| 'bottom' \| 'left' | `bottom` | Preferred side relative to trigger |
+| align | 'start' \| 'center' \| 'end' | `center` | Alignment along the side axis |
+| sideOffset | number | `8` | Pixel gap between trigger and popover |
+| triggerOn | 'click' \| 'hover' | `click` | What interaction opens the popover |
+| closeOnOutsideClick | boolean | `true` | Close when clicking outside |
+| closeOnEsc | boolean | `true` | Close when pressing Escape |
+| showArrow | boolean | `false` | Show arrow pointing to trigger |
+
+**Component Tokens:**
+
+- `--popover-arrow-size` (fallback: `--spacing-2`)
+- `--popover-bg` (fallback: `--color-bg-page`)
+- `--popover-border` (fallback: `--color-border-default`)
+- `--popover-max-width`
+- `--popover-padding` (fallback: `--spacing-md`)
+- `--popover-radius` (fallback: `--radius-lg`)
+- `--popover-shadow` (fallback: `--shadow-lg`)
+
+### CommandPalette
+
+```tsx
+import { CommandPalette } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| open | boolean | — | Whether the palette is visible |
+| onClose | () => void | — | Callback fired when the palette should close |
+| items | CommandItem[] | `[]` | Static list of command items |
+| onSelect | (item: CommandItem) => void | — | Callback fired when an item is selected |
+| onSearch | (query: string) => CommandItem[] | Promise<CommandItem[]> | — | Async search function for dynamic results |
+| placeholder | string | — | Placeholder text in the search input |
+| emptyState | ReactNode | — | Content shown when no results match |
+| groups | boolean | — | Whether to group items by their group property |
+
+**Component Tokens:**
+
+- `--spinner-speed`
+
+### Divider
+
+```tsx
+import { Divider } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| orientation | 'horizontal' \| 'vertical' | `horizontal` | Divider direction |
+| variant | 'solid' \| 'dashed' \| 'dotted' | `solid` | Line style |
+| label | string | React.ReactNode | — | Text or element displayed in the middle of the divider |
+| spacing | 'none' \| 'sm' \| 'md' \| 'lg' | `md` | Spacing above and below (or left/right for vertical) |
+
+**Example:**
+
+```tsx
+<Divider variant="solid">Content</Divider>
+```
+
+**Component Tokens:**
+
+- `--divider-color` (fallback: `--color-border-muted`)
+- `--divider-label-bg` (fallback: `--color-bg-page`)
+- `--divider-label-color` (fallback: `--color-fg-muted`)
+- `--divider-label-size` (fallback: `--font-size-sm`)
+- `--divider-weight` (fallback: `--border-width-default`)
+
+### Spacer
+
+```tsx
+import { Spacer } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| 'section' | `md` | Spacing size mapped to spacing tokens |
+| axis | 'vertical' \| 'horizontal' | `vertical` | Direction of spacing |
+
+**Example:**
+
+```tsx
+<Spacer size="sm">Content</Spacer>
+```
+
+### AspectRatio
+
+```tsx
+import { AspectRatio } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| ratio | number | 'square' | 'video' | 'portrait' | 'wide' | `video` | Aspect ratio — preset name or numeric width/height ratio |
+
+### Image
+
+```tsx
+import { Image } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| src | string | — | Image source URL |
+| alt | string | — | Alt text (required for accessibility — use "" for decorative images) |
+| fallback | ReactNode | — | Fallback content shown while loading or on error |
+| aspectRatio | number | 'square' | 'video' | 'portrait' | — | Aspect ratio constraint |
+| objectFit | 'cover' \| 'contain' \| 'fill' \| 'none' | `cover` | How the image fills its container |
+| lazy | boolean | `true` | Use native lazy loading |
+| radius | 'none' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'full' | `none` | Border radius |
+
+**Component Tokens:**
+
+- `--image-fallback-bg` (fallback: `--color-bg-surface`)
+- `--image-fallback-color` (fallback: `--color-fg-muted`)
+
+### Carousel
+
+```tsx
+import { Carousel } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| autoPlay | boolean | `false` | Auto-advance slides |
+| autoPlayInterval | number | `5000` | Auto-play interval in ms |
+| loop | boolean | `true` | Wrap around when reaching the end |
+| showArrows | boolean | `true` | Show prev/next arrow buttons |
+| showDots | boolean | `true` | Show dot indicators |
+| gap | 'none' \| 'sm' \| 'md' \| 'lg' | `md` | Gap between slides |
+| label | string | `Carousel` | Accessible label |
+
+**Component Tokens:**
+
+- `--carousel-arrow-bg` (fallback: `--color-bg-page`)
+- `--carousel-arrow-color` (fallback: `--color-fg-primary`)
+- `--carousel-arrow-radius` (fallback: `--radius-full`)
+- `--carousel-arrow-size` (fallback: `--spacing-10`)
+- `--carousel-dot-active-color` (fallback: `--color-action-primary`)
+- `--carousel-dot-color` (fallback: `--color-border-default`)
+- `--carousel-dot-size` (fallback: `--spacing-2`)
+
+### Banner
+
+```tsx
+import { Banner } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'info' \| 'success' \| 'warning' \| 'error' \| 'neutral' | `info` | Visual variant |
+| title | string | — | Optional title |
+| icon | ReactNode | — | Custom icon (defaults to variant icon) |
+| action | ReactNode | — | Action element (button or link) |
+| dismissible | boolean | `false` | Whether the banner can be dismissed |
+| onDismiss | () => void | — | Callback fired when dismissed |
+| sticky | boolean | `false` | Stick to top of page |
+
+**Example:**
+
+```tsx
+<Banner variant="info">Content</Banner>
+```
+
+**Component Tokens:**
+
+- `--banner-error-bg` (fallback: `--color-status-error-bg`)
+- `--banner-info-bg` (fallback: `--color-status-info-bg`)
+- `--banner-info-border` (fallback: `--color-status-info-border`)
+- `--banner-neutral-bg` (fallback: `--color-bg-surface`)
+- `--banner-padding-x` (fallback: `--spacing-md`)
+- `--banner-padding-y` (fallback: `--spacing-3`)
+- `--banner-success-bg` (fallback: `--color-status-success-bg`)
+- `--banner-warning-bg` (fallback: `--color-status-warning-bg`)
+
+### Skeleton
+
+```tsx
+import { Skeleton } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'text' \| 'circular' \| 'rectangular' | `text` | Shape variant |
+| width | string | — | Width (CSS value) |
+| height | string | — | Height (CSS value) |
+| lines | number | `1` | Number of text lines to render |
+| animate | boolean | `true` | Whether to animate the pulse effect |
+| radius | 'none' \| 'sm' \| 'md' \| 'lg' \| 'full' | — | Border radius override |
+
+**Example:**
+
+```tsx
+<Skeleton variant="text">Content</Skeleton>
+```
+
+**Component Tokens:**
+
+- `--skeleton-animation-duration`
+- `--skeleton-bg` (fallback: `--color-bg-surface`)
+- `--skeleton-radius` (fallback: `--radius-md`)
+
+### Spinner
+
+```tsx
+import { Spinner } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' | `md` | Spinner size |
+| color | 'primary' \| 'current' \| 'white' | `primary` | Color variant — "current" inherits parent text color |
+| label | string | `Loading` | Accessible label (visually hidden) |
+
+**Example:**
+
+```tsx
+<Spinner size="sm">Content</Spinner>
+```
+
+**Component Tokens:**
+
+- `--spinner-color` (fallback: `--color-action-primary`)
+- `--spinner-speed`
+
+### ErrorBoundary
+
+```tsx
+import { ErrorBoundary } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| fallback | React.ReactNode | ((error: Error, reset: () => void) => React.ReactNode) | — | Fallback UI — ReactNode or render function receiving error and reset |
+| onError | (error: Error, errorInfo: React.ErrorInfo) => void | — | Callback fired when an error is caught |
+
+### ProductCard
+
+```tsx
+import { ProductCard } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| image | string | — | Product image URL |
+| title | string | — | Product title |
+| price | number | ProductPrice | — | Price as number or object with current/original |
+| rating | ProductRating | — | Star rating with optional review count |
+| badge | string | — | Badge text ("New", "Sale", "-20%", "Sold Out") |
+| variant | 'default' \| 'compact' \| 'horizontal' | `default` | Layout variant |
+| onAddToCart | () => void | — | Add to cart handler — shows button when provided |
+| onFavorite | () => void | — | Favorite handler — shows heart when provided |
+| href | string | — | Link URL — makes card clickable |
+| loading | boolean | `false` | Show skeleton loading state |
+
+**Example:**
+
+```tsx
+<ProductCard variant="default">Content</ProductCard>
+```
+
+**Component Tokens:**
+
+- `--product-card-badge-bg` (fallback: `--color-action-primary`)
+- `--product-card-badge-color` (fallback: `--color-fg-on-primary`)
+- `--product-card-bg` (fallback: `--color-bg-surface`)
+- `--product-card-hover-shadow` (fallback: `--shadow-md`)
+- `--product-card-original-price-color` (fallback: `--color-fg-muted`)
+- `--product-card-padding` (fallback: `--spacing-md`)
+- `--product-card-radius` (fallback: `--radius-lg`)
+- `--product-card-sale-color` (fallback: `--color-status-error-fg`)
+
+### CartItem
+
+```tsx
+import { CartItem } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| image | string | — | URL of the product image |
+| title | string | — | Product title |
+| variant | string | — | Product variant description (e.g., "Size M, Blue") |
+| price | number | — | Price as a number |
+| quantity | number | — | Current quantity |
+| currency | string | — | Currency symbol or code |
+| onQuantityChange | (quantity: number) => void | — | Callback fired when quantity changes |
+| onRemove | () => void | — | Callback fired when the remove button is clicked |
+| maxQuantity | number | `99` | Maximum allowed quantity |
+
+### QuantitySelector
+
+```tsx
+import { QuantitySelector } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | number | — | Current quantity value |
+| onChange | (value: number) => void | — | Callback fired when the value changes |
+| min | number | `1` | Minimum allowed value |
+| max | number | `99` | Maximum allowed value |
+| size | 'sm' \| 'md' | `md` | Size variant |
+| disabled | boolean | `false` | Whether the selector is disabled |
+
+**Example:**
+
+```tsx
+<QuantitySelector size="md">Content</QuantitySelector>
+```
+
+### PriceDisplay
+
+```tsx
+import { PriceDisplay } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | number | — | Price value to display |
+| originalValue | number | — | Original price before discount (renders struck-through when provided) |
+| currency | string | `USD` | ISO 4217 currency code |
+| locale | string | `en-US` | BCP 47 locale string for formatting |
+| size | 'sm' \| 'md' \| 'lg' \| 'xl' | `md` | Size of the price text |
+
+**Example:**
+
+```tsx
+<PriceDisplay size="md">Content</PriceDisplay>
+```
+
+### RatingStars
+
+```tsx
+import { RatingStars } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | number | — | Current rating value (0 to max, supports 0.5 increments) |
+| max | number | `5` | Maximum number of stars |
+| count | number | — | Number of reviews to display after stars (e.g., 128 renders "(128)") |
+| size | 'sm' \| 'md' \| 'lg' | `md` | Size of the star icons |
+| interactive | boolean | `false` | Enable interactive clicking and keyboard navigation |
+| onChange | (value: number) => void | — | Callback when rating changes (interactive mode only) |
+
+**Example:**
+
+```tsx
+<RatingStars size="md">Content</RatingStars>
+```
+
+### ArticleLayout
+
+```tsx
+import { ArticleLayout } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| maxWidth | 'prose' \| 'wide' \| 'full' | `prose` | Maximum content width |
+| sidebar | ReactNode | — | Sidebar content (TOC, author info, related) |
+| sidebarPosition | 'left' \| 'right' | `right` | Sidebar position |
+| sidebarSticky | boolean | `true` | Whether sidebar sticks while scrolling |
+
+### PullQuote
+
+```tsx
+import { PullQuote } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| quote | string | — | Quote text |
+| attribution | string | — | Attribution text |
+| variant | 'default' \| 'accent' \| 'large' | `default` | Visual variant |
+
+**Example:**
+
+```tsx
+<PullQuote variant="default">Content</PullQuote>
+```
+
+### AuthorCard
+
+```tsx
+import { AuthorCard } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| name | string | — | Author name |
+| role | string | — | Role or title |
+| avatar | string | — | Avatar image URL |
+| bio | string | — | Short bio |
+| social | AuthorSocial[] | — | Social media links |
+| variant | 'inline' \| 'card' | `inline` | Layout variant |
+
+**Example:**
+
+```tsx
+<AuthorCard variant="inline">Content</AuthorCard>
+```
+
+**Component Tokens:**
+
+- `--author-card-bg` (fallback: `--color-bg-surface`)
+- `--author-card-padding` (fallback: `--spacing-lg`)
+- `--author-card-radius` (fallback: `--radius-lg`)
+
+### RelatedPosts
+
+```tsx
+import { RelatedPosts } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| title | string | — | Section title |
+| posts | RelatedPost[] | — | Array of related posts |
+| columns | 2 | 3 | 4 | `3` | Number of columns |
+| variant | 'card' \| 'list' | `card` | Layout variant |
+
+**Example:**
+
+```tsx
+<RelatedPosts variant="card">Content</RelatedPosts>
+```
+
+### NewsletterSignup
+
+```tsx
+import { NewsletterSignup } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| title | string | — | Section title |
+| description | string | — | Description text |
+| placeholder | string | — | Input placeholder |
+| buttonText | string | `Subscribe` | Button label |
+| onSubmit | (email: string) => void | Promise<void> | — | Submit handler — receives validated email |
+| variant | 'inline' \| 'card' \| 'banner' | `inline` | Layout variant |
+| successMessage | string | — | Message after successful submit |
+
+**Example:**
+
+```tsx
+<NewsletterSignup variant="inline">Content</NewsletterSignup>
+```
+
+### ScrollArea
+
+```tsx
+import { ScrollArea } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| maxHeight | string | — | Maximum height constraint |
+| orientation | 'vertical' \| 'horizontal' \| 'both' | `vertical` | Scroll direction |
+| showScrollbar | 'auto' \| 'always' \| 'hover' | `auto` | Scrollbar visibility |
+
+### Collapsible
+
+```tsx
+import { Collapsible } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| open | boolean | — | Controlled open state |
+| defaultOpen | boolean | `false` | Default open state |
+| onOpenChange | (open: boolean) => void | — | Callback when open state changes |
+| trigger | ReactNode | — | Clickable trigger element |
+| animateHeight | boolean | `true` | Animate height transition |
+
+**Component Tokens:**
+
+- `--collapsible-duration` (fallback: `--duration-normal`)
+
+### CopyButton
+
+```tsx
+import { CopyButton } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | — | Text to copy to clipboard |
+| label | string | `Copy` | Button label |
+| copiedLabel | string | — | Label shown after copying |
+| copiedDuration | number | `2000` | How long "Copied!" stays visible (ms) |
+| variant | 'default' \| 'ghost' \| 'icon' | `default` | Visual variant |
+| size | 'sm' \| 'md' | `sm` | Size |
+
+**Example:**
+
+```tsx
+<CopyButton variant="default" size="md">Content</CopyButton>
+```
+
+### KeyboardShortcut
+
+```tsx
+import { KeyboardShortcut } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| keys | string[] | — | Key labels to display (e.g., ["⌘", "K"]) |
+| variant | 'default' \| 'inline' | `default` | Visual variant |
+
+**Example:**
+
+```tsx
+<KeyboardShortcut variant="default">Content</KeyboardShortcut>
+```
+
+### ColorPicker
+
+```tsx
+import { ColorPicker } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | — | Current CSS color value (hex, rgb, rgba) |
+| onChange | (value: string) => void | — | Called on every change with a hex value (or rgba for semi-transparent) |
+| format | 'hex' \| 'rgb' \| 'rgba' \| 'hsl' | `hex` | Color output format |
+| showAlpha | boolean | `true` | Show alpha/opacity slider (default true) |
+| showInputs | boolean | `true` | Show hex/RGB text inputs (default true) |
+| showEyeDropper | boolean | — | Show eyedropper button when supported (default true) |
+| presetColors | string[] | `[]` | Optional palette swatches (e.g. current theme colors) |
+| showRecent | boolean | `true` | Track and show recent colors (default true) |
+| placement | 'top' \| 'bottom' \| 'left' \| 'right' | `bottom` | Placement of popup relative to trigger |
+| size | 'sm' \| 'md' \| 'lg' | `md` | Size variant |
+| disabled | boolean | `false` | Disabled state |
+
+**Example:**
+
+```tsx
+<ColorPicker size="md">Content</ColorPicker>
+```
+
+### FontPicker
+
+```tsx
+import { FontPicker } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | string | — | Current font-family stack value |
+| onChange | (fontStack: string) => void | — | Called when a font is selected |
+| label | string | — | Label text displayed on the trigger |
+| googleFonts | GoogleFontEntry[] | — | Google Fonts to offer (defaults to a curated list of ~31 fonts) |
+| localFonts | LocalFontEntry[] | `[]` | Locally uploaded fonts |
+| searchable | boolean | `true` | Show search input (default true) |
+| searchPlaceholder | string | — | Placeholder text for search |
+| size | 'sm' \| 'md' \| 'lg' | `md` | Size variant |
+| disabled | boolean | `false` | Disabled state |
+
+**Example:**
+
+```tsx
+<FontPicker size="md">Content</FontPicker>
+```
+
+### ThemeProvider
+
+```tsx
+import { ThemeProvider } from '@arcana-ui/core'
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| defaultTheme | 'brutalist' \| 'commerce' \| 'corporate' \| 'dark' \| 'editorial' \| 'glass' \| 'light' \| 'midnight' \| 'mono' \| 'nature' \| 'neon' \| 'retro98' \| 'startup' \| 'terminal' | `light` | Default theme to use when no stored preference exists and system detection is not used. |
+| storageKey | string | `arcana-theme` | localStorage key for persisting theme preference. |
+| enableTransitions | boolean | `false` | When `true`, add smooth CSS transitions during theme changes. |
+
+## Hooks Reference
+
+### useToast
+
+```tsx
+import { useToast } from '@arcana-ui/core'
+```
+
+### useMediaQuery
+
+```tsx
+import { useMediaQuery } from '@arcana-ui/core'
+```
+
+Reactively matches a CSS media query string. SSR-safe: returns `false` when `window` is unavailable.
+
+### useBreakpoint
+
+```tsx
+import { useBreakpoint } from '@arcana-ui/core'
+```
+
+Returns the current active breakpoint and convenience booleans. SSR-safe: defaults to `"lg"` (desktop) when `window` is unavailable. Breakpoint values match the layout token system: - sm: < 640px - md: 640px – 1023px - lg: 1024px – 1279px - xl: 1280px – 1535px - 2xl: >= 1536px
+
+### usePrefersReducedMotion
+
+```tsx
+import { usePrefersReducedMotion } from '@arcana-ui/core'
+```
+
+Returns `true` when the user has enabled "Prefer reduced motion" in their OS or browser settings. SSR-safe: returns `false` when `window` is unavailable. Note: CSS-level reduced motion is already handled by the Arcana token system (all `--duration-*` tokens are zeroed out via a `prefers-reduced-motion` media query in arcana.css). This hook is for **JavaScript-driven** animations where CSS transiti...
+
+### useHotkey
+
+```tsx
+import { useHotkey } from '@arcana-ui/core'
+```
+
+Hook to listen for keyboard shortcuts. Automatically handles Cmd (Mac) vs Ctrl (Windows/Linux) when modifier includes "meta". Does not fire when user is typing in an input, textarea, or contenteditable.
+
+### useFloating
+
+```tsx
+import { useFloating } from '@arcana-ui/core'
+```
+
+Positions a floating element relative to a trigger, with smart flip and viewport clamping. Zero dependencies — a lightweight alternative to Floating UI / Popper.js.
+
+### useClickOutside
+
+```tsx
+import { useClickOutside } from '@arcana-ui/core'
+```
+
+Fires a callback when a click (mousedown) occurs outside of the referenced element. SSR-safe: does nothing when `document` is unavailable.
+
+### useDrag
+
+```tsx
+import { useDrag } from '@arcana-ui/core'
+```
+
+Generic drag interaction hook. Handles mousedown/touchstart → document mousemove/touchmove → mouseup/touchend with optional RAF throttling and coordinate normalization.
+
+### useUndoRedo
+
+```tsx
+import { useUndoRedo } from '@arcana-ui/core'
+```
+
+Generic undo/redo history stack. New pushes after an undo clear the forward (redo) history. Stack size is bounded by `maxHistory`.
+
+### useTheme
+
+```tsx
+import { useTheme } from '@arcana-ui/core'
+```
+
+Reads the persisted theme from localStorage. Returns `null` if no preference is stored or if running on the server. / function getStoredTheme(): ThemeId | null { if (typeof window === 'undefined') return null; try { const stored = localStorage.getItem(STORAGE_KEY); if (stored && THEME_IDS.includes(stored as ThemeId)) { return stored as ThemeId; } } catch { // localStorage may be unavailable (e.g.,...
+
+### useThemeContext
+
+```tsx
+import { useThemeContext } from '@arcana-ui/core'
+```
+
+Reads the persisted theme from localStorage. / function getStoredTheme(key: string): ThemeId | null { if (typeof window === 'undefined') return null; try { const stored = localStorage.getItem(key); if (stored && THEME_IDS.includes(stored as ThemeId)) { return stored as ThemeId; } } catch { // localStorage may be unavailable } return null; } /** Persists the theme choice to localStorage. / function...
+
+## Layout Patterns
+
+Complete, working code examples for common page types.
+
+### Dashboard Layout
+
+```tsx
+import '@arcana-ui/tokens/dist/arcana.css';
+import { Navbar, NavbarBrand, NavbarActions, Sidebar, SidebarContent, SidebarItem,
+  SidebarSection, StatCard, DataTable, Tabs, TabList, Tab, TabPanels, TabPanel,
+  Badge, Button, Card, ProgressBar } from '@arcana-ui/core';
+import type { ColumnDef } from '@arcana-ui/core';
+
+interface User { id: number; name: string; email: string; role: string; }
+const users: User[] = [
+  { id: 1, name: 'Alice Chen', email: 'alice@example.com', role: 'Admin' },
+  { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'Developer' },
+];
+const columns: ColumnDef<User>[] = [
+  { key: 'name', header: 'Name', sortable: true },
+  { key: 'email', header: 'Email', sortable: true },
+  { key: 'role', header: 'Role', render: (_, row) => <Badge variant="secondary">{row.role}</Badge> },
+];
+
+export function Dashboard() {
+  return (
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-page)' }}>
+      <Navbar sticky border>
+        <NavbarBrand>My App</NavbarBrand>
+        <NavbarActions><Button variant="ghost" size="sm">Log Out</Button></NavbarActions>
+      </Navbar>
+      <div style={{ display: 'flex' }}>
+        <Sidebar style={{ width: 240 }}>
+          <SidebarContent>
+            <SidebarSection label="Main">
+              <SidebarItem href="/" active>Dashboard</SidebarItem>
+              <SidebarItem href="/users">Users</SidebarItem>
+            </SidebarSection>
+          </SidebarContent>
+        </Sidebar>
+        <main style={{ flex: 1, padding: 'var(--spacing-6)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 'var(--spacing-4)', marginBottom: 'var(--spacing-6)' }}>
+            <StatCard label="Users" value="1,284" trend={{ direction: 'up', value: 12.5 }} comparison="vs last month" />
+            <StatCard label="Revenue" value="$48,290" trend={{ direction: 'up', value: 8.2 }} comparison="vs last month" />
+          </div>
+          <Tabs defaultValue="users">
+            <TabList><Tab value="users">Users</Tab><Tab value="metrics">Metrics</Tab></TabList>
+            <TabPanels>
+              <TabPanel value="users"><Card><DataTable data={users} columns={columns} sortable filterable pagination={{ pageSize: 10 }} /></Card></TabPanel>
+              <TabPanel value="metrics"><Card><ProgressBar value={99.9} showValue color="success" /></Card></TabPanel>
+            </TabPanels>
+          </Tabs>
+        </main>
+      </div>
+    </div>
+  );
+}
+```
+
+### Marketing Landing Page
+
+```tsx
+import '@arcana-ui/tokens/dist/arcana.css';
+import { Navbar, NavbarBrand, NavbarContent, NavbarActions, Hero, FeatureSection,
+  PricingCard, CTA, StatsBar, Footer, FooterSection, FooterLink, FooterBottom,
+  Button } from '@arcana-ui/core';
+
+export function Landing() {
+  return (
+    <>
+      <Navbar sticky><NavbarBrand>Acme</NavbarBrand>
+        <NavbarActions><Button size="sm">Get started</Button></NavbarActions>
+      </Navbar>
+      <Hero headline="Build AI-native interfaces" subheadline="Token-driven React components."
+        primaryCTA={{ label: 'Start free', href: '/signup' }} variant="centered" />
+      <StatsBar stats={[{ value: '108', label: 'Components' }, { value: '14', label: 'Themes' }]} />
+      <FeatureSection title="Everything you need" features={[
+        { title: 'Token-driven', description: 'CSS variables all the way down.' },
+        { title: 'WCAG AA', description: '100% accessible out of the box.' },
+      ]} />
+      <PricingCard name="Pro" price="$49" period="/mo" highlighted
+        features={['All components', 'All themes', 'MCP server']}
+        primaryCTA={{ label: 'Start trial', href: '/signup' }} />
+      <CTA headline="Ready to ship?" primaryCTA={{ label: 'Get started', href: '/signup' }} />
+      <Footer><FooterSection title="Product"><FooterLink href="/docs">Docs</FooterLink></FooterSection>
+        <FooterBottom>&copy; 2026 Acme Inc.</FooterBottom></Footer>
+    </>
+  );
+}
+```
+
+### E-commerce Store
+
+```tsx
+import '@arcana-ui/tokens/dist/arcana.css';
+import { Navbar, NavbarBrand, NavbarActions, ProductCard, Button, Grid, Container } from '@arcana-ui/core';
+
+const products = [
+  { id: 1, title: 'Arcana Hoodie', price: 79, originalPrice: 99, image: '/hoodie.jpg', badge: 'Sale' },
+  { id: 2, title: 'Dev Mug', price: 24, image: '/mug.jpg' },
+];
+export function Shop() {
+  return (<><Navbar sticky border><NavbarBrand>Arcana Supply</NavbarBrand>
+    <NavbarActions><Button variant="ghost" size="sm">Cart</Button></NavbarActions></Navbar>
+    <Container size="xl" style={{ paddingTop: 'var(--spacing-8)' }}>
+      <Grid columns={3} gap={6}>{products.map(p => (
+        <ProductCard key={p.id} image={p.image} title={p.title} price={p.price}
+          originalPrice={p.originalPrice} badge={p.badge}
+          actions={<Button variant="primary" size="sm">Add to cart</Button>} />))}
+      </Grid></Container></>);
+}
+```
+
+### Editorial Article
+
+```tsx
+import '@arcana-ui/tokens/dist/arcana.css';
+import { Navbar, NavbarBrand, ArticleLayout, AuthorCard, PullQuote, RelatedPosts, Badge, Button } from '@arcana-ui/core';
+
+export function Article() {
+  return (<><Navbar sticky border><NavbarBrand>The Journal</NavbarBrand>
+    <Button variant="ghost" size="sm">Subscribe</Button></Navbar>
+    <ArticleLayout sidebar={<AuthorCard name="Sarah Chen" role="Editor" avatar="/sarah.jpg" bio="Covering design systems." />}>
+      <Badge variant="primary" size="sm">Design Systems</Badge>
+      <h1>Why token-driven design is the future</h1>
+      <p>When every visual property is a CSS variable...</p>
+      <PullQuote quote="Design tokens are the API between design and code." attribution="Sarah Chen" />
+      <RelatedPosts title="More reading" posts={[{ title: 'CSS custom properties', href: '/css-vars', category: 'Tutorial' }]} />
+    </ArticleLayout></>);
+}
+```
+
+## Theme Customization Guide
+
+Create a custom theme JSON file:
+
+```json
+{
+  "name": "my-brand",
+  "description": "Custom brand theme",
+  "primitive": {
+    "color": {
+      "brand": { "50": "#eff6ff", "500": "#3b82f6", "600": "#2563eb", "900": "#1e3a8a" },
+      "neutral": { "0": "#fff", "50": "#f9fafb", "100": "#f3f4f6", "900": "#111827" }
+    },
+    "font": { "display": "Inter, sans-serif", "body": "Inter, sans-serif", "mono": "JetBrains Mono, monospace" }
+  },
+  "semantic": {
+    "color": {
+      "background": { "default": "{primitive.color.neutral.50}", "surface": "{primitive.color.neutral.0}", "elevated": "{primitive.color.neutral.0}" },
+      "foreground": { "primary": "{primitive.color.neutral.900}", "secondary": "{primitive.color.neutral.600}", "muted": "{primitive.color.neutral.400}" },
+      "action": { "primary": "{primitive.color.brand.500}", "primaryHover": "{primitive.color.brand.600}" },
+      "border": { "default": "{primitive.color.neutral.200}" }
+    }
+  },
+  "component": {}
+}
+```
+
+Validate with: `npx @arcana-ui/cli validate my-theme.json`
+Activate: `document.documentElement.setAttribute('data-theme', 'my-brand')`
+
+## Responsive Design
+
+Arcana is mobile-first. All CSS defaults target mobile; `min-width` queries scale up.
+
+### Breakpoints
+
+| Name | Range | Token |
+|------|-------|-------|
+| sm   | < 640px | `--breakpoint-sm` |
+| md   | 640–1023px | `--breakpoint-md` |
+| lg   | 1024–1279px | `--breakpoint-lg` |
+| xl   | 1280–1535px | `--breakpoint-xl` |
+| 2xl  | ≥ 1536px | `--breakpoint-2xl` |
+
+```tsx
+import { useBreakpoint } from '@arcana-ui/core';
+function Layout() {
+  const { isMobile, isTablet, isDesktop } = useBreakpoint();
+  return isMobile ? <MobileLayout /> : <DesktopLayout />;
+}
+```
+
+Density switching: `document.documentElement.setAttribute('data-density', 'compact')`
+Values: `compact` | `normal` | `comfortable`
+
+## Resources
+
+- Playground: https://arcana-ui.dev
+- GitHub: https://github.com/Arcana-UI/arcana
+- npm: @arcana-ui/core @arcana-ui/tokens @arcana-ui/cli @arcana-ui/mcp
+- MCP server: `npx @arcana-ui/mcp` — programmatic AI agent access
+- manifest.ai.json — machine-readable component registry at repo root

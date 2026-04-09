@@ -78,6 +78,7 @@ interface SemanticTokens {
     easing: Record<string, string>;
     transition?: Record<string, string>;
   };
+  elementSizing?: Record<string, string>;
 }
 
 interface TokenPreset {
@@ -467,6 +468,13 @@ function generateSemanticVars(
     vars.push({ name: `--spacing-${key}`, value: resolveValue(preset, value) });
   }
 
+  // Element sizing (heights and padding for interactive elements)
+  if (semantic.elementSizing) {
+    for (const [key, value] of Object.entries(semantic.elementSizing)) {
+      vars.push({ name: `--${key}`, value: resolveValue(preset, value) });
+    }
+  }
+
   // Elevation → --shadow-* (size-based) + --elevation-* (contextual)
   for (const [key, value] of Object.entries(semantic.elevation)) {
     const prefix = SHADOW_SIZE_KEYS_SET.has(key) ? '--shadow' : '--elevation';
@@ -776,6 +784,25 @@ function generateCombinedCSS(presets: TokenPreset[]): string {
     '  --spacing-3xl: var(--spacing-12);',
     '  --spacing-section: var(--spacing-16);',
     '  --spacing-section-lg: var(--spacing-24);',
+    '',
+    '  /* Element sizing — compact */  ',
+    '  --element-height-xs: 1.5rem;',
+    '  --element-height-sm: 1.75rem;',
+    '  --element-height-md: 2.25rem;',
+    '  --element-height-lg: 2.75rem;',
+    '  --element-height-xl: 3.25rem;',
+    '',
+    '  --element-padding-y-xs: 0.125rem;',
+    '  --element-padding-y-sm: 0.25rem;',
+    '  --element-padding-y-md: 0.375rem;',
+    '  --element-padding-y-lg: 0.5rem;',
+    '  --element-padding-y-xl: 0.625rem;',
+    '',
+    '  --element-padding-x-xs: 0.375rem;',
+    '  --element-padding-x-sm: 0.5rem;',
+    '  --element-padding-x-md: 0.75rem;',
+    '  --element-padding-x-lg: 1rem;',
+    '  --element-padding-x-xl: 1.25rem;',
     '}',
     '',
     '/* ─── Density: Comfortable ─── */',
@@ -789,6 +816,25 @@ function generateCombinedCSS(presets: TokenPreset[]): string {
     '  --spacing-3xl: var(--spacing-24);',
     '  --spacing-section: var(--spacing-32);',
     '  --spacing-section-lg: var(--spacing-40);',
+    '',
+    '  /* Element sizing — comfortable */  ',
+    '  --element-height-xs: 2rem;',
+    '  --element-height-sm: 2.25rem;',
+    '  --element-height-md: 2.75rem;',
+    '  --element-height-lg: 3.25rem;',
+    '  --element-height-xl: 3.75rem;',
+    '',
+    '  --element-padding-y-xs: 0.375rem;',
+    '  --element-padding-y-sm: 0.5rem;',
+    '  --element-padding-y-md: 0.625rem;',
+    '  --element-padding-y-lg: 0.75rem;',
+    '  --element-padding-y-xl: 0.875rem;',
+    '',
+    '  --element-padding-x-xs: 0.625rem;',
+    '  --element-padding-x-sm: 0.875rem;',
+    '  --element-padding-x-md: 1.25rem;',
+    '  --element-padding-x-lg: 1.5rem;',
+    '  --element-padding-x-xl: 1.75rem;',
     '}',
     '',
   );
