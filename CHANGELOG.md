@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- `demos/dashboard` — full Meridian Analytics rebuild: 4 KPI cards with sparklines (active users, MRR, sessions, churn), user activity line chart with 7d/30d/90d range switcher, revenue-by-plan bar chart, user segments donut chart, recent events feed (typed badges: upgrade/cancel/signup/invite/export), infrastructure health progress bars, top-pages DataTable with sort. Responsive sidebar with hamburger toggle on mobile. ThemeSwitcher wired (defaultTheme: "dark").
+- `demos/ecommerce` — rebranded from "Forma" luxury goods to "Arcana Supply" developer merch store: 8 new products (black hoodie, stone hoodie, navy cap, token tote, desk mat, zip pouch, sticker sheet, mug) with real Unsplash images; updated categories (Apparel/Accessories/Home); hero, testimonials, and timeline rewritten to reflect Arcana UI's actual launch story.
 
 ### Added
 - `@arcana-ui/cli@0.1.0-beta.1` — new package: command-line tool for scaffolding Arcana UI projects, validating themes, and managing presets. Three commands:
