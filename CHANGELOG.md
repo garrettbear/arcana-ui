@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Playground Token Editor: `Export CSS` button alongside existing `Export JSON`. Generates a ready-to-paste `:root { --token: value }` block (with a `[data-density="..."]` companion selector when the density override is set) so users can copy a tuned theme straight into their own stylesheet.
+- Playground `?theme=` URL sync: switching presets from the Token Editor now rewrites the `?theme=` query param via `setSearchParams({ replace: true })`, so a refresh or shared URL preserves the active theme instead of reverting to the landing-page deep-link.
+
+### Fixed
+- Landing page and playground copy: replaced outdated "60+ components" language with the real, current count ("108 components") across `playground/index.html` meta tags (description, og:description, twitter:description), `playground/src/pages/Landing.tsx` hero subheadline, "Production Components" feature card, and "How it works" step copy, and `playground/src/App.tsx` Hero subheadline, `StatCard`, and FAQ accordion.
+- Playground: removed stray `console.log('Undo!')` from the Toast "With action" demo in `playground/src/App.tsx`; undo now triggers a real restore toast.
+
+### Added
 - `@arcana-ui/mcp@0.1.0-beta.1` — new package: MCP (Model Context Protocol) server for Arcana UI. Gives AI agents (Claude Code, Cursor, Codex, Figma Make) programmatic access to component docs, theme presets, and token impact data. Seven tools: `list_components` (filter by category), `get_component` (full props + examples + token surface), `list_presets`, `get_preset` (complete JSON), `validate_theme` (structure + WCAG contrast), `generate_theme` (AI generation via Anthropic API or playground fallback), `get_token_impact` (blast-radius for any token). Ships all data bundled (manifest, token-map, 14 presets) as a fully self-contained 130 kB npm package. Setup: add one entry to `.claude/settings.json` → MCP active.
 - `.claude/skills/arcana/SKILL.md` — Claude Code skill with complete Arcana reference: quick start, all 108 components with props tables and examples, 11 hooks, token system guide, 4 complete layout patterns (dashboard, marketing, ecommerce, editorial), all 14 preset descriptions + best-use guide, responsive breakpoints and mobile behavior, rules. 1,821 lines — sufficient to build a full multi-page application without external references.
 - `scripts/generate-docs.mjs` Generator 8: copies `llms.txt` and `llms-full.txt` to `playground/public/` after generation so they are served at `/llms.txt` and `/llms-full.txt` on the Vercel deployment.

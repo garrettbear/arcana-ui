@@ -169,7 +169,11 @@ function ToastDemo() {
           toast({
             title: 'File deleted',
             description: 'design-system.fig was removed.',
-            action: { label: 'Undo', onClick: () => console.log('Undo!') },
+            action: {
+              label: 'Undo',
+              onClick: () =>
+                toast({ title: 'Restored', description: 'design-system.fig is back.' }),
+            },
           })
         }
       >
@@ -688,7 +692,7 @@ function OverviewSection() {
         <Hero
           variant="centered"
           headline="Ship beautiful interfaces at the speed of thought"
-          subheadline="Arcana UI is a token-driven design system built for AI agents. One JSON config controls your entire design — colors, typography, spacing, motion. 60+ production-grade components."
+          subheadline="Arcana UI is a token-driven design system built for AI agents. One JSON config controls your entire design — colors, typography, spacing, motion. 108 production-grade components."
           primaryCTA={{ label: 'Get Started', onClick: () => {} }}
           secondaryCTA={{ label: 'View on GitHub', onClick: () => {} }}
         />
@@ -696,7 +700,7 @@ function OverviewSection() {
 
       {/* Stats */}
       <div className={styles.statsGrid}>
-        <StatCard label="Components" value="60+" trend={{ value: 12, direction: 'up' }} />
+        <StatCard label="Components" value="108" trend={{ value: 12, direction: 'up' }} />
         <StatCard
           label="Theme Presets"
           value="14"
@@ -894,7 +898,7 @@ function OverviewSection() {
             <AccordionItem value="a2">
               <AccordionTrigger>How many components?</AccordionTrigger>
               <AccordionContent>
-                60+ components across navigation, forms, data display, overlays, feedback,
+                108 components across navigation, forms, data display, overlays, feedback,
                 marketing, e-commerce, and editorial categories.
               </AccordionContent>
             </AccordionItem>
@@ -3763,7 +3767,7 @@ function KitchenSink() {
 // ─── Root App ─────────────────────────────────────────────────────────────────
 
 export default function App() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [leftOpen, setLeftOpen] = useState(true);
   const [rightOpen, setRightOpen] = useState(false);
 
@@ -3788,8 +3792,17 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Keep the URL in sync so refreshes and shared links preserve the active preset
   const handlePresetChange = (id: PresetId) => {
     setActivePresetId(id);
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.set('theme', id);
+        return next;
+      },
+      { replace: true },
+    );
   };
 
   return (
