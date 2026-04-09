@@ -50,7 +50,7 @@ All foundation work, token system, component library (68 components), 14 theme p
 - [x] 5.1 — manifest.ai.json (generated, fixed, 100% coverage)
 - [x] 5.2 — llms.txt + llms-full.txt (enhanced: grouped by category, density docs, links, layout patterns, theme guide, responsive section; auto-copied to playground/public/)
 - [x] 5.3 — Claude Code skill at `.claude/skills/arcana/SKILL.md` (1,821 lines — all 108 components, hooks, token system, 4 layout patterns, presets, responsive, rules)
-- [x] 5.4 — MCP server: `@arcana-ui/mcp@0.1.0-beta.1` — 7 tools (list_components, get_component, list_presets, get_preset, validate_theme, generate_theme, get_token_impact); self-contained 130 kB package
+- [x] 5.4 — MCP server: `@arcana-ui/mcp@0.1.0-beta.1` published to npm (2026-04-08) — 7 tools (list_components, get_component, list_presets, get_preset, validate_theme, generate_theme, get_token_impact); self-contained 1.16 MB unpacked, shasum `186d547829f4a0ba0f8cdad739fdffdc3bb5eabd`
 - [ ] 5.5 — Documentation site
 - [ ] 5.6 — SEO & discoverability
 - [ ] 5.7 — Community starter templates (Next, Vite, Remix, Astro)
@@ -77,7 +77,7 @@ All foundation work, token system, component library (68 components), 14 theme p
 
 | Blocker | Owner | Status |
 |---------|-------|--------|
-| `npm publish` of `@arcana-ui/core@0.1.0-beta.2` and `@arcana-ui/tokens@0.1.0-beta.2` | Bear | Waiting on maintainer — agents cannot publish |
+| `npm publish` of `@arcana-ui/core@0.1.0-beta.2` and `@arcana-ui/tokens@0.1.0-beta.2` | Bear | ✅ Published (2026-04-06) |
 | Vercel deploy for 5 demo sites | Bear | Pending |
 | OpenClaw gateway re-pairing | Bear | Pending |
 | Anthropic API key for AI generation (Sprint 2) | Bear | Not yet needed |
