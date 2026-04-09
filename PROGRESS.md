@@ -1,9 +1,9 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-04-06 (package audit session)
-> **Current sprint:** Week 1 launch sprint — Developer experience / package audit
+> **Last updated:** 2026-04-09 (launch polish session)
+> **Current sprint:** Final launch sprint — Landing + playground polish
 > **Source of truth for current state:** CLAUDE.md "Current State" section
-> **Next priority task:** Sprint 2 — AI Theme Generation (after beta.2 publish)
+> **Next priority task:** Sprint 2 — AI Theme Generation (P.5) — playground now launch-ready
 
 ---
 
