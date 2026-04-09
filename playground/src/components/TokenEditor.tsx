@@ -729,16 +729,32 @@ export function TokenEditor({
     return exportObj;
   }, [radius, scale, displayFont, bodyFont, monoFont, lineHeight, motionDuration, density]);
 
-  const handleExport = () => {
-    const exportObj = collectTokenSnapshot();
-    const json = JSON.stringify(exportObj, null, 2);
-    const blob = new Blob([json], { type: 'application/json' });
+  const downloadFile = (contents: string, filename: string, mime: string) => {
+    const blob = new Blob([contents], { type: mime });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `arcana-theme-${activePresetId}.json`;
+    a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const handleExportJson = () => {
+    const exportObj = collectTokenSnapshot();
+    const json = JSON.stringify(exportObj, null, 2);
+    downloadFile(json, `arcana-theme-${activePresetId}.json`, 'application/json');
+  };
+
+  const handleExportCss = () => {
+    const exportObj = collectTokenSnapshot();
+    const density = exportObj['--data-density'];
+    const tokenLines = Object.entries(exportObj)
+      .filter(([key]) => key.startsWith('--') && key !== '--data-density')
+      .map(([key, value]) => `  ${key}: ${value};`)
+      .join('\n');
+    const densityAttr = density && density !== 'default' ? `[data-density="${density}"] ` : '';
+    const css = `/* Arcana UI — ${activePresetId} theme (exported ${new Date().toISOString().slice(0, 10)}) */\n:root${densityAttr ? `,\n${densityAttr}:root` : ''} {\n${tokenLines}\n}\n`;
+    downloadFile(css, `arcana-theme-${activePresetId}.css`, 'text/css');
   };
 
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -1680,10 +1696,19 @@ export function TokenEditor({
         />
         <button
           type="button"
-          className={`${styles.actionBtn} ${styles.actionBtnPrimary}`}
-          onClick={handleExport}
+          className={styles.actionBtn}
+          onClick={handleExportCss}
+          title="Download a ready-to-paste :root { --token: value } CSS block"
         >
-          Export
+          Export CSS
+        </button>
+        <button
+          type="button"
+          className={`${styles.actionBtn} ${styles.actionBtnPrimary}`}
+          onClick={handleExportJson}
+          title="Download a theme JSON file you can reimport or feed into Arcana tools"
+        >
+          Export JSON
         </button>
       </div>
 
