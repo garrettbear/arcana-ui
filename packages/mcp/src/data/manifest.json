@@ -1,0 +1,3418 @@
+{
+  "$schema": "./scripts/manifest.schema.json",
+  "release": {
+    "version": "0.1.0-beta.2",
+    "releaseDate": "2026-04-09",
+    "changelog": "https://github.com/garrettbear/arcana-ui/blob/develop/CHANGELOG.md",
+    "breaking": [],
+    "migration": null
+  },
+  "name": "@arcana-ui/core",
+  "version": "0.1.0-beta.2",
+  "description": "React components for Arcana UI — AI's #1 design system",
+  "install": "npm i @arcana-ui/core @arcana-ui/tokens",
+  "quickStart": [
+    "import '@arcana-ui/tokens/dist/arcana.css'",
+    "import { Button, Card, Input } from '@arcana-ui/core'",
+    "",
+    "// Theme switching — no JS runtime, just CSS",
+    "document.documentElement.setAttribute('data-theme', 'dark')"
+  ],
+  "themeSetup": "Set data-theme='light' or data-theme='dark' on <html> element",
+  "tokens": {
+    "categories": ["primitive", "semantic", "component"],
+    "naming": "Three-tier architecture: primitives (raw values) → semantic (contextual) → component (scoped)",
+    "themeSwitch": "Set data-theme attribute on root element: 'brutalist' | 'commerce' | 'corporate' | 'dark' | 'editorial' | 'glass' | 'light' | 'midnight' | 'mono' | 'nature' | 'neon' | 'retro98' | 'startup' | 'terminal'",
+    "customization": "Override any CSS custom property in your CSS to customize. All tokens are prefixed with -- (e.g., --color-action-primary)",
+    "themes": [
+      {
+        "id": "brutalist",
+        "name": "arcana-brutalist",
+        "description": "Bloomberg Terminal meets Swiss poster — bold red accent, dramatic typography, thick structural borders"
+      },
+      {
+        "id": "commerce",
+        "name": "arcana-commerce",
+        "description": "Clean product-focused design — warm neutrals with green accent, Shopify-inspired"
+      },
+      {
+        "id": "corporate",
+        "name": "arcana-corporate",
+        "description": "Conservative navy/slate palette — trustworthy, enterprise-grade, Stripe-inspired"
+      },
+      {
+        "id": "dark",
+        "name": "arcana-dark",
+        "description": "Deep slate dark with vibrant indigo accent — focused, rich, Linear-inspired"
+      },
+      {
+        "id": "editorial",
+        "name": "arcana-editorial",
+        "description": "Elegant serif typography, high contrast — publishing, NYT-inspired"
+      },
+      {
+        "id": "glass",
+        "name": "arcana-glass",
+        "description": "Apple iOS glassmorphism — frosted translucent surfaces on gradient, elegant light typography"
+      },
+      {
+        "id": "light",
+        "name": "arcana-light",
+        "description": "Warm stone palette with indigo accent — clean, precise, Notion-inspired"
+      },
+      {
+        "id": "midnight",
+        "name": "arcana-midnight",
+        "description": "Deep navy with soft gold accents — premium, finance-grade, Bloomberg-inspired"
+      },
+      {
+        "id": "mono",
+        "name": "arcana-mono",
+        "description": "Pure black and white — stark typographic minimalism, portfolio/architecture-inspired"
+      },
+      {
+        "id": "nature",
+        "name": "arcana-nature",
+        "description": "Earth tones with warm greens — organic, wellness, sustainability-inspired"
+      },
+      {
+        "id": "neon",
+        "name": "arcana-neon",
+        "description": "Electric neon on dark — vivid cyan/pink accents, cyberpunk, gaming-inspired"
+      },
+      {
+        "id": "retro98",
+        "name": "arcana-retro98",
+        "description": "Authentic Windows 98 recreation — pixel-perfect bevels, navy blue title bars, silver surfaces"
+      },
+      {
+        "id": "startup",
+        "name": "arcana-startup",
+        "description": "Vibrant purple-to-pink gradient energy — modern SaaS, Vercel/Linear-inspired"
+      },
+      {
+        "id": "terminal",
+        "name": "arcana-terminal",
+        "description": "Premium terminal emulator — green phosphor on black, monospace everything, Warp/Hyper-inspired"
+      }
+    ],
+    "keyTokens": {
+      "--color-action-primary": "Primary brand color for actions (button, link, highlight)",
+      "--color-bg-page": "Main background surface for page content",
+      "--color-fg-primary": "Primary text color (body text, labels)",
+      "--radius-md": "Medium border radius (commonly used in components)",
+      "--shadow-md": "Medium drop shadow for elevation",
+      "--spacing-md": "Medium spacing unit (used for padding, margin, gaps)",
+      "--font-size-base": "Base text size for body copy",
+      "--duration-normal": "Default animation duration for transitions"
+    }
+  },
+  "components": [
+    {
+      "name": "Button",
+      "category": "primitives",
+      "import": "import { Button } from '@arcana-ui/core'",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["primary", "secondary", "ghost", "destructive", "outline"],
+          "required": false,
+          "description": "Visual style variant",
+          "default": "primary"
+        },
+        "size": {
+          "type": "enum",
+          "values": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "icon-xs",
+            "icon-sm",
+            "icon",
+            "icon-lg",
+            "icon-xl"
+          ],
+          "required": false,
+          "description": "Size of the button",
+          "default": "md"
+        },
+        "shape": {
+          "type": "enum",
+          "values": ["default", "circle", "pill"],
+          "required": false,
+          "description": "Shape of the button",
+          "default": "default"
+        },
+        "loading": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the button is in a loading state",
+          "default": false
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Icon element displayed before the label"
+        },
+        "iconRight": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Icon element displayed after the label"
+        },
+        "fullWidth": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the button stretches to fill its container",
+          "default": false
+        },
+        "iconOnly": {
+          "type": "boolean",
+          "required": false,
+          "description": "@deprecated Use size=\"icon\" instead. Render as an icon-only button (square shape, requires aria-label)",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "Input",
+      "category": "primitives",
+      "import": "import { Input } from '@arcana-ui/core'",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text displayed above the input"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["xs", "sm", "md", "lg", "xl"],
+          "required": false,
+          "description": "Size of the input",
+          "default": "md"
+        },
+        "error": {
+          "type": "string | boolean",
+          "required": false,
+          "description": "Error message string or boolean error state"
+        },
+        "helperText": {
+          "type": "string",
+          "required": false,
+          "description": "Helper text displayed below the input"
+        },
+        "prefix": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Element rendered before the input field"
+        },
+        "suffix": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Element rendered after the input field"
+        },
+        "fullWidth": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the input stretches to fill its container",
+          "default": false
+        },
+        "required": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the input is required (shows indicator on label)"
+        },
+        "wrapperClassName": {
+          "type": "string",
+          "required": false,
+          "description": "Additional className for the outer wrapper containing border and focus ring"
+        }
+      }
+    },
+    {
+      "name": "Textarea",
+      "category": "primitives",
+      "import": "import { Textarea } from '@arcana-ui/core'",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text displayed above the textarea"
+        },
+        "error": {
+          "type": "string | boolean",
+          "required": false,
+          "description": "Error message string or boolean error state"
+        },
+        "helperText": {
+          "type": "string",
+          "required": false,
+          "description": "Helper text displayed below the textarea"
+        },
+        "autoResize": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the textarea automatically grows to fit content",
+          "default": false
+        },
+        "showCount": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to display a character count",
+          "default": false
+        },
+        "maxLength": {
+          "type": "number",
+          "required": false,
+          "description": "Maximum number of characters allowed"
+        }
+      }
+    },
+    {
+      "name": "Select",
+      "category": "primitives",
+      "import": "import { Select } from '@arcana-ui/core'",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text displayed above the select"
+        },
+        "error": {
+          "type": "string | boolean",
+          "required": false,
+          "description": "Error message string or boolean error state"
+        },
+        "helperText": {
+          "type": "string",
+          "required": false,
+          "description": "Helper text displayed below the select"
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text when no option is selected"
+        },
+        "options": {
+          "type": "SelectOption[]",
+          "required": false,
+          "description": "Array of options to render",
+          "default": "[]"
+        },
+        "value": {
+          "type": "string | string[]",
+          "required": false,
+          "description": "Controlled selected value (string for single, string[] for multiple)"
+        },
+        "defaultValue": {
+          "type": "string | string[]",
+          "required": false,
+          "description": "Default value for uncontrolled usage"
+        },
+        "onChange": {
+          "type": "(value: string | string[]) => void",
+          "required": false,
+          "description": "Callback fired when the selection changes"
+        },
+        "multiple": {
+          "type": "boolean",
+          "required": false,
+          "description": "Allow multiple selections",
+          "default": false
+        },
+        "searchable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Enable type-to-filter search in dropdown",
+          "default": false
+        },
+        "clearable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show clear button to reset selection",
+          "default": false
+        },
+        "loading": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show loading spinner in dropdown",
+          "default": false
+        },
+        "size": {
+          "type": "enum",
+          "values": ["xs", "sm", "md", "lg", "xl"],
+          "required": false,
+          "description": "Size variant",
+          "default": "md"
+        },
+        "fullWidth": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the select stretches to fill its container",
+          "default": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the select is disabled",
+          "default": false
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "description": "Form input name attribute"
+        }
+      }
+    },
+    {
+      "name": "Checkbox",
+      "category": "primitives",
+      "import": "import { Checkbox } from '@arcana-ui/core'",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text displayed next to the checkbox"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Description text displayed below the label"
+        },
+        "indeterminate": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the checkbox is in an indeterminate state",
+          "default": false
+        },
+        "error": {
+          "type": "string | boolean",
+          "required": false,
+          "description": "Error message string or boolean error state"
+        }
+      }
+    },
+    {
+      "name": "CheckboxGroup",
+      "category": "primitives",
+      "import": "import { CheckboxGroup } from '@arcana-ui/core'",
+      "props": {
+        "options": {
+          "type": "CheckboxGroupOption[]",
+          "description": "Array of checkbox options"
+        },
+        "value": {
+          "type": "string[]",
+          "required": false,
+          "description": "Currently selected values",
+          "default": "[]"
+        },
+        "onChange": {
+          "type": "(values: string[]) => void",
+          "required": false,
+          "description": "Callback fired when selection changes"
+        },
+        "orientation": {
+          "type": "enum",
+          "values": ["vertical", "horizontal"],
+          "required": false,
+          "description": "Layout direction",
+          "default": "vertical"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Group label"
+        },
+        "error": {
+          "type": "string",
+          "required": false,
+          "description": "Error message"
+        }
+      }
+    },
+    {
+      "name": "Radio",
+      "category": "primitives",
+      "import": "import { Radio } from '@arcana-ui/core'",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text displayed next to the radio button"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Description text displayed below the label"
+        }
+      }
+    },
+    {
+      "name": "RadioGroup",
+      "category": "primitives",
+      "import": "import { RadioGroup } from '@arcana-ui/core'",
+      "props": {
+        "name": {
+          "type": "string",
+          "description": "Name attribute shared by all radio inputs in the group"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text displayed as the fieldset legend"
+        },
+        "value": {
+          "type": "string",
+          "required": false,
+          "description": "Currently selected value"
+        },
+        "onChange": {
+          "type": "(value: string) => void",
+          "required": false,
+          "description": "Callback fired when the selected value changes"
+        },
+        "options": {
+          "type": "RadioOption[]",
+          "description": "Array of radio options to render"
+        },
+        "orientation": {
+          "type": "enum",
+          "values": ["vertical", "horizontal"],
+          "required": false,
+          "description": "Layout direction",
+          "default": "vertical"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "card"],
+          "required": false,
+          "description": "Visual variant — \"card\" renders each option as a selectable card",
+          "default": "default"
+        },
+        "error": {
+          "type": "string",
+          "required": false,
+          "description": "Error message"
+        }
+      }
+    },
+    {
+      "name": "Toggle",
+      "category": "primitives",
+      "import": "import { Toggle } from '@arcana-ui/core'",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text displayed next to the toggle"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Description text displayed below the label"
+        },
+        "checked": {
+          "type": "boolean",
+          "description": "Whether the toggle is in the on state"
+        },
+        "onChange": {
+          "type": "(checked: boolean) => void",
+          "description": "Callback fired when the toggle state changes"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the toggle is disabled",
+          "default": false
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "required": false,
+          "description": "Size of the toggle",
+          "default": "md"
+        },
+        "id": {
+          "type": "string",
+          "required": false,
+          "description": "HTML id attribute"
+        }
+      }
+    },
+    {
+      "name": "Badge",
+      "category": "primitives",
+      "import": "import { Badge } from '@arcana-ui/core'",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["default", "success", "warning", "error", "info", "secondary"],
+          "required": false,
+          "description": "Visual style variant",
+          "default": "default"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "required": false,
+          "description": "Size of the badge",
+          "default": "md"
+        },
+        "dot": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to display a status dot indicator",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "Avatar",
+      "category": "primitives",
+      "import": "import { Avatar } from '@arcana-ui/core'",
+      "props": {
+        "src": {
+          "type": "string",
+          "required": false,
+          "description": "Image source URL"
+        },
+        "alt": {
+          "type": "string",
+          "required": false,
+          "description": "Alt text for the avatar image"
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "description": "User name for generating initials and background color"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["xs", "sm", "md", "lg", "xl"],
+          "required": false,
+          "description": "Size of the avatar",
+          "default": "md"
+        }
+      }
+    },
+    {
+      "name": "AvatarGroup",
+      "category": "primitives",
+      "import": "import { AvatarGroup } from '@arcana-ui/core'",
+      "props": {
+        "max": {
+          "type": "number",
+          "required": false,
+          "description": "Maximum number of avatars to display before truncating"
+        }
+      }
+    },
+    {
+      "name": "Card",
+      "category": "composites",
+      "import": "import { Card } from '@arcana-ui/core'",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["default", "outlined", "elevated"],
+          "required": false,
+          "description": "Visual style variant",
+          "default": "default"
+        },
+        "padding": {
+          "type": "enum",
+          "values": ["none", "sm", "md", "lg"],
+          "required": false,
+          "description": "Padding size applied to the card",
+          "default": "md"
+        },
+        "interactive": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the card has hover and focus interactions",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "CardHeader",
+      "category": "composites",
+      "import": "import { CardHeader } from '@arcana-ui/core'",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Header title text"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Description text below the title"
+        },
+        "action": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Action element rendered on the right side"
+        }
+      }
+    },
+    {
+      "name": "CardBody",
+      "category": "composites",
+      "import": "import { CardBody } from '@arcana-ui/core'"
+    },
+    {
+      "name": "CardFooter",
+      "category": "composites",
+      "import": "import { CardFooter } from '@arcana-ui/core'",
+      "props": {
+        "align": {
+          "type": "enum",
+          "values": ["left", "center", "right", "space-between"],
+          "required": false,
+          "description": "Horizontal alignment of footer content",
+          "default": "right"
+        }
+      }
+    },
+    {
+      "name": "Modal",
+      "category": "composites",
+      "import": "import { Modal } from '@arcana-ui/core'",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Whether the modal is visible"
+        },
+        "onClose": {
+          "type": "() => void",
+          "description": "Callback fired when the modal should close"
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Dialog title text"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Dialog description text"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg", "xl", "full"],
+          "required": false,
+          "description": "Size of the modal dialog"
+        },
+        "closeOnOverlayClick": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether clicking the overlay closes the modal"
+        },
+        "closeOnEsc": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether pressing Escape closes the modal"
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Footer content rendered at the bottom of the modal"
+        }
+      }
+    },
+    {
+      "name": "ModalClose",
+      "category": "composites",
+      "import": "import { ModalClose } from '@arcana-ui/core'",
+      "props": {
+        "onClick": {
+          "type": "() => void",
+          "description": "Callback fired when the close button is clicked"
+        }
+      }
+    },
+    {
+      "name": "Alert",
+      "category": "composites",
+      "import": "import { Alert } from '@arcana-ui/core'",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["info", "success", "warning", "error"],
+          "required": false,
+          "description": "Visual style variant indicating the alert type",
+          "default": "info"
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Alert title text"
+        },
+        "onClose": {
+          "type": "() => void",
+          "required": false,
+          "description": "Callback fired when the dismiss button is clicked"
+        }
+      }
+    },
+    {
+      "name": "ToastProvider",
+      "category": "composites",
+      "import": "import { ToastProvider } from '@arcana-ui/core'"
+    },
+    {
+      "name": "Tabs",
+      "category": "composites",
+      "import": "import { Tabs } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string",
+          "required": false,
+          "description": "Controlled active tab value"
+        },
+        "onChange": {
+          "type": "(value: string) => void",
+          "required": false,
+          "description": "Callback fired when the active tab changes"
+        },
+        "defaultValue": {
+          "type": "string",
+          "required": false,
+          "description": "Default active tab value for uncontrolled mode"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["line", "pills"],
+          "required": false,
+          "description": "Visual style variant",
+          "default": "line"
+        }
+      }
+    },
+    {
+      "name": "TabList",
+      "category": "composites",
+      "import": "import { TabList } from '@arcana-ui/core'"
+    },
+    {
+      "name": "Tab",
+      "category": "composites",
+      "import": "import { Tab } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string",
+          "description": "Unique identifier for this tab"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the tab is disabled"
+        }
+      }
+    },
+    {
+      "name": "TabPanels",
+      "category": "composites",
+      "import": "import { TabPanels } from '@arcana-ui/core'"
+    },
+    {
+      "name": "TabPanel",
+      "category": "composites",
+      "import": "import { TabPanel } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string",
+          "description": "Value matching the corresponding Tab"
+        }
+      }
+    },
+    {
+      "name": "Accordion",
+      "category": "composites",
+      "import": "import { Accordion } from '@arcana-ui/core'",
+      "props": {
+        "type": {
+          "type": "enum",
+          "values": ["single", "multiple"],
+          "required": false,
+          "description": "Whether one or multiple items can be open at once",
+          "default": "single"
+        },
+        "defaultValue": {
+          "type": "string | string[]",
+          "required": false,
+          "description": "Default open item value(s) for uncontrolled mode"
+        },
+        "value": {
+          "type": "string | string[]",
+          "required": false,
+          "description": "Controlled open item value(s)"
+        },
+        "onChange": {
+          "type": "(value: string | string[]) => void",
+          "required": false,
+          "description": "Callback fired when the open items change"
+        }
+      }
+    },
+    {
+      "name": "AccordionItem",
+      "category": "composites",
+      "import": "import { AccordionItem } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string",
+          "description": "Unique identifier for this item"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the item is disabled"
+        }
+      }
+    },
+    {
+      "name": "AccordionTrigger",
+      "category": "composites",
+      "import": "import { AccordionTrigger } from '@arcana-ui/core'"
+    },
+    {
+      "name": "AccordionContent",
+      "category": "composites",
+      "import": "import { AccordionContent } from '@arcana-ui/core'"
+    },
+    {
+      "name": "Stack",
+      "category": "layout",
+      "import": "import { Stack } from '@arcana-ui/core'",
+      "props": {
+        "direction": {
+          "type": "enum",
+          "values": ["vertical", "horizontal"],
+          "required": false,
+          "description": "Direction of the stack layout",
+          "default": "vertical"
+        },
+        "gap": {
+          "type": "GapSize | number | string",
+          "required": false,
+          "description": "Spacing between children — semantic name, number (maps to token), or raw CSS",
+          "default": "md"
+        },
+        "align": {
+          "type": "enum",
+          "values": ["start", "center", "end", "stretch"],
+          "required": false,
+          "description": "Cross-axis alignment of children"
+        },
+        "justify": {
+          "type": "enum",
+          "values": ["start", "center", "end", "between", "around"],
+          "required": false,
+          "description": "Main-axis alignment of children"
+        },
+        "wrap": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether children should wrap to the next line"
+        },
+        "as": {
+          "type": "React.ElementType",
+          "required": false,
+          "description": "HTML element to render as"
+        }
+      }
+    },
+    {
+      "name": "HStack",
+      "category": "layout",
+      "import": "import { HStack } from '@arcana-ui/core'",
+      "props": {
+        "gap": {
+          "type": "GapSize | number | string",
+          "required": false,
+          "description": "Spacing between children — semantic name, number (maps to token), or raw CSS",
+          "default": "md"
+        },
+        "align": {
+          "type": "enum",
+          "values": ["start", "center", "end", "stretch"],
+          "required": false,
+          "description": "Cross-axis alignment of children",
+          "default": "center"
+        },
+        "justify": {
+          "type": "enum",
+          "values": ["start", "center", "end", "between", "around"],
+          "required": false,
+          "description": "Main-axis alignment of children"
+        },
+        "wrap": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether children should wrap to the next line"
+        },
+        "as": {
+          "type": "React.ElementType",
+          "required": false,
+          "description": "HTML element to render as"
+        }
+      }
+    },
+    {
+      "name": "Grid",
+      "category": "layout",
+      "import": "import { Grid } from '@arcana-ui/core'",
+      "props": {
+        "columns": {
+          "type": "number | ResponsiveColumns",
+          "required": false,
+          "description": "Number of columns or responsive column object. Default: auto-collapses (1 mobile, 12 desktop).",
+          "default": 12
+        },
+        "gap": {
+          "type": "GapSize | number | string",
+          "required": false,
+          "description": "Gap between grid items — semantic name, number, or raw CSS",
+          "default": "md"
+        },
+        "rowGap": {
+          "type": "GapSize | number | string",
+          "required": false,
+          "description": "Vertical gap between grid rows"
+        },
+        "colGap": {
+          "type": "GapSize | number | string",
+          "required": false,
+          "description": "Horizontal gap between grid columns"
+        },
+        "align": {
+          "type": "enum",
+          "values": ["start", "center", "end", "stretch"],
+          "required": false,
+          "description": "Vertical alignment of grid items"
+        },
+        "justify": {
+          "type": "enum",
+          "values": ["start", "center", "end", "stretch", "between"],
+          "required": false,
+          "description": "Horizontal alignment of grid items"
+        },
+        "as": {
+          "type": "React.ElementType",
+          "required": false,
+          "description": "HTML element to render as"
+        }
+      }
+    },
+    {
+      "name": "GridColumn",
+      "category": "layout",
+      "import": "import { GridColumn } from '@arcana-ui/core'",
+      "props": {
+        "span": {
+          "type": "number | ResponsiveSpan",
+          "required": false,
+          "description": "Number of columns to span, or responsive span object",
+          "default": 12
+        },
+        "start": {
+          "type": "number",
+          "required": false,
+          "description": "Grid column start position"
+        },
+        "as": {
+          "type": "React.ElementType",
+          "required": false,
+          "description": "HTML element to render as"
+        }
+      }
+    },
+    {
+      "name": "Container",
+      "category": "layout",
+      "import": "import { Container } from '@arcana-ui/core'",
+      "props": {
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg", "xl", "2xl", "full"],
+          "required": false,
+          "description": "Maximum width of the container",
+          "default": "xl"
+        },
+        "prose": {
+          "type": "boolean",
+          "required": false,
+          "description": "When true, sets max-width to optimal reading width (65ch). Overrides size.",
+          "default": false
+        },
+        "padding": {
+          "type": "enum",
+          "values": ["none", "sm", "md", "lg"],
+          "required": false,
+          "description": "Horizontal edge padding. Responsive by default.",
+          "default": "md"
+        },
+        "center": {
+          "type": "boolean",
+          "required": false,
+          "description": "Centers the container with auto margins",
+          "default": true
+        },
+        "as": {
+          "type": "React.ElementType",
+          "required": false,
+          "description": "HTML element to render as"
+        }
+      }
+    },
+    {
+      "name": "Navbar",
+      "category": "patterns",
+      "import": "import { Navbar } from '@arcana-ui/core'",
+      "props": {
+        "sticky": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the navbar sticks to the top of the viewport",
+          "default": false
+        },
+        "border": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to show a bottom border",
+          "default": false
+        },
+        "mobileContent": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content for the mobile drawer (rendered in a DrawerNav on mobile)"
+        },
+        "mobileMenuTitle": {
+          "type": "string",
+          "required": false,
+          "description": "Title for the mobile drawer header",
+          "default": "Menu"
+        }
+      }
+    },
+    {
+      "name": "NavbarBrand",
+      "category": "patterns",
+      "import": "import { NavbarBrand } from '@arcana-ui/core'"
+    },
+    {
+      "name": "NavbarContent",
+      "category": "patterns",
+      "import": "import { NavbarContent } from '@arcana-ui/core'"
+    },
+    {
+      "name": "NavbarActions",
+      "category": "patterns",
+      "import": "import { NavbarActions } from '@arcana-ui/core'"
+    },
+    {
+      "name": "Sidebar",
+      "category": "patterns",
+      "import": "import { Sidebar } from '@arcana-ui/core'",
+      "props": {
+        "collapsed": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the sidebar is collapsed to icon-only mode"
+        },
+        "position": {
+          "type": "enum",
+          "values": ["left", "right"],
+          "required": false,
+          "description": "Position of the sidebar"
+        }
+      }
+    },
+    {
+      "name": "SidebarHeader",
+      "category": "patterns",
+      "import": "import { SidebarHeader } from '@arcana-ui/core'"
+    },
+    {
+      "name": "SidebarContent",
+      "category": "patterns",
+      "import": "import { SidebarContent } from '@arcana-ui/core'"
+    },
+    {
+      "name": "SidebarFooter",
+      "category": "patterns",
+      "import": "import { SidebarFooter } from '@arcana-ui/core'"
+    },
+    {
+      "name": "SidebarItem",
+      "category": "patterns",
+      "import": "import { SidebarItem } from '@arcana-ui/core'",
+      "props": {
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Icon element displayed before the label"
+        },
+        "active": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether this item is currently active",
+          "default": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether this item is disabled",
+          "default": false
+        },
+        "href": {
+          "type": "string",
+          "required": false,
+          "description": "Render as an anchor element instead of button"
+        },
+        "badge": {
+          "type": "string | number",
+          "required": false,
+          "description": "Badge count or text displayed on the right"
+        }
+      }
+    },
+    {
+      "name": "SidebarSection",
+      "category": "patterns",
+      "import": "import { SidebarSection } from '@arcana-ui/core'",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Section heading label"
+        }
+      }
+    },
+    {
+      "name": "Form",
+      "category": "patterns",
+      "import": "import { Form } from '@arcana-ui/core'"
+    },
+    {
+      "name": "FormField",
+      "category": "patterns",
+      "import": "import { FormField } from '@arcana-ui/core'",
+      "props": {
+        "isRequired": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the field is required"
+        },
+        "isInvalid": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the field has a validation error"
+        }
+      }
+    },
+    {
+      "name": "FormLabel",
+      "category": "patterns",
+      "import": "import { FormLabel } from '@arcana-ui/core'"
+    },
+    {
+      "name": "FormHelperText",
+      "category": "patterns",
+      "import": "import { FormHelperText } from '@arcana-ui/core'"
+    },
+    {
+      "name": "FormErrorMessage",
+      "category": "patterns",
+      "import": "import { FormErrorMessage } from '@arcana-ui/core'"
+    },
+    {
+      "name": "BottomSheet",
+      "category": "patterns",
+      "import": "import { BottomSheet } from '@arcana-ui/core'",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Whether the bottom sheet is visible"
+        },
+        "onClose": {
+          "type": "() => void",
+          "description": "Callback fired when the sheet should close"
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Optional header title"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Optional header description"
+        },
+        "snapPoints": {
+          "type": "number[]",
+          "required": false,
+          "description": "Snap points as fractions of viewport height"
+        },
+        "dismissible": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the sheet can be dismissed by tapping the overlay",
+          "default": true
+        },
+        "showHandle": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to show the drag handle bar",
+          "default": true
+        }
+      }
+    },
+    {
+      "name": "MobileNav",
+      "category": "patterns",
+      "import": "import { MobileNav } from '@arcana-ui/core'",
+      "props": {
+        "items": {
+          "type": "MobileNavItem[]",
+          "description": "Navigation items (maximum 5)"
+        },
+        "activeKey": {
+          "type": "string",
+          "description": "Key of the currently active item"
+        },
+        "onChange": {
+          "type": "(key: string) => void",
+          "description": "Callback fired when an item is selected"
+        }
+      }
+    },
+    {
+      "name": "DrawerNav",
+      "category": "patterns",
+      "import": "import { DrawerNav } from '@arcana-ui/core'",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Whether the drawer is visible"
+        },
+        "onClose": {
+          "type": "() => void",
+          "description": "Callback fired when the drawer should close"
+        },
+        "side": {
+          "type": "enum",
+          "values": ["left", "right"],
+          "required": false,
+          "description": "Which side the drawer slides in from",
+          "default": "left"
+        },
+        "width": {
+          "type": "string",
+          "required": false,
+          "description": "Drawer width (CSS value)"
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Optional title shown at top of drawer"
+        },
+        "overlay": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to show the backdrop overlay"
+        }
+      }
+    },
+    {
+      "name": "Table",
+      "category": "patterns",
+      "import": "import { Table } from '@arcana-ui/core'",
+      "props": {
+        "striped": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to alternate row background colors"
+        },
+        "hoverable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether rows highlight on hover"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "required": false,
+          "description": "Size variant affecting cell padding density"
+        },
+        "bordered": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to show borders between all cells"
+        }
+      }
+    },
+    {
+      "name": "TableHeader",
+      "category": "patterns",
+      "import": "import { TableHeader } from '@arcana-ui/core'"
+    },
+    {
+      "name": "TableBody",
+      "category": "patterns",
+      "import": "import { TableBody } from '@arcana-ui/core'"
+    },
+    {
+      "name": "TableRow",
+      "category": "patterns",
+      "import": "import { TableRow } from '@arcana-ui/core'"
+    },
+    {
+      "name": "TableHead",
+      "category": "patterns",
+      "import": "import { TableHead } from '@arcana-ui/core'",
+      "props": {
+        "sortable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the column is sortable"
+        },
+        "sortDirection": {
+          "type": "'asc' | 'desc' | null",
+          "required": false,
+          "description": "Current sort direction — null means unsorted"
+        },
+        "onSort": {
+          "type": "() => void",
+          "required": false,
+          "description": "Callback fired when the sort button is clicked"
+        }
+      }
+    },
+    {
+      "name": "TableCell",
+      "category": "patterns",
+      "import": "import { TableCell } from '@arcana-ui/core'"
+    },
+    {
+      "name": "Breadcrumb",
+      "category": "patterns",
+      "import": "import { Breadcrumb } from '@arcana-ui/core'",
+      "props": {
+        "separator": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Custom separator element between items"
+        },
+        "maxItems": {
+          "type": "number",
+          "required": false,
+          "description": "Maximum items to display before truncating with ellipsis"
+        }
+      }
+    },
+    {
+      "name": "BreadcrumbItem",
+      "category": "patterns",
+      "import": "import { BreadcrumbItem } from '@arcana-ui/core'",
+      "props": {
+        "href": {
+          "type": "string",
+          "required": false,
+          "description": "URL for the breadcrumb link"
+        },
+        "current": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether this is the current (last) page",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "Pagination",
+      "category": "patterns",
+      "import": "import { Pagination } from '@arcana-ui/core'",
+      "props": {
+        "page": {
+          "type": "number",
+          "description": "Current active page (1-indexed)"
+        },
+        "totalPages": {
+          "type": "number",
+          "description": "Total number of pages"
+        },
+        "onPageChange": {
+          "type": "(page: number) => void",
+          "description": "Callback fired when the page changes"
+        },
+        "siblingCount": {
+          "type": "number",
+          "required": false,
+          "description": "Number of sibling pages to show on each side of the current page",
+          "default": 1
+        },
+        "showEdges": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to show first/last page buttons",
+          "default": true
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "compact"],
+          "required": false,
+          "description": "Display variant — \"default\" shows page buttons, \"compact\" shows \"Page X of Y\"",
+          "default": "default"
+        }
+      }
+    },
+    {
+      "name": "Footer",
+      "category": "patterns",
+      "import": "import { Footer } from '@arcana-ui/core'",
+      "props": {
+        "border": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to show a top border",
+          "default": true
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["standard", "minimal"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "standard"
+        }
+      }
+    },
+    {
+      "name": "FooterSection",
+      "category": "patterns",
+      "import": "import { FooterSection } from '@arcana-ui/core'",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Section heading"
+        }
+      }
+    },
+    {
+      "name": "FooterLink",
+      "category": "patterns",
+      "import": "import { FooterLink } from '@arcana-ui/core'",
+      "props": {
+        "external": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether this links to an external site",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "FooterBottom",
+      "category": "patterns",
+      "import": "import { FooterBottom } from '@arcana-ui/core'"
+    },
+    {
+      "name": "Hero",
+      "category": "patterns",
+      "import": "import { Hero } from '@arcana-ui/core'",
+      "props": {
+        "headline": {
+          "type": "string",
+          "description": "Main headline text (rendered as h1)"
+        },
+        "subheadline": {
+          "type": "string",
+          "required": false,
+          "description": "Supporting text below the headline"
+        },
+        "primaryCTA": {
+          "type": "HeroCTAAction",
+          "required": false,
+          "description": "Primary call-to-action button/link"
+        },
+        "secondaryCTA": {
+          "type": "HeroCTAAction",
+          "required": false,
+          "description": "Secondary call-to-action button/link"
+        },
+        "media": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Media element (image, video, or illustration) for split/fullscreen variants"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["centered", "split", "fullscreen"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "centered"
+        },
+        "align": {
+          "type": "enum",
+          "values": ["left", "center"],
+          "required": false,
+          "description": "Text alignment (only applies to centered variant)",
+          "default": "center"
+        },
+        "height": {
+          "type": "enum",
+          "values": ["viewport", "large", "auto"],
+          "required": false,
+          "description": "Height behavior",
+          "default": "auto"
+        },
+        "overlay": {
+          "type": "boolean",
+          "required": false,
+          "description": "Adds a semi-transparent dark overlay for text readability over media",
+          "default": false
+        },
+        "badge": {
+          "type": "string",
+          "required": false,
+          "description": "Small announcement badge displayed above the headline"
+        }
+      }
+    },
+    {
+      "name": "FeatureSection",
+      "category": "patterns",
+      "import": "import { FeatureSection } from '@arcana-ui/core'",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Section heading"
+        },
+        "subtitle": {
+          "type": "string",
+          "required": false,
+          "description": "Section description displayed below the title"
+        },
+        "features": {
+          "type": "FeatureItemData[]",
+          "description": "Array of feature items to display"
+        },
+        "columns": {
+          "type": "2 | 3 | 4",
+          "required": false,
+          "description": "Number of columns in the grid layout (desktop)",
+          "default": 3
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["grid", "list", "alternating"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "grid"
+        }
+      }
+    },
+    {
+      "name": "Testimonial",
+      "category": "patterns",
+      "import": "import { Testimonial } from '@arcana-ui/core'",
+      "props": {
+        "quote": {
+          "type": "string",
+          "description": "The testimonial quote text"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author's full name"
+        },
+        "jobTitle": {
+          "type": "string",
+          "required": false,
+          "description": "Author's job title or role"
+        },
+        "company": {
+          "type": "string",
+          "required": false,
+          "description": "Author's company or organization"
+        },
+        "avatar": {
+          "type": "string",
+          "required": false,
+          "description": "URL of the author's avatar image"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["card", "inline", "featured"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "card"
+        },
+        "rating": {
+          "type": "number",
+          "required": false,
+          "description": "Star rating from 1 to 5"
+        }
+      }
+    },
+    {
+      "name": "PricingCard",
+      "category": "patterns",
+      "import": "import { PricingCard } from '@arcana-ui/core'",
+      "props": {
+        "name": {
+          "type": "string",
+          "description": "Plan/tier name (e.g., \"Pro\", \"Enterprise\")"
+        },
+        "price": {
+          "type": "string | number",
+          "description": "Price amount — displayed as-is if string, or formatted as number"
+        },
+        "period": {
+          "type": "string",
+          "required": false,
+          "description": "Billing period text (e.g., \"/month\", \"/year\", \"one-time\")"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Short plan description"
+        },
+        "features": {
+          "type": "PricingFeature[]",
+          "required": false,
+          "description": "List of features with included/excluded status"
+        },
+        "cta": {
+          "type": "PricingCTAAction",
+          "required": false,
+          "description": "Call-to-action button/link"
+        },
+        "popular": {
+          "type": "boolean",
+          "required": false,
+          "description": "Highlights this tier as recommended (badge + elevated styling)",
+          "default": false
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "compact"],
+          "required": false,
+          "description": "Visual density variant",
+          "default": "default"
+        }
+      }
+    },
+    {
+      "name": "CTA",
+      "category": "patterns",
+      "import": "import { CTA } from '@arcana-ui/core'",
+      "props": {
+        "headline": {
+          "type": "string",
+          "description": "Main headline text"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Supporting description text"
+        },
+        "primaryCTA": {
+          "type": "CTAAction",
+          "required": false,
+          "description": "Primary call-to-action button/link"
+        },
+        "secondaryCTA": {
+          "type": "CTAAction",
+          "required": false,
+          "description": "Secondary call-to-action button/link"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["banner", "card", "minimal"],
+          "required": false,
+          "description": "Visual variant",
+          "default": "banner"
+        }
+      }
+    },
+    {
+      "name": "StatsBar",
+      "category": "patterns",
+      "import": "import { StatsBar } from '@arcana-ui/core'",
+      "props": {
+        "stats": {
+          "type": "StatItemData[]",
+          "description": "Array of stat items to display"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["inline", "card"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "inline"
+        }
+      }
+    },
+    {
+      "name": "Timeline",
+      "category": "patterns",
+      "import": "import { Timeline } from '@arcana-ui/core'",
+      "props": {
+        "items": {
+          "type": "TimelineItemData[]",
+          "description": "Array of timeline items"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["standard", "compact", "alternating"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "standard"
+        }
+      }
+    },
+    {
+      "name": "LogoCloud",
+      "category": "patterns",
+      "import": "import { LogoCloud } from '@arcana-ui/core'",
+      "props": {
+        "logos": {
+          "type": "LogoItem[]",
+          "description": "Array of logo items to display"
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Optional section title (e.g., \"Trusted by\")"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["grid", "marquee", "fade"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "grid"
+        }
+      }
+    },
+    {
+      "name": "DataTable",
+      "category": "patterns",
+      "import": "import { DataTable } from '@arcana-ui/core'",
+      "props": {
+        "data": {
+          "type": "T[]",
+          "description": "Array of data objects to display"
+        },
+        "columns": {
+          "type": "ColumnDef<T>[]",
+          "description": "Column definitions"
+        },
+        "sortable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Enable column header click to sort",
+          "default": false
+        },
+        "filterable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show filter input for searching",
+          "default": false
+        },
+        "selectable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Enable row selection with checkboxes",
+          "default": false
+        },
+        "pagination": {
+          "type": "boolean | PaginationConfig",
+          "required": false,
+          "description": "Enable pagination — true for default (10 rows), or provide config",
+          "default": false
+        },
+        "striped": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show alternating row background colors",
+          "default": false
+        },
+        "hoverable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Highlight rows on hover",
+          "default": true
+        },
+        "stickyHeader": {
+          "type": "boolean",
+          "required": false,
+          "description": "Keep header row fixed when scrolling table body",
+          "default": false
+        },
+        "emptyState": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content shown when data array is empty"
+        },
+        "loading": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show skeleton loading rows",
+          "default": false
+        },
+        "onSort": {
+          "type": "(column: string, direction: 'asc' | 'desc') => void",
+          "required": false,
+          "description": "Callback fired when a column sort changes"
+        },
+        "onFilter": {
+          "type": "(filters: Record<string, string>) => void",
+          "required": false,
+          "description": "Callback fired when the filter value changes"
+        },
+        "onSelect": {
+          "type": "(selectedRows: T[]) => void",
+          "required": false,
+          "description": "Callback fired when row selection changes"
+        },
+        "onRowClick": {
+          "type": "(row: T) => void",
+          "required": false,
+          "description": "Callback fired when a row is clicked"
+        }
+      }
+    },
+    {
+      "name": "StatCard",
+      "category": "patterns",
+      "import": "import { StatCard } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string | number",
+          "description": "The main metric value"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label describing the metric"
+        },
+        "prefix": {
+          "type": "string",
+          "required": false,
+          "description": "Prefix displayed before the value (e.g., \"$\", \"€\")"
+        },
+        "suffix": {
+          "type": "string",
+          "required": false,
+          "description": "Suffix displayed after the value (e.g., \"%\", \"+\", \"users\")"
+        },
+        "trend": {
+          "type": "StatTrend",
+          "required": false,
+          "description": "Trend indicator with direction and percentage"
+        },
+        "comparison": {
+          "type": "string",
+          "required": false,
+          "description": "Comparison text (e.g., \"vs last month\")"
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Icon displayed in the card"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "compact"],
+          "required": false,
+          "description": "Visual variant — \"compact\" uses smaller spacing and no icon",
+          "default": "default"
+        },
+        "loading": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show skeleton loading state",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "ProgressBar",
+      "category": "patterns",
+      "import": "import { ProgressBar } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "number",
+          "description": "Current progress value (0-100 by default, or 0-max)"
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "description": "Maximum value (default 100)",
+          "default": 100
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "striped", "animated"],
+          "required": false,
+          "description": "Visual variant",
+          "default": "default"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "required": false,
+          "description": "Bar height size",
+          "default": "md"
+        },
+        "color": {
+          "type": "enum",
+          "values": ["primary", "success", "warning", "error", "info"],
+          "required": false,
+          "description": "Color mapped to semantic status colors",
+          "default": "primary"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Accessible label for the progress bar"
+        },
+        "showValue": {
+          "type": "boolean",
+          "required": false,
+          "description": "Display percentage text alongside the bar",
+          "default": false
+        },
+        "indeterminate": {
+          "type": "boolean",
+          "required": false,
+          "description": "Indeterminate mode — shows infinite loading animation",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "KPICard",
+      "category": "patterns",
+      "import": "import { KPICard } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string | number",
+          "description": "The main metric value"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label describing the metric"
+        },
+        "prefix": {
+          "type": "string",
+          "required": false,
+          "description": "Prefix displayed before the value (e.g., \"$\", \"€\")"
+        },
+        "suffix": {
+          "type": "string",
+          "required": false,
+          "description": "Suffix displayed after the value (e.g., \"%\", \"ms\")"
+        },
+        "trend": {
+          "type": "KPITrend",
+          "required": false,
+          "description": "Trend indicator with direction and percentage"
+        },
+        "data": {
+          "type": "number[]",
+          "required": false,
+          "description": "Array of recent values for the sparkline chart"
+        },
+        "sparklineColor": {
+          "type": "string",
+          "required": false,
+          "description": "Custom sparkline color (defaults to trend color)"
+        },
+        "target": {
+          "type": "KPITarget",
+          "required": false,
+          "description": "Target line on the sparkline"
+        },
+        "period": {
+          "type": "string",
+          "required": false,
+          "description": "Time period label (e.g., \"Last 7 days\")"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "compact"],
+          "required": false,
+          "description": "Visual variant — \"compact\" uses smaller spacing",
+          "default": "default"
+        },
+        "loading": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show skeleton loading state",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "DatePicker",
+      "category": "patterns",
+      "import": "import { DatePicker } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "Date | null",
+          "required": false,
+          "description": "Controlled selected date"
+        },
+        "defaultValue": {
+          "type": "Date | null",
+          "required": false,
+          "description": "Default date for uncontrolled usage",
+          "default": "null"
+        },
+        "onChange": {
+          "type": "(date: Date | null) => void",
+          "required": false,
+          "description": "Callback fired when date changes"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text"
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text"
+        },
+        "error": {
+          "type": "string | boolean",
+          "required": false,
+          "description": "Error message or boolean"
+        },
+        "helperText": {
+          "type": "string",
+          "required": false,
+          "description": "Helper text"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the picker is disabled",
+          "default": false
+        },
+        "min": {
+          "type": "Date",
+          "required": false,
+          "description": "Earliest selectable date"
+        },
+        "max": {
+          "type": "Date",
+          "required": false,
+          "description": "Latest selectable date"
+        },
+        "format": {
+          "type": "string",
+          "required": false,
+          "description": "Display format (default \"MM/DD/YYYY\")"
+        },
+        "clearable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show clear button",
+          "default": true
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "required": false,
+          "description": "Size variant",
+          "default": "md"
+        }
+      }
+    },
+    {
+      "name": "FileUpload",
+      "category": "patterns",
+      "import": "import { FileUpload } from '@arcana-ui/core'",
+      "props": {
+        "accept": {
+          "type": "string",
+          "required": false,
+          "description": "File type filter (e.g., \"image/*,.pdf\")"
+        },
+        "multiple": {
+          "type": "boolean",
+          "required": false,
+          "description": "Allow multiple file selection",
+          "default": false
+        },
+        "maxSize": {
+          "type": "number",
+          "required": false,
+          "description": "Maximum file size in bytes"
+        },
+        "maxFiles": {
+          "type": "number",
+          "required": false,
+          "description": "Maximum number of files when multiple"
+        },
+        "onChange": {
+          "type": "(files: File[]) => void",
+          "required": false,
+          "description": "Callback fired when files are selected"
+        },
+        "onError": {
+          "type": "(error: string) => void",
+          "required": false,
+          "description": "Callback fired on validation errors"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Description text (e.g., \"PNG, JPG, PDF up to 10MB\")"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the uploader is disabled",
+          "default": false
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["dropzone", "button"],
+          "required": false,
+          "description": "Visual variant",
+          "default": "dropzone"
+        }
+      }
+    },
+    {
+      "name": "Drawer",
+      "category": "patterns",
+      "import": "import { Drawer } from '@arcana-ui/core'",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Whether the drawer is visible"
+        },
+        "onClose": {
+          "type": "() => void",
+          "description": "Callback fired when the drawer should close"
+        },
+        "side": {
+          "type": "enum",
+          "values": ["left", "right", "top", "bottom"],
+          "required": false,
+          "description": "Which side the drawer slides in from",
+          "default": "right"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg", "full"],
+          "required": false,
+          "description": "Size preset — sm: 320px, md: 420px, lg: 640px, full: 100%",
+          "default": "md"
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Optional title in the header"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Optional description below title"
+        },
+        "overlay": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to show the backdrop overlay"
+        },
+        "closeOnOverlayClick": {
+          "type": "boolean",
+          "required": false,
+          "description": "Close when clicking the overlay backdrop",
+          "default": true
+        },
+        "closeOnEsc": {
+          "type": "boolean",
+          "required": false,
+          "description": "Close when pressing Escape",
+          "default": true
+        },
+        "showClose": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show close button in header",
+          "default": true
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Optional sticky footer content"
+        }
+      }
+    },
+    {
+      "name": "Popover",
+      "category": "patterns",
+      "import": "import { Popover } from '@arcana-ui/core'",
+      "props": {
+        "trigger": {
+          "type": "ReactNode",
+          "description": "The trigger element that opens the popover"
+        },
+        "content": {
+          "type": "ReactNode",
+          "description": "Popover content"
+        },
+        "open": {
+          "type": "boolean",
+          "required": false,
+          "description": "Controlled open state"
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "required": false,
+          "description": "Default open state for uncontrolled usage",
+          "default": false
+        },
+        "onOpenChange": {
+          "type": "(open: boolean) => void",
+          "required": false,
+          "description": "Callback fired when open state changes"
+        },
+        "side": {
+          "type": "enum",
+          "values": ["top", "right", "bottom", "left"],
+          "required": false,
+          "description": "Preferred side relative to trigger",
+          "default": "bottom"
+        },
+        "align": {
+          "type": "enum",
+          "values": ["start", "center", "end"],
+          "required": false,
+          "description": "Alignment along the side axis",
+          "default": "center"
+        },
+        "sideOffset": {
+          "type": "number",
+          "required": false,
+          "description": "Pixel gap between trigger and popover",
+          "default": 8
+        },
+        "triggerOn": {
+          "type": "enum",
+          "values": ["click", "hover"],
+          "required": false,
+          "description": "What interaction opens the popover",
+          "default": "click"
+        },
+        "closeOnOutsideClick": {
+          "type": "boolean",
+          "required": false,
+          "description": "Close when clicking outside",
+          "default": true
+        },
+        "closeOnEsc": {
+          "type": "boolean",
+          "required": false,
+          "description": "Close when pressing Escape",
+          "default": true
+        },
+        "showArrow": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show arrow pointing to trigger",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "CommandPalette",
+      "category": "patterns",
+      "import": "import { CommandPalette } from '@arcana-ui/core'",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Whether the palette is visible"
+        },
+        "onClose": {
+          "type": "() => void",
+          "description": "Callback fired when the palette should close"
+        },
+        "items": {
+          "type": "CommandItem[]",
+          "required": false,
+          "description": "Static list of command items",
+          "default": "[]"
+        },
+        "onSelect": {
+          "type": "(item: CommandItem) => void",
+          "required": false,
+          "description": "Callback fired when an item is selected"
+        },
+        "onSearch": {
+          "type": "(query: string) => CommandItem[] | Promise<CommandItem[]>",
+          "required": false,
+          "description": "Async search function for dynamic results"
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text in the search input"
+        },
+        "emptyState": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content shown when no results match"
+        },
+        "groups": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to group items by their group property"
+        }
+      }
+    },
+    {
+      "name": "Divider",
+      "category": "patterns",
+      "import": "import { Divider } from '@arcana-ui/core'",
+      "props": {
+        "orientation": {
+          "type": "enum",
+          "values": ["horizontal", "vertical"],
+          "required": false,
+          "description": "Divider direction",
+          "default": "horizontal"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["solid", "dashed", "dotted"],
+          "required": false,
+          "description": "Line style",
+          "default": "solid"
+        },
+        "label": {
+          "type": "string | React.ReactNode",
+          "required": false,
+          "description": "Text or element displayed in the middle of the divider"
+        },
+        "spacing": {
+          "type": "enum",
+          "values": ["none", "sm", "md", "lg"],
+          "required": false,
+          "description": "Spacing above and below (or left/right for vertical)",
+          "default": "md"
+        }
+      }
+    },
+    {
+      "name": "Spacer",
+      "category": "patterns",
+      "import": "import { Spacer } from '@arcana-ui/core'",
+      "props": {
+        "size": {
+          "type": "enum",
+          "values": ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "section"],
+          "required": false,
+          "description": "Spacing size mapped to spacing tokens",
+          "default": "md"
+        },
+        "axis": {
+          "type": "enum",
+          "values": ["vertical", "horizontal"],
+          "required": false,
+          "description": "Direction of spacing",
+          "default": "vertical"
+        }
+      }
+    },
+    {
+      "name": "AspectRatio",
+      "category": "patterns",
+      "import": "import { AspectRatio } from '@arcana-ui/core'",
+      "props": {
+        "ratio": {
+          "type": "number | 'square' | 'video' | 'portrait' | 'wide'",
+          "required": false,
+          "description": "Aspect ratio — preset name or numeric width/height ratio",
+          "default": "video"
+        }
+      }
+    },
+    {
+      "name": "Image",
+      "category": "patterns",
+      "import": "import { Image } from '@arcana-ui/core'",
+      "props": {
+        "src": {
+          "type": "string",
+          "description": "Image source URL"
+        },
+        "alt": {
+          "type": "string",
+          "description": "Alt text (required for accessibility — use \"\" for decorative images)"
+        },
+        "fallback": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Fallback content shown while loading or on error"
+        },
+        "aspectRatio": {
+          "type": "number | 'square' | 'video' | 'portrait'",
+          "required": false,
+          "description": "Aspect ratio constraint"
+        },
+        "objectFit": {
+          "type": "enum",
+          "values": ["cover", "contain", "fill", "none"],
+          "required": false,
+          "description": "How the image fills its container",
+          "default": "cover"
+        },
+        "lazy": {
+          "type": "boolean",
+          "required": false,
+          "description": "Use native lazy loading",
+          "default": true
+        },
+        "radius": {
+          "type": "enum",
+          "values": ["none", "sm", "md", "lg", "xl", "full"],
+          "required": false,
+          "description": "Border radius",
+          "default": "none"
+        }
+      }
+    },
+    {
+      "name": "Carousel",
+      "category": "patterns",
+      "import": "import { Carousel } from '@arcana-ui/core'",
+      "props": {
+        "autoPlay": {
+          "type": "boolean",
+          "required": false,
+          "description": "Auto-advance slides",
+          "default": false
+        },
+        "autoPlayInterval": {
+          "type": "number",
+          "required": false,
+          "description": "Auto-play interval in ms",
+          "default": 5000
+        },
+        "loop": {
+          "type": "boolean",
+          "required": false,
+          "description": "Wrap around when reaching the end",
+          "default": true
+        },
+        "showArrows": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show prev/next arrow buttons",
+          "default": true
+        },
+        "showDots": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show dot indicators",
+          "default": true
+        },
+        "gap": {
+          "type": "enum",
+          "values": ["none", "sm", "md", "lg"],
+          "required": false,
+          "description": "Gap between slides",
+          "default": "md"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Accessible label",
+          "default": "Carousel"
+        }
+      }
+    },
+    {
+      "name": "Banner",
+      "category": "composites",
+      "import": "import { Banner } from '@arcana-ui/core'",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["info", "success", "warning", "error", "neutral"],
+          "required": false,
+          "description": "Visual variant",
+          "default": "info"
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Optional title"
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Custom icon (defaults to variant icon)"
+        },
+        "action": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Action element (button or link)"
+        },
+        "dismissible": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the banner can be dismissed",
+          "default": false
+        },
+        "onDismiss": {
+          "type": "() => void",
+          "required": false,
+          "description": "Callback fired when dismissed"
+        },
+        "sticky": {
+          "type": "boolean",
+          "required": false,
+          "description": "Stick to top of page",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "Skeleton",
+      "category": "composites",
+      "import": "import { Skeleton } from '@arcana-ui/core'",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["text", "circular", "rectangular"],
+          "required": false,
+          "description": "Shape variant",
+          "default": "text"
+        },
+        "width": {
+          "type": "string",
+          "required": false,
+          "description": "Width (CSS value)"
+        },
+        "height": {
+          "type": "string",
+          "required": false,
+          "description": "Height (CSS value)"
+        },
+        "lines": {
+          "type": "number",
+          "required": false,
+          "description": "Number of text lines to render",
+          "default": 1
+        },
+        "animate": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to animate the pulse effect",
+          "default": true
+        },
+        "radius": {
+          "type": "enum",
+          "values": ["none", "sm", "md", "lg", "full"],
+          "required": false,
+          "description": "Border radius override"
+        }
+      }
+    },
+    {
+      "name": "Spinner",
+      "category": "composites",
+      "import": "import { Spinner } from '@arcana-ui/core'",
+      "props": {
+        "size": {
+          "type": "enum",
+          "values": ["xs", "sm", "md", "lg", "xl"],
+          "required": false,
+          "description": "Spinner size",
+          "default": "md"
+        },
+        "color": {
+          "type": "enum",
+          "values": ["primary", "current", "white"],
+          "required": false,
+          "description": "Color variant — \"current\" inherits parent text color",
+          "default": "primary"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Accessible label (visually hidden)",
+          "default": "Loading"
+        }
+      }
+    },
+    {
+      "name": "ErrorBoundary",
+      "category": "composites",
+      "import": "import { ErrorBoundary } from '@arcana-ui/core'",
+      "props": {
+        "fallback": {
+          "type": "React.ReactNode | ((error: Error, reset: () => void) => React.ReactNode)",
+          "required": false,
+          "description": "Fallback UI — ReactNode or render function receiving error and reset"
+        },
+        "onError": {
+          "type": "(error: Error, errorInfo: React.ErrorInfo) => void",
+          "required": false,
+          "description": "Callback fired when an error is caught"
+        }
+      }
+    },
+    {
+      "name": "ProductCard",
+      "category": "patterns",
+      "import": "import { ProductCard } from '@arcana-ui/core'",
+      "props": {
+        "image": {
+          "type": "string",
+          "description": "Product image URL"
+        },
+        "title": {
+          "type": "string",
+          "description": "Product title"
+        },
+        "price": {
+          "type": "number | ProductPrice",
+          "description": "Price as number or object with current/original"
+        },
+        "rating": {
+          "type": "ProductRating",
+          "required": false,
+          "description": "Star rating with optional review count"
+        },
+        "badge": {
+          "type": "string",
+          "required": false,
+          "description": "Badge text (\"New\", \"Sale\", \"-20%\", \"Sold Out\")"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "compact", "horizontal"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "default"
+        },
+        "onAddToCart": {
+          "type": "() => void",
+          "required": false,
+          "description": "Add to cart handler — shows button when provided"
+        },
+        "onFavorite": {
+          "type": "() => void",
+          "required": false,
+          "description": "Favorite handler — shows heart when provided"
+        },
+        "href": {
+          "type": "string",
+          "required": false,
+          "description": "Link URL — makes card clickable"
+        },
+        "loading": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show skeleton loading state",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "CartItem",
+      "category": "patterns",
+      "import": "import { CartItem } from '@arcana-ui/core'",
+      "props": {
+        "image": {
+          "type": "string",
+          "description": "URL of the product image"
+        },
+        "title": {
+          "type": "string",
+          "description": "Product title"
+        },
+        "variant": {
+          "type": "string",
+          "required": false,
+          "description": "Product variant description (e.g., \"Size M, Blue\")"
+        },
+        "price": {
+          "type": "number",
+          "description": "Price as a number"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Current quantity"
+        },
+        "currency": {
+          "type": "string",
+          "required": false,
+          "description": "Currency symbol or code"
+        },
+        "onQuantityChange": {
+          "type": "(quantity: number) => void",
+          "description": "Callback fired when quantity changes"
+        },
+        "onRemove": {
+          "type": "() => void",
+          "description": "Callback fired when the remove button is clicked"
+        },
+        "maxQuantity": {
+          "type": "number",
+          "required": false,
+          "description": "Maximum allowed quantity",
+          "default": 99
+        }
+      }
+    },
+    {
+      "name": "QuantitySelector",
+      "category": "patterns",
+      "import": "import { QuantitySelector } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "number",
+          "description": "Current quantity value"
+        },
+        "onChange": {
+          "type": "(value: number) => void",
+          "description": "Callback fired when the value changes"
+        },
+        "min": {
+          "type": "number",
+          "required": false,
+          "description": "Minimum allowed value",
+          "default": 1
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "description": "Maximum allowed value",
+          "default": 99
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md"],
+          "required": false,
+          "description": "Size variant",
+          "default": "md"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the selector is disabled",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "PriceDisplay",
+      "category": "patterns",
+      "import": "import { PriceDisplay } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "number",
+          "description": "Price value to display"
+        },
+        "originalValue": {
+          "type": "number",
+          "required": false,
+          "description": "Original price before discount (renders struck-through when provided)"
+        },
+        "currency": {
+          "type": "string",
+          "required": false,
+          "description": "ISO 4217 currency code",
+          "default": "USD"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "description": "BCP 47 locale string for formatting",
+          "default": "en-US"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg", "xl"],
+          "required": false,
+          "description": "Size of the price text",
+          "default": "md"
+        }
+      }
+    },
+    {
+      "name": "RatingStars",
+      "category": "patterns",
+      "import": "import { RatingStars } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "number",
+          "description": "Current rating value (0 to max, supports 0.5 increments)"
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "description": "Maximum number of stars",
+          "default": 5
+        },
+        "count": {
+          "type": "number",
+          "required": false,
+          "description": "Number of reviews to display after stars (e.g., 128 renders \"(128)\")"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "required": false,
+          "description": "Size of the star icons",
+          "default": "md"
+        },
+        "interactive": {
+          "type": "boolean",
+          "required": false,
+          "description": "Enable interactive clicking and keyboard navigation",
+          "default": false
+        },
+        "onChange": {
+          "type": "(value: number) => void",
+          "required": false,
+          "description": "Callback when rating changes (interactive mode only)"
+        }
+      }
+    },
+    {
+      "name": "ArticleLayout",
+      "category": "patterns",
+      "import": "import { ArticleLayout } from '@arcana-ui/core'",
+      "props": {
+        "maxWidth": {
+          "type": "enum",
+          "values": ["prose", "wide", "full"],
+          "required": false,
+          "description": "Maximum content width",
+          "default": "prose"
+        },
+        "sidebar": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Sidebar content (TOC, author info, related)"
+        },
+        "sidebarPosition": {
+          "type": "enum",
+          "values": ["left", "right"],
+          "required": false,
+          "description": "Sidebar position",
+          "default": "right"
+        },
+        "sidebarSticky": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether sidebar sticks while scrolling",
+          "default": true
+        }
+      }
+    },
+    {
+      "name": "PullQuote",
+      "category": "patterns",
+      "import": "import { PullQuote } from '@arcana-ui/core'",
+      "props": {
+        "quote": {
+          "type": "string",
+          "description": "Quote text"
+        },
+        "attribution": {
+          "type": "string",
+          "required": false,
+          "description": "Attribution text"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "accent", "large"],
+          "required": false,
+          "description": "Visual variant",
+          "default": "default"
+        }
+      }
+    },
+    {
+      "name": "AuthorCard",
+      "category": "patterns",
+      "import": "import { AuthorCard } from '@arcana-ui/core'",
+      "props": {
+        "name": {
+          "type": "string",
+          "description": "Author name"
+        },
+        "role": {
+          "type": "string",
+          "required": false,
+          "description": "Role or title"
+        },
+        "avatar": {
+          "type": "string",
+          "required": false,
+          "description": "Avatar image URL"
+        },
+        "bio": {
+          "type": "string",
+          "required": false,
+          "description": "Short bio"
+        },
+        "social": {
+          "type": "AuthorSocial[]",
+          "required": false,
+          "description": "Social media links"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["inline", "card"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "inline"
+        }
+      }
+    },
+    {
+      "name": "RelatedPosts",
+      "category": "patterns",
+      "import": "import { RelatedPosts } from '@arcana-ui/core'",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Section title"
+        },
+        "posts": {
+          "type": "RelatedPost[]",
+          "description": "Array of related posts"
+        },
+        "columns": {
+          "type": "2 | 3 | 4",
+          "required": false,
+          "description": "Number of columns",
+          "default": 3
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["card", "list"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "card"
+        }
+      }
+    },
+    {
+      "name": "NewsletterSignup",
+      "category": "patterns",
+      "import": "import { NewsletterSignup } from '@arcana-ui/core'",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Section title"
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Description text"
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false,
+          "description": "Input placeholder"
+        },
+        "buttonText": {
+          "type": "string",
+          "required": false,
+          "description": "Button label",
+          "default": "Subscribe"
+        },
+        "onSubmit": {
+          "type": "(email: string) => void | Promise<void>",
+          "required": false,
+          "description": "Submit handler — receives validated email"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["inline", "card", "banner"],
+          "required": false,
+          "description": "Layout variant",
+          "default": "inline"
+        },
+        "successMessage": {
+          "type": "string",
+          "required": false,
+          "description": "Message after successful submit"
+        }
+      }
+    },
+    {
+      "name": "ScrollArea",
+      "category": "patterns",
+      "import": "import { ScrollArea } from '@arcana-ui/core'",
+      "props": {
+        "maxHeight": {
+          "type": "string",
+          "required": false,
+          "description": "Maximum height constraint"
+        },
+        "orientation": {
+          "type": "enum",
+          "values": ["vertical", "horizontal", "both"],
+          "required": false,
+          "description": "Scroll direction",
+          "default": "vertical"
+        },
+        "showScrollbar": {
+          "type": "enum",
+          "values": ["auto", "always", "hover"],
+          "required": false,
+          "description": "Scrollbar visibility",
+          "default": "auto"
+        }
+      }
+    },
+    {
+      "name": "Collapsible",
+      "category": "patterns",
+      "import": "import { Collapsible } from '@arcana-ui/core'",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "required": false,
+          "description": "Controlled open state"
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "required": false,
+          "description": "Default open state",
+          "default": false
+        },
+        "onOpenChange": {
+          "type": "(open: boolean) => void",
+          "required": false,
+          "description": "Callback when open state changes"
+        },
+        "trigger": {
+          "type": "ReactNode",
+          "description": "Clickable trigger element"
+        },
+        "animateHeight": {
+          "type": "boolean",
+          "required": false,
+          "description": "Animate height transition",
+          "default": true
+        }
+      }
+    },
+    {
+      "name": "CopyButton",
+      "category": "patterns",
+      "import": "import { CopyButton } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string",
+          "description": "Text to copy to clipboard"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Button label",
+          "default": "Copy"
+        },
+        "copiedLabel": {
+          "type": "string",
+          "required": false,
+          "description": "Label shown after copying"
+        },
+        "copiedDuration": {
+          "type": "number",
+          "required": false,
+          "description": "How long \"Copied!\" stays visible (ms)",
+          "default": 2000
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "ghost", "icon"],
+          "required": false,
+          "description": "Visual variant",
+          "default": "default"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md"],
+          "required": false,
+          "description": "Size",
+          "default": "sm"
+        }
+      }
+    },
+    {
+      "name": "KeyboardShortcut",
+      "category": "patterns",
+      "import": "import { KeyboardShortcut } from '@arcana-ui/core'",
+      "props": {
+        "keys": {
+          "type": "string[]",
+          "description": "Key labels to display (e.g., [\"⌘\", \"K\"])"
+        },
+        "variant": {
+          "type": "enum",
+          "values": ["default", "inline"],
+          "required": false,
+          "description": "Visual variant",
+          "default": "default"
+        }
+      }
+    },
+    {
+      "name": "ColorPicker",
+      "category": "other",
+      "import": "import { ColorPicker } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string",
+          "description": "Current CSS color value (hex, rgb, rgba)"
+        },
+        "onChange": {
+          "type": "(value: string) => void",
+          "description": "Called on every change with a hex value (or rgba for semi-transparent)"
+        },
+        "format": {
+          "type": "enum",
+          "values": ["hex", "rgb", "rgba", "hsl"],
+          "required": false,
+          "description": "Color output format",
+          "default": "hex"
+        },
+        "showAlpha": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show alpha/opacity slider (default true)",
+          "default": true
+        },
+        "showInputs": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show hex/RGB text inputs (default true)",
+          "default": true
+        },
+        "showEyeDropper": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show eyedropper button when supported (default true)"
+        },
+        "presetColors": {
+          "type": "string[]",
+          "required": false,
+          "description": "Optional palette swatches (e.g. current theme colors)",
+          "default": "[]"
+        },
+        "showRecent": {
+          "type": "boolean",
+          "required": false,
+          "description": "Track and show recent colors (default true)",
+          "default": true
+        },
+        "placement": {
+          "type": "enum",
+          "values": ["top", "bottom", "left", "right"],
+          "required": false,
+          "description": "Placement of popup relative to trigger",
+          "default": "bottom"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "required": false,
+          "description": "Size variant",
+          "default": "md"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "FontPicker",
+      "category": "other",
+      "import": "import { FontPicker } from '@arcana-ui/core'",
+      "props": {
+        "value": {
+          "type": "string",
+          "description": "Current font-family stack value"
+        },
+        "onChange": {
+          "type": "(fontStack: string) => void",
+          "description": "Called when a font is selected"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "description": "Label text displayed on the trigger"
+        },
+        "googleFonts": {
+          "type": "GoogleFontEntry[]",
+          "required": false,
+          "description": "Google Fonts to offer (defaults to a curated list of ~31 fonts)"
+        },
+        "localFonts": {
+          "type": "LocalFontEntry[]",
+          "required": false,
+          "description": "Locally uploaded fonts",
+          "default": "[]"
+        },
+        "searchable": {
+          "type": "boolean",
+          "required": false,
+          "description": "Show search input (default true)",
+          "default": true
+        },
+        "searchPlaceholder": {
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text for search"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "required": false,
+          "description": "Size variant",
+          "default": "md"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "ThemeProvider",
+      "category": "context",
+      "import": "import { ThemeProvider } from '@arcana-ui/core'",
+      "props": {
+        "defaultTheme": {
+          "type": "enum",
+          "values": [
+            "brutalist",
+            "commerce",
+            "corporate",
+            "dark",
+            "editorial",
+            "glass",
+            "light",
+            "midnight",
+            "mono",
+            "nature",
+            "neon",
+            "retro98",
+            "startup",
+            "terminal"
+          ],
+          "required": false,
+          "description": "Default theme to use when no stored preference exists and system detection is not used.",
+          "default": "light"
+        },
+        "storageKey": {
+          "type": "string",
+          "required": false,
+          "description": "localStorage key for persisting theme preference.",
+          "default": "arcana-theme"
+        },
+        "enableTransitions": {
+          "type": "boolean",
+          "required": false,
+          "description": "When `true`, add smooth CSS transitions during theme changes.",
+          "default": false
+        }
+      }
+    }
+  ],
+  "hooks": [
+    {
+      "name": "useToast",
+      "import": "import { useToast } from '@arcana-ui/core'"
+    },
+    {
+      "name": "useMediaQuery",
+      "import": "import { useMediaQuery } from '@arcana-ui/core'",
+      "description": "Reactively matches a CSS media query string. SSR-safe: returns `false` when `window` is unavailable."
+    },
+    {
+      "name": "useBreakpoint",
+      "import": "import { useBreakpoint } from '@arcana-ui/core'",
+      "description": "Returns the current active breakpoint and convenience booleans. SSR-safe: defaults to `\"lg\"` (desktop) when `window` is unavailable. Breakpoint values match the layout token system: - sm: < 640px - md: 640px – 1023px - lg: 1024px – 1279px - xl: 1280px – 1535px - 2xl: >= 1536px"
+    },
+    {
+      "name": "usePrefersReducedMotion",
+      "import": "import { usePrefersReducedMotion } from '@arcana-ui/core'",
+      "description": "Returns `true` when the user has enabled \"Prefer reduced motion\" in their OS or browser settings. SSR-safe: returns `false` when `window` is unavailable. Note: CSS-level reduced motion is already handled by the Arcana token system (all `--duration-*` tokens are zeroed out via a `prefers-reduced-motion` media query in arcana.css). This hook is for **JavaScript-driven** animations where CSS transitions don't apply (e.g., number counters, auto-playing carousels)."
+    },
+    {
+      "name": "useHotkey",
+      "import": "import { useHotkey } from '@arcana-ui/core'",
+      "description": "Hook to listen for keyboard shortcuts. Automatically handles Cmd (Mac) vs Ctrl (Windows/Linux) when modifier includes \"meta\". Does not fire when user is typing in an input, textarea, or contenteditable."
+    },
+    {
+      "name": "useFloating",
+      "import": "import { useFloating } from '@arcana-ui/core'",
+      "description": "Positions a floating element relative to a trigger, with smart flip and viewport clamping. Zero dependencies — a lightweight alternative to Floating UI / Popper.js."
+    },
+    {
+      "name": "useClickOutside",
+      "import": "import { useClickOutside } from '@arcana-ui/core'",
+      "description": "Fires a callback when a click (mousedown) occurs outside of the referenced element. SSR-safe: does nothing when `document` is unavailable."
+    },
+    {
+      "name": "useDrag",
+      "import": "import { useDrag } from '@arcana-ui/core'",
+      "description": "Generic drag interaction hook. Handles mousedown/touchstart → document mousemove/touchmove → mouseup/touchend with optional RAF throttling and coordinate normalization."
+    },
+    {
+      "name": "useUndoRedo",
+      "import": "import { useUndoRedo } from '@arcana-ui/core'",
+      "description": "Generic undo/redo history stack. New pushes after an undo clear the forward (redo) history. Stack size is bounded by `maxHistory`."
+    },
+    {
+      "name": "useTheme",
+      "import": "import { useTheme } from '@arcana-ui/core'",
+      "description": "Reads the persisted theme from localStorage. Returns `null` if no preference is stored or if running on the server. / function getStoredTheme(): ThemeId | null { if (typeof window === 'undefined') return null; try { const stored = localStorage.getItem(STORAGE_KEY); if (stored && THEME_IDS.includes(stored as ThemeId)) { return stored as ThemeId; } } catch { // localStorage may be unavailable (e.g., private browsing) } return null; } /** Persists the theme choice to localStorage, or removes it to follow system. / function storeTheme(theme: ThemeId | null): void { if (typeof window === 'undefined') return; try { if (theme === null) { localStorage.removeItem(STORAGE_KEY); } else { localStorage.setItem(STORAGE_KEY, theme); } } catch { // Silently fail if localStorage is unavailable } } /** Applies the theme to the document root element. / function applyTheme(theme: ThemeId): void { if (typeof document === 'undefined') return; document.documentElement.setAttribute(ATTRIBUTE, theme); } /** SSR-safe subscription to `prefers-color-scheme: dark` media query. / function useSystemPrefersDark(): boolean { const query = '(prefers-color-scheme: dark)'; const subscribe = useCallback((callback: () => void) => { if (typeof window === 'undefined') return () => {}; const mql = window.matchMedia(query); mql.addEventListener('change', callback); return () => mql.removeEventListener('change', callback); }, []); const getSnapshot = useCallback((): boolean => { if (typeof window === 'undefined') return false; return window.matchMedia(query).matches; }, []); const getServerSnapshot = useCallback((): boolean => false, []); return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot); } /** Manages theme switching with system preference detection, manual override, and localStorage persistence. SSR-safe: defaults to `\"light\"` when `window` is unavailable."
+    },
+    {
+      "name": "useThemeContext",
+      "import": "import { useThemeContext } from '@arcana-ui/core'",
+      "description": "Reads the persisted theme from localStorage. / function getStoredTheme(key: string): ThemeId | null { if (typeof window === 'undefined') return null; try { const stored = localStorage.getItem(key); if (stored && THEME_IDS.includes(stored as ThemeId)) { return stored as ThemeId; } } catch { // localStorage may be unavailable } return null; } /** Persists the theme choice to localStorage. / function storeTheme(key: string, theme: ThemeId | null): void { if (typeof window === 'undefined') return; try { if (theme === null) { localStorage.removeItem(key); } else { localStorage.setItem(key, theme); } } catch { // Silently fail } } /** Provides theme state to the component tree via React context. Handles system preference detection (`prefers-color-scheme`), manual override, localStorage persistence, and optional CSS transitions during theme changes."
+    }
+  ],
+  "_generated": {
+    "at": "2026-04-09T03:58:22.528Z",
+    "by": "scripts/generate-manifest.mjs",
+    "componentCount": 108,
+    "hookCount": 11
+  }
+}
