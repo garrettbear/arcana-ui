@@ -1,14 +1,14 @@
 {
   "$schema": "./scripts/manifest.schema.json",
   "release": {
-    "version": "0.1.0-beta.1",
-    "releaseDate": "2026-04-04",
+    "version": "0.1.0-beta.2",
+    "releaseDate": "2026-04-09",
     "changelog": "https://github.com/garrettbear/arcana-ui/blob/develop/CHANGELOG.md",
     "breaking": [],
     "migration": null
   },
   "name": "@arcana-ui/core",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
   "description": "React components for Arcana UI — AI's #1 design system",
   "install": "npm i @arcana-ui/core @arcana-ui/tokens",
   "quickStart": [
@@ -3410,7 +3410,7 @@
     }
   ],
   "_generated": {
-    "at": "2026-04-04T03:21:25.660Z",
+    "at": "2026-04-09T03:58:22.528Z",
     "by": "scripts/generate-manifest.mjs",
     "componentCount": 108,
     "hookCount": 11

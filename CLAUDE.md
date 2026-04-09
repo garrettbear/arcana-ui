@@ -625,8 +625,8 @@ Phase 4 (partial) + Phase P (partial)
 - P.2 — AI theme generation (prompt input → theme JSON)
 
 **Phase 5:**
-- 5.3 — Claude Code skill (planned, not published)
-- 5.4 — MCP server
+- 5.3 — Claude Code skill ✅ `.claude/skills/arcana/SKILL.md` (1,821 lines)
+- 5.4 — MCP server ✅ `@arcana-ui/mcp@0.1.0-beta.1` (7 tools, 130 kB package)
 - 5.5 — Documentation site
 - 5.6 — SEO & discoverability
 - 5.7 — Community starter templates beyond Vite + Next
@@ -640,7 +640,7 @@ None. All three npm packages (`@arcana-ui/tokens`, `@arcana-ui/core`, `@arcana-u
 ### What the Next Agent Should Do
 1. Read CLAUDE.md, PROGRESS.md, ROADMAP.md, AI_OPS.md
 2. Create a new branch from `develop` for the task (NEVER commit directly to develop)
-3. Priority: P.2 — AI theme generation, OR 4.4/4.5/4.7/4.8 demo content
+3. Priority: P.5 — AI theme generation flow in playground, OR publish `@arcana-ui/mcp@0.1.0-beta.1` (Bear action), OR 5.5 — documentation site
 4. Pre-existing test issue: 16 tests in `useTheme.test.tsx` fail (`localStorage.clear is not a function`) — investigate vitest jsdom environment config when time permits
 
 ### Session History
@@ -673,5 +673,6 @@ None. All three npm packages (`@arcana-ui/tokens`, `@arcana-ui/core`, `@arcana-u
 | 2026-03-28 | Claude (Claude Code) | Task P.1.4 — Playground site map architecture | Built 6 new routes: component gallery, component detail, token explorer, token impact, relationship graph. Component-to-token mapping build script (67 components, 551 tokens). Canvas-based graph visualization. All pages use Arcana components, token-driven CSS. 928 tests pass. |
 | 2026-03-31 | Claude (Claude Code) | Graph visualization upgrade — D3 force simulation | Replaced Canvas-based graph with D3 force-directed SVG visualization. Added glow filters, hover highlighting with connection tracing, zoom/pan, drag interaction, search-to-focus, legend, category color coding, tooltip, loading spinner, mobile fallback message, click-to-navigate. 958 tests pass. |
 | 2026-04-08 | Claude (Claude Code) | Task 5.11 ships — `@arcana-ui/cli@0.1.0-beta.1` published | Bear ran `npm publish --tag beta --access public` from `packages/cli/` after a root `pnpm install` + `pnpm --filter @arcana-ui/cli build`. Verified live on the real registry via direct curl to `https://registry.npmjs.org/@arcana-ui/cli/0.1.0-beta.1`: name/version/bin/tarball all correct, unpacked size 51,102 bytes, shasum `b90a1e86e9803a92e2abb1eb16081f50ff663a34`. All three Arcana packages (`@arcana-ui/tokens`, `@arcana-ui/core`, `@arcana-ui/cli`) are now on npm. Doc-only sync branch `docs/5.11-cli-publish-sync` drops the "awaiting Bear" note from Current State and CHANGELOG's Changed bucket. |
+| 2026-04-08 | Claude (Claude Code) | Tasks 5.2–5.4 — AI discoverability layer | Enhanced `llms.txt` (grouped by category, density switching, resource links) and `llms-full.txt` (4 layout patterns, theme customization guide, responsive section, 2370 lines). Created `.claude/skills/arcana/SKILL.md` (1,821 lines — all 108 components with props, hooks, token system, 4 complete layout patterns, presets, responsive, rules). Built `@arcana-ui/mcp@0.1.0-beta.1` — MCP server with 7 tools (list_components, get_component, list_presets, get_preset, validate_theme, generate_theme with Anthropic API integration, get_token_impact). Fully self-contained 130 kB npm package. Added Generator 8 to generate-docs pipeline: copies llms files to playground/public/ for Vercel serving. |
 | 2026-04-07 | Claude (Claude Code) | Task 5.11 — `@arcana-ui/cli` package | Built new CLI package with three commands: `init` (interactive scaffolder, 5 starter layouts × Vite/Next, package-manager detection, --yes for non-interactive use), `validate` (theme JSON linter — structure, completeness, references, WCAG AA contrast on 5 key fg/bg pairs, --strict promotes warnings, exits 1 on error), `add-theme` (preset activation snippet, --list for all 14 presets). Layouts use real `@arcana-ui/core` imports — all 10 combos typecheck against the published package via local `file:` link. Bundled with tsup ESM (deps externalized — bundling commander into ESM broke `require('events')`). New `packages/cli/README.md` + root README quickstart now leads with `npx @arcana-ui/cli init`. Five logical commits on `feat/5.11-cli-init-validate-add-theme`, merged as PR #90. |
 | 2026-04-06 | Claude (Claude Code) | Consumer package audit → beta.2 | Installed `@arcana-ui/core@beta` + `@arcana-ui/tokens@beta` from registry into a fresh project; found beta.1 was stale (115/122 exports, missing `useClickOutside`/`useDrag`/`useUndoRedo`/`ColorPicker`/`FontPicker`/`BottomSheet`/`DrawerNav`/`LogoCloud`), `@arcana-ui/tokens` exports map blocked `./dist/arcana.css` subpath (`ERR_PACKAGE_PATH_NOT_EXPORTED`), and tree-shaking was broken (Button-only import = 278 kB, same as 8-component app). Fixed exports maps on both packages, bumped to `0.1.0-beta.2`, scaffolded `examples/quickstart/` Vite + React + TS consumer test fixture, wrote `docs/QUICKSTART.md` (consumer setup + CLI spec) and `KNOWN_ISSUES.md`. Tree-shaking fix deferred to beta.3 — documented because it requires per-component entry points that conflict with the `"use client"` banner in single-entry mode. **Awaiting Bear to `npm publish` beta.2.** |

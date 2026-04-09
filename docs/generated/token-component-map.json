@@ -2,11 +2,11 @@
   "_generated": {
     "warning": "This file is auto-generated. Do not edit manually.",
     "source": "scripts/generate-docs.mjs",
-    "timestamp": "2026-03-31T04:53:17.732Z",
+    "timestamp": "2026-04-09T03:58:22.407Z",
     "command": "pnpm generate-docs"
   },
   "componentCount": 69,
-  "tokenCount": 570,
+  "tokenCount": 656,
   "componentToTokens": {
     "colorpicker": {
       "componentTokens": [],
@@ -33,7 +33,7 @@
         },
         {
           "name": "--color-bg-page",
-          "property": "background"
+          "property": "--colorpicker-thumb-border"
         },
         {
           "name": "--color-border-default",
@@ -68,6 +68,10 @@
           "property": "width"
         },
         {
+          "name": "--colorpicker-cursor-shadow",
+          "property": "box-shadow"
+        },
+        {
           "name": "--colorpicker-padding",
           "property": "padding"
         },
@@ -86,6 +90,14 @@
         {
           "name": "--colorpicker-swatch-size",
           "property": "width"
+        },
+        {
+          "name": "--colorpicker-thumb-border",
+          "property": "border"
+        },
+        {
+          "name": "--colorpicker-thumb-shadow",
+          "property": "box-shadow"
         },
         {
           "name": "--colorpicker-thumb-size",
@@ -136,8 +148,16 @@
           "property": "border-radius"
         },
         {
+          "name": "--shadow-sm",
+          "property": "--colorpicker-thumb-shadow"
+        },
+        {
           "name": "--shadow-xl",
           "property": "--colorpicker-shadow"
+        },
+        {
+          "name": "--shadow-xs",
+          "property": "--colorpicker-cursor-shadow"
         },
         {
           "name": "--spacing-0-5",
@@ -1220,12 +1240,12 @@
         },
         {
           "name": "--tabs-padding-x",
-          "fallback": "--spacing-3",
+          "fallback": "--element-padding-x-sm",
           "property": "padding"
         },
         {
           "name": "--tabs-padding-y",
-          "fallback": "--spacing-2",
+          "fallback": "--element-padding-y-sm",
           "property": "padding"
         }
       ],
@@ -1261,6 +1281,14 @@
         {
           "name": "--color-fg-secondary",
           "property": "color"
+        },
+        {
+          "name": "--element-padding-x-sm",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-sm",
+          "property": "padding"
         },
         {
           "name": "--focus-ring",
@@ -1301,14 +1329,6 @@
         {
           "name": "--spacing-1",
           "property": "gap"
-        },
-        {
-          "name": "--spacing-2",
-          "property": "padding"
-        },
-        {
-          "name": "--spacing-3",
-          "property": "padding"
         },
         {
           "name": "--spacing-4",
@@ -2856,13 +2876,7 @@
       ]
     },
     "datepicker": {
-      "componentTokens": [
-        {
-          "name": "--input-height",
-          "fallback": null,
-          "property": "height"
-        }
-      ],
+      "componentTokens": [],
       "semanticTokens": [
         {
           "name": "--border-width-default",
@@ -2961,6 +2975,18 @@
           "property": "border-radius"
         },
         {
+          "name": "--element-height-md",
+          "property": "min-height"
+        },
+        {
+          "name": "--element-padding-x-md",
+          "property": "padding-left"
+        },
+        {
+          "name": "--element-padding-y-md",
+          "property": "padding-top"
+        },
+        {
           "name": "--focus-ring",
           "property": "box-shadow"
         },
@@ -3018,7 +3044,7 @@
         },
         {
           "name": "--spacing-2",
-          "property": "padding"
+          "property": "padding-right"
         },
         {
           "name": "--spacing-3",
@@ -3027,10 +3053,6 @@
         {
           "name": "--spacing-9",
           "property": "width"
-        },
-        {
-          "name": "--spacing-sm",
-          "property": "padding"
         },
         {
           "name": "--transition-colors",
@@ -3209,6 +3231,10 @@
         {
           "name": "--ease-out",
           "property": "animation"
+        },
+        {
+          "name": "--element-height-sm",
+          "property": "min-width"
         },
         {
           "name": "--focus-ring",
@@ -4815,6 +4841,18 @@
           "property": "color"
         },
         {
+          "name": "--element-height-sm",
+          "property": "min-width"
+        },
+        {
+          "name": "--element-padding-x-sm",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-sm",
+          "property": "padding"
+        },
+        {
           "name": "--focus-ring",
           "property": "box-shadow"
         },
@@ -5619,6 +5657,22 @@
           "property": "color"
         },
         {
+          "name": "--element-height-md",
+          "property": "min-height"
+        },
+        {
+          "name": "--element-height-sm",
+          "property": "min-height"
+        },
+        {
+          "name": "--element-padding-y-md",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-sm",
+          "property": "padding"
+        },
+        {
           "name": "--focus-ring",
           "property": "outline"
         },
@@ -5635,6 +5689,22 @@
           "property": "opacity"
         },
         {
+          "name": "--qty-height-md",
+          "property": "min-height"
+        },
+        {
+          "name": "--qty-height-sm",
+          "property": "min-height"
+        },
+        {
+          "name": "--qty-padding-md",
+          "property": "padding"
+        },
+        {
+          "name": "--qty-padding-sm",
+          "property": "padding"
+        },
+        {
           "name": "--radius-md",
           "property": "border-radius"
         },
@@ -5649,10 +5719,6 @@
         {
           "name": "--spacing-12",
           "property": "width"
-        },
-        {
-          "name": "--spacing-2",
-          "property": "padding"
         },
         {
           "name": "--spacing-8",
@@ -5982,6 +6048,10 @@
         {
           "name": "--color-fg-secondary",
           "property": "color"
+        },
+        {
+          "name": "--element-padding-y-sm",
+          "property": "padding"
         },
         {
           "name": "--focus-ring",
@@ -6945,12 +7015,12 @@
         },
         {
           "name": "--badge-padding-x",
-          "fallback": "--spacing-2",
+          "fallback": "--element-padding-x-xs",
           "property": "padding"
         },
         {
           "name": "--badge-padding-y",
-          "fallback": "--spacing-0-5",
+          "fallback": "--element-padding-y-xs",
           "property": "padding"
         },
         {
@@ -7029,6 +7099,14 @@
           "property": "color"
         },
         {
+          "name": "--element-padding-x-xs",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-xs",
+          "property": "padding"
+        },
+        {
           "name": "--font-family-body",
           "property": "font-family"
         },
@@ -7057,19 +7135,11 @@
           "property": "border-radius"
         },
         {
-          "name": "--spacing-0-5",
-          "property": "padding"
-        },
-        {
           "name": "--spacing-1",
           "property": "gap"
         },
         {
           "name": "--spacing-1-5",
-          "property": "padding"
-        },
-        {
-          "name": "--spacing-2",
           "property": "padding"
         },
         {
@@ -7110,8 +7180,28 @@
           "property": "color"
         },
         {
-          "name": "--button-font-size",
-          "fallback": "--font-size-sm",
+          "name": "--button-font-size-lg",
+          "fallback": "--element-font-size-lg",
+          "property": "font-size"
+        },
+        {
+          "name": "--button-font-size-md",
+          "fallback": "--element-font-size-md",
+          "property": "font-size"
+        },
+        {
+          "name": "--button-font-size-sm",
+          "fallback": "--element-font-size-sm",
+          "property": "font-size"
+        },
+        {
+          "name": "--button-font-size-xl",
+          "fallback": "--element-font-size-xl",
+          "property": "font-size"
+        },
+        {
+          "name": "--button-font-size-xs",
+          "fallback": "--element-font-size-xs",
           "property": "font-size"
         },
         {
@@ -7120,13 +7210,33 @@
           "property": "font-weight"
         },
         {
-          "name": "--button-height",
-          "fallback": null,
+          "name": "--button-height-lg",
+          "fallback": "--element-height-lg",
+          "property": "height"
+        },
+        {
+          "name": "--button-height-md",
+          "fallback": "--element-height-md",
+          "property": "height"
+        },
+        {
+          "name": "--button-height-sm",
+          "fallback": "--element-height-sm",
+          "property": "height"
+        },
+        {
+          "name": "--button-height-xl",
+          "fallback": "--element-height-xl",
+          "property": "height"
+        },
+        {
+          "name": "--button-height-xs",
+          "fallback": "--element-height-xs",
           "property": "height"
         },
         {
           "name": "--button-icon-size",
-          "fallback": "--spacing-4",
+          "fallback": "--element-icon-size-md",
           "property": "width"
         },
         {
@@ -7135,8 +7245,53 @@
           "property": "letter-spacing"
         },
         {
-          "name": "--button-padding-x",
-          "fallback": "--spacing-md",
+          "name": "--button-padding-x-lg",
+          "fallback": "--element-padding-x-lg",
+          "property": "padding"
+        },
+        {
+          "name": "--button-padding-x-md",
+          "fallback": "--element-padding-x-md",
+          "property": "padding"
+        },
+        {
+          "name": "--button-padding-x-sm",
+          "fallback": "--element-padding-x-sm",
+          "property": "padding"
+        },
+        {
+          "name": "--button-padding-x-xl",
+          "fallback": "--element-padding-x-xl",
+          "property": "padding"
+        },
+        {
+          "name": "--button-padding-x-xs",
+          "fallback": "--element-padding-x-xs",
+          "property": "padding"
+        },
+        {
+          "name": "--button-padding-y-lg",
+          "fallback": "--element-padding-y-lg",
+          "property": "padding"
+        },
+        {
+          "name": "--button-padding-y-md",
+          "fallback": "--element-padding-y-md",
+          "property": "padding"
+        },
+        {
+          "name": "--button-padding-y-sm",
+          "fallback": "--element-padding-y-sm",
+          "property": "padding"
+        },
+        {
+          "name": "--button-padding-y-xl",
+          "fallback": "--element-padding-y-xl",
+          "property": "padding"
+        },
+        {
+          "name": "--button-padding-y-xs",
+          "fallback": "--element-padding-y-xs",
           "property": "padding"
         },
         {
@@ -7221,24 +7376,112 @@
           "property": "animation"
         },
         {
+          "name": "--element-font-size-lg",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-md",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-sm",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-xl",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-xs",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-height-lg",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-md",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-sm",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-xl",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-xs",
+          "property": "height"
+        },
+        {
+          "name": "--element-icon-size-lg",
+          "property": "--button-icon-size"
+        },
+        {
+          "name": "--element-icon-size-md",
+          "property": "--button-icon-size"
+        },
+        {
+          "name": "--element-icon-size-sm",
+          "property": "--button-icon-size"
+        },
+        {
+          "name": "--element-icon-size-xl",
+          "property": "--button-icon-size"
+        },
+        {
+          "name": "--element-icon-size-xs",
+          "property": "--button-icon-size"
+        },
+        {
+          "name": "--element-padding-x-lg",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-x-md",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-x-sm",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-x-xl",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-x-xs",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-lg",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-md",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-sm",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-xl",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-xs",
+          "property": "padding"
+        },
+        {
           "name": "--focus-ring",
           "property": "box-shadow"
         },
         {
           "name": "--font-family-body",
           "property": "font-family"
-        },
-        {
-          "name": "--font-size-base",
-          "property": "font-size"
-        },
-        {
-          "name": "--font-size-sm",
-          "property": "font-size"
-        },
-        {
-          "name": "--font-size-xs",
-          "property": "font-size"
         },
         {
           "name": "--font-weight-medium",
@@ -7257,6 +7500,10 @@
           "property": "opacity"
         },
         {
+          "name": "--radius-full",
+          "property": "border-radius"
+        },
+        {
           "name": "--radius-md",
           "property": "border-radius"
         },
@@ -7265,32 +7512,20 @@
           "property": "box-shadow"
         },
         {
+          "name": "--spacing-1",
+          "property": "gap"
+        },
+        {
+          "name": "--spacing-1-5",
+          "property": "gap"
+        },
+        {
           "name": "--spacing-2",
           "property": "gap"
         },
         {
           "name": "--spacing-3",
-          "property": "padding"
-        },
-        {
-          "name": "--spacing-3-5",
-          "property": "--button-icon-size"
-        },
-        {
-          "name": "--spacing-4",
-          "property": "--button-icon-size"
-        },
-        {
-          "name": "--spacing-5",
-          "property": "--button-icon-size"
-        },
-        {
-          "name": "--spacing-6",
-          "property": "padding"
-        },
-        {
-          "name": "--spacing-md",
-          "property": "padding"
+          "property": "gap"
         },
         {
           "name": "--transition-colors",
@@ -7492,13 +7727,103 @@
           "property": "font-size"
         },
         {
-          "name": "--input-height",
-          "fallback": null,
+          "name": "--input-font-size-lg",
+          "fallback": "--element-font-size-lg",
+          "property": "font-size"
+        },
+        {
+          "name": "--input-font-size-md",
+          "fallback": "--element-font-size-md",
+          "property": "font-size"
+        },
+        {
+          "name": "--input-font-size-sm",
+          "fallback": "--element-font-size-sm",
+          "property": "font-size"
+        },
+        {
+          "name": "--input-font-size-xl",
+          "fallback": "--element-font-size-xl",
+          "property": "font-size"
+        },
+        {
+          "name": "--input-font-size-xs",
+          "fallback": "--element-font-size-xs",
+          "property": "font-size"
+        },
+        {
+          "name": "--input-height-lg",
+          "fallback": "--element-height-lg",
           "property": "height"
         },
         {
-          "name": "--input-padding-x",
-          "fallback": "--spacing-sm",
+          "name": "--input-height-md",
+          "fallback": "--element-height-md",
+          "property": "height"
+        },
+        {
+          "name": "--input-height-sm",
+          "fallback": "--element-height-sm",
+          "property": "height"
+        },
+        {
+          "name": "--input-height-xl",
+          "fallback": "--element-height-xl",
+          "property": "height"
+        },
+        {
+          "name": "--input-height-xs",
+          "fallback": "--element-height-xs",
+          "property": "height"
+        },
+        {
+          "name": "--input-padding-x-lg",
+          "fallback": "--element-padding-x-lg",
+          "property": "padding"
+        },
+        {
+          "name": "--input-padding-x-md",
+          "fallback": "--element-padding-x-md",
+          "property": "padding"
+        },
+        {
+          "name": "--input-padding-x-sm",
+          "fallback": "--element-padding-x-sm",
+          "property": "padding"
+        },
+        {
+          "name": "--input-padding-x-xl",
+          "fallback": "--element-padding-x-xl",
+          "property": "padding"
+        },
+        {
+          "name": "--input-padding-x-xs",
+          "fallback": "--element-padding-x-xs",
+          "property": "padding"
+        },
+        {
+          "name": "--input-padding-y-lg",
+          "fallback": "--element-padding-y-lg",
+          "property": "padding"
+        },
+        {
+          "name": "--input-padding-y-md",
+          "fallback": "--element-padding-y-md",
+          "property": "padding"
+        },
+        {
+          "name": "--input-padding-y-sm",
+          "fallback": "--element-padding-y-sm",
+          "property": "padding"
+        },
+        {
+          "name": "--input-padding-y-xl",
+          "fallback": "--element-padding-y-xl",
+          "property": "padding"
+        },
+        {
+          "name": "--input-padding-y-xs",
+          "fallback": "--element-padding-y-xs",
           "property": "padding"
         },
         {
@@ -7558,6 +7883,90 @@
           "property": "color"
         },
         {
+          "name": "--element-font-size-lg",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-md",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-sm",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-xl",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-xs",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-height-lg",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-md",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-sm",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-xl",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-xs",
+          "property": "height"
+        },
+        {
+          "name": "--element-icon-size-md",
+          "property": "width"
+        },
+        {
+          "name": "--element-padding-x-lg",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-x-md",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-x-sm",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-x-xl",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-x-xs",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-lg",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-md",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-sm",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-xl",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-xs",
+          "property": "padding"
+        },
+        {
           "name": "--focus-ring",
           "property": "box-shadow"
         },
@@ -7568,10 +7977,6 @@
         {
           "name": "--font-family-body",
           "property": "font-family"
-        },
-        {
-          "name": "--font-size-base",
-          "property": "font-size"
         },
         {
           "name": "--font-size-sm",
@@ -7606,20 +8011,8 @@
           "property": "gap"
         },
         {
-          "name": "--spacing-12",
-          "property": "height"
-        },
-        {
           "name": "--spacing-2",
-          "property": "padding-left"
-        },
-        {
-          "name": "--spacing-8",
-          "property": "height"
-        },
-        {
-          "name": "--spacing-sm",
-          "property": "padding"
+          "property": "gap"
         },
         {
           "name": "--transition-colors",
@@ -7823,8 +8216,53 @@
           "property": "font-size"
         },
         {
-          "name": "--select-height",
-          "fallback": null,
+          "name": "--select-font-size-lg",
+          "fallback": "--element-font-size-lg",
+          "property": "font-size"
+        },
+        {
+          "name": "--select-font-size-md",
+          "fallback": "--element-font-size-md",
+          "property": "font-size"
+        },
+        {
+          "name": "--select-font-size-sm",
+          "fallback": "--element-font-size-sm",
+          "property": "font-size"
+        },
+        {
+          "name": "--select-font-size-xl",
+          "fallback": "--element-font-size-xl",
+          "property": "font-size"
+        },
+        {
+          "name": "--select-font-size-xs",
+          "fallback": "--element-font-size-xs",
+          "property": "font-size"
+        },
+        {
+          "name": "--select-height-lg",
+          "fallback": "--element-height-lg",
+          "property": "height"
+        },
+        {
+          "name": "--select-height-md",
+          "fallback": "--element-height-md",
+          "property": "height"
+        },
+        {
+          "name": "--select-height-sm",
+          "fallback": "--element-height-sm",
+          "property": "height"
+        },
+        {
+          "name": "--select-height-xl",
+          "fallback": "--element-height-xl",
+          "property": "height"
+        },
+        {
+          "name": "--select-height-xs",
+          "fallback": "--element-height-xs",
           "property": "height"
         },
         {
@@ -7833,9 +8271,54 @@
           "property": "background-color"
         },
         {
-          "name": "--select-padding-x",
-          "fallback": "--spacing-sm",
-          "property": "padding"
+          "name": "--select-padding-x-lg",
+          "fallback": "--element-padding-x-lg",
+          "property": "padding-left"
+        },
+        {
+          "name": "--select-padding-x-md",
+          "fallback": "--element-padding-x-md",
+          "property": "padding-left"
+        },
+        {
+          "name": "--select-padding-x-sm",
+          "fallback": "--element-padding-x-sm",
+          "property": "padding-left"
+        },
+        {
+          "name": "--select-padding-x-xl",
+          "fallback": "--element-padding-x-xl",
+          "property": "padding-left"
+        },
+        {
+          "name": "--select-padding-x-xs",
+          "fallback": "--element-padding-x-xs",
+          "property": "padding-left"
+        },
+        {
+          "name": "--select-padding-y-lg",
+          "fallback": "--element-padding-y-lg",
+          "property": "padding-top"
+        },
+        {
+          "name": "--select-padding-y-md",
+          "fallback": "--element-padding-y-md",
+          "property": "padding-top"
+        },
+        {
+          "name": "--select-padding-y-sm",
+          "fallback": "--element-padding-y-sm",
+          "property": "padding-top"
+        },
+        {
+          "name": "--select-padding-y-xl",
+          "fallback": "--element-padding-y-xl",
+          "property": "padding-top"
+        },
+        {
+          "name": "--select-padding-y-xs",
+          "fallback": "--element-padding-y-xs",
+          "property": "padding-top"
         },
         {
           "name": "--select-radius",
@@ -7900,6 +8383,86 @@
         {
           "name": "--color-status-error-fg",
           "property": "color"
+        },
+        {
+          "name": "--element-font-size-lg",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-md",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-sm",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-xl",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-font-size-xs",
+          "property": "font-size"
+        },
+        {
+          "name": "--element-height-lg",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-md",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-sm",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-xl",
+          "property": "height"
+        },
+        {
+          "name": "--element-height-xs",
+          "property": "height"
+        },
+        {
+          "name": "--element-padding-x-lg",
+          "property": "padding-left"
+        },
+        {
+          "name": "--element-padding-x-md",
+          "property": "padding-left"
+        },
+        {
+          "name": "--element-padding-x-sm",
+          "property": "padding-left"
+        },
+        {
+          "name": "--element-padding-x-xl",
+          "property": "padding-left"
+        },
+        {
+          "name": "--element-padding-x-xs",
+          "property": "padding-left"
+        },
+        {
+          "name": "--element-padding-y-lg",
+          "property": "padding-top"
+        },
+        {
+          "name": "--element-padding-y-md",
+          "property": "padding-top"
+        },
+        {
+          "name": "--element-padding-y-sm",
+          "property": "padding-top"
+        },
+        {
+          "name": "--element-padding-y-xl",
+          "property": "padding-top"
+        },
+        {
+          "name": "--element-padding-y-xs",
+          "property": "padding-top"
         },
         {
           "name": "--focus-ring",
@@ -7974,16 +8537,12 @@
           "property": "padding"
         },
         {
-          "name": "--spacing-12",
-          "property": "height"
-        },
-        {
           "name": "--spacing-2",
           "property": "gap"
         },
         {
           "name": "--spacing-3",
-          "property": "padding"
+          "property": "padding-right"
         },
         {
           "name": "--spacing-4",
@@ -7992,14 +8551,6 @@
         {
           "name": "--spacing-48",
           "property": "max-height"
-        },
-        {
-          "name": "--spacing-8",
-          "property": "height"
-        },
-        {
-          "name": "--spacing-sm",
-          "property": "padding"
         },
         {
           "name": "--transition-colors",
@@ -8053,12 +8604,12 @@
         },
         {
           "name": "--textarea-padding-x",
-          "fallback": "--spacing-sm",
+          "fallback": "--element-padding-x-md",
           "property": "padding"
         },
         {
           "name": "--textarea-padding-y",
-          "fallback": "--spacing-2",
+          "fallback": "--element-padding-y-md",
           "property": "padding"
         },
         {
@@ -8113,6 +8664,14 @@
           "property": "color"
         },
         {
+          "name": "--element-padding-x-md",
+          "property": "padding"
+        },
+        {
+          "name": "--element-padding-y-md",
+          "property": "padding"
+        },
+        {
           "name": "--focus-ring",
           "property": "box-shadow"
         },
@@ -8158,7 +8717,7 @@
         },
         {
           "name": "--spacing-2",
-          "property": "padding"
+          "property": "gap"
         },
         {
           "name": "--spacing-20",
@@ -8167,10 +8726,6 @@
         {
           "name": "--spacing-4",
           "property": "min-height"
-        },
-        {
-          "name": "--spacing-sm",
-          "property": "padding"
         },
         {
           "name": "--transition-colors",
@@ -8517,6 +9072,179 @@
         }
       ]
     },
+    "--color-bg-page": {
+      "tier": "semantic",
+      "category": "color",
+      "usedBy": [
+        {
+          "component": "avatar",
+          "property": "border",
+          "via": "--avatar-border-color"
+        },
+        {
+          "component": "card",
+          "property": "background-color",
+          "via": "--card-bg"
+        },
+        {
+          "component": "carousel",
+          "property": "background",
+          "via": "--carousel-arrow-bg"
+        },
+        {
+          "component": "checkbox",
+          "property": "background-color",
+          "via": "--checkbox-bg"
+        },
+        {
+          "component": "colorpicker",
+          "property": "--colorpicker-thumb-border",
+          "direct": true
+        },
+        {
+          "component": "commandpalette",
+          "property": "background",
+          "direct": true
+        },
+        {
+          "component": "cta",
+          "property": "background-color",
+          "direct": true
+        },
+        {
+          "component": "datatable",
+          "property": "background",
+          "direct": true
+        },
+        {
+          "component": "datepicker",
+          "property": "background",
+          "direct": true
+        },
+        {
+          "component": "divider",
+          "property": "background",
+          "via": "--divider-label-bg"
+        },
+        {
+          "component": "drawer",
+          "property": "background",
+          "via": "--drawer-bg"
+        },
+        {
+          "component": "fileupload",
+          "property": "background",
+          "direct": true
+        },
+        {
+          "component": "fontpicker",
+          "property": "background",
+          "direct": true
+        },
+        {
+          "component": "hero",
+          "property": "color",
+          "direct": true
+        },
+        {
+          "component": "input",
+          "property": "background-color",
+          "via": "--input-bg"
+        },
+        {
+          "component": "kpicard",
+          "property": "background",
+          "direct": true
+        },
+        {
+          "component": "navbar",
+          "property": "background-color",
+          "via": "--navbar-bg"
+        },
+        {
+          "component": "newslettersignup",
+          "property": "background",
+          "direct": true
+        },
+        {
+          "component": "popover",
+          "property": "background",
+          "via": "--popover-bg"
+        },
+        {
+          "component": "productcard",
+          "property": "background",
+          "direct": true
+        },
+        {
+          "component": "radio",
+          "property": "background-color",
+          "via": "--radio-bg"
+        },
+        {
+          "component": "select",
+          "property": "background-color",
+          "via": "--select-bg"
+        },
+        {
+          "component": "statcard",
+          "property": "background",
+          "direct": true
+        },
+        {
+          "component": "tabs",
+          "property": "background-color",
+          "direct": true
+        },
+        {
+          "component": "textarea",
+          "property": "background-color",
+          "via": "--textarea-bg"
+        },
+        {
+          "component": "timeline",
+          "property": "box-shadow",
+          "direct": true
+        }
+      ]
+    },
+    "--shadow-sm": {
+      "tier": "semantic",
+      "category": "elevation",
+      "usedBy": [
+        {
+          "component": "colorpicker",
+          "property": "--colorpicker-thumb-shadow",
+          "direct": true
+        },
+        {
+          "component": "productcard",
+          "property": "box-shadow",
+          "direct": true
+        },
+        {
+          "component": "tabs",
+          "property": "box-shadow",
+          "direct": true
+        },
+        {
+          "component": "toggle",
+          "property": "box-shadow",
+          "direct": true
+        }
+      ]
+    },
+    "--shadow-xs": {
+      "tier": "semantic",
+      "category": "elevation",
+      "usedBy": [
+        {
+          "component": "colorpicker",
+          "property": "--colorpicker-cursor-shadow",
+          "direct": true
+        }
+      ]
+    },
     "--spacing-2": {
       "tier": "semantic",
       "category": "spacing",
@@ -8530,11 +9258,6 @@
           "component": "avatar",
           "property": "margin-left",
           "direct": true
-        },
-        {
-          "component": "badge",
-          "property": "padding",
-          "via": "--badge-padding-x"
         },
         {
           "component": "banner",
@@ -8583,7 +9306,7 @@
         },
         {
           "component": "datepicker",
-          "property": "padding",
+          "property": "padding-right",
           "direct": true
         },
         {
@@ -8608,7 +9331,7 @@
         },
         {
           "component": "input",
-          "property": "padding-left",
+          "property": "gap",
           "direct": true
         },
         {
@@ -8652,11 +9375,6 @@
           "direct": true
         },
         {
-          "component": "quantityselector",
-          "property": "padding",
-          "direct": true
-        },
-        {
           "component": "radio",
           "property": "margin-bottom",
           "direct": true
@@ -8692,14 +9410,9 @@
           "direct": true
         },
         {
-          "component": "tabs",
-          "property": "padding",
-          "via": "--tabs-padding-y"
-        },
-        {
           "component": "textarea",
-          "property": "padding",
-          "via": "--textarea-padding-y"
+          "property": "gap",
+          "direct": true
         },
         {
           "component": "toast",
@@ -8739,7 +9452,7 @@
         },
         {
           "component": "button",
-          "property": "padding",
+          "property": "gap",
           "direct": true
         },
         {
@@ -8854,7 +9567,7 @@
         },
         {
           "component": "select",
-          "property": "padding",
+          "property": "padding-right",
           "direct": true
         },
         {
@@ -8866,11 +9579,6 @@
           "component": "table",
           "property": "padding",
           "via": "--table-cell-padding-y"
-        },
-        {
-          "component": "tabs",
-          "property": "padding",
-          "via": "--tabs-padding-x"
         },
         {
           "component": "timeline",
@@ -9989,6 +10697,11 @@
           "direct": true
         },
         {
+          "component": "button",
+          "property": "border-radius",
+          "direct": true
+        },
+        {
           "component": "carousel",
           "property": "border-radius",
           "via": "--carousel-arrow-radius"
@@ -10070,6 +10783,28 @@
         }
       ]
     },
+    "--colorpicker-thumb-border": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "colorpicker",
+          "property": "border",
+          "direct": true
+        }
+      ]
+    },
+    "--colorpicker-cursor-shadow": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "colorpicker",
+          "property": "box-shadow",
+          "direct": true
+        }
+      ]
+    },
     "--spacing-7": {
       "tier": "semantic",
       "category": "spacing",
@@ -10098,6 +10833,11 @@
         {
           "component": "badge",
           "property": "padding",
+          "direct": true
+        },
+        {
+          "component": "button",
+          "property": "gap",
           "direct": true
         },
         {
@@ -10216,6 +10956,17 @@
         }
       ]
     },
+    "--colorpicker-thumb-shadow": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "colorpicker",
+          "property": "box-shadow",
+          "direct": true
+        }
+      ]
+    },
     "--spacing-1": {
       "tier": "semantic",
       "category": "spacing",
@@ -10242,6 +10993,11 @@
         },
         {
           "component": "breadcrumb",
+          "property": "gap",
+          "direct": true
+        },
+        {
+          "component": "button",
           "property": "gap",
           "direct": true
         },
@@ -10422,11 +11178,6 @@
           "direct": true
         },
         {
-          "component": "badge",
-          "property": "padding",
-          "via": "--badge-padding-y"
-        },
-        {
           "component": "breadcrumb",
           "property": "padding",
           "direct": true
@@ -10536,11 +11287,6 @@
           "component": "badge",
           "property": "font-size",
           "via": "--badge-font-size"
-        },
-        {
-          "component": "button",
-          "property": "font-size",
-          "direct": true
         },
         {
           "component": "checkbox",
@@ -10716,142 +11462,6 @@
         {
           "component": "keyboardshortcut",
           "property": "font-family",
-          "direct": true
-        }
-      ]
-    },
-    "--color-bg-page": {
-      "tier": "semantic",
-      "category": "color",
-      "usedBy": [
-        {
-          "component": "avatar",
-          "property": "border",
-          "via": "--avatar-border-color"
-        },
-        {
-          "component": "card",
-          "property": "background-color",
-          "via": "--card-bg"
-        },
-        {
-          "component": "carousel",
-          "property": "background",
-          "via": "--carousel-arrow-bg"
-        },
-        {
-          "component": "checkbox",
-          "property": "background-color",
-          "via": "--checkbox-bg"
-        },
-        {
-          "component": "colorpicker",
-          "property": "background",
-          "direct": true
-        },
-        {
-          "component": "commandpalette",
-          "property": "background",
-          "direct": true
-        },
-        {
-          "component": "cta",
-          "property": "background-color",
-          "direct": true
-        },
-        {
-          "component": "datatable",
-          "property": "background",
-          "direct": true
-        },
-        {
-          "component": "datepicker",
-          "property": "background",
-          "direct": true
-        },
-        {
-          "component": "divider",
-          "property": "background",
-          "via": "--divider-label-bg"
-        },
-        {
-          "component": "drawer",
-          "property": "background",
-          "via": "--drawer-bg"
-        },
-        {
-          "component": "fileupload",
-          "property": "background",
-          "direct": true
-        },
-        {
-          "component": "fontpicker",
-          "property": "background",
-          "direct": true
-        },
-        {
-          "component": "hero",
-          "property": "color",
-          "direct": true
-        },
-        {
-          "component": "input",
-          "property": "background-color",
-          "via": "--input-bg"
-        },
-        {
-          "component": "kpicard",
-          "property": "background",
-          "direct": true
-        },
-        {
-          "component": "navbar",
-          "property": "background-color",
-          "via": "--navbar-bg"
-        },
-        {
-          "component": "newslettersignup",
-          "property": "background",
-          "direct": true
-        },
-        {
-          "component": "popover",
-          "property": "background",
-          "via": "--popover-bg"
-        },
-        {
-          "component": "productcard",
-          "property": "background",
-          "direct": true
-        },
-        {
-          "component": "radio",
-          "property": "background-color",
-          "via": "--radio-bg"
-        },
-        {
-          "component": "select",
-          "property": "background-color",
-          "via": "--select-bg"
-        },
-        {
-          "component": "statcard",
-          "property": "background",
-          "direct": true
-        },
-        {
-          "component": "tabs",
-          "property": "background-color",
-          "direct": true
-        },
-        {
-          "component": "textarea",
-          "property": "background-color",
-          "via": "--textarea-bg"
-        },
-        {
-          "component": "timeline",
-          "property": "box-shadow",
           "direct": true
         }
       ]
@@ -11923,11 +12533,6 @@
           "direct": true
         },
         {
-          "component": "button",
-          "property": "--button-icon-size",
-          "via": "--button-icon-size"
-        },
-        {
           "component": "card",
           "property": "padding",
           "direct": true
@@ -12260,11 +12865,6 @@
           "component": "breadcrumb",
           "property": "font-size",
           "direct": true
-        },
-        {
-          "component": "button",
-          "property": "font-size",
-          "via": "--button-font-size"
         },
         {
           "component": "card",
@@ -13588,11 +14188,6 @@
           "via": "--banner-padding-x"
         },
         {
-          "component": "button",
-          "property": "padding",
-          "via": "--button-padding-x"
-        },
-        {
           "component": "card",
           "property": "padding",
           "direct": true
@@ -13748,11 +14343,6 @@
         {
           "component": "bottomsheet",
           "property": "padding",
-          "direct": true
-        },
-        {
-          "component": "button",
-          "property": "--button-icon-size",
           "direct": true
         },
         {
@@ -14173,11 +14763,6 @@
         {
           "component": "avatar",
           "property": "--avatar-size",
-          "direct": true
-        },
-        {
-          "component": "button",
-          "property": "padding",
           "direct": true
         },
         {
@@ -15096,11 +15681,6 @@
           "direct": true
         },
         {
-          "component": "input",
-          "property": "height",
-          "direct": true
-        },
-        {
           "component": "kpicard",
           "property": "height",
           "direct": true
@@ -15113,11 +15693,6 @@
         {
           "component": "quantityselector",
           "property": "min-width",
-          "direct": true
-        },
-        {
-          "component": "select",
-          "property": "height",
           "direct": true
         },
         {
@@ -15801,17 +16376,7 @@
           "direct": true
         },
         {
-          "component": "button",
-          "property": "font-size",
-          "direct": true
-        },
-        {
           "component": "emptystate",
-          "property": "font-size",
-          "direct": true
-        },
-        {
-          "component": "input",
           "property": "font-size",
           "direct": true
         },
@@ -16037,6 +16602,47 @@
         }
       ]
     },
+    "--element-padding-y-sm": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "via": "--button-padding-y-sm"
+        },
+        {
+          "component": "input",
+          "property": "padding",
+          "via": "--input-padding-y-sm"
+        },
+        {
+          "component": "pagination",
+          "property": "padding",
+          "direct": true
+        },
+        {
+          "component": "quantityselector",
+          "property": "padding",
+          "direct": true
+        },
+        {
+          "component": "select",
+          "property": "padding-top",
+          "via": "--select-padding-y-sm"
+        },
+        {
+          "component": "sidebar",
+          "property": "padding",
+          "direct": true
+        },
+        {
+          "component": "tabs",
+          "property": "padding",
+          "via": "--tabs-padding-y"
+        }
+      ]
+    },
     "--tabs-padding-x": {
       "tier": "component",
       "category": "component",
@@ -16045,6 +16651,37 @@
           "component": "tabs",
           "property": "padding",
           "direct": true
+        }
+      ]
+    },
+    "--element-padding-x-sm": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "via": "--button-padding-x-sm"
+        },
+        {
+          "component": "input",
+          "property": "padding",
+          "via": "--input-padding-x-sm"
+        },
+        {
+          "component": "pagination",
+          "property": "padding",
+          "direct": true
+        },
+        {
+          "component": "select",
+          "property": "padding-left",
+          "via": "--select-padding-x-sm"
+        },
+        {
+          "component": "tabs",
+          "property": "padding",
+          "via": "--tabs-padding-x"
         }
       ]
     },
@@ -16127,27 +16764,6 @@
         }
       ]
     },
-    "--shadow-sm": {
-      "tier": "semantic",
-      "category": "elevation",
-      "usedBy": [
-        {
-          "component": "productcard",
-          "property": "box-shadow",
-          "direct": true
-        },
-        {
-          "component": "tabs",
-          "property": "box-shadow",
-          "direct": true
-        },
-        {
-          "component": "toggle",
-          "property": "box-shadow",
-          "direct": true
-        }
-      ]
-    },
     "--z-toast": {
       "tier": "semantic",
       "category": "elevation",
@@ -16190,11 +16806,6 @@
           "direct": true
         },
         {
-          "component": "input",
-          "property": "height",
-          "direct": true
-        },
-        {
           "component": "kpicard",
           "property": "height",
           "direct": true
@@ -16202,11 +16813,6 @@
         {
           "component": "quantityselector",
           "property": "width",
-          "direct": true
-        },
-        {
-          "component": "select",
-          "property": "height",
           "direct": true
         },
         {
@@ -16499,11 +17105,6 @@
           "direct": true
         },
         {
-          "component": "datepicker",
-          "property": "padding",
-          "direct": true
-        },
-        {
           "component": "divider",
           "property": "margin",
           "direct": true
@@ -16517,11 +17118,6 @@
           "component": "hero",
           "property": "gap",
           "direct": true
-        },
-        {
-          "component": "input",
-          "property": "padding",
-          "via": "--input-padding-x"
         },
         {
           "component": "layout",
@@ -16539,11 +17135,6 @@
           "direct": true
         },
         {
-          "component": "select",
-          "property": "padding",
-          "via": "--select-padding-x"
-        },
-        {
           "component": "spacer",
           "property": "height",
           "direct": true
@@ -16552,11 +17143,6 @@
           "component": "testimonial",
           "property": "gap",
           "direct": true
-        },
-        {
-          "component": "textarea",
-          "property": "padding",
-          "via": "--textarea-padding-x"
         }
       ]
     },
@@ -17929,19 +18515,101 @@
         }
       ]
     },
-    "--input-height": {
-      "tier": "component",
-      "category": "component",
+    "--element-padding-y-md": {
+      "tier": "semantic",
+      "category": "other",
       "usedBy": [
         {
+          "component": "button",
+          "property": "padding",
+          "via": "--button-padding-y-md"
+        },
+        {
           "component": "datepicker",
+          "property": "padding-top",
+          "direct": true
+        },
+        {
+          "component": "input",
+          "property": "padding",
+          "via": "--input-padding-y-md"
+        },
+        {
+          "component": "quantityselector",
+          "property": "padding",
+          "direct": true
+        },
+        {
+          "component": "select",
+          "property": "padding-top",
+          "via": "--select-padding-y-md"
+        },
+        {
+          "component": "textarea",
+          "property": "padding",
+          "via": "--textarea-padding-y"
+        }
+      ]
+    },
+    "--element-padding-x-md": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "via": "--button-padding-x-md"
+        },
+        {
+          "component": "datepicker",
+          "property": "padding-left",
+          "direct": true
+        },
+        {
+          "component": "input",
+          "property": "padding",
+          "via": "--input-padding-x-md"
+        },
+        {
+          "component": "select",
+          "property": "padding-left",
+          "via": "--select-padding-x-md"
+        },
+        {
+          "component": "textarea",
+          "property": "padding",
+          "via": "--textarea-padding-x"
+        }
+      ]
+    },
+    "--element-height-md": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
           "property": "height",
+          "via": "--button-height-md"
+        },
+        {
+          "component": "datepicker",
+          "property": "min-height",
           "direct": true
         },
         {
           "component": "input",
           "property": "height",
+          "via": "--input-height-md"
+        },
+        {
+          "component": "quantityselector",
+          "property": "min-height",
           "direct": true
+        },
+        {
+          "component": "select",
+          "property": "height",
+          "via": "--select-height-md"
         }
       ]
     },
@@ -18189,6 +18857,42 @@
           "component": "drawer",
           "property": "padding",
           "direct": true
+        }
+      ]
+    },
+    "--element-height-sm": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "height",
+          "via": "--button-height-sm"
+        },
+        {
+          "component": "drawer",
+          "property": "min-width",
+          "direct": true
+        },
+        {
+          "component": "input",
+          "property": "height",
+          "via": "--input-height-sm"
+        },
+        {
+          "component": "pagination",
+          "property": "min-width",
+          "direct": true
+        },
+        {
+          "component": "quantityselector",
+          "property": "min-height",
+          "direct": true
+        },
+        {
+          "component": "select",
+          "property": "height",
+          "via": "--select-height-sm"
         }
       ]
     },
@@ -19750,6 +20454,50 @@
         }
       ]
     },
+    "--qty-padding-md": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "quantityselector",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--qty-padding-sm": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "quantityselector",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--qty-height-md": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "quantityselector",
+          "property": "min-height",
+          "direct": true
+        }
+      ]
+    },
+    "--qty-height-sm": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "quantityselector",
+          "property": "min-height",
+          "direct": true
+        }
+      ]
+    },
     "--rating-gap": {
       "tier": "semantic",
       "category": "other",
@@ -19765,11 +20513,6 @@
       "tier": "semantic",
       "category": "spacing",
       "usedBy": [
-        {
-          "component": "button",
-          "property": "--button-icon-size",
-          "direct": true
-        },
         {
           "component": "ratingstars",
           "property": "width",
@@ -20551,6 +21294,32 @@
         }
       ]
     },
+    "--element-padding-y-xs": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "badge",
+          "property": "padding",
+          "via": "--badge-padding-y"
+        },
+        {
+          "component": "button",
+          "property": "padding",
+          "via": "--button-padding-y-xs"
+        },
+        {
+          "component": "input",
+          "property": "padding",
+          "via": "--input-padding-y-xs"
+        },
+        {
+          "component": "select",
+          "property": "padding-top",
+          "via": "--select-padding-y-xs"
+        }
+      ]
+    },
     "--badge-padding-x": {
       "tier": "component",
       "category": "component",
@@ -20559,6 +21328,32 @@
           "component": "badge",
           "property": "padding",
           "direct": true
+        }
+      ]
+    },
+    "--element-padding-x-xs": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "badge",
+          "property": "padding",
+          "via": "--badge-padding-x"
+        },
+        {
+          "component": "button",
+          "property": "padding",
+          "via": "--button-padding-x-xs"
+        },
+        {
+          "component": "input",
+          "property": "padding",
+          "via": "--input-padding-x-xs"
+        },
+        {
+          "component": "select",
+          "property": "padding-left",
+          "via": "--select-padding-x-xs"
         }
       ]
     },
@@ -20657,17 +21452,6 @@
         {
           "component": "button",
           "property": "font-weight",
-          "direct": true
-        }
-      ]
-    },
-    "--button-font-size": {
-      "tier": "component",
-      "category": "component",
-      "usedBy": [
-        {
-          "component": "button",
-          "property": "font-size",
           "direct": true
         }
       ]
@@ -20815,7 +21599,18 @@
         }
       ]
     },
-    "--button-padding-x": {
+    "--element-icon-size-xs": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "--button-icon-size",
+          "direct": true
+        }
+      ]
+    },
+    "--button-padding-y-xs": {
       "tier": "component",
       "category": "component",
       "usedBy": [
@@ -20826,7 +21621,399 @@
         }
       ]
     },
-    "--button-height": {
+    "--button-padding-x-xs": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--button-font-size-xs": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--element-font-size-xs": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "font-size",
+          "via": "--button-font-size-xs"
+        },
+        {
+          "component": "input",
+          "property": "font-size",
+          "via": "--input-font-size-xs"
+        },
+        {
+          "component": "select",
+          "property": "font-size",
+          "via": "--select-font-size-xs"
+        }
+      ]
+    },
+    "--element-icon-size-sm": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "--button-icon-size",
+          "direct": true
+        }
+      ]
+    },
+    "--button-padding-y-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--button-padding-x-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--button-font-size-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--element-font-size-sm": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "font-size",
+          "via": "--button-font-size-sm"
+        },
+        {
+          "component": "input",
+          "property": "font-size",
+          "via": "--input-font-size-sm"
+        },
+        {
+          "component": "select",
+          "property": "font-size",
+          "via": "--select-font-size-sm"
+        }
+      ]
+    },
+    "--element-icon-size-md": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "--button-icon-size",
+          "via": "--button-icon-size"
+        },
+        {
+          "component": "input",
+          "property": "width",
+          "direct": true
+        }
+      ]
+    },
+    "--button-padding-y-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--button-padding-x-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--button-font-size-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--element-font-size-md": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "font-size",
+          "via": "--button-font-size-md"
+        },
+        {
+          "component": "input",
+          "property": "font-size",
+          "via": "--input-font-size-md"
+        },
+        {
+          "component": "select",
+          "property": "font-size",
+          "via": "--select-font-size-md"
+        }
+      ]
+    },
+    "--element-icon-size-lg": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "--button-icon-size",
+          "direct": true
+        }
+      ]
+    },
+    "--button-padding-y-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--element-padding-y-lg": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "via": "--button-padding-y-lg"
+        },
+        {
+          "component": "input",
+          "property": "padding",
+          "via": "--input-padding-y-lg"
+        },
+        {
+          "component": "select",
+          "property": "padding-top",
+          "via": "--select-padding-y-lg"
+        }
+      ]
+    },
+    "--button-padding-x-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--element-padding-x-lg": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "via": "--button-padding-x-lg"
+        },
+        {
+          "component": "input",
+          "property": "padding",
+          "via": "--input-padding-x-lg"
+        },
+        {
+          "component": "select",
+          "property": "padding-left",
+          "via": "--select-padding-x-lg"
+        }
+      ]
+    },
+    "--button-font-size-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--element-font-size-lg": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "font-size",
+          "via": "--button-font-size-lg"
+        },
+        {
+          "component": "input",
+          "property": "font-size",
+          "via": "--input-font-size-lg"
+        },
+        {
+          "component": "select",
+          "property": "font-size",
+          "via": "--select-font-size-lg"
+        }
+      ]
+    },
+    "--element-icon-size-xl": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "--button-icon-size",
+          "direct": true
+        }
+      ]
+    },
+    "--button-padding-y-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--element-padding-y-xl": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "via": "--button-padding-y-xl"
+        },
+        {
+          "component": "input",
+          "property": "padding",
+          "via": "--input-padding-y-xl"
+        },
+        {
+          "component": "select",
+          "property": "padding-top",
+          "via": "--select-padding-y-xl"
+        }
+      ]
+    },
+    "--button-padding-x-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--element-padding-x-xl": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "padding",
+          "via": "--button-padding-x-xl"
+        },
+        {
+          "component": "input",
+          "property": "padding",
+          "via": "--input-padding-x-xl"
+        },
+        {
+          "component": "select",
+          "property": "padding-left",
+          "via": "--select-padding-x-xl"
+        }
+      ]
+    },
+    "--button-font-size-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--element-font-size-xl": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "font-size",
+          "via": "--button-font-size-xl"
+        },
+        {
+          "component": "input",
+          "property": "font-size",
+          "via": "--input-font-size-xl"
+        },
+        {
+          "component": "select",
+          "property": "font-size",
+          "via": "--select-font-size-xl"
+        }
+      ]
+    },
+    "--button-height-xs": {
       "tier": "component",
       "category": "component",
       "usedBy": [
@@ -20834,6 +22021,113 @@
           "component": "button",
           "property": "height",
           "direct": true
+        }
+      ]
+    },
+    "--element-height-xs": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "height",
+          "via": "--button-height-xs"
+        },
+        {
+          "component": "input",
+          "property": "height",
+          "via": "--input-height-xs"
+        },
+        {
+          "component": "select",
+          "property": "height",
+          "via": "--select-height-xs"
+        }
+      ]
+    },
+    "--button-height-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--button-height-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--button-height-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--element-height-lg": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "height",
+          "via": "--button-height-lg"
+        },
+        {
+          "component": "input",
+          "property": "height",
+          "via": "--input-height-lg"
+        },
+        {
+          "component": "select",
+          "property": "height",
+          "via": "--select-height-lg"
+        }
+      ]
+    },
+    "--button-height-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--element-height-xl": {
+      "tier": "semantic",
+      "category": "other",
+      "usedBy": [
+        {
+          "component": "button",
+          "property": "height",
+          "via": "--button-height-xl"
+        },
+        {
+          "component": "input",
+          "property": "height",
+          "via": "--input-height-xl"
+        },
+        {
+          "component": "select",
+          "property": "height",
+          "via": "--select-height-xl"
         }
       ]
     },
@@ -20941,6 +22235,28 @@
         }
       ]
     },
+    "--input-padding-y-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--input-padding-x-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
     "--input-bg": {
       "tier": "component",
       "category": "component",
@@ -20985,6 +22301,215 @@
         }
       ]
     },
+    "--input-fg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "color",
+          "direct": true
+        }
+      ]
+    },
+    "--input-height-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--input-font-size-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--input-padding-y-xs": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--input-padding-x-xs": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--input-font-size-xs": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--input-padding-y-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--input-padding-x-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--input-font-size-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--input-padding-y-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--input-padding-x-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--input-font-size-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--input-padding-y-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--input-padding-x-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "padding",
+          "direct": true
+        }
+      ]
+    },
+    "--input-font-size-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--input-height-xs": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--input-height-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--input-height-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--input-height-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "input",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
     "--input-border-focus": {
       "tier": "component",
       "category": "component",
@@ -21003,28 +22528,6 @@
         {
           "component": "input",
           "property": "border-color",
-          "direct": true
-        }
-      ]
-    },
-    "--input-padding-x": {
-      "tier": "component",
-      "category": "component",
-      "usedBy": [
-        {
-          "component": "input",
-          "property": "padding",
-          "direct": true
-        }
-      ]
-    },
-    "--input-fg": {
-      "tier": "component",
-      "category": "component",
-      "usedBy": [
-        {
-          "component": "input",
-          "property": "color",
           "direct": true
         }
       ]
@@ -21111,13 +22614,24 @@
         }
       ]
     },
-    "--select-padding-x": {
+    "--select-padding-y-md": {
       "tier": "component",
       "category": "component",
       "usedBy": [
         {
           "component": "select",
-          "property": "padding",
+          "property": "padding-top",
+          "direct": true
+        }
+      ]
+    },
+    "--select-padding-x-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "padding-left",
           "direct": true
         }
       ]
@@ -21166,7 +22680,194 @@
         }
       ]
     },
-    "--select-height": {
+    "--select-height-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--select-font-size-md": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--select-padding-y-xs": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "padding-top",
+          "direct": true
+        }
+      ]
+    },
+    "--select-padding-x-xs": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "padding-left",
+          "direct": true
+        }
+      ]
+    },
+    "--select-font-size-xs": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--select-padding-y-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "padding-top",
+          "direct": true
+        }
+      ]
+    },
+    "--select-padding-x-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "padding-left",
+          "direct": true
+        }
+      ]
+    },
+    "--select-font-size-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--select-padding-y-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "padding-top",
+          "direct": true
+        }
+      ]
+    },
+    "--select-padding-x-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "padding-left",
+          "direct": true
+        }
+      ]
+    },
+    "--select-font-size-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--select-padding-y-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "padding-top",
+          "direct": true
+        }
+      ]
+    },
+    "--select-padding-x-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "padding-left",
+          "direct": true
+        }
+      ]
+    },
+    "--select-font-size-xl": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "font-size",
+          "direct": true
+        }
+      ]
+    },
+    "--select-height-xs": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--select-height-sm": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--select-height-lg": {
+      "tier": "component",
+      "category": "component",
+      "usedBy": [
+        {
+          "component": "select",
+          "property": "height",
+          "direct": true
+        }
+      ]
+    },
+    "--select-height-xl": {
       "tier": "component",
       "category": "component",
       "usedBy": [

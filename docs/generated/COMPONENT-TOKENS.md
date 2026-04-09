@@ -1,7 +1,7 @@
 > **Auto-generated file.** Do not edit manually.
 > Source: `scripts/generate-docs.mjs`
 > Regenerate: `pnpm generate-docs`
-> Last generated: 2026-03-31T04:53:17.732Z
+> Last generated: 2026-04-09T03:58:22.407Z
 
 # Component Token Reference
 
@@ -204,8 +204,8 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--badge-dot-size` | — | width |
 | `--badge-font-size` | `--font-size-xs` | font-size |
 | `--badge-font-weight` | `--font-weight-medium` | font-weight |
-| `--badge-padding-x` | `--spacing-2` | padding |
-| `--badge-padding-y` | `--spacing-0-5` | padding |
+| `--badge-padding-x` | `--element-padding-x-xs` | padding |
+| `--badge-padding-y` | `--element-padding-y-xs` | padding |
 | `--badge-radius` | `--radius-full` | border-radius |
 
 ### Semantic Tokens Used
@@ -229,6 +229,8 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--color-status-warning-bg` | background-color |
 | `--color-status-warning-border` | border-color |
 | `--color-status-warning-fg` | color |
+| `--element-padding-x-xs` | padding |
+| `--element-padding-y-xs` | padding |
 | `--font-family-body` | font-family |
 | `--font-size-2xs` | font-size |
 | `--font-size-sm` | font-size |
@@ -236,10 +238,8 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--font-weight-medium` | font-weight |
 | `--line-height-tight` | line-height |
 | `--radius-full` | border-radius |
-| `--spacing-0-5` | padding |
 | `--spacing-1` | gap |
 | `--spacing-1-5` | padding |
-| `--spacing-2` | padding |
 | `--spacing-3` | padding |
 | `--spacing-px` | padding |
 
@@ -362,12 +362,29 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--button-border-color` | — | border |
 | `--button-border-width` | `--border-width-default` | border |
 | `--button-fg` | `--color-fg-on-primary` | color |
-| `--button-font-size` | `--font-size-sm` | font-size |
+| `--button-font-size-lg` | `--element-font-size-lg` | font-size |
+| `--button-font-size-md` | `--element-font-size-md` | font-size |
+| `--button-font-size-sm` | `--element-font-size-sm` | font-size |
+| `--button-font-size-xl` | `--element-font-size-xl` | font-size |
+| `--button-font-size-xs` | `--element-font-size-xs` | font-size |
 | `--button-font-weight` | `--font-weight-medium` | font-weight |
-| `--button-height` | — | height |
-| `--button-icon-size` | `--spacing-4` | width |
+| `--button-height-lg` | `--element-height-lg` | height |
+| `--button-height-md` | `--element-height-md` | height |
+| `--button-height-sm` | `--element-height-sm` | height |
+| `--button-height-xl` | `--element-height-xl` | height |
+| `--button-height-xs` | `--element-height-xs` | height |
+| `--button-icon-size` | `--element-icon-size-md` | width |
 | `--button-letter-spacing` | `--letter-spacing-normal` | letter-spacing |
-| `--button-padding-x` | `--spacing-md` | padding |
+| `--button-padding-x-lg` | `--element-padding-x-lg` | padding |
+| `--button-padding-x-md` | `--element-padding-x-md` | padding |
+| `--button-padding-x-sm` | `--element-padding-x-sm` | padding |
+| `--button-padding-x-xl` | `--element-padding-x-xl` | padding |
+| `--button-padding-x-xs` | `--element-padding-x-xs` | padding |
+| `--button-padding-y-lg` | `--element-padding-y-lg` | padding |
+| `--button-padding-y-md` | `--element-padding-y-md` | padding |
+| `--button-padding-y-sm` | `--element-padding-y-sm` | padding |
+| `--button-padding-y-xl` | `--element-padding-y-xl` | padding |
+| `--button-padding-y-xs` | `--element-padding-y-xs` | padding |
 | `--button-radius` | `--radius-md` | border-radius |
 | `--button-shadow` | `--shadow-none` | box-shadow |
 | `--spinner-speed` | — | animation |
@@ -392,24 +409,44 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--color-fg-on-primary` | color |
 | `--color-fg-primary` | color |
 | `--ease-linear` | animation |
+| `--element-font-size-lg` | font-size |
+| `--element-font-size-md` | font-size |
+| `--element-font-size-sm` | font-size |
+| `--element-font-size-xl` | font-size |
+| `--element-font-size-xs` | font-size |
+| `--element-height-lg` | height |
+| `--element-height-md` | height |
+| `--element-height-sm` | height |
+| `--element-height-xl` | height |
+| `--element-height-xs` | height |
+| `--element-icon-size-lg` | --button-icon-size |
+| `--element-icon-size-md` | --button-icon-size |
+| `--element-icon-size-sm` | --button-icon-size |
+| `--element-icon-size-xl` | --button-icon-size |
+| `--element-icon-size-xs` | --button-icon-size |
+| `--element-padding-x-lg` | padding |
+| `--element-padding-x-md` | padding |
+| `--element-padding-x-sm` | padding |
+| `--element-padding-x-xl` | padding |
+| `--element-padding-x-xs` | padding |
+| `--element-padding-y-lg` | padding |
+| `--element-padding-y-md` | padding |
+| `--element-padding-y-sm` | padding |
+| `--element-padding-y-xl` | padding |
+| `--element-padding-y-xs` | padding |
 | `--focus-ring` | box-shadow |
 | `--font-family-body` | font-family |
-| `--font-size-base` | font-size |
-| `--font-size-sm` | font-size |
-| `--font-size-xs` | font-size |
 | `--font-weight-medium` | font-weight |
 | `--letter-spacing-normal` | letter-spacing |
 | `--line-height-tight` | line-height |
 | `--opacity-disabled` | opacity |
+| `--radius-full` | border-radius |
 | `--radius-md` | border-radius |
 | `--shadow-none` | box-shadow |
+| `--spacing-1` | gap |
+| `--spacing-1-5` | gap |
 | `--spacing-2` | gap |
-| `--spacing-3` | padding |
-| `--spacing-3-5` | --button-icon-size |
-| `--spacing-4` | --button-icon-size |
-| `--spacing-5` | --button-icon-size |
-| `--spacing-6` | padding |
-| `--spacing-md` | padding |
+| `--spacing-3` | gap |
 | `--transition-colors` | transition |
 | `--transition-opacity` | transition |
 | `--transition-shadow` | transition |
@@ -601,7 +638,7 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--color-action-ghost-hover` | background |
 | `--color-action-primary` | box-shadow |
 | `--color-bg-elevated` | --colorpicker-bg |
-| `--color-bg-page` | background |
+| `--color-bg-page` | --colorpicker-thumb-border |
 | `--color-border-default` | border |
 | `--color-border-focus` | border-color |
 | `--color-fg-muted` | color |
@@ -610,11 +647,14 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--colorpicker-bg` | background |
 | `--colorpicker-canvas-height` | height |
 | `--colorpicker-canvas-width` | width |
+| `--colorpicker-cursor-shadow` | box-shadow |
 | `--colorpicker-padding` | padding |
 | `--colorpicker-radius` | border-radius |
 | `--colorpicker-shadow` | box-shadow |
 | `--colorpicker-slider-height` | height |
 | `--colorpicker-swatch-size` | width |
+| `--colorpicker-thumb-border` | border |
+| `--colorpicker-thumb-shadow` | box-shadow |
 | `--colorpicker-thumb-size` | top |
 | `--duration-fast` | transition |
 | `--ease-default` | transition |
@@ -627,7 +667,9 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--radius-lg` | --colorpicker-radius |
 | `--radius-sm` | border-radius |
 | `--radius-xs` | border-radius |
+| `--shadow-sm` | --colorpicker-thumb-shadow |
 | `--shadow-xl` | --colorpicker-shadow |
+| `--shadow-xs` | --colorpicker-cursor-shadow |
 | `--spacing-0-5` | gap |
 | `--spacing-1` | gap |
 | `--spacing-1-5` | gap |
@@ -830,12 +872,6 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 
 ## Datepicker
 
-### Component Tokens
-
-| Token | Default Fallback | CSS Property |
-|-------|-----------------|---------------|
-| `--input-height` | — | height |
-
 ### Semantic Tokens Used
 
 | Token | CSS Property |
@@ -864,6 +900,9 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--datepicker-day-size` | width |
 | `--datepicker-day-today-border` | border-color |
 | `--datepicker-radius` | border-radius |
+| `--element-height-md` | min-height |
+| `--element-padding-x-md` | padding-left |
+| `--element-padding-y-md` | padding-top |
 | `--focus-ring` | box-shadow |
 | `--focus-ring-error` | box-shadow |
 | `--font-family-body` | font-family |
@@ -878,10 +917,9 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--shadow-lg` | box-shadow |
 | `--spacing-0-5` | gap |
 | `--spacing-1` | gap |
-| `--spacing-2` | padding |
+| `--spacing-2` | padding-right |
 | `--spacing-3` | padding |
 | `--spacing-9` | width |
-| `--spacing-sm` | padding |
 | `--transition-colors` | transition |
 | `--transition-shadow` | transition |
 | `--z-dropdown` | z-index |
@@ -944,6 +982,7 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--duration-normal` | animation |
 | `--ease-default` | animation |
 | `--ease-out` | animation |
+| `--element-height-sm` | min-width |
 | `--focus-ring` | box-shadow |
 | `--font-family-body` | font-family |
 | `--font-size-lg` | font-size |
@@ -1321,8 +1360,26 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--input-border-width` | `--border-width-default` | border |
 | `--input-fg` | `--color-fg-primary` | color |
 | `--input-font-size` | `--font-size-sm` | font-size |
-| `--input-height` | — | height |
-| `--input-padding-x` | `--spacing-sm` | padding |
+| `--input-font-size-lg` | `--element-font-size-lg` | font-size |
+| `--input-font-size-md` | `--element-font-size-md` | font-size |
+| `--input-font-size-sm` | `--element-font-size-sm` | font-size |
+| `--input-font-size-xl` | `--element-font-size-xl` | font-size |
+| `--input-font-size-xs` | `--element-font-size-xs` | font-size |
+| `--input-height-lg` | `--element-height-lg` | height |
+| `--input-height-md` | `--element-height-md` | height |
+| `--input-height-sm` | `--element-height-sm` | height |
+| `--input-height-xl` | `--element-height-xl` | height |
+| `--input-height-xs` | `--element-height-xs` | height |
+| `--input-padding-x-lg` | `--element-padding-x-lg` | padding |
+| `--input-padding-x-md` | `--element-padding-x-md` | padding |
+| `--input-padding-x-sm` | `--element-padding-x-sm` | padding |
+| `--input-padding-x-xl` | `--element-padding-x-xl` | padding |
+| `--input-padding-x-xs` | `--element-padding-x-xs` | padding |
+| `--input-padding-y-lg` | `--element-padding-y-lg` | padding |
+| `--input-padding-y-md` | `--element-padding-y-md` | padding |
+| `--input-padding-y-sm` | `--element-padding-y-sm` | padding |
+| `--input-padding-y-xl` | `--element-padding-y-xl` | padding |
+| `--input-padding-y-xs` | `--element-padding-y-xs` | padding |
 | `--input-placeholder-color` | `--color-fg-muted` | color |
 | `--input-radius` | `--radius-md` | border-radius |
 
@@ -1341,10 +1398,30 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--color-fg-primary` | color |
 | `--color-fg-secondary` | color |
 | `--color-status-error-fg` | color |
+| `--element-font-size-lg` | font-size |
+| `--element-font-size-md` | font-size |
+| `--element-font-size-sm` | font-size |
+| `--element-font-size-xl` | font-size |
+| `--element-font-size-xs` | font-size |
+| `--element-height-lg` | height |
+| `--element-height-md` | height |
+| `--element-height-sm` | height |
+| `--element-height-xl` | height |
+| `--element-height-xs` | height |
+| `--element-icon-size-md` | width |
+| `--element-padding-x-lg` | padding |
+| `--element-padding-x-md` | padding |
+| `--element-padding-x-sm` | padding |
+| `--element-padding-x-xl` | padding |
+| `--element-padding-x-xs` | padding |
+| `--element-padding-y-lg` | padding |
+| `--element-padding-y-md` | padding |
+| `--element-padding-y-sm` | padding |
+| `--element-padding-y-xl` | padding |
+| `--element-padding-y-xs` | padding |
 | `--focus-ring` | box-shadow |
 | `--focus-ring-error` | box-shadow |
 | `--font-family-body` | font-family |
-| `--font-size-base` | font-size |
 | `--font-size-sm` | font-size |
 | `--font-size-xs` | font-size |
 | `--font-weight-medium` | font-weight |
@@ -1353,10 +1430,7 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--opacity-disabled` | opacity |
 | `--radius-md` | border-radius |
 | `--spacing-1` | gap |
-| `--spacing-12` | height |
-| `--spacing-2` | padding-left |
-| `--spacing-8` | height |
-| `--spacing-sm` | padding |
+| `--spacing-2` | gap |
 | `--transition-colors` | transition |
 | `--transition-shadow` | transition |
 
@@ -1643,6 +1717,9 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--color-fg-on-primary` | color |
 | `--color-fg-primary` | color |
 | `--color-fg-secondary` | color |
+| `--element-height-sm` | min-width |
+| `--element-padding-x-sm` | padding |
+| `--element-padding-y-sm` | padding |
 | `--focus-ring` | box-shadow |
 | `--font-family-body` | font-family |
 | `--font-size-sm` | font-size |
@@ -1890,15 +1967,22 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--color-border-default` | border |
 | `--color-fg-muted` | color |
 | `--color-fg-primary` | color |
+| `--element-height-md` | min-height |
+| `--element-height-sm` | min-height |
+| `--element-padding-y-md` | padding |
+| `--element-padding-y-sm` | padding |
 | `--focus-ring` | outline |
 | `--font-size-md` | font-size |
 | `--font-size-sm` | font-size |
 | `--opacity-disabled` | opacity |
+| `--qty-height-md` | min-height |
+| `--qty-height-sm` | min-height |
+| `--qty-padding-md` | padding |
+| `--qty-padding-sm` | padding |
 | `--radius-md` | border-radius |
 | `--spacing-1` | padding |
 | `--spacing-10` | min-width |
 | `--spacing-12` | width |
-| `--spacing-2` | padding |
 | `--spacing-8` | min-width |
 | `--transition-colors` | transition |
 
@@ -2046,9 +2130,27 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--select-dropdown-bg` | `--color-bg-page` | background |
 | `--select-dropdown-shadow` | `--shadow-lg` | box-shadow |
 | `--select-font-size` | `--font-size-sm` | font-size |
-| `--select-height` | — | height |
+| `--select-font-size-lg` | `--element-font-size-lg` | font-size |
+| `--select-font-size-md` | `--element-font-size-md` | font-size |
+| `--select-font-size-sm` | `--element-font-size-sm` | font-size |
+| `--select-font-size-xl` | `--element-font-size-xl` | font-size |
+| `--select-font-size-xs` | `--element-font-size-xs` | font-size |
+| `--select-height-lg` | `--element-height-lg` | height |
+| `--select-height-md` | `--element-height-md` | height |
+| `--select-height-sm` | `--element-height-sm` | height |
+| `--select-height-xl` | `--element-height-xl` | height |
+| `--select-height-xs` | `--element-height-xs` | height |
 | `--select-option-hover-bg` | `--color-bg-surface` | background-color |
-| `--select-padding-x` | `--spacing-sm` | padding |
+| `--select-padding-x-lg` | `--element-padding-x-lg` | padding-left |
+| `--select-padding-x-md` | `--element-padding-x-md` | padding-left |
+| `--select-padding-x-sm` | `--element-padding-x-sm` | padding-left |
+| `--select-padding-x-xl` | `--element-padding-x-xl` | padding-left |
+| `--select-padding-x-xs` | `--element-padding-x-xs` | padding-left |
+| `--select-padding-y-lg` | `--element-padding-y-lg` | padding-top |
+| `--select-padding-y-md` | `--element-padding-y-md` | padding-top |
+| `--select-padding-y-sm` | `--element-padding-y-sm` | padding-top |
+| `--select-padding-y-xl` | `--element-padding-y-xl` | padding-top |
+| `--select-padding-y-xs` | `--element-padding-y-xs` | padding-top |
 | `--select-radius` | `--radius-md` | border-radius |
 | `--spinner-speed` | — | animation |
 
@@ -2069,6 +2171,26 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--color-fg-primary` | color |
 | `--color-fg-secondary` | color |
 | `--color-status-error-fg` | color |
+| `--element-font-size-lg` | font-size |
+| `--element-font-size-md` | font-size |
+| `--element-font-size-sm` | font-size |
+| `--element-font-size-xl` | font-size |
+| `--element-font-size-xs` | font-size |
+| `--element-height-lg` | height |
+| `--element-height-md` | height |
+| `--element-height-sm` | height |
+| `--element-height-xl` | height |
+| `--element-height-xs` | height |
+| `--element-padding-x-lg` | padding-left |
+| `--element-padding-x-md` | padding-left |
+| `--element-padding-x-sm` | padding-left |
+| `--element-padding-x-xl` | padding-left |
+| `--element-padding-x-xs` | padding-left |
+| `--element-padding-y-lg` | padding-top |
+| `--element-padding-y-md` | padding-top |
+| `--element-padding-y-sm` | padding-top |
+| `--element-padding-y-xl` | padding-top |
+| `--element-padding-y-xs` | padding-top |
 | `--focus-ring` | box-shadow |
 | `--focus-ring-error` | box-shadow |
 | `--font-family-body` | font-family |
@@ -2087,13 +2209,10 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--spacing-0-5` | padding |
 | `--spacing-1` | gap |
 | `--spacing-1-5` | padding |
-| `--spacing-12` | height |
 | `--spacing-2` | gap |
-| `--spacing-3` | padding |
+| `--spacing-3` | padding-right |
 | `--spacing-4` | width |
 | `--spacing-48` | max-height |
-| `--spacing-8` | height |
-| `--spacing-sm` | padding |
 | `--transition-colors` | transition |
 | `--transition-shadow` | transition |
 | `--transition-transform` | transition |
@@ -2122,6 +2241,7 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--color-fg-muted` | color |
 | `--color-fg-primary` | color |
 | `--color-fg-secondary` | color |
+| `--element-padding-y-sm` | padding |
 | `--focus-ring` | box-shadow |
 | `--font-family-body` | font-family |
 | `--font-size-sm` | font-size |
@@ -2325,8 +2445,8 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--tabs-border-color` | `--color-border-default` | border-bottom |
 | `--tabs-font-size` | `--font-size-sm` | font-size |
 | `--tabs-font-weight` | `--font-weight-medium` | font-weight |
-| `--tabs-padding-x` | `--spacing-3` | padding |
-| `--tabs-padding-y` | `--spacing-2` | padding |
+| `--tabs-padding-x` | `--element-padding-x-sm` | padding |
+| `--tabs-padding-y` | `--element-padding-y-sm` | padding |
 
 ### Semantic Tokens Used
 
@@ -2340,6 +2460,8 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--color-border-default` | border-bottom |
 | `--color-fg-primary` | color |
 | `--color-fg-secondary` | color |
+| `--element-padding-x-sm` | padding |
+| `--element-padding-y-sm` | padding |
 | `--focus-ring` | box-shadow |
 | `--font-family-body` | font-family |
 | `--font-size-base` | font-size |
@@ -2350,8 +2472,6 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--radius-sm` | border-radius |
 | `--shadow-sm` | box-shadow |
 | `--spacing-1` | gap |
-| `--spacing-2` | padding |
-| `--spacing-3` | padding |
 | `--spacing-4` | padding-top |
 | `--spacing-px` | margin-bottom |
 | `--transition-colors` | transition |
@@ -2414,8 +2534,8 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--textarea-border-width` | `--border-width-default` | border |
 | `--textarea-font-size` | `--font-size-sm` | font-size |
 | `--textarea-min-height` | `--spacing-20` | min-height |
-| `--textarea-padding-x` | `--spacing-sm` | padding |
-| `--textarea-padding-y` | `--spacing-2` | padding |
+| `--textarea-padding-x` | `--element-padding-x-md` | padding |
+| `--textarea-padding-y` | `--element-padding-y-md` | padding |
 | `--textarea-radius` | `--radius-md` | border-radius |
 
 ### Semantic Tokens Used
@@ -2433,6 +2553,8 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--color-fg-primary` | color |
 | `--color-fg-secondary` | color |
 | `--color-status-error-fg` | color |
+| `--element-padding-x-md` | padding |
+| `--element-padding-y-md` | padding |
 | `--focus-ring` | box-shadow |
 | `--focus-ring-error` | box-shadow |
 | `--font-family-body` | font-family |
@@ -2444,10 +2566,9 @@ Component tokens (tier 3) provide per-component overrides that fall back to sema
 | `--opacity-disabled` | opacity |
 | `--radius-md` | border-radius |
 | `--spacing-1` | gap |
-| `--spacing-2` | padding |
+| `--spacing-2` | gap |
 | `--spacing-20` | min-height |
 | `--spacing-4` | min-height |
-| `--spacing-sm` | padding |
 | `--transition-colors` | transition |
 | `--transition-shadow` | transition |
 

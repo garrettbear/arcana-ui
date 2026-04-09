@@ -1,11 +1,11 @@
 > **Auto-generated file.** Do not edit manually.
 > Source: `scripts/generate-docs.mjs`
 > Regenerate: `pnpm generate-docs`
-> Last generated: 2026-03-31T04:53:17.732Z
+> Last generated: 2026-04-09T03:58:22.407Z
 
 # Component Inventory
 
-Total components: **105**
+Total components: **108**
 
 ## Primitives (12)
 
@@ -14,22 +14,23 @@ Total components: **105**
 | Avatar | — | xs, sm, md, lg, xl | AvatarGroup |
 | AvatarGroup | — | — | — |
 | Badge | default, success, warning, error, info, secondary | sm, md, lg | — |
-| Button | primary, secondary, ghost, destructive, outline | sm, md, lg | — |
+| Button | primary, secondary, ghost, destructive, outline | xs, sm, md, lg, xl, icon-xs, icon-sm, icon, icon-lg, icon-xl | — |
 | Checkbox | — | — | CheckboxGroup |
 | CheckboxGroup | — | — | — |
-| Input | — | sm, md, lg | — |
+| Input | — | xs, sm, md, lg, xl | — |
 | Radio | — | — | RadioGroup |
 | RadioGroup | default, card | — | — |
-| Select | — | sm, md, lg | — |
+| Select | — | xs, sm, md, lg, xl | — |
 | Textarea | — | — | — |
 | Toggle | — | sm, md, lg | — |
 
-## Composites (20)
+## Composites (21)
 
 | Component | Variants | Sizes | Sub-components |
 |-----------|----------|-------|----------------|
 | Accordion | — | — | AccordionItem, AccordionTrigger, AccordionContent |
 | AccordionContent | — | — | — |
+| AccordionItem | — | — | — |
 | AccordionTrigger | — | — | — |
 | Alert | info, success, warning, error | — | — |
 | Banner | info, success, warning, error, neutral | — | — |
@@ -53,13 +54,13 @@ Total components: **105**
 
 | Component | Variants | Sizes | Sub-components |
 |-----------|----------|-------|----------------|
-| Container | — | — | ContainerSize, ContainerPadding |
+| Container | — | sm, md, lg, xl, 2xl, full | ContainerSize, ContainerPadding |
 | Grid | — | — | GridColumn |
 | GridColumn | — | — | — |
 | HStack | — | — | — |
 | Stack | — | — | — |
 
-## Patterns (64)
+## Patterns (67)
 
 | Component | Variants | Sizes | Sub-components |
 |-----------|----------|-------|----------------|
@@ -68,7 +69,9 @@ Total components: **105**
 | AuthorCard | inline, card | — | — |
 | BottomSheet | — | — | — |
 | Breadcrumb | — | — | BreadcrumbItem |
+| BreadcrumbItem | — | — | — |
 | Carousel | — | — | — |
+| CartItem | — | — | — |
 | Collapsible | — | — | — |
 | CommandPalette | — | — | — |
 | CopyButton | default, ghost, icon | sm, md | — |
@@ -115,6 +118,7 @@ Total components: **105**
 | SidebarContent | — | — | — |
 | SidebarFooter | — | — | — |
 | SidebarHeader | — | — | — |
+| SidebarItem | — | — | — |
 | SidebarSection | — | — | — |
 | Spacer | — | xs, sm, md, lg, xl, 2xl, 3xl, section | — |
 | StatCard | default, compact | — | — |
@@ -128,13 +132,12 @@ Total components: **105**
 | Testimonial | card, inline, featured | — | — |
 | Timeline | standard, compact, alternating | — | TimelineItemData |
 
-## Other (4)
+## Other (3)
 
 | Component | Variants | Sizes | Sub-components |
 |-----------|----------|-------|----------------|
 | ColorPicker | — | sm, md, lg | — |
 | FontPicker | — | sm, md, lg | — |
-| rgbaToHex | — | — | — |
 | ThemeProvider | — | — | — |
 
 ## Hooks (11)

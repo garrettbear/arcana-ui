@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `@arcana-ui/mcp@0.1.0-beta.1` — new package: MCP (Model Context Protocol) server for Arcana UI. Gives AI agents (Claude Code, Cursor, Codex, Figma Make) programmatic access to component docs, theme presets, and token impact data. Seven tools: `list_components` (filter by category), `get_component` (full props + examples + token surface), `list_presets`, `get_preset` (complete JSON), `validate_theme` (structure + WCAG contrast), `generate_theme` (AI generation via Anthropic API or playground fallback), `get_token_impact` (blast-radius for any token). Ships all data bundled (manifest, token-map, 14 presets) as a fully self-contained 130 kB npm package. Setup: add one entry to `.claude/settings.json` → MCP active.
+- `.claude/skills/arcana/SKILL.md` — Claude Code skill with complete Arcana reference: quick start, all 108 components with props tables and examples, 11 hooks, token system guide, 4 complete layout patterns (dashboard, marketing, ecommerce, editorial), all 14 preset descriptions + best-use guide, responsive breakpoints and mobile behavior, rules. 1,821 lines — sufficient to build a full multi-page application without external references.
+- `scripts/generate-docs.mjs` Generator 8: copies `llms.txt` and `llms-full.txt` to `playground/public/` after generation so they are served at `/llms.txt` and `/llms-full.txt` on the Vercel deployment.
+
+### Changed
+- `llms.txt` — enhanced: components now grouped by category, density switching (`data-density`) added to Quick Start, resources section with GitHub / playground / manifest links.
+- `llms-full.txt` — enhanced: added 4 complete layout pattern code examples (dashboard, marketing, ecommerce, editorial), full theme customization JSON guide, responsive breakpoints section with `useBreakpoint` example, density switching docs. 2370 lines (up from 2070).
+- `vercel.json` — added `Content-Type: text/plain; charset=utf-8` and `Cache-Control` headers for `/llms.txt` and `/llms-full.txt` so AI crawlers receive correct MIME type.
+
+### Added
 - `demos/wavefront` — replaced all `placehold.co` collection and artist artwork with real Unsplash photos matched to each station's mood (night city, coastal sunset, piano, tropical highway, neon cityscape); added 2 new channels: "Sunset Drive" (Tame Impala, Beach House, Washed Out) and "Neo Seoul" (Bonobo, Four Tet, Bicep) bringing the total to 5 stations; added `@arcana-ui/demo-shared` dep and wired ThemeSwitcher (defaultTheme: "midnight").
 
 ### Added

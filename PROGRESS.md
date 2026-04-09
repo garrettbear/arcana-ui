@@ -48,9 +48,9 @@ All foundation work, token system, component library (68 components), 14 theme p
 ## Phase 5: AI Integration & Launch
 
 - [x] 5.1 — manifest.ai.json (generated, fixed, 100% coverage)
-- [x] 5.2 — llms.txt + llms-full.txt (file exists in repo root)
-- [ ] 5.3 — Claude Code skill (planned, not published to Clawhub)
-- [ ] 5.4 — MCP server
+- [x] 5.2 — llms.txt + llms-full.txt (enhanced: grouped by category, density docs, links, layout patterns, theme guide, responsive section; auto-copied to playground/public/)
+- [x] 5.3 — Claude Code skill at `.claude/skills/arcana/SKILL.md` (1,821 lines — all 108 components, hooks, token system, 4 layout patterns, presets, responsive, rules)
+- [x] 5.4 — MCP server: `@arcana-ui/mcp@0.1.0-beta.1` — 7 tools (list_components, get_component, list_presets, get_preset, validate_theme, generate_theme, get_token_impact); self-contained 130 kB package
 - [ ] 5.5 — Documentation site
 - [ ] 5.6 — SEO & discoverability
 - [ ] 5.7 — Community starter templates (Next, Vite, Remix, Astro)
@@ -67,7 +67,7 @@ All foundation work, token system, component library (68 components), 14 theme p
 |--------|------|--------|
 | 1 | Playground to demo quality + demo sites | ✅ Done |
 | 2 | AI theme generation | Not started |
-| 3 | MCP server + llms.txt + Claude Code skill | Not started |
+| 3 | MCP server + llms.txt + Claude Code skill | ✅ Done (2026-04-08) |
 | 4 | CLI MVP + Figma Code Connect | Not started |
 | 5 | Launch | Not started |
 
