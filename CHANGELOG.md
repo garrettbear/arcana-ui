@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- `demos/control` — full analytics dashboard polish: 63-component registry with token counts, test coverage, bundle sizes, and WCAG scores; npm download trend chart (inline SVG, 30-day area fill + sparkline); component-by-category horizontal bar chart; new Performance page (bundle analysis by category, tree-shaking table, build times); new Accessibility page (WCAG 2.1 AA criteria progress bars, score by category, contrast matrix). ThemeSwitcher wired with `defaultTheme: "dark"`.
+- `demos/dashboard` — full Meridian Analytics rebuild: 4 KPI cards with sparklines (active users, MRR, sessions, churn), user activity line chart with 7d/30d/90d range switcher, revenue-by-plan bar chart, user segments donut chart, recent events feed (typed badges: upgrade/cancel/signup/invite/export), infrastructure health progress bars, top-pages DataTable with sort. Responsive sidebar with hamburger toggle on mobile. ThemeSwitcher wired (defaultTheme: "dark").
 
 ### Added
 - `@arcana-ui/cli@0.1.0-beta.1` — new package: command-line tool for scaffolding Arcana UI projects, validating themes, and managing presets. Three commands:
