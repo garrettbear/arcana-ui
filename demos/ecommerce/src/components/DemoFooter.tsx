@@ -8,38 +8,37 @@ export function DemoFooter(): React.JSX.Element {
       <div className="forma-footer-grid">
         <div className="forma-footer-brand">
           <Link to="/" className="forma-footer-logo">
-            FORMA
+            ARCANA SUPPLY
           </Link>
-          <p className="forma-footer-tagline">Objects that endure.</p>
+          <p className="forma-footer-tagline">Gear for people who build with tokens.</p>
         </div>
 
         <FooterSection title="Shop">
           <FooterLink href="/shop">All Products</FooterLink>
-          <FooterLink href="/shop?category=Kitchen">Kitchen</FooterLink>
+          <FooterLink href="/shop?category=Apparel">Apparel</FooterLink>
+          <FooterLink href="/shop?category=Accessories">Accessories</FooterLink>
           <FooterLink href="/shop?category=Home">Home</FooterLink>
-          <FooterLink href="/shop?category=Living">Living</FooterLink>
-          <FooterLink href="/shop?category=Furniture">Furniture</FooterLink>
         </FooterSection>
 
-        <FooterSection title="Collections">
-          <FooterLink href="/shop?category=Accessories">Accessories</FooterLink>
+        <FooterSection title="New & Sale">
           <FooterLink href="/shop">New Arrivals</FooterLink>
           <FooterLink href="/shop">Best Sellers</FooterLink>
           <FooterLink href="/shop">Sale</FooterLink>
+          <FooterLink href="/shop">Bundles</FooterLink>
         </FooterSection>
 
         <FooterSection title="Company">
-          <FooterLink href="/#about">About Forma</FooterLink>
-          <FooterLink href="/#about">Sustainability</FooterLink>
+          <FooterLink href="/#about">About</FooterLink>
+          <FooterLink href="https://arcana-ui.com">Arcana UI</FooterLink>
           <FooterLink href="/#about">Contact</FooterLink>
-          <FooterLink href="/#about">Careers</FooterLink>
+          <FooterLink href="https://github.com/Arcana-UI/arcana">GitHub</FooterLink>
         </FooterSection>
       </div>
 
       <Divider spacing="lg" />
 
       <FooterBottom>
-        <span className="forma-footer-copy">&copy; 2026 Forma. All rights reserved.</span>
+        <span className="forma-footer-copy">&copy; 2026 Arcana Supply. All rights reserved.</span>
       </FooterBottom>
     </Footer>
   );

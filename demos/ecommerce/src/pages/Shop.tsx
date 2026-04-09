@@ -118,7 +118,7 @@ export function Shop(): React.JSX.Element {
       <div className="forma-shop-container">
         {/* ── Header ──────────────────────────────────────────────────── */}
         <div className="forma-shop-header">
-          <h1 className="forma-shop-title">All Objects</h1>
+          <h1 className="forma-shop-title">All Products</h1>
           <Badge variant="secondary" size="sm">
             {filtered.length}
           </Badge>

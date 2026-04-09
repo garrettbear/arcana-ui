@@ -25,27 +25,27 @@ export function Home(): React.JSX.Element {
     <main className="forma-home">
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <Hero
-        headline="Objects that endure."
-        subheadline="Thoughtfully made for everyday life."
-        primaryCTA={{ label: 'Shop Collection', onClick: () => navigate('/shop') }}
+        headline="Gear for people who ship."
+        subheadline="Official merch for the Arcana UI design system."
+        primaryCTA={{ label: 'Shop Now', onClick: () => navigate('/shop') }}
         secondaryCTA={{ label: 'Our Story', href: '#about' }}
         variant="fullscreen"
         height="large"
         overlay
         media={
           <Image
-            src="https://placehold.co/1440x600/d4c5b0/6b5d4f?text=FORMA"
-            alt="A curated arrangement of ceramic objects and textiles in warm, natural tones"
+            src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=1400&q=85"
+            alt="Developer in a black Arcana hoodie at a desk with a mechanical keyboard"
             aspectRatio="video"
           />
         }
       />
 
-      {/* ── Selected Objects ─────────────────────────────────────────────── */}
+      {/* ── Featured Products ─────────────────────────────────────────────── */}
       <section className="forma-section">
         <div className="forma-container">
           <div className="forma-section-header">
-            <h2 className="forma-section-title">Selected Objects</h2>
+            <h2 className="forma-section-title">New Arrivals</h2>
             <Link to="/shop" className="forma-section-link">
               View all
             </Link>
@@ -57,7 +57,7 @@ export function Home(): React.JSX.Element {
       {/* ── Trust Banner ─────────────────────────────────────────────────── */}
       <section className="forma-container">
         <Banner variant="neutral">
-          Complimentary shipping on orders over $200. Returns accepted within 60 days.
+          Free shipping on orders over $75. Easy returns within 30 days.
         </Banner>
       </section>
 
@@ -66,8 +66,8 @@ export function Home(): React.JSX.Element {
         <div className="forma-container">
           <div className="forma-stats-grid">
             <StatCard
-              value="10k+"
-              label="Happy customers"
+              value="4,200+"
+              label="Orders shipped"
               icon={
                 <svg
                   width="24"
@@ -83,8 +83,8 @@ export function Home(): React.JSX.Element {
               }
             />
             <StatCard
-              value="Carbon neutral"
-              label="Shipping worldwide"
+              value="63 +"
+              label="Components in the system"
               icon={
                 <svg
                   width="24"
@@ -95,8 +95,10 @@ export function Home(): React.JSX.Element {
                   strokeWidth="1.5"
                   aria-hidden="true"
                 >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
                 </svg>
               }
             />
@@ -119,8 +121,8 @@ export function Home(): React.JSX.Element {
               }
             />
             <StatCard
-              value="Handmade"
-              label="By independent makers"
+              value="MIT"
+              label="Open-source license"
               icon={
                 <svg
                   width="24"
@@ -144,30 +146,28 @@ export function Home(): React.JSX.Element {
       {/* ── Testimonials ──────────────────────────────────────────────────── */}
       <section className="forma-section">
         <div className="forma-container">
-          <h2 className="forma-section-title forma-section-title--center">
-            What people are saying
-          </h2>
+          <h2 className="forma-section-title forma-section-title--center">From the community</h2>
           <div className="forma-testimonials">
             <Testimonial
-              quote="The Alto Bowl is the only thing on our table that gets a compliment every dinner. It is that kind of object."
-              author="Clara M."
-              jobTitle="Interior Designer"
-              company="Stockholm"
+              quote="Wore the hoodie to a conference. Got asked about Arcana three times before lunch. Comfortable too."
+              author="Priya S."
+              jobTitle="Frontend Engineer"
+              company="Berlin"
               rating={5}
               variant="card"
             />
             <Testimonial
-              quote="I replaced everything on my desk with Forma pieces. The leather notebook cover alone changed how I feel about starting my day."
-              author="James T."
-              jobTitle="Writer"
-              company="Brooklyn"
+              quote="The desk mat is the best thing on my setup. The token-grid pattern is exactly the kind of subtle nerd joke I appreciate."
+              author="Marcus L."
+              jobTitle="Design Systems Lead"
+              company="San Francisco"
               rating={5}
               variant="card"
             />
             <Testimonial
-              quote="Finally, a brand that trusts you to appreciate simplicity. No over-designed nonsense. Just things that work and look right."
-              author="Aiko N."
-              jobTitle="Architect"
+              quote="Bought the sticker sheet for my laptop and the tote for my commute. Both held up way better than I expected for the price."
+              author="Yuki T."
+              jobTitle="Staff Engineer"
               company="Tokyo"
               rating={5}
               variant="card"
@@ -181,14 +181,14 @@ export function Home(): React.JSX.Element {
         <div className="forma-container">
           <div className="forma-about-grid">
             <div className="forma-about-text">
-              <h2 className="forma-section-title">Our Story</h2>
+              <h2 className="forma-section-title">Built by builders, for builders</h2>
               <p className="forma-about-description">
-                We started with a question: what if fewer, better things could replace the constant
-                cycle of buying and discarding. Every Forma object is made by independent artisans
-                using materials that age with grace.
+                Arcana Supply is the official merch store for Arcana UI — an open-source,
+                token-driven design system built for AI agents to assemble production-grade
+                interfaces. Every item here is designed by the same people who write the components.
               </p>
               <Button variant="outline" onClick={() => navigate('/shop')}>
-                Explore the collection
+                Shop the collection
               </Button>
             </div>
             <Card variant="outlined">
@@ -197,27 +197,29 @@ export function Home(): React.JSX.Element {
                   variant="compact"
                   items={[
                     {
-                      title: 'Founded in Portland',
-                      description: 'Started with a single ceramic line and a belief in permanence.',
-                      date: '2019',
+                      title: 'Arcana UI open-sourced',
+                      description: 'Token-driven design system released on GitHub under MIT.',
+                      date: '2026-03',
                       status: 'complete',
                     },
                     {
-                      title: 'First international makers',
-                      description: 'Partnered with artisans in Japan, Italy, and New Zealand.',
-                      date: '2021',
+                      title: 'First beta packages published',
+                      description: '@arcana-ui/tokens and @arcana-ui/core hit npm as 0.1.0-beta.1.',
+                      date: '2026-03',
                       status: 'complete',
                     },
                     {
-                      title: 'Carbon neutral shipping',
-                      description: 'Every order offset. No exceptions, no asterisks.',
-                      date: '2023',
+                      title: 'CLI launched',
+                      description:
+                        'arcana-ui init, validate, and add-theme commands. All 14 presets.',
+                      date: '2026-04',
                       status: 'complete',
                     },
                     {
-                      title: 'Furniture collection',
-                      description: 'Oak, walnut, and ash pieces designed in-house, made in Oregon.',
-                      date: '2025',
+                      title: 'Arcana Supply opens',
+                      description:
+                        'Merch store for the community. Every purchase supports development.',
+                      date: '2026-04',
                       status: 'active',
                     },
                   ]}
@@ -233,12 +235,12 @@ export function Home(): React.JSX.Element {
         <div className="forma-container">
           <NewsletterSignup
             title="Stay in the loop."
-            description="New objects, rarely. No noise."
+            description="New drops and Arcana UI releases. Low volume."
             placeholder="your@email.com"
             buttonText="Subscribe"
             variant="card"
             onSubmit={() => Promise.resolve()}
-            successMessage="Welcome to Forma."
+            successMessage="You're on the list."
           />
         </div>
       </section>
