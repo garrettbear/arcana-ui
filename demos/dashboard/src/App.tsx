@@ -520,28 +520,28 @@ export function App(): React.JSX.Element {
               value="2,340"
               label="Active Users"
               trend={{ value: 12.4, direction: 'up' }}
-              sparkline={kpiSparkline7d}
+              data={kpiSparkline7d}
               period="vs last week"
             />
             <KPICard
               value="$46,100"
               label="MRR"
               trend={{ value: 8.2, direction: 'up' }}
-              sparkline={kpiSparklineRev}
+              data={kpiSparklineRev}
               period="vs last month"
             />
             <KPICard
               value="9,840"
               label="Sessions"
               trend={{ value: 5.8, direction: 'up' }}
-              sparkline={kpiSparklineSessions}
+              data={kpiSparklineSessions}
               period="vs last week"
             />
             <KPICard
               value="1.8%"
               label="Churn Rate"
               trend={{ value: 0.6, direction: 'down' }}
-              sparkline={kpiSparklineChurn}
+              data={kpiSparklineChurn}
               sparklineColor="var(--color-status-success-fg)"
               period="vs last month"
             />
@@ -622,10 +622,10 @@ export function App(): React.JSX.Element {
               </h2>
               <div className="meridian-health-grid">
                 {[
-                  { label: 'API Uptime', value: 99.98, variant: 'success' as const },
-                  { label: 'CPU Load', value: 34, variant: 'success' as const },
-                  { label: 'Memory', value: 61, variant: 'warning' as const },
-                  { label: 'Disk', value: 48, variant: 'success' as const },
+                  { label: 'API Uptime', value: 99.98, variant: 'striped' as const },
+                  { label: 'CPU Load', value: 34, variant: 'striped' as const },
+                  { label: 'Memory', value: 61, variant: 'default' as const },
+                  { label: 'Disk', value: 48, variant: 'striped' as const },
                 ].map((m) => (
                   <div key={m.label} className="meridian-health-item">
                     <div className="meridian-health-label">
