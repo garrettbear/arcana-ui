@@ -55,7 +55,7 @@ export function Accessibility(): React.JSX.Element {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {a11yChecks.map((check) => {
             const pct = Math.round((check.pass / check.total) * 100);
-            const variant = pct === 100 ? 'success' : pct >= 95 ? 'warning' : 'error';
+            const badgeVariant = pct === 100 ? 'success' : pct >= 95 ? 'warning' : 'error';
             return (
               <div key={check.criterion}>
                 <div
@@ -71,12 +71,12 @@ export function Accessibility(): React.JSX.Element {
                     <span style={{ fontSize: '12px', color: 'var(--color-fg-secondary)' }}>
                       {check.pass}/{check.total}
                     </span>
-                    <Badge variant={variant} size="sm">
+                    <Badge variant={badgeVariant} size="sm">
                       {pct}%
                     </Badge>
                   </div>
                 </div>
-                <ProgressBar value={pct} variant={variant} size="sm" />
+                <ProgressBar value={pct} variant={pct >= 95 ? 'striped' : 'default'} size="sm" />
               </div>
             );
           })}
@@ -90,7 +90,7 @@ export function Accessibility(): React.JSX.Element {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {wcagData.map((d) => {
-            const variant = d.score >= 98 ? 'success' : d.score >= 94 ? 'warning' : 'error';
+            const badgeVariant = d.score >= 98 ? 'success' : d.score >= 94 ? 'warning' : 'error';
             return (
               <div key={d.category} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <span
@@ -104,9 +104,13 @@ export function Accessibility(): React.JSX.Element {
                   {d.category}
                 </span>
                 <div style={{ flex: 1 }}>
-                  <ProgressBar value={d.score} variant={variant} size="sm" />
+                  <ProgressBar
+                    value={d.score}
+                    variant={d.score >= 94 ? 'striped' : 'default'}
+                    size="sm"
+                  />
                 </div>
-                <Badge variant={variant} size="sm">
+                <Badge variant={badgeVariant} size="sm">
                   {d.score}%
                 </Badge>
               </div>

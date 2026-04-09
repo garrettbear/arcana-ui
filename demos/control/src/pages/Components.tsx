@@ -156,7 +156,13 @@ export function Components(): React.JSX.Element {
         </Badge>
       </div>
 
-      <DataTable data={filteredData} columns={columns} sortable hoverable paginated pageSize={20} />
+      <DataTable
+        data={filteredData}
+        columns={columns}
+        sortable
+        hoverable
+        pagination={{ pageSize: 20 }}
+      />
     </div>
   );
 }

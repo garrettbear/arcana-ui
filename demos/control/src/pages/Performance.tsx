@@ -140,7 +140,7 @@ export function Performance(): React.JSX.Element {
               <div style={{ flex: 1 }}>
                 <ProgressBar
                   value={(b.time / b.threshold) * 100}
-                  variant={b.time > b.threshold ? 'warning' : 'success'}
+                  variant={b.time > b.threshold ? 'default' : 'striped'}
                   size="sm"
                 />
               </div>
