@@ -3,7 +3,6 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Divider,
-  PullQuote,
   RelatedPosts,
   Skeleton,
 } from '@arcana-ui/core';

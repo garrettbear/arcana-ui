@@ -17,7 +17,7 @@ export function ArticleHero({ article }: ArticleHeroProps): React.JSX.Element {
           alt={article.imageAlt}
           className="atelier-hero-fullbleed__img"
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className="atelier-hero-fullbleed__overlay" aria-hidden="true" />
         <div className="atelier-hero-fullbleed__content">

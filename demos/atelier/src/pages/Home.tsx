@@ -9,12 +9,11 @@ import {
   useToast,
 } from '@arcana-ui/core';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { ArticleCard } from '../components/ArticleCard';
 import { ArticleHero } from '../components/ArticleHero';
 import { AtelierNavbar } from '../components/AtelierNavbar';
 import { articles, categories, getArticlesByCategory } from '../data/articles';
-import { authors, getAuthor } from '../data/authors';
+import { authors } from '../data/authors';
 
 export function Home(): React.JSX.Element {
   const toast = useToast();
