@@ -27,8 +27,8 @@ export function DemoNavbar(): React.JSX.Element {
     <>
       <Navbar sticky>
         <NavbarBrand>
-          <Link to="/" className="forma-logo" aria-label="Forma home">
-            FORMA
+          <Link to="/" className="forma-logo" aria-label="Arcana Supply home">
+            ARCANA SUPPLY
           </Link>
         </NavbarBrand>
 
