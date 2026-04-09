@@ -601,25 +601,49 @@ function runLlmsGenerator(manifest, tokenMap) {
     '## Install\n',
     '```bash\nnpm install @arcana-ui/core @arcana-ui/tokens\n```\n',
     '## Quick Start\n',
-    "```tsx\nimport '@arcana-ui/tokens/dist/arcana.css';\nimport { Button, Card, Input } from '@arcana-ui/core';\n\n// Theme switching\ndocument.documentElement.setAttribute('data-theme', 'dark');\n```\n",
+    "```tsx\nimport '@arcana-ui/tokens/dist/arcana.css'; // Required CSS tokens\nimport { Button, Card, Input } from '@arcana-ui/core';\n\n// Theme switching (14 presets, no JS runtime — pure CSS)\ndocument.documentElement.setAttribute('data-theme', 'midnight');\n\n// Density switching\ndocument.documentElement.setAttribute('data-density', 'compact'); // compact | normal | comfortable\n```\n",
     `## Themes (${themeCount})\n`,
   ];
   for (const theme of manifest.tokens?.themes || []) {
     shortParts.push(`- **${theme.id}**: ${theme.description}`);
   }
   shortParts.push('', `## Components (${compCount})\n`);
+
+  // Group by category
+  const byCategory = {};
   for (const comp of manifest.components || []) {
-    const desc = comp.props ? Object.keys(comp.props).slice(0, 3).join(', ') : '';
-    shortParts.push(`- **${comp.name}** (${comp.category})${desc ? ` — props: ${desc}` : ''}`);
+    if (!byCategory[comp.category]) byCategory[comp.category] = [];
+    byCategory[comp.category].push(comp);
   }
+  for (const [cat, catComps] of Object.entries(byCategory)) {
+    shortParts.push(`\n### ${cat} (${catComps.length})\n`);
+    for (const comp of catComps) {
+      const desc = comp.props ? Object.keys(comp.props).slice(0, 3).join(', ') : '';
+      shortParts.push(`- **${comp.name}**${desc ? ` — props: ${desc}` : ''}`);
+    }
+  }
+
   shortParts.push('', `## Hooks (${hookCount})\n`);
   for (const hook of manifest.hooks || []) {
-    shortParts.push(`- **${hook.name}**${hook.description ? `: ${hook.description}` : ''}`);
+    const desc = hook.description
+      ? hook.description
+          .replace(/\n[\s\S]*/m, '')
+          .trim()
+          .slice(0, 120)
+      : '';
+    shortParts.push(`- **${hook.name}**${desc ? `: ${desc}` : ''}`);
   }
   shortParts.push(
     '',
+    '## Resources\n',
+    '- Full reference: https://arcana-ui.dev/llms-full.txt',
+    '- Machine-readable manifest: https://raw.githubusercontent.com/Arcana-UI/arcana/develop/manifest.ai.json',
+    '- GitHub: https://github.com/Arcana-UI/arcana',
+    '- Playground / theme editor: https://arcana-ui.dev',
+    '- npm: @arcana-ui/core @arcana-ui/tokens @arcana-ui/cli @arcana-ui/mcp',
+    '',
     '## Full Reference\n',
-    'See llms-full.txt for complete props, usage examples, and token reference.',
+    'See llms-full.txt for complete props tables, usage examples, layout patterns, token reference, and theme customization guide.',
   );
 
   writeFile(LLMS_PATH, `${shortParts.join('\n')}\n`);
@@ -711,9 +735,259 @@ function runLlmsGenerator(manifest, tokenMap) {
     fullParts.push(`### ${hook.name}\n`);
     fullParts.push(`\`\`\`tsx\n${hook.import}\n\`\`\`\n`);
     if (hook.description) {
-      fullParts.push(`${hook.description}\n`);
+      // Trim very long descriptions that include full source code
+      const trimmed = hook.description
+        .replace(/\/\*\*[\s\S]*?\*\//g, '')
+        .trim()
+        .slice(0, 400);
+      fullParts.push(`${trimmed}${hook.description.length > 400 ? '...' : ''}\n`);
     }
   }
+
+  // Layout patterns
+  fullParts.push('## Layout Patterns\n');
+  fullParts.push('Complete, working code examples for common page types.\n');
+
+  fullParts.push('### Dashboard Layout\n');
+  fullParts.push('```tsx');
+  fullParts.push("import '@arcana-ui/tokens/dist/arcana.css';");
+  fullParts.push(
+    'import { Navbar, NavbarBrand, NavbarActions, Sidebar, SidebarContent, SidebarItem,',
+  );
+  fullParts.push('  SidebarSection, StatCard, DataTable, Tabs, TabList, Tab, TabPanels, TabPanel,');
+  fullParts.push("  Badge, Button, Card, ProgressBar } from '@arcana-ui/core';");
+  fullParts.push("import type { ColumnDef } from '@arcana-ui/core';\n");
+  fullParts.push('interface User { id: number; name: string; email: string; role: string; }');
+  fullParts.push('const users: User[] = [');
+  fullParts.push("  { id: 1, name: 'Alice Chen', email: 'alice@example.com', role: 'Admin' },");
+  fullParts.push("  { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'Developer' },");
+  fullParts.push('];');
+  fullParts.push('const columns: ColumnDef<User>[] = [');
+  fullParts.push("  { key: 'name', header: 'Name', sortable: true },");
+  fullParts.push("  { key: 'email', header: 'Email', sortable: true },");
+  fullParts.push(
+    "  { key: 'role', header: 'Role', render: (_, row) => <Badge variant=\"secondary\">{row.role}</Badge> },",
+  );
+  fullParts.push('];\n');
+  fullParts.push('export function Dashboard() {');
+  fullParts.push('  return (');
+  fullParts.push("    <div style={{ minHeight: '100vh', background: 'var(--color-bg-page)' }}>");
+  fullParts.push('      <Navbar sticky border>');
+  fullParts.push('        <NavbarBrand>My App</NavbarBrand>');
+  fullParts.push(
+    '        <NavbarActions><Button variant="ghost" size="sm">Log Out</Button></NavbarActions>',
+  );
+  fullParts.push('      </Navbar>');
+  fullParts.push("      <div style={{ display: 'flex' }}>");
+  fullParts.push('        <Sidebar style={{ width: 240 }}>');
+  fullParts.push('          <SidebarContent>');
+  fullParts.push('            <SidebarSection label="Main">');
+  fullParts.push('              <SidebarItem href="/" active>Dashboard</SidebarItem>');
+  fullParts.push('              <SidebarItem href="/users">Users</SidebarItem>');
+  fullParts.push('            </SidebarSection>');
+  fullParts.push('          </SidebarContent>');
+  fullParts.push('        </Sidebar>');
+  fullParts.push("        <main style={{ flex: 1, padding: 'var(--spacing-6)' }}>");
+  fullParts.push(
+    "          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 'var(--spacing-4)', marginBottom: 'var(--spacing-6)' }}>",
+  );
+  fullParts.push(
+    '            <StatCard label="Users" value="1,284" trend={{ direction: \'up\', value: 12.5 }} comparison="vs last month" />',
+  );
+  fullParts.push(
+    '            <StatCard label="Revenue" value="$48,290" trend={{ direction: \'up\', value: 8.2 }} comparison="vs last month" />',
+  );
+  fullParts.push('          </div>');
+  fullParts.push('          <Tabs defaultValue="users">');
+  fullParts.push(
+    '            <TabList><Tab value="users">Users</Tab><Tab value="metrics">Metrics</Tab></TabList>',
+  );
+  fullParts.push('            <TabPanels>');
+  fullParts.push(
+    '              <TabPanel value="users"><Card><DataTable data={users} columns={columns} sortable filterable pagination={{ pageSize: 10 }} /></Card></TabPanel>',
+  );
+  fullParts.push(
+    '              <TabPanel value="metrics"><Card><ProgressBar value={99.9} showValue color="success" /></Card></TabPanel>',
+  );
+  fullParts.push('            </TabPanels>');
+  fullParts.push('          </Tabs>');
+  fullParts.push('        </main>');
+  fullParts.push('      </div>');
+  fullParts.push('    </div>');
+  fullParts.push('  );');
+  fullParts.push('}');
+  fullParts.push('```\n');
+
+  fullParts.push('### Marketing Landing Page\n');
+  fullParts.push('```tsx');
+  fullParts.push("import '@arcana-ui/tokens/dist/arcana.css';");
+  fullParts.push(
+    'import { Navbar, NavbarBrand, NavbarContent, NavbarActions, Hero, FeatureSection,',
+  );
+  fullParts.push('  PricingCard, CTA, StatsBar, Footer, FooterSection, FooterLink, FooterBottom,');
+  fullParts.push("  Button } from '@arcana-ui/core';\n");
+  fullParts.push('export function Landing() {');
+  fullParts.push('  return (');
+  fullParts.push('    <>');
+  fullParts.push('      <Navbar sticky><NavbarBrand>Acme</NavbarBrand>');
+  fullParts.push('        <NavbarActions><Button size="sm">Get started</Button></NavbarActions>');
+  fullParts.push('      </Navbar>');
+  fullParts.push(
+    '      <Hero headline="Build AI-native interfaces" subheadline="Token-driven React components."',
+  );
+  fullParts.push(
+    "        primaryCTA={{ label: 'Start free', href: '/signup' }} variant=\"centered\" />",
+  );
+  fullParts.push(
+    "      <StatsBar stats={[{ value: '108', label: 'Components' }, { value: '14', label: 'Themes' }]} />",
+  );
+  fullParts.push('      <FeatureSection title="Everything you need" features={[');
+  fullParts.push(
+    "        { title: 'Token-driven', description: 'CSS variables all the way down.' },",
+  );
+  fullParts.push("        { title: 'WCAG AA', description: '100% accessible out of the box.' },");
+  fullParts.push('      ]} />');
+  fullParts.push('      <PricingCard name="Pro" price="$49" period="/mo" highlighted');
+  fullParts.push("        features={['All components', 'All themes', 'MCP server']}");
+  fullParts.push("        primaryCTA={{ label: 'Start trial', href: '/signup' }} />");
+  fullParts.push(
+    "      <CTA headline=\"Ready to ship?\" primaryCTA={{ label: 'Get started', href: '/signup' }} />",
+  );
+  fullParts.push(
+    '      <Footer><FooterSection title="Product"><FooterLink href="/docs">Docs</FooterLink></FooterSection>',
+  );
+  fullParts.push('        <FooterBottom>&copy; 2026 Acme Inc.</FooterBottom></Footer>');
+  fullParts.push('    </>');
+  fullParts.push('  );');
+  fullParts.push('}');
+  fullParts.push('```\n');
+
+  fullParts.push('### E-commerce Store\n');
+  fullParts.push('```tsx');
+  fullParts.push("import '@arcana-ui/tokens/dist/arcana.css';");
+  fullParts.push(
+    "import { Navbar, NavbarBrand, NavbarActions, ProductCard, Button, Grid, Container } from '@arcana-ui/core';\n",
+  );
+  fullParts.push('const products = [');
+  fullParts.push(
+    "  { id: 1, title: 'Arcana Hoodie', price: 79, originalPrice: 99, image: '/hoodie.jpg', badge: 'Sale' },",
+  );
+  fullParts.push("  { id: 2, title: 'Dev Mug', price: 24, image: '/mug.jpg' },");
+  fullParts.push('];');
+  fullParts.push('export function Shop() {');
+  fullParts.push('  return (<><Navbar sticky border><NavbarBrand>Arcana Supply</NavbarBrand>');
+  fullParts.push(
+    '    <NavbarActions><Button variant="ghost" size="sm">Cart</Button></NavbarActions></Navbar>',
+  );
+  fullParts.push('    <Container size="xl" style={{ paddingTop: \'var(--spacing-8)\' }}>');
+  fullParts.push('      <Grid columns={3} gap={6}>{products.map(p => (');
+  fullParts.push('        <ProductCard key={p.id} image={p.image} title={p.title} price={p.price}');
+  fullParts.push('          originalPrice={p.originalPrice} badge={p.badge}');
+  fullParts.push(
+    '          actions={<Button variant="primary" size="sm">Add to cart</Button>} />))}',
+  );
+  fullParts.push('      </Grid></Container></>);');
+  fullParts.push('}');
+  fullParts.push('```\n');
+
+  fullParts.push('### Editorial Article\n');
+  fullParts.push('```tsx');
+  fullParts.push("import '@arcana-ui/tokens/dist/arcana.css';");
+  fullParts.push(
+    "import { Navbar, NavbarBrand, ArticleLayout, AuthorCard, PullQuote, RelatedPosts, Badge, Button } from '@arcana-ui/core';\n",
+  );
+  fullParts.push('export function Article() {');
+  fullParts.push('  return (<><Navbar sticky border><NavbarBrand>The Journal</NavbarBrand>');
+  fullParts.push('    <Button variant="ghost" size="sm">Subscribe</Button></Navbar>');
+  fullParts.push(
+    '    <ArticleLayout sidebar={<AuthorCard name="Sarah Chen" role="Editor" avatar="/sarah.jpg" bio="Covering design systems." />}>',
+  );
+  fullParts.push('      <Badge variant="primary" size="sm">Design Systems</Badge>');
+  fullParts.push('      <h1>Why token-driven design is the future</h1>');
+  fullParts.push('      <p>When every visual property is a CSS variable...</p>');
+  fullParts.push(
+    '      <PullQuote quote="Design tokens are the API between design and code." attribution="Sarah Chen" />',
+  );
+  fullParts.push(
+    "      <RelatedPosts title=\"More reading\" posts={[{ title: 'CSS custom properties', href: '/css-vars', category: 'Tutorial' }]} />",
+  );
+  fullParts.push('    </ArticleLayout></>);');
+  fullParts.push('}');
+  fullParts.push('```\n');
+
+  // Theme customization guide
+  fullParts.push('## Theme Customization Guide\n');
+  fullParts.push('Create a custom theme JSON file:\n');
+  fullParts.push('```json');
+  fullParts.push('{');
+  fullParts.push('  "name": "my-brand",');
+  fullParts.push('  "description": "Custom brand theme",');
+  fullParts.push('  "primitive": {');
+  fullParts.push('    "color": {');
+  fullParts.push(
+    '      "brand": { "50": "#eff6ff", "500": "#3b82f6", "600": "#2563eb", "900": "#1e3a8a" },',
+  );
+  fullParts.push(
+    '      "neutral": { "0": "#fff", "50": "#f9fafb", "100": "#f3f4f6", "900": "#111827" }',
+  );
+  fullParts.push('    },');
+  fullParts.push(
+    '    "font": { "display": "Inter, sans-serif", "body": "Inter, sans-serif", "mono": "JetBrains Mono, monospace" }',
+  );
+  fullParts.push('  },');
+  fullParts.push('  "semantic": {');
+  fullParts.push('    "color": {');
+  fullParts.push(
+    '      "background": { "default": "{primitive.color.neutral.50}", "surface": "{primitive.color.neutral.0}", "elevated": "{primitive.color.neutral.0}" },',
+  );
+  fullParts.push(
+    '      "foreground": { "primary": "{primitive.color.neutral.900}", "secondary": "{primitive.color.neutral.600}", "muted": "{primitive.color.neutral.400}" },',
+  );
+  fullParts.push(
+    '      "action": { "primary": "{primitive.color.brand.500}", "primaryHover": "{primitive.color.brand.600}" },',
+  );
+  fullParts.push('      "border": { "default": "{primitive.color.neutral.200}" }');
+  fullParts.push('    }');
+  fullParts.push('  },');
+  fullParts.push('  "component": {}');
+  fullParts.push('}');
+  fullParts.push('```\n');
+  fullParts.push('Validate with: `npx @arcana-ui/cli validate my-theme.json`');
+  fullParts.push("Activate: `document.documentElement.setAttribute('data-theme', 'my-brand')`\n");
+
+  // Responsive guide
+  fullParts.push('## Responsive Design\n');
+  fullParts.push(
+    'Arcana is mobile-first. All CSS defaults target mobile; `min-width` queries scale up.\n',
+  );
+  fullParts.push('### Breakpoints\n');
+  fullParts.push('| Name | Range | Token |');
+  fullParts.push('|------|-------|-------|');
+  fullParts.push('| sm   | < 640px | `--breakpoint-sm` |');
+  fullParts.push('| md   | 640–1023px | `--breakpoint-md` |');
+  fullParts.push('| lg   | 1024–1279px | `--breakpoint-lg` |');
+  fullParts.push('| xl   | 1280–1535px | `--breakpoint-xl` |');
+  fullParts.push('| 2xl  | ≥ 1536px | `--breakpoint-2xl` |');
+  fullParts.push('');
+  fullParts.push('```tsx');
+  fullParts.push("import { useBreakpoint } from '@arcana-ui/core';");
+  fullParts.push('function Layout() {');
+  fullParts.push('  const { isMobile, isTablet, isDesktop } = useBreakpoint();');
+  fullParts.push('  return isMobile ? <MobileLayout /> : <DesktopLayout />;');
+  fullParts.push('}');
+  fullParts.push('```\n');
+  fullParts.push(
+    "Density switching: `document.documentElement.setAttribute('data-density', 'compact')`",
+  );
+  fullParts.push('Values: `compact` | `normal` | `comfortable`\n');
+
+  // Resources
+  fullParts.push('## Resources\n');
+  fullParts.push('- Playground: https://arcana-ui.dev');
+  fullParts.push('- GitHub: https://github.com/Arcana-UI/arcana');
+  fullParts.push('- npm: @arcana-ui/core @arcana-ui/tokens @arcana-ui/cli @arcana-ui/mcp');
+  fullParts.push('- MCP server: `npx @arcana-ui/mcp` — programmatic AI agent access');
+  fullParts.push('- manifest.ai.json — machine-readable component registry at repo root');
 
   const full = `${fullParts.join('\n')}\n`;
   writeFile(LLMS_FULL_PATH, full);
@@ -766,6 +1040,26 @@ function runVersionSync() {
   }
 }
 
+// ── GENERATOR 8: Copy llms files to playground/public/ ──────────────────────
+
+function runPublicCopy() {
+  const PLAYGROUND_PUBLIC = path.resolve(ROOT, 'playground/public');
+  if (!fs.existsSync(PLAYGROUND_PUBLIC)) {
+    console.log('  [8/8] Public Copy — playground/public/ not found, skipping');
+    return;
+  }
+  const targets = [
+    [LLMS_PATH, path.resolve(PLAYGROUND_PUBLIC, 'llms.txt')],
+    [LLMS_FULL_PATH, path.resolve(PLAYGROUND_PUBLIC, 'llms-full.txt')],
+  ];
+  for (const [src, dest] of targets) {
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dest);
+    }
+  }
+  console.log('  [8/8] Copied llms.txt + llms-full.txt → playground/public/');
+}
+
 // ── Main ────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -780,6 +1074,7 @@ async function main() {
   const warnings = runExportVerification();
   runLlmsGenerator(manifest, tokenMap);
   runVersionSync();
+  runPublicCopy();
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
   console.log(`\nDone in ${elapsed}s`);

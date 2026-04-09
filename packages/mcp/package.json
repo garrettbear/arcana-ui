@@ -1,0 +1,49 @@
+{
+  "name": "@arcana-ui/mcp",
+  "version": "0.1.0-beta.1",
+  "description": "MCP server for Arcana UI — gives AI agents (Claude, Cursor, Codex) full access to Arcana components, presets, and token system",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "arcana-mcp": "./dist/index.js"
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "prebuild": "node scripts/copy-data.mjs",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist src/data",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Arcana-UI/arcana",
+    "directory": "packages/mcp"
+  },
+  "homepage": "https://arcana-ui.com",
+  "keywords": [
+    "arcana",
+    "arcana-ui",
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "design-system",
+    "claude"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
