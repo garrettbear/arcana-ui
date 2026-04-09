@@ -1,9 +1,9 @@
 # Arcana UI — Progress Tracker
 
-> **Last updated:** 2026-04-09 (launch polish session)
-> **Current sprint:** Final launch sprint — Landing + playground polish
+> **Last updated:** 2026-04-09 (v0.1.0 stable release prep)
+> **Current sprint:** v0.1.0 stable release — final cut
 > **Source of truth for current state:** CLAUDE.md "Current State" section
-> **Next priority task:** Sprint 2 — AI Theme Generation (P.5) — playground now launch-ready
+> **Next priority task:** Merge `release/0.1.0` → `main`, tag, publish `@arcana-ui/{tokens,core,cli,mcp}@0.1.0` (Bear actions); then Sprint 2 — AI Theme Generation (P.5)
 
 ---
 

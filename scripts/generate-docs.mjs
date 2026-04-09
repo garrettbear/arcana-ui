@@ -19,6 +19,7 @@
  *   7. Version Sync (manifest.ai.json version ↔ package.json)
  */
 
+import { spawnSync } from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -67,6 +68,20 @@ function readJSON(filePath) {
 
 function writeJSON(filePath, data) {
   fs.writeFileSync(filePath, `${JSON.stringify(data, null, 2)}\n`);
+  formatWithBiome(filePath);
+}
+
+// Format a file with the repo's biome config so generated JSON matches the
+// formatter rules (line width, trailing commas, etc). Without this, lint fails
+// on freshly-generated JSON because JSON.stringify uses a different style.
+const BIOME_BIN = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '..',
+  'node_modules/.bin/biome',
+);
+function formatWithBiome(filePath) {
+  if (!fs.existsSync(BIOME_BIN)) return;
+  spawnSync(BIOME_BIN, ['format', '--write', filePath], { stdio: 'ignore' });
 }
 
 function writeFile(filePath, content) {

@@ -16,6 +16,7 @@
  * Check: node scripts/generate-manifest.mjs --check (exits 1 if drift detected)
  */
 
+import { spawnSync } from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -29,6 +30,43 @@ const INDEX_PATH = path.resolve(CORE_SRC, 'index.ts');
 const TOKENS_PRESETS = path.resolve(ROOT, 'packages/tokens/src/presets');
 const MANIFEST_PATH = path.resolve(ROOT, 'manifest.ai.json');
 const CHECK_MODE = process.argv.includes('--check');
+
+// ── Release History ──────────────────────────────────────────────────────────
+//
+// Authoritative list of every published Arcana UI release. AI agents upgrading
+// a consumer project from version A to version B iterate this array and apply
+// each entry whose `version` is > A and <= B. For any release with breaking
+// changes, set `breaking` (list of short strings) and `migration` to the path
+// of a guide in `docs/migrations/` (e.g. `'docs/migrations/1.0.0.md'`).
+//
+// New releases: prepend a new entry at the top. Never mutate historical
+// entries — they are public contract for agents doing automated upgrades.
+const RELEASE_HISTORY = [
+  {
+    version: '0.1.0',
+    date: '2026-04-09',
+    breaking: [],
+    migration: null,
+    summary:
+      'Initial stable release. 108 React components, 14 theme presets, 11 hooks, three-tier token system (2,600+ CSS variables), @arcana-ui/cli scaffolder, @arcana-ui/mcp Model Context Protocol server, Claude Code skill, llms.txt discoverability layer, and 6 demo sites.',
+  },
+  {
+    version: '0.1.0-beta.2',
+    date: '2026-04-06',
+    breaking: [],
+    migration: null,
+    summary:
+      'Consumer package audit pass. Fixed @arcana-ui/tokens exports map to allow importing ./dist/arcana.css subpath. Rebuilt @arcana-ui/core from current source so all 122 exports (previously 115 in beta.1) are present — useClickOutside, useDrag, useUndoRedo, ColorPicker, FontPicker, BottomSheet, DrawerNav, LogoCloud now ship.',
+  },
+  {
+    version: '0.1.0-beta.1',
+    date: '2026-03-24',
+    breaking: [],
+    migration: null,
+    summary:
+      'Initial beta release. Foundation phases 0-3 complete: token restructure, color/typography/spacing/elevation/motion systems, responsive mobile-first suite, and 60+ components across navigation, forms, data display, overlays, layout, media, feedback, e-commerce, editorial, and utility categories.',
+  },
+];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -557,6 +595,8 @@ function buildManifest() {
     if (name.endsWith('Props') || name.endsWith('Option') || name.endsWith('Options')) continue;
     // Skip utility functions (lowercase, non-hook exports like cn, rgbaToHex, clsx)
     if (/^[a-z]/.test(name) && !name.startsWith('use')) continue;
+    // Skip runtime constants re-exported from './version' (e.g., VERSION).
+    if (entry.fromPath === './version') continue;
     // Skip type aliases that aren't components or hooks
     if (
       name.match(/^[A-Z]/) &&
@@ -584,16 +624,22 @@ function buildManifest() {
     }
   }
 
+  // Find the release history entry that matches the current version, if any.
+  // This lets the top-level `release` object stay in sync with the changelog
+  // entry for the current version (breaking changes, migration link, etc.).
+  const currentReleaseEntry = RELEASE_HISTORY.find((r) => r.version === corePkg.version);
+
   // Build manifest
   const manifest = {
     $schema: './scripts/manifest.schema.json',
     release: {
       version: corePkg.version,
-      releaseDate: new Date().toISOString().split('T')[0],
-      changelog: 'https://github.com/garrettbear/arcana-ui/blob/develop/CHANGELOG.md',
-      breaking: [],
-      migration: null,
+      releaseDate: currentReleaseEntry?.date || new Date().toISOString().split('T')[0],
+      changelog: 'https://github.com/Arcana-UI/arcana/blob/main/CHANGELOG.md',
+      breaking: currentReleaseEntry?.breaking || [],
+      migration: currentReleaseEntry?.migration || null,
     },
+    releaseHistory: RELEASE_HISTORY,
     name: '@arcana-ui/core',
     version: corePkg.version,
     description: corePkg.description || 'AI-first React design system with token-driven theming.',
@@ -676,6 +722,18 @@ function main() {
 
   // Write manifest
   fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
+
+  // Run biome format so the output matches repo formatting rules (prevents
+  // lint failures after regeneration). We shell out to the local biome binary
+  // so generate-docs + CI both produce byte-identical output.
+  const biomeBin = path.resolve(ROOT, 'node_modules/.bin/biome');
+  if (fs.existsSync(biomeBin)) {
+    spawnSync(biomeBin, ['format', '--write', MANIFEST_PATH], {
+      stdio: 'ignore',
+      cwd: ROOT,
+    });
+  }
+
   console.log(`\n   ✓ Written to ${path.relative(ROOT, MANIFEST_PATH)}`);
 }
 

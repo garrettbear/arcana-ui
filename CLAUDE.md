@@ -587,7 +587,7 @@ Decisions made during development that should not be revisited without discussio
 *This section is updated at the end of every AI agent session.*
 
 ### Active Phase
-Phase 4 (partial) + Phase P (partial)
+v0.1.0 stable release in flight. Release branch `release/0.1.0` is cut from `develop` with version bumps, finalized CHANGELOG, migration infrastructure, and runtime `VERSION` export. PR against `main` is open — awaiting Bear to merge, tag, and publish.
 
 ### Phase Completion Summary
 
@@ -602,9 +602,10 @@ Phase 4 (partial) + Phase P (partial)
 | Phase 5 — AI Integration & Launch | 🔄 Partial | 5.1, 5.2, 5.11 done |
 
 ### Key Milestones Reached
+- **v0.1.0 stable release PR** open against `main` from `release/0.1.0` — all four packages bumped to `0.1.0`, finalized CHANGELOG, migration doc infrastructure in place for future breaking changes.
 - **14 theme presets** built and polished: light, dark, terminal, retro98, glass, brutalist, corporate, startup, editorial, commerce, midnight, nature, neon, mono
-- **60+ components** across navigation, forms, data display, overlays, layout, media, feedback, e-commerce, editorial, and utility categories
-- **npm packages published** as `0.1.0-beta.1` on npmjs.com — `@arcana-ui/tokens` and `@arcana-ui/core`
+- **108 components** across navigation, forms, data display, overlays, layout, media, feedback, e-commerce, editorial, and utility categories
+- **npm packages published** as `0.1.0-beta.2` on npmjs.com — `@arcana-ui/tokens` and `@arcana-ui/core`; stable `0.1.0` pending release PR merge
 - **Landing page** live at `arcana-ui.com` — dark premium aesthetic, 10 sections, SEO, responsive
 - **Token editor** rebuilt to investor-demo quality: custom HSV color picker, cubic bezier editor, undo/redo (Cmd+Z), search/filter, modified indicators, mobile message
 - **Demo infrastructure** in place: SaaS dashboard + e-commerce demos with shared ThemeSwitcher
@@ -635,18 +636,20 @@ Phase 4 (partial) + Phase P (partial)
 - 5.10 — Launch checklist
 
 ### Blockers
-None. All three npm packages (`@arcana-ui/tokens`, `@arcana-ui/core`, `@arcana-ui/cli`) are published. Credentials not needed for development work.
+**Release PR open** — `release/0.1.0` → `main`. Waiting on Bear to: (1) merge the PR to main, (2) tag `v0.1.0` on the merge commit and push, (3) `npm publish` each of `@arcana-ui/tokens`, `@arcana-ui/core`, `@arcana-ui/cli`, `@arcana-ui/mcp` from `main`, (4) create a GitHub Release from the tag. Until those finish, no npm installs of the stable `0.1.0` will work.
 
 ### What the Next Agent Should Do
 1. Read CLAUDE.md, PROGRESS.md, ROADMAP.md, AI_OPS.md
-2. Create a new branch from `develop` for the task (NEVER commit directly to develop)
-3. Priority: P.5 — AI theme generation flow in playground, OR publish `@arcana-ui/mcp@0.1.0-beta.1` (Bear action), OR 5.5 — documentation site
-4. Pre-existing test issue: 16 tests in `useTheme.test.tsx` fail (`localStorage.clear is not a function`) — investigate vitest jsdom environment config when time permits
+2. If the release PR has been merged + tagged + published, fast-forward `develop` from `main` and move on to Sprint 2 — P.5 AI theme generation.
+3. If the release PR is still open, do NOT start new feature work on `develop` — help review the release PR instead.
+4. Priority after release: P.5 — AI theme generation flow in playground, OR 5.5 — documentation site, OR 5.9 — performance audit.
+5. Pre-existing test issue: 16 tests in `useTheme.test.tsx` fail (`localStorage.clear is not a function`) — investigate vitest jsdom environment config when time permits
 
 ### Session History
 
 | Date | Agent | Tasks Completed | Notes |
 |------|-------|-----------------|-------|
+| 2026-04-09 | Claude (Claude Code) | v0.1.0 stable release prep | Cut `release/0.1.0` from `develop`. Bumped all four packages to `0.1.0` (`@arcana-ui/tokens`, `@arcana-ui/core` were on beta.2; `@arcana-ui/cli`, `@arcana-ui/mcp` were on beta.1). Moved every `[Unreleased]` entry in `CHANGELOG.md` under a new `[0.1.0] - 2026-04-09` header (added a "Release Overview" summary bullet list) and left `[Unreleased]` empty. Built migration-guide infrastructure: `docs/migrations/README.md` (explains to AI agents how to iterate `manifest.ai.json.releaseHistory` to find every breaking change between two versions) + `docs/migrations/TEMPLATE.md` (scaffold for future guides with Breaking Changes table, Before/After code, automated-fix scripts, rollback steps). Added runtime `VERSION` export: new `packages/core/src/version.ts` + re-export at the bottom of `packages/core/src/index.ts`, so consumers can `import { VERSION } from '@arcana-ui/core'` for telemetry/logging. Patched `scripts/generate-manifest.mjs` so manifest.ai.json now always includes a static `releaseHistory` array (entries for 0.1.0, 0.1.0-beta.2, 0.1.0-beta.1 with version/date/breaking/migration/summary shape) — previously the field was wiped on every regenerate; also added `entry.fromPath === './version'` skip so the new `VERSION` constant doesn't get counted as a component; and added a `spawnSync(biome, format --write)` step so the generated JSON matches repo formatting. Same biome-format post-step added to `writeJSON` in `scripts/generate-docs.mjs` so `playground/src/data/token-map.json` no longer fails lint after regeneration. Updated `release.changelog` in manifest to the canonical `github.com/Arcana-UI/arcana/blob/main/CHANGELOG.md` URL. Verified: `pnpm lint` 0 errors / 77 pre-existing warnings, `pnpm test` 958/958 pass, `pnpm build` green across all 12 workspace projects (tokens, core, cli, mcp, playground, 6 demos), `pnpm generate-docs` all 8 generators pass, manifest.ai.json has `version: 0.1.0`, `release.version: 0.1.0`, `releaseHistory` length 3, 108 components, 11 hooks, 14 themes. |
 | 2026-04-09 | Claude (Claude Code) | Launch polish — landing + playground | Updated "60+ components" → "108 components" everywhere (playground `index.html` description/og:description/twitter:description, `Landing.tsx` hero subheadline + "108 Production Components" feature card + "How it works" step copy, `App.tsx` Hero subheadline + StatCard + FAQ accordion) so meta tags, hero copy and in-playground stats match the real manifest count. Playground `?theme=` URL param now stays in sync when the user changes presets inside the Token Editor — `handlePresetChange` rewrites the query via `setSearchParams({ replace: true })`, so a refresh or shared URL keeps the selected theme. Added `Export CSS` button to Token Editor next to `Export JSON`: `handleExportCss` serializes the current `collectTokenSnapshot()` into a ready-to-paste `:root { --token: value; ... }` block (plus a `[data-density="..."]` companion selector when the density override is active), downloaded as `arcana-theme-{preset}.css`. Split the single `handleExport` into `handleExportJson` + `handleExportCss` sharing a `downloadFile` helper. Removed stray `console.log('Undo!')` from Toast "With action" demo — now fires a real "Restored" toast. Verified build (all 958 tests pass, full `pnpm build` green across core/tokens/cli/mcp/playground + 5 demos), lint stayed at the same 77 pre-existing warnings (no new ones introduced), vercel.json llms.txt headers confirmed correct, llms.txt + llms-full.txt present in `playground/dist/`. |
 | 2026-03-01 | Claude (claude.ai) | Project planning | Created ROADMAP.md, AI_OPS.md, PROGRESS.md, CLAUDE.md |
 | 2026-03-02 | Claude (Claude Code) | Task 0.1 — Token audit | Scanned 32 CSS files, cataloged ~176 tokens, found 88 hardcoded violations |

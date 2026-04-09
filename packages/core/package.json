@@ -1,6 +1,6 @@
 {
   "name": "@arcana-ui/core",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0",
   "description": "React components for Arcana UI — AI's #1 design system",
   "license": "MIT",
   "main": "./dist/index.js",

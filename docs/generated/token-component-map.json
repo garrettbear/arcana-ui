@@ -2,7 +2,7 @@
   "_generated": {
     "warning": "This file is auto-generated. Do not edit manually.",
     "source": "scripts/generate-docs.mjs",
-    "timestamp": "2026-04-09T03:58:22.407Z",
+    "timestamp": "2026-04-09T17:22:56.002Z",
     "command": "pnpm generate-docs"
   },
   "componentCount": 69,
