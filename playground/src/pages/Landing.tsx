@@ -510,7 +510,8 @@ function LandingContent() {
           </h1>
 
           <p className={styles.heroSubheadline}>
-            Token-driven theming, 60+ React components, built for AI to assemble and humans to love.
+            Token-driven theming, 108 React components, 14 themes. Built for AI to assemble and
+            humans to love.
           </p>
 
           <form onSubmit={handlePromptSubmit} className={styles.promptWrap}>
@@ -604,7 +605,7 @@ function LandingContent() {
               <div className={styles.featureIcon}>
                 <ComponentsIcon />
               </div>
-              <h3 className={styles.featureTitle}>60+ Production Components</h3>
+              <h3 className={styles.featureTitle}>108 Production Components</h3>
               <p className={styles.featureDesc}>
                 From Hero sections to DataTables. Dashboard, marketing, editorial, and e-commerce
                 categories — all responsive, accessible, and theme-aware.
@@ -644,7 +645,7 @@ function LandingContent() {
               <div className={styles.stepNumber}>2</div>
               <h3 className={styles.stepTitle}>Customize</h3>
               <p className={styles.stepDesc}>
-                Fine-tune with the visual editor. Adjust any of 2,600+ tokens, preview across 60+
+                Fine-tune with the visual editor. Adjust any of 2,600+ tokens, preview across 108
                 components in real time. Every change is instant.
               </p>
             </div>
