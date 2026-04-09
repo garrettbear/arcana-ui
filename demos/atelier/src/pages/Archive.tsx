@@ -37,7 +37,7 @@ const timelineItems = [
 
 const categoryOptions = [
   { value: '', label: 'All Categories' },
-  ...categories.map((c) => ({ value: c, label: c })),
+  ...categories.filter((c) => c !== 'All').map((c) => ({ value: c, label: c })),
 ];
 
 const yearOptions = years.map((y) => ({ value: y === 'All' ? '' : y, label: y }));

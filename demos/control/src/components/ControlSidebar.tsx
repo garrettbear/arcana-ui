@@ -15,6 +15,8 @@ const NAV_ITEMS = [
   { label: 'Overview', path: '/', icon: '◎' },
   { label: 'Components', path: '/components', icon: '▦' },
   { label: 'Tokens', path: '/tokens', icon: '◈' },
+  { label: 'Performance', path: '/performance', icon: '◷' },
+  { label: 'Accessibility', path: '/accessibility', icon: '⊙' },
   { label: 'Builds', path: '/builds', icon: '⚙' },
 ];
 
