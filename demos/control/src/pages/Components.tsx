@@ -1,150 +1,121 @@
-import {
-  Badge,
-  Button,
-  Checkbox,
-  DataTable,
-  Input,
-  Select,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from '@arcana-ui/core';
+import { Badge, Button, DataTable, Input, Select } from '@arcana-ui/core';
 import type { ColumnDef } from '@arcana-ui/core';
 import { useMemo, useState } from 'react';
-import { ComponentDrawer } from '../components/ComponentDrawer';
-import { componentData, componentStats } from '../data/components';
+import { CATEGORIES, componentData, componentStats } from '../data/components';
 import type { ComponentEntry } from '../data/components';
 
 const categoryOptions = [
   { value: '', label: 'All Categories' },
-  { value: 'Primitives', label: 'Primitives' },
-  { value: 'Composites', label: 'Composites' },
-  { value: 'Patterns', label: 'Patterns' },
-  { value: 'Layout', label: 'Layout' },
-  { value: 'Context', label: 'Context' },
-  { value: 'Components', label: 'Components' },
+  ...CATEGORIES.filter((c) => c !== 'All').map((c) => ({ value: c, label: c })),
 ];
 
-const statusOptions = [
-  { value: '', label: 'All' },
-  { value: 'healthy', label: 'Healthy' },
-  { value: 'warning', label: 'Warning' },
-  { value: 'missing-tests', label: 'Missing Tests' },
+const columns: ColumnDef<ComponentEntry>[] = [
+  {
+    key: 'name',
+    header: 'Component',
+    sortable: true,
+    render: (_v, row) => (
+      <span
+        className="control-mono"
+        style={{ fontSize: '12px', color: 'var(--color-action-primary)' }}
+      >
+        {row.name}
+      </span>
+    ),
+  },
+  {
+    key: 'category',
+    header: 'Category',
+    sortable: true,
+    render: (_v, row) => (
+      <Badge variant="secondary" size="sm">
+        {row.category}
+      </Badge>
+    ),
+  },
+  {
+    key: 'tokenCount',
+    header: 'Tokens',
+    sortable: true,
+    width: '70px',
+    align: 'center' as const,
+    render: (_v, row) => (
+      <span style={{ fontSize: '12px', color: 'var(--color-fg-secondary)' }}>{row.tokenCount}</span>
+    ),
+  },
+  {
+    key: 'testCoverage',
+    header: 'Coverage',
+    sortable: true,
+    width: '90px',
+    render: (_v, row) => (
+      <Badge
+        variant={row.testCoverage >= 95 ? 'success' : row.testCoverage >= 90 ? 'warning' : 'error'}
+        size="sm"
+      >
+        {row.testCoverage}%
+      </Badge>
+    ),
+  },
+  {
+    key: 'bundleSize',
+    header: 'Bundle',
+    width: '80px',
+    render: (_v, row) => (
+      <span style={{ fontSize: '12px', color: 'var(--color-fg-secondary)' }}>{row.bundleSize}</span>
+    ),
+  },
+  {
+    key: 'wcagScore',
+    header: 'WCAG',
+    sortable: true,
+    width: '75px',
+    render: (_v, row) => (
+      <Badge
+        variant={row.wcagScore >= 98 ? 'success' : row.wcagScore >= 94 ? 'warning' : 'error'}
+        size="sm"
+      >
+        {row.wcagScore}%
+      </Badge>
+    ),
+  },
+  {
+    key: 'lastUpdated',
+    header: 'Updated',
+    sortable: false,
+    width: '90px',
+    render: (_v, row) => (
+      <span style={{ fontSize: '12px', color: 'var(--color-fg-secondary)' }}>
+        {row.lastUpdated}
+      </span>
+    ),
+  },
 ];
 
 export function Components(): React.JSX.Element {
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
-  const [showWarningsOnly, setShowWarningsOnly] = useState(false);
-  const [selectedComponent, setSelectedComponent] = useState<ComponentEntry | null>(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('all');
 
   const filteredData = useMemo(() => {
     let result = componentData;
-
     if (search) {
-      const lower = search.toLowerCase();
-      result = result.filter((c) => c.name.toLowerCase().includes(lower));
+      const q = search.toLowerCase();
+      result = result.filter(
+        (c) => c.name.toLowerCase().includes(q) || c.category.toLowerCase().includes(q),
+      );
     }
-
     if (categoryFilter) {
       result = result.filter((c) => c.category === categoryFilter);
     }
-
-    if (activeTab !== 'all') {
-      const tabCategory = activeTab.charAt(0).toUpperCase() + activeTab.slice(1);
-      result = result.filter((c) => c.category === tabCategory);
-    }
-
-    if (statusFilter === 'warning' || statusFilter === 'missing-tests' || showWarningsOnly) {
-      result = result.filter((c) => !c.tests || !c.manifest);
-    }
-
     return result;
-  }, [search, categoryFilter, statusFilter, activeTab, showWarningsOnly]);
+  }, [search, categoryFilter]);
 
-  const columns: ColumnDef<ComponentEntry>[] = [
-    {
-      key: 'name',
-      header: 'Name',
-      sortable: true,
-      render: (_v, row) => (
-        <button
-          type="button"
-          onClick={() => {
-            setSelectedComponent(row);
-            setDrawerOpen(true);
-          }}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            fontFamily: 'var(--font-family-mono)',
-            fontSize: 'var(--font-size-sm, 0.875rem)',
-            color: 'var(--color-action-primary)',
-            padding: 0,
-            textDecoration: 'underline',
-            textUnderlineOffset: '2px',
-          }}
-        >
-          {row.name}
-        </button>
-      ),
-    },
-    {
-      key: 'category',
-      header: 'Category',
-      sortable: true,
-      render: (_v, row) => (
-        <Badge variant="secondary" size="sm">
-          {row.category}
-        </Badge>
-      ),
-    },
-    {
-      key: 'props',
-      header: 'Props',
-      sortable: true,
-      width: '80px',
-      align: 'center' as const,
-    },
-    {
-      key: 'variants',
-      header: 'Variants',
-      width: '90px',
-      align: 'center' as const,
-    },
-    {
-      key: 'tests',
-      header: 'Tests',
-      width: '80px',
-      render: (_v, row) => (
-        <Badge variant={row.tests ? 'success' : 'warning'} size="sm">
-          {row.tests ? '✓' : '✗'}
-        </Badge>
-      ),
-    },
-    {
-      key: 'manifest',
-      header: 'Manifest',
-      width: '90px',
-      render: (_v, row) => (
-        <Badge variant={row.manifest ? 'success' : 'warning'} size="sm">
-          {row.manifest ? '✓' : '✗'}
-        </Badge>
-      ),
-    },
-    {
-      key: 'lastUpdated',
-      header: 'Updated',
-      sortable: true,
-      width: '100px',
-    },
-  ];
+  const avgCoverage = Math.round(
+    componentData.reduce((s, c) => s + c.testCoverage, 0) / componentData.length,
+  );
+  const avgWcag = Math.round(
+    componentData.reduce((s, c) => s + c.wcagScore, 0) / componentData.length,
+  );
 
   return (
     <div>
@@ -152,12 +123,12 @@ export function Components(): React.JSX.Element {
         <div className="control-page-header__left">
           <h1 className="control-page-header__title">Component Registry</h1>
           <span className="control-page-header__subtitle">
-            {componentStats.total} components · Last audited: 2026-04-03
+            {componentStats.total} components · avg coverage {avgCoverage}% · avg WCAG {avgWcag}%
           </span>
         </div>
         <div className="control-page-header__actions">
           <Button variant="ghost" size="sm">
-            Export JSON
+            Export CSV
           </Button>
         </div>
       </div>
@@ -165,7 +136,7 @@ export function Components(): React.JSX.Element {
       <div className="control-filters">
         <div className="control-filters__input">
           <Input
-            placeholder="Search components..."
+            placeholder="Search components…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             size="sm"
@@ -180,99 +151,17 @@ export function Components(): React.JSX.Element {
             size="sm"
           />
         </div>
-        <div className="control-filters__select">
-          <Select
-            placeholder="Status"
-            options={statusOptions}
-            onChange={(v) => setStatusFilter(v as string)}
-            size="sm"
-          />
-        </div>
-        <Checkbox
-          label="Show only warnings"
-          checked={showWarningsOnly}
-          onChange={(e) => setShowWarningsOnly(e.target.checked)}
-        />
+        <Badge variant="secondary">
+          {filteredData.length} / {componentStats.total}
+        </Badge>
       </div>
 
-      <Tabs value={activeTab} onChange={setActiveTab} variant="line">
-        <TabList>
-          <Tab value="all">All ({componentStats.total})</Tab>
-          <Tab value="primitives">Primitives ({componentStats.categories.primitives})</Tab>
-          <Tab value="composites">Composites ({componentStats.categories.composites})</Tab>
-          <Tab value="patterns">Patterns ({componentStats.categories.patterns})</Tab>
-          <Tab value="other">
-            Other ({componentStats.categories.layout + componentStats.categories.context})
-          </Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel value="all">
-            <DataTable
-              data={filteredData}
-              columns={columns}
-              sortable
-              hoverable
-              onRowClick={(row) => {
-                setSelectedComponent(row);
-                setDrawerOpen(true);
-              }}
-            />
-          </TabPanel>
-          <TabPanel value="primitives">
-            <DataTable
-              data={filteredData}
-              columns={columns}
-              sortable
-              hoverable
-              onRowClick={(row) => {
-                setSelectedComponent(row);
-                setDrawerOpen(true);
-              }}
-            />
-          </TabPanel>
-          <TabPanel value="composites">
-            <DataTable
-              data={filteredData}
-              columns={columns}
-              sortable
-              hoverable
-              onRowClick={(row) => {
-                setSelectedComponent(row);
-                setDrawerOpen(true);
-              }}
-            />
-          </TabPanel>
-          <TabPanel value="patterns">
-            <DataTable
-              data={filteredData}
-              columns={columns}
-              sortable
-              hoverable
-              onRowClick={(row) => {
-                setSelectedComponent(row);
-                setDrawerOpen(true);
-              }}
-            />
-          </TabPanel>
-          <TabPanel value="other">
-            <DataTable
-              data={filteredData}
-              columns={columns}
-              sortable
-              hoverable
-              onRowClick={(row) => {
-                setSelectedComponent(row);
-                setDrawerOpen(true);
-              }}
-            />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-
-      <ComponentDrawer
-        component={selectedComponent}
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
+      <DataTable
+        data={filteredData}
+        columns={columns}
+        sortable
+        hoverable
+        pagination={{ pageSize: 20 }}
       />
     </div>
   );

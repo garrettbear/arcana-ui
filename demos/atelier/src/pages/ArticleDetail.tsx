@@ -3,78 +3,91 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Divider,
-  Image,
-  Modal,
-  PullQuote,
   RelatedPosts,
-  ScrollArea,
   Skeleton,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
 } from '@arcana-ui/core';
-import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AtelierNavbar } from '../components/AtelierNavbar';
 import { articles, getArticle } from '../data/articles';
 import { getAuthor } from '../data/authors';
 
 /** Article body prose keyed by slug */
-const articleBodies: Record<string, { paragraphs: string[]; pullQuote: string }> = {
-  'the-weight-of-silence': {
-    pullQuote: 'The building does not ask for your attention. It assumes it.',
+const articleBodies: Record<
+  string,
+  {
+    paragraphs: string[];
+    pullQuote: string;
+    inlineImages?: Array<{ url: string; alt: string; caption: string }>;
+  }
+> = {
+  'the-quiet-power-of-concrete': {
+    pullQuote:
+      'Brutalism was never about hostility. It was about honesty. About showing the world exactly what a building is made of.',
+    inlineImages: [
+      {
+        url: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&q=85',
+        alt: 'Brutalist building exterior with deep shadow geometry',
+        caption:
+          "The building's north elevation. Raw concrete mixed with volcanic ash from Sakurajima.",
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1503708928676-1cb796a0891e?w=1200&q=85',
+        alt: 'Interior concrete surface with natural light',
+        caption: 'The main hall at midday. Formwork marks visible in the poured concrete surface.',
+      },
+    ],
     paragraphs: [
-      'The road to the chapel at Kagawa is unmarked. There is no signage, no visitor center, no indication that one of the most significant religious buildings of the century sits at the end of a gravel path flanked by cedar. This is by design. Tadao Ando has never believed that architecture should announce itself. His buildings arrive the way a good sentence does — with an inevitability that makes you forget someone had to write it.',
-      'The chapel is cast from a single pour of concrete, which Ando specified to be mixed with volcanic ash from Sakurajima. The result is a surface that reads as both ancient and impossibly precise. The formwork marks are visible, each one a record of the day the wall was made. In the main hall, a vertical slit in the eastern wall admits a blade of morning light that migrates across the floor over the course of two hours, tracing a line that arrives at the altar precisely at the vernal equinox. The engineering required to achieve this was considerable. Ando does not discuss it.',
-      'Inside, the silence is structural. The chapel seats forty, on pews carved from a single hinoki cypress that fell in a typhoon in 2019. There is no music, no amplification. The acoustic design ensures that a whisper at the altar can be heard in the last row, but a conversation in the vestibule cannot penetrate the nave. The architect describes this as "selective silence" — the building chooses what it will carry.',
-      'To visit Ando\u2019s chapel is to be reminded that architecture is not primarily a visual art. It is a temporal one. The building changes with every hour of daylight, every season, every shift in the weight of clouds above the Inland Sea. It does not photograph well. It does not need to. It is, in the most literal sense, a building that must be experienced — and in that requirement lies its most radical proposition: that some things cannot be mediated.',
+      "In the winding streets of Lisbon's Mouraria district, a former textile factory has been reborn as something quietly radical. Architect Paulo Mendes has stripped the building to its structural bones, exposing the raw concrete that previous renovators had spent decades hiding beneath plaster, laminate, and dropped ceilings. The result is an ode to honesty — a building that wears its age and its materials with a dignity that feels almost unfashionable in an era that mistakes novelty for ambition.",
+      "The factory was built in 1948 and abandoned in 1991, when the last of Lisbon's textile manufacturing migrated east. For thirty years it stood vacant, its façade colonised by ferns and its interiors stripped of everything removable. What remained when Mendes first walked through it in 2022 was the structure itself: 400-millimetre walls of aggregate concrete, ceilings that rose to six metres at their apex, and windows that admitted a quality of light — diffused through decades of grime — that he would spend the next two years trying to preserve in the renovation.",
+      "The rehabilitation is now complete, and the building functions as a shared workspace, archive, and lecture hall for the Lisbon School of Architecture. Mendes's interventions are deliberate in their restraint. New elements — a mezzanine floor of rolled steel, staircases of folded plate, handrails of black oxide — are clearly contemporary, clearly reversible, and clearly in conversation with rather than competition against the existing fabric. Where the concrete was damaged, it was repaired in matching aggregate. Where it was sound, it was left entirely alone.",
+      'What makes the project significant is not the quality of the workmanship, though that is considerable. It is the argument the building makes about what renovation is for. In an era when adaptive reuse has become the default strategy for redundant industrial buildings, the standard procedure is to insert a layer of finish — polished concrete, white plaster, new glazing — that transforms the existing structure into a neutral backdrop. Mendes has done the opposite. The existing fabric is the foreground. The new elements defer to it.',
+      'The building received the Prémio Nacional de Arquitectura in November 2025. At the ceremony, Mendes declined to give a speech. In the catalogue note that substituted for his remarks, he wrote: "The building was already there. I tried not to ruin it." It is a statement that could be read as false modesty, but it isn\'t. It is, rather, a precise description of a philosophy that the building itself enacts: that the most honest thing an architect can do with an existing structure is to trust it.',
     ],
   },
-  'the-most-honest-apartment-in-berlin': {
-    pullQuote: 'What remained was the truth of the building.',
+  'living-light-norwegian-fjords': {
+    pullQuote:
+      'The engineering required to achieve this was extraordinary. The architect does not discuss it.',
     paragraphs: [
-      'The apartment occupies the top two floors of a Gründerzeit building in Prenzlauer Berg, built in 1887 and left largely untouched by the renovations that swept through the neighborhood after reunification. When Katrin Müller acquired the space in 2022, the ceilings were dropped, the original stucco hidden behind plasterboard, the oak floors buried under laminate. Her first act was demolition.',
-      'Removing the false ceilings revealed the original plasterwork — damaged, incomplete, but present. Müller, who trained as a conservator before turning to interior design, made the decision that would define the project: she would restore nothing. The fragments of decorative molding would remain as fragments. The water stains on the original ceiling beams would stay. The apartment would not pretend that the twentieth century had not happened.',
-      'The furniture is sparse, each piece selected for its willingness to be honest about what it is. A sofa by Jasper Morrison sits in the main room, its grey wool the only soft surface visible. The dining table is a single slab of Douglas fir on steel trestles. In the kitchen, the cabinetry is birch plywood with exposed edges — no veneer, no paint, no concealment. The effect is not austere. It is clarifying.',
-      'What Müller has built is not a minimalist apartment. Minimalism, in her view, is another form of decoration — an aesthetic choice that obscures as much as maximalism. Her apartment is something rarer: a space that refuses to perform. The walls show their age. The floors show their wear. The building, at last, is allowed to be exactly what it is.',
+      'The brief was simple: wake up to the fjord. The execution, however, required a structural engineering feat that took two years to resolve. The result is a 240-square-meter retreat outside Bergen where every room opens to a panorama of water and stone, and where the boundary between building and landscape has been dissolved so completely that it is difficult, on the best mornings, to say where one ends and the other begins.',
+      'The house belongs to a family of four who spent years searching the Norwegian coast for a site that would deliver what the architect, Marte Haagensen, calls "the full Norwegian light." Not the soft, indirect light of the coastal lowlands, but the hard, crystalline light of the fjord interior — the light that arrives sideways in the blue hours of winter, that floods the cliffs in midsummer, that turns the water to hammered silver in the hour before dark.',
+      'The structure is a single-story pavilion of glass and laminated larch, cantilevered six meters over the fjord cliff so that the living room floor is also, effectively, a bridge. The cantilever is supported by a post-tensioned concrete spine that runs through the hillside behind the house, its presence concealed within the landscape planting that Haagensen specified as part of the construction contract. From the fjord, the house appears to float. This is not an accident.',
+      'Inside, the rooms are arranged in a single linear sequence — entrance, kitchen, living, sleeping — each one opening to the fjord through full-height pivoting panels of triple-laminated glass. The thermal performance is achieved not through insulation alone but through the orientation of the building, which tracks the sun across its 180-degree arc and admits it into every room in sequence over the course of the day. The heating is supplemented by a geothermal system that draws from the fjord water itself.',
     ],
   },
-  'concrete-revisited': {
-    pullQuote: 'The rehabilitation of concrete is not aesthetic. It is moral.',
+  'wabi-sabi-interiors': {
+    pullQuote: 'The Japanese word for imperfection is not an apology. It is an aspiration.',
     paragraphs: [
-      'For thirty years, concrete was the material architects apologized for. The legacy of Brutalism — misunderstood, poorly maintained, politically conscripted — had made raw concrete synonymous with failure. Institutions commissioned glass and timber. Residential developers specified anything with warmth. Concrete, when it appeared at all, was hidden behind cladding. The material that had built the modern world had become embarrassing.',
-      'The reversal began slowly and from unexpected quarters. In 2018, a conservation campaign in London succeeded in listing the Barbican as a Grade II structure, not despite its concrete but because of it. In Tokyo, Kengo Kuma — an architect known primarily for wood — completed a pavilion in exposed concrete, citing the influence of Antonin Raymond. In Mexico City, a generation of young architects began working exclusively in concrete, not as a reference to the past but as an economic necessity that became an aesthetic conviction.',
-      'What distinguishes this new concrete architecture from its Brutalist predecessors is not form but care. The formwork is exquisite. The aggregates are locally sourced and carefully graded. The surfaces are sealed and maintained. Where the Brutalists treated concrete as a blunt instrument of social ambition, the current generation treats it as a craft material — closer to rammed earth than to the megastructure. The result is buildings that age gracefully, that patinate rather than decay.',
-      'The question of whether this represents a genuine revaluation or merely a cyclical fashion remains open. But the evidence suggests something deeper is at work. As the construction industry confronts its carbon legacy, concrete — which can now be mixed with industrial waste products, can sequester CO\u2082 during curing, and can be recycled indefinitely — is being reconsidered not merely as beautiful but as responsible. The material\u2019s rehabilitation is, in the end, inseparable from the industry\u2019s.',
+      'Cracked plaster walls. Mismatched ceramics. A wooden table worn smooth by decades of use. These are not accidents to be corrected — they are the point. Wabi-sabi, the Japanese aesthetic philosophy that finds beauty in imperfection, impermanence, and incompleteness, is quietly reshaping how a generation of designers in Europe and North America approach the interior.',
+      'The philosophy has Western analogues — in the Arts and Crafts movement\'s rejection of industrial perfection, in the patina-worship of antique dealers, in the current vogue for "lived-in" aesthetics. But wabi-sabi is something more specific and more demanding. It is not the simulation of age but the acceptance of it. A wabi-sabi interior does not look old because someone has applied a wash of grey paint and left it to dry unevenly. It looks old because it is old, because the aging has been allowed to proceed without intervention, and because that aging has been read as evidence of a life fully lived.',
+      'The designer Chiaki Mori, who trained in Kyoto and practices in London, has spent the past decade attempting to translate the philosophy for Western clients who instinctively resist it. "The first response is always that it looks unfinished," she says. "People are trained to read cracks and chips and scratches as evidence of poor maintenance. The whole project of wabi-sabi is to retrain that response — to see those marks as evidence of time, and to understand time as something valuable rather than something to be concealed."',
+      'The interiors Mori creates are not, it should be said, cheap. The aged ceramics she specifies are rare. The handmade plaster she uses is expensive to apply and requires skilled craftspeople who are becoming harder to find. The wood she selects — reclaimed, patinated, sometimes structurally compromised — must be assessed by specialists before installation. Wabi-sabi, as a practice, turns out to be a luxury. The irony is deliberate. "If we value imperfection," Mori says, "we should be willing to pay for it."',
     ],
   },
-  'the-invisible-house': {
-    pullQuote: 'Studio Mumbai builds nothing that the site does not already know.',
+  'new-desert-modernism': {
+    pullQuote: 'The desert is not a backdrop. It is a building material.',
     paragraphs: [
-      'Bijoy Jain does not keep a computer in his studio. The workshop at Alibag, an hour south of Mumbai by ferry, operates on a principle that most contemporary practices would find untenable: every element of a building is prototyped at full scale before construction begins. Walls, stairs, window frames, door handles — each is built, examined, revised, and rebuilt. A single door may go through twelve iterations. This is not perfectionism. It is listening.',
-      'The house under discussion sits on a hillside in the Western Ghats, though Jain is reluctant to name the client or the precise location. What he will say is that the site contained a mango grove, a seasonal stream, and a basalt outcrop that the client wished to incorporate into the living space. The rock now forms one wall of the main room. It was not cut, not shaped, not polished. The house was designed around it.',
-      'Construction took four years — long by international standards, unremarkable by Studio Mumbai\u2019s. The structure is load-bearing stone quarried from the site itself, with teak framing from trees that had fallen in the previous monsoon. The roof is a series of shallow vaults in thin-shell concrete, their curvature calculated to collect rainwater and direct it to cisterns below the kitchen garden. There is no air conditioning. The cross-ventilation, tested in the workshop with smoke and silk threads, maintains a temperature differential of eight degrees from the exterior.',
-      'To describe a Studio Mumbai building in terms of sustainability metrics is to miss the point, though the metrics are impressive. What Jain has achieved is a practice in which the distinction between building and landscape, between construction and conservation, between architecture and agriculture has become meaningless. The house does not sit on the hill. It is, in a sense that Jain has spent thirty years making literal, part of the hill.',
+      'The mid-century modern homes of Palm Springs have always been about the dialogue between indoor and outdoor living. The Neutra houses, the Lautner structures, the work of William Cody and Donald Wexler — all of them negotiated the same fundamental proposition: that the California desert, with its extremes of temperature and its extraordinary quality of light, was not a hostile environment to be excluded but an active participant to be incorporated. Now, seventy years later, a new generation of architects is taking that dialogue to its logical conclusion.',
+      'The houses being built around Palm Springs today are not mid-century modern. They acknowledge their predecessors — the flat rooflines, the clerestory windows, the connection between interior and exterior — but they go further. Where the Case Study architects worked against the climate with air conditioning and glass, the current generation works with it. Passive cooling strategies, carefully calculated overhangs, and rammed earth walls that absorb heat during the day and release it at night have allowed architects to reduce or eliminate mechanical climate control in buildings where the temperature differential between interior and exterior can reach forty degrees Celsius.',
+      'The materials are different too. Mid-century desert modernism was a Southern California architecture — it used the concrete block, the steel beam, and the plate glass that were available in abundance to a postwar construction industry flush with industrial capacity. Contemporary desert architecture draws on the desert itself. Rammed earth, adobe, and compressed stabilized earth block — all of them local materials with deep roots in the vernacular architecture of the American Southwest — have been reintegrated into a contemporary practice that acknowledges their thermal mass and their visual rightness in a way that the mid-century architects, who were more interested in the industrial future than the pre-industrial past, could not quite manage.',
+      'The result is a body of work that is both more modest and more ambitious than its predecessors. More modest because it does not try to conquer the desert; more ambitious because it tries to understand it.',
     ],
   },
-  'renzo-pianos-last-work': {
-    pullQuote: 'He has always been interested in lightness. His late buildings have achieved it.',
+  'material-conversations': {
+    pullQuote: 'The joint is where the argument happens. Everything else is just waiting.',
     paragraphs: [
-      'The building is a library, though Renzo Piano resists the word. "It is a room," he says, in the Genoese-inflected English that has not changed in sixty years of international practice. "A very large room, with very good light." The room in question occupies a headland on the Norwegian coast, north of Bergen, where the Renzo Piano Building Workshop was invited to design a cultural center that would, in the foundation\u2019s words, "make reading visible."',
-      'Piano, now eighty-eight, visited the site once, in September 2024. His associates describe the visit as decisive. He spent three hours walking the headland, said almost nothing, and on the flight back to Genoa produced a sketch on the back of a boarding pass that is, in its essentials, the building as built. A long, low pavilion of glass and laminated timber, cantilevered over the cliff edge so that readers at the window desks look directly down to the sea. The structure is almost entirely transparent. At certain angles it disappears.',
-      'The engineering is, as always with Piano, concealed within the apparent simplicity. The cantilever extends fourteen meters beyond the cliff face, supported by a post-tensioned concrete spine that is hidden within the timber floor plates. The glass is triple-laminated, with an interlayer that shifts from clear to translucent as the sun angle increases, reducing glare without mechanical intervention. The heating is geothermal. The timber is Norwegian spruce, certified and locally milled.',
-      'Piano\u2019s late career has been marked by a progressive reduction — fewer materials, simpler forms, greater reliance on natural light and ventilation. This building represents the logical end of that trajectory: a structure so light, so transparent, so willing to defer to its landscape that it barely registers as architecture at all. It is, perhaps, the most difficult thing to build — a building that does not insist on being seen.',
+      'There is something inherently tense about pairing wood and steel. One is warm, organic, shaped by centuries of growth and subject to the same slow decay as everything that lives. The other is cold, precise, wrought in furnaces at temperatures that reduce everything to liquid, and subject to a different kind of decay — oxidation, stress fracture, fatigue. When skilled hands bring them together, that tension becomes a kind of poetry.',
+      'The furniture maker and structural designer Lena Brandt has spent twenty years exploring the joint between these two materials — the literal, physical, engineered place where organic and industrial meet. Her studio in Hamburg produces objects that range from small-scale pieces to architectural elements: furniture, staircases, screens, and spatial dividers that use the junction between wood and steel not as a transition to be smoothed over but as the primary expressive element of the work.',
+      '"The joint is where the argument happens," she says. "Everything else is just waiting for the joint." In practice, this means that Brandt designs her joints before she designs anything else. A table begins not with a question about proportion or material but with a question about how the steel leg will meet the timber top — whether it will penetrate through and be pinned, whether it will rest beneath and be welded to a hidden flange, whether it will be visible and celebrated or concealed and merely structural.',
+      'The current body of work — fourteen pieces, ranging from a side table to a structural screen for a Berlin museum — is unified by a single formal constraint: every joint is visible, and every joint is different. No two pieces share the same solution to the same problem. "If you find a solution and repeat it," Brandt says, "you\'ve stopped designing. You\'ve started manufacturing." It is a distinction she makes without apology, and one that is increasingly legible in the work of the designers who have emerged from her studio.',
     ],
   },
-  'the-archive-ten-spaces': {
-    pullQuote: 'From Maison de Verre to the Kimbell, the rooms we return to.',
+  'tokyo-micro-living': {
+    pullQuote: 'In Tokyo, compression is not a limitation. It is the premise.',
     paragraphs: [
-      'Every discipline has its canon — the works to which practitioners return not for instruction but for orientation. In architecture, the canon is spatial. It is not a list of buildings one has read about but a list of rooms one has stood in. The ten spaces collected here are not the most famous, nor the most influential, nor the most technically accomplished. They are the rooms that, once entered, alter the visitor\u2019s understanding of what a room can be.',
-      'Pierre Chareau\u2019s Maison de Verre, completed in 1932, occupies a courtyard in the 7th arrondissement of Paris. Its glass-block facade — an industrial material repurposed with surgical precision — transforms the interior into a lantern. The light is not natural and not artificial but something between: diffused, even, unchanging. To enter is to step inside a piece of amber. Louis Kahn\u2019s Kimbell Art Museum in Fort Worth, completed in 1972, performs the opposite trick. Its cycloid vaults admit natural light through narrow slits at their apex, bouncing it off polished aluminum reflectors so that the galleries are lit from above by what Kahn called "silver light."',
-      'Sigurd Lewerentz\u2019s St. Peter\u2019s Church in Klippan, Sweden, built between 1963 and 1966, is a room that seems to have been discovered rather than designed. The brickwork is deliberately rough, the mortar joints thick and irregular, the floor a single pour of dark concrete. There are no right angles. The windows are fixed directly into the brick without frames, sealed with mastic that Lewerentz applied himself. It is a building that looks like it was made by a mason, not an architect — and in that apparent crudeness lies its sophistication.',
-      'The Farnsworth House, the Barcelona Pavilion, the Salk Institute courtyard, Barragan\u2019s Casa Gilardi, the Therme Vals, Zumthor\u2019s Bruder Klaus Chapel, and Sejima\u2019s Toledo Museum Glass Pavilion complete the list. Each operates on a different principle. Each achieves the same result: the temporary suspension of the visitor\u2019s belief that space is neutral. These are rooms that argue — quietly, through proportion and light and material — that the shape of a space is the shape of an experience.',
+      "In a city where space has always been a luxury, Tokyo's architects have spent decades perfecting the art of compression. The result is a body of residential work that is, paradoxically, one of the most liberating in the world — because when you have nothing to hide, you design with total honesty, and when every square meter must justify its existence, every element must be essential.",
+      'The apartment belongs to Haruki Sato, a graphic designer in his early thirties who commissioned the architect Ai Fujiwara to transform a 28-square-meter unit in Shimokitazawa into a home that would function as a studio, a kitchen, a living room, a bedroom, and a place for receiving guests. The constraints were absolute. The budget was modest. The result, completed in 2025, has been published in twelve countries.',
+      "Fujiwara's solution is a section. The apartment is divided not by walls — there are almost none — but by levels. A raised platform in the middle of the space, reached by two steps, serves as a sleeping area by night and a work platform by day, with a custom desk that folds down from the wall behind it. Below the platform is a concealed storage system that contains, according to Sato's count, more than three hundred objects. Above the platform is a skylight, one of two in the apartment, that was negotiated with considerable difficulty from the building's owners and that provides the apartment with the quality of light that makes the compression bearable.",
+      'The kitchen is a single wall of custom cabinetry, three meters long and floor-to-ceiling, with a hob, a half-width refrigerator, and a sink hidden behind panels that, when closed, read as a continuation of the shelving system. The bathroom is the apartment\'s one concession to enclosure: a fully tiled room of 2.4 square meters with a soaking tub that folds up against the wall when not in use. Sato describes it as his favourite room. "It\'s the only place I can stand up without seeing my desk," he says.',
     ],
   },
 };
@@ -96,8 +109,6 @@ function getRelated(
 export function ArticleDetail(): React.JSX.Element {
   const { slug } = useParams<{ slug: string }>();
   const article = getArticle(slug ?? '');
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   if (!article) {
     return (
@@ -116,26 +127,45 @@ export function ArticleDetail(): React.JSX.Element {
   const author = getAuthor(article.authorSlug);
   const body = articleBodies[article.slug];
   const related = getRelated(article.slug);
-
-  // Gallery images for the tabs
-  const galleryImages = articles.slice(0, 4).map((a) => ({
-    bg: a.image.bg,
-    fg: a.image.fg,
-    label: a.title,
-    width: a.image.width,
-    height: a.image.height,
-  }));
-
-  function openLightbox(index: number): void {
-    setLightboxIndex(index);
-    setLightboxOpen(true);
-  }
+  const inlineImages = body?.inlineImages ?? [];
 
   return (
     <>
       <AtelierNavbar />
 
-      <div className="atelier-container atelier-section">
+      {/* Full-bleed hero image */}
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '55vh',
+          minHeight: '360px',
+          maxHeight: '640px',
+          overflow: 'hidden',
+        }}
+      >
+        <img
+          src={article.imageUrl}
+          alt={article.imageAlt}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 40%',
+          }}
+          loading="eager"
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to bottom, transparent 60%, rgba(253,251,247,0.95) 100%)',
+          }}
+        />
+      </div>
+
+      <div className="atelier-container" style={{ paddingTop: '2.5rem', paddingBottom: '5rem' }}>
         <div className="atelier-reading-column">
           {/* Breadcrumb */}
           <Breadcrumb>
@@ -144,115 +174,107 @@ export function ArticleDetail(): React.JSX.Element {
               {article.category}
             </BreadcrumbItem>
             <BreadcrumbItem current>
-              {article.title.length > 40 ? `${article.title.slice(0, 40)}\u2026` : article.title}
+              {article.title.length > 45 ? `${article.title.slice(0, 45)}\u2026` : article.title}
             </BreadcrumbItem>
           </Breadcrumb>
 
           {/* Category */}
-          <p
-            className="atelier-smallcaps"
-            style={{
-              marginTop: 'var(--spacing-xl, 2rem)',
-              marginBottom: 'var(--spacing-xs, 0.25rem)',
-            }}
-          >
+          <p className="atelier-smallcaps" style={{ marginTop: '2rem', marginBottom: '0.5rem' }}>
             {article.category}
           </p>
 
           {/* Title */}
-          <h1
-            className="atelier-display atelier-display--lg"
-            style={{ marginBottom: 'var(--spacing-md, 1rem)' }}
-          >
+          <h1 className="atelier-display atelier-display--lg" style={{ marginBottom: '0.75rem' }}>
             {article.title}
           </h1>
 
-          {/* Byline */}
+          {/* Subtitle */}
           <p
+            className="atelier-body--serif"
             style={{
               color: 'var(--color-fg-secondary)',
-              marginBottom: 'var(--spacing-lg, 1.5rem)',
+              marginBottom: '1.5rem',
+              fontSize: '1.1875rem',
             }}
           >
-            By {author?.name} &mdash; {article.readTime} min read
+            {article.subtitle}
           </p>
+
+          {/* Byline */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              fontSize: '0.875rem',
+              color: 'var(--color-fg-secondary)',
+              marginBottom: '2.5rem',
+            }}
+          >
+            <span>By {author?.name}</span>
+            <span>&middot;</span>
+            <span>
+              {new Date(article.date).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+            </span>
+            <span>&middot;</span>
+            <span>{article.readTime} min read</span>
+          </div>
 
           <Divider spacing="md" />
 
-          {/* Tabs: Article | Gallery */}
-          <Tabs defaultValue="article">
-            <TabList>
-              <Tab value="article">Article</Tab>
-              <Tab value="gallery">Gallery</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel value="article">
-                {/* Hero image */}
-                <div style={{ margin: 'var(--spacing-lg, 1.5rem) 0' }}>
-                  <Image
-                    src={`data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${article.image.width}" height="${article.image.height}"><rect fill="${article.image.bg}" width="100%" height="100%"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="${article.image.fg}" font-family="Georgia" font-size="18" font-style="italic">${article.category}</text></svg>`)}`}
-                    alt={article.title}
-                    style={{ width: '100%', height: 'auto' }}
-                    radius="none"
-                  />
-                </div>
+          {/* Article body */}
+          <article className="atelier-body--reading" style={{ marginTop: '2rem' }}>
+            {body ? (
+              <>
+                <p style={{ marginTop: 0 }}>{body.paragraphs[0]}</p>
+                <p>{body.paragraphs[1]}</p>
 
-                {/* Article body */}
-                <article className="atelier-body--serif">
-                  {body ? (
-                    <>
-                      <p>{body.paragraphs[0]}</p>
-                      <p>{body.paragraphs[1]}</p>
+                {/* First inline image */}
+                {inlineImages[0] && (
+                  <figure className="atelier-inline-image">
+                    <img
+                      src={inlineImages[0].url}
+                      alt={inlineImages[0].alt}
+                      style={{ width: '100%', height: 'auto' }}
+                      loading="lazy"
+                    />
+                    <figcaption>{inlineImages[0].caption}</figcaption>
+                  </figure>
+                )}
 
-                      <PullQuote quote={body.pullQuote} variant="accent" />
+                <blockquote className="atelier-pull-quote">
+                  <p className="atelier-pull-quote__text">{body.pullQuote}</p>
+                </blockquote>
 
-                      <p>{body.paragraphs[2]}</p>
-                      <p>{body.paragraphs[3]}</p>
-                    </>
-                  ) : (
-                    <>
-                      <p>{article.excerpt}</p>
-                      <Skeleton variant="text" lines={8} />
-                    </>
-                  )}
-                </article>
-              </TabPanel>
+                <p>{body.paragraphs[2]}</p>
 
-              <TabPanel value="gallery">
-                <ScrollArea maxHeight="600px" style={{ marginTop: 'var(--spacing-lg, 1.5rem)' }}>
-                  <div className="atelier-gallery-grid">
-                    {galleryImages.map((img, i) => (
-                      <button
-                        key={img.label}
-                        type="button"
-                        onClick={() => openLightbox(i)}
-                        style={{
-                          border: 'none',
-                          padding: 0,
-                          cursor: 'pointer',
-                          background: 'none',
-                        }}
-                        aria-label={`View image: ${img.label}`}
-                      >
-                        <div
-                          className="atelier-placeholder-image"
-                          style={{
-                            background: img.bg,
-                            color: img.fg,
-                            aspectRatio: '1',
-                            width: '100%',
-                            fontSize: 'var(--font-size-sm, 0.875rem)',
-                          }}
-                        >
-                          {img.label.length > 30 ? `${img.label.slice(0, 30)}\u2026` : img.label}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </ScrollArea>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
+                {/* Second inline image */}
+                {inlineImages[1] && (
+                  <figure className="atelier-inline-image">
+                    <img
+                      src={inlineImages[1].url}
+                      alt={inlineImages[1].alt}
+                      style={{ width: '100%', height: 'auto' }}
+                      loading="lazy"
+                    />
+                    <figcaption>{inlineImages[1].caption}</figcaption>
+                  </figure>
+                )}
+
+                <p>{body.paragraphs[3]}</p>
+                {body.paragraphs[4] && <p>{body.paragraphs[4]}</p>}
+              </>
+            ) : (
+              <>
+                <p>{article.excerpt}</p>
+                <Skeleton variant="text" lines={8} />
+              </>
+            )}
+          </article>
 
           <Divider spacing="lg" />
 
@@ -272,10 +294,10 @@ export function ArticleDetail(): React.JSX.Element {
           <RelatedPosts title="More from Atelier" posts={related} columns={3} variant="list" />
 
           {/* Back to top */}
-          <div style={{ textAlign: 'center', padding: 'var(--spacing-xl, 2rem) 0' }}>
+          <div style={{ textAlign: 'center', padding: '3rem 0 1rem' }}>
             <button
               type="button"
-              className="atelier-link"
+              className="atelier-link atelier-smallcaps"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               style={{
                 background: 'none',
@@ -290,22 +312,6 @@ export function ArticleDetail(): React.JSX.Element {
           </div>
         </div>
       </div>
-
-      {/* Lightbox modal */}
-      <Modal open={lightboxOpen} onClose={() => setLightboxOpen(false)} size="lg">
-        <div
-          className="atelier-placeholder-image"
-          style={{
-            background: galleryImages[lightboxIndex]?.bg,
-            color: galleryImages[lightboxIndex]?.fg,
-            aspectRatio: '4 / 3',
-            width: '100%',
-            fontSize: 'var(--font-size-lg, 1.125rem)',
-          }}
-        >
-          {galleryImages[lightboxIndex]?.label}
-        </div>
-      </Modal>
     </>
   );
 }

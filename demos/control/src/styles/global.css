@@ -440,3 +440,59 @@ body {
     padding-bottom: 80px;
   }
 }
+
+/* Charts grid */
+.control-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4, 16px);
+  margin-bottom: var(--spacing-6, 24px);
+}
+
+@media (max-width: 900px) {
+  .control-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Metric card (used in Performance/Accessibility) */
+.control-metric-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1, 4px);
+}
+
+.control-metric-card__value {
+  font-size: var(--font-size-2xl, 1.5rem);
+  font-weight: 600;
+  color: var(--color-fg-primary);
+  line-height: 1;
+}
+
+.control-metric-card__label {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-fg-secondary);
+}
+
+/* Alerts list */
+.control-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3, 12px);
+}
+
+@media (max-width: 900px) {
+  .control-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .control-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
