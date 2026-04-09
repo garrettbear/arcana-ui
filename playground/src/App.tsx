@@ -1734,7 +1734,7 @@ function DataSection() {
             <CardBody>
               <EmptyState
                 icon={
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <svg aria-hidden="true" width="40" height="40" viewBox="0 0 40 40" fill="none">
                     <rect
                       x="6"
                       y="10"
@@ -1797,6 +1797,7 @@ function DataSection() {
             comparison="vs last month"
             icon={
               <svg
+                aria-hidden="true"
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
@@ -1815,6 +1816,7 @@ function DataSection() {
             comparison="vs last month"
             icon={
               <svg
+                aria-hidden="true"
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
@@ -1836,6 +1838,7 @@ function DataSection() {
             comparison="vs last month"
             icon={
               <svg
+                aria-hidden="true"
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
@@ -2841,40 +2844,46 @@ function NavigationSection() {
         >
           <Navbar brand={<NavbarBrand>Nimbus</NavbarBrand>}>
             <NavbarContent>
-              <span
-                role="link"
-                tabIndex={0}
+              <button
+                type="button"
                 style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
                   color: 'var(--color-fg-primary)',
                   fontSize: 'var(--font-size-sm)',
                   fontWeight: 500,
-                  cursor: 'pointer',
                 }}
               >
                 Product
-              </span>
-              <span
-                role="link"
-                tabIndex={0}
+              </button>
+              <button
+                type="button"
                 style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
                   color: 'var(--color-fg-secondary)',
                   fontSize: 'var(--font-size-sm)',
-                  cursor: 'pointer',
                 }}
               >
                 Pricing
-              </span>
-              <span
-                role="link"
-                tabIndex={0}
+              </button>
+              <button
+                type="button"
                 style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
                   color: 'var(--color-fg-secondary)',
                   fontSize: 'var(--font-size-sm)',
-                  cursor: 'pointer',
                 }}
               >
                 Docs
-              </span>
+              </button>
             </NavbarContent>
             <NavbarActions>
               <Button size="sm" variant="ghost">
@@ -3720,6 +3729,7 @@ function KitchenSink() {
       <nav className={styles.contentNav}>
         {SECTIONS.map((s) => (
           <button
+            type="button"
             key={s.id}
             className={`${styles.navLink} ${activeSection === s.id ? styles.navActive : ''}`}
             onClick={() => setActiveSection(s.id)}
@@ -3785,22 +3795,12 @@ export default function App() {
   return (
     <ToastProvider>
       <div className={styles.app}>
-        {/* Dev banner */}
-        <div className={styles.devBanner}>
-          <span className={styles.devBannerIcon}>🚧</span>
-          <span>
-            Arcana UI Playground — token-driven design system with <strong>60+ components</strong>{' '}
-            across 14 themes.
-          </span>
-        </div>
-
         {/* Top bar */}
         <header className={styles.topbar}>
-          <div className={styles.brand}>
+          <Link to="/" className={styles.brand}>
             <span className={styles.brandLogo} role="img" aria-label="Arcana" />
-            <span className={styles.brandVersion}>v0.1.0</span>
-            <span className={styles.componentCount}>60+ components</span>
-          </div>
+            <span className={styles.brandVersion}>v0.1.0-beta</span>
+          </Link>
 
           <nav className={styles.playgroundNav}>
             <span className={`${styles.playgroundNavLink} ${styles.playgroundNavActive}`}>
@@ -3812,16 +3812,26 @@ export default function App() {
             <Link to="/playground/tokens" className={styles.playgroundNavLink}>
               Tokens
             </Link>
+            <Link to="/playground/graph" className={styles.playgroundNavLink}>
+              Graph
+            </Link>
           </nav>
 
           <div className={styles.topbarSpacer} />
 
           <div className={styles.topbarControls}>
             <button
+              type="button"
               className={`${styles.panelToggle} ${leftOpen ? styles.panelToggleActive : ''} ${styles.editorToggleBtn}`}
               onClick={() => setLeftOpen((v) => !v)}
             >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+              <svg
+                aria-hidden="true"
+                width="14"
+                height="14"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+              >
                 <path d="M2 4h12v1.5H2V4zm0 3.5h12V9H2V7.5zm0 3.5h8v1.5H2V11z" />
               </svg>
               Token Editor
@@ -3830,10 +3840,17 @@ export default function App() {
             <div className={styles.topbarDivider} />
 
             <button
+              type="button"
               className={`${styles.panelToggle} ${rightOpen ? styles.panelToggleActive : ''}`}
               onClick={() => setRightOpen((v) => !v)}
             >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+              <svg
+                aria-hidden="true"
+                width="14"
+                height="14"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+              >
                 <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm-.75 3.5h1.5v5h-1.5v-5zm0 6h1.5v1.5h-1.5V10.5z" />
               </svg>
               A11y Panel
