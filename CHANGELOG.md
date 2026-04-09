@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- `demos/ecommerce` — rebranded from "Forma" luxury goods to "Arcana Supply" developer merch store: 8 new products (black hoodie, stone hoodie, navy cap, token tote, desk mat, zip pouch, sticker sheet, mug) with real Unsplash images; updated categories (Apparel/Accessories/Home); hero, testimonials, and timeline rewritten to reflect Arcana UI's actual launch story.
+- `demos/mosaic` — replaced all 20 placeholder images (`placehold.co`) with real Unsplash photographs matched to the design/architecture/typography content; expanded feed from 20 to 30 items; added `@arcana-ui/demo-shared` dependency and wired ThemeSwitcher (defaultTheme: "light").
 
 ### Added
 - `@arcana-ui/cli@0.1.0-beta.1` — new package: command-line tool for scaffolding Arcana UI projects, validating themes, and managing presets. Three commands:

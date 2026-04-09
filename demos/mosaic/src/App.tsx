@@ -1,4 +1,5 @@
 import { ToastProvider } from '@arcana-ui/core';
+import { ThemeSwitcher } from '@arcana-ui/demo-shared/theme-switcher';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MosaicNavbar } from './components/MosaicNavbar';
 import { CollectionDetail } from './pages/CollectionDetail';
@@ -17,6 +18,7 @@ export function App(): React.JSX.Element {
             <Route path="/collections/:id" element={<CollectionDetail />} />
           </Routes>
         </div>
+        <ThemeSwitcher defaultTheme="light" />
       </ToastProvider>
     </BrowserRouter>
   );
