@@ -1,6 +1,6 @@
 {
   "name": "@arcana-ui/cli",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0",
   "description": "Command-line tool for Arcana UI — scaffold projects, validate themes, manage presets",
   "license": "MIT",
   "type": "module",

@@ -7,7 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+_No unreleased changes. The next feature or fix merged to `develop` lands here._
+
+## [0.1.0] - 2026-04-09
+
+First stable release of Arcana UI. Everything below was accumulated across the
+`0.1.0-beta.1` and `0.1.0-beta.2` pre-releases plus the final launch-polish
+sprint on `develop`. All four packages — `@arcana-ui/tokens`,
+`@arcana-ui/core`, `@arcana-ui/cli`, and `@arcana-ui/mcp` — are published to
+npm at `0.1.0` on the `latest` tag.
+
+### Release Overview
+
+**Shipping in 0.1.0:**
+
+- **108 React components** across primitives, navigation, forms, data
+  display, overlays, layout, media, feedback, content/marketing, e-commerce,
+  editorial, and utility categories.
+- **14 theme presets:** light, dark, terminal, retro98, glass, brutalist,
+  corporate, startup, editorial, commerce, midnight, nature, neon, mono.
+- **Three-tier token architecture** (primitive → semantic → component) with
+  density modes (compact/default/comfortable), global element sizing, WCAG
+  contrast validation, per-preset motion personalities, and
+  `prefers-reduced-motion` support.
+- **11 hooks:** `useTheme`, `useMediaQuery`, `useBreakpoint`,
+  `usePrefersReducedMotion`, `useHotkey`, `useFloating`, `useClickOutside`,
+  `useDrag`, `useUndoRedo`, plus the `ThemeProvider` context.
+- **`@arcana-ui/cli`** with `init`, `validate`, and `add-theme` commands (5
+  starter layouts × Vite/Next frameworks).
+- **`@arcana-ui/mcp`** — Model Context Protocol server with 7 tools for AI
+  agents (Claude Code, Cursor, Codex, Figma Make).
+- **Claude Code skill** at `.claude/skills/arcana/SKILL.md` (1,821 lines —
+  complete component reference, hooks, token system, 4 layout patterns).
+- **`llms.txt` + `llms-full.txt`** AI discovery files served from
+  `arcana-ui.com` with correct `text/plain` headers.
+- **6 demo sites** deployed to Vercel: Forma (ecommerce), Meridian
+  (dashboard), Atelier (editorial), Control (analytics), Wavefront (music),
+  Mosaic (visual discovery).
+- **Landing page + playground** at `arcana-ui.com` with visual token editor,
+  ComponentGallery, D3 token-component relationship graph, export to JSON
+  + CSS, and `?theme=` deep-link sync.
+- **Version control + migration infrastructure:** `docs/migrations/` scaffold
+  and `manifest.ai.json` `releaseHistory` array so AI agents can
+  programmatically track breaking changes across releases.
+
 ### Added
+- Version control + migration infrastructure: `docs/migrations/README.md` documents how AI agents should read `manifest.ai.json` for breaking-change metadata when upgrading between versions, and `docs/migrations/TEMPLATE.md` is the scaffold for every future release with breaking changes.
+- `manifest.ai.json` — new top-level `releaseHistory` array records every past release (version, date, breaking changes, migration guide URL, one-line summary) so AI agents upgrading across multiple versions can walk the array forward and apply every guide in order.
+- `packages/core/src/version.ts` — runtime-exposed `VERSION` constant, re-exported from the package entry point. Consumers, the CLI, and AI agents can now read the package version without touching the filesystem.
 - Playground Token Editor: `Export CSS` button alongside existing `Export JSON`. Generates a ready-to-paste `:root { --token: value }` block (with a `[data-density="..."]` companion selector when the density override is set) so users can copy a tuned theme straight into their own stylesheet.
 - Playground `?theme=` URL sync: switching presets from the Token Editor now rewrites the `?theme=` query param via `setSearchParams({ replace: true })`, so a refresh or shared URL preserves the active theme instead of reverting to the landing-page deep-link.
 

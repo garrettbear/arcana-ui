@@ -1,6 +1,6 @@
 {
   "name": "@arcana-ui/mcp",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0",
   "description": "MCP server for Arcana UI — gives AI agents (Claude, Cursor, Codex) full access to Arcana components, presets, and token system",
   "license": "MIT",
   "type": "module",

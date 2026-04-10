@@ -306,3 +306,6 @@ export type { ThemeProviderProps } from './context/ThemeProvider';
 
 // ─── Utils ────────────────────────────────────────────────────────────────────
 export { cn } from './utils/cn';
+
+// ─── Version ─────────────────────────────────────────────────────────────────
+export { VERSION } from './version';

@@ -1,14 +1,37 @@
 {
   "$schema": "./scripts/manifest.schema.json",
   "release": {
-    "version": "0.1.0-beta.2",
+    "version": "0.1.0",
     "releaseDate": "2026-04-09",
-    "changelog": "https://github.com/garrettbear/arcana-ui/blob/develop/CHANGELOG.md",
+    "changelog": "https://github.com/Arcana-UI/arcana/blob/main/CHANGELOG.md",
     "breaking": [],
     "migration": null
   },
+  "releaseHistory": [
+    {
+      "version": "0.1.0",
+      "date": "2026-04-09",
+      "breaking": [],
+      "migration": null,
+      "summary": "Initial stable release. 108 React components, 14 theme presets, 11 hooks, three-tier token system (2,600+ CSS variables), @arcana-ui/cli scaffolder, @arcana-ui/mcp Model Context Protocol server, Claude Code skill, llms.txt discoverability layer, and 6 demo sites."
+    },
+    {
+      "version": "0.1.0-beta.2",
+      "date": "2026-04-06",
+      "breaking": [],
+      "migration": null,
+      "summary": "Consumer package audit pass. Fixed @arcana-ui/tokens exports map to allow importing ./dist/arcana.css subpath. Rebuilt @arcana-ui/core from current source so all 122 exports (previously 115 in beta.1) are present — useClickOutside, useDrag, useUndoRedo, ColorPicker, FontPicker, BottomSheet, DrawerNav, LogoCloud now ship."
+    },
+    {
+      "version": "0.1.0-beta.1",
+      "date": "2026-03-24",
+      "breaking": [],
+      "migration": null,
+      "summary": "Initial beta release. Foundation phases 0-3 complete: token restructure, color/typography/spacing/elevation/motion systems, responsive mobile-first suite, and 60+ components across navigation, forms, data display, overlays, layout, media, feedback, e-commerce, editorial, and utility categories."
+    }
+  ],
   "name": "@arcana-ui/core",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0",
   "description": "React components for Arcana UI — AI's #1 design system",
   "install": "npm i @arcana-ui/core @arcana-ui/tokens",
   "quickStart": [
@@ -3410,7 +3433,7 @@
     }
   ],
   "_generated": {
-    "at": "2026-04-09T03:58:22.528Z",
+    "at": "2026-04-09T17:22:56.088Z",
     "by": "scripts/generate-manifest.mjs",
     "componentCount": 108,
     "hookCount": 11
