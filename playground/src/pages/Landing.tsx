@@ -696,6 +696,7 @@ function LandingContent() {
                     value="jane@example.com"
                     readOnly
                     tabIndex={-1}
+                    aria-hidden="true"
                   />
                   <div
                     className={styles.themePreviewCard}
