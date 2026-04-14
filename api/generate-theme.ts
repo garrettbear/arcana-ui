@@ -17,9 +17,16 @@
  * Response:
  *   200 { "themes": [ { name, description, primitive, semantic, component } ],
  *         "meta": { model, byok, count, cached } }
- *   400 { "error": "..." }            // bad input
- *   429 { "error": "rate_limited" }   // abuse protection
- *   500 { "error": "..." }            // upstream / parsing failure
+ *   4xx/5xx { "error": "...", "code": "billing_error" | "authentication_error" |
+ *             "overloaded_error" | "rate_limit_error" | "invalid_request_error" |
+ *             "api_error" | null, "detail"?: "..." }
+ *
+ * Error shape: every non-2xx response carries `code`. When the failure was
+ * upstream from Anthropic the edge function parses Anthropic's JSON error
+ * envelope, copies `error.type` to `code`, and forwards Anthropic's HTTP
+ * status unchanged. When the failure was produced locally (validation,
+ * rate limit, forbidden origin, etc.) `code` is `null` and the client
+ * switches on `error` or the HTTP status instead.
  *
  * Semantic cache: results are keyed on a SHA-256 hash of the normalized
  * { description, siteType, density, count, model } tuple and persisted in
@@ -97,7 +104,7 @@ export default async function handler(req: Request): Promise<Response> {
 
   if (!apiKey) {
     return json(
-      { error: 'server_misconfigured', detail: 'ANTHROPIC_API_KEY missing' },
+      { error: 'server_misconfigured', code: null, detail: 'ANTHROPIC_API_KEY missing' },
       500,
       corsHeaders,
     );
@@ -108,24 +115,33 @@ export default async function handler(req: Request): Promise<Response> {
   // this check any client could burn through the shared key even though the
   // CORS header would reject the response in a real browser.
   if (!usingByok && !originAllowed) {
-    return json({ error: 'forbidden_origin' }, 403, corsHeaders);
+    return json({ error: 'forbidden_origin', code: null }, 403, corsHeaders);
   }
 
   // Rate limit only applies to shared-key requests.
   if (!usingByok) {
     if (!checkGlobalSharedRateLimit()) {
       return json(
-        { error: 'rate_limited', scope: 'global', retryAfterMs: RATE_LIMIT_WINDOW_MS },
+        {
+          error: 'rate_limited',
+          code: null,
+          scope: 'global',
+          retryAfterMs: RATE_LIMIT_WINDOW_MS,
+        },
         429,
         { ...corsHeaders, 'Retry-After': String(Math.ceil(RATE_LIMIT_WINDOW_MS / 1000)) },
       );
     }
     const ip = getClientIp(req);
     if (!checkRateLimit(ip)) {
-      return json({ error: 'rate_limited', scope: 'ip', retryAfterMs: RATE_LIMIT_WINDOW_MS }, 429, {
-        ...corsHeaders,
-        'Retry-After': String(Math.ceil(RATE_LIMIT_WINDOW_MS / 1000)),
-      });
+      return json(
+        { error: 'rate_limited', code: null, scope: 'ip', retryAfterMs: RATE_LIMIT_WINDOW_MS },
+        429,
+        {
+          ...corsHeaders,
+          'Retry-After': String(Math.ceil(RATE_LIMIT_WINDOW_MS / 1000)),
+        },
+      );
     }
   }
 
@@ -134,12 +150,12 @@ export default async function handler(req: Request): Promise<Response> {
   try {
     body = await req.json();
   } catch {
-    return json({ error: 'invalid_json' }, 400, corsHeaders);
+    return json({ error: 'invalid_json', code: null }, 400, corsHeaders);
   }
 
   const parsed = validateInput(body);
   if ('error' in parsed) {
-    return json({ error: parsed.error }, 400, corsHeaders);
+    return json({ error: parsed.error, code: null }, 400, corsHeaders);
   }
   const { description, siteType, density, count, model } = parsed;
 
@@ -178,8 +194,46 @@ export default async function handler(req: Request): Promise<Response> {
       corsHeaders,
     );
   } catch (err) {
+    if (err instanceof AnthropicApiError) {
+      // Forward Anthropic's HTTP status unchanged when it is a real 4xx/5xx
+      // so the client can distinguish, e.g., our 429 (IP rate limit) from
+      // Anthropic's 429 (rate_limit_error / overloaded_error) via the code
+      // field. Out-of-range status codes fall back to 502 so we never turn
+      // an upstream failure into a success.
+      const status = err.status >= 400 && err.status < 600 ? err.status : 502;
+      return json(
+        { error: 'generation_failed', code: err.code, detail: err.detail },
+        status,
+        corsHeaders,
+      );
+    }
     const message = err instanceof Error ? err.message : String(err);
-    return json({ error: 'generation_failed', detail: message }, 500, corsHeaders);
+    return json({ error: 'generation_failed', code: null, detail: message }, 500, corsHeaders);
+  }
+}
+
+// --- Upstream error envelope --------------------------------------------
+
+/**
+ * Thrown from generateOne when Anthropic returns a non-2xx. Carries the
+ * upstream HTTP status, the parsed `error.type` from Anthropic's JSON body
+ * (or null if the body wasn't JSON), and the human-readable `error.message`
+ * so the handler can forward all three to the client.
+ *
+ * Anthropic's error envelope is documented at
+ * https://docs.anthropic.com/en/api/errors and looks like:
+ *   { "type": "error", "error": { "type": "overloaded_error", "message": "..." } }
+ */
+class AnthropicApiError extends Error {
+  readonly status: number;
+  readonly code: string | null;
+  readonly detail: string;
+  constructor(status: number, code: string | null, detail: string) {
+    super(`anthropic ${status}${code ? ` (${code})` : ''}`);
+    this.name = 'AnthropicApiError';
+    this.status = status;
+    this.code = code;
+    this.detail = detail;
   }
 }
 
@@ -233,7 +287,8 @@ async function generateOne(
 
   if (!response.ok) {
     const text = await safeText(response);
-    throw new Error(`anthropic ${response.status}: ${text.slice(0, 200)}`);
+    const { code, detail } = parseAnthropicError(text);
+    throw new AnthropicApiError(response.status, code, detail);
   }
 
   const data = (await response.json()) as {
@@ -415,6 +470,51 @@ function checkGlobalSharedRateLimit(): boolean {
   if (globalSharedBucket.count >= GLOBAL_SHARED_RATE_MAX) return false;
   globalSharedBucket.count += 1;
   return true;
+}
+
+/**
+ * Parse the Anthropic error envelope into a `{ code, detail }` pair.
+ * Anthropic returns JSON like `{ "type": "error", "error": { "type": "...", "message": "..." } }`
+ * on failure. We narrow the `type` to the set documented in
+ * https://docs.anthropic.com/en/api/errors so downstream consumers can
+ * switch on it safely; anything unknown becomes `null` and the client
+ * falls back to the HTTP status.
+ */
+function parseAnthropicError(rawText: string): { code: string | null; detail: string } {
+  const fallbackDetail = rawText.slice(0, 200);
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(rawText);
+  } catch {
+    return { code: null, detail: fallbackDetail };
+  }
+  if (!parsed || typeof parsed !== 'object') {
+    return { code: null, detail: fallbackDetail };
+  }
+  const inner = (parsed as { error?: unknown }).error;
+  if (!inner || typeof inner !== 'object') {
+    return { code: null, detail: fallbackDetail };
+  }
+  const innerObj = inner as { type?: unknown; message?: unknown };
+  const rawType = typeof innerObj.type === 'string' ? innerObj.type : null;
+  const message = typeof innerObj.message === 'string' ? innerObj.message : fallbackDetail;
+  return { code: isKnownAnthropicErrorType(rawType) ? rawType : null, detail: message };
+}
+
+const ANTHROPIC_ERROR_TYPES = new Set([
+  'invalid_request_error',
+  'authentication_error',
+  'permission_error',
+  'not_found_error',
+  'request_too_large',
+  'rate_limit_error',
+  'api_error',
+  'overloaded_error',
+  'billing_error',
+]);
+
+function isKnownAnthropicErrorType(type: string | null): type is string {
+  return typeof type === 'string' && ANTHROPIC_ERROR_TYPES.has(type);
 }
 
 async function safeText(res: Response): Promise<string> {
