@@ -14,9 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `/generate` route with side-by-side preview cards, then hands the picked
   theme into the Token Editor via sessionStorage.
   - `playground/api/generate-theme.ts` — Vercel Edge function proxying to the
-    Anthropic API. Origin-restricted CORS, 10 req/min in-memory rate limit per
-    IP, supports BYOK via the `X-User-API-Key` header (rate limit bypassed
-    when present).
+    Anthropic API. Strict origin allowlist on the shared server key (only
+    `arcana-ui.com`, its subdomains, `localhost`, and team preview deploys
+    under `*.garrett-whistens-projects.vercel.app`), plus per-IP (5/min) and
+    global (60/min) rate limits with `Retry-After`. Supports BYOK via the
+    `X-User-API-Key` header (origin gating and rate limits bypassed when
+    present).
   - `playground/api/README.md` — endpoint spec, BYOK notes, cost controls.
   - `playground/src/pages/Generate.tsx` + `Generate.module.css` — `/generate`
     route showing three theme cards with live-colored preview windows
@@ -43,6 +46,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Landing page hero form now calls the generator with a loading state
   instead of showing "AI generation coming soon" and navigating blindly to
   `/playground`. Error states surface via toast.
+
+### Security
+
+- Hardened `/api/generate-theme` against shared-key abuse that could have
+  driven up the Anthropic bill. The previous CORS check accepted any
+  `*.vercel.app` origin, which any third-party Vercel app could have used to
+  proxy through our shared key. Three independent gates now protect the
+  shared key: (1) strict origin allowlist narrowed to `arcana-ui.com`,
+  subdomains, localhost, and team preview deploys under
+  `*.garrett-whistens-projects.vercel.app`, enforced server-side so curl,
+  server-to-server, and bot traffic without a valid browser origin get a
+  `403 forbidden_origin` before any Anthropic call is made; (2) per-IP limit
+  dropped from 10/min to 5/min; (3) new global 60/min ceiling across all
+  IPs on the shared key, belt-and-suspenders protection against distributed
+  attacks that would compound per-IP limits into a large bill. 429 responses
+  now include a `Retry-After` header and a `scope` field (`ip` or `global`).
+  BYOK requests bypass all three checks since the user is paying.
 
 ## [0.1.0] - 2026-04-09
 
