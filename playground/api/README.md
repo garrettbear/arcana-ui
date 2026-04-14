@@ -43,7 +43,11 @@ Response:
 }
 ```
 
-Runtime: Vercel Edge. Origin-restricted CORS. In-memory rate limit of 10 req/min per IP (bypassed for BYOK).
+Runtime: Vercel Edge. Shared-key requests are gated by three independent checks (all bypassed for BYOK requests that pass `X-User-API-Key`):
+
+- Origin allowlist. The `Origin` header must be `arcana-ui.com`, a `.arcana-ui.com` subdomain, `localhost`, `127.0.0.1`, or a team preview subdomain under `.garrett-whistens-projects.vercel.app`. Anything else (including missing origin, third-party Vercel apps, and raw `curl`) returns `403 forbidden_origin`. CORS alone cannot block non-browser clients, so this is enforced server-side.
+- Per-IP limit of 5 requests per minute on the shared key. Returns `429 rate_limited` with `scope: "ip"` and a `Retry-After` header.
+- Global ceiling of 60 shared-key requests per minute per edge instance across all IPs. Caps total Anthropic spend even under distributed abuse. Returns `429 rate_limited` with `scope: "global"`.
 
 Cost controls:
 

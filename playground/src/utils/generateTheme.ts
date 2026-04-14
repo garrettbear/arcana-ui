@@ -135,6 +135,8 @@ function readableError(err: GenerateThemeError, status: number): string {
       return 'That description is a bit long. Try trimming to under 500 characters.';
     case 'rate_limited':
       return 'Free tier limit reached. Try again in a minute or add your own API key.';
+    case 'forbidden_origin':
+      return 'This origin cannot use the shared key. Add your own Anthropic API key to generate from here.';
     case 'server_misconfigured':
       return 'The generation service is not configured. Please let us know.';
     case 'generation_failed':
