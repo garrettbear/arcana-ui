@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Landing hero theme generation returned 404 after the 405 fix.** The
+  Vercel project's Root Directory is the repo root, so Vercel only scans
+  `./api/*` for functions. The edge function was sitting at
+  `./playground/api/generate-theme.ts`, which Vercel never discovered.
+  Before the SPA rewrite was tightened, that path fell through to the
+  catchall and returned 405; after the rewrite started excluding `/api/`,
+  the path resolved to nothing and returned 404. Moved the function to
+  `./api/generate-theme.ts` (and the README to `./api/README.md`) so
+  Vercel picks it up natively. `@vercel/kv` promoted from the playground
+  workspace to the repo root `package.json` so the bundler at the root
+  can resolve it. `.env.example` moved to the repo root as well, since
+  env vars are now pulled from the root via `vercel env pull`.
+  - `api/generate-theme.ts`, `api/README.md` — moved from `playground/api/`.
+  - `.env.example` — moved from `playground/.env.example`.
+  - `package.json` — added `@vercel/kv@^3.0.0` as a runtime dependency.
+  - `playground/package.json` — removed `@vercel/kv` (now inherited).
 - **Landing hero theme generation returned 405.** The root `vercel.json` SPA
   rewrite used `/(.*)` as its source, which caught `/api/*` requests before
   Vercel Functions could handle them. POSTs to `/api/generate-theme` were
