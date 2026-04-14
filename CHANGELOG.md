@@ -9,6 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Semantic cache for AI theme generation (P.5.1).** `/api/generate-theme`
+  now checks Vercel KV before calling Anthropic. Cache key is a SHA-256 of
+  the normalized `{description, siteType, density, count, model}` tuple
+  (description is lowercased and internal whitespace collapsed so cosmetic
+  edits still hit the same entry), stored under the `theme:v1:` prefix
+  with a 7-day TTL. Cache hits return with `meta.cached = true` and skip
+  Anthropic entirely, so repeat prompts cost zero. Cache writes are
+  best-effort: any KV failure is swallowed so the Anthropic response still
+  reaches the client. KV is optional — when `KV_REST_API_URL` /
+  `KV_REST_API_TOKEN` are missing (local dev without `vercel env pull`),
+  the cache layer is a no-op and every request hits Anthropic as before.
+  - `playground/package.json` — added `@vercel/kv@^3.0.0` as a dependency.
+  - `playground/api/generate-theme.ts` — added `kvConfigured`,
+    `buildCacheKey`, `cacheGet`, `cacheSet` helpers plus
+    `CACHE_KEY_PREFIX` and `CACHE_TTL_SECONDS` constants. Handler now
+    consults the cache before running `generateOne` and writes the
+    successful response back on a miss. Response `meta` shape extended
+    with the optional `cached` boolean.
+  - `playground/src/utils/generateTheme.ts` — `GenerateThemeResponse.meta`
+    picks up the optional `cached?: boolean` field.
+  - `playground/src/pages/Generate.tsx` — preview page shows a "From
+    cache" Badge alongside the model and key badges when the response
+    was cached.
+  - `playground/api/README.md` — documents the KV setup flow, the new
+    env vars, and how to bust the cache by bumping `CACHE_KEY_PREFIX`.
 - **Generated theme chip in playground topbar (P.5.1).** When `?theme=generated`
   is active, a pill appears in the playground topbar showing a small
   "Generated" prefix plus the generated theme's kebab-case name, with a close

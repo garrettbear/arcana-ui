@@ -64,6 +64,7 @@ export default function Generate() {
         <div className={styles.metaModel}>
           <span className={styles.metaBadge}>{response.meta.byok ? 'Your key' : 'Shared'}</span>
           <span className={styles.metaBadge}>{formatModel(response.meta.model)}</span>
+          {response.meta.cached && <span className={styles.metaBadge}>From cache</span>}
         </div>
       </header>
 

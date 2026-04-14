@@ -15,11 +15,21 @@
  *   }
  *
  * Response:
- *   200 { "themes": [ { name, description, primitive, semantic, component } ] }
+ *   200 { "themes": [ { name, description, primitive, semantic, component } ],
+ *         "meta": { model, byok, count, cached } }
  *   400 { "error": "..." }            // bad input
  *   429 { "error": "rate_limited" }   // abuse protection
  *   500 { "error": "..." }            // upstream / parsing failure
+ *
+ * Semantic cache: results are keyed on a SHA-256 hash of the normalized
+ * { description, siteType, density, count, model } tuple and persisted in
+ * Vercel KV for 7 days. A cache hit returns with `meta.cached = true` and
+ * bypasses the Anthropic call entirely (zero API cost). KV is optional:
+ * when the KV env vars are missing (local dev without `vercel env pull`),
+ * the cache layer is skipped silently and every request calls Anthropic.
  */
+
+import { kv } from '@vercel/kv';
 
 export const config = {
   runtime: 'edge',
@@ -45,6 +55,13 @@ const RATE_LIMIT_MAX = 5;
 const GLOBAL_SHARED_RATE_MAX = 60;
 const rateLimitBuckets = new Map<string, { count: number; resetAt: number }>();
 let globalSharedBucket: { count: number; resetAt: number } = { count: 0, resetAt: 0 };
+
+// Semantic cache. Keys are `theme:v1:<sha256>` so we can invalidate the
+// entire cache by bumping the version prefix if the prompt or output
+// schema changes. TTL is 7 days: long enough to make repeat prompts free,
+// short enough that a prompt tweak cycles through within a sprint.
+const CACHE_KEY_PREFIX = 'theme:v1:';
+const CACHE_TTL_SECONDS = 60 * 60 * 24 * 7;
 
 // --- Handler -------------------------------------------------------------
 
@@ -126,6 +143,19 @@ export default async function handler(req: Request): Promise<Response> {
   }
   const { description, siteType, density, count, model } = parsed;
 
+  // Semantic cache lookup. Keyed on the validated/normalized tuple so
+  // cosmetic differences (capitalization, extra whitespace) collapse to
+  // the same entry.
+  const cacheKey = await buildCacheKey({ description, siteType, density, count, model });
+  const cachedThemes = cacheKey ? await cacheGet(cacheKey) : null;
+  if (cachedThemes) {
+    return json(
+      { themes: cachedThemes, meta: { model, byok: usingByok, count, cached: true } },
+      200,
+      corsHeaders,
+    );
+  }
+
   // Call Anthropic
   try {
     const themes = await Promise.all(
@@ -134,7 +164,19 @@ export default async function handler(req: Request): Promise<Response> {
       ),
     );
 
-    return json({ themes, meta: { model, byok: usingByok, count } }, 200, corsHeaders);
+    // Best-effort cache write. A KV failure must never surface to the
+    // client; the generation succeeded, that's what the user cares about.
+    if (cacheKey) {
+      cacheSet(cacheKey, themes).catch(() => {
+        /* swallow */
+      });
+    }
+
+    return json(
+      { themes, meta: { model, byok: usingByok, count, cached: false } },
+      200,
+      corsHeaders,
+    );
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return json({ error: 'generation_failed', detail: message }, 500, corsHeaders);
@@ -388,4 +430,61 @@ function json(body: unknown, status: number, headers: Record<string, string>): R
     status,
     headers: { ...headers, 'Content-Type': 'application/json' },
   });
+}
+
+// --- Semantic cache ------------------------------------------------------
+
+// KV is configured via Vercel env vars (KV_REST_API_URL, KV_REST_API_TOKEN).
+// When those are absent (e.g. `vercel dev` without `vercel env pull`),
+// `@vercel/kv` throws on the first call. We treat that as a soft miss so
+// local development still works and production still gets caching.
+function kvConfigured(): boolean {
+  return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+}
+
+interface CacheKeyInput {
+  description: string;
+  siteType: string | undefined;
+  density: 'compact' | 'normal' | 'comfortable' | undefined;
+  count: number;
+  model: string;
+}
+
+async function buildCacheKey(input: CacheKeyInput): Promise<string | null> {
+  if (!kvConfigured()) return null;
+  // Normalize description so whitespace and case do not cause cache misses
+  // on semantically identical prompts. The validator has already trimmed,
+  // we additionally lowercase and collapse internal runs of whitespace.
+  const normalized = {
+    description: input.description.toLowerCase().replace(/\s+/g, ' '),
+    siteType: input.siteType ?? '',
+    density: input.density ?? '',
+    count: input.count,
+    model: input.model,
+  };
+  const payload = JSON.stringify(normalized);
+  const bytes = new TextEncoder().encode(payload);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  const hex = Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+  return `${CACHE_KEY_PREFIX}${hex}`;
+}
+
+async function cacheGet(key: string): Promise<Record<string, unknown>[] | null> {
+  try {
+    const hit = await kv.get<Record<string, unknown>[]>(key);
+    return hit ?? null;
+  } catch {
+    // KV unavailable — treat as miss. Never fail the request on cache IO.
+    return null;
+  }
+}
+
+async function cacheSet(key: string, themes: Record<string, unknown>[]): Promise<void> {
+  try {
+    await kv.set(key, themes, { ex: CACHE_TTL_SECONDS });
+  } catch {
+    // swallow — see cacheGet
+  }
 }

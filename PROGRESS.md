@@ -67,7 +67,7 @@ All foundation work, token system (2,600+ CSS variables), responsive framework (
   - [x] Cost controls: Haiku default, prompt caching, max_tokens 2500
   - [x] BYOK via `X-User-API-Key` header (plumbing complete, UI follow-up)
   - [x] BYOK settings UI (gear icon + Popover in playground topbar: password input with show/hide, Test and save, Clear key, "Your key" Badge when set)
-  - [ ] Semantic cache (Vercel KV on hash of description+siteType+density+model)
+  - [x] Semantic cache (Vercel KV on SHA-256 hash of normalized description+siteType+density+count+model, 7-day TTL, `meta.cached` on response, soft-miss when KV env missing)
   - [x] Topbar shows generated theme name when `?theme=generated` is active (chip with close button, persisted across routes via `arcana-active-generated-name` session key)
 - [ ] P.6 -- Theme gallery (browse presets, one-click load, fork)
 - [ ] P.7 -- Authentication (GitHub + Google OAuth)

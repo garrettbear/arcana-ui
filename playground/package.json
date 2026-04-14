@@ -11,6 +11,7 @@
   "dependencies": {
     "@arcana-ui/core": "workspace:*",
     "@arcana-ui/tokens": "workspace:*",
+    "@vercel/kv": "^3.0.0",
     "d3": "^7.9.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

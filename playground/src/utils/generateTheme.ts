@@ -31,7 +31,18 @@ export interface GenerateThemeRequest {
 
 export interface GenerateThemeResponse {
   themes: GeneratedTheme[];
-  meta: { model: string; byok: boolean; count: number };
+  meta: {
+    model: string;
+    byok: boolean;
+    count: number;
+    /**
+     * True when the themes were served from the Vercel KV semantic cache
+     * instead of hitting the Anthropic API. Present on every successful
+     * response from deployments where KV is configured; may be absent
+     * from responses produced before the caching layer shipped.
+     */
+    cached?: boolean;
+  };
 }
 
 export interface GenerateThemeError {
