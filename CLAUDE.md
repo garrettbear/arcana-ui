@@ -587,11 +587,13 @@ Decisions made during development that should not be revisited without discussio
 *This section is updated at the end of every AI agent session.*
 
 ### Active Phase
-P.5 AI Theme Generation, first cut landed on `develop` via PR #106. The Anthropic-backed edge function is live on the playground Vercel project (`playground/api/generate-theme.ts`), the landing hero generates three theme variants, `/generate` previews and picks one, and the Token Editor applies the picked theme via inline CSS custom property overrides on top of a light/dark base. Cost controls (Haiku default, prompt caching, `max_tokens` 2500, BYOK header) baked in.
+P.5 Sprint 2 in progress. PR #106 landed the first cut (Anthropic-backed edge function, landing hero, `/generate` preview route, pick-into-editor), PR #107 hardened the shared server key with a tightened origin allowlist, per-IP limit of 5 per minute, and a 60 per minute global ceiling. Sprint 2 is three follow-up PRs, each on its own branch off `develop`:
 
-Hotfix in flight: PR #106 merged at the pre-hardening commit, so the deployed edge function still accepts any `*.vercel.app` origin for the shared key. Follow-up PR `fix/P.5-cors-rate-limit-harden-generate-theme` tightens the origin allowlist, drops per-IP rate from 10 to 5 per minute, and adds a 60 per minute global ceiling on the shared key. Needs to land before the key is at risk of being proxied.
+1. `feat/P.5.1-byok-settings-ui` (in flight). Gear icon in the playground topbar opens a Popover with the BYOK API key Input, Test-and-save, Clear, and a "Your key" Badge when set. `generateTheme` gained an optional `{ apiKey }` override so the panel can test unsaved input without mutating localStorage.
+2. `feat/P.5.1-topbar-generated-name` (next). Shows the picked theme's name as a chip in the topbar when `?theme=generated` is active, with a close button that returns the app to the light preset.
+3. `feat/P.5.1-kv-semantic-cache` (last). Vercel KV lookup keyed on a normalized hash of the request body so repeat prompts serve from cache with `meta.cached = true` and zero Anthropic cost.
 
-UI surfaces for BYOK and a Vercel KV semantic cache are the Sprint 2 follow-ups after the hotfix.
+Supabase accounts + workspaces (P.5.2) are explicitly deferred to the next sprint.
 
 ### Phase Completion Summary
 
