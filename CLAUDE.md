@@ -589,9 +589,9 @@ Decisions made during development that should not be revisited without discussio
 ### Active Phase
 P.5 Sprint 2 in progress. PR #106 landed the first cut (Anthropic-backed edge function, landing hero, `/generate` preview route, pick-into-editor), PR #107 hardened the shared server key with a tightened origin allowlist, per-IP limit of 5 per minute, and a 60 per minute global ceiling. Sprint 2 is three follow-up PRs, each on its own branch off `develop`:
 
-1. `feat/P.5.1-byok-settings-ui` (in flight). Gear icon in the playground topbar opens a Popover with the BYOK API key Input, Test-and-save, Clear, and a "Your key" Badge when set. `generateTheme` gained an optional `{ apiKey }` override so the panel can test unsaved input without mutating localStorage.
-2. `feat/P.5.1-topbar-generated-name` (next). Shows the picked theme's name as a chip in the topbar when `?theme=generated` is active, with a close button that returns the app to the light preset.
-3. `feat/P.5.1-kv-semantic-cache` (last). Vercel KV lookup keyed on a normalized hash of the request body so repeat prompts serve from cache with `meta.cached = true` and zero Anthropic cost.
+1. `feat/P.5.1-byok-settings-ui` (PR #108, merged). Gear icon in the playground topbar opens a Popover with the BYOK API key Input, Test-and-save, Clear, and a "Your key" Badge when set. `generateTheme` gained an optional `{ apiKey }` override so the panel can test unsaved input without mutating localStorage.
+2. `feat/P.5.1-topbar-generated-name` (in flight). Shows the picked theme's name as a chip in the topbar when `?theme=generated` is active, with a close button that returns the app to the light preset. Name stashed into a new `arcana-active-generated-name` session key so it survives refreshes and `/playground/*` navigations.
+3. `feat/P.5.1-kv-semantic-cache` (next). Vercel KV lookup keyed on a normalized hash of the request body so repeat prompts serve from cache with `meta.cached = true` and zero Anthropic cost.
 
 Supabase accounts + workspaces (P.5.2) are explicitly deferred to the next sprint.
 

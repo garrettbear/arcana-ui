@@ -51,6 +51,12 @@ export const GENERATED_THEMES_SESSION_KEY = 'arcana-generated-themes';
 // sessionStorage key used to hand a single picked theme into the editor.
 export const PICKED_THEME_SESSION_KEY = 'arcana-picked-generated-theme';
 
+// sessionStorage key that holds the `name` field of the currently applied
+// generated theme. The picked theme JSON is cleared on mount (applyGeneratedTheme
+// bakes the overrides into the DOM), but the name needs to survive so the
+// topbar chip can show what the user is looking at across navigations.
+export const ACTIVE_GENERATED_NAME_KEY = 'arcana-active-generated-name';
+
 export function getStoredApiKey(): string | null {
   try {
     return localStorage.getItem(BYOK_STORAGE_KEY);
@@ -201,6 +207,30 @@ export function readPickedTheme(): GeneratedTheme | null {
 export function clearPickedTheme(): void {
   try {
     sessionStorage.removeItem(PICKED_THEME_SESSION_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+export function setActiveGeneratedName(name: string): void {
+  try {
+    sessionStorage.setItem(ACTIVE_GENERATED_NAME_KEY, name);
+  } catch {
+    // ignore
+  }
+}
+
+export function getActiveGeneratedName(): string | null {
+  try {
+    return sessionStorage.getItem(ACTIVE_GENERATED_NAME_KEY);
+  } catch {
+    return null;
+  }
+}
+
+export function clearActiveGeneratedName(): void {
+  try {
+    sessionStorage.removeItem(ACTIVE_GENERATED_NAME_KEY);
   } catch {
     // ignore
   }

@@ -112,8 +112,15 @@ import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import styles from './App.module.css';
 import { AccessibilityPanel } from './components/AccessibilityPanel';
+import { GeneratedThemeChip } from './components/GeneratedThemeChip';
 import { TokenEditor } from './components/TokenEditor';
-import { clearPickedTheme, readPickedTheme } from './utils/generateTheme';
+import {
+  clearActiveGeneratedName,
+  clearPickedTheme,
+  getActiveGeneratedName,
+  readPickedTheme,
+  setActiveGeneratedName,
+} from './utils/generateTheme';
 import { PRESETS, type PresetId, applyGeneratedTheme, applyPreset } from './utils/presets';
 
 // ─── Toast Demo ───────────────────────────────────────────────────────────────
@@ -3778,6 +3785,7 @@ export default function App() {
   const [activePresetId, setActivePresetId] = useState<PresetId>(
     validPresetIds.includes(initialTheme) ? initialTheme : 'light',
   );
+  const [generatedName, setGeneratedName] = useState<string | null>(() => getActiveGeneratedName());
 
   // Apply the initial theme from URL on mount
   useEffect(() => {
@@ -3791,6 +3799,12 @@ export default function App() {
         // Editor chrome uses `light` as the base preset; the generated
         // overrides are laid on top in applyGeneratedTheme.
         setActivePresetId('light');
+        // Stash the name before clearing the picked theme JSON so the
+        // topbar chip can survive refreshes and cross-route navigation.
+        if (picked.name) {
+          setActiveGeneratedName(picked.name);
+          setGeneratedName(picked.name);
+        }
         clearPickedTheme();
         return;
       }
@@ -3811,10 +3825,32 @@ export default function App() {
   // Keep the URL in sync so refreshes and shared links preserve the active preset
   const handlePresetChange = (id: PresetId) => {
     setActivePresetId(id);
+    // Switching to a named preset replaces the generated overlay, so the chip
+    // no longer reflects reality. Drop it.
+    if (generatedName) {
+      clearActiveGeneratedName();
+      setGeneratedName(null);
+    }
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
         next.set('theme', id);
+        return next;
+      },
+      { replace: true },
+    );
+  };
+
+  const handleClearGenerated = () => {
+    clearActiveGeneratedName();
+    setGeneratedName(null);
+    const lightPreset = PRESETS.find((p) => p.id === 'light');
+    if (lightPreset) applyPreset(lightPreset);
+    setActivePresetId('light');
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.set('theme', 'light');
         return next;
       },
       { replace: true },
@@ -3847,6 +3883,10 @@ export default function App() {
           </nav>
 
           <div className={styles.topbarSpacer} />
+
+          {generatedName && (
+            <GeneratedThemeChip name={generatedName} onClear={handleClearGenerated} />
+          )}
 
           <div className={styles.topbarControls}>
             <button
