@@ -70,7 +70,11 @@ export default async function handler(req: Request): Promise<Response> {
   const usingByok = Boolean(userKey);
 
   if (!apiKey) {
-    return json({ error: 'server_misconfigured', detail: 'ANTHROPIC_API_KEY missing' }, 500, corsHeaders);
+    return json(
+      { error: 'server_misconfigured', detail: 'ANTHROPIC_API_KEY missing' },
+      500,
+      corsHeaders,
+    );
   }
 
   // Rate limit per client IP only when using the shared key.
@@ -98,7 +102,9 @@ export default async function handler(req: Request): Promise<Response> {
   // Call Anthropic
   try {
     const themes = await Promise.all(
-      Array.from({ length: count }, (_, i) => generateOne(apiKey, model, description, siteType, density, i)),
+      Array.from({ length: count }, (_, i) =>
+        generateOne(apiKey, model, description, siteType, density, i),
+      ),
     );
 
     return json({ themes, meta: { model, byok: usingByok, count } }, 200, corsHeaders);
@@ -260,10 +266,15 @@ function validateInput(body: unknown): ValidatedInput | { error: string } {
   if (!description) return { error: 'description_required' };
   if (description.length > MAX_DESCRIPTION_LEN) return { error: 'description_too_long' };
 
-  const siteType = typeof b.siteType === 'string' && b.siteType.trim() ? b.siteType.trim().slice(0, 50) : undefined;
+  const siteType =
+    typeof b.siteType === 'string' && b.siteType.trim()
+      ? b.siteType.trim().slice(0, 50)
+      : undefined;
 
   const density =
-    b.density === 'compact' || b.density === 'normal' || b.density === 'comfortable' ? b.density : undefined;
+    b.density === 'compact' || b.density === 'normal' || b.density === 'comfortable'
+      ? b.density
+      : undefined;
 
   let count = typeof b.count === 'number' ? Math.floor(b.count) : 1;
   if (count < 1) count = 1;

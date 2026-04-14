@@ -113,8 +113,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 import styles from './App.module.css';
 import { AccessibilityPanel } from './components/AccessibilityPanel';
 import { TokenEditor } from './components/TokenEditor';
-import { PRESETS, type PresetId, applyGeneratedTheme, applyPreset } from './utils/presets';
 import { clearPickedTheme, readPickedTheme } from './utils/generateTheme';
+import { PRESETS, type PresetId, applyGeneratedTheme, applyPreset } from './utils/presets';
 
 // ─── Toast Demo ───────────────────────────────────────────────────────────────
 

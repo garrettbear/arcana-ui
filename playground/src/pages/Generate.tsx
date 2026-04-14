@@ -1,11 +1,7 @@
 import { Button } from '@arcana-ui/core';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  type GeneratedTheme,
-  readGeneratedThemes,
-  stashPickedTheme,
-} from '../utils/generateTheme';
+import { type GeneratedTheme, readGeneratedThemes, stashPickedTheme } from '../utils/generateTheme';
 import styles from './Generate.module.css';
 
 /**
@@ -39,14 +35,24 @@ export default function Generate() {
 
   const handlePick = (theme: GeneratedTheme) => {
     stashPickedTheme(theme);
-    navigate(`/playground?theme=generated`);
+    navigate('/playground?theme=generated');
   };
 
   return (
     <div className={styles.page}>
       <header className={styles.header}>
         <Link to="/" className={styles.back} aria-label="Back to landing">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
             <path d="m15 18-6-6 6-6" />
           </svg>
           Back
@@ -56,12 +62,8 @@ export default function Generate() {
           <p className={styles.metaPrompt}>"{prompt}"</p>
         </div>
         <div className={styles.metaModel}>
-          <span className={styles.metaBadge}>
-            {response.meta.byok ? 'Your key' : 'Shared'}
-          </span>
-          <span className={styles.metaBadge}>
-            {formatModel(response.meta.model)}
-          </span>
+          <span className={styles.metaBadge}>{response.meta.byok ? 'Your key' : 'Shared'}</span>
+          <span className={styles.metaBadge}>{formatModel(response.meta.model)}</span>
         </div>
       </header>
 
@@ -73,7 +75,10 @@ export default function Generate() {
 
       <footer className={styles.footer}>
         <p className={styles.footerHint}>
-          Don't love them? <Link to="/" className={styles.link}>Try a different prompt</Link>
+          Don't love them?{' '}
+          <Link to="/" className={styles.link}>
+            Try a different prompt
+          </Link>
         </p>
       </footer>
     </div>
@@ -218,7 +223,18 @@ function resolveThemePreview(theme: GeneratedTheme): ThemePreview {
     .filter((c): c is string => typeof c === 'string' && /^#[0-9a-f]{6}$/i.test(c))
     .slice(0, 6);
 
-  return { bg, surface, fg, fgMuted, action, actionFg, border, radius, font: displayFont, swatches };
+  return {
+    bg,
+    surface,
+    fg,
+    fgMuted,
+    action,
+    actionFg,
+    border,
+    radius,
+    font: displayFont,
+    swatches,
+  };
 }
 
 function getPath(obj: unknown, keys: string[]): unknown {
@@ -251,7 +267,7 @@ function contrastOn(hex: string): string {
 function parseHex(hex: string): [number, number, number] | null {
   const m = /^#([0-9a-f]{6})$/i.exec(hex.trim());
   if (!m) return null;
-  const n = parseInt(m[1], 16);
+  const n = Number.parseInt(m[1], 16);
   return [(n >> 16) & 0xff, (n >> 8) & 0xff, n & 0xff];
 }
 

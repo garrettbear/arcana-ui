@@ -220,7 +220,7 @@ export function flattenGeneratedTheme(theme: {
 function isDarkColor(hex: string): boolean {
   const m = /^#?([0-9a-f]{6})$/i.exec(hex.trim().replace(/^#/, '#'));
   if (!m) return false;
-  const n = parseInt(m[1], 16);
+  const n = Number.parseInt(m[1], 16);
   const r = ((n >> 16) & 0xff) / 255;
   const g = ((n >> 8) & 0xff) / 255;
   const b = (n & 0xff) / 255;

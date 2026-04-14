@@ -75,9 +75,7 @@ export function clearStoredApiKey(): void {
   }
 }
 
-export async function generateTheme(
-  req: GenerateThemeRequest,
-): Promise<GenerateThemeResponse> {
+export async function generateTheme(req: GenerateThemeRequest): Promise<GenerateThemeResponse> {
   const byokKey = getStoredApiKey();
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',

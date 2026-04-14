@@ -361,8 +361,7 @@ function LandingContent() {
     } catch (err) {
       const title =
         err instanceof ThemeGenerationError ? 'Could not generate themes' : 'Something went wrong';
-      const descriptionText =
-        err instanceof Error ? err.message : 'Please try again in a moment.';
+      const descriptionText = err instanceof Error ? err.message : 'Please try again in a moment.';
       toast({ title, description: descriptionText, variant: 'error' });
       setIsGenerating(false);
     }
