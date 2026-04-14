@@ -38,16 +38,25 @@ const MAX_COUNT = 3;
 // Simple in-memory rate limit per edge instance. Not perfect, but prevents
 // trivial abuse. For production-grade limiting, move to Upstash/KV.
 const RATE_LIMIT_WINDOW_MS = 60_000;
-const RATE_LIMIT_MAX = 10;
+// Per-IP ceiling for shared-key requests. BYOK bypasses this.
+const RATE_LIMIT_MAX = 5;
+// Belt-and-suspenders: a global ceiling across all IPs on the shared key so
+// a distributed attack can't compound per-IP limits into a large bill.
+const GLOBAL_SHARED_RATE_MAX = 60;
 const rateLimitBuckets = new Map<string, { count: number; resetAt: number }>();
+let globalSharedBucket: { count: number; resetAt: number } = { count: 0, resetAt: 0 };
 
 // --- Handler -------------------------------------------------------------
 
 export default async function handler(req: Request): Promise<Response> {
-  // CORS — allow playground subdomains and localhost during dev
+  // CORS. Only trusted origins receive a matching Access-Control-Allow-Origin.
+  // Anything else gets the canonical production host echoed back, which will
+  // make the browser reject the response.
   const origin = req.headers.get('origin') ?? '';
+  const originAllowed = isAllowedOrigin(origin);
   const corsHeaders: Record<string, string> = {
-    'Access-Control-Allow-Origin': isAllowedOrigin(origin) ? origin : 'https://arcana-ui.com',
+    'Access-Control-Allow-Origin': originAllowed ? origin : 'https://arcana-ui.com',
+    Vary: 'Origin',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, X-User-API-Key',
     'Access-Control-Max-Age': '86400',
@@ -62,8 +71,8 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   // BYOK: users can pass their own Anthropic key via X-User-API-Key.
-  // If present, skip server rate limit and use their key. Otherwise fall back
-  // to the shared server key with a rate limit.
+  // If present, skip server rate limits and origin gating and use their key.
+  // Otherwise fall back to the shared server key with rate + origin gating.
   const userKey = req.headers.get('x-user-api-key')?.trim() ?? '';
   const serverKey = process.env.ANTHROPIC_API_KEY ?? '';
   const apiKey = userKey || serverKey;
@@ -77,11 +86,29 @@ export default async function handler(req: Request): Promise<Response> {
     );
   }
 
-  // Rate limit per client IP only when using the shared key.
+  // Shared-key requests MUST come from an allowed browser origin. Browsers
+  // enforce CORS, but curl, server-to-server calls, and bots do not. Without
+  // this check any client could burn through the shared key even though the
+  // CORS header would reject the response in a real browser.
+  if (!usingByok && !originAllowed) {
+    return json({ error: 'forbidden_origin' }, 403, corsHeaders);
+  }
+
+  // Rate limit only applies to shared-key requests.
   if (!usingByok) {
+    if (!checkGlobalSharedRateLimit()) {
+      return json(
+        { error: 'rate_limited', scope: 'global', retryAfterMs: RATE_LIMIT_WINDOW_MS },
+        429,
+        { ...corsHeaders, 'Retry-After': String(Math.ceil(RATE_LIMIT_WINDOW_MS / 1000)) },
+      );
+    }
     const ip = getClientIp(req);
     if (!checkRateLimit(ip)) {
-      return json({ error: 'rate_limited', retryAfterMs: RATE_LIMIT_WINDOW_MS }, 429, corsHeaders);
+      return json({ error: 'rate_limited', scope: 'ip', retryAfterMs: RATE_LIMIT_WINDOW_MS }, 429, {
+        ...corsHeaders,
+        'Retry-After': String(Math.ceil(RATE_LIMIT_WINDOW_MS / 1000)),
+      });
     }
   }
 
@@ -290,14 +317,24 @@ function validateInput(body: unknown): ValidatedInput | { error: string } {
 
 // --- Helpers -------------------------------------------------------------
 
+// Origin allowlist. Anything not on this list cannot hit the shared key.
+// We explicitly do NOT allow the wildcard *.vercel.app (that would let any
+// Vercel app in the world proxy through our shared key). Preview deploys for
+// this project live under the team's own Vercel subdomain, which we allow.
+const ALLOWED_ORIGIN_HOSTS = new Set(['arcana-ui.com', 'localhost', '127.0.0.1']);
+const ALLOWED_ORIGIN_SUFFIXES = [
+  '.arcana-ui.com',
+  '.garrett-whistens-projects.vercel.app', // team preview deploys
+];
+
 function isAllowedOrigin(origin: string): boolean {
   if (!origin) return false;
   try {
     const { hostname } = new URL(origin);
-    if (hostname === 'localhost' || hostname === '127.0.0.1') return true;
-    if (hostname === 'arcana-ui.com') return true;
-    if (hostname.endsWith('.arcana-ui.com')) return true;
-    if (hostname.endsWith('.vercel.app')) return true; // preview deploys
+    if (ALLOWED_ORIGIN_HOSTS.has(hostname)) return true;
+    for (const suffix of ALLOWED_ORIGIN_SUFFIXES) {
+      if (hostname.endsWith(suffix)) return true;
+    }
     return false;
   } catch {
     return false;
@@ -321,6 +358,20 @@ function checkRateLimit(ip: string): boolean {
   }
   if (bucket.count >= RATE_LIMIT_MAX) return false;
   bucket.count += 1;
+  return true;
+}
+
+// Global per-instance ceiling for shared-key requests. Caps total Anthropic
+// spend regardless of how many unique IPs are calling. Enforced in addition
+// to (not instead of) the per-IP bucket.
+function checkGlobalSharedRateLimit(): boolean {
+  const now = Date.now();
+  if (globalSharedBucket.resetAt < now) {
+    globalSharedBucket = { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS };
+    return true;
+  }
+  if (globalSharedBucket.count >= GLOBAL_SHARED_RATE_MAX) return false;
+  globalSharedBucket.count += 1;
   return true;
 }
 
