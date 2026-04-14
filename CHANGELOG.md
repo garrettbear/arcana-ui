@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Landing hero theme generation returned 405.** The root `vercel.json` SPA
+  rewrite used `/(.*)` as its source, which caught `/api/*` requests before
+  Vercel Functions could handle them. POSTs to `/api/generate-theme` were
+  rewritten to the static `/index.html`, which responded 405 Method Not
+  Allowed. Changed the rewrite source to `/((?!api/).*)` so paths starting
+  with `api/` fall through to the edge function and all other paths still
+  resolve to the SPA entry.
+  - `vercel.json` — single-line rewrite source change.
+
 ### Added
 
 - **Semantic cache for AI theme generation (P.5.1).** `/api/generate-theme`

@@ -591,7 +591,9 @@ P.5 Sprint 2 wrapping up. PR #106 landed the first cut (Anthropic-backed edge fu
 
 1. `feat/P.5.1-byok-settings-ui` (PR #108, merged). Gear icon in the playground topbar opens a Popover with the BYOK API key Input, Test-and-save, Clear, and a "Your key" Badge when set. `generateTheme` gained an optional `{ apiKey }` override so the panel can test unsaved input without mutating localStorage.
 2. `feat/P.5.1-topbar-generated-name` (PR #109, merged). Shows the picked theme's name as a chip in the topbar when `?theme=generated` is active, with a close button that returns the app to the light preset. Name stashed into a new `arcana-active-generated-name` session key so it survives refreshes and `/playground/*` navigations.
-3. `feat/P.5.1-kv-semantic-cache` (in flight). Vercel KV lookup keyed on a SHA-256 hash of the normalized `{description, siteType, density, count, model}` tuple. 7-day TTL. Cache hits return with `meta.cached = true` and bypass Anthropic entirely. Soft-fails to a pass-through when KV env vars are absent so local dev and preview deploys without KV still work.
+3. `feat/P.5.1-kv-semantic-cache` (PR #110, merged). Vercel KV lookup keyed on a SHA-256 hash of the normalized `{description, siteType, density, count, model}` tuple. 7-day TTL. Cache hits return with `meta.cached = true` and bypass Anthropic entirely. Soft-fails to a pass-through when KV env vars are absent so local dev and preview deploys without KV still work.
+
+Post-Sprint 2 hotfix: the root `vercel.json` SPA rewrite source was `/(.*)`, which caught `/api/*` and returned 405 on POST to `/api/generate-theme` (the static `/index.html` doesn't accept POSTs). Changed the rewrite source to `/((?!api/).*)` so edge functions handle `/api/*` while the SPA still gets every other path.
 
 Supabase accounts + workspaces (P.5.2) are explicitly deferred to the next sprint.
 
