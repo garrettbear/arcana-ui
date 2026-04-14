@@ -587,7 +587,11 @@ Decisions made during development that should not be revisited without discussio
 *This section is updated at the end of every AI agent session.*
 
 ### Active Phase
-P.5 AI Theme Generation, first cut shipping. The Anthropic-backed edge function is live on the playground Vercel project (`playground/api/generate-theme.ts`). The landing hero now generates three theme variants, a new `/generate` route previews and picks one, and the Token Editor applies the picked theme via inline CSS custom property overrides on top of a light/dark base. Cost controls (Haiku default, prompt caching, `max_tokens` 2500, BYOK header) baked in. UI surfaces for BYOK and a Vercel KV semantic cache are the planned follow-ups.
+P.5 AI Theme Generation, first cut landed on `develop` via PR #106. The Anthropic-backed edge function is live on the playground Vercel project (`playground/api/generate-theme.ts`), the landing hero generates three theme variants, `/generate` previews and picks one, and the Token Editor applies the picked theme via inline CSS custom property overrides on top of a light/dark base. Cost controls (Haiku default, prompt caching, `max_tokens` 2500, BYOK header) baked in.
+
+Hotfix in flight: PR #106 merged at the pre-hardening commit, so the deployed edge function still accepts any `*.vercel.app` origin for the shared key. Follow-up PR `fix/P.5-cors-rate-limit-harden-generate-theme` tightens the origin allowlist, drops per-IP rate from 10 to 5 per minute, and adds a 60 per minute global ceiling on the shared key. Needs to land before the key is at risk of being proxied.
+
+UI surfaces for BYOK and a Vercel KV semantic cache are the Sprint 2 follow-ups after the hotfix.
 
 ### Phase Completion Summary
 
