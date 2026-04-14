@@ -75,6 +75,159 @@ export function getCSSVar(varName: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
 }
 
+/**
+ * Apply an AI-generated theme on top of a base preset.
+ *
+ * Generated themes follow a simplified schema (primitive colors + fonts +
+ * radius, semantic references using the `{primitive.path}` syntax). We flatten
+ * them to CSS custom property overrides and apply them inline, using `light`
+ * or `dark` as the base depending on the theme's background luminance so
+ * every unmapped token has a reasonable fallback.
+ */
+export function applyGeneratedTheme(theme: {
+  name?: string;
+  primitive?: Record<string, unknown>;
+  semantic?: Record<string, unknown>;
+}): void {
+  const overrides = flattenGeneratedTheme(theme);
+
+  // Pick base preset by background luminance. If we can't tell, default to light.
+  const bg = overrides['--color-bg-page'];
+  const isDark = bg ? isDarkColor(bg) : false;
+  const basePreset = PRESETS.find((p) => p.id === (isDark ? 'dark' : 'light'));
+
+  const root = document.documentElement;
+
+  // Clear previous overrides + global CSS (same pattern as applyPreset)
+  for (const k of appliedTokenKeys) root.style.removeProperty(k);
+  appliedTokenKeys = [];
+  injectedStyleEl?.remove();
+  injectedStyleEl = null;
+
+  // Lay down the base preset's data-theme so unmapped vars still have values.
+  root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+
+  // Apply base preset's own overrides first (if any)
+  if (basePreset) {
+    for (const [varName, value] of Object.entries(basePreset.tokens)) {
+      root.style.setProperty(varName, value);
+      appliedTokenKeys.push(varName);
+    }
+  }
+
+  // Then stack the generated theme's overrides on top
+  for (const [varName, value] of Object.entries(overrides)) {
+    if (!value) continue;
+    root.style.setProperty(varName, value);
+    appliedTokenKeys.push(varName);
+  }
+}
+
+/** Flatten a generated theme JSON into a { cssVar: value } map. */
+export function flattenGeneratedTheme(theme: {
+  primitive?: Record<string, unknown>;
+  semantic?: Record<string, unknown>;
+}): Record<string, string> {
+  const primitive = (theme.primitive ?? {}) as Record<string, unknown>;
+  const semantic = (theme.semantic ?? {}) as Record<string, unknown>;
+
+  const resolve = (value: unknown): string | undefined => {
+    if (typeof value !== 'string') return undefined;
+    const match = /^\{(.+)\}$/.exec(value.trim());
+    if (!match) return value;
+    const path = match[1].split('.');
+    let cursor: unknown = { primitive, semantic };
+    for (const key of path) {
+      if (cursor && typeof cursor === 'object' && key in (cursor as Record<string, unknown>)) {
+        cursor = (cursor as Record<string, unknown>)[key];
+      } else {
+        return undefined;
+      }
+    }
+    return typeof cursor === 'string' ? cursor : undefined;
+  };
+
+  const semColor = (...path: string[]): string | undefined => {
+    let cursor: unknown = semantic;
+    for (const k of ['color', ...path]) {
+      if (cursor && typeof cursor === 'object' && k in (cursor as Record<string, unknown>)) {
+        cursor = (cursor as Record<string, unknown>)[k];
+      } else return undefined;
+    }
+    return resolve(cursor);
+  };
+
+  const primValue = (...path: string[]): string | undefined => {
+    let cursor: unknown = primitive;
+    for (const k of path) {
+      if (cursor && typeof cursor === 'object' && k in (cursor as Record<string, unknown>)) {
+        cursor = (cursor as Record<string, unknown>)[k];
+      } else return undefined;
+    }
+    return typeof cursor === 'string' ? cursor : undefined;
+  };
+
+  const map: Record<string, string | undefined> = {
+    // Backgrounds
+    '--color-bg-page': semColor('background', 'default'),
+    '--color-bg-surface': semColor('background', 'surface'),
+    '--color-bg-elevated': semColor('background', 'elevated'),
+    '--color-bg-subtle': semColor('background', 'surface'),
+    '--color-bg-sunken': semColor('background', 'surface'),
+
+    // Foregrounds
+    '--color-fg-primary': semColor('foreground', 'primary'),
+    '--color-fg-secondary': semColor('foreground', 'secondary'),
+    '--color-fg-muted': semColor('foreground', 'muted'),
+
+    // Actions
+    '--color-action-primary': semColor('action', 'primary'),
+    '--color-action-primary-hover': semColor('action', 'primaryHover'),
+    '--color-action-primary-active': semColor('action', 'primaryActive'),
+    '--color-action-secondary': semColor('action', 'secondary'),
+    '--color-action-secondary-hover': semColor('action', 'secondaryHover'),
+
+    // Borders
+    '--color-border-default': semColor('border', 'default'),
+    '--color-border-strong': semColor('border', 'strong'),
+    '--color-border-focus': semColor('border', 'focus'),
+
+    // Feedback
+    '--color-action-destructive': semColor('feedback', 'danger'),
+    '--color-action-success': semColor('feedback', 'success'),
+    '--color-action-warning': semColor('feedback', 'warning'),
+
+    // Radius
+    '--radius-sm': primValue('radius', 'sm'),
+    '--radius-md': primValue('radius', 'md'),
+    '--radius-lg': primValue('radius', 'lg'),
+    '--radius-xl': primValue('radius', 'xl'),
+    '--radius-full': primValue('radius', 'full'),
+
+    // Fonts
+    '--font-family-display': primValue('font', 'display'),
+    '--font-family-body': primValue('font', 'body'),
+    '--font-family-mono': primValue('font', 'mono'),
+  };
+
+  const out: Record<string, string> = {};
+  for (const [k, v] of Object.entries(map)) {
+    if (typeof v === 'string' && v.length > 0) out[k] = v;
+  }
+  return out;
+}
+
+function isDarkColor(hex: string): boolean {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex.trim().replace(/^#/, '#'));
+  if (!m) return false;
+  const n = Number.parseInt(m[1], 16);
+  const r = ((n >> 16) & 0xff) / 255;
+  const g = ((n >> 8) & 0xff) / 255;
+  const b = (n & 0xff) / 255;
+  const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return lum < 0.5;
+}
+
 export const PRESETS: ThemePreset[] = [
   {
     id: 'light',

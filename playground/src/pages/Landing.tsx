@@ -1,6 +1,7 @@
 import { Badge, Button, Input, ToastProvider, useToast } from '@arcana-ui/core';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ThemeGenerationError, generateTheme, stashGeneratedThemes } from '../utils/generateTheme';
 import styles from './Landing.module.css';
 
 // ─── SVG Icons (inline to avoid dependencies) ─────────────────────────────────
@@ -338,6 +339,7 @@ function LandingContent() {
   const { toast } = useToast();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [promptValue, setPromptValue] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleComingSoon = (feature: string) => {
     toast({
@@ -346,9 +348,23 @@ function LandingContent() {
     });
   };
 
-  const handlePromptSubmit = (e: React.FormEvent) => {
+  const handlePromptSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/playground');
+    const description = promptValue.trim();
+    if (!description || isGenerating) return;
+
+    setIsGenerating(true);
+    try {
+      const response = await generateTheme({ description, count: 3 });
+      stashGeneratedThemes({ prompt: description, response });
+      navigate('/generate');
+    } catch (err) {
+      const title =
+        err instanceof ThemeGenerationError ? 'Could not generate themes' : 'Something went wrong';
+      const descriptionText = err instanceof Error ? err.message : 'Please try again in a moment.';
+      toast({ title, description: descriptionText, variant: 'error' });
+      setIsGenerating(false);
+    }
   };
 
   return (
@@ -517,12 +533,13 @@ function LandingContent() {
           <form onSubmit={handlePromptSubmit} className={styles.promptWrap}>
             <Input
               wrapperClassName={styles.promptInputWrapper}
-              placeholder="Tell me about your brand — colors, mood, industry..."
+              placeholder="Tell me about your brand, colors, mood, industry..."
               value={promptValue}
               onChange={(e) => setPromptValue(e.target.value)}
               aria-label="Describe your brand"
               size="lg"
               fullWidth
+              disabled={isGenerating}
               suffix={
                 <Button
                   variant="primary"
@@ -530,12 +547,18 @@ function LandingContent() {
                   className={styles.promptSubmit}
                   type="submit"
                   aria-label="Generate design system"
+                  loading={isGenerating}
+                  disabled={isGenerating || !promptValue.trim()}
                 >
-                  <ArrowIcon />
+                  {isGenerating ? 'Generating' : <ArrowIcon />}
                 </Button>
               }
             />
-            <span className={styles.promptComingSoon}>AI generation coming soon</span>
+            <span className={styles.promptComingSoon}>
+              {isGenerating
+                ? 'Brewing 3 themes, this usually takes 10 to 15 seconds...'
+                : 'Powered by Claude. Generates 3 theme variants.'}
+            </span>
           </form>
 
           <div className={styles.promptLinks}>

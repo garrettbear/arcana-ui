@@ -58,11 +58,17 @@ All foundation work, token system (2,600+ CSS variables), responsive framework (
 - [x] P.2 -- ComponentGallery with stats bar, richer cards, audit table mode
 - [x] P.3 -- Visual token editor (custom HSV color picker, cubic bezier editor, undo/redo, search/filter, modified indicators)
 - [x] P.4 -- Live component preview with category filter
-- [ ] **P.5 -- AI theme generation flow** (NEXT PRIORITY)
-  - Hero input: "Describe your brand"
-  - Anthropic API via Vercel edge function
-  - Generate 2-3 theme options as token JSON
-  - User picks one, lands in editor with theme applied
+- [~] **P.5 -- AI theme generation flow** (in progress, first cut shipped)
+  - [x] Hero input: "Describe your brand" wired to edge function with loading state
+  - [x] Anthropic API via Vercel edge function (`playground/api/generate-theme.ts`)
+  - [x] Generate 3 theme variants per request, returned as structured JSON
+  - [x] `/generate` route with side-by-side preview cards
+  - [x] User picks one, lands in editor with theme applied via sessionStorage
+  - [x] Cost controls: Haiku default, prompt caching, max_tokens 2500
+  - [x] BYOK via `X-User-API-Key` header (plumbing complete, UI follow-up)
+  - [ ] BYOK settings UI (enter/clear key, show status in hero)
+  - [ ] Semantic cache (Vercel KV on hash of description+siteType+density+model)
+  - [ ] Topbar shows generated theme name when `?theme=generated` is active
 - [ ] P.6 -- Theme gallery (browse presets, one-click load, fork)
 - [ ] P.7 -- Authentication (GitHub + Google OAuth)
 - [ ] P.8 -- Theme save/load

@@ -1,0 +1,199 @@
+/**
+ * Client helper for POST /api/generate-theme.
+ *
+ * Responsibilities:
+ *  - Shape the request body and forward BYOK header if a user key is stored.
+ *  - Normalize the response into a typed shape.
+ *  - Stash results in sessionStorage under a known key for the /generate route
+ *    to pick up without re-fetching on navigation / refresh.
+ */
+
+export interface GeneratedTheme {
+  /** kebab-case id, e.g. "ironclad" */
+  name: string;
+  /** One-sentence description */
+  description: string;
+  /** Full three-tier-light preset body (primitive + semantic + component) */
+  primitive: Record<string, unknown>;
+  semantic: Record<string, unknown>;
+  component?: Record<string, unknown>;
+}
+
+export interface GenerateThemeRequest {
+  description: string;
+  siteType?: string;
+  density?: 'compact' | 'normal' | 'comfortable';
+  /** 1-3; anything above caps at 3 server-side */
+  count?: number;
+  /** Opt into Sonnet. Default Haiku. Ignored without BYOK once we enforce that in prod. */
+  model?: 'haiku' | 'sonnet';
+}
+
+export interface GenerateThemeResponse {
+  themes: GeneratedTheme[];
+  meta: { model: string; byok: boolean; count: number };
+}
+
+export interface GenerateThemeError {
+  error: string;
+  detail?: string;
+  retryAfterMs?: number;
+}
+
+// localStorage key for the user-supplied Anthropic key (BYOK).
+// Only the browser ever sees this value; it is forwarded to the edge function
+// via the X-User-API-Key header but never stored server-side.
+export const BYOK_STORAGE_KEY = 'arcana-user-anthropic-key';
+
+// sessionStorage key used to hand off the /generate route its data.
+export const GENERATED_THEMES_SESSION_KEY = 'arcana-generated-themes';
+
+// sessionStorage key used to hand a single picked theme into the editor.
+export const PICKED_THEME_SESSION_KEY = 'arcana-picked-generated-theme';
+
+export function getStoredApiKey(): string | null {
+  try {
+    return localStorage.getItem(BYOK_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+export function setStoredApiKey(key: string): void {
+  try {
+    localStorage.setItem(BYOK_STORAGE_KEY, key.trim());
+  } catch {
+    // ignore — private mode / storage disabled
+  }
+}
+
+export function clearStoredApiKey(): void {
+  try {
+    localStorage.removeItem(BYOK_STORAGE_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+export async function generateTheme(req: GenerateThemeRequest): Promise<GenerateThemeResponse> {
+  const byokKey = getStoredApiKey();
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  if (byokKey) headers['X-User-API-Key'] = byokKey;
+
+  const body: GenerateThemeRequest = {
+    description: req.description,
+    count: req.count ?? 3,
+    ...(req.siteType ? { siteType: req.siteType } : {}),
+    ...(req.density ? { density: req.density } : {}),
+    ...(req.model ? { model: req.model } : {}),
+  };
+
+  const res = await fetch('/api/generate-theme', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
+  });
+
+  const text = await res.text();
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    throw new ThemeGenerationError(
+      `Unexpected response from /api/generate-theme (status ${res.status})`,
+      res.status,
+    );
+  }
+
+  if (!res.ok) {
+    const err = parsed as GenerateThemeError;
+    const message = readableError(err, res.status);
+    throw new ThemeGenerationError(message, res.status, err.error);
+  }
+
+  return parsed as GenerateThemeResponse;
+}
+
+export class ThemeGenerationError extends Error {
+  status: number;
+  code?: string;
+  constructor(message: string, status: number, code?: string) {
+    super(message);
+    this.name = 'ThemeGenerationError';
+    this.status = status;
+    this.code = code;
+  }
+}
+
+function readableError(err: GenerateThemeError, status: number): string {
+  switch (err.error) {
+    case 'description_required':
+      return 'Add a description of your brand so we know what to generate.';
+    case 'description_too_long':
+      return 'That description is a bit long. Try trimming to under 500 characters.';
+    case 'rate_limited':
+      return 'Free tier limit reached. Try again in a minute or add your own API key.';
+    case 'server_misconfigured':
+      return 'The generation service is not configured. Please let us know.';
+    case 'generation_failed':
+      return `Generation failed: ${err.detail ?? 'unknown error'}`;
+    default:
+      return err.detail ?? `Request failed (${status})`;
+  }
+}
+
+export function stashGeneratedThemes(payload: {
+  prompt: string;
+  response: GenerateThemeResponse;
+}): void {
+  try {
+    sessionStorage.setItem(
+      GENERATED_THEMES_SESSION_KEY,
+      JSON.stringify({ ...payload, createdAt: Date.now() }),
+    );
+  } catch {
+    // ignore
+  }
+}
+
+export function readGeneratedThemes(): {
+  prompt: string;
+  response: GenerateThemeResponse;
+  createdAt: number;
+} | null {
+  try {
+    const raw = sessionStorage.getItem(GENERATED_THEMES_SESSION_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+export function stashPickedTheme(theme: GeneratedTheme): void {
+  try {
+    sessionStorage.setItem(PICKED_THEME_SESSION_KEY, JSON.stringify(theme));
+  } catch {
+    // ignore
+  }
+}
+
+export function readPickedTheme(): GeneratedTheme | null {
+  try {
+    const raw = sessionStorage.getItem(PICKED_THEME_SESSION_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw) as GeneratedTheme;
+  } catch {
+    return null;
+  }
+}
+
+export function clearPickedTheme(): void {
+  try {
+    sessionStorage.removeItem(PICKED_THEME_SESSION_KEY);
+  } catch {
+    // ignore
+  }
+}
