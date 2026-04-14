@@ -7,7 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-_No unreleased changes. The next feature or fix merged to `develop` lands here._
+### Added
+
+- **AI theme generation (P.5.1 first cut).** Hero input on the landing page now
+  generates three Arcana theme variants from a brand description via a new
+  `/generate` route with side-by-side preview cards, then hands the picked
+  theme into the Token Editor via sessionStorage.
+  - `playground/api/generate-theme.ts` — Vercel Edge function proxying to the
+    Anthropic API. Origin-restricted CORS, 10 req/min in-memory rate limit per
+    IP, supports BYOK via the `X-User-API-Key` header (rate limit bypassed
+    when present).
+  - `playground/api/README.md` — endpoint spec, BYOK notes, cost controls.
+  - `playground/src/pages/Generate.tsx` + `Generate.module.css` — `/generate`
+    route showing three theme cards with live-colored preview windows
+    (swatches, sample button, sample card, headline in the generated display
+    font) plus prompt recap and model badge.
+  - `playground/src/utils/generateTheme.ts` — client helper, sessionStorage
+    hand-off, typed error mapping, BYOK localStorage plumbing.
+  - `applyGeneratedTheme()` in `playground/src/utils/presets.ts` — resolves
+    `{primitive.path}` semantic refs into flat CSS custom properties, picks
+    light or dark as the base preset by background luminance so unmapped
+    tokens still have sensible values, lays the generated overrides on top.
+  - `playground/.env.example` documenting `ANTHROPIC_API_KEY`.
+
+### Changed
+
+- Edge function defaults to Claude Haiku 4.5 for roughly 4x lower cost than
+  Sonnet on the same structured-JSON task. Opt into Sonnet via
+  `"model": "sonnet"`.
+- Enabled Anthropic prompt caching on the identical system prompt. Cached
+  input reads at ~10% of normal cost within the 5-minute window, effectively
+  free for bursts and concurrent variant generations.
+- Reduced `max_tokens` from 4096 to 2500, sized to fit a complete theme JSON
+  with a small buffer.
+- Landing page hero form now calls the generator with a loading state
+  instead of showing "AI generation coming soon" and navigating blindly to
+  `/playground`. Error states surface via toast.
 
 ## [0.1.0] - 2026-04-09
 

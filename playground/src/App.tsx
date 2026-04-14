@@ -113,7 +113,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 import styles from './App.module.css';
 import { AccessibilityPanel } from './components/AccessibilityPanel';
 import { TokenEditor } from './components/TokenEditor';
-import { PRESETS, type PresetId, applyPreset } from './utils/presets';
+import { PRESETS, type PresetId, applyGeneratedTheme, applyPreset } from './utils/presets';
+import { clearPickedTheme, readPickedTheme } from './utils/generateTheme';
 
 // ─── Toast Demo ───────────────────────────────────────────────────────────────
 
@@ -3780,12 +3781,27 @@ export default function App() {
 
   // Apply the initial theme from URL on mount
   useEffect(() => {
-    const themeParam = searchParams.get('theme') as PresetId | null;
-    if (themeParam && validPresetIds.includes(themeParam)) {
+    const themeParam = searchParams.get('theme');
+
+    // Generated theme: sessionStorage hands us the JSON from /generate
+    if (themeParam === 'generated') {
+      const picked = readPickedTheme();
+      if (picked) {
+        applyGeneratedTheme(picked);
+        // Editor chrome uses `light` as the base preset; the generated
+        // overrides are laid on top in applyGeneratedTheme.
+        setActivePresetId('light');
+        clearPickedTheme();
+        return;
+      }
+      // No stashed theme (direct link, post-refresh after clear): fall through to light.
+    }
+
+    if (themeParam && validPresetIds.includes(themeParam as PresetId)) {
       const preset = PRESETS.find((p) => p.id === themeParam);
       if (preset) {
         applyPreset(preset);
-        setActivePresetId(themeParam);
+        setActivePresetId(themeParam as PresetId);
       }
     }
     // Only run on mount

@@ -587,7 +587,7 @@ Decisions made during development that should not be revisited without discussio
 *This section is updated at the end of every AI agent session.*
 
 ### Active Phase
-v0.1.0 stable release in flight. Release branch `release/0.1.0` is cut from `develop` with version bumps, finalized CHANGELOG, migration infrastructure, and runtime `VERSION` export. PR against `main` is open — awaiting Bear to merge, tag, and publish.
+P.5 AI Theme Generation, first cut shipping. The Anthropic-backed edge function is live on the playground Vercel project (`playground/api/generate-theme.ts`). The landing hero now generates three theme variants, a new `/generate` route previews and picks one, and the Token Editor applies the picked theme via inline CSS custom property overrides on top of a light/dark base. Cost controls (Haiku default, prompt caching, `max_tokens` 2500, BYOK header) baked in. UI surfaces for BYOK and a Vercel KV semantic cache are the planned follow-ups.
 
 ### Phase Completion Summary
 
@@ -623,7 +623,9 @@ v0.1.0 stable release in flight. Release branch `release/0.1.0` is cut from `dev
 - 4.9 — Visual regression test fixtures from demos
 
 **Phase P:**
-- P.2 — AI theme generation (prompt input → theme JSON)
+- P.5 — AI theme generation (first cut landed on `feat/P.5-ai-theme-generation-hero-generate-route`; BYOK UI + KV semantic cache still to ship)
+- P.5.2 — Accounts + workspaces (Supabase) so users can save cocacola-light, cocacola-dark, etc. under one brand workspace
+- P.5.3 — Asset-augmented generation (logo + inspo upload, vision-conditioned generation)
 
 **Phase 5:**
 - 5.3 — Claude Code skill ✅ `.claude/skills/arcana/SKILL.md` (1,821 lines)
