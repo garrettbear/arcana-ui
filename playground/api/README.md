@@ -39,9 +39,16 @@ Response:
       "component": {}
     }
   ],
-  "meta": { "model": "claude-haiku-4-5-20251001", "byok": false, "count": 3 }
+  "meta": {
+    "model": "claude-haiku-4-5-20251001",
+    "byok": false,
+    "count": 3,
+    "cached": false
+  }
 }
 ```
+
+`meta.cached` is `true` when the response was served from the Vercel KV semantic cache. `false` on a fresh Anthropic call. Absent on deployments where KV is not configured.
 
 Runtime: Vercel Edge. Shared-key requests are gated by three independent checks (all bypassed for BYOK requests that pass `X-User-API-Key`):
 
@@ -54,13 +61,23 @@ Cost controls:
 - Default model is Claude Haiku 4.5 (~4x cheaper than Sonnet). Pass `"model": "sonnet"` to opt into Sonnet.
 - Anthropic prompt caching is enabled on the system prompt (5-minute ephemeral cache). A burst of requests reuses the cached system prompt at ~10% of normal input cost.
 - `max_tokens` is 2500, sized to fit a complete theme JSON with a small buffer.
-- Semantic cache (Vercel KV on `hash(description + siteType + density + model)`) is a planned follow-up and will serve repeat prompts at zero API cost.
+- Semantic cache (Vercel KV) keyed on SHA-256 of the normalized `{description, siteType, density, count, model}` tuple. Description is lowercased and internal whitespace is collapsed so cosmetic edits still hit the same entry. 7-day TTL. Cache hits return with `meta.cached = true` and skip Anthropic entirely.
 
 ## Environment
 
 | Var | Where | Required | Notes |
 | --- | --- | --- | --- |
 | `ANTHROPIC_API_KEY` | Vercel project env (all envs) | Yes | Read server-side only. Never prefix with `VITE_`. |
+| `KV_REST_API_URL` | Vercel project env (all envs) | No | Provided automatically when you connect a Vercel KV store. If absent, the semantic cache layer is a no-op and every request hits Anthropic. |
+| `KV_REST_API_TOKEN` | Vercel project env (all envs) | No | Same source as `KV_REST_API_URL`. |
+
+### Setting up KV
+
+1. In the Vercel dashboard, open the Arcana project → Storage → Create Database → KV.
+2. Name it something recognizable (`arcana-theme-cache` is fine). Attach it to Production, Preview, and Development.
+3. Vercel will inject `KV_REST_API_URL`, `KV_REST_API_TOKEN`, `KV_REST_API_READ_ONLY_TOKEN`, and `KV_URL` into the environment. Only the first two are used here.
+4. Pull the updated env down locally: `vercel env pull .env.local` from `playground/`. `vercel dev` will now hit the real KV instance.
+5. To bust the entire cache after a prompt or schema change, bump `CACHE_KEY_PREFIX` in `generate-theme.ts` (currently `theme:v1:`).
 
 ## Local development
 
