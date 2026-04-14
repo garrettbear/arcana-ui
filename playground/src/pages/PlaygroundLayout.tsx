@@ -6,7 +6,9 @@
 import { Breadcrumb, BreadcrumbItem, ToastProvider } from '@arcana-ui/core';
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
+import { GeneratedThemeChip } from '../components/GeneratedThemeChip';
 import { Settings } from '../components/Settings';
+import { clearActiveGeneratedName, getActiveGeneratedName } from '../utils/generateTheme';
 import { PRESETS, type PresetId, applyPreset } from '../utils/presets';
 import styles from './PlaygroundLayout.module.css';
 
@@ -94,6 +96,7 @@ export default function PlaygroundLayout() {
   const [activePresetId, setActivePresetId] = useState<PresetId>(
     validPresetIds.includes(initialTheme) ? initialTheme : 'light',
   );
+  const [generatedName, setGeneratedName] = useState<string | null>(() => getActiveGeneratedName());
 
   useEffect(() => {
     const themeParam = searchParams.get('theme') as PresetId | null;
@@ -114,9 +117,26 @@ export default function PlaygroundLayout() {
     setActivePresetId(id);
     const preset = PRESETS.find((p) => p.id === id);
     if (preset) applyPreset(preset);
+    // A named preset replaces any generated overlay, so the chip is no
+    // longer accurate.
+    if (generatedName) {
+      clearActiveGeneratedName();
+      setGeneratedName(null);
+    }
     // Update URL param
     const newParams = new URLSearchParams(searchParams);
     newParams.set('theme', id);
+    setSearchParams(newParams, { replace: true });
+  };
+
+  const handleClearGenerated = () => {
+    clearActiveGeneratedName();
+    setGeneratedName(null);
+    const lightPreset = PRESETS.find((p) => p.id === 'light');
+    if (lightPreset) applyPreset(lightPreset);
+    setActivePresetId('light');
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('theme', 'light');
     setSearchParams(newParams, { replace: true });
   };
 
@@ -156,6 +176,10 @@ export default function PlaygroundLayout() {
           </nav>
 
           <div className={styles.topbarSpacer} />
+
+          {generatedName && (
+            <GeneratedThemeChip name={generatedName} onClear={handleClearGenerated} />
+          )}
 
           <Settings />
 

@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Generated theme chip in playground topbar (P.5.1).** When `?theme=generated`
+  is active, a pill appears in the playground topbar showing a small
+  "Generated" prefix plus the generated theme's kebab-case name, with a close
+  button that rolls the editor back to the light preset. The chip survives
+  page refreshes and cross-route navigation (editor, components, tokens,
+  graph) by stashing the name into a new `arcana-active-generated-name`
+  sessionStorage key before the picked theme JSON is cleared. Picking a named
+  preset in the theme switcher also drops the chip, since the overlay is
+  gone.
+  - `playground/src/components/GeneratedThemeChip.tsx` +
+    `GeneratedThemeChip.module.css`. Pure presentational component that
+    accepts a `name` and an `onClear` handler. Token-driven styling only,
+    with truncation, tooltip, and an accessible close button.
+  - `playground/src/utils/generateTheme.ts`. Added
+    `ACTIVE_GENERATED_NAME_KEY`, `setActiveGeneratedName`,
+    `getActiveGeneratedName`, `clearActiveGeneratedName` helpers.
+  - `playground/src/App.tsx`. Stashes `picked.name` before
+    `clearPickedTheme()`, renders the chip between the topbar spacer and the
+    editor/a11y panel toggles, and clears the chip on preset switches.
+  - `playground/src/pages/PlaygroundLayout.tsx`. Reads the stashed name on
+    mount so the chip is visible on every `/playground/*` route, with the
+    same clear-on-preset-switch behavior.
 - **BYOK settings UI (P.5.1).** New gear button in the playground topbar,
   next to the theme switcher, opens a Popover for managing the user's own
   Anthropic API key. The panel has a masked Input (with a show/hide toggle),
