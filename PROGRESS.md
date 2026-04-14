@@ -66,7 +66,7 @@ All foundation work, token system (2,600+ CSS variables), responsive framework (
   - [x] User picks one, lands in editor with theme applied via sessionStorage
   - [x] Cost controls: Haiku default, prompt caching, max_tokens 2500
   - [x] BYOK via `X-User-API-Key` header (plumbing complete, UI follow-up)
-  - [ ] BYOK settings UI (enter/clear key, show status in hero)
+  - [x] BYOK settings UI (gear icon + Popover in playground topbar: password input with show/hide, Test and save, Clear key, "Your key" Badge when set)
   - [ ] Semantic cache (Vercel KV on hash of description+siteType+density+model)
   - [ ] Topbar shows generated theme name when `?theme=generated` is active
 - [ ] P.6 -- Theme gallery (browse presets, one-click load, fork)

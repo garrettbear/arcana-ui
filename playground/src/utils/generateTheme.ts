@@ -75,8 +75,14 @@ export function clearStoredApiKey(): void {
   }
 }
 
-export async function generateTheme(req: GenerateThemeRequest): Promise<GenerateThemeResponse> {
-  const byokKey = getStoredApiKey();
+export async function generateTheme(
+  req: GenerateThemeRequest,
+  options?: { apiKey?: string },
+): Promise<GenerateThemeResponse> {
+  // Explicit override wins over stored BYOK. Used by the Settings panel
+  // to test a key the user just typed without having to commit it to
+  // localStorage first.
+  const byokKey = options?.apiKey?.trim() || getStoredApiKey();
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };

@@ -6,6 +6,7 @@
 import { Breadcrumb, BreadcrumbItem, ToastProvider } from '@arcana-ui/core';
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
+import { Settings } from '../components/Settings';
 import { PRESETS, type PresetId, applyPreset } from '../utils/presets';
 import styles from './PlaygroundLayout.module.css';
 
@@ -155,6 +156,8 @@ export default function PlaygroundLayout() {
           </nav>
 
           <div className={styles.topbarSpacer} />
+
+          <Settings />
 
           <ThemeSwitcherBar activePresetId={activePresetId} onPresetChange={handlePresetChange} />
         </header>

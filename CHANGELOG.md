@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **BYOK settings UI (P.5.1).** New gear button in the playground topbar,
+  next to the theme switcher, opens a Popover for managing the user's own
+  Anthropic API key. The panel has a masked Input (with a show/hide toggle),
+  a "Test and save" button that pings `/api/generate-theme` with a minimal
+  description and surfaces the result as a toast, a "Clear key" button, and
+  a one-line explainer that the key stays in the browser. A small "Your key"
+  Badge appears next to the gear when a key is stored, so the state is
+  visible at a glance.
+  - `playground/src/components/Settings.tsx` + `Settings.module.css`. Builds
+    on the existing `@arcana-ui/core` Popover, Button, Input, Badge, and
+    `useToast` primitives. All styling token-driven.
+  - `playground/src/utils/generateTheme.ts`. `generateTheme` now accepts an
+    optional `{ apiKey }` override so the Settings panel can test an
+    unsaved key without mutating localStorage first. The stored key is only
+    persisted after a successful test response.
+  - `playground/src/pages/PlaygroundLayout.tsx`. Mounts `<Settings />`
+    between the topbar spacer and the `ThemeSwitcherBar` on every
+    `/playground/*` route.
 - **AI theme generation (P.5.1 first cut).** Hero input on the landing page now
   generates three Arcana theme variants from a brand description via a new
   `/generate` route with side-by-side preview cards, then hands the picked
