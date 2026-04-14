@@ -11,6 +11,10 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      '@vercel/kv':
+        specifier: ^3.0.0
+        version: 3.0.0
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.1
@@ -415,9 +419,6 @@ importers:
       '@arcana-ui/tokens':
         specifier: workspace:*
         version: link:../packages/tokens
-      '@vercel/kv':
-        specifier: ^3.0.0
-        version: 3.0.0
       d3:
         specifier: ^7.9.0
         version: 7.9.0

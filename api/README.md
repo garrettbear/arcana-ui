@@ -76,24 +76,24 @@ Cost controls:
 1. In the Vercel dashboard, open the Arcana project → Storage → Create Database → KV.
 2. Name it something recognizable (`arcana-theme-cache` is fine). Attach it to Production, Preview, and Development.
 3. Vercel will inject `KV_REST_API_URL`, `KV_REST_API_TOKEN`, `KV_REST_API_READ_ONLY_TOKEN`, and `KV_URL` into the environment. Only the first two are used here.
-4. Pull the updated env down locally: `vercel env pull .env.local` from `playground/`. `vercel dev` will now hit the real KV instance.
+4. Pull the updated env down locally: `vercel env pull .env.local` from the repo root. `vercel dev` will now hit the real KV instance.
 5. To bust the entire cache after a prompt or schema change, bump `CACHE_KEY_PREFIX` in `generate-theme.ts` (currently `theme:v1:`).
 
 ## Local development
 
 ```bash
-# From playground/ after `vercel link`
+# From the repo root after `vercel link`
 vercel env pull .env.local
 
 # Run the playground with the function locally
 vercel dev
 ```
 
-`vercel dev` serves both the Vite app and the `api/` functions on a single origin, matching production routing.
+`vercel dev` serves both the Vite app and the `api/` functions on a single origin, matching production routing. The Vercel project's Root Directory is the repo root, so functions live in `./api/` (not `./playground/api/`).
 
 ## Notes for future functions
 
-- Put one function per file under `playground/api/`. Vercel routes them at `/api/<filename>`.
+- Put one function per file under `./api/` at the repo root. Vercel routes them at `/api/<filename>`.
 - Prefer edge runtime (`export const config = { runtime: 'edge' }`) unless the code needs a Node-only API.
 - CORS: reuse the `isAllowedOrigin` helper pattern from `generate-theme.ts`.
 - Rate limit: the in-memory Map approach is good enough for beta. Move to Upstash/KV if we see sustained traffic.
