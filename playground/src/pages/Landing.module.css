@@ -1188,11 +1188,94 @@
   color: var(--landing-fg-secondary);
 }
 
+/* ─── Hero Ambient Drift ────────────────────────────────────────────────────── */
+
+/* Two very soft radial blobs that drift around the hero at different
+   periods. Low-contrast on purpose. They read as atmosphere, not as
+   animated UI. */
+.heroDriftBlobA,
+.heroDriftBlobB {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroDriftBlobA {
+  top: 10%;
+  left: 8%;
+  background: radial-gradient(circle at center, var(--landing-accent) 0%, transparent 70%);
+  animation: heroDriftA 18s ease-in-out infinite;
+}
+
+.heroDriftBlobB {
+  top: 20%;
+  right: 6%;
+  background: radial-gradient(circle at center, var(--landing-accent-bright) 0%, transparent 70%);
+  animation: heroDriftB 24s ease-in-out infinite;
+}
+
+@keyframes heroDriftA {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(40px, -30px, 0);
+  }
+}
+
+@keyframes heroDriftB {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-35px, 40px, 0);
+  }
+}
+
+.hero > *:not(.heroDriftBlobA):not(.heroDriftBlobB) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── CTA Spotlight ─────────────────────────────────────────────────────────── */
+
+.ctaSpotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    400px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    var(--landing-accent-glow-strong) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.ctaSection:hover .ctaSpotlight {
+  opacity: 1;
+}
+
 /* ─── Reduced Motion ────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   .heroBadgeDot {
     animation: none;
     opacity: 1;
+  }
+  .heroDriftBlobA,
+  .heroDriftBlobB {
+    animation: none;
+  }
+  .ctaSpotlight {
+    transition: none;
   }
 }

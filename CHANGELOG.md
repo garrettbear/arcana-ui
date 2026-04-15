@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Motion primitives + enterprise-grade landing polish.** Four token-driven
+  motion primitives landed under `playground/src/components/motion/`:
+  `FadeIn` (opacity + `translateY` reveal keyed to `--duration-slow` /
+  `--ease-out`), `Stagger` (wrapper that clones children into `FadeIn`s
+  with `baseDelay + i * step` delays), `CountUp` (rAF-driven ease-out
+  cubic that animates 0 -> `to` over 1200ms with suffix support and
+  locale thousands formatting), and `GradientBorder` (conic-gradient
+  border painted via a masked pseudo-element that rotates on hover /
+  focus-within using a CSS `@property --gradient-angle`). All four
+  honor `prefers-reduced-motion`: the shared hook
+  `playground/src/hooks/useInView.ts` wraps `IntersectionObserver` and
+  reports `true` on mount when reduced motion is set, and
+  `motion.module.css` collapses every transition to `0ms` under the
+  same media query. The primitives are exported from a barrel at
+  `playground/src/components/motion/index.ts`. The landing page
+  (`playground/src/pages/Landing.tsx`) now threads every section
+  through these primitives: hero headline + subhead + prompt + links
+  fade in at 0/100/200/300/400ms; logo cloud staggers at 60ms; features
+  stagger at 80ms and each feature card is wrapped in `GradientBorder`
+  so a conic accent border reveals on hover; how-it-works staggers at
+  120ms; theme gallery staggers at 40ms; component showcase fades in
+  with `translateY(48px)`; stats are `CountUp`s (108, 2,600, 14, 5);
+  the CTA tracks the cursor with a radial spotlight piped via
+  `--spotlight-x` / `--spotlight-y`. The hero also gets two soft
+  radial-gradient "drift" blobs looping at 18s / 24s for ambient
+  depth.
+- **Button scale on `:active`.** `packages/core/src/primitives/Button/Button.module.css`
+  now transitions `transform` alongside color / shadow / opacity using
+  `var(--duration-fast)` + `var(--ease-out)` and applies
+  `transform: scale(0.98)` on `:active:not(:disabled)`. Behind
+  `prefers-reduced-motion` the scale is neutralized back to `none`.
+  This is the first component-level motion tweak that picks up the
+  per-preset motion personality set by the tokens JSON.
+
 ### Changed
 
 - **Migrated the playground theme cache from Vercel KV to Supabase.**
