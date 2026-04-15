@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Anthropic upstream error codes are now forwarded to the client.** When
+  `/api/generate-theme` calls Anthropic and the upstream returns non-2xx,
+  the edge function parses Anthropic's JSON error envelope, copies
+  `error.type` to a new `code` field on the response, and forwards the
+  upstream HTTP status unchanged. The client can now tell e.g. our 429
+  (IP rate limit, `code: null`) apart from Anthropic's 429
+  (`code: "rate_limit_error"` / `code: "overloaded_error"`) without
+  guessing from the detail message. `readableError` in
+  `playground/src/utils/generateTheme.ts` was rewritten to dispatch on
+  `code` first, then HTTP status, then the edge function's own string
+  codes, and now ships tailored copy for `billing_error`,
+  `authentication_error`, `overloaded_error`, `rate_limit_error`, and
+  `invalid_request_error`. The function is exported so the new unit test
+  suite can exercise every branch without mocking `fetch`.
+  - `api/generate-theme.ts` — new `AnthropicApiError` class,
+    `parseAnthropicError` helper, and known-type allowlist. Handler catch
+    now forwards the parsed status + code + detail. Every error response
+    now carries `code` (including `null` for locally-produced errors) so
+    the client gets a consistent shape.
+  - `playground/src/utils/generateTheme.ts` — `GenerateThemeError.code`
+    added to the type. `readableError` exported and rewritten with the
+    new dispatch order.
+  - `playground/src/utils/generateTheme.test.ts` — new 16-case test
+    suite covering every readable-error branch.
+  - `playground/vitest.config.ts` — new minimal vitest config so the
+    playground participates in the root test run.
+  - `vitest.workspace.ts` — added the playground config to the workspace
+    so `pnpm test` at the root picks up the new suite.
+  - `playground/package.json` — added `test` / `test:watch` scripts and
+    `vitest` as a devDependency.
+
 ### Fixed
 
 - **Landing hero theme generation returned 404 after the 405 fix.** The

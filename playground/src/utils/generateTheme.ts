@@ -46,7 +46,27 @@ export interface GenerateThemeResponse {
 }
 
 export interface GenerateThemeError {
+  /** Stable string identifier for the failure class set by the edge function. */
   error: string;
+  /**
+   * Anthropic-specific error type copied through from the upstream response
+   * when the failure came from `/v1/messages`. `null` on locally-produced
+   * errors (validation, rate limit, forbidden origin, etc.). The client
+   * switches on this first because it is more specific than the HTTP status
+   * (e.g. Anthropic's 429 `rate_limit_error` and our 429 IP rate limit
+   * share a status but need distinct messages).
+   */
+  code?:
+    | 'billing_error'
+    | 'authentication_error'
+    | 'overloaded_error'
+    | 'rate_limit_error'
+    | 'invalid_request_error'
+    | 'api_error'
+    | 'permission_error'
+    | 'not_found_error'
+    | 'request_too_large'
+    | null;
   detail?: string;
   retryAfterMs?: number;
 }
@@ -150,14 +170,50 @@ export class ThemeGenerationError extends Error {
   }
 }
 
-function readableError(err: GenerateThemeError, status: number): string {
+/**
+ * Map an error response to a human-readable message. Dispatch order is:
+ *   1. `err.code` — Anthropic's upstream `error.type` forwarded by the edge
+ *      function. Most specific, so it wins. Distinguishes e.g. Anthropic's
+ *      429 (rate_limit_error / overloaded_error) from our 429 (IP limit).
+ *   2. HTTP `status` — for locally-produced errors where `code` is null.
+ *      Today only 429 (our own rate limit) has a status-specific message.
+ *   3. `err.error` — the edge function's own string codes for validation,
+ *      forbidden origin, misconfiguration, and generic generation failures.
+ *
+ * Exported so `generateTheme.test.ts` can exercise every branch without
+ * having to mock `fetch`.
+ */
+export function readableError(err: GenerateThemeError, status: number): string {
+  switch (err.code) {
+    case 'billing_error':
+      return 'Theme generation is temporarily unavailable (billing). Add your own Anthropic key in settings to continue.';
+    case 'authentication_error':
+      return 'The Anthropic key is invalid. If you set a BYOK key, check it in settings.';
+    case 'overloaded_error':
+      return 'Anthropic is overloaded right now. Try again in a moment.';
+    case 'rate_limit_error':
+      return 'Anthropic rate-limited this request. Try again in a few seconds.';
+    case 'invalid_request_error':
+      return 'Something about the prompt confused the model. Try rephrasing.';
+    case 'api_error':
+    case 'permission_error':
+    case 'not_found_error':
+    case 'request_too_large':
+      return `Generation failed: ${err.detail ?? 'upstream error'}`;
+  }
+
+  // No upstream code. Locally-produced errors: dispatch on HTTP status for
+  // cases where status alone is meaningful, then on the edge function's
+  // own string code.
+  if (status === 429) {
+    return "You've hit the daily generation limit. Add your own Anthropic key in settings to keep going.";
+  }
+
   switch (err.error) {
     case 'description_required':
       return 'Add a description of your brand so we know what to generate.';
     case 'description_too_long':
       return 'That description is a bit long. Try trimming to under 500 characters.';
-    case 'rate_limited':
-      return 'Free tier limit reached. Try again in a minute or add your own API key.';
     case 'forbidden_origin':
       return 'This origin cannot use the shared key. Add your own Anthropic API key to generate from here.';
     case 'server_misconfigured':
