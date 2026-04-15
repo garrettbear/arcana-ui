@@ -107,6 +107,7 @@ These are the key rules. For full details, see [CLAUDE.md](./CLAUDE.md) and [ROA
 - Mobile-first: default styles for mobile, `@media (min-width: ...)` for larger screens.
 - BEM-like naming with `arcana-` prefix: `arcana-button`, `arcana-button--primary`.
 - No `!important`. Ever.
+- Landing and playground pages must use motion tokens (`var(--duration-*)`, `var(--ease-*)`); hardcoded `ms` / `s` values and literal `ease` / `cubic-bezier(...)` functions are not permitted. This is what makes the per-preset motion personalities in `packages/tokens/src/presets/*.json` flow through to every surface instead of being overridden by page-local timings.
 
 **Components:**
 - `forwardRef` on every component with `displayName` set.
