@@ -51,72 +51,170 @@
       {
         "id": "brutalist",
         "name": "arcana-brutalist",
-        "description": "Bloomberg Terminal meets Swiss poster — bold red accent, dramatic typography, thick structural borders"
+        "description": "Bloomberg Terminal meets Swiss poster — bold red accent, dramatic typography, thick structural borders",
+        "motion": {
+          "personality": "instant",
+          "fast": "0ms",
+          "normal": "0ms",
+          "slow": "0ms",
+          "defaultEasing": "linear"
+        }
       },
       {
         "id": "commerce",
         "name": "arcana-commerce",
-        "description": "Clean product-focused design — warm neutrals with green accent, Shopify-inspired"
+        "description": "Clean product-focused design — warm neutrals with green accent, Shopify-inspired",
+        "motion": {
+          "personality": "default",
+          "fast": "100ms",
+          "normal": "200ms",
+          "slow": "300ms",
+          "defaultEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        }
       },
       {
         "id": "corporate",
         "name": "arcana-corporate",
-        "description": "Conservative navy/slate palette — trustworthy, enterprise-grade, Stripe-inspired"
+        "description": "Conservative navy/slate palette — trustworthy, enterprise-grade, Stripe-inspired",
+        "motion": {
+          "personality": "default",
+          "fast": "100ms",
+          "normal": "200ms",
+          "slow": "300ms",
+          "defaultEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        }
       },
       {
         "id": "dark",
         "name": "arcana-dark",
-        "description": "Deep slate dark with vibrant indigo accent — focused, rich, Linear-inspired"
+        "description": "Deep slate dark with vibrant indigo accent — focused, rich, Linear-inspired",
+        "motion": {
+          "personality": "default",
+          "fast": "100ms",
+          "normal": "200ms",
+          "slow": "300ms",
+          "defaultEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        }
       },
       {
         "id": "editorial",
         "name": "arcana-editorial",
-        "description": "Elegant serif typography, high contrast — publishing, NYT-inspired"
+        "description": "Elegant serif typography, high contrast — publishing, NYT-inspired",
+        "motion": {
+          "personality": "calm",
+          "fast": "180ms",
+          "normal": "300ms",
+          "slow": "450ms",
+          "defaultEasing": "linear"
+        }
       },
       {
         "id": "glass",
         "name": "arcana-glass",
-        "description": "Apple iOS glassmorphism — frosted translucent surfaces on gradient, elegant light typography"
+        "description": "Apple iOS glassmorphism — frosted translucent surfaces on gradient, elegant light typography",
+        "motion": {
+          "personality": "languid",
+          "fast": "200ms",
+          "normal": "350ms",
+          "slow": "600ms",
+          "defaultEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        }
       },
       {
         "id": "light",
         "name": "arcana-light",
-        "description": "Warm stone palette with indigo accent — clean, precise, Notion-inspired"
+        "description": "Warm stone palette with indigo accent — clean, precise, Notion-inspired",
+        "motion": {
+          "personality": "default",
+          "fast": "100ms",
+          "normal": "200ms",
+          "slow": "300ms",
+          "defaultEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        }
       },
       {
         "id": "midnight",
         "name": "arcana-midnight",
-        "description": "Deep navy with soft gold accents — premium, finance-grade, Bloomberg-inspired"
+        "description": "Deep navy with soft gold accents — premium, finance-grade, Bloomberg-inspired",
+        "motion": {
+          "personality": "default",
+          "fast": "120ms",
+          "normal": "240ms",
+          "slow": "360ms",
+          "defaultEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        }
       },
       {
         "id": "mono",
         "name": "arcana-mono",
-        "description": "Pure black and white — stark typographic minimalism, portfolio/architecture-inspired"
+        "description": "Pure black and white — stark typographic minimalism, portfolio/architecture-inspired",
+        "motion": {
+          "personality": "default",
+          "fast": "100ms",
+          "normal": "200ms",
+          "slow": "300ms",
+          "defaultEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        }
       },
       {
         "id": "nature",
         "name": "arcana-nature",
-        "description": "Earth tones with warm greens — organic, wellness, sustainability-inspired"
+        "description": "Earth tones with warm greens — organic, wellness, sustainability-inspired",
+        "motion": {
+          "personality": "organic",
+          "fast": "150ms",
+          "normal": "260ms",
+          "slow": "420ms",
+          "defaultEasing": "cubic-bezier(0.34, 1.56, 0.64, 1)"
+        }
       },
       {
         "id": "neon",
         "name": "arcana-neon",
-        "description": "Electric neon on dark — vivid cyan/pink accents, cyberpunk, gaming-inspired"
+        "description": "Electric neon on dark — vivid cyan/pink accents, cyberpunk, gaming-inspired",
+        "motion": {
+          "personality": "energetic",
+          "fast": "150ms",
+          "normal": "200ms",
+          "slow": "300ms",
+          "defaultEasing": "cubic-bezier(0.34, 1.56, 0.64, 1)"
+        }
       },
       {
         "id": "retro98",
         "name": "arcana-retro98",
-        "description": "Authentic Windows 98 recreation — pixel-perfect bevels, navy blue title bars, silver surfaces"
+        "description": "Authentic Windows 98 recreation — pixel-perfect bevels, navy blue title bars, silver surfaces",
+        "motion": {
+          "personality": "snappy",
+          "fast": "0ms",
+          "normal": "100ms",
+          "slow": "150ms",
+          "defaultEasing": "steps(3, end)"
+        }
       },
       {
         "id": "startup",
         "name": "arcana-startup",
-        "description": "Vibrant purple-to-pink gradient energy — modern SaaS, Vercel/Linear-inspired"
+        "description": "Vibrant purple-to-pink gradient energy — modern SaaS, Vercel/Linear-inspired",
+        "motion": {
+          "personality": "default",
+          "fast": "100ms",
+          "normal": "200ms",
+          "slow": "300ms",
+          "defaultEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        }
       },
       {
         "id": "terminal",
         "name": "arcana-terminal",
-        "description": "Premium terminal emulator — green phosphor on black, monospace everything, Warp/Hyper-inspired"
+        "description": "Premium terminal emulator — green phosphor on black, monospace everything, Warp/Hyper-inspired",
+        "motion": {
+          "personality": "instant",
+          "fast": "0ms",
+          "normal": "0ms",
+          "slow": "75ms",
+          "defaultEasing": "linear"
+        }
       }
     ],
     "keyTokens": {
@@ -3433,7 +3531,7 @@
     }
   ],
   "_generated": {
-    "at": "2026-04-09T17:22:56.088Z",
+    "at": "2026-04-15T21:36:54.558Z",
     "by": "scripts/generate-manifest.mjs",
     "componentCount": 108,
     "hookCount": 11

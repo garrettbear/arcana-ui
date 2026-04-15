@@ -616,13 +616,13 @@
     "motion": {
       "duration": {
         "instant": "{primitive.motion.duration.0}",
-        "fast": "{primitive.motion.duration.150}",
-        "normal": "{primitive.motion.duration.300}",
-        "slow": "{primitive.motion.duration.500}",
-        "slower": "{primitive.motion.duration.700}"
+        "fast": "200ms",
+        "normal": "350ms",
+        "slow": "600ms",
+        "slower": "900ms"
       },
       "easing": {
-        "default": "{primitive.motion.easing.out}",
+        "default": "{primitive.motion.easing.in-out}",
         "in": "{primitive.motion.easing.in}",
         "out": "{primitive.motion.easing.out}",
         "in-out": "{primitive.motion.easing.in-out}",

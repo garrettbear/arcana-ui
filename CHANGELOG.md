@@ -42,6 +42,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `prefers-reduced-motion` the scale is neutralized back to `none`.
   This is the first component-level motion tweak that picks up the
   per-preset motion personality set by the tokens JSON.
+- **Per-preset motion personalities.** The `semantic.motion` block in
+  each preset JSON under `packages/tokens/src/presets/` was retuned so
+  every theme ships a distinct cadence. `editorial` is calm at
+  180 / 300 / 450 ms with `linear` / `ease-out` only; `glass` is
+  languid at 200 / 350 / 600 ms with `ease-in-out`; `midnight` is
+  deliberate at 120 / 240 / 360 ms with `ease-in-out`; `nature` is
+  organic at 150 / 260 / 420 ms with spring easing and spring
+  transform; `neon` is energetic at 150 / 200 / 300 ms with spring
+  easing and spring transform; `retro98` switches to `steps(3, end)`
+  easing at 100 ms for a snappy stepped feel. `brutalist` and
+  `terminal` keep their existing instant baselines. Personalities are
+  captured in `manifest.ai.json` under `tokens.themes[].motion` as
+  `{ personality, fast, normal, slow, defaultEasing }` for AI
+  consumers. ROADMAP's preset matrix gets a new "Motion Personality"
+  column.
+- **Token Editor — Fast / Normal / Slow duration sliders.** The Motion
+  section in the playground Token Editor was expanded from a single
+  `--duration-normal` slider into three independent sliders (ranges
+  0–600 / 0–1000 / 0–1500 ms) that drive `--duration-fast`,
+  `--duration-normal`, and `--duration-slow` individually. The preset
+  segmented control still sets all three at once; editing Normal
+  still auto-scales the others so the previous muscle memory survives.
+  `collectTokenSnapshot` now exports `--duration-fast` and
+  `--duration-slow` alongside `--duration-normal` so JSON / CSS
+  exports round-trip cleanly.
+- **Playwright landing-motion harness.** New spec
+  `tests/visual/landing.spec.ts` injects a global stylesheet with
+  `animation-delay: -999s` + `transition-duration: 0s` so the
+  landing's reveal primitives settle into their resting state before
+  a snapshot is taken. Two captures: full-page and hero-only.
+  Baselines are generated on first run via `pnpm test:visual
+  --update-snapshots`.
 
 ### Changed
 
