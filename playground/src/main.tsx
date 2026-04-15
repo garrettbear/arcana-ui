@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -32,6 +33,14 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/playground/graph" element={<RelationshipGraph />} />
         </Route>
       </Routes>
+      {/*
+        Vercel Web Analytics — mounted inside BrowserRouter so pageview
+        tracking picks up react-router-dom path changes automatically.
+        No-ops in dev (the script only loads when VERCEL_ENV is set on
+        the Vercel deployment). Zero-config: enable Web Analytics in the
+        project's Vercel dashboard and events start flowing.
+      */}
+      <Analytics />
     </BrowserRouter>
   </React.StrictMode>,
 );

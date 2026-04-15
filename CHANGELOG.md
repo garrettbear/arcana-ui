@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Vercel Web Analytics on the playground.** `@vercel/analytics@^2.0.1`
+  added to `playground/package.json` and the React export mounted via
+  `<Analytics />` inside `<BrowserRouter>` in `playground/src/main.tsx`
+  so react-router-dom path changes trigger automatic pageview events.
+  Script no-ops locally (only loads when Vercel sets `VERCEL_ENV` at
+  deploy time); enable Web Analytics in the project's Vercel dashboard
+  to start collecting data — no other config needed.
 - **Motion primitives + enterprise-grade landing polish.** Four token-driven
   motion primitives landed under `playground/src/components/motion/`:
   `FadeIn` (opacity + `translateY` reveal keyed to `--duration-slow` /
