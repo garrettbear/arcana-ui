@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Migrated the playground theme cache from Vercel KV to Supabase.**
+  `@vercel/kv` was deprecated upstream and we're consolidating storage on
+  the same Supabase project arcana-ops already uses. Behavior is
+  identical: 7-day TTL, same SHA-256 key scheme (now written as
+  `<modelShort>:<hash16>` directly into `theme_cache.cache_key` without
+  the legacy `arcana:theme:` prefix), same BYOK skip, same soft-fail when
+  env vars are absent, same hit/miss `console.log` instrumentation.
+  Responses now also carry an `X-Cache: HIT | MISS` header and set
+  `Cache-Control: no-store` on BYOK responses.
+  - `api/generate-theme.ts` — swap `@vercel/kv` for
+    `@supabase/supabase-js`. Client is initialized once at module scope
+    from `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`; missing env vars
+    log a single warning and the cache layer passes through. Read path
+    selects `response, expires_at` filtered by `expires_at > now()` and
+    bumps `hit_count` fire-and-forget through an
+    `increment_theme_cache_hit` RPC. Write path is a fire-and-forget
+    upsert on `cache_key` with `expires_at = now() + 7 days`.
+  - `buildCacheKey` is now exported and pinned by a new 8-case unit
+    suite under `api/generate-theme.test.ts` (new
+    `api/vitest.config.ts`, wired into `vitest.workspace.ts`) so the
+    hash scheme cannot drift silently.
+  - `package.json` — `@vercel/kv@^3.0.0` removed,
+    `@supabase/supabase-js@^2.45.4` added at the repo root (the edge
+    function lives at `./api/` at the repo root, not in `playground/`).
+  - `.env.example` — `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`
+    documented in place of the KV vars.
+  - `api/README.md`, `playground/src/utils/generateTheme.ts` —
+    docstrings swapped from "Vercel KV" to "Supabase".
+
 ### Added
 
 - **Anthropic upstream error codes are now forwarded to the client.** When

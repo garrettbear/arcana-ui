@@ -2,7 +2,7 @@
 
 > **Last updated:** 2026-04-14
 > **Current version:** v0.1.0 (stable, published to npm)
-> **Current sprint:** P.5 Sprint 2 close-out; P.5.2 (Supabase accounts) next
+> **Current sprint:** P.5 Sprint 2 closed; cache migrated off Vercel KV onto Supabase; P.5.2 (Supabase accounts) next
 > **Source of truth for current state:** CLAUDE.md "Current State" section
 > **Next priority:** P.5.2 Supabase accounts + workspaces, then external starter repos
 
@@ -58,7 +58,7 @@ All foundation work, token system (2,600+ CSS variables), responsive framework (
 - [x] P.2 -- ComponentGallery with stats bar, richer cards, audit table mode
 - [x] P.3 -- Visual token editor (custom HSV color picker, cubic bezier editor, undo/redo, search/filter, modified indicators)
 - [x] P.4 -- Live component preview with category filter
-- [x] **P.5 -- AI theme generation flow** (Sprint 2 shipped via PRs #108, #109, #110, #113)
+- [x] **P.5 -- AI theme generation flow** (Sprint 2 fully shipped via PRs #108, #109, #110, #112, #113 + this PR)
   - [x] Hero input: "Describe your brand" wired to edge function with loading state
   - [x] Anthropic API via Vercel edge function (`api/generate-theme.ts` at repo root after #112)
   - [x] Generate 3 theme variants per request, returned as structured JSON
@@ -67,7 +67,7 @@ All foundation work, token system (2,600+ CSS variables), responsive framework (
   - [x] Cost controls: Haiku default, prompt caching, max_tokens 2500
   - [x] BYOK via `X-User-API-Key` header (plumbing + UI both live)
   - [x] BYOK settings UI (gear icon + Popover in playground topbar: password input with show/hide, Test and save, Clear key, "Your key" Badge when set) -- #108
-  - [x] Semantic cache (Vercel KV on SHA-256 hash of normalized description+siteType+density+count+model, 7-day TTL, `meta.cached` on response, soft-miss when KV env missing) -- #110
+  - [x] Semantic cache on SHA-256 hash of normalized description+siteType+density+count+model, 7-day TTL, `meta.cached` on response, soft-miss when storage env vars missing; originally Vercel KV (#110), migrated to Supabase `theme_cache` table (this PR) after `@vercel/kv@3` was deprecated upstream. Responses also carry `X-Cache: HIT | MISS` and `Cache-Control: no-store` on BYOK.
   - [x] Topbar shows generated theme name when `?theme=generated` is active (chip with close button, persisted across routes via `arcana-active-generated-name` session key) -- #109
   - [x] Anthropic `error.type` forwarded to the client as `code`, upstream HTTP status preserved so our 429 (IP rate limit) and Anthropic's 429 (`rate_limit_error`/`overloaded_error`) are distinguishable; `readableError` rewritten with tailored copy for `billing_error`, `authentication_error`, `overloaded_error`, `rate_limit_error`, `invalid_request_error`. 16-case unit test suite added. -- this PR
 - [ ] P.6 -- Theme gallery (browse presets, one-click load, fork)

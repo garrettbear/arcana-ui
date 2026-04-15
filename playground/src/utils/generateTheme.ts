@@ -36,10 +36,10 @@ export interface GenerateThemeResponse {
     byok: boolean;
     count: number;
     /**
-     * True when the themes were served from the Vercel KV semantic cache
+     * True when the themes were served from the Supabase semantic cache
      * instead of hitting the Anthropic API. Present on every successful
-     * response from deployments where KV is configured; may be absent
-     * from responses produced before the caching layer shipped.
+     * response from deployments where Supabase is configured; may be
+     * absent from responses produced before the caching layer shipped.
      */
     cached?: boolean;
   };
