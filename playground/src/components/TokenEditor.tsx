@@ -241,6 +241,8 @@ export function TokenEditor({
   const [scale, setScale] = useState(1);
   const [localFonts, setLocalFontEntrys] = useState<LocalFontEntry[]>([]);
   const [motionDuration, setMotionDuration] = useState(200);
+  const [motionDurationFast, setMotionDurationFast] = useState(100);
+  const [motionDurationSlow, setMotionDurationSlow] = useState(300);
   const [bezier, setBezier] = useState<BezierValues>({ x1: 0.25, y1: 0.1, x2: 0.25, y2: 1 });
   const [pendingFont, setPendingFont] = useState<LocalFontEntry | null>(null);
 
@@ -357,6 +359,16 @@ export function TokenEditor({
       const ms = Number.parseInt(durNormal);
       if (!Number.isNaN(ms)) setMotionDuration(ms);
     }
+    const durFast = getCSSVar('--duration-fast');
+    if (durFast) {
+      const ms = Number.parseInt(durFast);
+      if (!Number.isNaN(ms)) setMotionDurationFast(ms);
+    }
+    const durSlow = getCSSVar('--duration-slow');
+    if (durSlow) {
+      const ms = Number.parseInt(durSlow);
+      if (!Number.isNaN(ms)) setMotionDurationSlow(ms);
+    }
 
     // Element sizing
     const parseRemOrPx = (val: string): number => {
@@ -423,11 +435,15 @@ export function TokenEditor({
 
   const applyMotionDuration = useCallback((ms: number) => {
     const root = document.documentElement;
+    const fast = Math.round(ms * 0.5);
+    const slow = Math.round(ms * 1.5);
     root.style.setProperty('--duration-instant', '0ms');
-    root.style.setProperty('--duration-fast', `${Math.round(ms * 0.5)}ms`);
+    root.style.setProperty('--duration-fast', `${fast}ms`);
     root.style.setProperty('--duration-normal', `${ms}ms`);
-    root.style.setProperty('--duration-slow', `${Math.round(ms * 1.5)}ms`);
+    root.style.setProperty('--duration-slow', `${slow}ms`);
     root.style.setProperty('--duration-slower', `${Math.round(ms * 2.5)}ms`);
+    setMotionDurationFast(fast);
+    setMotionDurationSlow(slow);
     const easingVal = getCSSVar('--ease-default') || 'ease';
     root.style.setProperty(
       '--transition-colors',
@@ -437,6 +453,14 @@ export function TokenEditor({
     root.style.setProperty('--transition-transform', `transform ${ms}ms ${easingVal}`);
     root.style.setProperty('--transition-opacity', `opacity ${ms}ms ${easingVal}`);
     root.style.setProperty('--transition-all', `all ${ms}ms ${easingVal}`);
+  }, []);
+
+  const applyMotionDurationFast = useCallback((ms: number) => {
+    document.documentElement.style.setProperty('--duration-fast', `${ms}ms`);
+  }, []);
+
+  const applyMotionDurationSlow = useCallback((ms: number) => {
+    document.documentElement.style.setProperty('--duration-slow', `${ms}ms`);
   }, []);
 
   // ── Event handlers ────────────────────────────────────────────────────────
@@ -576,6 +600,18 @@ export function TokenEditor({
   const handleMotionDurationChange = (ms: number) => {
     setMotionDuration(ms);
     applyMotionDuration(ms);
+    setModifiedScalars((prev) => new Set([...prev, 'motion']));
+  };
+
+  const handleMotionDurationFastChange = (ms: number) => {
+    setMotionDurationFast(ms);
+    applyMotionDurationFast(ms);
+    setModifiedScalars((prev) => new Set([...prev, 'motion']));
+  };
+
+  const handleMotionDurationSlowChange = (ms: number) => {
+    setMotionDurationSlow(ms);
+    applyMotionDurationSlow(ms);
     setModifiedScalars((prev) => new Set([...prev, 'motion']));
   };
 
@@ -723,11 +759,24 @@ export function TokenEditor({
     exportObj['--line-height-normal'] = String(lineHeight);
     for (const step of TYPE_SCALE_STEPS) exportObj[step.cssVar] = getCSSVar(step.cssVar);
     for (const step of ALL_SPACING_STEPS) exportObj[step.cssVar] = getCSSVar(step.cssVar);
+    exportObj['--duration-fast'] = `${motionDurationFast}ms`;
     exportObj['--duration-normal'] = `${motionDuration}ms`;
+    exportObj['--duration-slow'] = `${motionDurationSlow}ms`;
     exportObj['--ease-default'] = getCSSVar('--ease-default') || 'ease';
     exportObj['--data-density'] = density;
     return exportObj;
-  }, [radius, scale, displayFont, bodyFont, monoFont, lineHeight, motionDuration, density]);
+  }, [
+    radius,
+    scale,
+    displayFont,
+    bodyFont,
+    monoFont,
+    lineHeight,
+    motionDuration,
+    motionDurationFast,
+    motionDurationSlow,
+    density,
+  ]);
 
   const downloadFile = (contents: string, filename: string, mime: string) => {
     const blob = new Blob([contents], { type: mime });
@@ -1644,6 +1693,35 @@ export function TokenEditor({
                 ))}
               </div>
               <div className={styles.sliderRow}>
+                <span className={styles.sliderLabel}>FAST</span>
+                <div className={styles.sliderControl}>
+                  <input
+                    type="range"
+                    className={styles.slider}
+                    min={0}
+                    max={600}
+                    step={10}
+                    value={motionDurationFast}
+                    onChange={(e) =>
+                      handleMotionDurationFastChange(Number.parseInt(e.target.value))
+                    }
+                  />
+                  <input
+                    type="number"
+                    className={styles.sliderNumberInput}
+                    min={0}
+                    max={600}
+                    step={10}
+                    value={motionDurationFast}
+                    onChange={(e) =>
+                      handleMotionDurationFastChange(Number.parseInt(e.target.value))
+                    }
+                  />
+                  <span className={styles.sliderUnit}>ms</span>
+                </div>
+              </div>
+              <div className={styles.sliderRow}>
+                <span className={styles.sliderLabel}>NORM</span>
                 <div className={styles.sliderControl}>
                   <input
                     type="range"
@@ -1662,6 +1740,34 @@ export function TokenEditor({
                     step={10}
                     value={motionDuration}
                     onChange={(e) => handleMotionDurationChange(Number.parseInt(e.target.value))}
+                  />
+                  <span className={styles.sliderUnit}>ms</span>
+                </div>
+              </div>
+              <div className={styles.sliderRow}>
+                <span className={styles.sliderLabel}>SLOW</span>
+                <div className={styles.sliderControl}>
+                  <input
+                    type="range"
+                    className={styles.slider}
+                    min={0}
+                    max={1500}
+                    step={10}
+                    value={motionDurationSlow}
+                    onChange={(e) =>
+                      handleMotionDurationSlowChange(Number.parseInt(e.target.value))
+                    }
+                  />
+                  <input
+                    type="number"
+                    className={styles.sliderNumberInput}
+                    min={0}
+                    max={1500}
+                    step={10}
+                    value={motionDurationSlow}
+                    onChange={(e) =>
+                      handleMotionDurationSlowChange(Number.parseInt(e.target.value))
+                    }
                   />
                   <span className={styles.sliderUnit}>ms</span>
                 </div>

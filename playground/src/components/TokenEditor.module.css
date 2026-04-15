@@ -1016,7 +1016,7 @@
   font-size: 10px;
   font-family: "JetBrains Mono", monospace;
   color: var(--color-fg-muted);
-  width: 20px;
+  min-width: 32px;
   flex-shrink: 0;
   text-transform: uppercase;
 }

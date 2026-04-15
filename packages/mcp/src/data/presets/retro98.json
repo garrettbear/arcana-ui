@@ -492,17 +492,17 @@
       "duration": {
         "instant": "{primitive.motion.duration.0}",
         "fast": "{primitive.motion.duration.0}",
-        "normal": "{primitive.motion.duration.75}",
-        "slow": "{primitive.motion.duration.100}",
-        "slower": "{primitive.motion.duration.150}"
+        "normal": "{primitive.motion.duration.100}",
+        "slow": "{primitive.motion.duration.150}",
+        "slower": "{primitive.motion.duration.200}"
       },
       "easing": {
-        "default": "{primitive.motion.easing.linear}",
-        "in": "{primitive.motion.easing.linear}",
-        "out": "{primitive.motion.easing.linear}",
-        "in-out": "{primitive.motion.easing.linear}",
-        "spring": "{primitive.motion.easing.linear}",
-        "bounce": "{primitive.motion.easing.linear}"
+        "default": "steps(3, end)",
+        "in": "steps(3, end)",
+        "out": "steps(3, end)",
+        "in-out": "steps(3, end)",
+        "spring": "steps(3, end)",
+        "bounce": "steps(3, end)"
       },
       "transition": {
         "colors": "color var(--duration-fast) var(--ease-default), background-color var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default), text-decoration-color var(--duration-fast) var(--ease-default), fill var(--duration-fast) var(--ease-default), stroke var(--duration-fast) var(--ease-default)",

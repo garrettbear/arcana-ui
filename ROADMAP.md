@@ -854,22 +854,22 @@ Button.displayName = 'Button';
 
 Every preset gets a canonical demo site type that showcases its strengths. The demo site also serves as a visual regression test fixture.
 
-| # | Preset Name | Mood / Aesthetic | Best For | Demo Site |
-|---|---|---|---|---|
-| 1 | **Light** (default) | Warm, clean, professional | General purpose, SaaS | SaaS Dashboard |
-| 2 | **Dark** | Deep, focused, modern | Dev tools, media apps | Admin Panel |
-| 3 | **Terminal** | Green phosphor, hacker | CLI tools, dev dashboards | CLI Status Dashboard |
-| 4 | **Retro 98** | Windows 98 nostalgia | Novelty, games, retro apps | Retro Personal Homepage |
-| 5 | **Glass** | Apple-style translucent blur | Creative portfolios, luxury | Portfolio Landing Page |
-| 6 | **Brutalist** | Raw, bold, maximalist | Art, fashion, editorial | Magazine / Editorial |
-| 7 | **Corporate** *(new)* | Conservative, trustworthy, navy | Enterprise, finance, legal | Corporate Landing Page |
-| 8 | **Startup** *(new)* | Vibrant gradients, energetic | SaaS marketing, startups | SaaS Marketing Site |
-| 9 | **Editorial** *(new)* | Elegant serif, high contrast | News, blogs, publishing | News Editorial Site |
-| 10 | **Commerce** *(new)* | Clean, product-focused | E-commerce, retail | E-commerce Product Page |
-| 11 | **Midnight** *(new)* | Deep navy, soft gold accents | Finance, premium apps | Finance Dashboard |
-| 12 | **Nature** *(new)* | Earth tones, organic shapes | Sustainability, health, food | Wellness / Recipe Blog |
-| 13 | **Neon** *(new)* | Electric, dark bg, vivid accents | Gaming, nightlife, events | Event / Music Landing |
-| 14 | **Mono** *(new)* | Black and white, stark, typographic | Minimal portfolio, law, architecture | Minimal Documentation |
+| # | Preset Name | Mood / Aesthetic | Motion Personality | Best For | Demo Site |
+|---|---|---|---|---|---|
+| 1 | **Light** (default) | Warm, clean, professional | Default — 100 / 200 / 300 ms, cubic ease | General purpose, SaaS | SaaS Dashboard |
+| 2 | **Dark** | Deep, focused, modern | Default — 100 / 200 / 300 ms, cubic ease | Dev tools, media apps | Admin Panel |
+| 3 | **Terminal** | Green phosphor, hacker | Instant — 0 / 0 / 75 ms, linear | CLI tools, dev dashboards | CLI Status Dashboard |
+| 4 | **Retro 98** | Windows 98 nostalgia | Snappy — 0 / 100 / 150 ms, steps(3, end) | Novelty, games, retro apps | Retro Personal Homepage |
+| 5 | **Glass** | Apple-style translucent blur | Languid — 200 / 350 / 600 ms, ease-in-out | Creative portfolios, luxury | Portfolio Landing Page |
+| 6 | **Brutalist** | Raw, bold, maximalist | Instant — 0 / 0 / 0 ms, linear | Art, fashion, editorial | Magazine / Editorial |
+| 7 | **Corporate** *(new)* | Conservative, trustworthy, navy | Default — 100 / 200 / 300 ms, cubic ease | Enterprise, finance, legal | Corporate Landing Page |
+| 8 | **Startup** *(new)* | Vibrant gradients, energetic | Default — 100 / 200 / 300 ms, cubic ease | SaaS marketing, startups | SaaS Marketing Site |
+| 9 | **Editorial** *(new)* | Elegant serif, high contrast | Calm — 180 / 300 / 450 ms, linear & ease-out | News, blogs, publishing | News Editorial Site |
+| 10 | **Commerce** *(new)* | Clean, product-focused | Default — 100 / 200 / 300 ms, cubic ease | E-commerce, retail | E-commerce Product Page |
+| 11 | **Midnight** *(new)* | Deep navy, soft gold accents | Deliberate — 120 / 240 / 360 ms, ease-in-out | Finance, premium apps | Finance Dashboard |
+| 12 | **Nature** *(new)* | Earth tones, organic shapes | Organic — 150 / 260 / 420 ms, spring | Sustainability, health, food | Wellness / Recipe Blog |
+| 13 | **Neon** *(new)* | Electric, dark bg, vivid accents | Energetic — 150 / 200 / 300 ms, spring | Gaming, nightlife, events | Event / Music Landing |
+| 14 | **Mono** *(new)* | Black and white, stark, typographic | Default — 100 / 200 / 300 ms, cubic ease | Minimal portfolio, law, architecture | Minimal Documentation |
 
 ### 5.2 Demo Site Specifications
 
