@@ -30,13 +30,14 @@
  *
  * Semantic cache: results are keyed on a SHA-256 hash of the normalized
  * { description, siteType, density, count, model } tuple and persisted in
- * Vercel KV for 7 days. A cache hit returns with `meta.cached = true` and
- * bypasses the Anthropic call entirely (zero API cost). KV is optional:
- * when the KV env vars are missing (local dev without `vercel env pull`),
- * the cache layer is skipped silently and every request calls Anthropic.
+ * the Supabase `theme_cache` table for 7 days. A cache hit returns with
+ * `meta.cached = true` and bypasses the Anthropic call entirely (zero API
+ * cost). Supabase is optional: when SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY
+ * is missing (local dev without `vercel env pull`), the cache layer is
+ * skipped silently and every request calls Anthropic.
  */
 
-import { kv } from '@vercel/kv';
+import { type SupabaseClient, createClient } from '@supabase/supabase-js';
 
 export const config = {
   runtime: 'edge',
@@ -63,12 +64,39 @@ const GLOBAL_SHARED_RATE_MAX = 60;
 const rateLimitBuckets = new Map<string, { count: number; resetAt: number }>();
 let globalSharedBucket: { count: number; resetAt: number } = { count: 0, resetAt: 0 };
 
-// Semantic cache. Keys are `theme:v1:<sha256>` so we can invalidate the
-// entire cache by bumping the version prefix if the prompt or output
-// schema changes. TTL is 7 days: long enough to make repeat prompts free,
-// short enough that a prompt tweak cycles through within a sprint.
-const CACHE_KEY_PREFIX = 'theme:v1:';
-const CACHE_TTL_SECONDS = 60 * 60 * 24 * 7;
+// Semantic cache. Keys are `<modelShort>:<hash16>` where modelShort is
+// "haiku" or "sonnet" and hash16 is the first 16 hex chars of the SHA-256
+// of the normalized prompt tuple. TTL is 7 days: long enough to make
+// repeat prompts free, short enough that a prompt tweak cycles through
+// within a sprint. TTL is written as an absolute `expires_at` timestamp
+// so the read path can filter it in SQL; no background expiry job needed.
+const CACHE_TTL_DAYS = 7;
+
+// --- Supabase client -----------------------------------------------------
+
+// Initialized once at module scope. When SUPABASE_URL or
+// SUPABASE_SERVICE_ROLE_KEY is missing (local dev without `vercel env
+// pull`), the client stays null and the cache layer soft-fails to a
+// pass-through that always calls Anthropic. The warning is logged once
+// here at init; per-request code never re-logs the absence.
+let supabase: SupabaseClient | null = null;
+try {
+  const url = process.env.SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (url && serviceRoleKey) {
+    supabase = createClient(url, serviceRoleKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+  } else {
+    console.log(
+      '[generate-theme] Supabase env vars missing; theme cache disabled (local dev or unset).',
+    );
+  }
+} catch (err) {
+  supabase = null;
+  const message = err instanceof Error ? err.message : String(err);
+  console.log(`[generate-theme] Supabase client init failed; theme cache disabled. ${message}`);
+}
 
 // --- Handler -------------------------------------------------------------
 
@@ -161,15 +189,29 @@ export default async function handler(req: Request): Promise<Response> {
 
   // Semantic cache lookup. Keyed on the validated/normalized tuple so
   // cosmetic differences (capitalization, extra whitespace) collapse to
-  // the same entry.
-  const cacheKey = await buildCacheKey({ description, siteType, density, count, model });
-  const cachedThemes = cacheKey ? await cacheGet(cacheKey) : null;
-  if (cachedThemes) {
-    return json(
-      { themes: cachedThemes, meta: { model, byok: usingByok, count, cached: true } },
-      200,
-      corsHeaders,
-    );
+  // the same entry. BYOK requests bypass the cache entirely: users
+  // bringing their own key expect their prompts to stay off our server,
+  // and we emit Cache-Control: no-store on the response to signal that
+  // intent to any intermediaries.
+  const cacheHeaders: Record<string, string> = {};
+  if (usingByok) {
+    cacheHeaders['Cache-Control'] = 'no-store';
+  }
+  const cacheEnabled = supabase !== null && !usingByok;
+  const cacheKey = cacheEnabled
+    ? await buildCacheKey({ description, siteType, density, count, model })
+    : null;
+  if (cacheKey) {
+    const cachedThemes = await cacheGet(cacheKey);
+    if (cachedThemes) {
+      console.log(`[generate-theme] cache hit key=${cacheKey} model=${model}`);
+      return json(
+        { themes: cachedThemes, meta: { model, byok: usingByok, count, cached: true } },
+        200,
+        { ...corsHeaders, ...cacheHeaders, 'X-Cache': 'HIT' },
+      );
+    }
+    console.log(`[generate-theme] cache miss key=${cacheKey} model=${model}`);
   }
 
   // Call Anthropic
@@ -180,19 +222,19 @@ export default async function handler(req: Request): Promise<Response> {
       ),
     );
 
-    // Best-effort cache write. A KV failure must never surface to the
-    // client; the generation succeeded, that's what the user cares about.
+    // Best-effort cache write. A Supabase failure must never surface to
+    // the client; the generation succeeded, that's what the user cares
+    // about. Fire-and-forget so the round-trip does not delay the
+    // response.
     if (cacheKey) {
-      cacheSet(cacheKey, themes).catch(() => {
-        /* swallow */
-      });
+      cacheSet(cacheKey, model, themes);
     }
 
-    return json(
-      { themes, meta: { model, byok: usingByok, count, cached: false } },
-      200,
-      corsHeaders,
-    );
+    return json({ themes, meta: { model, byok: usingByok, count, cached: false } }, 200, {
+      ...corsHeaders,
+      ...cacheHeaders,
+      'X-Cache': 'MISS',
+    });
   } catch (err) {
     if (err instanceof AnthropicApiError) {
       // Forward Anthropic's HTTP status unchanged when it is a real 4xx/5xx
@@ -534,15 +576,20 @@ function json(body: unknown, status: number, headers: Record<string, string>): R
 
 // --- Semantic cache ------------------------------------------------------
 
-// KV is configured via Vercel env vars (KV_REST_API_URL, KV_REST_API_TOKEN).
-// When those are absent (e.g. `vercel dev` without `vercel env pull`),
-// `@vercel/kv` throws on the first call. We treat that as a soft miss so
-// local development still works and production still gets caching.
-function kvConfigured(): boolean {
-  return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
-}
+// Backed by the Supabase `theme_cache` table. Schema:
+//   cache_key   text primary key   -- `<modelShort>:<hash16>`
+//   model       text               -- resolved Anthropic model id
+//   response    jsonb              -- array of generated theme objects
+//   created_at  timestamptz default now()
+//   expires_at  timestamptz        -- now() + 7 days on write
+//   hit_count   int default 0      -- incremented fire-and-forget on read hit
+//
+// Soft-fails on every IO boundary: a Supabase outage, a schema mismatch,
+// or a missing client all collapse to "miss" and let the request fall
+// through to Anthropic. The generation succeeded is the thing that
+// matters; cache IO failures never bubble to the response.
 
-interface CacheKeyInput {
+export interface CacheKeyInput {
   description: string;
   siteType: string | undefined;
   density: 'compact' | 'normal' | 'comfortable' | undefined;
@@ -550,8 +597,14 @@ interface CacheKeyInput {
   model: string;
 }
 
-async function buildCacheKey(input: CacheKeyInput): Promise<string | null> {
-  if (!kvConfigured()) return null;
+/**
+ * Build the cache key for a normalized prompt tuple. Shape is
+ * `<modelShort>:<hash16>` where modelShort is `haiku` or `sonnet` and
+ * hash16 is the first 16 hex chars of the SHA-256 of the normalized
+ * payload. Exported for unit tests because changing the hash scheme
+ * silently invalidates every existing cache entry.
+ */
+export async function buildCacheKey(input: CacheKeyInput): Promise<string> {
   // Normalize description so whitespace and case do not cause cache misses
   // on semantically identical prompts. The validator has already trimmed,
   // we additionally lowercase and collapse internal runs of whitespace.
@@ -568,23 +621,64 @@ async function buildCacheKey(input: CacheKeyInput): Promise<string | null> {
   const hex = Array.from(new Uint8Array(digest))
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('');
-  return `${CACHE_KEY_PREFIX}${hex}`;
+  const modelShort = input.model === SONNET_MODEL ? 'sonnet' : 'haiku';
+  return `${modelShort}:${hex.slice(0, 16)}`;
 }
 
 async function cacheGet(key: string): Promise<Record<string, unknown>[] | null> {
+  if (!supabase) return null;
   try {
-    const hit = await kv.get<Record<string, unknown>[]>(key);
-    return hit ?? null;
+    const { data, error } = await supabase
+      .from('theme_cache')
+      .select('response, expires_at')
+      .eq('cache_key', key)
+      .gt('expires_at', new Date().toISOString())
+      .limit(1)
+      .maybeSingle();
+    if (error || !data) return null;
+
+    // Fire-and-forget hit_count bump. Explicitly detached from the
+    // response path: we never await it and we swallow any rejection.
+    // Uses a Supabase RPC-style update rather than an atomic counter
+    // because the table lives behind the service role key and a stale
+    // read is harmless for this metric.
+    void supabase.rpc('increment_theme_cache_hit', { p_cache_key: key }).then(
+      () => undefined,
+      () => undefined,
+    );
+
+    const response = (data as { response: unknown }).response;
+    return Array.isArray(response) ? (response as Record<string, unknown>[]) : null;
   } catch {
-    // KV unavailable — treat as miss. Never fail the request on cache IO.
+    // Supabase unavailable; treat as miss. Never fail the request on cache IO.
     return null;
   }
 }
 
-async function cacheSet(key: string, themes: Record<string, unknown>[]): Promise<void> {
-  try {
-    await kv.set(key, themes, { ex: CACHE_TTL_SECONDS });
-  } catch {
-    // swallow — see cacheGet
-  }
+function cacheSet(key: string, model: string, themes: Record<string, unknown>[]): void {
+  if (!supabase) return;
+  const expiresAt = new Date(Date.now() + CACHE_TTL_DAYS * 24 * 60 * 60 * 1000).toISOString();
+  // Fire-and-forget upsert. The response has already been sent by the
+  // time Supabase acks; a write failure is logged and dropped.
+  void supabase
+    .from('theme_cache')
+    .upsert(
+      {
+        cache_key: key,
+        model,
+        response: themes,
+        expires_at: expiresAt,
+        created_at: new Date().toISOString(),
+        hit_count: 0,
+      },
+      { onConflict: 'cache_key' },
+    )
+    .then(
+      ({ error }) => {
+        if (error) {
+          console.log(`[generate-theme] cache write failed key=${key} ${error.message}`);
+        }
+      },
+      () => undefined,
+    );
 }
