@@ -37,7 +37,7 @@ An AI agent upgrading a project from version `A` to version `B` should:
 
 | Version | Date       | Breaking Changes      | Migration Guide |
 | ------- | ---------- | --------------------- | --------------- |
-| 0.1.0   | 2026-04-09 | None (initial stable) | N/A             |
+| 0.1.0   | 2026-04-16 | None (initial stable) | N/A             |
 
 Future releases with breaking changes will be added to this table in
 chronological order and each will link to a dedicated `{version}.md` file in

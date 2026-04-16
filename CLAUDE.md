@@ -587,22 +587,9 @@ Decisions made during development that should not be revisited without discussio
 *This section is updated at the end of every AI agent session.*
 
 ### Active Phase
-Landing-motion sweep (three-PR series) is now fully delivered. All three land on `develop`. PR 1 `refactor/landing-consume-motion-tokens` (merged) tokenized every hardcoded duration / easing string in `playground/src/pages/Landing.module.css`. PR 2 `feat/landing-enterprise-motion` (merged, PR #116) introduced the four motion primitives (`FadeIn`, `Stagger`, `CountUp`, `GradientBorder`) plus the shared `useInView` hook, retrofitted every landing section with them, added the cursor-tracked CTA spotlight and hero drift blobs, and added a `scale(0.98)` on `:active` to `@arcana-ui/core` Buttons. PR 3 (this branch `feat/tokens-preset-motion-personalities`) closes the sweep: per-preset motion personalities now override `semantic.motion` in each JSON under `packages/tokens/src/presets/` (editorial=calm linear 180/300/450ms, glass=languid ease-in-out 200/350/600ms, midnight=deliberate ease-in-out 120/240/360ms, nature=organic spring 150/260/420ms, neon=energetic spring 150/200/300ms, retro98=snappy steps(3,end) 0/100/150ms, brutalist and terminal keep their existing instant baselines, the rest stay on the 100/200/300ms cubic default); the playground Token Editor's Motion section grows two new sliders (Fast and Slow) alongside the existing Normal slider and already-wired `CubicBezierEditor`, each piped through its own `applyMotionDuration*` helper and captured in `collectTokenSnapshot` so JSON / CSS exports round-trip; `scripts/generate-manifest.mjs` gets a new `resolveTokenRef` + `classifyMotion` helper that resolves `{primitive.x.y.z}` refs against a preset's tree and writes `tokens.themes[].motion` as `{ personality, fast, normal, slow, defaultEasing }` into `manifest.ai.json`; ROADMAP.md's preset matrix gets a Motion Personality column with the resolved ms / easing string; and `tests/visual/landing.spec.ts` ships the Playwright harness that calls `page.addStyleTag` with `animation-delay: -999s` + `transition-duration: 0s` so reveal motion settles before the snapshot (baselines generated via `pnpm test:visual --update-snapshots` on first run). All 14 presets rebuild cleanly through `pnpm build:tokens` and the per-preset CSS reflects the new durations / easings exactly.
+v0.1.0 stable release finalization. Release branch `chore/release-0.1.0-stable` cut from `develop` with all [Unreleased] CHANGELOG entries merged into the [0.1.0] section (dated 2026-04-16), manifest.ai.json and docs/migrations dates updated, verification suite passing (982 tests, 0 lint errors, full build green). PR open against `main` for Bear to merge, tag, and npm publish.
 
-P.5 Sprint 2 is fully closed. First cut (PR #106) landed the Anthropic-backed edge function, landing hero, `/generate` preview route, pick-into-editor. PR #107 hardened the shared server key with a tightened origin allowlist, per-IP limit of 5 per minute, and a 60 per minute global ceiling. Sprint 2 itself was four follow-up PRs (#108 BYOK UI, #109 topbar chip, #110 KV cache, #113 error.type forwarding), each on its own branch off `develop`, plus a final storage swap on `refactor/P.5-swap-kv-for-supabase-cache`:
-
-1. `feat/P.5.1-byok-settings-ui` (PR #108, merged). Gear icon in the playground topbar opens a Popover with the BYOK API key Input, Test-and-save, Clear, and a "Your key" Badge when set.
-2. `feat/P.5.1-topbar-generated-name` (PR #109, merged). Shows the picked theme's name as a chip in the topbar when `?theme=generated` is active.
-3. `feat/P.5.1-kv-semantic-cache` (PR #110, merged, later superseded). Original Vercel KV lookup keyed on SHA-256 of the normalized `{description, siteType, density, count, model}` tuple, 7-day TTL.
-4. `feat/P.5-forward-anthropic-error-type` (PR #113, merged). Edge function parses Anthropic's JSON error envelope on non-2xx, copies `error.type` to a new `code` field, and forwards upstream HTTP status unchanged.
-5. `refactor/P.5-swap-kv-for-supabase-cache` (this PR). Swapped `@vercel/kv@3` (deprecated upstream) for `@supabase/supabase-js` against the shared `arcana-ops-prod` Supabase project. Same cache key (now written as `<modelShort>:<hash16>` directly into `theme_cache.cache_key` without the legacy `arcana:theme:` prefix), same 7-day TTL via an absolute `expires_at` column the read path filters in SQL, same BYOK skip (now made explicit: BYOK sets `Cache-Control: no-store` and bypasses both read and write paths), same hit/miss `console.log` instrumentation. New: responses carry an `X-Cache: HIT | MISS` header and the hit path fires a `increment_theme_cache_hit` RPC fire-and-forget. Client initialized once at module scope; missing `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` logs one warning and the cache layer soft-fails to a pass-through, so local dev without the env vars still works. `buildCacheKey` is exported and pinned by a new 8-case unit suite (`api/generate-theme.test.ts`, new `api/vitest.config.ts` wired into the workspace) so the hash scheme cannot drift silently.
-
-Post-Sprint 2 hotfixes for the landing hero input:
-
-1. Root `vercel.json` SPA rewrite source was `/(.*)`, which caught `/api/*` and returned 405 on POST to `/api/generate-theme`. Changed the rewrite source to `/((?!api/).*)` so edge functions handle `/api/*` while the SPA still gets every other path. (PR #111)
-2. After the rewrite fix, the same call returned 404: the Vercel project's Root Directory is the repo root, so Vercel only scans `./api/*` for functions. Moved the function (and its README) to `./api/` and moved `.env.example` to the repo root alongside. (PR #112)
-
-Supabase accounts + workspaces (P.5.2) are the next sprint. Infrastructure for that sprint (the `arcana-ops-prod` Supabase project, the service role key in Vercel env) is already in place thanks to the cache swap.
+All P.5 sprint work is included in this release: AI theme generation (PR #106), shared-key hardening (#107), BYOK UI (#108), topbar chip (#109), semantic cache (#110, later swapped to Supabase), error.type forwarding (#113), SPA rewrite fixes (#111, #112), motion primitives and per-preset motion personalities (#115, #116, #117).
 
 ### Phase Completion Summary
 
@@ -617,16 +604,15 @@ Supabase accounts + workspaces (P.5.2) are the next sprint. Infrastructure for t
 | Phase 5 — AI Integration & Launch | 🔄 Partial | 5.1, 5.2, 5.11 done |
 
 ### Key Milestones Reached
-- **v0.1.0 stable release PR** open against `main` from `release/0.1.0` — all four packages bumped to `0.1.0`, finalized CHANGELOG, migration doc infrastructure in place for future breaking changes.
-- **14 theme presets** built and polished: light, dark, terminal, retro98, glass, brutalist, corporate, startup, editorial, commerce, midnight, nature, neon, mono
+- **v0.1.0 stable release** finalized on `chore/release-0.1.0-stable` branch, PR open against `main`. All four packages at `0.1.0`. CHANGELOG consolidated, migration doc infrastructure in place.
+- **AI theme generation** live: "Describe your brand. Get a design system." via Anthropic API, BYOK, Supabase semantic cache, error forwarding, rate limiting.
+- **14 theme presets** with per-preset motion personalities: light, dark, terminal, retro98, glass, brutalist, corporate, startup, editorial, commerce, midnight, nature, neon, mono
 - **108 components** across navigation, forms, data display, overlays, layout, media, feedback, e-commerce, editorial, and utility categories
-- **npm packages published** as `0.1.0-beta.2` on npmjs.com — `@arcana-ui/tokens` and `@arcana-ui/core`; stable `0.1.0` pending release PR merge
-- **Landing page** live at `arcana-ui.com` — dark premium aesthetic, 10 sections, SEO, responsive
-- **Token editor** rebuilt to investor-demo quality: custom HSV color picker, cubic bezier editor, undo/redo (Cmd+Z), search/filter, modified indicators, mobile message
-- **Demo infrastructure** in place: SaaS dashboard + e-commerce demos with shared ThemeSwitcher
+- **Landing page** live at `arcana-ui.com` with token-driven motion primitives (FadeIn, Stagger, CountUp, GradientBorder), enterprise polish
+- **6 demo sites** deployed: Forma, Meridian, Atelier, Control, Wavefront, Mosaic
 - **Playground site map** with 6 route types: editor, component gallery, component detail, token explorer, token impact, and D3 force-directed relationship graph
-- **Repo** at `github.com/Arcana-UI/arcana`; branching: `develop` (day-to-day), `main` (releases only)
-- **CLI** built and published as new `@arcana-ui/cli@0.1.0-beta.1` on npm: `init` (5 starter layouts × Vite/Next), `validate` (theme JSON linter with WCAG AA contrast checks), `add-theme` (preset activation snippet). All 10 layout/framework combos typecheck against published `@arcana-ui/core`.
+- **CLI** (`@arcana-ui/cli`): `init` (5 starter layouts x Vite/Next), `validate` (WCAG checks), `add-theme` (14 presets)
+- **MCP server** (`@arcana-ui/mcp`): 7 tools for AI agents
 
 ### Remaining Work
 
@@ -653,13 +639,12 @@ Supabase accounts + workspaces (P.5.2) are the next sprint. Infrastructure for t
 - 5.10 — Launch checklist
 
 ### Blockers
-**Release PR open** — `release/0.1.0` → `main`. Waiting on Bear to: (1) merge the PR to main, (2) tag `v0.1.0` on the merge commit and push, (3) `npm publish` each of `@arcana-ui/tokens`, `@arcana-ui/core`, `@arcana-ui/cli`, `@arcana-ui/mcp` from `main`, (4) create a GitHub Release from the tag. Until those finish, no npm installs of the stable `0.1.0` will work.
+**Release PR open** - `chore/release-0.1.0-stable` -> `main`. Bear needs to: (1) review and merge the PR to main, (2) tag `v0.1.0` on the merge commit and push, (3) `npm publish` each of `@arcana-ui/tokens`, `@arcana-ui/core`, `@arcana-ui/cli`, `@arcana-ui/mcp` from `main`, (4) create a GitHub Release from the tag, (5) sync develop with main (`git checkout develop && git merge main && git push`).
 
 ### What the Next Agent Should Do
 1. Read CLAUDE.md, PROGRESS.md, ROADMAP.md, AI_OPS.md
-2. Priority: P.5.2 — accounts + workspaces on Supabase. The `arcana-ops-prod` Supabase project is already wired into Vercel env thanks to the cache swap, so the anon key for the browser is the only net-new secret needed. Reuse the same project.
-3. Alternate priorities if P.5.2 is blocked: 5.5 — documentation site, 5.9 — performance audit, 6.x — extensibility.
-4. Pre-existing test issue: 16 tests in `useTheme.test.tsx` fail (`localStorage.clear is not a function`) — investigate vitest jsdom environment config when time permits
+2. Priority: P.5.2 - accounts + workspaces on Supabase. The `arcana-ops-prod` Supabase project is already wired into Vercel env thanks to the cache swap, so the anon key for the browser is the only net-new secret needed.
+3. Alternate priorities if P.5.2 is blocked: 5.5 - documentation site, 5.9 - performance audit, 6.x - extensibility.
 
 ### Session History
 

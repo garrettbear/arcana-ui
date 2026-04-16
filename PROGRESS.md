@@ -1,10 +1,10 @@
 # Arcana UI -- Progress Tracker
 
-> **Last updated:** 2026-04-14
-> **Current version:** v0.1.0 (stable, published to npm)
-> **Current sprint:** P.5 Sprint 2 closed; cache migrated off Vercel KV onto Supabase; P.5.2 (Supabase accounts) next
+> **Last updated:** 2026-04-16
+> **Current version:** v0.1.0 (stable release finalized, PR open against main)
+> **Current sprint:** Release 0.1.0 stable; P.5.2 (Supabase accounts) next
 > **Source of truth for current state:** CLAUDE.md "Current State" section
-> **Next priority:** P.5.2 Supabase accounts + workspaces, then external starter repos
+> **Next priority:** Merge release PR to main, npm publish, then P.5.2
 
 ---
 

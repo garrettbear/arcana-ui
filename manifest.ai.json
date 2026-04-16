@@ -2,7 +2,7 @@
   "$schema": "./scripts/manifest.schema.json",
   "release": {
     "version": "0.1.0",
-    "releaseDate": "2026-04-09",
+    "releaseDate": "2026-04-16",
     "changelog": "https://github.com/Arcana-UI/arcana/blob/main/CHANGELOG.md",
     "breaking": [],
     "migration": null
@@ -10,10 +10,10 @@
   "releaseHistory": [
     {
       "version": "0.1.0",
-      "date": "2026-04-09",
+      "date": "2026-04-16",
       "breaking": [],
       "migration": null,
-      "summary": "Initial stable release. 108 React components, 14 theme presets, 11 hooks, three-tier token system (2,600+ CSS variables), @arcana-ui/cli scaffolder, @arcana-ui/mcp Model Context Protocol server, Claude Code skill, llms.txt discoverability layer, and 6 demo sites."
+      "summary": "Initial stable release. 108 React components, 14 theme presets (each with per-preset motion personalities), 11 hooks, three-tier token system (2,600+ CSS variables), AI theme generation via Anthropic API with BYOK and Supabase semantic cache, @arcana-ui/cli scaffolder, @arcana-ui/mcp Model Context Protocol server, Claude Code skill, llms.txt discoverability layer, 6 demo sites, and token-driven motion primitives."
     },
     {
       "version": "0.1.0-beta.2",
