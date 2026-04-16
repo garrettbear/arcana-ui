@@ -1,7 +1,7 @@
 # Arcana UI — Product Roadmap & AI Agent Contribution Guide
 
-> **Version:** 1.0 · **Last Updated:** February 28, 2026
-> **Status:** Pre-launch → Launch-ready
+> **Version:** 2.0 · **Last Updated:** April 10, 2026
+> **Status:** v0.1.0 shipped. Post-launch growth phase.
 > **Maintainer:** Garrett Bear · **License:** MIT
 
 ---
@@ -12,9 +12,9 @@ Arcana UI is an open-source, token-driven design system engineered to be the def
 
 **The problem we solve:** When an AI agent (Claude Code, Cursor, Copilot, etc.) is asked to build a web UI, it currently has no opinionated, high-quality design system purpose-built for machine consumption. Existing systems (Material, Chakra, shadcn) were designed for humans first. Arcana is designed for machines first and beautiful for humans — with semantic token naming, a manifest file for AI discovery, and preset themes that span dashboards, marketing sites, editorial layouts, and e-commerce.
 
-**Current state:** Rough prototype. 22 components, 6 theme presets, playground deployed on Vercel. No mobile support, limited token depth, dashboard-only focus. The project reads as an early-stage bootcamp project and needs significant architectural and design maturity to be launch-ready.
+**Current state (April 2026):** v0.1.0 stable released and published to npm. 108 components across 9 primitives, 10 composites, and 47 patterns. 14 theme presets. 2,600+ CSS custom properties. Full three-tier token architecture (primitive, semantic, component). 5-breakpoint responsive system. Playground live at arcana-ui.com with custom HSV color picker, cubic bezier editor, undo/redo. 6 demo sites deployed. MCP server (7 tools), Claude Code skill (1,821 lines), CLI (init/validate/add-theme), llms.txt, and manifest.ai.json all shipped.
 
-**Target state:** A professional, enterprise-grade design system with 60+ components, 12+ theme presets, comprehensive responsive behavior, full token architecture (including elevation, motion, breakpoints), example demo sites, and world-class documentation — all with AI-agent-first DX.
+**Target state:** The default design system AI tools reach for. AI theme generation ("Describe your brand. Get a design system.") as the headline feature. External starter repos proving production readiness. Extensibility system for custom components. Icon system. Variant-depth token customization. Documentation site. Strong community presence (GitHub stars, npm downloads, Show HN). Claude marketplace listing.
 
 ---
 
@@ -22,7 +22,7 @@ Arcana UI is an open-source, token-driven design system engineered to be the def
 
 1. [Design Philosophy](#1-design-philosophy)
 2. [Token Architecture](#2-token-architecture)
-3. [Phased Roadmap](#3-phased-roadmap)
+3. [Phased Roadmap](#3-phased-roadmap) (Phases 0-5 complete/partial, **Phases 6-8 NEW**)
 4. [Component Library Plan](#4-component-library-plan)
 5. [Theme Presets & Example Sites](#5-theme-presets--example-sites)
 6. [Responsive & Mobile Strategy](#6-responsive--mobile-strategy)
@@ -51,12 +51,16 @@ These principles govern every decision in Arcana. Contributors (human or AI) mus
 
 ### 1.2 What Makes Arcana Different
 
-| Design System | Primary Audience | Token Strategy | AI-Readiness |
-|---|---|---|---|
-| Material (Google) | Android/Web developers | Layered (ref → sys → comp) | Low — complex API surface |
-| Chakra UI | React developers | Flat theme object | Medium — JS config |
-| shadcn/ui | Copy-paste developers | Tailwind + CSS vars | Medium — requires Tailwind |
-| **Arcana UI** | **AI agents building for humans** | **3-tier JSON → CSS vars** | **High — manifest + semantic naming** |
+| Design System | Primary Audience | Token Strategy | AI-Readiness | AI Features (April 2026) |
+|---|---|---|---|---|
+| Material (Google) | Android/Web developers | Layered (ref, sys, comp) | Low | None native |
+| Chakra UI | React developers | Flat theme object | Medium | None native |
+| shadcn/ui | Copy-paste developers | Tailwind + CSS vars | High | MCP server, skills, presets, CLI v4 (March 2026) |
+| v0.dev (Vercel) | Prompt-to-app users | shadcn registry | High | Full-stack app builder, 6M+ users |
+| DESIGN.md (Google Stitch) | AI agents | Plain-text markdown | High | New standard, 4.3k stars in 3 days |
+| **Arcana UI** | **AI agents building for humans** | **3-tier JSON to CSS vars** | **Highest** | **MCP (7 tools), manifest.ai.json, llms.txt, Claude skill, CLI, AI theme generation (shipping)** |
+
+**Key competitive shift (March-April 2026):** shadcn/ui shipped AI skills, MCP server, and presets. DESIGN.md emerged as a fast-growing standard for AI-readable design context. Arcana's advantage is not just AI-readability but AI GENERATION: "Describe your brand. Get a design system." Nobody else does this. The token-driven architecture makes this possible because one JSON file controls everything.
 
 ### 1.3 Why AI Prefers Arcana (The Technical Moat)
 
@@ -578,7 +582,7 @@ The build step converts the JSON to CSS like:
 
 ## 3. Phased Roadmap
 
-### Phase 0: Foundation Cleanup (Weeks 1–2)
+### Phase 0: Foundation Cleanup -- COMPLETE
 > **Goal:** Bring the codebase from bootcamp-quality to professional-grade.
 
 | # | Task | Priority | Effort |
@@ -594,8 +598,8 @@ The build step converts the JSON to CSS like:
 | 0.9 | **Set up CI/CD** — lint, test, build on every PR; deploy playground on merge to main | P1 | M |
 | 0.10 | **Establish CONTRIBUTING.md** with clear PR process for human and AI contributors | P1 | S |
 
-### Phase 1: Token System Maturity (Weeks 3–5)
-> **Goal:** Ship the complete token architecture. Every visual decision flows through tokens.
+### Phase 1: Token System Maturity -- COMPLETE
+> **Goal:** Ship the complete token architecture. Every visual decision flows through tokens. **Status:** 2,600+ CSS variables, 14 presets, full three-tier hierarchy operational.
 
 | # | Task | Priority | Effort |
 |---|------|----------|--------|
@@ -612,8 +616,8 @@ The build step converts the JSON to CSS like:
 | 1.11 | **WCAG contrast validation** — automated checking that every fg/bg token pair meets AA or AAA | P0 | M |
 | 1.12 | **Implement component token layer** — every component exposes a full set of overridable tokens (bg, border, radius, shadow, padding, font-size, etc.) controlled from the preset JSON. Support density modes (compact/default/comfortable) per component. This is the mechanism that lets presets tune individual components for app-style vs. marketing-style vs. hybrid use cases. | P0 | L |
 
-### Phase 2: Responsive & Mobile (Weeks 5–7)
-> **Goal:** Every component works beautifully from 320px to 2560px.
+### Phase 2: Responsive & Mobile -- COMPLETE
+> **Goal:** Every component works beautifully from 320px to 2560px. **Status:** 5-breakpoint visual regression suite. Mobile-first CSS throughout.
 
 | # | Task | Priority | Effort |
 |---|------|----------|--------|
@@ -628,8 +632,8 @@ The build step converts the JSON to CSS like:
 | 2.9 | **Touch & interaction** — larger hit areas, no hover-dependent UI, proper focus management | P0 | M |
 | 2.10 | **Test matrix** — automated visual regression at 320, 768, 1024, 1280, 1536px | P0 | M |
 
-### Phase 3: Expanded Component Library (Weeks 7–12)
-> **Goal:** Grow from 22 to 60+ components covering dashboard, marketing, editorial, and e-commerce needs.
+### Phase 3: Expanded Component Library -- COMPLETE
+> **Goal:** Grow from 22 to 60+ components covering dashboard, marketing, editorial, and e-commerce needs. **Status:** 108 components (9 primitives, 10 composites, 47 patterns, 2 playground components, 1 layout). 958 tests passing.
 
 | # | Task | Priority | Effort |
 |---|------|----------|--------|
@@ -646,8 +650,8 @@ The build step converts the JSON to CSS like:
 | 3.11 | **Build editorial components** — Article Layout, Pull Quote, Author Card, Related Posts, Newsletter Signup | P1 | L |
 | 3.12 | **Build utility components** — Scroll Area, Collapsible, Accordion, Copy Button, Keyboard Shortcut | P2 | M |
 
-### Phase 4: Theme Presets & Demo Sites (Weeks 10–14)
-> **Goal:** Ship 12+ presets, each with a corresponding demo site that proves the system works for real-world applications.
+### Phase 4: Theme Presets & Demo Sites -- COMPLETE
+> **Goal:** Ship 12+ presets, each with a corresponding demo site that proves the system works for real-world applications. **Status:** 14 presets shipped. 6 demo sites built and deployed to Vercel (dashboard, wavefront, ecommerce, atelier, mosaic, control).
 
 | # | Task | Priority | Effort |
 |---|------|----------|--------|
@@ -662,8 +666,8 @@ The build step converts the JSON to CSS like:
 | 4.9 | **Use demo sites as visual regression test fixtures** | P0 | M |
 | 4.10 | **Themeable demo switcher** — single app that switches between presets + site types | P1 | L |
 
-### Phase P: Playground Product (Weeks 12–16)
-> **Goal:** Transform the playground from a developer demo into an investor-ready product with AI-powered theme generation, conversational overrides, and authentication. This is the demo that gets funded.
+### Phase P: Playground Product -- PARTIAL (P.1-P.4 complete, P.5+ remaining)
+> **Goal:** Transform the playground from a developer demo into an investor-ready product with AI-powered theme generation, conversational overrides, and authentication. This is the demo that gets funded. **Status:** Landing page live, token editor rebuilt to investor-demo quality, component gallery and preview working. AI theme generation (P.5) is the next priority.
 
 | # | Task | Priority | Effort |
 |---|------|----------|--------|
@@ -680,8 +684,8 @@ The build step converts the JSON to CSS like:
 | P.11 | **AI generation rate limiting** — Free (no login): 3 per session. Free (logged in): 10 per day. Pro: unlimited. Track usage, show remaining count, upgrade prompts. | P1 | M |
 | P.12 | **Accessibility panel** — Live WCAG AA/AAA scoring in the editor. Contrast ratio display for all fg/bg pairs. Red/yellow/green indicators. Auto-fix suggestions ("Darken this text to #X to pass AA"). Runs on every token change. | P1 | L |
 
-### Phase 5: AI Integration & Launch (Weeks 13–16)
-> **Goal:** Make Arcana the obvious choice for every AI code agent.
+### Phase 5: AI Integration & Launch -- PARTIAL (5.1-5.4, 5.11 complete)
+> **Goal:** Make Arcana the obvious choice for every AI code agent. **Status:** manifest.ai.json, llms.txt, Claude Code skill, MCP server, and CLI all shipped and published. Documentation site (5.5), SEO (5.6), and performance audit (5.9) remain.
 
 | # | Task | Priority | Effort |
 |---|------|----------|--------|
@@ -850,22 +854,22 @@ Button.displayName = 'Button';
 
 Every preset gets a canonical demo site type that showcases its strengths. The demo site also serves as a visual regression test fixture.
 
-| # | Preset Name | Mood / Aesthetic | Best For | Demo Site |
-|---|---|---|---|---|
-| 1 | **Light** (default) | Warm, clean, professional | General purpose, SaaS | SaaS Dashboard |
-| 2 | **Dark** | Deep, focused, modern | Dev tools, media apps | Admin Panel |
-| 3 | **Terminal** | Green phosphor, hacker | CLI tools, dev dashboards | CLI Status Dashboard |
-| 4 | **Retro 98** | Windows 98 nostalgia | Novelty, games, retro apps | Retro Personal Homepage |
-| 5 | **Glass** | Apple-style translucent blur | Creative portfolios, luxury | Portfolio Landing Page |
-| 6 | **Brutalist** | Raw, bold, maximalist | Art, fashion, editorial | Magazine / Editorial |
-| 7 | **Corporate** *(new)* | Conservative, trustworthy, navy | Enterprise, finance, legal | Corporate Landing Page |
-| 8 | **Startup** *(new)* | Vibrant gradients, energetic | SaaS marketing, startups | SaaS Marketing Site |
-| 9 | **Editorial** *(new)* | Elegant serif, high contrast | News, blogs, publishing | News Editorial Site |
-| 10 | **Commerce** *(new)* | Clean, product-focused | E-commerce, retail | E-commerce Product Page |
-| 11 | **Midnight** *(new)* | Deep navy, soft gold accents | Finance, premium apps | Finance Dashboard |
-| 12 | **Nature** *(new)* | Earth tones, organic shapes | Sustainability, health, food | Wellness / Recipe Blog |
-| 13 | **Neon** *(new)* | Electric, dark bg, vivid accents | Gaming, nightlife, events | Event / Music Landing |
-| 14 | **Mono** *(new)* | Black and white, stark, typographic | Minimal portfolio, law, architecture | Minimal Documentation |
+| # | Preset Name | Mood / Aesthetic | Motion Personality | Best For | Demo Site |
+|---|---|---|---|---|---|
+| 1 | **Light** (default) | Warm, clean, professional | Default — 100 / 200 / 300 ms, cubic ease | General purpose, SaaS | SaaS Dashboard |
+| 2 | **Dark** | Deep, focused, modern | Default — 100 / 200 / 300 ms, cubic ease | Dev tools, media apps | Admin Panel |
+| 3 | **Terminal** | Green phosphor, hacker | Instant — 0 / 0 / 75 ms, linear | CLI tools, dev dashboards | CLI Status Dashboard |
+| 4 | **Retro 98** | Windows 98 nostalgia | Snappy — 0 / 100 / 150 ms, steps(3, end) | Novelty, games, retro apps | Retro Personal Homepage |
+| 5 | **Glass** | Apple-style translucent blur | Languid — 200 / 350 / 600 ms, ease-in-out | Creative portfolios, luxury | Portfolio Landing Page |
+| 6 | **Brutalist** | Raw, bold, maximalist | Instant — 0 / 0 / 0 ms, linear | Art, fashion, editorial | Magazine / Editorial |
+| 7 | **Corporate** *(new)* | Conservative, trustworthy, navy | Default — 100 / 200 / 300 ms, cubic ease | Enterprise, finance, legal | Corporate Landing Page |
+| 8 | **Startup** *(new)* | Vibrant gradients, energetic | Default — 100 / 200 / 300 ms, cubic ease | SaaS marketing, startups | SaaS Marketing Site |
+| 9 | **Editorial** *(new)* | Elegant serif, high contrast | Calm — 180 / 300 / 450 ms, linear & ease-out | News, blogs, publishing | News Editorial Site |
+| 10 | **Commerce** *(new)* | Clean, product-focused | Default — 100 / 200 / 300 ms, cubic ease | E-commerce, retail | E-commerce Product Page |
+| 11 | **Midnight** *(new)* | Deep navy, soft gold accents | Deliberate — 120 / 240 / 360 ms, ease-in-out | Finance, premium apps | Finance Dashboard |
+| 12 | **Nature** *(new)* | Earth tones, organic shapes | Organic — 150 / 260 / 420 ms, spring | Sustainability, health, food | Wellness / Recipe Blog |
+| 13 | **Neon** *(new)* | Electric, dark bg, vivid accents | Energetic — 150 / 200 / 300 ms, spring | Gaming, nightlife, events | Event / Music Landing |
+| 14 | **Mono** *(new)* | Black and white, stark, typographic | Default — 100 / 200 / 300 ms, cubic ease | Minimal portfolio, law, architecture | Minimal Documentation |
 
 ### 5.2 Demo Site Specifications
 
@@ -1594,6 +1598,45 @@ These are the design systems Arcana should study, learn from, and differentiate 
 | **Preset** | A complete theme configuration (JSON file) that maps all semantic tokens to primitives. |
 | **Density mode** | Spacing multiplier that controls how compact or spacious the UI feels. |
 | **Manifest** | `manifest.ai.json` — machine-readable index of all components, tokens, and presets for AI discovery. |
+
+---
+
+## Phase 6: Extensibility & Developer Experience (NEW -- April 2026)
+> **Goal:** Make Arcana easy to extend, customize at depth, and integrate into real workflows. This is the phase that turns Arcana from a library into a platform.
+
+| # | Task | Priority | Effort | Description |
+|---|------|----------|--------|-------------|
+| 6.1 | **Icon system** | P0 | L | Arcana ships with a recommended default icon library (e.g., Lucide). Components that use icons (Button with leadingIcon, Alert, Toast, EmptyState, etc.) accept any ReactNode for icon slots, so users are never locked in. Three modes: (1) Use the default recommended library (zero config), (2) Use no icons (pass `null` or omit), (3) Bring your own icon library (pass any component). Documentation shows examples with Lucide, Heroicons, Phosphor, and custom SVGs. A `docs/ICONS.md` guide explains the pattern. The CLI `init` command asks which icon library to install (or none). |
+| 6.2 | **Extension guidelines (EXTENDING.md)** | P0 | M | A comprehensive guide that AI agents and human developers follow to build new components that match the Arcana system. Covers: file structure, naming conventions (arcana- prefix, BEM-like), token usage rules (never hardcode), prop API patterns (variant, size, className passthrough, forwardRef), CSS rules (mobile-first, max 3 nesting levels), accessibility checklist, test requirements. Includes a component template generator in the CLI. The goal: any component built following this guide is indistinguishable from a first-party Arcana component. |
+| 6.3 | **CLI enhancements** | P0 | L | Expand the CLI beyond init/validate/add-theme. New commands: `create-component` (scaffold a new component following EXTENDING.md guidelines), `add-theme --from-description "warm minimalist coffee shop"` (AI-powered theme generation from the terminal), `update` (check for newer Arcana versions and migrate), `doctor` (diagnose common setup issues), `eject-theme` (copy a preset JSON into your project for full customization). Each command should feel fast. Terminal output is minimal and purposeful. |
+| 6.4 | **Variant-depth token customization** | P1 | L | Currently component tokens control the base appearance (e.g., `--button-bg`, `--button-radius`). This task extends the component token layer so variants are independently tunable from the preset JSON. Example: `component.button.primary.bg`, `component.button.ghost.bg`, `component.button.destructive.bg` each resolve independently. A preset can make primary buttons have sharp corners while ghost buttons stay rounded. Same for sizes: `component.button.sm.height`, `component.button.lg.height`. The cascade still works: variant tokens fall back to base component tokens, which fall back to semantic tokens, which fall back to primitives. |
+| 6.5 | **DESIGN.md export** | P1 | M | Generate a DESIGN.md file from Arcana tokens. DESIGN.md is an emerging standard (Google Stitch, 4.3k stars in 3 days) that AI agents read to produce consistent UI. Arcana's token system is more structured than hand-written DESIGN.md files, so the export should be high quality. Command: `arcana export-design-md --preset corporate`. Output includes: visual theme description, full color palette with semantic names, typography hierarchy, component styles with states, layout principles, elevation system, and design guardrails. This positions Arcana as a DESIGN.md generator, not just a consumer. |
+
+---
+
+## Phase 7: External Validation (NEW -- April 2026)
+> **Goal:** Prove Arcana works in production by building real apps in separate repositories that install from npm. Every pain point becomes a tracked issue.
+
+| # | Task | Priority | Effort | Description |
+|---|------|----------|--------|-------------|
+| 7.1 | **arcana-starter-saas** | P0 | XL | Production-quality SaaS starter template in a standalone repo under `github.com/Arcana-UI/arcana-starter-saas`. Next.js 14+ App Router. Pages: dashboard (charts, stat cards, data table), auth (login, register, forgot password), settings (profile, billing, team), and a users table. Installs `@arcana-ui/core` and `@arcana-ui/tokens` from npm (not workspace links). Includes ThemeSwitcher with all 14 presets. README with setup instructions, screenshots, and "Built with Arcana" badge. |
+| 7.2 | **arcana-starter-storefront** | P0 | XL | Marketing / ecommerce starter template under `github.com/Arcana-UI/arcana-starter-storefront`. Vite + React (proving framework flexibility). Landing page with hero, features, testimonials. Product/menu grid with filtering. Product detail page. Cart flow (local state). Contact page. Themed around a food/catering concept for authenticity. Installs from npm. ThemeSwitcher with all 14 presets. |
+| 7.3 | **Website clone rebuilds** | P0 | XL | Pick 3-5 real, well-known websites and attempt to rebuild key pages using only Arcana components and tokens. Purpose: stress-test the design system's flexibility and find gaps. For each site, document: (1) which components were used, (2) which components were missing, (3) which tokens needed extension, (4) where the system felt rigid, (5) overall fidelity score. Candidates: a Stripe-style pricing page, a Linear-style dashboard, a Vercel-style marketing page, a Notion-style doc page, an Apple-style product page. Results feed directly into component and token backlog. |
+| 7.4 | **DX friction tracking** | P0 | S | Establish a feedback system: every external repo gets a `FEEDBACK.md` where developers (human or AI) log friction points as they build. Each entry includes: what they tried, what went wrong or felt awkward, and a suggested fix. These entries become GitHub issues on the main Arcana repo with a `dx-friction` label. Run a retrospective after each repo is complete. |
+
+---
+
+## Phase 8: GTM & Distribution (NEW -- April 2026)
+> **Goal:** Get Arcana in front of developers, AI tools, and investors. Distribution is the product.
+
+| # | Task | Priority | Effort | Description |
+|---|------|----------|--------|-------------|
+| 8.1 | **README overhaul** | P0 | M | Rewrite the README with competitive positioning. Lead with the value prop ("Describe your brand. Get a design system."), show a GIF or screenshot of AI theme generation, include the comparison table against shadcn/MUI/Chakra, link to all demo sites, and make the quickstart dead simple. The README is the landing page for 90% of developers. |
+| 8.2 | **Claude marketplace listing** | P0 | M | Submit Arcana as a skill on the Claude marketplace. Category: Design. The listing should demonstrate the AI generation flow and link to the MCP server. First-mover advantage: no design system listings currently exist. |
+| 8.3 | **Show HN launch** | P1 | M | Prepare and execute a Hacker News launch. Title should emphasize the AI-native angle, not just "another design system." Include the playground link, demo sites, and the "describe your brand" flow. Time the launch for a Tuesday or Wednesday morning. |
+| 8.4 | **Community onboarding** | P1 | M | Contributor guide (CONTRIBUTING.md update), good-first-issue labels, community starter templates (Remix, Astro beyond the existing Next.js and Vite), and a Discord or GitHub Discussions setup. |
+| 8.5 | **Performance audit** | P1 | L | Fix tree-shaking (per-component entry points in tsup), audit bundle size per component, measure CSS size per theme, Lighthouse scores on all demo sites. Target: importing a single component should not ship 278 kB. |
+| 8.6 | **Documentation site** | P0 | XL | Auto-generated from manifest.ai.json. Component pages with live examples, prop tables, token usage, and accessibility notes. Theme explorer. Token reference. Getting started guide. Search. Deployed to docs.arcana-ui.com. |
 
 ---
 

@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import ComponentDetail from './pages/ComponentDetail';
 import ComponentGallery from './pages/ComponentGallery';
+import Generate from './pages/Generate';
 import Landing from './pages/Landing';
 import PlaygroundLayout from './pages/PlaygroundLayout';
 import RelationshipGraph from './pages/RelationshipGraph';
@@ -18,6 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
+        {/* AI theme generation: preview + pick step before landing in the editor */}
+        <Route path="/generate" element={<Generate />} />
         {/* Main editor — existing App with three-panel layout */}
         <Route path="/playground" element={<App />} />
         {/* New playground pages with shared layout */}

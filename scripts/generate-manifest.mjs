@@ -529,6 +529,68 @@ function extractHookMetadata(name, fromPath) {
 
 // ── Token Metadata ──────────────────────────────────────────────────────────
 
+/**
+ * Resolve a token reference string like "{primitive.motion.duration.100}" against
+ * a preset's token tree. If the input is already a literal value (e.g. "240ms",
+ * "linear", "steps(3, end)"), it is returned unchanged. Returns undefined when
+ * the path cannot be resolved.
+ */
+function resolveTokenRef(value, preset) {
+  if (typeof value !== 'string') return value;
+  const match = /^\{([^}]+)\}$/.exec(value);
+  if (!match) return value;
+  const segments = match[1].split('.');
+  let node = preset;
+  for (const seg of segments) {
+    if (node && typeof node === 'object' && seg in node) {
+      node = node[seg];
+    } else {
+      return undefined;
+    }
+  }
+  return typeof node === 'string' ? resolveTokenRef(node, preset) : undefined;
+}
+
+/**
+ * Bucket a preset's semantic motion into a one-word personality that is
+ * predictable for downstream agents. The heuristic leans on the `normal`
+ * duration (which drives most component transitions) and the `default`
+ * easing — both are the knobs users actually notice.
+ */
+function classifyMotion(normalMs, defaultEasing, slowerMs) {
+  if (normalMs <= 60) return 'instant';
+  if (defaultEasing.startsWith('steps(')) return 'snappy';
+  if (defaultEasing === 'linear' && normalMs >= 250) return 'calm';
+  if (defaultEasing.includes('cubic-bezier(0.34, 1.56')) {
+    return slowerMs >= 600 ? 'organic' : 'energetic';
+  }
+  if (normalMs >= 320) return 'languid';
+  if (normalMs <= 140) return 'snappy';
+  return 'default';
+}
+
+function extractMotionPersonality(preset) {
+  const semMotion = preset?.semantic?.motion;
+  if (!semMotion) return undefined;
+  const fast = resolveTokenRef(semMotion.duration?.fast, preset) || '';
+  const normal = resolveTokenRef(semMotion.duration?.normal, preset) || '';
+  const slow = resolveTokenRef(semMotion.duration?.slow, preset) || '';
+  const slower = resolveTokenRef(semMotion.duration?.slower, preset) || '';
+  const defaultEasing = resolveTokenRef(semMotion.easing?.default, preset) || '';
+  const toMs = (v) => {
+    const n = Number.parseInt(v, 10);
+    return Number.isNaN(n) ? 0 : n;
+  };
+  const personality = classifyMotion(toMs(normal), defaultEasing, toMs(slower));
+  return {
+    personality,
+    fast,
+    normal,
+    slow,
+    defaultEasing,
+  };
+}
+
 function extractTokenMetadata() {
   if (!fs.existsSync(TOKENS_PRESETS)) return {};
 
@@ -537,10 +599,12 @@ function extractTokenMetadata() {
 
   for (const file of presetFiles) {
     const preset = JSON.parse(fs.readFileSync(path.join(TOKENS_PRESETS, file), 'utf-8'));
+    const motion = extractMotionPersonality(preset);
     themes.push({
       id: file.replace('.json', ''),
       name: preset.name || file.replace('.json', ''),
       description: preset.description || '',
+      ...(motion ? { motion } : {}),
     });
   }
 

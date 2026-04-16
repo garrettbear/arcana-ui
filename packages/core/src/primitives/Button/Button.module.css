@@ -35,10 +35,21 @@
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
-  transition: var(--transition-colors), var(--transition-shadow), var(--transition-opacity);
+  transition: var(--transition-colors), var(--transition-shadow), var(--transition-opacity),
+    transform var(--duration-fast) var(--ease-out);
   user-select: none;
   position: relative;
   overflow: hidden;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:active:not(:disabled) {
+    transform: none;
+  }
 }
 
 /* @breakpoint-sm (640px) — relax mobile touch target floor */

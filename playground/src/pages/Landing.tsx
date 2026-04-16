@@ -1,6 +1,8 @@
 import { Badge, Button, Input, ToastProvider, useToast } from '@arcana-ui/core';
-import { useState } from 'react';
+import { type CSSProperties, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { CountUp, FadeIn, GradientBorder, Stagger } from '../components/motion';
+import { ThemeGenerationError, generateTheme, stashGeneratedThemes } from '../utils/generateTheme';
 import styles from './Landing.module.css';
 
 // ─── SVG Icons (inline to avoid dependencies) ─────────────────────────────────
@@ -329,6 +331,72 @@ const THEME_PREVIEWS = [
   },
 ];
 
+// ─── CTA with cursor-tracked spotlight ────────────────────────────────────────
+
+/**
+ * CTA panel that paints a soft radial spotlight at the cursor's position.
+ * The position is piped in via `--spotlight-x` / `--spotlight-y` CSS vars
+ * rather than re-rendering on every mouse move so the reveal stays smooth
+ * under React's reconciler.
+ */
+function CtaSection({ navigate }: { navigate: (path: string) => void }) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const node = sectionRef.current;
+    if (!node) return;
+    const rect = node.getBoundingClientRect();
+    node.style.setProperty('--spotlight-x', `${e.clientX - rect.left}px`);
+    node.style.setProperty('--spotlight-y', `${e.clientY - rect.top}px`);
+  };
+
+  return (
+    <section
+      ref={sectionRef}
+      className={styles.ctaSection}
+      onMouseMove={handleMouseMove}
+      style={
+        {
+          '--spotlight-x': '50%',
+          '--spotlight-y': '50%',
+        } as CSSProperties
+      }
+    >
+      <div className={styles.ctaGlow} aria-hidden="true" />
+      <div className={styles.ctaSpotlight} aria-hidden="true" />
+      <FadeIn>
+        <h2 className={styles.ctaHeadline}>Start building with Arcana</h2>
+      </FadeIn>
+      <FadeIn delay={80}>
+        <p className={styles.ctaDesc}>
+          Open the playground to explore themes, customize tokens, and preview every component in
+          real time.
+        </p>
+      </FadeIn>
+      <FadeIn delay={160}>
+        <div className={styles.ctaActions}>
+          <Button
+            variant="primary"
+            size="lg"
+            className={styles.ctaBtnPrimary}
+            onClick={() => navigate('/playground')}
+          >
+            Open Playground
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            className={styles.ctaBtnSecondary}
+            onClick={() => window.open('https://github.com/Arcana-UI/arcana', '_blank')}
+          >
+            View on GitHub
+          </Button>
+        </div>
+      </FadeIn>
+    </section>
+  );
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // Landing Page Component
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -338,6 +406,7 @@ function LandingContent() {
   const { toast } = useToast();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [promptValue, setPromptValue] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleComingSoon = (feature: string) => {
     toast({
@@ -346,9 +415,23 @@ function LandingContent() {
     });
   };
 
-  const handlePromptSubmit = (e: React.FormEvent) => {
+  const handlePromptSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/playground');
+    const description = promptValue.trim();
+    if (!description || isGenerating) return;
+
+    setIsGenerating(true);
+    try {
+      const response = await generateTheme({ description, count: 3 });
+      stashGeneratedThemes({ prompt: description, response });
+      navigate('/generate');
+    } catch (err) {
+      const title =
+        err instanceof ThemeGenerationError ? 'Could not generate themes' : 'Something went wrong';
+      const descriptionText = err instanceof Error ? err.message : 'Please try again in a moment.';
+      toast({ title, description: descriptionText, variant: 'error' });
+      setIsGenerating(false);
+    }
   };
 
   return (
@@ -498,71 +581,94 @@ function LandingContent() {
       <main>
         {/* ═══ SECTION 2: Hero ═══ */}
         <section className={styles.hero}>
-          <Badge variant="info" className={styles.heroBadge}>
-            <span className={styles.heroBadgeDot} />
-            Coming Soon
-          </Badge>
+          <div className={styles.heroDriftBlobA} aria-hidden="true" />
+          <div className={styles.heroDriftBlobB} aria-hidden="true" />
+          <FadeIn delay={0} translateY={12}>
+            <Badge variant="info" className={styles.heroBadge}>
+              <span className={styles.heroBadgeDot} />
+              Coming Soon
+            </Badge>
+          </FadeIn>
 
-          <h1 className={styles.heroHeadline}>
-            Describe your brand.
-            <br />
-            <span className={styles.heroHeadlineAccent}>Get a design system.</span>
-          </h1>
+          <FadeIn delay={0}>
+            <h1 className={styles.heroHeadline}>
+              Describe your brand.
+              <br />
+              <FadeIn as="span" delay={100} translateY={0}>
+                <span className={styles.heroHeadlineAccent}>Get a design system.</span>
+              </FadeIn>
+            </h1>
+          </FadeIn>
 
-          <p className={styles.heroSubheadline}>
-            Token-driven theming, 108 React components, 14 themes. Built for AI to assemble and
-            humans to love.
-          </p>
+          <FadeIn delay={200}>
+            <p className={styles.heroSubheadline}>
+              Token-driven theming, 108 React components, 14 themes. Built for AI to assemble and
+              humans to love.
+            </p>
+          </FadeIn>
 
-          <form onSubmit={handlePromptSubmit} className={styles.promptWrap}>
-            <Input
-              wrapperClassName={styles.promptInputWrapper}
-              placeholder="Tell me about your brand — colors, mood, industry..."
-              value={promptValue}
-              onChange={(e) => setPromptValue(e.target.value)}
-              aria-label="Describe your brand"
-              size="lg"
-              fullWidth
-              suffix={
-                <Button
-                  variant="primary"
-                  size="sm"
-                  className={styles.promptSubmit}
-                  type="submit"
-                  aria-label="Generate design system"
-                >
-                  <ArrowIcon />
-                </Button>
-              }
-            />
-            <span className={styles.promptComingSoon}>AI generation coming soon</span>
-          </form>
+          <FadeIn delay={300}>
+            <form onSubmit={handlePromptSubmit} className={styles.promptWrap}>
+              <Input
+                wrapperClassName={styles.promptInputWrapper}
+                placeholder="Tell me about your brand, colors, mood, industry..."
+                value={promptValue}
+                onChange={(e) => setPromptValue(e.target.value)}
+                aria-label="Describe your brand"
+                size="lg"
+                fullWidth
+                disabled={isGenerating}
+                suffix={
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    className={styles.promptSubmit}
+                    type="submit"
+                    aria-label="Generate design system"
+                    loading={isGenerating}
+                    disabled={isGenerating || !promptValue.trim()}
+                  >
+                    {isGenerating ? 'Generating' : <ArrowIcon />}
+                  </Button>
+                }
+              />
+              <span className={styles.promptComingSoon}>
+                {isGenerating
+                  ? 'Brewing 3 themes, this usually takes 10 to 15 seconds...'
+                  : 'Powered by Claude. Generates 3 theme variants.'}
+              </span>
+            </form>
+          </FadeIn>
 
-          <div className={styles.promptLinks}>
-            or{' '}
-            <a href="#themes" className={styles.promptTextLink}>
-              Browse themes
-            </a>
-            {' · '}
-            <a
-              href="https://www.npmjs.com/package/@arcana-ui/cli"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.promptTextLink}
-            >
-              <code>npx @arcana-ui/cli init</code>
-            </a>
-            {' · '}
-            <Link to="/playground" className={styles.promptTextLink}>
-              Start from scratch
-            </Link>
-          </div>
+          <FadeIn delay={400}>
+            <div className={styles.promptLinks}>
+              or{' '}
+              <a href="#themes" className={styles.promptTextLink}>
+                Browse themes
+              </a>
+              {' · '}
+              <a
+                href="https://www.npmjs.com/package/@arcana-ui/cli"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.promptTextLink}
+              >
+                <code>npx @arcana-ui/cli init</code>
+              </a>
+              {' · '}
+              <Link to="/playground" className={styles.promptTextLink}>
+                Start from scratch
+              </Link>
+            </div>
+          </FadeIn>
         </section>
 
         {/* ═══ SECTION 3: Logo Cloud ═══ */}
         <section className={styles.logoCloud}>
-          <p className={styles.logoCloudLabel}>Built for AI tools</p>
-          <div className={styles.logoCloudGrid}>
+          <FadeIn>
+            <p className={styles.logoCloudLabel}>Built for AI tools</p>
+          </FadeIn>
+          <Stagger step={60} className={styles.logoCloudGrid} translateY={12}>
             {['Claude Code', 'Cursor', 'GitHub Copilot', 'v0', 'Bolt', 'Lovable'].map((name) => (
               <span key={name} className={styles.logoCloudItem}>
                 <svg
@@ -577,19 +683,23 @@ function LandingContent() {
                 {name}
               </span>
             ))}
-          </div>
+          </Stagger>
         </section>
 
         {/* ═══ SECTION 4: Features ═══ */}
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Why Arcana</h2>
-          <p className={styles.sectionSubtitle}>
-            A design system engineered for the AI era. Predictable for machines, beautiful for
-            humans.
-          </p>
+          <FadeIn>
+            <h2 className={styles.sectionTitle}>Why Arcana</h2>
+          </FadeIn>
+          <FadeIn delay={80}>
+            <p className={styles.sectionSubtitle}>
+              A design system engineered for the AI era. Predictable for machines, beautiful for
+              humans.
+            </p>
+          </FadeIn>
 
-          <div className={styles.featuresGrid}>
-            <div className={styles.featureCard}>
+          <Stagger step={80} baseDelay={120} className={styles.featuresGrid}>
+            <GradientBorder className={styles.featureCard}>
               <div className={styles.featureIcon}>
                 <TokensIcon />
               </div>
@@ -599,20 +709,20 @@ function LandingContent() {
                 typography, spacing, elevation, motion, and more. Change the file, change
                 everything.
               </p>
-            </div>
+            </GradientBorder>
 
-            <div className={styles.featureCard}>
+            <GradientBorder className={styles.featureCard}>
               <div className={styles.featureIcon}>
                 <ComponentsIcon />
               </div>
               <h3 className={styles.featureTitle}>108 Production Components</h3>
               <p className={styles.featureDesc}>
                 From Hero sections to DataTables. Dashboard, marketing, editorial, and e-commerce
-                categories — all responsive, accessible, and theme-aware.
+                categories, all responsive, accessible, and theme-aware.
               </p>
-            </div>
+            </GradientBorder>
 
-            <div className={styles.featureCard}>
+            <GradientBorder className={styles.featureCard}>
               <div className={styles.featureIcon}>
                 <AIIcon />
               </div>
@@ -621,24 +731,28 @@ function LandingContent() {
                 manifest.ai.json for discovery, semantic token naming, predictable component APIs.
                 Built for machines to compose, gorgeous for humans to use.
               </p>
-            </div>
-          </div>
+            </GradientBorder>
+          </Stagger>
         </section>
 
         {/* ═══ SECTION 5: How It Works ═══ */}
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>How it works</h2>
-          <p className={styles.sectionSubtitle}>
-            From brand description to production UI in three steps.
-          </p>
+          <FadeIn>
+            <h2 className={styles.sectionTitle}>How it works</h2>
+          </FadeIn>
+          <FadeIn delay={80}>
+            <p className={styles.sectionSubtitle}>
+              From brand description to production UI in three steps.
+            </p>
+          </FadeIn>
 
-          <div className={styles.stepsGrid}>
+          <Stagger step={120} baseDelay={120} className={styles.stepsGrid}>
             <div className={styles.stepCard}>
               <div className={styles.stepNumber}>1</div>
               <h3 className={styles.stepTitle}>Describe</h3>
               <p className={styles.stepDesc}>
-                Type your brand description. Arcana generates a complete theme — colors, typography,
-                spacing, shadows — from a single sentence.
+                Type your brand description. Arcana generates a complete theme (colors, typography,
+                spacing, shadows) from a single sentence.
               </p>
             </div>
             <div className={styles.stepCard}>
@@ -657,17 +771,21 @@ function LandingContent() {
                 React app. Zero runtime cost.
               </p>
             </div>
-          </div>
+          </Stagger>
         </section>
 
         {/* ═══ SECTION 6: Theme Showcase ═══ */}
         <section id="themes" className={styles.section}>
-          <h2 className={styles.sectionTitle}>One system, infinite looks</h2>
-          <p className={styles.sectionSubtitle}>
-            Same components, completely different personalities. Each theme is a single JSON file.
-          </p>
+          <FadeIn>
+            <h2 className={styles.sectionTitle}>One system, infinite looks</h2>
+          </FadeIn>
+          <FadeIn delay={80}>
+            <p className={styles.sectionSubtitle}>
+              Same components, completely different personalities. Each theme is a single JSON file.
+            </p>
+          </FadeIn>
 
-          <div className={styles.themeGrid}>
+          <Stagger step={40} baseDelay={120} className={styles.themeGrid} translateY={16}>
             {THEME_PREVIEWS.map((theme) => (
               <Link
                 key={theme.id}
@@ -696,6 +814,7 @@ function LandingContent() {
                     value="jane@example.com"
                     readOnly
                     tabIndex={-1}
+                    aria-hidden="true"
                   />
                   <div
                     className={styles.themePreviewCard}
@@ -725,134 +844,120 @@ function LandingContent() {
                 </div>
               </Link>
             ))}
-          </div>
+          </Stagger>
         </section>
 
         {/* ═══ SECTION 7: Component Showcase ═══ */}
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Production-ready components</h2>
-          <p className={styles.sectionSubtitle}>
-            Every component is responsive, accessible, and fully token-driven. Here's a taste of
-            what ships out of the box.
-          </p>
+          <FadeIn>
+            <h2 className={styles.sectionTitle}>Production-ready components</h2>
+          </FadeIn>
+          <FadeIn delay={80}>
+            <p className={styles.sectionSubtitle}>
+              Every component is responsive, accessible, and fully token-driven. Here's a taste of
+              what ships out of the box.
+            </p>
+          </FadeIn>
 
-          <div className={styles.browserFrame}>
-            <div className={styles.browserBar}>
-              <div className={styles.browserDot} />
-              <div className={styles.browserDot} />
-              <div className={styles.browserDot} />
-              <span className={styles.browserUrl}>your-app.com</span>
-            </div>
-            <div className={styles.browserContent}>
-              <div className={styles.showcaseInner} data-theme="light">
-                <div className={styles.showcaseNav}>
-                  <span className={styles.showcaseNavBrand}>Acme Inc</span>
-                  <div className={styles.showcaseNavLinks}>
-                    <span>Dashboard</span>
-                    <span>Products</span>
-                    <span>Analytics</span>
+          <FadeIn delay={160} translateY={48}>
+            <div className={styles.browserFrame}>
+              <div className={styles.browserBar}>
+                <div className={styles.browserDot} />
+                <div className={styles.browserDot} />
+                <div className={styles.browserDot} />
+                <span className={styles.browserUrl}>your-app.com</span>
+              </div>
+              <div className={styles.browserContent}>
+                <div className={styles.showcaseInner} data-theme="light">
+                  <div className={styles.showcaseNav}>
+                    <span className={styles.showcaseNavBrand}>Acme Inc</span>
+                    <div className={styles.showcaseNavLinks}>
+                      <span>Dashboard</span>
+                      <span>Products</span>
+                      <span>Analytics</span>
+                    </div>
+                    <span className={styles.showcaseNavCta}>New Project</span>
                   </div>
-                  <span className={styles.showcaseNavCta}>New Project</span>
-                </div>
-                <div className={styles.showcaseStats}>
-                  {[
-                    { label: 'Revenue', value: '$48,293', trend: '+12.5%', up: true },
-                    { label: 'Users', value: '2,847', trend: '+8.2%', up: true },
-                    { label: 'Conversion', value: '3.24%', trend: '-0.4%', up: false },
-                  ].map((stat) => (
-                    <div key={stat.label} className={styles.showcaseStatCard}>
-                      <div className={styles.showcaseStatLabel}>{stat.label}</div>
-                      <div className={styles.showcaseStatValue}>{stat.value}</div>
-                      <div
-                        className={styles.showcaseStatTrend}
-                        style={{
-                          color: stat.up
-                            ? 'var(--color-status-success-fg, #16a34a)'
-                            : 'var(--color-status-error-fg, #dc2626)',
-                        }}
-                      >
-                        {stat.trend} from last month
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className={styles.showcaseTableWrap}>
-                  <div className={styles.showcaseTable}>
-                    <div className={styles.showcaseTableHead}>
-                      <span>Customer</span>
-                      <span>Plan</span>
-                      <span>MRR</span>
-                      <span>Status</span>
-                    </div>
+                  <div className={styles.showcaseStats}>
                     {[
-                      { name: 'Linear', plan: 'Enterprise', mrr: '$12,000' },
-                      { name: 'Vercel', plan: 'Business', mrr: '$4,800' },
-                      { name: 'Notion', plan: 'Enterprise', mrr: '$8,400' },
-                    ].map((row) => (
-                      <div key={row.name} className={styles.showcaseTableRow}>
-                        <span style={{ fontWeight: 500, color: '#1c1917' }}>{row.name}</span>
-                        <span>{row.plan}</span>
-                        <span style={{ fontVariantNumeric: 'tabular-nums' }}>{row.mrr}</span>
-                        <span>
-                          <Badge variant="success" size="sm" className={styles.showcaseBadge}>
-                            Active
-                          </Badge>
-                        </span>
+                      { label: 'Revenue', value: '$48,293', trend: '+12.5%', up: true },
+                      { label: 'Users', value: '2,847', trend: '+8.2%', up: true },
+                      { label: 'Conversion', value: '3.24%', trend: '-0.4%', up: false },
+                    ].map((stat) => (
+                      <div key={stat.label} className={styles.showcaseStatCard}>
+                        <div className={styles.showcaseStatLabel}>{stat.label}</div>
+                        <div className={styles.showcaseStatValue}>{stat.value}</div>
+                        <div
+                          className={styles.showcaseStatTrend}
+                          style={{
+                            color: stat.up
+                              ? 'var(--color-status-success-fg, #16a34a)'
+                              : 'var(--color-status-error-fg, #dc2626)',
+                          }}
+                        >
+                          {stat.trend} from last month
+                        </div>
                       </div>
                     ))}
+                  </div>
+                  <div className={styles.showcaseTableWrap}>
+                    <div className={styles.showcaseTable}>
+                      <div className={styles.showcaseTableHead}>
+                        <span>Customer</span>
+                        <span>Plan</span>
+                        <span>MRR</span>
+                        <span>Status</span>
+                      </div>
+                      {[
+                        { name: 'Linear', plan: 'Enterprise', mrr: '$12,000' },
+                        { name: 'Vercel', plan: 'Business', mrr: '$4,800' },
+                        { name: 'Notion', plan: 'Enterprise', mrr: '$8,400' },
+                      ].map((row) => (
+                        <div key={row.name} className={styles.showcaseTableRow}>
+                          <span style={{ fontWeight: 500, color: '#1c1917' }}>{row.name}</span>
+                          <span>{row.plan}</span>
+                          <span style={{ fontVariantNumeric: 'tabular-nums' }}>{row.mrr}</span>
+                          <span>
+                            <Badge variant="success" size="sm" className={styles.showcaseBadge}>
+                              Active
+                            </Badge>
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </FadeIn>
         </section>
 
         {/* ═══ SECTION 8: Stats ═══ */}
         <section className={styles.statsSection}>
-          <div className={styles.statsGrid}>
+          <Stagger step={100} className={styles.statsGrid} translateY={16}>
             {[
-              { value: '108+', label: 'Components' },
-              { value: '2,600+', label: 'CSS Variables', accent: true },
-              { value: '14', label: 'Theme Presets' },
-              { value: '5', label: 'Site Categories' },
+              { to: 108, suffix: '+', label: 'Components' },
+              { to: 2600, suffix: '+', label: 'CSS Variables', accent: true },
+              { to: 14, label: 'Theme Presets' },
+              { to: 5, label: 'Site Categories' },
             ].map((stat) => (
               <div key={stat.label}>
                 <p className={`${styles.statValue} ${stat.accent ? styles.statValueAccent : ''}`}>
-                  {stat.value}
+                  <CountUp
+                    to={stat.to}
+                    suffix={stat.suffix}
+                    formatThousands={stat.to >= 1000}
+                    delay={400}
+                  />
                 </p>
                 <p className={styles.statLabel}>{stat.label}</p>
               </div>
             ))}
-          </div>
+          </Stagger>
         </section>
 
         {/* ═══ SECTION 9: CTA ═══ */}
-        <section className={styles.ctaSection}>
-          <div className={styles.ctaGlow} aria-hidden="true" />
-          <h2 className={styles.ctaHeadline}>Start building with Arcana</h2>
-          <p className={styles.ctaDesc}>
-            Open the playground to explore themes, customize tokens, and preview every component in
-            real time.
-          </p>
-          <div className={styles.ctaActions}>
-            <Button
-              variant="primary"
-              size="lg"
-              className={styles.ctaBtnPrimary}
-              onClick={() => navigate('/playground')}
-            >
-              Open Playground
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className={styles.ctaBtnSecondary}
-              onClick={() => window.open('https://github.com/Arcana-UI/arcana', '_blank')}
-            >
-              View on GitHub
-            </Button>
-          </div>
-        </section>
+        <CtaSection navigate={navigate} />
       </main>
 
       {/* ═══ SECTION 10: Footer ═══ */}

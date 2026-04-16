@@ -631,13 +631,13 @@
     "motion": {
       "duration": {
         "instant": "{primitive.motion.duration.0}",
-        "fast": "{primitive.motion.duration.100}",
+        "fast": "{primitive.motion.duration.150}",
         "normal": "{primitive.motion.duration.200}",
         "slow": "{primitive.motion.duration.300}",
         "slower": "{primitive.motion.duration.500}"
       },
       "easing": {
-        "default": "{primitive.motion.easing.default}",
+        "default": "{primitive.motion.easing.spring}",
         "in": "{primitive.motion.easing.in}",
         "out": "{primitive.motion.easing.out}",
         "in-out": "{primitive.motion.easing.in-out}",
@@ -647,7 +647,7 @@
       "transition": {
         "colors": "color var(--duration-fast) var(--ease-default), background-color var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default), text-decoration-color var(--duration-fast) var(--ease-default), fill var(--duration-fast) var(--ease-default), stroke var(--duration-fast) var(--ease-default)",
         "shadow": "box-shadow var(--duration-fast) var(--ease-default)",
-        "transform": "transform var(--duration-normal) var(--ease-default)",
+        "transform": "transform var(--duration-normal) var(--ease-spring)",
         "opacity": "opacity var(--duration-normal) var(--ease-default)",
         "all": "all var(--duration-normal) var(--ease-default)"
       }

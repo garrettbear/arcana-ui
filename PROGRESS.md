@@ -1,100 +1,147 @@
-# Arcana UI — Progress Tracker
+# Arcana UI -- Progress Tracker
 
-> **Last updated:** 2026-04-09 (v0.1.0 stable release prep)
-> **Current sprint:** v0.1.0 stable release — final cut
+> **Last updated:** 2026-04-16
+> **Current version:** v0.1.0 (stable release finalized, PR open against main)
+> **Current sprint:** Release 0.1.0 stable; P.5.2 (Supabase accounts) next
 > **Source of truth for current state:** CLAUDE.md "Current State" section
-> **Next priority task:** Merge `release/0.1.0` → `main`, tag, publish `@arcana-ui/{tokens,core,cli,mcp}@0.1.0` (Bear actions); then Sprint 2 — AI Theme Generation (P.5)
+> **Next priority:** Merge release PR to main, npm publish, then P.5.2
 
 ---
 
-## Phases 0–3: Complete
+## Release Status
 
-All foundation work, token system, component library (68 components), 14 theme presets, test infrastructure, CI/CD, and npm publish are done. See CLAUDE.md for details.
+| Package | Version | npm | Status |
+|---------|---------|-----|--------|
+| `@arcana-ui/tokens` | 0.1.0 | Published | Stable |
+| `@arcana-ui/core` | 0.1.0 | Published | Stable |
+| `@arcana-ui/cli` | 0.1.0 | Published | Stable |
+| `@arcana-ui/mcp` | 0.1.0 | Published | Stable |
 
 ---
 
-## Phase 4: Demo Sites ✅ COMPLETE (2026-04-03 to 2026-04-04)
+## Phases 0-3: Complete
 
-- [x] 4.1 — Manifest generator: type alias resolution, skip filter fixes (commit `2ddea82`)
-- [x] 4.2 — Component audit: 68 components, 95.6%→100% manifest coverage (`.sage/COMPONENT_AUDIT.md`)
-- [x] 4.3 — Demo: Forma — luxury ecommerce (`commerce` theme, 4 pages, 47 components)
-- [x] 4.4 — Demo: Wavefront — music player (`midnight` theme, sidebar + player bar, 3 views)
-- [x] 4.5 — Demo: Mosaic — visual discovery app (`light` theme, masonry grid, 3 pages)
-- [x] 4.6 — Demo: Atelier — editorial magazine (`editorial` theme, zero-radius, real prose, 3 pages)
-- [x] 4.7 — Demo: Control — component analytics dashboard (`dark` theme, 4 pages, full registry)
-- [ ] 4.8 — Deploy all 5 demos to Vercel (**Bear action: needs Vercel CLI or manual deploy**)
-- [ ] 4.9 — ComponentGallery: wire live manifest coverage data (currently hardcoded 95.6%)
-- [ ] 4.10 — Add `vercel.json` to each demo for zero-config Vercel import
+All foundation work, token system (2,600+ CSS variables), responsive framework (5-breakpoint visual regression suite), and component library built. 14 theme presets. Test infrastructure, CI/CD, and npm publish done.
+
+- **Primitives:** 9 (Button, Input, Textarea, Select, Checkbox, Radio, Toggle, Badge, Avatar)
+- **Composites:** 10 (Accordion, Alert, Banner, Card, ErrorBoundary, Modal, Skeleton, Spinner, Tabs, Toast)
+- **Patterns:** 47 (Navbar, Sidebar, DataTable, Hero, PricingCard, CommandPalette, etc.)
+- **Playground components:** 2 (ColorPicker, FontPicker)
+- **Layout:** 1 (Layout)
+- **Hooks:** 8 (useTheme, useBreakpoint, useClickOutside, useDrag, useFloating, useHotkey, useMediaQuery, usePrefersReducedMotion, useUndoRedo)
+- **Total named exports:** 114 (108 components per manifest.ai.json)
+
+---
+
+## Phase 4: Demo Sites -- COMPLETE
+
+- [x] 4.1 -- Manifest generator: type alias resolution, skip filter fixes
+- [x] 4.2 -- Component audit: 100% manifest coverage
+- [x] 4.3 -- Demo: Forma -- luxury ecommerce (`commerce` theme, 4 pages, 47 components)
+- [x] 4.4 -- Demo: Wavefront -- music player (`midnight` theme, sidebar + player bar, 3 views)
+- [x] 4.5 -- Demo: Mosaic -- visual discovery app (`light` theme, masonry grid, 3 pages)
+- [x] 4.6 -- Demo: Atelier -- editorial magazine (`editorial` theme, zero-radius, real prose, 3 pages)
+- [x] 4.7 -- Demo: Control -- component analytics dashboard (`dark` theme, 4 pages, full registry)
+- [x] 4.8 -- Deploy all demos to Vercel
+  - dashboard.arcana-ui.com
+  - wavefront.arcana-ui.com
+  - ecommerce.arcana-ui.com
+  - atelier.arcana-ui.com
+  - mosaic.arcana-ui.com
+  - control.arcana-ui.com
 
 ---
 
 ## Phase P: Playground Product
 
-- [x] P.1 — Landing page (original Vercel deploy live)
-- [x] P.2 — ComponentGallery with stats bar, richer cards, audit table mode
-- [x] P.3 — Visual token editor (color pickers, sliders)
-- [x] P.4 — Live component preview with category filter
-- [ ] P.5 — AI theme generation flow (Sprint 2)
-- [ ] P.6 — Theme gallery (browse presets, one-click load, fork)
-- [ ] P.7 — Authentication (GitHub + Google OAuth)
-- [ ] P.8 — Theme save/load
-- [ ] P.9 — Export (JSON, CSS, starter project)
-- [ ] P.10 — Monetization infrastructure
-- [ ] P.11 — AI generation rate limiting
-- [ ] P.12 — Accessibility panel (live WCAG scoring)
+- [x] P.1 -- Landing page (live at arcana-ui.com)
+- [x] P.2 -- ComponentGallery with stats bar, richer cards, audit table mode
+- [x] P.3 -- Visual token editor (custom HSV color picker, cubic bezier editor, undo/redo, search/filter, modified indicators)
+- [x] P.4 -- Live component preview with category filter
+- [x] **P.5 -- AI theme generation flow** (Sprint 2 fully shipped via PRs #108, #109, #110, #112, #113 + this PR)
+  - [x] Hero input: "Describe your brand" wired to edge function with loading state
+  - [x] Anthropic API via Vercel edge function (`api/generate-theme.ts` at repo root after #112)
+  - [x] Generate 3 theme variants per request, returned as structured JSON
+  - [x] `/generate` route with side-by-side preview cards
+  - [x] User picks one, lands in editor with theme applied via sessionStorage
+  - [x] Cost controls: Haiku default, prompt caching, max_tokens 2500
+  - [x] BYOK via `X-User-API-Key` header (plumbing + UI both live)
+  - [x] BYOK settings UI (gear icon + Popover in playground topbar: password input with show/hide, Test and save, Clear key, "Your key" Badge when set) -- #108
+  - [x] Semantic cache on SHA-256 hash of normalized description+siteType+density+count+model, 7-day TTL, `meta.cached` on response, soft-miss when storage env vars missing; originally Vercel KV (#110), migrated to Supabase `theme_cache` table (this PR) after `@vercel/kv@3` was deprecated upstream. Responses also carry `X-Cache: HIT | MISS` and `Cache-Control: no-store` on BYOK.
+  - [x] Topbar shows generated theme name when `?theme=generated` is active (chip with close button, persisted across routes via `arcana-active-generated-name` session key) -- #109
+  - [x] Anthropic `error.type` forwarded to the client as `code`, upstream HTTP status preserved so our 429 (IP rate limit) and Anthropic's 429 (`rate_limit_error`/`overloaded_error`) are distinguishable; `readableError` rewritten with tailored copy for `billing_error`, `authentication_error`, `overloaded_error`, `rate_limit_error`, `invalid_request_error`. 16-case unit test suite added. -- this PR
+- [ ] P.6 -- Theme gallery (browse presets, one-click load, fork)
+- [ ] P.7 -- Authentication (GitHub + Google OAuth)
+- [ ] P.8 -- Theme save/load
+- [ ] P.9 -- Export enhancements (JSON and CSS export already work)
+- [ ] P.10 -- Monetization infrastructure
+- [ ] P.11 -- AI generation rate limiting
+- [ ] P.12 -- Accessibility panel (live WCAG scoring)
 
 ---
 
 ## Phase 5: AI Integration & Launch
 
-- [x] 5.1 — manifest.ai.json (generated, fixed, 100% coverage)
-- [x] 5.2 — llms.txt + llms-full.txt (enhanced: grouped by category, density docs, links, layout patterns, theme guide, responsive section; auto-copied to playground/public/)
-- [x] 5.3 — Claude Code skill at `.claude/skills/arcana/SKILL.md` (1,821 lines — all 108 components, hooks, token system, 4 layout patterns, presets, responsive, rules)
-- [x] 5.4 — MCP server: `@arcana-ui/mcp@0.1.0-beta.1` published to npm (2026-04-08) — 7 tools (list_components, get_component, list_presets, get_preset, validate_theme, generate_theme, get_token_impact); self-contained 1.16 MB unpacked, shasum `186d547829f4a0ba0f8cdad739fdffdc3bb5eabd`
-- [ ] 5.5 — Documentation site
-- [ ] 5.6 — SEO & discoverability
-- [ ] 5.7 — Community starter templates (Next, Vite, Remix, Astro)
-- [ ] 5.8 — Figma Code Connect + token export
-- [ ] 5.9 — Performance audit
-- [ ] 5.10 — Launch checklist
-- [x] 5.11 — CLI: `@arcana-ui/cli@0.1.0-beta.1` published to npm (init / validate / add-theme commands; 5 starter layouts × 2 frameworks; all 10 combos typecheck against published `@arcana-ui/core`)
+- [x] 5.1 -- manifest.ai.json (auto-generated, 108 components, 100% coverage)
+- [x] 5.2 -- llms.txt + llms-full.txt (2,370 lines, grouped by category, layout patterns, theme guide)
+- [x] 5.3 -- Claude Code skill at `.claude/skills/arcana/SKILL.md` (1,821 lines)
+- [x] 5.4 -- MCP server: `@arcana-ui/mcp@0.1.0` (7 tools: list_components, get_component, list_presets, get_preset, validate_theme, generate_theme, get_token_impact)
+- [ ] 5.5 -- Documentation site (auto-generated from manifest.ai.json)
+- [ ] 5.6 -- SEO and discoverability (structured data, OG images, meta tags)
+- [ ] 5.7 -- Community starter templates (Next, Vite, Remix, Astro)
+- [ ] 5.8 -- Figma Code Connect + token export
+- [ ] 5.9 -- Performance audit (tree-shaking, bundle size, CSS size per theme)
+- [ ] 5.10 -- Launch checklist
+- [x] 5.11 -- CLI: init (5 layouts x 2 frameworks), validate (WCAG checks), add-theme (14 presets)
 
 ---
 
-## 8-Week Sprint Plan Status
+## Phase 6: Extensibility & Developer Experience (NEW)
 
-| Sprint | Goal | Status |
-|--------|------|--------|
-| 1 | Playground to demo quality + demo sites | ✅ Done |
-| 2 | AI theme generation | Not started |
-| 3 | MCP server + llms.txt + Claude Code skill | ✅ Done (2026-04-08) |
-| 4 | CLI MVP + Figma Code Connect | Not started |
-| 5 | Launch | Not started |
+- [ ] 6.1 -- Icon system: default icon library recommendation, opt-out to none, BYOI (bring your own icons) support
+- [ ] 6.2 -- Extension guidelines: EXTENDING.md file for AI agents to follow when building custom components that match the system
+- [ ] 6.3 -- CLI enhancements: `add-theme` from description, `update` commands, AI-powered CLI flows
+- [ ] 6.4 -- Component variant depth: expose variant-level tokens for components (e.g., button primary vs ghost at the token layer)
+- [ ] 6.5 -- DESIGN.md export: generate a DESIGN.md from Arcana tokens for Google Stitch and other AI tools
 
 ---
 
-## Open Blockers
+## Phase 7: External Validation (NEW)
 
-| Blocker | Owner | Status |
-|---------|-------|--------|
-| `npm publish` of `@arcana-ui/core@0.1.0-beta.2` and `@arcana-ui/tokens@0.1.0-beta.2` | Bear | ✅ Published (2026-04-06) |
-| Vercel deploy for 5 demo sites | Bear | Pending |
-| OpenClaw gateway re-pairing | Bear | Pending |
-| Anthropic API key for AI generation (Sprint 2) | Bear | Not yet needed |
-| Vercel CLI configured | Bear | Not yet needed |
+- [ ] 7.1 -- `arcana-starter-saas` repo (Next.js dashboard template, under Arcana-UI org)
+- [ ] 7.2 -- `arcana-starter-storefront` repo (Vite + React ecommerce/marketing, under Arcana-UI org)
+- [ ] 7.3 -- Website clone rebuilds: pick 3-5 real websites and rebuild them with Arcana to stress-test flexibility
+- [ ] 7.4 -- DX friction tracking: document every pain point from external repo development as issues on main repo
 
 ---
 
-## Package Audit (2026-04-06)
+## Phase 8: GTM & Distribution (NEW)
 
-- [x] Consumer-test `@arcana-ui/core@beta` + `@arcana-ui/tokens@beta` from a fresh project outside the monorepo
-- [x] Document all findings in CHANGELOG.md and KNOWN_ISSUES.md
-- [x] Fix `@arcana-ui/tokens` exports map (added `./styles`, `./dist/*`, `./package.json`)
-- [x] Fix `@arcana-ui/core` exports map (added `./dist/*`, `./package.json`)
-- [x] Bump both packages to `0.1.0-beta.2`
-- [x] Rebuild; `npm pack --dry-run` lists only `dist/` + `package.json`
-- [x] Write `docs/QUICKSTART.md` (consumer doc + CLI spec)
-- [x] Commit `examples/quickstart/` (reproducible consumer test fixture)
-- [x] Publish beta.2 to npm (**Bear — done 2026-04-06 21:45/21:55 UTC**)
-- [x] Re-verify after publish: fresh `npm install @arcana-ui/core@beta @arcana-ui/tokens@beta` in `/tmp` — both resolve to `0.1.0-beta.2`, 122 exports, `useClickOutside`/`useDrag`/`useUndoRedo` present, `@arcana-ui/tokens/dist/arcana.css` subpath resolves, `examples/quickstart` builds cleanly (280.34 kB JS / 570.07 kB CSS)
-- [ ] Follow-up: per-component entry points in `tsup.config.ts` to fix tree-shaking (tracked in KNOWN_ISSUES.md for beta.3)
+- [ ] 8.1 -- README overhaul with competitive positioning
+- [ ] 8.2 -- Claude marketplace / skills listing
+- [ ] 8.3 -- Show HN preparation and launch
+- [ ] 8.4 -- Contributor guide and community templates
+- [ ] 8.5 -- Performance audit and tree-shaking fix (per-component entry points)
+
+---
+
+## Known Issues
+
+| Issue | Severity | Status |
+|-------|----------|--------|
+| Tree-shaking broken (single entry point, ~278 kB for any import) | Medium | Tracked in KNOWN_ISSUES.md, fix needs per-component entry points |
+| 16 useTheme tests fail (`localStorage.clear is not a function` in vitest jsdom) | Low | Investigate vitest jsdom environment config |
+
+---
+
+## Deployed Sites
+
+| Site | URL | Status |
+|------|-----|--------|
+| Playground / Landing | arcana-ui.com | Live |
+| Dashboard demo | dashboard.arcana-ui.com | Live |
+| Wavefront demo | wavefront.arcana-ui.com | Live |
+| Ecommerce demo | ecommerce.arcana-ui.com | Live |
+| Atelier demo | atelier.arcana-ui.com | Live |
+| Mosaic demo | mosaic.arcana-ui.com | Live |
+| Control demo | control.arcana-ui.com | Live |

@@ -1,0 +1,83 @@
+/*
+ * Shared stylesheet for the motion primitives in this directory.
+ *
+ * Every timing value comes from the Arcana motion tokens so per-preset
+ * motion personalities (set in packages/tokens/src/presets/*.json) flow
+ * through to the landing page without primitive-level overrides.
+ *
+ * The `prefers-reduced-motion: reduce` block at the bottom collapses
+ * every transition to 0ms so the elements still appear, just without
+ * the animated lead-in. useInView.ts already reports `true` on mount
+ * when reduced-motion is set, so the visible state is applied right
+ * away and the zero-duration transition finishes on the same tick.
+ */
+
+.fadeIn {
+  opacity: 0;
+  transform: translateY(var(--fade-translate, 24px));
+  transition: opacity var(--duration-slow) var(--ease-out) var(--fade-delay, 0ms), transform
+    var(--duration-slow) var(--ease-out) var(--fade-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.fadeInVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Rotating conic-gradient border used by GradientBorder. The gradient
+ * itself is painted via a masked pseudo-element so the wrapper's own
+ * content stays crisp. `--gradient-angle` is animated via
+ * @property so the browser can interpolate it smoothly on hover. */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.gradientBorder {
+  position: relative;
+  border-radius: inherit;
+  isolation: isolate;
+}
+
+.gradientBorder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: var(--gradient-border-width, 1px);
+  background: conic-gradient(
+    from var(--gradient-angle),
+    var(--color-accent, currentColor),
+    var(--color-accent-bright, var(--color-accent, currentColor)),
+    var(--color-accent, currentColor)
+  );
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out), --gradient-angle 6s linear;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradientBorder:hover::before,
+.gradientBorder:focus-within::before {
+  opacity: 1;
+  --gradient-angle: 360deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fadeIn {
+    transition-duration: 0ms;
+  }
+  .gradientBorder::before {
+    transition: opacity 0ms;
+  }
+  .gradientBorder:hover::before,
+  .gradientBorder:focus-within::before {
+    --gradient-angle: 0deg;
+  }
+}

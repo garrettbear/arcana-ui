@@ -114,7 +114,7 @@
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  transition: color 0.15s;
+  transition: color var(--duration-fast) var(--ease-default);
 }
 
 /* Button reset — visually identical to .navLink but semantically a button */
@@ -129,7 +129,7 @@
   color: var(--landing-fg-secondary);
   font-size: 14px;
   font-weight: 500;
-  transition: color 0.15s;
+  transition: color var(--duration-fast) var(--ease-default);
 }
 
 .navLinkBtn:hover,
@@ -159,7 +159,8 @@
   font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
-  transition: color 0.15s, background 0.15s;
+  transition: color var(--duration-fast) var(--ease-default), background var(--duration-fast)
+    var(--ease-default);
   font-family: inherit;
 }
 
@@ -177,7 +178,8 @@
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.15s, box-shadow 0.15s;
+  transition: background var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast)
+    var(--ease-default);
   font-family: inherit;
 }
 
@@ -224,7 +226,7 @@
   background: rgba(0, 0, 0, 0.6);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s;
+  transition: opacity var(--duration-normal) var(--ease-out);
 }
 
 .mobileMenuOpen {
@@ -242,7 +244,7 @@
   border-left: 1px solid var(--landing-border);
   padding: 24px;
   transform: translateX(100%);
-  transition: transform 0.25s ease;
+  transition: transform var(--duration-normal) var(--ease-default);
 }
 
 .mobileMenuOpen .mobileMenuPanel {
@@ -323,7 +325,7 @@
   height: 6px;
   border-radius: 50%;
   background: var(--landing-accent);
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse 2s var(--ease-in-out) infinite;
 }
 
 @keyframes pulse {
@@ -383,7 +385,8 @@
   font-size: var(--font-size-md);
   height: auto;
   min-height: auto;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal)
+    var(--ease-out);
 }
 
 .promptInputWrapper:focus-within {
@@ -420,7 +423,7 @@
 .promptTextLink {
   color: var(--landing-fg-secondary);
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color var(--duration-fast) var(--ease-default);
 }
 
 .promptTextLink:hover {
@@ -480,7 +483,7 @@
   align-items: center;
   gap: 8px;
   opacity: 0.6;
-  transition: opacity 0.2s;
+  transition: opacity var(--duration-normal) var(--ease-out);
 }
 
 .logoCloudItem:hover {
@@ -514,7 +517,8 @@
   border: 1px solid var(--landing-border);
   border-radius: 16px;
   padding: 32px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal)
+    var(--ease-out);
 }
 
 .featureCard:hover {
@@ -636,7 +640,8 @@
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  transition: border-color var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal)
+    var(--ease-out), transform var(--duration-normal) var(--ease-out);
   text-decoration: none;
   display: block;
 }
@@ -1021,7 +1026,8 @@
   font-weight: 600;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.15s, box-shadow 0.15s;
+  transition: background var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast)
+    var(--ease-default);
   text-decoration: none;
   font-family: inherit;
 }
@@ -1040,7 +1046,8 @@
   font-weight: 500;
   border-radius: 10px;
   cursor: pointer;
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  transition: color var(--duration-fast) var(--ease-default), border-color var(--duration-fast)
+    var(--ease-default), background var(--duration-fast) var(--ease-default);
   text-decoration: none;
   font-family: inherit;
 }
@@ -1131,7 +1138,7 @@
   color: var(--landing-fg-secondary);
   text-decoration: none;
   font-size: 14px;
-  transition: color 0.15s;
+  transition: color var(--duration-fast) var(--ease-default);
 }
 
 .footerLink:hover {
@@ -1148,7 +1155,7 @@
   font-family: inherit;
   color: var(--landing-fg-secondary);
   font-size: 14px;
-  transition: color 0.15s;
+  transition: color var(--duration-fast) var(--ease-default);
 }
 
 .footerLinkBtn:hover {
@@ -1181,11 +1188,87 @@
 .footerBottomLink {
   color: var(--landing-fg-muted);
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color var(--duration-fast) var(--ease-default);
 }
 
 .footerBottomLink:hover {
   color: var(--landing-fg-secondary);
+}
+
+/* ─── Hero Ambient Drift ────────────────────────────────────────────────────── */
+
+/* Two very soft radial blobs that drift around the hero at different
+   periods. Low-contrast on purpose. They read as atmosphere, not as
+   animated UI. */
+.heroDriftBlobA,
+.heroDriftBlobB {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroDriftBlobA {
+  top: 10%;
+  left: 8%;
+  background: radial-gradient(circle at center, var(--landing-accent) 0%, transparent 70%);
+  animation: heroDriftA 18s ease-in-out infinite;
+}
+
+.heroDriftBlobB {
+  top: 20%;
+  right: 6%;
+  background: radial-gradient(circle at center, var(--landing-accent-bright) 0%, transparent 70%);
+  animation: heroDriftB 24s ease-in-out infinite;
+}
+
+@keyframes heroDriftA {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(40px, -30px, 0);
+  }
+}
+
+@keyframes heroDriftB {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-35px, 40px, 0);
+  }
+}
+
+.hero > *:not(.heroDriftBlobA):not(.heroDriftBlobB) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── CTA Spotlight ─────────────────────────────────────────────────────────── */
+
+.ctaSpotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    400px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    var(--landing-accent-glow-strong) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.ctaSection:hover .ctaSpotlight {
+  opacity: 1;
 }
 
 /* ─── Reduced Motion ────────────────────────────────────────────────────────── */
@@ -1194,5 +1277,12 @@
   .heroBadgeDot {
     animation: none;
     opacity: 1;
+  }
+  .heroDriftBlobA,
+  .heroDriftBlobB {
+    animation: none;
+  }
+  .ctaSpotlight {
+    transition: none;
   }
 }
