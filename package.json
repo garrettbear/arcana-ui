@@ -7,6 +7,8 @@
     "build": "pnpm -r --filter '!docs' build",
     "build:tokens": "pnpm --filter @arcana-ui/tokens build",
     "build:core": "pnpm --filter @arcana-ui/core build",
+    "verify-build": "node scripts/verify-build.mjs",
+    "prepublish-check": "pnpm build && pnpm verify-build",
     "dev": "pnpm --filter playground dev",
     "lint": "biome check . && pnpm lint:tokens",
     "lint:tokens": "pnpm --filter @arcana-ui/tokens exec tsx src/lint-tokens.ts",
