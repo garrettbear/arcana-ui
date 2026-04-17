@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 
-/** Supported theme identifiers. */
-export type ThemeId =
+/** Built-in theme identifiers shipped with @arcana-ui/core. */
+export type BuiltInThemeId =
   | 'brutalist'
   | 'commerce'
   | 'corporate'
@@ -16,6 +16,13 @@ export type ThemeId =
   | 'retro98'
   | 'startup'
   | 'terminal';
+
+/**
+ * Supported theme identifiers. Accepts both built-in themes and arbitrary
+ * strings for custom themes — the `(string & {})` preserves autocomplete
+ * for built-ins while allowing any string.
+ */
+export type ThemeId = BuiltInThemeId | (string & {});
 
 /** The resolved source of the current theme. */
 export type ThemeSource = 'manual' | 'system';

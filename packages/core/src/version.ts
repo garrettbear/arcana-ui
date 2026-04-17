@@ -7,4 +7,4 @@
  * consumers, the CLI (`arcana-ui info --version`), and AI agents can read it
  * without touching the filesystem.
  */
-export const VERSION = '0.1.0';
+export const VERSION = '0.1.1';

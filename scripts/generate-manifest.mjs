@@ -43,12 +43,20 @@ const CHECK_MODE = process.argv.includes('--check');
 // entries — they are public contract for agents doing automated upgrades.
 const RELEASE_HISTORY = [
   {
-    version: '0.1.0',
-    date: '2026-04-09',
+    version: '0.1.1',
+    date: '2026-04-17',
     breaking: [],
     migration: null,
     summary:
-      'Initial stable release. 108 React components, 14 theme presets, 11 hooks, three-tier token system (2,600+ CSS variables), @arcana-ui/cli scaffolder, @arcana-ui/mcp Model Context Protocol server, Claude Code skill, llms.txt discoverability layer, and 6 demo sites.',
+      "Hotfix for @arcana-ui/core@0.1.0 (#119). The published bundle shipped empty CSS-module class-name maps, so every component rendered with class=\"\" and no styling — caused by tsup 8's internal postcss plugin intercepting .module.css loads across namespaces. Fixed with a custom esbuild plugin that rewrites .module.css imports to a path suffix outside tsup's filter. Also: <Image> now unmounts the broken <img> on error so browsers can't paint a broken-image icon behind the fallback, plus a new errorFallback prop; <ThemeProvider> accepts defaultTheme: null | 'inherit' and a customThemes prop and no longer stomps a host-app-managed data-theme attribute; ThemeId relaxed to BuiltInThemeId | (string & {}); manifest.ai.json now ships in the npm tarball. Build pipeline hardened with scripts/verify-build.mjs wired into the release workflow so this regression can never ship again.",
+  },
+  {
+    version: '0.1.0',
+    date: '2026-04-16',
+    breaking: [],
+    migration: null,
+    summary:
+      'Initial stable release. 108 React components, 14 theme presets (each with per-preset motion personalities), 11 hooks, three-tier token system (2,600+ CSS variables), AI theme generation via Anthropic API with BYOK and Supabase semantic cache, @arcana-ui/cli scaffolder, @arcana-ui/mcp Model Context Protocol server, Claude Code skill, llms.txt discoverability layer, 6 demo sites, and token-driven motion primitives.',
   },
   {
     version: '0.1.0-beta.2',

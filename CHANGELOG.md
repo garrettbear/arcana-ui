@@ -7,6 +7,73 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-04-17
+
+Hotfix for `@arcana-ui/core@0.1.0`. The published bundle shipped every
+component with empty CSS-module class-name maps (`var Button_default = {};`,
+`var Navbar_default = {};`, etc.), so every component rendered with `class=""`
+and no styling. This release fixes the build pipeline, hardens it with a
+post-build smoke test, and rolls in a few small P1 API fixes that surfaced
+while investigating.
+
+Only `@arcana-ui/core` is republished. `@arcana-ui/tokens`, `@arcana-ui/cli`,
+and `@arcana-ui/mcp` stay at `0.1.0`.
+
+### Fixed
+
+- **[`@arcana-ui/core`] Empty CSS module class-name maps in the published
+  bundle** (#119). `dist/index.mjs` shipped `var <Component>_default = {};`
+  for every `.module.css` import because tsup 8.x's built-in PostCSS plugin
+  registers an `onLoad({ filter: /\.css$/ })` handler without a namespace,
+  which wildcards across every namespace and intercepts module-CSS loads
+  before our own plugin can. The new custom esbuild plugin rewrites every
+  `.module.css` import to a path ending in `?arcana-css-module` (outside
+  tsup's filter) and emits both the hashed class-name map as a JS module
+  and the rewritten CSS via a sibling virtual sheet. Every rendered
+  `<ComponentName>_<className>_<hash>` selector in `dist/index.css` now has
+  a corresponding entry in the JS module's default export.
+- **[`@arcana-ui/core`] `<Image>` shows a broken-image icon behind the
+  fallback on load error.** The underlying `<img>` is now unmounted when
+  `status === 'error'` so the browser can't paint its broken-image
+  placeholder behind the fallback. Status also resets to `'loading'` when
+  `src` changes, so swapping URLs after an error recovers cleanly.
+- **[`@arcana-ui/core`] `<ThemeProvider>` always overwrote an existing
+  `data-theme` attribute on `<html>`.** Pass `defaultTheme={null}` or
+  `defaultTheme="inherit"` to opt into "don't touch the attribute" mode —
+  the provider then only writes `data-theme` once the user explicitly calls
+  `setTheme`. Host apps that manage the attribute themselves (playground,
+  SSR with pre-painted theme) can now wrap their tree without stomping it.
+
+### Added
+
+- **[`@arcana-ui/core`] `<ThemeProvider customThemes={…}>`.** Additional
+  theme ids beyond the built-in set are accepted as valid stored values
+  and appear in the `themes` array returned from `useThemeContext()`.
+- **[`@arcana-ui/core`] Exported `BuiltInThemeId` type** and relaxed
+  `ThemeId` to `BuiltInThemeId | (string & {})` so consumers can use
+  custom theme names without casting, while keeping autocomplete for
+  the built-ins.
+- **[`@arcana-ui/core`] `<Image errorFallback={…}>`.** Separate node for
+  the error state when callers want distinct loading-vs-error UI; falls
+  back to `fallback` when omitted.
+- **[`@arcana-ui/core`] `manifest.ai.json` ships in the npm tarball.**
+  Available at `@arcana-ui/core/manifest.ai.json` (and at
+  `./dist/manifest.ai.json` inside the package) so AI agents can resolve
+  it from an installed dependency without cloning the repo.
+- **[root] `scripts/verify-build.mjs` post-build smoke test** wired into
+  `pnpm verify-build`, `pnpm prepublish-check`, and the `release.yml`
+  GitHub Actions workflow. The script greps the JS bundle for empty
+  `_default = {}` patterns, renders five flagship components via
+  `renderToString` and asserts non-empty `class` attributes, and
+  cross-checks every rendered class against `dist/index.css`. Exits 1
+  on any failure — **a future build with this regression will block
+  release automatically.**
+
+### Changed
+
+- **[`@arcana-ui/core`] Bumped to `0.1.1`.** `VERSION` export updated
+  to match.
+
 ## [0.1.0] - 2026-04-16
 
 First stable release of Arcana UI. Everything below was accumulated across the
