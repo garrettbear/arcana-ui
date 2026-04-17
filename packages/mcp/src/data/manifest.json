@@ -1,13 +1,20 @@
 {
   "$schema": "./scripts/manifest.schema.json",
   "release": {
-    "version": "0.1.0",
-    "releaseDate": "2026-04-16",
+    "version": "0.1.1",
+    "releaseDate": "2026-04-17",
     "changelog": "https://github.com/Arcana-UI/arcana/blob/main/CHANGELOG.md",
     "breaking": [],
     "migration": null
   },
   "releaseHistory": [
+    {
+      "version": "0.1.1",
+      "date": "2026-04-17",
+      "breaking": [],
+      "migration": null,
+      "summary": "Hotfix for @arcana-ui/core@0.1.0 (#119). The published bundle shipped empty CSS-module class-name maps, so every component rendered with class=\"\" and no styling — caused by tsup 8's internal postcss plugin intercepting .module.css loads across namespaces. Fixed with a custom esbuild plugin that rewrites .module.css imports to a path suffix outside tsup's filter. Also: <Image> now unmounts the broken <img> on error so browsers can't paint a broken-image icon behind the fallback, plus a new errorFallback prop; <ThemeProvider> accepts defaultTheme: null | 'inherit' and a customThemes prop and no longer stomps a host-app-managed data-theme attribute; ThemeId relaxed to BuiltInThemeId | (string & {}); manifest.ai.json now ships in the npm tarball. Build pipeline hardened with scripts/verify-build.mjs wired into the release workflow so this regression can never ship again."
+    },
     {
       "version": "0.1.0",
       "date": "2026-04-16",
@@ -31,7 +38,7 @@
     }
   ],
   "name": "@arcana-ui/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React components for Arcana UI — AI's #1 design system",
   "install": "npm i @arcana-ui/core @arcana-ui/tokens",
   "quickStart": [
