@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **[ci] `release.yml` no longer short-circuits when a tag bumps only one
+  package.** Each `Publish @arcana-ui/*` step now delegates to
+  `.github/scripts/publish-if-new.mjs`, which reads the package's
+  `package.json` version, checks `npm view` for that exact version, and
+  skips the `npm publish` call if it already exists. Previously a hotfix
+  that bumped only `@arcana-ui/core` failed at the first `Publish
+  @arcana-ui/tokens` step (because 0.1.0 was already on npm), which blocked
+  the core publish and the GitHub Release creation — the v0.1.1 publish had
+  to be done manually from a maintainer's shell.
+- **[ci] Added missing publish steps** for `@arcana-ui/cli` and
+  `@arcana-ui/mcp` to `release.yml`. Both were previously ignored by the
+  tag-push workflow and had to be published by hand.
+
 ## [0.1.1] - 2026-04-17
 
 Hotfix for `@arcana-ui/core@0.1.0`. The published bundle shipped every

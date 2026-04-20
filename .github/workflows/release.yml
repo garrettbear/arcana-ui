@@ -30,13 +30,27 @@ jobs:
       - name: Verify build output
         run: pnpm verify-build
 
+      # Each publish step checks the registry first and skips if the current
+      # package.json version is already published, so a hotfix that bumps
+      # only one package doesn't short-circuit the whole job on "version
+      # already exists" from the untouched packages.
       - name: Publish @arcana-ui/tokens
-        run: cd packages/tokens && npm publish --access public
+        run: node .github/scripts/publish-if-new.mjs packages/tokens
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @arcana-ui/core
-        run: cd packages/core && npm publish --access public
+        run: node .github/scripts/publish-if-new.mjs packages/core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @arcana-ui/cli
+        run: node .github/scripts/publish-if-new.mjs packages/cli
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @arcana-ui/mcp
+        run: node .github/scripts/publish-if-new.mjs packages/mcp
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
